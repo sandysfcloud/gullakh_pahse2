@@ -108,11 +108,7 @@ public class ViewAnimator {
      */
     private boolean mShouldAnimate = true;
 
-    /**
-     * Creates a new ViewAnimator, using the given {@link com.gullakh.loanmanagment.ListViewWrapper}.
-     *
-     * @param listViewWrapper the {@code ListViewWrapper} which wraps the implementation of the ListView used.
-     */
+
     public ViewAnimator(@NonNull final ListViewWrapper listViewWrapper) {
         mListViewWrapper = listViewWrapper;
         mAnimationStartMillis = -1;

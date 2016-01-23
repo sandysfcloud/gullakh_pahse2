@@ -4,18 +4,32 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/gullakh_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.gullakh.gullakhandroid.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.gullakh.gullakhandroid.RegisterPageActivity"
+            />
+        <activity
+            android:name="com.gullakh.gullakhandroid.GoogleCardsMediaActivity"
+            />
+        <activity
+            android:name="com.gullakh.gullakhandroid.StickyListHeadersActivity"
+            />
+        <activity
+            android:name="com.gullakh.gullakhandroid.LogInPageActivity"
+            />
+
     </application>
 
 </manifest>

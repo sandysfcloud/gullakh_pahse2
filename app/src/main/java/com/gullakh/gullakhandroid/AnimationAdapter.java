@@ -15,6 +15,8 @@
  */
 package com.gullakh.gullakhandroid;
 
+
+
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -26,10 +28,6 @@ import android.widget.BaseAdapter;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-/**
- * A {@link BaseAdapterDecorator} class which applies multiple {@link Animator}s at once to views when they are first shown. The Animators applied include the animations specified
- * in {@link #getAnimators(ViewGroup, View)}, plus an alpha transition.
- */
 public abstract class AnimationAdapter extends BaseAdapterDecorator {
 
     /**
@@ -114,9 +112,7 @@ public abstract class AnimationAdapter extends BaseAdapterDecorator {
         }
     }
 
-    /**
-     * Returns the {@link com.gullakh.loanmanagment.ViewAnimator} responsible for animating the Views in this adapter.
-     */
+
     @Nullable
     public ViewAnimator getViewAnimator() {
         return mViewAnimator;

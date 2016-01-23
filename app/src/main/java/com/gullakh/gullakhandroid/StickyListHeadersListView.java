@@ -24,7 +24,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
 
-import com.gullakh.loanmanagment.WrapperViewList.LifeCycleListener;
+import com.gullakh.gullakhandroid.WrapperViewList.LifeCycleListener;
 
 /**
  * Even though this is a FrameLayout subclass we still consider it a ListView.

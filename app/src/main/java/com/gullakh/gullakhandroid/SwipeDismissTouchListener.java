@@ -15,23 +15,21 @@
  */
 package com.gullakh.gullakhandroid;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * A {@link com.gullakh.loanmanagment.SwipeTouchListener} that directly dismisses the items when swiped.
- */
+
 public class SwipeDismissTouchListener extends SwipeTouchListener {
 
     /**
