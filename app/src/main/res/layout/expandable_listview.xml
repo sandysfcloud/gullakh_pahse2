@@ -4,8 +4,13 @@
     style="@style/ListViewStyle" />-->
 <com.gullakh.gullakhandroid.AnimatedExpandableListView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_view"
+    android:id="@+id/exp_list_view"
     android:layout_width="match_parent"
     android:background="#fff"
+    android:groupIndicator="@android:color/transparent"
+    android:layout_height="match_parent"
 
-    android:layout_height="match_parent" />
+
+
+
+    />
