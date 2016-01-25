@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
         mTitle = mDrawerTitle = getTitle();
       //expand  mDrawerList = (ListView) findViewById(R.id.list_view);
 
-        mDrawerList = (AnimatedExpandableListView) findViewById(R.id.list_view);
+        mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
        // mDrawerList.setGroupIndicator(getResources().getDrawable(R.drawable.custom_arrow));
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
@@ -110,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
         List<GroupItem> items = new ArrayList<GroupItem>();
 
         // Populate our list with groups and it's children
-        for (int i = 1; i < 100; i++) {
+       /* for (int i = 1; i < 100; i++) {
             GroupItem item = new GroupItem();
 
             item.title = "Expand this item " + i;
@@ -124,7 +126,40 @@ public class MainActivity extends ActionBarActivity {
             }
 
             items.add(item);
-        }
+        }*/
+
+
+
+
+        GroupItem item = new GroupItem();
+        item.title = "My profile";
+        GroupItem item2 = new GroupItem();
+        item2.title = "My Searches";
+        GroupItem item3 = new GroupItem();
+        item3.title = "Loans";
+
+        ChildItem child = new ChildItem();
+        child.title = "Personal Loan ";
+        ChildItem child2 = new ChildItem();
+        child2.title = "Car Loan ";
+        ChildItem child3 = new ChildItem();
+        child3.title = "Home Loan ";
+        //child.hint = "Too awesome";
+
+        item3.items.add(child);
+        item3.items.add(child2);
+        item3.items.add(child3);
+
+        GroupItem item4 = new GroupItem();
+        item4.title = "Policy And Licences";
+
+        items.add(item);
+        items.add(item2);
+        items.add(item3);
+        items.add(item4);
+
+
+    //   mDrawerList.setGroupIndicator(null);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -436,6 +471,9 @@ public class MainActivity extends ActionBarActivity {
             return childPosition;
         }
 
+
+
+
         @Override
         public View getRealChildView(int groupPosition, int childPosition,
                                      boolean isLastChild, View convertView, ViewGroup parent) {
@@ -464,11 +502,17 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public int getRealChildrenCount(int groupPosition) {
+
+
             return items.get(groupPosition).items.size();
         }
 
+
+
+
         @Override
         public GroupItem getGroup(int groupPosition) {
+
             return items.get(groupPosition);
         }
 
@@ -502,8 +546,25 @@ public class MainActivity extends ActionBarActivity {
 
             holder.title.setText(item.title);
 
+            ImageView tv = (ImageView) convertView.findViewById(R.id.flag);
+
+            if ( getChildrenCount( groupPosition ) == 3 ) {
+
+                tv.setVisibility( View.VISIBLE );
+                tv.setImageResource(isExpanded ? R.drawable.down_arrow : R.drawable.up_arrow);
+            } else {
+                tv.setVisibility( View.INVISIBLE );
+            }
+
+
+
+
             return convertView;
         }
+
+
+
+
 
         @Override
         public boolean hasStableIds() {

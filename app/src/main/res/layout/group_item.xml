@@ -30,5 +30,13 @@
         android:textColor="@color/main_color_grey_700"
         android:textSize="16sp"
         />
+    <ImageView
+        android:id="@+id/flag"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+
+        android:layout_marginLeft="27dp"
+        android:src="@drawable/ic_launcher"
+        />
 
 </LinearLayout>
