@@ -6,6 +6,7 @@
         <item name="actionBarStyle">@style/ActionBarStyle</item>
 
         <item name="colorPrimary">#e31881</item>
+
         <item name="colorPrimaryDark">#e31881</item>
     </style>
 

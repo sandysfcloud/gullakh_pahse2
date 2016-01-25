@@ -6,11 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/exp_list_view"
     android:layout_width="match_parent"
-    android:background="#fff"
-    android:groupIndicator="@android:color/transparent"
+    android:background="#D83C2F"
     android:layout_height="match_parent"
-
-
-
-
+    android:groupIndicator="@android:color/transparent"
     />
