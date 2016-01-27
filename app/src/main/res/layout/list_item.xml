@@ -15,7 +15,7 @@
         android:minHeight="48dp"
         android:padding="8dp"
         android:text="@string/fontello_heart_full"
-        android:textColor="#fff"
+
         android:textSize="16sp" />
 
     <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -27,7 +27,8 @@
         android:gravity="center_vertical"
         android:minHeight="48dp"
         android:padding="8dp"
-        android:textColor="#fff"
+        android:text="test"
+        android:textColor="@color/main_color_grey_700"
         android:textSize="16sp"
   />
 
