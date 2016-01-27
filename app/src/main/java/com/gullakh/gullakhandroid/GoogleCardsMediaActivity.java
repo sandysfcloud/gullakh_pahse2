@@ -15,6 +15,7 @@
  */
 package com.gullakh.gullakhandroid;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,16 +39,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 		ListView listView = (ListView) findViewById(R.id.list_view);
 		
-		listView.setBackgroundResource(R.drawable.background_media);
+		//listView.setBackgroundResource(R.drawable.background_media);
 
-		mGoogleCardsAdapter = new GoogleCardsMediaAdapter(this,
-				DummyContent.getDummyModelList());
-		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mGoogleCardsAdapter, this));
-		swingBottomInAnimationAdapter.setAbsListView(listView);
 
-		assert swingBottomInAnimationAdapter.getViewAnimator() != null;
-	swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
-				INITIAL_DELAY_MILLIS);
 
 		listView.setClipToPadding(false);
 		listView.setDivider(null);
@@ -61,10 +55,47 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 				r.getDisplayMetrics());
 		listView.setPadding(px, px, px, px);
 		listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-		listView.setAdapter(swingBottomInAnimationAdapter);
-
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle("Google cards media");
+
+		Intent intent = getIntent();
+		String data = intent.getStringExtra("data");
+
+		if(data.equals("personal"))
+		{
+			mGoogleCardsAdapter = new GoogleCardsMediaAdapter(this,
+					DummyContent.getDummyModelList());
+			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+			swingBottomInAnimationAdapter.setAbsListView(listView);
+
+			assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+			swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+					INITIAL_DELAY_MILLIS);
+
+
+			listView.setAdapter(swingBottomInAnimationAdapter);
+
+
+			getSupportActionBar().setTitle("Result");
+
+		}
+		else {
+
+
+			mGoogleCardsAdapter = new GoogleCardsMediaAdapter(this,
+					DummyContent.getDummyModelList());
+			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+			swingBottomInAnimationAdapter.setAbsListView(listView);
+
+			assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+			swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+					INITIAL_DELAY_MILLIS);
+
+
+			listView.setAdapter(swingBottomInAnimationAdapter);
+
+
+		getSupportActionBar().setTitle("My Seaches");
+		}
 	}
 
 	@Override

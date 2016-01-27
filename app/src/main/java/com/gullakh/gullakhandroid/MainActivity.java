@@ -34,6 +34,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -94,8 +97,7 @@ public class MainActivity extends ActionBarActivity {
       //expand  mDrawerList = (ListView) findViewById(R.id.list_view);
 
         mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
-        View listHeaderView = inflater.inflate(R.layout.list_header,null, false);
-        mDrawerList.addHeaderView(listHeaderView);
+
 
         // mDrawerList.setGroupIndicator(getResources().getDrawable(R.drawable.custom_arrow));
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
@@ -190,8 +192,13 @@ public class MainActivity extends ActionBarActivity {
 
         adapter = new ExampleAdapter(this);
         adapter.setData(items);
+        View headerView = null;
+        headerView = prepareHeaderView(R.layout.header_navigation_drawer,
+                "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg",
+                "dev@csform.com");
 
-       // listView = (AnimatedExpandableListView) findViewById(R.id.list_view);
+
+        mDrawerList.addHeaderView(headerView);
         mDrawerList.setAdapter(adapter);
 
 
@@ -202,16 +209,21 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-                // We call collapseGroupWithAnimation(int) and
-                // expandGroupWithAnimation(int) to animate group
-                // expansion/collapse.
-                if (mDrawerList.isGroupExpanded(groupPosition)) {
-                    Toast.makeText(MainActivity.this, "click1", Toast.LENGTH_LONG).show();
 
+
+                if (mDrawerList.isGroupExpanded(groupPosition)) {
                     mDrawerList.collapseGroupWithAnimation(groupPosition);
                 } else {
-                    Toast.makeText(MainActivity.this, "click2", Toast.LENGTH_LONG).show();
                     mDrawerList.expandGroupWithAnimation(groupPosition);
+                }
+
+
+                if(groupPosition==1)
+                {
+                    Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data","search");
+                    startActivity(intent);
+
                 }
                 return true;
             }
@@ -238,6 +250,21 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+    private View prepareHeaderView(int layoutRes, String url, String email) {
+        View headerView = getLayoutInflater().inflate(layoutRes, mDrawerList,
+                false);
+        ImageView iv = (ImageView) headerView.findViewById(R.id.image);
+        TextView tv = (TextView) headerView.findViewById(R.id.email);
+
+        ImageLoader loader = ImageLoader.getInstance();
+        loader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
+
+        ImageUtil.displayRoundImage(iv, url, null);
+        tv.setText(email);
+
+        return headerView;
+    }
+
 
 
     private static class GroupItem {
@@ -569,8 +596,8 @@ public class MainActivity extends ActionBarActivity {
                         .findViewById(R.id.textTitle);
                 holder.img = (ImageView) convertView
                         .findViewById(R.id.img);
-                //holder.img.setColorFilter(Color.argb(169,169,169,169));
-                holder.img.setColorFilter(Color.argb(225,225,225,225));
+                holder.img.setColorFilter(Color.argb(169,169,169,169));
+              //  holder.img.setColorFilter(Color.argb(225,225,225,225));
                 convertView.setTag(holder);
             } else {
 
@@ -606,11 +633,19 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
 
+
+
+
+
+
+
         @Override
         public boolean isChildSelectable(int groupPosition, int childPosition) {
-           if(groupPosition==3&&childPosition==0)
+
+           if(groupPosition==2&&childPosition==0)
             {
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data","personal");
                 startActivity(intent);
 
             }
