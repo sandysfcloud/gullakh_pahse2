@@ -39,9 +39,9 @@ public class GoogleCardsMediaAdapter extends ArrayAdapter<DummyModel>
 			convertView = mInflater.inflate(
 					R.layout.list_item_google_cards_media, parent, false);
 			holder = new ViewHolder();
-			holder.image = (ImageView) convertView
+			holder.image = (View) convertView
 					.findViewById(R.id.search_image);
-			holder.image.setColorFilter(Color.argb(225, 225, 225, 225));
+			//holder.image.setColorFilter(Color.argb(225, 225, 225, 225));
 			holder.artistName = (TextView) convertView
 					.findViewById(R.id.list_item_google_cards_media_artist_name);
 			holder.year = (TextView) convertView
@@ -77,7 +77,7 @@ public class GoogleCardsMediaAdapter extends ArrayAdapter<DummyModel>
 	}
 
 	private static class ViewHolder {
-		public ImageView image;
+		public View image;
 		public TextView artistName;
 		public TextView year;
 		public ImageView next;

@@ -31,6 +31,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	private static final int INITIAL_DELAY_MILLIS = 300;
 
 	private GoogleCardsMediaAdapter mGoogleCardsAdapter;
+	private PersonalLoan_Adapter mPersonalLoan_Adapter;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -62,9 +63,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 		if(data.equals("personal"))
 		{
-			mGoogleCardsAdapter = new GoogleCardsMediaAdapter(this,
+			mPersonalLoan_Adapter = new PersonalLoan_Adapter(this,
 					DummyContent.getDummyModelList());
-			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mPersonalLoan_Adapter, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
 
 			assert swingBottomInAnimationAdapter.getViewAnimator() != null;
