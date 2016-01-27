@@ -1,11 +1,15 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -62,15 +66,17 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      /*  ImageLoader imageLoader = ImageLoader.getInstance();
-        if (!imageLoader.isInited()) {
-            imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-        }*/
+       // ActionBar bar = getActionBar();
+       // bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fff")));
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
+
+        LayoutInflater inflater = getLayoutInflater();
+
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.string.drawer_open, R.string.drawer_close) {
             public void onDrawerClosed(View view) {
                 getSupportActionBar().setTitle(mTitle);
@@ -88,7 +94,10 @@ public class MainActivity extends ActionBarActivity {
       //expand  mDrawerList = (ListView) findViewById(R.id.list_view);
 
         mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
-       // mDrawerList.setGroupIndicator(getResources().getDrawable(R.drawable.custom_arrow));
+        View listHeaderView = inflater.inflate(R.layout.list_header,null, false);
+        mDrawerList.addHeaderView(listHeaderView);
+
+        // mDrawerList.setGroupIndicator(getResources().getDrawable(R.drawable.custom_arrow));
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
         prepareNavigationDrawerItems();
@@ -128,15 +137,24 @@ public class MainActivity extends ActionBarActivity {
             items.add(item);
         }*/
 
+        //***set images
 
+
+        int Images[] = { R.drawable.profile, R.drawable.search, R.drawable.loan, R.drawable.policy };
 
 
         GroupItem item = new GroupItem();
         item.title = "My profile";
+        item.Img = Images[0];
         GroupItem item2 = new GroupItem();
         item2.title = "My Searches";
+        item2.Img = Images[1];
         GroupItem item3 = new GroupItem();
         item3.title = "Loans";
+        item3.Img = Images[2];
+        GroupItem item4 = new GroupItem();
+        item4.title = "Policy And Licences";
+        item4.Img = Images[3];
 
         ChildItem child = new ChildItem();
         child.title = "Personal Loan ";
@@ -150,13 +168,20 @@ public class MainActivity extends ActionBarActivity {
         item3.items.add(child2);
         item3.items.add(child3);
 
-        GroupItem item4 = new GroupItem();
-        item4.title = "Policy And Licences";
+
 
         items.add(item);
         items.add(item2);
         items.add(item3);
         items.add(item4);
+
+
+
+
+
+
+
+
 
 
     //   mDrawerList.setGroupIndicator(null);
@@ -217,21 +242,24 @@ public class MainActivity extends ActionBarActivity {
 
     private static class GroupItem {
         String title;
+        int Img;
         List<ChildItem> items = new ArrayList<ChildItem>();
     }
 
     private static class ChildItem {
         String title;
-        //String hint;
+        int Img;
     }
 
     private static class ChildHolder {
         TextView title;
+        int Img;
         //TextView hint;
     }
 
     private static class GroupHolder {
         TextView title;
+        ImageView img;
     }
 
     @Override
@@ -427,7 +455,8 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-        mTitle = title;
+        //mTitle = title;
+        mTitle = "Home";
         getSupportActionBar().setTitle(mTitle);
     }
 
@@ -538,6 +567,10 @@ public class MainActivity extends ActionBarActivity {
                         false);
                 holder.title = (TextView) convertView
                         .findViewById(R.id.textTitle);
+                holder.img = (ImageView) convertView
+                        .findViewById(R.id.img);
+                //holder.img.setColorFilter(Color.argb(169,169,169,169));
+                holder.img.setColorFilter(Color.argb(225,225,225,225));
                 convertView.setTag(holder);
             } else {
 
@@ -545,8 +578,10 @@ public class MainActivity extends ActionBarActivity {
             }
 
             holder.title.setText(item.title);
+            holder.img.setImageResource(item.Img);
 
             ImageView tv = (ImageView) convertView.findViewById(R.id.flag);
+            tv.setVisibility( View.INVISIBLE );
 
             if ( getChildrenCount( groupPosition ) == 3 ) {
 
