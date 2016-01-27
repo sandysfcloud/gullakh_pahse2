@@ -10,5 +10,7 @@
     <dimen name="drawer_width_news">96dp</dimen>
     <dimen name="ken_burns_header">350dp</dimen>
     <dimen name="cpb_stroke_width">4dp</dimen>
-
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">140dp</dimen>
 </resources>

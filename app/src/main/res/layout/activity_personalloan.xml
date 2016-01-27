@@ -7,6 +7,91 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gullakh.gullakhandroid.personalloan">
+    android:background="#cf4404"
+    tools:context=".Personalloan">
 
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="How much would you like to borrow?"
+    android:id="@+id/textView5"
+    android:textColor="#ffffff"
+    android:gravity="center"
+    android:textStyle="bold"
+    android:typeface="serif"
+    android:textSize="20dp"
+    android:layout_alignParentTop="true"
+    android:layout_toRightOf="@+id/imageView2"
+    android:layout_toEndOf="@+id/imageView2"
+    android:layout_marginTop="10dp" />
+
+<ImageView
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    android:id="@+id/imageView2"
+    android:src="@drawable/rupee"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
+
+<ImageButton
+    android:layout_width="80dp"
+    android:layout_height="70dp"
+    android:id="@+id/buttonNext"
+    android:background="@drawable/button_select"
+    android:onClick="onClick"
+    android:layout_marginTop="16dp"
+    android:layout_below="@+id/spinnerloc"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:src="@drawable/right" />
+
+<ImageView
+    android:drawableLeft="@drawable/right"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    android:id="@+id/imageView5"
+    android:src="@drawable/locations"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:text="Select your Location"
+    android:id="@+id/textView8"
+    android:textColor="#ffffff"
+    android:typeface="serif"
+    android:textStyle="bold"
+    android:textSize="20dp"
+    android:layout_alignBottom="@+id/imageView5"
+    android:layout_alignRight="@+id/spinnerloc"
+    android:layout_alignEnd="@+id/spinnerloc"
+    android:layout_marginRight="7dp"
+    android:layout_marginEnd="7dp"
+    android:layout_marginBottom="20dp" />
+
+<Spinner
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/spinnerloc"
+    android:background="@drawable/editext_bg_gray"
+    android:layout_below="@+id/imageView5"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="29dp" />
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:numeric="integer"
+    android:ems="10"
+    android:id="@+id/loan"
+    android:background="@drawable/editext_bg_gray"
+    android:hint="1,00,000"
+    android:gravity="center"
+    android:layout_below="@+id/imageView2"
+    android:layout_centerHorizontal="true" />
 </RelativeLayout>
