@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.gullakh.gullakhandroid.Personalloan1Activity"
+    android:background="#cf4404">
+
+    <ImageView
+        android:drawableLeft="@drawable/emptype"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:id="@+id/imageView4"
+        android:src="@drawable/emptype"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_prev_emp"
+        android:src="@drawable/left"
+        android:background="@drawable/button_select"
+        android:onClick="onClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_next_emp"
+        android:src="@drawable/right"
+        android:background="@drawable/button_select"
+        android:onClick="onClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView9"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text=" What is your net monthly income ?"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginBottom="19dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Company Name"
+        android:id="@+id/textView7"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:id="@+id/editText"
+        android:background="@drawable/editext_bg_gray"
+        android:hint="ABC PVT. LTD"
+        android:gravity="center"
+        android:layout_below="@+id/textView7"
+        android:layout_toRightOf="@+id/imageView4"
+        android:layout_marginTop="9dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:numeric="integer"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:background="@drawable/editext_bg_gray"
+        android:hint="25,000"
+        android:gravity="center"
+        android:layout_above="@+id/button_prev_emp"
+        android:layout_alignLeft="@+id/button_prev_emp"
+        android:layout_alignStart="@+id/button_prev_emp"
+        android:layout_marginBottom="14dp" />
+
+    <ImageView
+        android:drawableLeft="@drawable/income"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/income"
+        android:layout_below="@+id/imageView4"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView4" />
+</RelativeLayout>

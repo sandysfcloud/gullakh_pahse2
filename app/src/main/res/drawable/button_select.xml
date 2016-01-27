@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:drawable="@color/grey"/> <!-- pressed state -->
+    <item android:state_focused="true"
+        android:drawable="@color/grey"/> <!-- focused state -->
+    <item android:drawable="@android:color/transparent"/> <!-- default state -->
+    <shape xmlns:android="http://schemas.android.com/apk/res/android" >
+        <stroke android:width="2dp"
+            android:color="#FFFFFF"/>
+        <gradient
+            android:angle="225"
+            android:startColor="#DD2ECCFA"
+            android:endColor="#DD000000"/>
+        <corners
+            android:bottomLeftRadius="25dp"
+            android:bottomRightRadius="25dp"
+            android:topLeftRadius="25dp"
+            android:topRightRadius="25dp" />
+    </shape>
+</selector>
+
