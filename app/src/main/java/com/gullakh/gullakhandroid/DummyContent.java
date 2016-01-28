@@ -786,13 +786,13 @@ public class DummyContent {
 		ArrayList<DummyModel> list = new ArrayList<>();
 
 		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
+		/*list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
 		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
 		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
 		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
 		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
 		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
-		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
-		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));
+		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg", "Isaac Reid", R.string.fontello_heart_empty));*/
 
 
 		
@@ -862,14 +862,15 @@ public class DummyContent {
 	public static ArrayList<DummyModel> getDummyModelDragAndDropShopList() {
 		ArrayList<DummyModel> list = new ArrayList<>();
 
-		list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/shop/0.jpg", "Black Shirt", R.string.fontello_heart_empty));
+		/*list.add(new DummyModel(0, "http://pengaja.com/uiapptemplate/newphotos/shop/0.jpg", "Black Shirt", R.string.fontello_heart_empty));
 		list.add(new DummyModel(1, "http://pengaja.com/uiapptemplate/newphotos/shop/1.jpg", "Black Sweater", R.string.fontello_heart_empty));
 		list.add(new DummyModel(2, "http://pengaja.com/uiapptemplate/newphotos/shop/2.jpg", "Shirt", R.string.fontello_heart_empty));
 		list.add(new DummyModel(3, "http://pengaja.com/uiapptemplate/newphotos/shop/3.jpg", "White Shirt", R.string.fontello_heart_empty));
 		list.add(new DummyModel(4, "http://pengaja.com/uiapptemplate/newphotos/shop/4.jpg", "White T shirt", R.string.fontello_heart_empty));
 		list.add(new DummyModel(5, "http://pengaja.com/uiapptemplate/newphotos/shop/5.jpg", "T shirt", R.string.fontello_heart_empty));
-		list.add(new DummyModel(6, "http://pengaja.com/uiapptemplate/newphotos/shop/6.jpg", "Hoodies", R.string.fontello_heart_empty));
-		
+		list.add(new DummyModel(6, "http://pengaja.com/uiapptemplate/newphotos/shop/6.jpg", "Hoodies", R.string.fontello_heart_empty));*/
+		list.add(new DummyModel(0, "ICICI BANK", "Black Shirt", R.string.fontello_heart_empty));
+		list.add(new DummyModel(1, "STATE BANK OF INDIA", "Black Sweater", R.string.fontello_heart_empty));
 		return list;
 	}
 	

@@ -644,8 +644,8 @@ public class MainActivity extends ActionBarActivity {
 
            if(groupPosition==2&&childPosition==0)
             {
-                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                intent.putExtra("data","personal");
+
+                Intent intent = new Intent(MainActivity.this, Personalloan.class);
                 startActivity(intent);
 
             }

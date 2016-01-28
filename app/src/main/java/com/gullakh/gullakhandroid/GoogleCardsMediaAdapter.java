@@ -2,11 +2,13 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,22 +18,37 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.List;
 
-public class GoogleCardsMediaAdapter extends ArrayAdapter<DummyModel>
+public class GoogleCardsMediaAdapter extends BaseAdapter
 		implements OnClickListener {
 
 	private LayoutInflater mInflater;
+	Context cont;
+	String [] result;
 
-	public GoogleCardsMediaAdapter(Context context, List<DummyModel> items) {
-		super(context, 0, items);
+	public GoogleCardsMediaAdapter(GoogleCardsMediaActivity context, String[] prgmNameList) {
+		cont=context;
+		result=prgmNameList;
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
-	public long getItemId(int position) {
-		return getItem(position).getId();
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return result.length;
 	}
 
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder;
@@ -40,26 +57,29 @@ public class GoogleCardsMediaAdapter extends ArrayAdapter<DummyModel>
 					R.layout.list_item_google_cards_media, parent, false);
 			holder = new ViewHolder();
 			holder.image = (View) convertView
-					.findViewById(R.id.search_image);
+					.findViewById(R.id.next);
 			//holder.image.setColorFilter(Color.argb(225, 225, 225, 225));
 			holder.artistName = (TextView) convertView
-					.findViewById(R.id.list_item_google_cards_media_artist_name);
+					.findViewById(R.id.bankname);
+
+			holder.artistName.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Black.ttf"));
+			holder.artistName.setText(result[position]);
 			holder.year = (TextView) convertView
-					.findViewById(R.id.list_item_google_cards_media_year);
-			holder.next = (ImageView) convertView
-					.findViewById(R.id.list_item_google_cards_media_text);
-			holder.next.setColorFilter(Color.argb(225, 225, 225, 225));
-			holder.country = (TextView) convertView
-					.findViewById(R.id.list_item_google_cards_media_country);
-			/*holder.like = (TextView) convertView
-					.findViewById(R.id.list_item_google_cards_media_like);
-			holder.favorite = (TextView) convertView
-					.findViewById(R.id.list_item_google_cards_media_favorite);
-			holder.share = (TextView) convertView
-					.findViewById(R.id.list_item_google_cards_media_share);
-			holder.like.setOnClickListener(this);
-			holder.favorite.setOnClickListener(this);
-			holder.share.setOnClickListener(this);*/
+					.findViewById(R.id.bank_date);
+			holder.year.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+			holder.time = (TextView) convertView
+					.findViewById(R.id.bank_time);
+			holder.time.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+			holder.t1 = (TextView) convertView
+					.findViewById(R.id.t1);
+			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+
+			holder.t2= (TextView) convertView
+					.findViewById(R.id.t2);
+			holder.t2.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+
+
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -68,9 +88,9 @@ public class GoogleCardsMediaAdapter extends ArrayAdapter<DummyModel>
 	//holder.like.setTag(position);
 	//	holder.favorite.setTag(position);
 	//	holder.share.setTag(position);
-		DummyModel item = getItem(position);
-		ImageLoader loader = ImageLoader.getInstance();
-		loader.init(ImageLoaderConfiguration.createDefault(getContext()));
+	//	DummyModel item = getItem(position);
+	//	ImageLoader loader = ImageLoader.getInstance();
+	//	loader.init(ImageLoaderConfiguration.createDefault(getContext()));
 	//	ImageUtil.displayImage(holder.image, item.getImageURL(), null);
 
 		return convertView;
@@ -80,9 +100,9 @@ public class GoogleCardsMediaAdapter extends ArrayAdapter<DummyModel>
 		public View image;
 		public TextView artistName;
 		public TextView year;
-		public ImageView next;
+
 		public TextView country;
-		public TextView like;
+		public TextView t1,t2,time;
 		public TextView favorite;
 		public TextView share;
 	}

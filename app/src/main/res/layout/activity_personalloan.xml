@@ -1,5 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/gradient_backg"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/rupee"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="How much would you like to borrow?"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/textView5"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                />
+
+        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:numeric="integer"
+            android:textColorHint="#757575"
+            android:background="#fff"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:id="@+id/loan"
+            android:textColor="#757575"
+            android:hint="1,00,000"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/gradient_backg"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:drawableLeft="@drawable/right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="20dp"
+                android:padding="6dp"
+                android:id="@+id/imageView5"
+                android:src="@drawable/locations"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select your Location"
+                android:layout_marginTop="10dp"
+                android:id="@+id/textView8"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                />
+
+        </LinearLayout>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/spinnerloc"
+            android:background="#fff"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp" />
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:id="@+id/buttonNext"
+            android:background="@drawable/button_select"
+            android:onClick="onClick"
+            android:layout_gravity="right"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/right" />
+    </LinearLayout>
+</LinearLayout>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +111,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#cf4404"
+   android:background="@drawable/gradient_background_shop"
     tools:context=".Personalloan">
 
 
@@ -78,7 +182,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:id="@+id/spinnerloc"
-    android:background="@drawable/editext_bg_gray"
+    android:background="#fff"
     android:layout_below="@+id/imageView5"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="29dp" />
@@ -89,9 +193,9 @@
     android:numeric="integer"
     android:ems="10"
     android:id="@+id/loan"
-    android:background="@drawable/editext_bg_gray"
+    android:background="#fff"
     android:hint="1,00,000"
     android:gravity="center"
     android:layout_below="@+id/imageView2"
     android:layout_centerHorizontal="true" />
-</RelativeLayout>
+</RelativeLayout>-->

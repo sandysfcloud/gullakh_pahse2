@@ -32,11 +32,15 @@ public class Personalloan1Activity extends AppCompatActivity {
     }
 
     private void goPrev() {
-        Intent i=new Intent(this, Personalloan.class);
-        startActivity(i);
+        //Intent i=new Intent(this, Personalloan.class);
+        //startActivity(i);
+       finish();
     }
 
     private void goNext() {
+        Intent intent = new Intent(Personalloan1Activity.this, GoogleCardsMediaActivity.class);
+        intent.putExtra("data","personal");
+        startActivity(intent);
 
     }
 }

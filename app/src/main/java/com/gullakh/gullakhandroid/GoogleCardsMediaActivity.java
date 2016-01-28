@@ -20,28 +20,32 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class GoogleCardsMediaActivity extends ActionBarActivity implements
 		OnDismissCallback {
 
 	private static final int INITIAL_DELAY_MILLIS = 300;
 
-	private GoogleCardsMediaAdapter mGoogleCardsAdapter;
-	private PersonalLoan_Adapter mPersonalLoan_Adapter;
-
+	private GoogleCardsShopAdapter mGoogleCardsAdapter;
+	private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
+	public static int [] prgmImages={R.drawable.icici_bank_logo2,R.drawable.axisbank_logo,R.drawable.kotakbank_logo,R.drawable.bankofindia_logo,R.drawable.hdfcbank_logo,R.drawable.statebank_logo};
+	public static String [] prgmNameList={"ICICI BANK","AXIS BANK","KOTAK MAHINDRA BANK","BANK OF INDIA","HDFC BANK","STATE BANK OF INDIA"};
+	public static String [] search={"PERSONAL LOAN","CAR LOAN"};
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_view);
 
 		ListView listView = (ListView) findViewById(R.id.list_view);
-		
-		//listView.setBackgroundResource(R.drawable.background_media);
 
+		listView.setBackgroundResource(R.drawable.background_shop);
 
 
 		listView.setClipToPadding(false);
@@ -63,13 +67,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 		if(data.equals("personal"))
 		{
-		/*	mPersonalLoan_Adapter = new PersonalLoan_Adapter(this,
-					DummyContent.getDummyModelList());
-			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mPersonalLoan_Adapter, this));
-			swingBottomInAnimationAdapter.setAbsListView(listView);*/
 
-			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,
-					DummyContent.getDummyModelDragAndDropShopList());
+
+			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,prgmNameList,prgmImages);
 			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
 					new SwipeDismissAdapter(mGoogleCardsAdapter, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
@@ -78,11 +78,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			assert swingBottomInAnimationAdapter.getViewAnimator() != null;
 			swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
 					INITIAL_DELAY_MILLIS);
-
-
-
-
-
 
 
 			listView.setAdapter(swingBottomInAnimationAdapter);
@@ -94,9 +89,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 		else {
 
 
-			mGoogleCardsAdapter = new GoogleCardsMediaAdapter(this,
-					DummyContent.getDummyModelList());
-			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+			mGoogleCardsAdapter2 = new GoogleCardsMediaAdapter(this,
+					search);
+			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mGoogleCardsAdapter2, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
 
 			assert swingBottomInAnimationAdapter.getViewAnimator() != null;
@@ -124,7 +119,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	public void onDismiss(@NonNull final ViewGroup listView,
 			@NonNull final int[] reverseSortedPositions) {
 		for (int position : reverseSortedPositions) {
-			mGoogleCardsAdapter.remove(mGoogleCardsAdapter.getItem(position));
+			//mGoogleCardsAdapter.remove(mGoogleCardsAdapter.getItem(position));
 		}
 	}
 }
