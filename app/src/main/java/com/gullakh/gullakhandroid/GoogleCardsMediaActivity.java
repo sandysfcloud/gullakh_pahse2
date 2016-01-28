@@ -63,14 +63,26 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 		if(data.equals("personal"))
 		{
-			mPersonalLoan_Adapter = new PersonalLoan_Adapter(this,
+		/*	mPersonalLoan_Adapter = new PersonalLoan_Adapter(this,
 					DummyContent.getDummyModelList());
 			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mPersonalLoan_Adapter, this));
+			swingBottomInAnimationAdapter.setAbsListView(listView);*/
+
+			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,
+					DummyContent.getDummyModelDragAndDropShopList());
+			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+					new SwipeDismissAdapter(mGoogleCardsAdapter, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
+
 
 			assert swingBottomInAnimationAdapter.getViewAnimator() != null;
 			swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
 					INITIAL_DELAY_MILLIS);
+
+
+
+
+
 
 
 			listView.setAdapter(swingBottomInAnimationAdapter);
