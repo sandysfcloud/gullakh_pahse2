@@ -25,6 +25,7 @@
         <activity android:name=".Personalloan" />
         <activity android:name=".Personalloan1Activity" />
         <activity android:name=".MyProfileActivity"></activity>
+        <activity android:name=".WheelViewActivity"></activity>
     </application>
 
 </manifest>

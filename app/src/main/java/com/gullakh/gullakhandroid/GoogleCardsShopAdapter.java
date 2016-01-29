@@ -66,10 +66,10 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.image.setImageResource(imageId[position]);
 
 
-			holder.promo = (TextView) convertView
+			/*holder.promo = (TextView) convertView
 					.findViewById(R.id.list_item_google_cards_shop_promo);
 			holder.discount = (TextView) convertView
-					.findViewById(R.id.list_item_google_cards_shop_discount);
+					.findViewById(R.id.list_item_google_cards_shop_discount);*/
 
 			holder.description = (TextView) convertView
 					.findViewById(R.id.list_item_google_cards_shop_description);

@@ -4,12 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -24,7 +31,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +44,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -57,18 +67,63 @@ public class MainActivity extends ActionBarActivity {
     //*****expandable listview
     private AnimatedExpandableListView listView;
     private ExampleAdapter adapter;
-
+    private static final int ITEM_COUNT = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       // ActionBar bar = getActionBar();
-       // bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#fff")));
 
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+      /*  if (savedInstanceState == null) {
+            Intent intent = new Intent(MainActivity.this, WheelViewActivity.class);
+            startActivity(intent);
+        }*/
+
+        //*****************************wheel
+
+        final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);
+
+        //create data for the adapter
+        List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(ITEM_COUNT);
+        for (int i = 0; i < ITEM_COUNT; i++) {
+
+            Map.Entry<String, Integer> entry = MaterialColor.random(this, "\\D*_500$");
+            entries.add(entry);
+
+        }
+
+        //populate the adapter, that knows how to draw each item (as you would do with a ListAdapter)
+        wheelView.setAdapter(new MaterialColorAdapter(entries));
+
+        //a listener for receiving a callback for when the item closest to the selection angle changes
+        wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectListener() {
+            @Override
+            public void onWheelItemSelected(WheelView parent, Drawable itemDrawable, int position) {
+                //get the item at this position
+                Map.Entry<String, Integer> selectedEntry = ((MaterialColorAdapter) parent.getAdapter()).getItem(position);
+                parent.setSelectionColor(getContrastColor(selectedEntry));
+            }
+        });
+
+        wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
+            @Override
+            public void onWheelItemClick(WheelView parent, int position, boolean isSelected) {
+                String msg = String.valueOf(position) + " " + isSelected;
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //initialise the selection drawable with the first contrast color
+        wheelView.setSelectionColor(getContrastColor(entries.get(0)));
+
+
+
+
+        //***********************************
+
+
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         LayoutInflater inflater = getLayoutInflater();
@@ -110,36 +165,12 @@ public class MainActivity extends ActionBarActivity {
             mDrawerLayout.openDrawer(mDrawerList);
         }
 
-        //********expandable listview
-
-
-
 
         List<GroupItem> items = new ArrayList<GroupItem>();
-
-        // Populate our list with groups and it's children
-       /* for (int i = 1; i < 100; i++) {
-            GroupItem item = new GroupItem();
-
-            item.title = "Expand this item " + i;
-
-            for (int j = 0; j < i; j++) {
-                ChildItem child = new ChildItem();
-                child.title = "Expanded " + j;
-                //child.hint = "Too awesome";
-
-                item.items.add(child);
-            }
-
-            items.add(item);
-        }*/
-
-        //***set images
-
-
         int Images[] = { R.drawable.profile, R.drawable.search, R.drawable.loan, R.drawable.policy };
 
-
+        GroupItem itemh = new GroupItem();
+        itemh.title = "Home";
         GroupItem item = new GroupItem();
         item.title = "My profile";
         item.Img = Images[0];
@@ -166,19 +197,11 @@ public class MainActivity extends ActionBarActivity {
         item3.items.add(child3);
 
 
-
+        items.add(itemh);
         items.add(item);
         items.add(item2);
         items.add(item3);
         items.add(item4);
-
-
-
-
-
-
-
-
 
 
     //   mDrawerList.setGroupIndicator(null);
@@ -213,12 +236,17 @@ public class MainActivity extends ActionBarActivity {
                 }
                 if(groupPosition==0)
                 {
+                    mDrawerLayout.closeDrawers();
+
+                }
+                if(groupPosition==1)
+                {
                     Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
                     startActivity(intent);
 
                 }
 
-                if(groupPosition==1)
+                if(groupPosition==2)
                 {
                     Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                     intent.putExtra("data","search");
@@ -250,6 +278,44 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+
+    private int getContrastColor(Map.Entry<String, Integer> entry) {
+        String colorName = MaterialColor.getColorName(entry);
+        return MaterialColor.getContrastColor(colorName);
+    }
+
+    class MaterialColorAdapter extends WheelArrayAdapter<Map.Entry<String, Integer>> {
+        MaterialColorAdapter(List<Map.Entry<String, Integer>> entries) {
+            super(entries);
+        }
+
+        @Override
+        public Drawable getDrawable(int position) {
+
+            int[] myImageList = new int[]{R.drawable.personalloan, R.drawable.personal_backg2,R.drawable.personalloannew,R.drawable.search,R.drawable.search,R.drawable.loan};
+
+            Bitmap b = BitmapFactory.decodeResource(getResources(), myImageList[position]);
+            Drawable d = new BitmapDrawable(getResources(),b);
+            //Drawable d = myImageList[position];
+            return d;
+
+        }
+
+
+
+
+        }
+
+        private Drawable createOvalDrawable(int color) {
+            ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
+            shapeDrawable.getPaint().setColor(color);
+            return shapeDrawable;
+        }
+
+
+
+
+
     private View prepareHeaderView(int layoutRes, String url, String email) {
         View headerView = getLayoutInflater().inflate(layoutRes, mDrawerList,
                 false);
@@ -385,23 +451,23 @@ public class MainActivity extends ActionBarActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             //selectItem(position, mDrawerItems.get(position).getTag());
-            if(position==0) {
+            if(position==1) {
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 startActivity(intent);
-            } if(position==1) {
+            } if(position==2) {
                 Intent intent = new Intent(MainActivity.this, StickyListHeadersActivity.class);
                 startActivity(intent);
             }
-            if(position==2) {
+            if(position==3) {
                 Intent intent = new Intent(MainActivity.this, LogInPageActivity.class);
                 startActivity(intent);
-            } if(position==3) {
+            } if(position==4) {
                 Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
                 startActivity(intent);
             }
 
 
-            if(position==4) {
+            if(position==5) {
                 List<String> list = childActions.get(4);
             }
 
@@ -613,7 +679,7 @@ public class MainActivity extends ActionBarActivity {
             if ( getChildrenCount( groupPosition ) == 3 ) {
 
                 tv.setVisibility( View.VISIBLE );
-                tv.setImageResource(isExpanded ? R.drawable.down_arrow : R.drawable.up_arrow);
+                tv.setImageResource(isExpanded ? R.drawable.up_arrow : R.drawable.down_arrow);
             } else {
                 tv.setVisibility( View.INVISIBLE );
             }
@@ -642,7 +708,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public boolean isChildSelectable(int groupPosition, int childPosition) {
 
-           if(groupPosition==2&&childPosition==0)
+           if(groupPosition==3&&childPosition==0)
             {
 
                 Intent intent = new Intent(MainActivity.this, Personalloan.class);
