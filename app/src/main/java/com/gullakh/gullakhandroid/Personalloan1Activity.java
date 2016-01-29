@@ -41,6 +41,7 @@ public class Personalloan1Activity extends AppCompatActivity {
         Intent intent = new Intent(Personalloan1Activity.this, GoogleCardsMediaActivity.class);
         intent.putExtra("data","personal");
         startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
 
     }
 }

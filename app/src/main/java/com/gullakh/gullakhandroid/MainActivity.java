@@ -243,7 +243,7 @@ public class MainActivity extends ActionBarActivity {
                 {
                     Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
                     startActivity(intent);
-
+                    overridePendingTransition(R.transition.left, R.transition.right);
                 }
 
                 if(groupPosition==2)
@@ -251,7 +251,7 @@ public class MainActivity extends ActionBarActivity {
                     Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                     intent.putExtra("data","search");
                     startActivity(intent);
-
+                    overridePendingTransition(R.transition.left, R.transition.right);
                 }
                 return true;
             }
@@ -713,6 +713,7 @@ public class MainActivity extends ActionBarActivity {
 
                 Intent intent = new Intent(MainActivity.this, Personalloan.class);
                 startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
 
             }
             if(groupPosition==3&&childPosition==1)
