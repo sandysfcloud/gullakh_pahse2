@@ -164,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
             selectItem(position, mDrawerItems.get(position).getTag());
             mDrawerLayout.openDrawer(mDrawerList);
         }
-
+        mDrawerLayout.closeDrawer(mDrawerList);
 
         List<GroupItem> items = new ArrayList<GroupItem>();
         int Images[] = { R.drawable.home_icon,R.drawable.profile, R.drawable.search, R.drawable.loan, R.drawable.policy };
@@ -326,9 +326,9 @@ public class MainActivity extends ActionBarActivity {
         ImageLoader loader = ImageLoader.getInstance();
         loader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
 
-        ImageUtil.displayRoundImage(iv, url, null);
+       // ImageUtil.displayRoundImage(iv, url, null);
         tv.setText(email);
-
+        iv.setBackgroundResource(R.drawable.prof_draw);
         return headerView;
     }
 

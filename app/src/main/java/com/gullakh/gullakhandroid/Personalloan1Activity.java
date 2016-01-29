@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 public class Personalloan1Activity extends AppCompatActivity {
@@ -14,11 +16,9 @@ public class Personalloan1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalloan1);
         nextemp=(ImageButton)findViewById(R.id.button_next_emp) ;
-        nextemp.setOnClickListener(new View.OnClickListener()
-        {
+        nextemp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 goNext();
             }
         });
@@ -29,6 +29,12 @@ public class Personalloan1Activity extends AppCompatActivity {
                 goPrev();
             }
         });
+        final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        nextemp.setAlpha(1.0F);
+        nextemp.startAnimation(shake);
+
+        prevemp.setAlpha(1.0F);
+        prevemp.startAnimation(shake);
     }
 
     private void goPrev() {

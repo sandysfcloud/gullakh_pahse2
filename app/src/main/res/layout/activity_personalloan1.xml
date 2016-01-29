@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="com.gullakh.gullakhandroid.Personalloan1Activity">
 
     <ScrollView
@@ -24,7 +25,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/gradient_backg">
 
                 <LinearLayout
@@ -63,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:id="@+id/companyname"
-                    android:background="#fff"
+                    android:background="@drawable/edittext_design"
                     android:hint="ABC PVT. LTD"
                     android:gravity="center"
                     android:layout_below="@+id/textView7"
@@ -79,10 +80,11 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="246dp"
+                    android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
                     android:background="@drawable/gradient_backg"
                 android:layout_margin="10dp"
-                android:layout_weight="0.13">
+                >
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -123,7 +125,8 @@
                     android:numeric="integer"
                     android:ems="10"
                     android:id="@+id/income"
-                    android:background="#fff"
+
+                    android:background="@drawable/edittext_design"
                     android:hint="25,000"
                     android:gravity="center"
                     android:layout_above="@+id/button_prev_emp"
@@ -133,37 +136,63 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp" />
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                <!--  <LinearLayout
+                     android:orientation="horizontal"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content" >
 
                     <ImageButton
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:id="@+id/button_prev_emp"
-                        android:src="@drawable/left"
-                        android:background="@drawable/button_select"
-                        android:onClick="onClick"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="16dp" />
+                         android:layout_width="80dp"
+                         android:layout_height="70dp"
+                         android:id="@+id/button_prev_emp"
+                         android:src="@drawable/left"
+                         android:background="@drawable/button_select"
+                         android:onClick="onClick"
+                         android:layout_alignParentBottom="true"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentStart="true"
+                         android:layout_marginTop="16dp" />
 
-                    <ImageButton
-                        android:layout_width="80dp"
-                        android:layout_height="70dp"
-                        android:id="@+id/button_next_emp"
-                        android:src="@drawable/right"
-                        android:background="@drawable/button_select"
-                        android:onClick="onClick"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginLeft="150dp"
-                        android:layout_marginTop="16dp" />
-                </LinearLayout>
+                     <ImageButton
+                         android:layout_width="80dp"
+                         android:layout_height="70dp"
+                         android:id="@+id/button_next_emp"
+                         android:src="@drawable/right"
+                         android:background="@drawable/button_select"
+                         android:onClick="onClick"
+                         android:layout_alignParentBottom="true"
+                         android:layout_alignParentRight="true"
+                         android:layout_alignParentEnd="true"
+                         android:layout_marginLeft="150dp"
+                         android:layout_marginTop="16dp" />
+                </LinearLayout>-->
         </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <ImageButton
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:id="@+id/button_next_emp"
+    android:background="@drawable/roundbutton_next"
+    android:onClick="onClick"
+    android:gravity="right"
+        android:layout_marginBottom="10dp"
+       android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+    android:layout_marginRight="10dp"
+
+    />
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/button_prev_emp"
+        android:background="@drawable/roundbutton_back"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClick"
+        android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+
+        />
+
+</RelativeLayout>
