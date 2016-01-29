@@ -127,6 +127,7 @@
     <string name="fontello_heart_full">&#xe80a;</string>
     <string name="fontello_drag_and_drop">&#xe821;</string>
     <string name="title_activity_launch_page">LaunchPage</string>
+    <string name="wellcome">Welcome \nto \nGullakh.com</string>
 
 
 </resources>

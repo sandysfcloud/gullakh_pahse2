@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,7 +49,8 @@ public class MainActivity extends ActionBarActivity {
 
     //private ListView mDrawerList;
     private AnimatedExpandableListView  mDrawerList;
-
+    Button myprof;
+    Button myapp;
     private List<DrawerItem> mDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -70,7 +72,22 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        myprof= (Button) findViewById(R.id.buttonMyprof);
+        myprof.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goMyprofile();
+            }
+        });
+        myapp= (Button) findViewById(R.id.buttonMyApp);
+        myapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goMyapp();
+            }
+        });
 
       /*  if (savedInstanceState == null) {
             Intent intent = new Intent(MainActivity.this, WheelViewActivity.class);
@@ -274,6 +291,17 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
+
+    }
+
+
+
+    private void goMyprofile() {
+        Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+    }
+    private void goMyapp() {
 
     }
 

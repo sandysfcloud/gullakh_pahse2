@@ -35,7 +35,7 @@
                         android:id="@+id/imageView2"
                         android:src="@drawable/rupee"
                         />
-                    <TextView
+                    <com.gullakh.gullakhandroid.font.RobotoTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
