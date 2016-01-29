@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
 
 import java.util.ArrayList;
@@ -44,6 +46,16 @@ public class Personalloan extends AppCompatActivity implements AdapterView.OnIte
         TextView amount=(TextView)findViewById(R.id.loan);
         loan_amt=amount.toString();
         next=(ImageButton)findViewById(R.id.buttonNext) ;
+
+        next.setAlpha(1.0F);
+
+        final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        next.startAnimation(shake);
+
+
+
+
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

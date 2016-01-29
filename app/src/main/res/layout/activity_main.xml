@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/lin"
+    android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" >
 
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:emptyItemColor="@color/green_900"
-            app:wheelColor="#80D83C2F"
+            app:wheelColor="#D83C2F"
             app:rotatableWheelDrawable="false"
             app:selectionAngle="90.0"
             app:selectionColor="@color/teal_900"
