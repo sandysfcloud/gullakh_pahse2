@@ -12,7 +12,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,13 +47,13 @@
                         />
 
                 </LinearLayout>
-                <EditText
+               <EditText
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
                     android:numeric="integer"
                     android:textColorHint="#757575"
-                    android:background="#fff"
+                    android:background="@drawable/edittext_design"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
@@ -63,6 +63,9 @@
                     android:hint="1,00,000"
 
                     />
+
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -100,22 +103,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/spinnerloc"
-                    android:background="#fff"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittext_design"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp" />
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="70dp"
-                    android:id="@+id/buttonNext"
-                    android:background="@drawable/button_select"
-                    android:onClick="onClick"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/right" />
+
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/buttonNext"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbutton_next"
+        android:onClick="onClick"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+   />
 </LinearLayout>
 <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

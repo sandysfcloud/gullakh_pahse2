@@ -67,7 +67,7 @@ public class MainActivity extends ActionBarActivity {
     //*****expandable listview
     private AnimatedExpandableListView listView;
     private ExampleAdapter adapter;
-    private static final int ITEM_COUNT = 6;
+    private static final int ITEM_COUNT = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,22 +167,23 @@ public class MainActivity extends ActionBarActivity {
 
 
         List<GroupItem> items = new ArrayList<GroupItem>();
-        int Images[] = { R.drawable.profile, R.drawable.search, R.drawable.loan, R.drawable.policy };
+        int Images[] = { R.drawable.home_icon,R.drawable.profile, R.drawable.search, R.drawable.loan, R.drawable.policy };
 
         GroupItem itemh = new GroupItem();
         itemh.title = "Home";
+        itemh.Img = Images[0];
         GroupItem item = new GroupItem();
         item.title = "My profile";
-        item.Img = Images[0];
+        item.Img = Images[1];
         GroupItem item2 = new GroupItem();
         item2.title = "My Searches";
-        item2.Img = Images[1];
+        item2.Img = Images[2];
         GroupItem item3 = new GroupItem();
         item3.title = "Loans";
-        item3.Img = Images[2];
+        item3.Img = Images[3];
         GroupItem item4 = new GroupItem();
         item4.title = "Policy And Licences";
-        item4.Img = Images[3];
+        item4.Img = Images[4];
 
         ChildItem child = new ChildItem();
         child.title = "Personal Loan ";
@@ -292,7 +293,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public Drawable getDrawable(int position) {
 
-            int[] myImageList = new int[]{R.drawable.personalloan, R.drawable.personal_backg2,R.drawable.personalloannew,R.drawable.search,R.drawable.search,R.drawable.loan};
+            int[] myImageList = new int[]{ R.drawable.personalloannew,R.drawable.busineeloan,R.drawable.homeloan,R.drawable.carloan};
 
             Bitmap b = BitmapFactory.decodeResource(getResources(), myImageList[position]);
             Drawable d = new BitmapDrawable(getResources(),b);
@@ -716,7 +717,7 @@ public class MainActivity extends ActionBarActivity {
                 overridePendingTransition(R.transition.left, R.transition.right);
 
             }
-            if(groupPosition==3&&childPosition==1)
+           /* if(groupPosition==3&&childPosition==1)
             {
                 Intent intent = new Intent(MainActivity.this, StickyListHeadersActivity.class);
                 startActivity(intent);
@@ -733,7 +734,7 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
                 startActivity(intent);
 
-            }
+            }*/
             return true;
         }
 

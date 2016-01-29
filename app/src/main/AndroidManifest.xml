@@ -22,7 +22,8 @@
         <activity android:name=".GoogleCardsMediaActivity" />
         <activity android:name=".StickyListHeadersActivity" />
         <activity android:name=".LogInPageActivity" />
-        <activity android:name=".Personalloan" />
+        <activity android:name=".Personalloan"
+            android:launchMode = "singleInstance"/>
         <activity android:name=".Personalloan1Activity" />
         <activity android:name=".MyProfileActivity"></activity>
         <activity android:name=".WheelViewActivity"></activity>

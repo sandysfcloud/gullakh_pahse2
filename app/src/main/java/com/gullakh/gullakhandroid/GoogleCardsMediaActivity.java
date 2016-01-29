@@ -45,7 +45,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 		ListView listView = (ListView) findViewById(R.id.list_view);
 
-		listView.setBackgroundResource(R.drawable.background_shop);
+		//listView.setBackgroundResource(R.drawable.background_shop);
 
 
 		listView.setClipToPadding(false);
