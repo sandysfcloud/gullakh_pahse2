@@ -7,7 +7,7 @@
 
         <item name="colorPrimary">#e31881</item>
 
-        <item name="colorPrimaryDark">#e31881</item>
+        <item name="colorPrimaryDark">#D83C2F</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
