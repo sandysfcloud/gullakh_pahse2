@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -29,10 +30,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,10 +48,9 @@ import java.util.Map;
 
 public class MainActivity extends ActionBarActivity {
 
-    //private ListView mDrawerList;
-    private AnimatedExpandableListView  mDrawerList;
-    Button myprof;
-    Button reg;
+    private ListView mDrawerList;
+    //private AnimatedExpandableListView  mDrawerList;
+    private TypedArray navMenuIcons;
     private List<DrawerItem> mDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -65,29 +65,14 @@ public class MainActivity extends ActionBarActivity {
 
     //*****expandable listview
     private AnimatedExpandableListView listView;
-    private ExampleAdapter adapter;
+    //private ExampleAdapter adapter;
     private static final int ITEM_COUNT = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myprof= (Button) findViewById(R.id.buttonMyprof);
-        myprof.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                goMyprofile();
-            }
-        });
-        reg= (Button) findViewById(R.id.buttonReg);
-        reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goReg();
-            }
-        });
+
 
       /*  if (savedInstanceState == null) {
             Intent intent = new Intent(MainActivity.this, WheelViewActivity.class);
@@ -127,7 +112,8 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
-        wheelView.setWheelDrawable(R.drawable.wheel6);
+        wheelView.setWheelDrawable(R.drawable.round_img_backg);
+
         //initialise the selection drawable with the first contrast color
         wheelView.setSelectionColor(getContrastColor(entries.get(0)));
 
@@ -158,16 +144,16 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mTitle = mDrawerTitle = getTitle();
-      //expand  mDrawerList = (ListView) findViewById(R.id.list_view);
+        mDrawerList = (ListView) findViewById(R.id.list_view);
 
-        mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
+        //mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
 
 
         // mDrawerList.setGroupIndicator(getResources().getDrawable(R.drawable.custom_arrow));
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
         prepareNavigationDrawerItems();
-       // mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
+        mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
@@ -178,12 +164,12 @@ public class MainActivity extends ActionBarActivity {
             selectItem(position, mDrawerItems.get(position).getTag());
             mDrawerLayout.openDrawer(mDrawerList);
         }
-
+        mDrawerLayout.closeDrawer(mDrawerList);
 
         List<GroupItem> items = new ArrayList<GroupItem>();
-        int Images[] = { R.drawable.home_icon,R.drawable.profile, R.drawable.search, R.drawable.loan, R.drawable.policy };
 
-        GroupItem itemh = new GroupItem();
+
+        /* GroupItem itemh = new GroupItem();
         itemh.title = "Home";
         itemh.Img = Images[0];
         GroupItem item = new GroupItem();
@@ -216,15 +202,16 @@ public class MainActivity extends ActionBarActivity {
         items.add(item);
         items.add(item2);
         items.add(item3);
-        items.add(item4);
+        items.add(item4);*/
 
 
-    //   mDrawerList.setGroupIndicator(null);
+        //   mDrawerList.setGroupIndicator(null);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        adapter = new ExampleAdapter(this);
-        adapter.setData(items);
+        //adapter = new ExampleAdapter(this);
+
+        //adapter.setData(items);
         View headerView = null;
         headerView = prepareHeaderView(R.layout.header_navigation_drawer,
                 "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg",
@@ -232,12 +219,14 @@ public class MainActivity extends ActionBarActivity {
 
 
         mDrawerList.addHeaderView(headerView);
-        mDrawerList.setAdapter(adapter);
+        //mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        //  mDrawerList.setAdapter(adapter);
 
 
         // In order to show animations, we need to use a custom click handler
         // for our ExpandableListView.
-        mDrawerList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        /*mDrawerList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
@@ -271,7 +260,7 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             }
 
-        });
+        });*/
 
         // Set indicator (arrow) to the right
         Display display = getWindowManager().getDefaultDisplay();
@@ -282,29 +271,16 @@ public class MainActivity extends ActionBarActivity {
         Resources r = getResources();
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 50, r.getDisplayMetrics());
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+     /*   if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
             //mDrawerList.setIndicatorBounds(width - px, width);
             mDrawerList.setIndicatorBounds(mDrawerList.getRight()- 40, mDrawerList.getWidth());
         } else {
           //  mDrawerList.setIndicatorBoundsRelative(width - px, width);
             mDrawerList.setIndicatorBoundsRelative(mDrawerList.getRight()- 40, mDrawerList.getWidth());
-        }
+        }*/
 
 
 
-    }
-
-
-
-    private void goMyprofile() {
-        Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.transition.left, R.transition.right);
-    }
-    private void goReg() {
-        Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.transition.left, R.transition.right);
     }
 
     private int getContrastColor(Map.Entry<String, Integer> entry) {
@@ -332,13 +308,13 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        }
+    }
 
-        private Drawable createOvalDrawable(int color) {
-            ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
-            shapeDrawable.getPaint().setColor(color);
-            return shapeDrawable;
-        }
+    private Drawable createOvalDrawable(int color) {
+        ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
+        shapeDrawable.getPaint().setColor(color);
+        return shapeDrawable;
+    }
 
 
 
@@ -348,14 +324,23 @@ public class MainActivity extends ActionBarActivity {
         View headerView = getLayoutInflater().inflate(layoutRes, mDrawerList,
                 false);
         ImageView iv = (ImageView) headerView.findViewById(R.id.image);
+
+
+
+        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.prof_draw);
+        RoundImage roundedImage = new RoundImage(bm);
+        iv.setImageDrawable(roundedImage);
+
+
+
         TextView tv = (TextView) headerView.findViewById(R.id.email);
 
         ImageLoader loader = ImageLoader.getInstance();
         loader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
 
-        ImageUtil.displayRoundImage(iv, url, null);
+        // ImageUtil.displayRoundImage(iv, url, null);
         tv.setText(email);
-
+        //iv.setBackgroundResource(R.drawable.prof_draw);
         return headerView;
     }
 
@@ -399,25 +384,29 @@ public class MainActivity extends ActionBarActivity {
 
     private void prepareNavigationDrawerItems() {
         mDrawerItems = new ArrayList<>();
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_list_views,
+
+        // nav drawer icons from resources
+        navMenuIcons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(0, -1),
                 R.string.drawer_title_list_views,
                 DrawerItem.DRAWER_ITEM_TAG_LIST_VIEWS));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_parallax,
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(1, -1),
                 R.string.drawer_title_parallax,
                 DrawerItem.DRAWER_ITEM_TAG_PARALLAX));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_left_menus,
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(2, -1),
                 R.string.drawer_title_left_menus,
                 DrawerItem.DRAWER_ITEM_TAG_LEFT_MENUS));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_login_page,
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(3, -1),
                 R.string.drawer_title_login_page,
                 DrawerItem.DRAWER_ITEM_TAG_LOGIN_PAGE_AND_LOADERS));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_image_gallery,
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(4, -1),
                 R.string.drawer_title_image_gallery,
                 DrawerItem.DRAWER_ITEM_TAG_IMAGE_GALLERY));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_shape_image_views,
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(5, -1),
                 R.string.drawer_title_shape_image_views,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_progress_bars,
+        /*mDrawerItems.add(new DrawerItem(R.string.drawer_icon_progress_bars,
                 R.string.drawer_title_progress_bars,
                 DrawerItem.DRAWER_ITEM_TAG_PROGRESS_BARS));
         mDrawerItems.add(new DrawerItem(
@@ -432,7 +421,7 @@ public class MainActivity extends ActionBarActivity {
                 DrawerItem.DRAWER_ITEM_TAG_SEARCH_BARS));
         mDrawerItems.add(new DrawerItem(R.string.drawer_icon_text_views,
                 R.string.drawer_title_text_views,
-                DrawerItem.DRAWER_ITEM_TAG_TEXT_VIEWS));
+                DrawerItem.DRAWER_ITEM_TAG_TEXT_VIEWS));*/
 
 
 
@@ -443,7 +432,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    @Override
+    /*@Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -451,7 +440,7 @@ public class MainActivity extends ActionBarActivity {
         } else {
             mDrawerList.setIndicatorBoundsRelative(mDrawerList.getRight()- 40, mDrawerList.getWidth());
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -480,24 +469,32 @@ public class MainActivity extends ActionBarActivity {
                                 long id) {
             //selectItem(position, mDrawerItems.get(position).getTag());
             if(position==1) {
-                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                // startActivity(intent);
+                mDrawerLayout.closeDrawers();
             } if(position==2) {
-                Intent intent = new Intent(MainActivity.this, StickyListHeadersActivity.class);
+                Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
             }
             if(position==3) {
-                Intent intent = new Intent(MainActivity.this, LogInPageActivity.class);
+                //Intent intent = new Intent(MainActivity.this, LogInPageActivity.class);
+                //startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data","search");
                 startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+
             } if(position==4) {
-                Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
+                //Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
+                //startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data","personal");
                 startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
             }
 
 
-            if(position==5) {
-                List<String> list = childActions.get(4);
-            }
 
         }
     }
@@ -517,28 +514,28 @@ public class MainActivity extends ActionBarActivity {
         //**kk
         fragment = new Fragment();
         if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_SPLASH_SCREENS) {
-           // fragment = SplashScreensFragment.newInstance();
+            // fragment = SplashScreensFragment.newInstance();
 
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_PROGRESS_BARS) {
-          //  fragment = ProgressBarsFragment.newInstance();
+            //  fragment = ProgressBarsFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS) {
-           // fragment = ShapeImageViewsFragment.newInstance();
+            // fragment = ShapeImageViewsFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_TEXT_VIEWS) {
-           // fragment = TextViewsFragment.newInstance();
+            // fragment = TextViewsFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_SEARCH_BARS) {
-           // fragment = SearchBarsFragment.newInstance();
+            // fragment = SearchBarsFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_LOGIN_PAGE_AND_LOADERS) {
-           // fragment = LogInPageFragment.newInstance();
+            // fragment = LogInPageFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_IMAGE_GALLERY) {
-          //  fragment = ImageGalleryFragment.newInstance();
+            //  fragment = ImageGalleryFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_CHECK_AND_RADIO_BOXES) {
-           // fragment = CheckAndRadioBoxesFragment.newInstance();
+            // fragment = CheckAndRadioBoxesFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_LEFT_MENUS) {
-          //  fragment = LeftMenusFragment.newInstance();
+            //  fragment = LeftMenusFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_LIST_VIEWS) {
-           // fragment = ListViewsFragment.newInstance();
+            // fragment = ListViewsFragment.newInstance();
         } else if (drawerTag == DrawerItem.DRAWER_ITEM_TAG_PARALLAX) {
-           // fragment = ParallaxEffectsFragment.newInstance();
+            // fragment = ParallaxEffectsFragment.newInstance();
         } else {
             fragment = new Fragment();
         }
@@ -598,7 +595,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    private class ExampleAdapter extends AnimatedExpandableListView.AnimatedExpandableListAdapter {
+  /*  private class ExampleAdapter extends AnimatedExpandableListView.AnimatedExpandableListAdapter {
         private LayoutInflater inflater;
 
         private List<GroupItem> items;
@@ -636,8 +633,7 @@ public class MainActivity extends ActionBarActivity {
                         false);
                 holder.title = (TextView) convertView
                         .findViewById(R.id.textTitle);
-				/*holder.hint = (TextView) convertView
-						.findViewById(R.id.textHint);*/
+
                 convertView.setTag(holder);
             } else {
 
@@ -645,7 +641,7 @@ public class MainActivity extends ActionBarActivity {
             }
 
             holder.title.setText(item.title);
-            //holder.hint.setText(item.hint);
+
 
             return convertView;
         }
@@ -762,10 +758,10 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
 
             }*/
-            return true;
-        }
+    // return true;
+    // }
 
-    }
+    // }
 
 
 }
