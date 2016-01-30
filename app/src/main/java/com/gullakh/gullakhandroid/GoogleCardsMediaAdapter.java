@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,24 +63,25 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 			holder.artistName = (TextView) convertView
 					.findViewById(R.id.bankname);
 
-			holder.artistName.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Black.ttf"));
+			holder.artistName.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 			holder.artistName.setText(result[position]);
 			holder.year = (TextView) convertView
 					.findViewById(R.id.bank_date);
-			holder.year.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+			holder.year.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-LightItalic.ttf"));
 			holder.time = (TextView) convertView
 					.findViewById(R.id.bank_time);
-			holder.time.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+			holder.time.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-LightItalic.ttf"));
 			holder.t1 = (TextView) convertView
 					.findViewById(R.id.t1);
-			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 
 			holder.t2= (TextView) convertView
 					.findViewById(R.id.t2);
-			holder.t2.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Regular.ttf"));
+			holder.t2.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 
-
-
+			holder.next = (Button) convertView
+					.findViewById(R.id.next);
+			holder.next.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -100,7 +102,7 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 		public View image;
 		public TextView artistName;
 		public TextView year;
-
+		public Button next;
 		public TextView country;
 		public TextView t1,t2,time;
 		public TextView favorite;

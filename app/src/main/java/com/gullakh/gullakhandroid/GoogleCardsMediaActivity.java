@@ -17,6 +17,7 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -35,8 +36,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 	private GoogleCardsShopAdapter mGoogleCardsAdapter;
 	private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
-	public static int [] prgmImages={R.drawable.icici_bank_logo2,R.drawable.axisbank_logo,R.drawable.kotakbank_logo,R.drawable.bankofindia_logo,R.drawable.hdfcbank_logo,R.drawable.statebank_logo};
-	public static String [] prgmNameList={"ICICI BANK","AXIS BANK","KOTAK MAHINDRA BANK","BANK OF INDIA","HDFC BANK","STATE BANK OF INDIA"};
+	public static int [] prgmImages={R.drawable.icici_bank_logo2,R.drawable.axisbank_logo,R.drawable.bankofindia_logo,R.drawable.hdfcbank_logo,R.drawable.statebank_logo};
+	public static String [] prgmNameList={"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK","STATE BANK OF INDIA"};
 	public static String [] search={"PERSONAL LOAN","CAR LOAN"};
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 		ListView listView = (ListView) findViewById(R.id.list_view);
 
-		//listView.setBackgroundResource(R.drawable.background_shop);
+		listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
 
 
 		listView.setClipToPadding(false);

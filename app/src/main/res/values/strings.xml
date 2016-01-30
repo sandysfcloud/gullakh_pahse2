@@ -34,18 +34,18 @@
     <string name="drawer_title_splash_screens">Splash Screens</string>
     <string name="drawer_title_progress_bars">Progress Bars</string>
     <!-- <string name="drawer_title_buttons">Buttons</string> -->
-    <string name="drawer_title_shape_image_views">Shape Image Views</string>
+    <string name="drawer_title_shape_image_views">Policy And Licences</string>
     <string name="drawer_title_text_views">Text Views</string>
     <string name="drawer_title_search_bars">Search Bars</string>
-    <string name="drawer_title_login_page">Login Pages</string>
+    <string name="drawer_title_login_page">Personal Loan</string>
     <!-- <string name="drawer_title_audio_player">Audio Player</string> -->
     <!-- <string name="drawer_title_video_player">Video Player</string> -->
-    <string name="drawer_title_image_gallery">Image Gallery</string>
+    <string name="drawer_title_image_gallery">Car Loan</string>
     <string name="drawer_title_check_and_radio_buttons">Check Boxes</string>
     <!-- <string name="drawer_title_calendars">Calendars</string> -->
-    <string name="drawer_title_left_menus">Left Menus</string>
-    <string name="drawer_title_list_views">List Views</string>
-    <string name="drawer_title_parallax">Parallax</string>
+    <string name="drawer_title_left_menus">My Searches</string>
+    <string name="drawer_title_list_views">Home</string>
+    <string name="drawer_title_parallax">My Profile</string>
     <!-- <string name="drawer_title_dialogs">Dialogs</string> -->
 
     <string name="drawer_title_linked_in">LinkedIn</string>
@@ -128,5 +128,13 @@
     <string name="fontello_drag_and_drop">&#xe821;</string>
     <string name="title_activity_launch_page">LaunchPage</string>
 
+    <array name="nav_drawer_icons">
+        <item>@drawable/home_icon</item>
+        <item>@drawable/profile</item>
+        <item>@drawable/search</item>
+        <item>@drawable/loan</item>
+        <item>@drawable/carloan_icon</item>
+        <item>@drawable/policy</item>
 
+    </array>
 </resources>

@@ -49,7 +49,7 @@
             android:contentDescription="cd_main_image"
             android:scaleType="centerCrop" />
 
-        <ImageView
+       <!-- <ImageView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,12 +57,13 @@
            android:src="@mipmap/personal_backg2"
 
 
-            />
+            />-->
 
         <View
             android:layout_width="match_parent"
             android:layout_height="128dp"
-            android:background="@drawable/gradient_background_shop" />
+
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,28 +85,28 @@
             android:background="@android:color/transparent"
             android:text="ICICI BANK"
 
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textColor="#177bbd"
+            android:textSize="18sp"
             />
             <ImageView
                 android:id="@+id/bankimg"
                 android:layout_weight="1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="-10dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/icici_bank_logo2"/>
 
            <Button
-                android:id="@+id/next"
+                android:id="@+id/apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+                android:layout_marginTop="6dp"
+               android:layout_marginRight="8dp"
+
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:padding="8dp"
@@ -113,7 +114,15 @@
                 android:background="@drawable/rectbutton_org"
                 android:text="Apply" />
         </LinearLayout>
-
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:id="@+id/line"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="4dp"
+                android:background="#80616161"/>
         </LinearLayout>
         <!--<com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/list_item_google_cards_shop_buy"
@@ -159,8 +168,8 @@
                 android:background="@android:color/transparent"
                 android:maxLines="2"
                 android:text="Monthly for 3 years"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
+                android:textColor="#616161"
+                android:textSize="14sp"
                 />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -170,8 +179,8 @@
                 android:background="@android:color/transparent"
                 android:maxLines="1"
                 android:text="2,300"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:textColor="#616161"
+                android:textSize="16sp"
                  />
         </LinearLayout>
         <LinearLayout
@@ -192,8 +201,8 @@
                 android:background="@android:color/transparent"
                 android:maxLines="2"
                 android:text="Fixed"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
+                android:textColor="#616161"
+                android:textSize="14sp"
                 />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -203,8 +212,8 @@
                 android:background="@android:color/transparent"
                 android:maxLines="1"
                 android:text="20%"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:textColor="#616161"
+                android:textSize="16sp"
                 />
         </LinearLayout>
             <LinearLayout
@@ -225,8 +234,8 @@
                     android:background="@android:color/transparent"
                     android:maxLines="2"
                     android:text="One Time Fee"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"
+                    android:textColor="#616161"
+                    android:textSize="14sp"
                     />
 
                 <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -236,8 +245,8 @@
                     android:background="@android:color/transparent"
                     android:maxLines="1"
                     android:text="1500"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
                     />
             </LinearLayout>
         </LinearLayout>

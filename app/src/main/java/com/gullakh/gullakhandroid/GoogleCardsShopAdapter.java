@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +62,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.name = (TextView) convertView
 					.findViewById(R.id.pbanknam);
 
-			holder.name.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Black.ttf"));
+			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 			holder.name.setText(result[position]);
 			holder.image.setImageResource(imageId[position]);
 
@@ -73,10 +74,28 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.description = (TextView) convertView
 					.findViewById(R.id.list_item_google_cards_shop_description);
+			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 			holder.day = (TextView) convertView
 					.findViewById(R.id.list_item_google_cards_shop_day);
-			//holder.buy = (TextView) convertView
-					//.findViewById(R.id.list_item_google_cards_shop_buy);
+			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+			holder.t1 = (TextView) convertView
+					.findViewById(R.id.t1);
+			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+
+			holder.t2= (TextView) convertView
+					.findViewById(R.id.t2);
+			holder.t2.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+			holder.t3 = (TextView) convertView
+					.findViewById(R.id.t3);
+			holder.t3.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+
+			holder.t4= (TextView) convertView
+					.findViewById(R.id.t4);
+			holder.t4.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+			holder.apply= (Button) convertView
+					.findViewById(R.id.apply);
+			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+
 			//holder.buy.setOnClickListener(this);
 			convertView.setTag(holder);
 		} else {
@@ -92,12 +111,13 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 	private static class ViewHolder {
 		public ImageView image;
-		public TextView promo,name;
+		public TextView promo,name,t1,t2,t3,t4;
 		public TextView discount;
 		public TextView price;
 		public TextView description;
 		public TextView day;
-		public TextView buy;
+		public Button apply;
+
 	}
 
 	@Override
