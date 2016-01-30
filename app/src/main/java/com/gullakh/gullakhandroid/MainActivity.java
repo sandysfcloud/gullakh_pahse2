@@ -46,8 +46,8 @@ import java.util.Map;
 
 public class MainActivity extends ActionBarActivity {
 
-    //private ListView mDrawerList;
-    private AnimatedExpandableListView  mDrawerList;
+    private ListView mDrawerList;
+    //private AnimatedExpandableListView  mDrawerList;
 
     private List<DrawerItem> mDrawerItems;
     private DrawerLayout mDrawerLayout;
@@ -141,9 +141,9 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mTitle = mDrawerTitle = getTitle();
-      //expand  mDrawerList = (ListView) findViewById(R.id.list_view);
+        mDrawerList = (ListView) findViewById(R.id.list_view);
 
-        mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
+        //mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
 
 
         // mDrawerList.setGroupIndicator(getResources().getDrawable(R.drawable.custom_arrow));
@@ -220,7 +220,7 @@ public class MainActivity extends ActionBarActivity {
 
         // In order to show animations, we need to use a custom click handler
         // for our ExpandableListView.
-        mDrawerList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        /*mDrawerList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
@@ -254,7 +254,7 @@ public class MainActivity extends ActionBarActivity {
                 return true;
             }
 
-        });
+        });*/
 
         // Set indicator (arrow) to the right
         Display display = getWindowManager().getDefaultDisplay();
@@ -265,13 +265,13 @@ public class MainActivity extends ActionBarActivity {
         Resources r = getResources();
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 50, r.getDisplayMetrics());
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+     /*   if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
             //mDrawerList.setIndicatorBounds(width - px, width);
             mDrawerList.setIndicatorBounds(mDrawerList.getRight()- 40, mDrawerList.getWidth());
         } else {
           //  mDrawerList.setIndicatorBoundsRelative(width - px, width);
             mDrawerList.setIndicatorBoundsRelative(mDrawerList.getRight()- 40, mDrawerList.getWidth());
-        }
+        }*/
 
 
 
@@ -413,7 +413,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    @Override
+    /*@Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
@@ -421,7 +421,7 @@ public class MainActivity extends ActionBarActivity {
         } else {
             mDrawerList.setIndicatorBoundsRelative(mDrawerList.getRight()- 40, mDrawerList.getWidth());
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -65,13 +65,17 @@
             android:background="@drawable/gradient_background_shop" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="4"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
             android:orientation="horizontal">
 
-      <com.gullakh.gullakhandroid.font.RobotoTextView
+       <com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/pbanknam"
-          android:layout_weight="1"
+           android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -81,22 +85,35 @@
             android:text="ICICI BANK"
 
             android:textColor="@android:color/white"
-            android:textSize="22sp"
+            android:textSize="20sp"
             />
+            <ImageView
+                android:id="@+id/bankimg"
+                android:layout_weight="1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="-10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/icici_bank_logo2"/>
 
-        <ImageView
-            android:id="@+id/bankimg"
-            android:layout_weight="5"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="2dp"
-            android:paddingTop="8dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+           <Button
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:padding="8dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/rectbutton_org"
+                android:text="Apply" />
+        </LinearLayout>
 
-            android:background="@android:color/transparent"
-            android:src="@drawable/icici_bank_logo2"/>
         </LinearLayout>
         <!--<com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/list_item_google_cards_shop_buy"
@@ -115,6 +132,7 @@
             android:textColor="@android:color/white"
             android:textSize="14sp"
             />-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
