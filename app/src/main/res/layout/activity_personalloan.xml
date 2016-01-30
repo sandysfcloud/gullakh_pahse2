@@ -4,126 +4,114 @@
 
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView3" >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:weightSum="1">
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="65dp"
+                android:background="#616161"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/imageView2"
+                    android:src="@drawable/rupee"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="How much would you like to borrow?"
+                    android:id="@+id/textView5"
+                    android:layout_margin="20dp"
+                    android:textColor="#ffffff"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/loan"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/edittext_design"
+                android:hint="1,00,000"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="#616161"
+                android:layout_marginTop="50dp"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/imageView3"
+                    android:src="@drawable/locations"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView6"
+                    android:layout_margin="20dp"
+                    android:textColor="#ffffff"
+                    android:text="Select Location"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+            <Spinner
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/spinnerloc"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext_design"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="60dp"
-                android:background="@drawable/gradient_backg"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="20dp"
-                        android:id="@+id/imageView2"
-                        android:src="@drawable/rupee"
-                        />
-                    <com.gullakh.gullakhandroid.font.RobotoTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="How much would you like to borrow?"
-                        android:layout_marginBottom="20dp"
-                        android:id="@+id/textView5"
-                        android:textColor="#ffffff"
-                        android:textSize="20dp"
-                        />
-
-                </LinearLayout>
-               <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:numeric="integer"
-                    android:textColorHint="#757575"
-                    android:background="@drawable/edittext_design"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:ems="10"
-                    android:id="@+id/loan"
-                    android:textColor="#757575"
-                    android:hint="1,00,000"
-
-                    />
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/gradient_backg"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:drawableLeft="@drawable/right"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="20dp"
-                        android:padding="6dp"
-                        android:id="@+id/imageView5"
-                        android:src="@drawable/locations"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Select your Location"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/textView8"
-                        android:textColor="#ffffff"
-                        android:textSize="20dp"
-                        />
-
-                </LinearLayout>
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/spinnerloc"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/edittext_design"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp" />
-
-            </LinearLayout>
+                android:layout_marginRight="10dp"
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center_horizontal"
+                android:dropDownSelector="#c2c2c2"
+                android:dropDownWidth="match_parent" />
 
         </LinearLayout>
 
-    </ScrollView>
-    <ImageButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/buttonNext"
-        android:background="@drawable/roundbutton_next"
-        android:onClick="onClick"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
-   />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/buttonNext"
+            android:onClick="onClick"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/next1"
+            android:baselineAlignBottom="true"
+            android:background="@drawable/next1" />
+    </FrameLayout>
 </LinearLayout>
 <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

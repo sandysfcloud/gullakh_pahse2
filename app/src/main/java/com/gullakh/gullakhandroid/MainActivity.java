@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
     //private ListView mDrawerList;
     private AnimatedExpandableListView  mDrawerList;
     Button myprof;
-    Button myapp;
+    Button reg;
     private List<DrawerItem> mDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -81,11 +81,11 @@ public class MainActivity extends ActionBarActivity {
                 goMyprofile();
             }
         });
-        myapp= (Button) findViewById(R.id.buttonMyApp);
-        myapp.setOnClickListener(new View.OnClickListener() {
+        reg= (Button) findViewById(R.id.buttonReg);
+        reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goMyapp();
+                goReg();
             }
         });
 
@@ -127,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
-        wheelView.setWheelDrawable(R.drawable.wheel3);
+        wheelView.setWheelDrawable(R.drawable.wheel6);
         //initialise the selection drawable with the first contrast color
         wheelView.setSelectionColor(getContrastColor(entries.get(0)));
 
@@ -301,8 +301,10 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);
     }
-    private void goMyapp() {
-
+    private void goReg() {
+        Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
     }
 
     private int getContrastColor(Map.Entry<String, Integer> entry) {

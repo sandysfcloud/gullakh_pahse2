@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/tools"
     android:id="@+id/lin"
-    android:background="#fff"
+    android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -20,61 +20,66 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent" >
 
+            <com.gullakh.gullakhandroid.WheelView
+                android:id="@+id/wheelview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyItemColor="@color/green_900"
+                app:wheelColor="#ffffff"
+                app:rotatableWheelDrawable="false"
+
+                app:selectionAngle="90.0"
+                app:selectionColor="@color/teal_900"
+                app:selectionPadding="4dp"
+                app:repeatItems="true"
+                app:wheelRadius="160dp"
+                app:wheelItemCount="4"
+                app:wheelPadding="13dp"
+                app:wheelItemRadius="35dp"
+                android:layout_gravity="right|top"
+                android:background="#ffffff"
+                android:layout_marginTop="20dp" />
+
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="45dp"
                 android:text="My Profile"
                 android:id="@+id/buttonMyprof"
                 android:layout_gravity="left|bottom"
-                android:background="#8BC34A"
+                android:background="@drawable/mainbutton"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:onClick="onClick" />
+                android:onClick="onClick"
+                android:layout_margin="20dp" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="45dp"
-                android:text="Policy &amp; Licences"
-                android:id="@+id/buttonMyApp"
+                android:text="Register"
+                android:id="@+id/buttonReg"
                 android:layout_gravity="bottom|right"
-                android:background="#8BC34A"
+                android:background="@drawable/mainbutton"
                 android:textColor="#ffffff"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:onClick="onClick" />
+                android:onClick="onClick"
+                android:layout_margin="20dp" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/wellcome"
-                android:id="@+id/textView"
+            <ImageView
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:id="@+id/imageView"
                 android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:textSize="25dp"
-                android:textColor="#E53935"
-                android:typeface="serif"
-                android:gravity="center" />
+                android:background="@drawable/imagestroke"
+                android:src="@drawable/logo"
+                android:layout_marginTop="10dp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="115dp"
+                android:id="@+id/imageView4"
+                android:layout_gravity="top"
+                android:src="@drawable/header" />
         </FrameLayout>
 
-        <com.gullakh.gullakhandroid.WheelView
-            android:id="@+id/wheelview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:emptyItemColor="@color/green_900"
-            app:wheelColor="#D83C2F"
-            app:rotatableWheelDrawable="false"
-            app:selectionAngle="90.0"
-            app:selectionColor="@color/teal_900"
-            app:selectionPadding="4dp"
-            app:repeatItems="true"
-            app:wheelRadius="155dp"
-            app:wheelItemCount="4"
-            app:wheelPadding="13dp"
-            app:wheelItemRadius="35dp"/>
-
-      <include
+     <include
            android:layout_width="@dimen/drawer_width"
            android:layout_height="match_parent"
            android:layout_gravity="start"
