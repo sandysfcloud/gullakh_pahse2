@@ -1,15 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/tools"
     android:id="@+id/lin"
-    android:background="#fff"
+    android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <!--<include layout="@layout/toolbar"--> />
-
-
-    <android.support.v4.widget.DrawerLayout
+    <!--<include layout="@layout/toolbar"-->
+ <android.support.v4.widget.DrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/drawer_layout"
 
@@ -19,30 +18,72 @@
         <FrameLayout
            android:id="@+id/content_frame"
            android:layout_width="match_parent"
-           android:layout_height="match_parent" />
+           android:layout_height="match_parent" >
 
-        <com.gullakh.gullakhandroid.WheelView
-            android:id="@+id/wheelview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:emptyItemColor="@color/green_900"
-            app:wheelColor="#D83C2F"
-            app:rotatableWheelDrawable="false"
-            app:selectionAngle="90.0"
-            app:selectionColor="@color/teal_900"
-            app:selectionPadding="4dp"
-            app:repeatItems="true"
-            app:wheelRadius="160dp"
-            app:wheelItemCount="4"
-            app:wheelPadding="13dp"
-            app:wheelItemRadius="35dp"/>
+            <com.gullakh.gullakhandroid.WheelView
+                android:id="@+id/wheelview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyItemColor="@color/green_900"
+                app:wheelColor="#ffffff"
+                app:rotatableWheelDrawable="false"
 
-      <include
+                app:selectionAngle="90.0"
+                app:selectionColor="@color/teal_900"
+                app:selectionPadding="4dp"
+                app:repeatItems="true"
+                app:wheelRadius="160dp"
+                app:wheelItemCount="4"
+                app:wheelPadding="13dp"
+                app:wheelItemRadius="35dp"
+                android:layout_gravity="right|top"
+                android:background="#ffffff"
+                android:layout_marginTop="20dp" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:text="My Profile"
+                android:id="@+id/buttonMyprof"
+                android:layout_gravity="left|bottom"
+                android:background="@drawable/mainbutton"
+                android:textColor="#ffffff"
+                android:onClick="onClick"
+                android:layout_margin="20dp" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:text="Register"
+                android:id="@+id/buttonReg"
+                android:layout_gravity="bottom|right"
+                android:background="@drawable/mainbutton"
+                android:textColor="#ffffff"
+                android:onClick="onClick"
+                android:layout_margin="20dp" />
+
+            <ImageView
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"
+                android:background="@drawable/imagestroke"
+                android:src="@drawable/logo"
+                android:layout_marginTop="10dp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="115dp"
+                android:id="@+id/imageView4"
+                android:layout_gravity="top"
+                android:src="@drawable/header" />
+        </FrameLayout>
+
+     <include
            android:layout_width="@dimen/drawer_width"
            android:layout_height="match_parent"
            android:layout_gravity="start"
            layout="@layout/list_view" />
     </android.support.v4.widget.DrawerLayout>
-
 
 </LinearLayout>

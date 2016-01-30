@@ -5,7 +5,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBarStyle</item>
 
-        <item name="colorPrimary">#e31881</item>
+        <item name="colorPrimary">#D83C2F</item>
 
         <item name="colorPrimaryDark">#D83C2F</item>
     </style>
@@ -14,8 +14,8 @@
         <item name="actionBarStyle">@style/ActionBarStyle</item>
         <item name="windowActionBar">true</item>
 
-        <item name="colorPrimary">#e31881</item>
-        <item name="colorPrimaryDark">#e31881</item>
+        <item name="colorPrimary">#D83C2F</item>
+        <item name="colorPrimaryDark">#D83C2F</item>
     </style>
     <style name="AppTheme.Title" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">@android:color/white</item>

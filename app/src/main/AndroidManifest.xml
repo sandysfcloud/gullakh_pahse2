@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/gullakhapp"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".MainActivity"
             android:label=" Home"/>
-        <activity android:name=".RegisterPageActivity" />
+        <activity android:name=".RegisterPageActivity"
+            android:label="Sign Up"/>
         <activity android:name=".GoogleCardsMediaActivity" />
         <activity android:name=".StickyListHeadersActivity" />
         <activity android:name=".LogInPageActivity"
@@ -28,7 +29,8 @@
                   android:label="Personal Loan" />
         <activity android:name=".Personalloan1Activity"
                   android:label="Personal Loan"/>
-        <activity android:name=".MyProfileActivity"/>
+        <activity android:name=".MyProfileActivity"
+            android:label="My Profile "/>
         <activity android:name=".WheelViewActivity"/>
     </application>
 

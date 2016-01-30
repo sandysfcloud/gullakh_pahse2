@@ -3,6 +3,7 @@ package com.gullakh.gullakhandroid;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -49,5 +50,13 @@ public class Personalloan1Activity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

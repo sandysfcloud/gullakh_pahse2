@@ -19,6 +19,8 @@ public class Personalloan extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personalloan);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         Spinner spinner = (Spinner) findViewById(R.id.spinnerloc);
         // Spinner click listener
 
