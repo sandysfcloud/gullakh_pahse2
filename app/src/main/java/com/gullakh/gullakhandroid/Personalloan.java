@@ -68,6 +68,7 @@ public class Personalloan extends AppCompatActivity implements AdapterView.OnIte
 
     private void goNext() {
         Intent i=new Intent(this, Personalloan1Activity.class);
+        i.putExtra("data","personal");
         startActivity(i);
         overridePendingTransition(R.transition.left, R.transition.right);
     }

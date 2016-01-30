@@ -1,13 +1,11 @@
 package com.gullakh.gullakhandroid;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -28,12 +26,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +43,8 @@ import java.util.Map;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    Button myprof;
+    Button reg;
     private ListView mDrawerList;
     //private AnimatedExpandableListView  mDrawerList;
     private TypedArray navMenuIcons;
@@ -72,7 +69,22 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        myprof= (Button) findViewById(R.id.buttonMyprof);
+        myprof.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goMyprofile();
+            }
+        });
+        reg= (Button) findViewById(R.id.buttonReg);
+        reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goReg();
+            }
+        });
 
       /*  if (savedInstanceState == null) {
             Intent intent = new Intent(MainActivity.this, WheelViewActivity.class);
@@ -108,13 +120,17 @@ public class MainActivity extends ActionBarActivity {
         wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
             @Override
             public void onWheelItemClick(WheelView parent, int position, boolean isSelected) {
-                String msg = String.valueOf(position) + " " + isSelected;
-                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, Personalloan.class);
+                // intent.putExtra("data","personal");
+                startActivity(intent);
+               // String msg = String.valueOf(position) + " " + isSelected;
+                //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
         wheelView.setWheelDrawable(R.drawable.round_img_backg);
 
         //initialise the selection drawable with the first contrast color
+       wheelView.setWheelDrawable(R.drawable.wheel6);
         wheelView.setSelectionColor(getContrastColor(entries.get(0)));
 
 
@@ -327,7 +343,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.prof_draw);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.prof_draw);
         RoundImage roundedImage = new RoundImage(bm);
         iv.setImageDrawable(roundedImage);
 
@@ -488,8 +504,8 @@ public class MainActivity extends ActionBarActivity {
             } if(position==4) {
                 //Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
                 //startActivity(intent);
-                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                intent.putExtra("data","personal");
+                Intent intent = new Intent(MainActivity.this, Personalloan.class);
+               // intent.putExtra("data","personal");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
             }
@@ -558,7 +574,16 @@ public class MainActivity extends ActionBarActivity {
                     .replace(R.id.content_frame, fragment).commit();
         }
     }
-
+    private void goMyprofile() {
+        Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+    }
+    private void goReg() {
+        Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+    }
     public void commitFragment(Fragment fragment) {
         // Using Handler class to avoid lagging while
         // committing fragment in same time as closing
