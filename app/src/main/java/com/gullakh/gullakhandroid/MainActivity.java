@@ -44,6 +44,7 @@ import java.util.Map;
 
 
 public class MainActivity extends ActionBarActivity {
+    Typeface myfontlight;
     Button myprof;
     Button reg;
     private ListView mDrawerList;
@@ -128,11 +129,12 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent = new Intent(MainActivity.this, Personalloan.class);
                 // intent.putExtra("data","personal");
                 startActivity(intent);
-               // String msg = String.valueOf(position) + " " + isSelected;
+                overridePendingTransition(R.transition.left, R.transition.right);
+                // String msg = String.valueOf(position) + " " + isSelected;
                 //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
-        wheelView.setWheelDrawable(R.drawable.wheel8);
+        wheelView.setWheelDrawable(R.drawable.wheelbg);
 
         //initialise the selection drawable with the first contrast color
         wheelView.setSelectionColor(getContrastColor(entries.get(0)));
@@ -354,6 +356,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         TextView tv = (TextView) headerView.findViewById(R.id.email);
+        tv.setTypeface(myfontlight);
 
         ImageLoader loader = ImageLoader.getInstance();
         loader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
@@ -411,6 +414,7 @@ public class MainActivity extends ActionBarActivity {
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(0, -1),
                 R.string.drawer_title_list_views,
                 DrawerItem.DRAWER_ITEM_TAG_LIST_VIEWS));
+
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(1, -1),
                 R.string.drawer_title_parallax,
                 DrawerItem.DRAWER_ITEM_TAG_PARALLAX));

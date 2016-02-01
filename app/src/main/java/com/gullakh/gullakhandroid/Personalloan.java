@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,11 @@ public class Personalloan extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_personalloan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+        TextView borrow= (TextView) findViewById(R.id.textBorrow);
+        borrow.setTypeface(myfontlight);
+        TextView loc= (TextView) findViewById(R.id.textLoc);
+        loc.setTypeface(myfontlight);
         Spinner spinner = (Spinner) findViewById(R.id.spinnerloc);
         // Spinner click listener
 

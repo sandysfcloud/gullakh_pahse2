@@ -19,7 +19,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="70dp"
                 android:background="#616161"
                 android:weightSum="1">
 
@@ -36,10 +36,10 @@
                     android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="How much would you like to borrow?"
-                    android:id="@+id/textView5"
+                    android:id="@+id/textBorrow"
                     android:layout_margin="20dp"
                     android:textColor="#ffffff"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     android:layout_gravity="center_vertical" />
             </LinearLayout>
 
@@ -58,7 +58,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="70dp"
                 android:background="#616161"
                 android:layout_marginTop="50dp"
                 android:weightSum="1">
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/textView6"
+                    android:id="@+id/textLoc"
                     android:layout_margin="20dp"
                     android:textColor="#ffffff"
                     android:text="Select Location"
@@ -101,8 +101,8 @@
         </LinearLayout>
 
         <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:id="@+id/buttonNext"
             android:onClick="onClick"
             android:layout_gravity="bottom|right"

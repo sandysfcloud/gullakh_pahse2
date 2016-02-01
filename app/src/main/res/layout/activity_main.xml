@@ -38,8 +38,7 @@
                 app:wheelItemRadius="35dp"
                 android:layout_gravity="right|top"
                 android:background="#ffffff"
-                android:layout_marginTop="22dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginTop="20dp" />
 
             <Button
                 android:layout_width="150dp"
@@ -67,6 +66,16 @@
                 android:textAllCaps="false"
                 android:layout_margin="20dp"
                 android:textSize="20dp" />
+
+            <ImageView
+                android:layout_width="141dp"
+                android:layout_height="141dp"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"
+                android:background="@drawable/imagestroke"
+                android:src="@drawable/logo"
+                android:layout_marginBottom="18dp"
+                android:layout_marginRight="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
