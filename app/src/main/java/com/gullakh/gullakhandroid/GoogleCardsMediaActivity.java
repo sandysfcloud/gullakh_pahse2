@@ -25,6 +25,7 @@ import android.text.Html;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -36,41 +37,39 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 	private GoogleCardsShopAdapter mGoogleCardsAdapter;
 	private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
-	public static int [] prgmImages={R.drawable.icici_bank_logo2,R.drawable.axisbank_logo,R.drawable.bankofindia_logo,R.drawable.hdfcbank_logo,R.drawable.statebank_logo};
-	public static String [] prgmNameList={"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK","STATE BANK OF INDIA"};
-	public static String [] search={"PERSONAL LOAN","CAR LOAN"};
+	public  int [] prgmImages;
+	public  String [] prgmNameList;
+	public  String [] month_fee;
+	public  String [] fixed_fee;
+	public  String [] onetime_fee;
+
+	public  String [] search={"PERSONAL LOAN","CAR LOAN"};
+	public  int [] searchimg={R.drawable.personalloannew,R.drawable.carloan};
+	public  String [] searchdate={"30-1-2016","1-02-2016"};
+	public  String [] searchtime={"05:50pm","10:15am"};
+	public  String [] newNameList,newImages;
+	ListView listView;
+	LinearLayout layout;
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list_view);
+		setContentView(R.layout.list_display);
 
-		ListView listView = (ListView) findViewById(R.id.list_view);
-
-		listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
-
-
-		listView.setClipToPadding(false);
-		listView.setDivider(null);
-		Resources r = getResources();
-		int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-				8, r.getDisplayMetrics());
-		listView.setDividerHeight(px);
-		listView.setFadingEdgeLength(0);
-		listView.setFitsSystemWindows(true);
-		px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
-				r.getDisplayMetrics());
-		listView.setPadding(px, px, px, px);
-		listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+		//ListView listView = (ListView) findViewById(R.id.list_view);
+	   layout = (LinearLayout) findViewById(R.id.linear);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("data");
+		createListView();
 
 		if(data.equals("personal"))
 		{
+			 prgmNameList = new String[]{"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK"};
+			 prgmImages=new int[]{R.drawable.icici_bank_logo2,R.drawable.axisbank_logo,R.drawable.bankofindia_logo,R.drawable.hdfcbank_logo};
+			 month_fee=new String[]{"2,500","2,200","2,700","2,100","2,300"};
+			 fixed_fee=new String[]{"20%","10%","30%","35%","25%"};
+			 onetime_fee=new String[]{"1,500","1,200","2,000","1,100","1,700"};
 
-
-			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,prgmNameList,prgmImages);
+			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,prgmNameList,prgmImages,month_fee,fixed_fee,onetime_fee);
 			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
 					new SwipeDismissAdapter(mGoogleCardsAdapter, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
@@ -80,7 +79,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
 					INITIAL_DELAY_MILLIS);
 
-
+			//listView.setAdapter(null);
+			//swingBottomInAnimationAdapter.notifyDataSetChanged();
 			listView.setAdapter(swingBottomInAnimationAdapter);
 
 
@@ -91,7 +91,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 			mGoogleCardsAdapter2 = new GoogleCardsMediaAdapter(this,
-					search);
+					search,searchdate,searchtime,searchimg);
 			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(new SwipeDismissAdapter(mGoogleCardsAdapter2, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
 
@@ -99,14 +99,39 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
 					INITIAL_DELAY_MILLIS);
 
-
+			//listView.setAdapter(null);
+			//swingBottomInAnimationAdapter.notifyDataSetChanged();
 			listView.setAdapter(swingBottomInAnimationAdapter);
 
 
-		getSupportActionBar().setTitle("My Seaches");
-		}
-	}
 
+		}
+
+
+
+	}
+public void createListView()
+{
+	listView  = new ListView(this);
+	listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
+
+
+	listView.setClipToPadding(false);
+	listView.setDivider(null);
+	Resources r = getResources();
+	int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+			8, r.getDisplayMetrics());
+	listView.setDividerHeight(px);
+	listView.setFadingEdgeLength(0);
+	listView.setFitsSystemWindows(true);
+	px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
+			r.getDisplayMetrics());
+	listView.setPadding(px, px, px, px);
+	listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
+	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	layout.addView(listView);
+
+}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {

@@ -55,7 +55,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-
+            android:id="@+id/searchimg"
             android:paddingBottom="6dp"
             android:src="@drawable/personalloannew"
 

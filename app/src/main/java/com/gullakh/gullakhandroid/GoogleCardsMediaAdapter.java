@@ -25,10 +25,16 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 	private LayoutInflater mInflater;
 	Context cont;
 	String [] result;
+	String [] rdate;
+	String [] rtim;
+	int[] prgmImages;
 
-	public GoogleCardsMediaAdapter(GoogleCardsMediaActivity context, String[] prgmNameList) {
+	public GoogleCardsMediaAdapter(GoogleCardsMediaActivity context, String[] prgmNameList,String[] date,String[] time,int[] Images) {
 		cont=context;
 		result=prgmNameList;
+		rdate=date;
+		rtim=time;
+		prgmImages=Images;
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -59,6 +65,9 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 			holder = new ViewHolder();
 			holder.image = (View) convertView
 					.findViewById(R.id.next);
+			holder.simg = (ImageView) convertView
+					.findViewById(R.id.searchimg);
+			holder.simg.setImageResource(prgmImages[position]);
 			//holder.image.setColorFilter(Color.argb(225, 225, 225, 225));
 			holder.artistName = (TextView) convertView
 					.findViewById(R.id.bankname);
@@ -67,9 +76,11 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 			holder.artistName.setText(result[position]);
 			holder.year = (TextView) convertView
 					.findViewById(R.id.bank_date);
-			holder.year.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-LightItalic.ttf"));
+			holder.year.setText(rdate[position]);
+			holder.year.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-LightItalic.ttf"));
 			holder.time = (TextView) convertView
 					.findViewById(R.id.bank_time);
+			holder.time.setText(rtim[position]);
 			holder.time.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-LightItalic.ttf"));
 			holder.t1 = (TextView) convertView
 					.findViewById(R.id.t1);
@@ -100,6 +111,7 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 
 	private static class ViewHolder {
 		public View image;
+		public ImageView simg;
 		public TextView artistName;
 		public TextView year;
 		public Button next;

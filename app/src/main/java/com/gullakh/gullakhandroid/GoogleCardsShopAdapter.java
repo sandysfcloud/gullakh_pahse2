@@ -21,12 +21,19 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	private LayoutInflater mInflater;
     Context cont;
 	String [] result;
-
+	String [] rmonth_fee;
+	String [] rfixed_fee;
+	String [] ronetime_fee;
 	int [] imageId;
-	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, String[] prgmNameList, int[] prgmImages) {
+	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, String[] prgmNameList, int[] prgmImages,String[] month_fee,String[] fixed_fee,String[] onetime_fee) {
 		//super(context, 0, items);
 		cont=context;
 		result=prgmNameList;
+
+		rmonth_fee=month_fee;
+		rfixed_fee=fixed_fee;
+		ronetime_fee=onetime_fee;
+
 		imageId=prgmImages;
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,12 +66,13 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder = new ViewHolder();
 			holder.image = (ImageView) convertView
 					.findViewById(R.id.bankimg);
+
+
 			holder.name = (TextView) convertView
 					.findViewById(R.id.pbanknam);
 
-			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
-			holder.name.setText(result[position]);
-			holder.image.setImageResource(imageId[position]);
+
+
 
 
 			/*holder.promo = (TextView) convertView
@@ -74,32 +82,52 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.description = (TextView) convertView
 					.findViewById(R.id.list_item_google_cards_shop_description);
-			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+
 			holder.day = (TextView) convertView
 					.findViewById(R.id.list_item_google_cards_shop_day);
-			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+
+
 			holder.t1 = (TextView) convertView
 					.findViewById(R.id.t1);
-			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+
 
 			holder.t2= (TextView) convertView
 					.findViewById(R.id.t2);
-			holder.t2.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+
 			holder.t3 = (TextView) convertView
 					.findViewById(R.id.t3);
-			holder.t3.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 
-			holder.t4= (TextView) convertView
-					.findViewById(R.id.t4);
-			holder.t4.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+
+
+
 			holder.apply= (Button) convertView
 					.findViewById(R.id.apply);
-			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+
 
 			//holder.buy.setOnClickListener(this);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
+		}
+		if (result.length <= 0) {
+			holder.name.setText("No Data");
+
+		} else {
+			holder.image.setImageResource(imageId[position]);
+			holder.name.setText(result[position]);
+			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.day.setText(rmonth_fee[position]);
+			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.t2.setText(rfixed_fee[position]);
+			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.t4= (TextView) convertView
+					.findViewById(R.id.t4);
+			holder.t4.setText(ronetime_fee[position]);
+			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
+			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
 		}
 		
 //		holder.buy.setTag(position);
