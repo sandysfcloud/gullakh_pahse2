@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#f5f5f5">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -17,7 +18,7 @@
             android:layout_height="match_parent">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
-                android:id="@+id/register"
+                android:id="@+id/signupheading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button_selector"
@@ -27,37 +28,23 @@
 
 
                 android:gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp" />
 
             <EditText
                 android:layout_width="250dp"
                 android:layout_height="45dp"
                 android:inputType="textPersonName"
-                android:hint="First Name"
+                android:hint="Userame"
                 android:ems="10"
                 android:id="@+id/editText"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:typeface="sans" />
-
-            <EditText
-                android:layout_width="250dp"
-                android:layout_height="45dp"
-                android:inputType="textPersonName"
-                android:hint="Last Name"
-                android:ems="10"
-                android:id="@+id/editText2"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/edittextsimple"
-                android:gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:typeface="sans" />
+                android:paddingLeft="10dp"
+                android:textColorHint="#b2b2b2" />
 
             <EditText
                 android:layout_width="250dp"
@@ -68,11 +55,12 @@
                 android:id="@+id/editText6"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:paddingLeft="10dp"
+                android:textColorHint="#b2b2b2" />
 
             <EditText
                 android:layout_width="250dp"
@@ -83,26 +71,28 @@
                 android:id="@+id/editText3"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:paddingLeft="10dp"
+                android:textColorHint="#b2b2b2" />
 
             <EditText
                 android:layout_width="250dp"
                 android:layout_height="45dp"
-                android:inputType="textPassword"
-                android:hint="Confirm Password"
+                android:inputType="phone"
+                android:hint="Mobile number"
                 android:ems="10"
-                android:id="@+id/editText4"
+                android:id="@+id/editText2"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:paddingLeft="10dp"
+                android:textColorHint="#b2b2b2" />
 
             <CheckBox
                 android:layout_width="250dp"
@@ -111,7 +101,8 @@
                 android:id="@+id/checkBox"
                 android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
-                android:textSize="13dp">
+                android:textSize="13dp"
+                android:textColor="#747373">
             </CheckBox>
 
             <LinearLayout
@@ -120,17 +111,19 @@
                 android:layout_height="50dp"
                 android:weightSum="1"
                 android:gravity="center"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp">
 
                 <Button
                     style="?android:attr/buttonStyleSmall"
-                    android:layout_width="100dp"
+                    android:layout_width="125dp"
                     android:layout_height="match_parent"
                     android:text="Register"
-                    android:id="@+id/button"
+                    android:id="@+id/Registerbutton"
                     android:layout_gravity="left|bottom|center_horizontal"
-                    android:background="@drawable/button_selector"
-                    android:textColor="#ffffff" />
+                    android:background="@drawable/mainbutton"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"

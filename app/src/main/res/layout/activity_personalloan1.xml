@@ -106,9 +106,9 @@
             android:layout_gravity="bottom|right"
             android:layout_marginRight="10dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/next1"
+            android:src="@drawable/nextbutton"
             android:baselineAlignBottom="true"
-            android:background="@drawable/next1" />
+            android:background="@drawable/nextbutton" />
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -117,8 +117,8 @@
             android:layout_gravity="left|bottom"
             android:layout_marginRight="10dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/prev1"
+            android:src="@drawable/prevbutton"
             android:baselineAlignBottom="true"
-            android:background="@drawable/prev1" />
+            android:background="@drawable/prevbutton" />
     </FrameLayout>
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -69,16 +70,20 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
+        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+        TextView signUptext= (TextView) findViewById(R.id.wellcometogullakh);
+        signUptext.setTypeface(myfontthin);
         myprof= (Button) findViewById(R.id.buttonMyprof);
-        myprof.setOnClickListener(new View.OnClickListener()
-        {
+        myprof.setTypeface(myfontlight);
+        myprof.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 goMyprofile();
             }
         });
         reg= (Button) findViewById(R.id.buttonReg);
+        reg.setTypeface(myfontlight);
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,10 +132,9 @@ public class MainActivity extends ActionBarActivity {
                 //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
-        wheelView.setWheelDrawable(R.drawable.round_img_backg);
+        wheelView.setWheelDrawable(R.drawable.wheel8);
 
         //initialise the selection drawable with the first contrast color
-       wheelView.setWheelDrawable(R.drawable.wheel6);
         wheelView.setSelectionColor(getContrastColor(entries.get(0)));
 
 

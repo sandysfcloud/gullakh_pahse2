@@ -23,7 +23,7 @@
             <com.gullakh.gullakhandroid.WheelView
                 android:id="@+id/wheelview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="475dp"
                 app:emptyItemColor="@color/green_900"
                 app:wheelColor="#ffffff"
                 app:rotatableWheelDrawable="false"
@@ -38,7 +38,8 @@
                 app:wheelItemRadius="35dp"
                 android:layout_gravity="right|top"
                 android:background="#ffffff"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="5dp" />
 
             <Button
                 android:layout_width="150dp"
@@ -49,7 +50,10 @@
                 android:background="@drawable/mainbutton"
                 android:textColor="#ffffff"
                 android:onClick="onClick"
-                android:layout_margin="20dp" />
+                android:textAllCaps="false"
+                android:layout_margin="20dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="150dp"
@@ -60,23 +64,20 @@
                 android:background="@drawable/mainbutton"
                 android:textColor="#ffffff"
                 android:onClick="onClick"
-                android:layout_margin="20dp" />
+                android:textAllCaps="false"
+                android:layout_margin="20dp"
+                android:textSize="20dp" />
 
-            <ImageView
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:id="@+id/imageView"
-                android:layout_gravity="center"
-                android:background="@drawable/imagestroke"
-                android:src="@drawable/logo"
-                android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Welcome to Gullakh.com"
+                android:id="@+id/wellcometogullakh"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_margin="20dp"
+                android:textSize="28dp" />
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="115dp"
-                android:id="@+id/imageView4"
-                android:layout_gravity="top"
-                android:src="@drawable/header" />
         </FrameLayout>
 
      <include
