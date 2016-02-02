@@ -101,25 +101,24 @@
         </LinearLayout>
 
         <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:id="@+id/button_next_emp"
             android:onClick="onClick"
             android:layout_gravity="bottom|right"
             android:layout_marginRight="10dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/nextbutton"
+
             android:baselineAlignBottom="true"
             android:background="@drawable/nextbutton" />
         <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:id="@+id/button_prev_emp"
             android:onClick="onClick"
             android:layout_gravity="left|bottom"
             android:layout_marginRight="10dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/prevbutton"
             android:baselineAlignBottom="true"
             android:background="@drawable/prevbutton" />
     </FrameLayout>
