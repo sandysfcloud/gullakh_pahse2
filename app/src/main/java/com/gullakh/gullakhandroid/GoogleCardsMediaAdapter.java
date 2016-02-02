@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -72,27 +73,29 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 			holder.artistName = (TextView) convertView
 					.findViewById(R.id.bankname);
 
-			holder.artistName.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+
+			holder.artistName.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.artistName.setText(result[position]);
 			holder.year = (TextView) convertView
 					.findViewById(R.id.bank_date);
 			holder.year.setText(rdate[position]);
-			holder.year.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-LightItalic.ttf"));
+			holder.year.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.time = (TextView) convertView
 					.findViewById(R.id.bank_time);
 			holder.time.setText(rtim[position]);
-			holder.time.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-LightItalic.ttf"));
+			holder.time.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t1 = (TextView) convertView
 					.findViewById(R.id.t1);
-			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 
 			holder.t2= (TextView) convertView
 					.findViewById(R.id.t2);
-			holder.t2.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.t2.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 
 			holder.next = (Button) convertView
 					.findViewById(R.id.next);
-			holder.next.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.next.setOnClickListener(GoogleCardsMediaAdapter.this);
+			holder.next.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -124,13 +127,17 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		int possition = (Integer) v.getTag();
+		//int possition = (Integer) v.getTag();
 		switch (v.getId()) {
-		/*case R.id.list_item_google_cards_media_like:
+		case R.id.next:
+
 			// click on share button
-			Toast.makeText(getContext(), "Like " + possition, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(cont, "Like " + 1, Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(cont, GoogleCardsMediaActivity.class);
+			intent.putExtra("data","personal");
+			cont.startActivity(intent);
 			break;
-		case R.id.list_item_google_cards_media_favorite:
+		/*case R.id.list_item_google_cards_media_favorite:
 			// click on share button
 			Toast.makeText(getContext(), "Favorite " + possition, Toast.LENGTH_SHORT).show();
 			break;

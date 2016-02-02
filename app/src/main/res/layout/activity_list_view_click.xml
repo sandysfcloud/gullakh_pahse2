@@ -1,0 +1,311 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:background="#0De0e0e0"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.gullakh.gullakhandroid.ListView_Click">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3"
+
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="vertical">
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_margin="5dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/searchimg"
+            android:paddingBottom="6dp"
+            android:src="@drawable/personalloannew"
+
+
+            />
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/bankname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+
+            android:background="@android:color/transparent"
+            android:text="PERSONAL LOAN"
+
+            android:textColor="#D83C2F"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:layout_marginBottom="4dp"
+        android:background="#B3757575"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+
+            android:paddingBottom="8dp"
+            android:orientation="vertical" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/mt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Monthly for 3 years"
+                android:textColor="#ff00719b"
+                android:textSize="14sp"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/tmr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="2,300"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+
+            android:paddingBottom="8dp"
+            android:orientation="vertical" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/tf1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Fixed"
+                android:textColor="#ff00719b"
+                android:textSize="14sp"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/tf2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="20%"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+
+            android:paddingBottom="8dp"
+            android:orientation="vertical" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/t3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="One Time Fee"
+                android:textColor="#ff00719b"
+                android:textSize="14sp"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/t4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="1500"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_background_white"
+
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/popup"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@drawable/google_cards_background_bottom"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/titlet"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp"
+                android:textColor="#4cae4c"
+                android:text="Fee"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/d1"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="14dp"
+                android:textColor="#616161"
+                android:text="Processing Fee is Rs 1603"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/d2"
+                android:textSize="14dp"
+                android:textColor="#616161"
+                android:text="Procloser Fee is 4% of pricipal outstanding(plus st)"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#B3757575"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/d3"
+                android:layout_marginBottom="10dp"
+                android:textSize="14dp"
+                android:textColor="#616161"
+                android:text="Other Details"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/d4"
+                android:textSize="14dp"
+                android:textColor="#616161"
+                android:text="Response Time"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/d5"
+                android:layout_marginTop="2dp"
+                android:textSize="14dp"
+                android:textColor="#616161"
+                android:text="Within 30 min"/>
+
+        </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:weightSum="3"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="60dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:textColor="#ffffff"
+                android:background="@drawable/roundedbutton"
+                android:text="Fee" />
+        <Button
+            android:id="@+id/apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/roundbutton_green"
+            android:text="Apply" />
+
+            <Button
+                android:id="@+id/othr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="8dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:textColor="#ffffff"
+                android:background="@drawable/roundedbutton"
+                android:text="Other" />
+        </LinearLayout>
+    </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

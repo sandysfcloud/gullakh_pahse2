@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,7 +104,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.apply= (Button) convertView
 					.findViewById(R.id.apply);
 
-
+			holder.apply.setOnClickListener(GoogleCardsShopAdapter.this);
 			//holder.buy.setOnClickListener(this);
 			convertView.setTag(holder);
 		} else {
@@ -115,19 +116,19 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		} else {
 			holder.image.setImageResource(imageId[position]);
 			holder.name.setText(result[position]);
-			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.day.setText(rmonth_fee[position]);
-			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
-			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
-			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t2.setText(rfixed_fee[position]);
-			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
-			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t4= (TextView) convertView
 					.findViewById(R.id.t4);
 			holder.t4.setText(ronetime_fee[position]);
-			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Italic.ttf"));
-			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/Roboto-Light.ttf"));
+			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 		}
 		
 //		holder.buy.setTag(position);
@@ -151,12 +152,12 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		int possition = (Integer) v.getTag();
+		//int possition = (Integer) v.getTag();
 		switch (v.getId()) {
-		//case R.id.list_item_google_cards_shop_buy:
-			// click on explore button
-			//Toast.makeText(getContext(), "Buy: ", Toast.LENGTH_SHORT).show();
-			//break;
+			case R.id.apply:
+				Intent intent = new Intent(cont, ListView_Click.class);
+				cont.startActivity(intent);
+				break;
 		}
 	}
 }

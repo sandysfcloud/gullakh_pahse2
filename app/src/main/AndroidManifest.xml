@@ -30,7 +30,10 @@
                   android:label="Personal Loan"/>
         <activity android:name=".MyProfileActivity"
             android:label="My Profile "/>
-        <activity android:name=".WheelViewActivity"/>
+        <activity android:name=".WheelViewActivity"
+            />
+        <activity android:name=".ListView_Click"
+            />
     </application>
 
 </manifest>
