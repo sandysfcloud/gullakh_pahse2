@@ -51,6 +51,12 @@
         <activity android:name=".Questionier"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".ExpandableListViewActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".AccordionWidgetDemoActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />

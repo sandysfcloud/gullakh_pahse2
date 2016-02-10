@@ -747,7 +747,8 @@ public class MainActivity extends ActionBarActivity {
                 //Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
                 //startActivity(intent);
                 //Intent intent = new Intent(MainActivity.this, LocationActivity.class);
-                Intent intent = new Intent(MainActivity.this, Questionier.class);
+                //Intent intent = new Intent(MainActivity.this, Questionier.class);
+                Intent intent = new Intent(MainActivity.this, AccordionWidgetDemoActivity.class);
                 // intent.putExtra("data","personal");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);

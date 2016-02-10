@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/tools"
+    android:id="@+id/lin"
+    android:background="#ffffff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Please Enter these details"
+        android:id="@+id/wellcometogullakh"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_margin="20dp"
+        android:textSize="24dp" />
+<com.gullakh.gullakhandroid.AnimatedExpandableListView
+    android:id="@+id/exlist_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+   </LinearLayout>
+<!-- 
+    android:divider="@color/main_color_grey_500"
+    android:childDivider="@android:color/transparent"
+    android:dividerHeight="1dp" -->

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/b1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:clickable="true"
+                android:text="30"
+                android:visibility="invisible"
+                android:textColor="#424242"
+
+                android:textSize="12dp" />
+            <View
+                android:layout_width="10dp"
+                android:visibility="invisible"
+                android:layout_height="10dp"></View>
+
+            <TextView
+                android:id="@+id/b2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="32"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"></View>
+            <TextView
+                android:id="@+id/b3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="34"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"></View>
+            <TextView
+                android:id="@+id/b4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="36"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"></View>
+            <TextView
+                android:id="@+id/b5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="38"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"></View>
+            <TextView
+                android:id="@+id/b6"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="40"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"></View>
+            <TextView
+                android:id="@+id/b7"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="42"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"></View>
+            <TextView
+                android:id="@+id/b8"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="44"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+            <View
+                android:layout_width="10dp"
+                android:visibility="invisible"
+                android:layout_height="10dp"></View>
+            <TextView
+                android:id="@+id/b9"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:visibility="invisible"
+                android:background="@drawable/ring"
+                android:gravity="center"
+                android:text="46"
+                android:textColor="#424242"
+                android:textSize="20dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

@@ -33,7 +33,11 @@
     <color name="main_color_grey_800">@color/material_grey_800</color>
     <color name="main_color_grey_900">@color/material_grey_900</color>
 
+ <color name="section_color">#f0f0f0</color>
+ <color name="border_color">#dedede</color>
 
+ <color name="header_color">#f6f6f6</color>
+ <color name="header_border_shadow">#ffffff</color>
     <!-- PLEASE NOTE: Since adding transparency to already
     defined colors is not supported through xml, we have
     to add them manually. This means: we have used purple
