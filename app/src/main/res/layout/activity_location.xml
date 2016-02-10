@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.riverdale.fbtest.LocationActivity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ff757575"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:gravity="center"
+                android:layout_marginBottom="35dp"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+
+                    android:id="@+id/imageView"
+                    android:background="@drawable/loanamt"
+                    android:layout_margin="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="4dp"
+                    android:ems="10"
+                    android:textSize="18dp"
+                    android:textColor="#757575"
+                    android:layout_margin="5dp"
+                    android:id="@+id/editText"
+                    android:background="@drawable/edittext_design"
+
+                    android:hint="Enter Loan Amount" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:background="#ff757575"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="35dp"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageButton
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:id="@+id/buttonLocation"
+                        android:background="@drawable/location"
+                        android:onClick="onClick"
+                        android:layout_below="@+id/locationText"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Select Location"
+                        android:paddingTop="14dp"
+                        android:paddingBottom="14dp"
+                        android:paddingLeft="4dp"
+                        android:textColor="#757575"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/edittext_design"
+                        android:id="@+id/locationText"
+                        android:textSize="18dp"
+                        android:gravity="left"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:background="#ff757575"
+                android:paddingBottom="15dp"
+
+                android:layout_marginBottom="35dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageView2"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/companyname"
+                    android:layout_margin="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="4dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/editText2"
+                    android:background="@drawable/edittext_design"
+                    android:textColor="#757575"
+                    android:textSize="18dp"
+                    android:layout_gravity="center_vertical"
+                    android:hint="Company Name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Current Net Salary"
+                    android:textColor="#757575"
+                    android:textSize="18dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/seekbartext" />
+
+                <SeekBar
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/seekBar"
+                    android:mirrorForRtl="false"
+                    android:thumb="@drawable/seekbaricon"
+                    android:max="100000"
+
+                   />
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:id="@+id/imageButton"
+                android:layout_gravity="right"
+                android:background="@drawable/nextbutton"
+                android:layout_marginBottom="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

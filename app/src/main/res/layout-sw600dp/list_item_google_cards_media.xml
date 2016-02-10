@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_background_white"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:padding="2dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@drawable/google_cards_background_bottom"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:padding="6dp" >
+
+        </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="115dp" >
+
+        <ImageView
+            android:id="@+id/list_item_google_cards_shop_image"
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:contentDescription="cd_main_image"
+            android:scaleType="centerCrop" />
+
+
+
+        <!--<View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/gradient_background_shop" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/searchimg"
+            android:paddingBottom="6dp"
+            android:src="@drawable/personalloannew"
+
+
+            />
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/bankname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+
+            android:background="@android:color/transparent"
+            android:text="PERSONAL LOAN"
+
+            android:textColor="#177bbd"
+            android:textSize="20sp"
+            />
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="4dp"
+            android:background="#80616161"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:weightSum="3"
+
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:layout_weight="1"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+
+                android:paddingBottom="8dp"
+                android:orientation="vertical" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:text="Search Date:"
+                    android:textColor="#616161"
+                    android:textSize="15sp"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/bank_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="25-01-2016"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:layout_weight="1"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+
+
+                android:orientation="vertical" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:text="Search Time:"
+                    android:textColor="#616161"
+                    android:textSize="15sp"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/bank_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="05:49 pm"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+          <Button
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/rectbutton_org"
+                android:text="Go" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    </LinearLayout>
+    <!--  <View
+       android:layout_width="fill_parent"
+       android:layout_height="1dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:background="#40bdbdbd"/>
+<Button
+       android:id="@+id/next"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:layout_marginRight="10dp"
+       android:layout_weight="1"
+       android:minHeight="0dp"
+       android:minWidth="0dp"
+       android:padding="10dp"
+       android:textColor="#ffffff"
+       android:layout_gravity="right"
+       android:background="@drawable/rectbutton_org"
+       android:text="Go" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@drawable/google_cards_background_bottom"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/google_card_media_background"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:layout_weight="2" >
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/search_image"
+                android:background="#80b62025" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:padding="8dp" >
+
+            <TextView
+                android:id="@+id/list_item_google_cards_media_artist_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dp"
+                android:paddingTop="10dp"
+                android:text="Personal Loan"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search Date: "
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                   />
+
+                <TextView
+                    android:id="@+id/list_item_google_cards_media_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25-01-2016"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                   />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search Time: "
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                   />
+
+                <TextView
+                    android:id="@+id/list_item_google_cards_media_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="05:49 pm"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/list_item_google_cards_media_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="center"
+       android:src="@drawable/next2"
+        />
+</LinearLayout>-->

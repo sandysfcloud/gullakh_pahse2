@@ -13,4 +13,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">140dp</dimen>
+
+    <dimen name="mtf_cardHeight_initial">4dp</dimen>
+    <dimen name="mtf_cardHeight_final">55dp</dimen>
+
+    <dimen name="mtf_cardview_additionnal">4dp</dimen>
 </resources>

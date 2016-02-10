@@ -1,9 +1,16 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -12,6 +19,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -20,6 +28,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -34,13 +43,42 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -58,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
     private CharSequence mTitle;
 
     private Handler mHandler;
-
+    JSONObject jsonglobal;
     private boolean mShouldFinish = false;
     private HashMap<Integer, List<String>> childActions = new HashMap<>();
 
@@ -66,6 +104,11 @@ public class MainActivity extends ActionBarActivity {
     private AnimatedExpandableListView listView;
     //private ExampleAdapter adapter;
     private static final int ITEM_COUNT = 4;
+    // flag for Internet connection status
+    Boolean isInternetPresent = false;
+
+    // Connection detector class
+    ConnectionDetector cd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +116,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
-        TextView signUptext= (TextView) findViewById(R.id.wellcometogullakh);
+        TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
         signUptext.setTypeface(myfontthin);
-        myprof= (Button) findViewById(R.id.buttonMyprof);
+        myprof = (Button) findViewById(R.id.buttonMyprof);
         myprof.setTypeface(myfontlight);
         myprof.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +126,7 @@ public class MainActivity extends ActionBarActivity {
                 goMyprofile();
             }
         });
-        reg= (Button) findViewById(R.id.buttonReg);
+        reg = (Button) findViewById(R.id.buttonReg);
         reg.setTypeface(myfontlight);
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +134,17 @@ public class MainActivity extends ActionBarActivity {
                 goReg();
             }
         });
+        //**************************internet connection check
+        cd = new ConnectionDetector(getApplicationContext());
+        isInternetPresent = cd.isConnectingToInternet();
 
-      /*  if (savedInstanceState == null) {
-            Intent intent = new Intent(MainActivity.this, WheelViewActivity.class);
-            startActivity(intent);
-        }*/
-
+        // check for Internet status
+        if (!isInternetPresent) {
+            // Internet connection is not present
+            // Ask user to connect to Internet
+            showAlertDialog(MainActivity.this, "No Internet Connection",
+                    " Oops! You don't have internet connection.", false);
+        }
         //*****************************wheel
 
         final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);
@@ -140,10 +188,7 @@ public class MainActivity extends ActionBarActivity {
         wheelView.setSelectionColor(getContrastColor(entries.get(0)));
 
 
-
-
         //***********************************
-
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -168,10 +213,7 @@ public class MainActivity extends ActionBarActivity {
         mTitle = mDrawerTitle = getTitle();
         mDrawerList = (ListView) findViewById(R.id.list_view);
 
-        //mDrawerList = (AnimatedExpandableListView) findViewById(R.id.exp_list_view);
 
-
-        // mDrawerList.setGroupIndicator(getResources().getDrawable(R.drawable.custom_arrow));
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
         prepareNavigationDrawerItems();
@@ -191,100 +233,18 @@ public class MainActivity extends ActionBarActivity {
         List<GroupItem> items = new ArrayList<GroupItem>();
 
 
-        /* GroupItem itemh = new GroupItem();
-        itemh.title = "Home";
-        itemh.Img = Images[0];
-        GroupItem item = new GroupItem();
-        item.title = "My profile";
-        item.Img = Images[1];
-        GroupItem item2 = new GroupItem();
-        item2.title = "My Searches";
-        item2.Img = Images[2];
-        GroupItem item3 = new GroupItem();
-        item3.title = "Loans";
-        item3.Img = Images[3];
-        GroupItem item4 = new GroupItem();
-        item4.title = "Policy And Licences";
-        item4.Img = Images[4];
-
-        ChildItem child = new ChildItem();
-        child.title = "Personal Loan ";
-        ChildItem child2 = new ChildItem();
-        child2.title = "Car Loan ";
-        ChildItem child3 = new ChildItem();
-        child3.title = "Home Loan ";
-        //child.hint = "Too awesome";
-
-        item3.items.add(child);
-        item3.items.add(child2);
-        item3.items.add(child3);
-
-
-        items.add(itemh);
-        items.add(item);
-        items.add(item2);
-        items.add(item3);
-        items.add(item4);*/
-
-
-        //   mDrawerList.setGroupIndicator(null);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //adapter = new ExampleAdapter(this);
-
-        //adapter.setData(items);
         View headerView = null;
         headerView = prepareHeaderView(R.layout.header_navigation_drawer,
                 "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg",
                 "dev@csform.com");
 
 
-        mDrawerList.addHeaderView(headerView);
+         mDrawerList.addHeaderView(headerView);
         //mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        //  mDrawerList.setAdapter(adapter);
 
-
-        // In order to show animations, we need to use a custom click handler
-        // for our ExpandableListView.
-        /*mDrawerList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-
-
-                if (mDrawerList.isGroupExpanded(groupPosition)) {
-                    mDrawerList.collapseGroupWithAnimation(groupPosition);
-                } else {
-                    mDrawerList.expandGroupWithAnimation(groupPosition);
-                }
-                if(groupPosition==0)
-                {
-                    mDrawerLayout.closeDrawers();
-
-                }
-                if(groupPosition==1)
-                {
-                    Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
-
-                if(groupPosition==2)
-                {
-                    Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                    intent.putExtra("data","search");
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
-                return true;
-            }
-
-        });*/
-
-        // Set indicator (arrow) to the right
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -293,17 +253,304 @@ public class MainActivity extends ActionBarActivity {
         Resources r = getResources();
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 50, r.getDisplayMetrics());
-     /*   if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            //mDrawerList.setIndicatorBounds(width - px, width);
-            mDrawerList.setIndicatorBounds(mDrawerList.getRight()- 40, mDrawerList.getWidth());
-        } else {
-          //  mDrawerList.setIndicatorBoundsRelative(width - px, width);
-            mDrawerList.setIndicatorBoundsRelative(mDrawerList.getRight()- 40, mDrawerList.getWidth());
-        }*/
 
+
+
+        //new JSONParse().execute();
+        ServerConnect  cls2= new ServerConnect();
+        cls2.init(MainActivity.this);
 
 
     }
+
+
+
+
+
+   /* private class JSONParse extends AsyncTask<String, String, JSONObject> {
+
+        private ProgressDialog pDialog;
+        JSONArray user = null;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+            //test
+        }
+
+
+
+
+        protected JSONObject doInBackground(String... args)
+        {
+
+
+            try {
+                //Create an HTTP client
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(GlobalData.SERVER_GET_URL);
+
+
+
+                //Perform the request and check the status code
+                HttpResponse response = client.execute(post);
+                Log.e("Response: " , String.valueOf(response));
+
+                StatusLine statusLine = response.getStatusLine();
+
+                Log.e("statusLine: " , String.valueOf(statusLine));
+                if(statusLine.getStatusCode() == 200) {
+                    //HttpEntity entity = response.getEntity();
+                    //InputStream content = entity.getContent();
+
+                    String json_string = EntityUtils.toString(response.getEntity());
+
+                    Log.e("json_string: " ,json_string);
+                   // JSONObject jsonObject = new JSONObject(json_string);
+                    JsonParser parser = new JsonParser();
+                    JsonObject jsonObject = parser.parse(json_string).getAsJsonObject();
+                    Log.e("jsonObject: " , String.valueOf(jsonObject));
+                    try {
+                        //Read the server response and attempt to parse it as JSON
+                       // Reader reader = new InputStreamReader(content);
+
+                        GsonBuilder gsonBuilder = new GsonBuilder();
+                        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                        Gson gson = gsonBuilder.create();
+
+
+
+                        //if(jsonObject.get("success").toString()=="true")
+                        if(jsonObject.get("success").toString().equals("true"))
+                        {
+
+
+                            Challenge challengedata=gson.fromJson(jsonObject.get("result"), Challenge.class);
+
+                            Log.e("Data display-succ: " , challengedata.getTokendata());
+
+                            JSONObject obj = new JSONObject();
+                            obj.put("data", "true");
+
+                            return obj;
+
+
+                        }else{
+                            responseError errodata=gson.fromJson(jsonObject.get("error"), responseError.class);
+
+                            Log.e("Data display-error: " , errodata.getmessage());
+                        }
+
+
+
+                    } catch (Exception ex) {
+                    Log.e("Failed parseJSON due: " , String.valueOf(ex));
+                    //failedLoadingPosts();
+                }
+            } else {
+            Log.e("Server resp-statuscod: " , String.valueOf(statusLine.getStatusCode()));
+            //failedLoadingPosts();
+        }
+        } catch(Exception ex) {
+            Log.e("FailtosendPOSTreqdue: " , String.valueOf(ex));
+            //failedLoadingPosts();
+        }
+        return null;
+    }
+
+
+    @Override
+        protected void onPostExecute(JSONObject json) {
+            pDialog.dismiss();
+
+            try {
+                jsonglobal=json;
+
+
+
+                Log.e("jsonglobal!!!!","");
+                Log.e(" json nnn", String.valueOf(json));
+                if(json==null) {
+                    Log.e(" if!!!!","");
+
+
+
+                    Toast.makeText(MainActivity.this, "Invalid Username and Password!!!!" , Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                if(json.getString("data").equals("true"))
+                {
+
+                }
+                else
+                {
+                    Log.e("not a Chair Person!!!!","");
+
+                }
+
+
+
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+    private class JSONParse2 extends AsyncTask<String, String, JSONObject> {
+
+        private ProgressDialog pDialog;
+        JSONArray user = null;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+            //test
+        }
+
+
+
+
+        protected JSONObject doInBackground(String... args)
+        {
+
+
+            try {
+                //Create an HTTP client
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(GlobalData.SERVER_GET_URL);
+
+
+
+                //Perform the request and check the status code
+                HttpResponse response = client.execute(post);
+                Log.e("Response: " , String.valueOf(response));
+
+                StatusLine statusLine = response.getStatusLine();
+
+                Log.e("statusLine: " , String.valueOf(statusLine));
+                if(statusLine.getStatusCode() == 200) {
+                    //HttpEntity entity = response.getEntity();
+                    //InputStream content = entity.getContent();
+
+                    String json_string = EntityUtils.toString(response.getEntity());
+
+                    Log.e("json_string: " ,json_string);
+                    // JSONObject jsonObject = new JSONObject(json_string);
+                    JsonParser parser = new JsonParser();
+                    JsonObject jsonObject = parser.parse(json_string).getAsJsonObject();
+                    Log.e("jsonObject: " , String.valueOf(jsonObject));
+                    try {
+                        //Read the server response and attempt to parse it as JSON
+                        // Reader reader = new InputStreamReader(content);
+
+                        GsonBuilder gsonBuilder = new GsonBuilder();
+                        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                        Gson gson = gsonBuilder.create();
+
+
+
+                        if(jsonObject.get("success").toString()=="true")
+                        {
+
+
+                            Challenge challengedata=gson.fromJson(jsonObject.get("result"), Challenge.class);
+
+                            Log.e( "Data display succe: " , challengedata.getTokendata());
+
+
+                        }else{
+                            responseError errodata=gson.fromJson(jsonObject.get("error"), responseError.class);
+
+                            Log.e("Data display error: " , errodata.getmessage());
+                        }
+
+
+
+                        //content.close();
+
+                        //handlePostsList(posts);
+                    } catch (Exception ex) {
+                        Log.e("Failed parseJSON due: " , String.valueOf(ex));
+                        //failedLoadingPosts();
+                    }
+                } else {
+                    Log.e("Server resp-statuscod: " , String.valueOf(statusLine.getStatusCode()));
+                    //failedLoadingPosts();
+                }
+            } catch(Exception ex) {
+                Log.e("FailtosendPOSTreqdue: " , String.valueOf(ex));
+                //failedLoadingPosts();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            pDialog.dismiss();
+
+            try {
+                jsonglobal=json;
+
+
+
+                Log.e("jsonglobal!!!!","");
+                Log.e(" json nnn", String.valueOf(json));
+                if(json==null) {
+                    Log.e(" if!!!!","");
+
+
+
+                    Toast.makeText(MainActivity.this, "Invalid Username and Password!!!!" , Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                String aff=null;
+                if(json.getString("free_type").equals("Chair Person"))
+                {
+                    Log.e("Chair Person!!!!",json.getString("free_type"));//kk
+                    aff= json.getString("free_type");
+                }
+                else
+                {
+                    Log.e("not a Chair Person!!!!","");
+                    aff= json.getString("affiliation");
+                }
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
+
+
+
+
+
+
+
+
+
+
 
     private int getContrastColor(Map.Entry<String, Integer> entry) {
         String colorName = MaterialColor.getColorName(entry);
@@ -318,19 +565,41 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public Drawable getDrawable(int position) {
 
-            int[] myImageList = new int[]{ R.drawable.personalloannew,R.drawable.busineeloan,R.drawable.homeloan,R.drawable.carloan};
+            int[] myImageList = new int[]{R.drawable.personalloannew, R.drawable.busineeloan, R.drawable.homeloan, R.drawable.carloan};
 
             Bitmap b = BitmapFactory.decodeResource(getResources(), myImageList[position]);
-            Drawable d = new BitmapDrawable(getResources(),b);
+            Drawable d = new BitmapDrawable(getResources(), b);
             //Drawable d = myImageList[position];
             return d;
 
         }
 
 
-
-
     }
+
+
+    public void showAlertDialog(Context context, String title, String message, Boolean status) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+
+        // Setting alert dialog icon
+        alertDialog.setIcon((status) ? R.drawable.success : R.drawable.fail);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
 
     private Drawable createOvalDrawable(int color) {
         ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
@@ -339,20 +608,15 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
-
-
     private View prepareHeaderView(int layoutRes, String url, String email) {
         View headerView = getLayoutInflater().inflate(layoutRes, mDrawerList,
                 false);
         ImageView iv = (ImageView) headerView.findViewById(R.id.image);
 
 
-
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.prof_draw);
         RoundImage roundedImage = new RoundImage(bm);
         iv.setImageDrawable(roundedImage);
-
 
 
         TextView tv = (TextView) headerView.findViewById(R.id.email);
@@ -366,7 +630,6 @@ public class MainActivity extends ActionBarActivity {
         //iv.setBackgroundResource(R.drawable.prof_draw);
         return headerView;
     }
-
 
 
     private static class GroupItem {
@@ -430,41 +693,10 @@ public class MainActivity extends ActionBarActivity {
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(5, -1),
                 R.string.drawer_title_shape_image_views,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
-        /*mDrawerItems.add(new DrawerItem(R.string.drawer_icon_progress_bars,
-                R.string.drawer_title_progress_bars,
-                DrawerItem.DRAWER_ITEM_TAG_PROGRESS_BARS));
-        mDrawerItems.add(new DrawerItem(
-                R.string.drawer_icon_check_and_radio_buttons,
-                R.string.drawer_title_check_and_radio_buttons,
-                DrawerItem.DRAWER_ITEM_TAG_CHECK_AND_RADIO_BOXES));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_splash_screens,
-                R.string.drawer_title_splash_screens,
-                DrawerItem.DRAWER_ITEM_TAG_SPLASH_SCREENS));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_search_bars,
-                R.string.drawer_title_search_bars,
-                DrawerItem.DRAWER_ITEM_TAG_SEARCH_BARS));
-        mDrawerItems.add(new DrawerItem(R.string.drawer_icon_text_views,
-                R.string.drawer_title_text_views,
-                DrawerItem.DRAWER_ITEM_TAG_TEXT_VIEWS));*/
-
-
-
-
 
 
     }
 
-
-
-    /*@Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            mDrawerList.setIndicatorBounds(mDrawerList.getRight()- 40, mDrawerList.getWidth());
-        } else {
-            mDrawerList.setIndicatorBoundsRelative(mDrawerList.getRight()- 40, mDrawerList.getWidth());
-        }
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -492,32 +724,34 @@ public class MainActivity extends ActionBarActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             //selectItem(position, mDrawerItems.get(position).getTag());
-            if(position==1) {
+            if (position == 1) {
                 //Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 // startActivity(intent);
                 mDrawerLayout.closeDrawers();
-            } if(position==2) {
+            }
+            if (position == 2) {
                 Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
             }
-            if(position==3) {
+            if (position == 3) {
                 //Intent intent = new Intent(MainActivity.this, LogInPageActivity.class);
                 //startActivity(intent);
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                intent.putExtra("data","search");
+                intent.putExtra("data", "search");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
 
-            } if(position==4) {
+            }
+            if (position == 4) {
                 //Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
                 //startActivity(intent);
-                Intent intent = new Intent(MainActivity.this, Personalloan.class);
-               // intent.putExtra("data","personal");
+                //Intent intent = new Intent(MainActivity.this, LocationActivity.class);
+                Intent intent = new Intent(MainActivity.this, Questionier.class);
+                // intent.putExtra("data","personal");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
             }
-
 
 
         }
@@ -582,16 +816,19 @@ public class MainActivity extends ActionBarActivity {
                     .replace(R.id.content_frame, fragment).commit();
         }
     }
+
     private void goMyprofile() {
         Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);
     }
+
     private void goReg() {
         Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);
     }
+
     public void commitFragment(Fragment fragment) {
         // Using Handler class to avoid lagging while
         // committing fragment in same time as closing
@@ -622,179 +859,5 @@ public class MainActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-    //Expandable listview
-
-
-
-
-  /*  private class ExampleAdapter extends AnimatedExpandableListView.AnimatedExpandableListAdapter {
-        private LayoutInflater inflater;
-
-        private List<GroupItem> items;
-
-        public ExampleAdapter(Context context) {
-            inflater = LayoutInflater.from(context);
-        }
-
-        public void setData(List<GroupItem> items) {
-            this.items = items;
-        }
-
-        @Override
-        public ChildItem getChild(int groupPosition, int childPosition) {
-            return items.get(groupPosition).items.get(childPosition);
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-
-
-
-        @Override
-        public View getRealChildView(int groupPosition, int childPosition,
-                                     boolean isLastChild, View convertView, ViewGroup parent) {
-            ChildHolder holder;
-            ChildItem item = getChild(groupPosition, childPosition);
-            if (convertView == null) {
-
-                holder = new ChildHolder();
-                convertView = inflater.inflate(R.layout.list_item, parent,
-                        false);
-                holder.title = (TextView) convertView
-                        .findViewById(R.id.textTitle);
-
-                convertView.setTag(holder);
-            } else {
-
-                holder = (ChildHolder) convertView.getTag();
-            }
-
-            holder.title.setText(item.title);
-
-
-            return convertView;
-        }
-
-        @Override
-        public int getRealChildrenCount(int groupPosition) {
-
-
-            return items.get(groupPosition).items.size();
-        }
-
-
-
-
-        @Override
-        public GroupItem getGroup(int groupPosition) {
-
-            return items.get(groupPosition);
-        }
-
-        @Override
-        public int getGroupCount() {
-            return items.size();
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded,
-                                 View convertView, ViewGroup parent) {
-            GroupHolder holder;
-            GroupItem item = getGroup(groupPosition);
-            if (convertView == null) {
-
-                holder = new GroupHolder();
-                convertView = inflater.inflate(R.layout.group_item, parent,
-                        false);
-                holder.title = (TextView) convertView
-                        .findViewById(R.id.textTitle);
-                holder.img = (ImageView) convertView
-                        .findViewById(R.id.img);
-                holder.img.setColorFilter(Color.argb(169,169,169,169));
-              //  holder.img.setColorFilter(Color.argb(225,225,225,225));
-                convertView.setTag(holder);
-            } else {
-
-                holder = (GroupHolder) convertView.getTag();
-            }
-
-            holder.title.setText(item.title);
-            holder.img.setImageResource(item.Img);
-
-            ImageView tv = (ImageView) convertView.findViewById(R.id.flag);
-            tv.setVisibility( View.INVISIBLE );
-
-            if ( getChildrenCount( groupPosition ) == 3 ) {
-
-                tv.setVisibility( View.VISIBLE );
-                tv.setImageResource(isExpanded ? R.drawable.up_arrow : R.drawable.down_arrow);
-            } else {
-                tv.setVisibility( View.INVISIBLE );
-            }
-
-
-
-
-            return convertView;
-        }
-
-
-
-
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-
-
-
-
-
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-
-           if(groupPosition==3&&childPosition==0)
-            {
-
-                Intent intent = new Intent(MainActivity.this, Personalloan.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-
-            }
-           /* if(groupPosition==3&&childPosition==1)
-            {
-                Intent intent = new Intent(MainActivity.this, StickyListHeadersActivity.class);
-                startActivity(intent);
-
-            }
-            if(groupPosition==3&&childPosition==2)
-            {
-                Intent intent = new Intent(MainActivity.this, LogInPageActivity.class);
-                startActivity(intent);
-
-            }
-            if(groupPosition==3&&childPosition==3)
-            {
-                Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
-                startActivity(intent);
-
-            }*/
-    // return true;
-    // }
-
-    // }
-
 
 }

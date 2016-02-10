@@ -134,8 +134,9 @@ public class GoogleCardsMediaAdapter extends BaseAdapter
 			// click on share button
 			//Toast.makeText(cont, "Like " + 1, Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(cont, GoogleCardsMediaActivity.class);
-			intent.putExtra("data","personal");
+			intent.putExtra("data", "personal");
 			cont.startActivity(intent);
+			((GoogleCardsMediaActivity)cont).overridePendingTransition(R.transition.left, R.transition.right);
 			break;
 		/*case R.id.list_item_google_cards_media_favorite:
 			// click on share button

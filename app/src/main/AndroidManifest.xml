@@ -45,6 +45,17 @@
         <activity android:name=".ListView_Click"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".LocationActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Questionier"
+            android:screenOrientation="portrait"
+            />
     </application>
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Network State Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

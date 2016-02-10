@@ -157,6 +157,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			case R.id.apply:
 				Intent intent = new Intent(cont, ListView_Click.class);
 				cont.startActivity(intent);
+				((GoogleCardsMediaActivity)cont).overridePendingTransition(R.transition.left, R.transition.right);
 				break;
 		}
 	}

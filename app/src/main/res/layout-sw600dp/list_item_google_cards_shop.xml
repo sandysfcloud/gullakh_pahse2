@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_background_white"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@drawable/google_cards_background_bottom"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:padding="8dp" >
+
+        <!--<com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/list_item_google_cards_shop_promo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROMO"
+            android:textColor="#4cae4c"
+            android:textSize="16sp"
+             />
+
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/list_item_google_cards_shop_discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_marginTop="8dp"
+            android:text="Special discount! Buy it now!"
+            android:textColor="@color/material_red_500"
+            android:textSize="20sp"
+           />-->
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp" >
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:contentDescription="cd_main_image"
+            android:scaleType="centerCrop" />
+
+       <!-- <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+           android:src="@mipmap/personal_backg2"
+
+
+            />-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+       <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/pbanknam"
+           android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:text="ICICI BANK"
+
+            android:textColor="#177bbd"
+            android:textSize="18sp"
+            />
+            <ImageView
+                android:id="@+id/bankimg"
+                android:layout_weight="1"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="-10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/icici_bank_logo2"/>
+
+           <Button
+                android:id="@+id/apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="6dp"
+               android:layout_marginRight="8dp"
+
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:padding="8dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/rectbutton_org"
+                android:text="Apply" />
+        </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:id="@+id/line"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="4dp"
+                android:background="#80616161"/>
+        </LinearLayout>
+        <!--<com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/list_item_google_cards_shop_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_weight="0"
+            android:background="#4cae4c"
+            android:gravity="center"
+            android:minHeight="36dp"
+            android:minWidth="64dp"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:text="BUY"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+
+            android:paddingBottom="8dp"
+            android:orientation="vertical" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/list_item_google_cards_shop_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Monthly for 3 years"
+                android:textColor="#616161"
+                android:textSize="14sp"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/list_item_google_cards_shop_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="2,300"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                 />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:layout_weight="1"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+
+            android:paddingBottom="8dp"
+            android:orientation="vertical" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/t1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Fixed"
+                android:textColor="#616161"
+                android:textSize="14sp"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/t2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="20%"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:layout_weight="1"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+
+                android:paddingBottom="8dp"
+                android:orientation="vertical" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:text="One Time Fee"
+                    android:textColor="#616161"
+                    android:textSize="14sp"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="1500"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@drawable/google_cards_background_bottom"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:padding="8dp" >
+
+    </LinearLayout>
+</LinearLayout>
