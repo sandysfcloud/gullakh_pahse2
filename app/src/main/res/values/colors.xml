@@ -74,4 +74,5 @@
  <color name="grey">#FFBEBBBB</color>
 
  <color name="colorPrimaryDark">#D83C2F</color>
+    <color name="red">#D83C2F</color>
 </resources>
