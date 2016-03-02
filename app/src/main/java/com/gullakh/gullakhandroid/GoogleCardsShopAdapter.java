@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleCardsShopAdapter extends BaseAdapter
@@ -21,12 +22,12 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 	private LayoutInflater mInflater;
     Context cont;
-	String [] result;
-	String [] rmonth_fee;
-	String [] rfixed_fee;
-	String [] ronetime_fee;
+	ArrayList<String> result;
+	ArrayList<String> rmonth_fee;
+	ArrayList<String>  rfixed_fee;
+	ArrayList<String> ronetime_fee;
 	int [] imageId;
-	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, String[] prgmNameList, int[] prgmImages,String[] month_fee,String[] fixed_fee,String[] onetime_fee) {
+	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee) {
 		//super(context, 0, items);
 		cont=context;
 		result=prgmNameList;
@@ -43,7 +44,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return result.length;
+		return result.size();
 	}
 
 	@Override
@@ -110,23 +111,23 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		if (result.length <= 0) {
+		if (result.size() <= 0) {
 			holder.name.setText("No Data");
 
 		} else {
 			holder.image.setImageResource(imageId[position]);
-			holder.name.setText(result[position]);
+			holder.name.setText(result.get(position));
 			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.day.setText(rmonth_fee[position]);
+			holder.day.setText(rmonth_fee.get(position));
 			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.t2.setText(rfixed_fee[position]);
+			holder.t2.setText(rfixed_fee.get(position));
 			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t4= (TextView) convertView
 					.findViewById(R.id.t4);
-			holder.t4.setText(ronetime_fee[position]);
+			holder.t4.setText(ronetime_fee.get(position));
 			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 		}

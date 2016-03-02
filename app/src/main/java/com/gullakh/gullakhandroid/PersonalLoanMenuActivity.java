@@ -48,9 +48,9 @@ public class PersonalLoanMenuActivity extends AppCompatActivity {
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                //if (groupPosition != previousGroup)
-                   //prevent collapsing expListView.collapseGroup(previousGroup);
-               // previousGroup = groupPosition;
+                if (groupPosition != previousGroup)
+                   expListView.collapseGroup(previousGroup);
+                previousGroup = groupPosition;
             }
 
         });
@@ -70,7 +70,7 @@ public class PersonalLoanMenuActivity extends AppCompatActivity {
                     ExpandableListView parent, View v,
                     int groupPosition, int childPosition,
                     long id) {
-                Log.d("SandeepClick ocurred", "button clicked");
+                Log.d("SandeepClick ocurred", "button clickedt");
                 return false;
             }
         });

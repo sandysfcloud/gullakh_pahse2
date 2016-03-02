@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Gullakh</string>
-
+    <string name="spinner_title">Select Category</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -153,5 +153,31 @@
         <item>0</item>
         <item>0</item>
     </integer-array>
+    <string name="title_activity_questionier1">Questionier1</string>
+    <string name="title_activity_questionier2">Questionier2</string>
+    <string name="title_activity_questionier3">questionier3</string>
+    <string name="title_activity_cartypes__questn">Cartypes_Questn</string>
+    <string name="title_activity_choose__car__questn">Choose_Car_Questn</string>
+    <string name="title_activity_your__comp__questn">Your_Comp_Questn</string>
+    <string name="title_activity_net__salry__qutsn">Net_Salry_Qutsn</string>
+    <string name="title_activity_emp_type__qustn">Emp_type_Qustn</string>
+    <string name="title_activity_self_business_type__questn">SelfBusiness_type_Questn</string>
+    <string name="title_activity_self__business__start_date">Self_Business_StartDate</string>
+    <string name="title_activity_self__business__professn">Self_Business_Professn</string>
+    <string name="title_activity_self__business__anual_turn_over">Self_Business_AnualTurnOver
+    </string>
+    <string name="title_activity_self__business__emipaid">Self_Business_EMIpaid</string>
+    <string name="title_activity_salaryed__net_salary">Salaryed_NetSalary</string>
+    <string name="title_activity_salaried__credited__bank">Salaried_Credited_Bank</string>
+    <string name="title_activity_salaried__emi__paid">Salaried_EMI_Paid</string>
+    <string name="title_activity_self_bussiness_man__buss_typ">SelfBussinessMan_BussTyp</string>
+    <string name="title_activity_employer_nam__qustn">EmployerNam_Qustn</string>
+    <string name="title_activity_working_year__employer">WorkingYear_Employer</string>
+    <string name="title_activity_total__work_year__qustn">Total_WorkYear_Qustn</string>
+    <string name="title_activity_current_city__residing_years">CurrentCity_Residing_years</string>
+    <string name="title_activity_current__residence__questn">Current_Residence_Questn</string>
+    <string name="title_activity_your__info_final__questn">Your_InfoFinal_Questn</string>
+    <string name="title_activity_emi_questn">EMI_questn</string>
+    <string name="title_activity_date_of_birth_questn">DateOfBirth_questn</string>
 
 </resources>

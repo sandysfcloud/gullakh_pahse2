@@ -174,7 +174,7 @@ public class DataHandler extends SQLiteOpenHelper {
 
     }
 
-    public void insertDataquery(String query)
+    public void query(String query)
     {
         try
         {

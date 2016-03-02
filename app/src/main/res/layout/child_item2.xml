@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical">
+
+    <AutoCompleteTextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/editText"
+        android:layout_margin="10dp"
+        android:textColor="#5a5a5a"
+        android:background="@drawable/editbox" />
+</LinearLayout>

@@ -2,9 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +41,7 @@ public class LocationActivity extends AppCompatActivity  implements AdapterView.
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+        setContentView(R.layout.car_type_questn);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         textViewLocation= (TextView)findViewById(R.id.locationText);

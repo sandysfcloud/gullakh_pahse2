@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter
 {
@@ -90,9 +93,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
             txtView5 = (TextView) v.findViewById(R.id.textcontent5);
             txtView5.setText("More");
 
-            txtView1.setOnClickListener(new View.OnClickListener() {
+          /*  txtView1.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Toast.makeText(context, "1 lakh", Toast.LENGTH_LONG).show();
+                    Log.d("list-data", "before" + loaninfo);
+                    loaninfo.add(1, "Loan Amount: 1 lakh ");
+                    Log.d("list-data", "after" + loaninfo);
+                    notifyDataSetChanged();
+                    Log.d("list-data", "after22" + loaninfo);
                 }
             });
 
@@ -105,7 +113,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
                 public void onClick(View v) {
                     Toast.makeText(context, "3 lakh", Toast.LENGTH_LONG).show();
                 }
-            });
+            });*/
 
 
         }
@@ -118,6 +126,33 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
             v = View.inflate(context, R.layout.child_item2, null);
             EditText txtView = (EditText) v.findViewById(R.id.editText);
             txtView.setHint("Ex:ABC Company PVT. LTD");
+            ArrayList<String> liste = new ArrayList<String>();
+            liste.add("Belgium");
+            liste.add("France");
+            liste.add("Italy");
+            liste.add("Germany");
+            liste.add("Spain");
+            ArrayList<String> liste2=null;
+                String flag= null;
+                ServerConnect  cls2= new ServerConnect();
+            try {
+                liste2 =cls2.getEmployerList(context);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            //Employer[] enums=null;
+           // Log.e("employerdata expandab ", enums[0].getemployername());
+            Log.e("emplist frm server ", String.valueOf(liste2));
+            final ShowSuggtn fAdapter = new ShowSuggtn(context, android.R.layout.simple_dropdown_item_1line, liste2);
+            AutoCompleteTextView textView = (AutoCompleteTextView)  v.findViewById(R.id.editText);
+            textView.setAdapter(fAdapter);
+
+           // ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+
+
         }
         if(groupPosition == 3) {
             v = View.inflate(context, R.layout.child_item, null);
@@ -133,7 +168,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
             txtView5.setText("More");
         }
 
-      /*  txtView1.setOnClickListener(context);
+        /*txtView1.setOnClickListener(goToClick);
         txtView2.setOnClickListener(goToClick);
         txtView3.setOnClickListener(goToClick);
         txtView4.setOnClickListener(goToClick);
@@ -155,6 +190,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
           //  Log.d("SanClick ocurred","data"+rownew.getText());
             if(row.getChildCount()==1)
            {
+               Log.d("list-data", "before" + loaninfo);
+               loaninfo.set(0, "Loan Amount: 1 lakh ");
+               Log.d("list-data", "after" + loaninfo);
+               notifyDataSetChanged();
+               Log.d("list-data", "after22" + loaninfo);
             Toast.makeText(context, "1 lakh", Toast.LENGTH_LONG).show();
            }
             if(row.getChildCount()==2)

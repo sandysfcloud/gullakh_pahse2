@@ -23,6 +23,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -124,6 +126,17 @@ public class MainActivity extends ActionBarActivity {
             entries.add(entry);
 
         }
+//**********************calculation
+
+
+
+        double Emit=FinanceLib.pmt(0.007916666, 288, -3592838, 0, false);
+        Log.d("checking PMT value",String.valueOf(Emit));
+
+
+        double Emi=FinanceLib.pmt(0.00740260861, 180, -100000, 0, false);
+        Log.d("checking PMT",String.valueOf(Emi));
+//*****************calculation
 
         //populate the adapter, that knows how to draw each item (as you would do with a ListAdapter)
         wheelView.setAdapter(new MaterialColorAdapter(entries));
@@ -225,297 +238,27 @@ public class MainActivity extends ActionBarActivity {
 
         //new JSONParse().execute();
         ServerConnect  cls2= new ServerConnect();
-        cls2.init(MainActivity.this);
-
-
-    }
-
-
-
-
-
-   /* private class JSONParse extends AsyncTask<String, String, JSONObject> {
-
-        private ProgressDialog pDialog;
-        JSONArray user = null;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-            //test
+        //check wether session-id is valid or not
+        String flag= null;
+        try {
+            flag = cls2.checkAPI(MainActivity.this);
+            Log.d("flag returned", flag);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
-
-
-
-        protected JSONObject doInBackground(String... args)
+        if(flag.equals("false"))//if not valid or user opens for 1st time get new session id from server
         {
-
-
-            try {
-                //Create an HTTP client
-                HttpClient client = new DefaultHttpClient();
-                HttpPost post = new HttpPost(GlobalData.SERVER_GET_URL);
-
-
-
-                //Perform the request and check the status code
-                HttpResponse response = client.execute(post);
-                Log.e("Response: " , String.valueOf(response));
-
-                StatusLine statusLine = response.getStatusLine();
-
-                Log.e("statusLine: " , String.valueOf(statusLine));
-                if(statusLine.getStatusCode() == 200) {
-                    //HttpEntity entity = response.getEntity();
-                    //InputStream content = entity.getContent();
-
-                    String json_string = EntityUtils.toString(response.getEntity());
-
-                    Log.e("json_string: " ,json_string);
-                   // JSONObject jsonObject = new JSONObject(json_string);
-                    JsonParser parser = new JsonParser();
-                    JsonObject jsonObject = parser.parse(json_string).getAsJsonObject();
-                    Log.e("jsonObject: " , String.valueOf(jsonObject));
-                    try {
-                        //Read the server response and attempt to parse it as JSON
-                       // Reader reader = new InputStreamReader(content);
-
-                        GsonBuilder gsonBuilder = new GsonBuilder();
-                        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-                        Gson gson = gsonBuilder.create();
-
-
-
-                        //if(jsonObject.get("success").toString()=="true")
-                        if(jsonObject.get("success").toString().equals("true"))
-                        {
-
-
-                            Challenge challengedata=gson.fromJson(jsonObject.get("result"), Challenge.class);
-
-                            Log.e("Data display-succ: " , challengedata.getTokendata());
-
-                            JSONObject obj = new JSONObject();
-                            obj.put("data", "true");
-
-                            return obj;
-
-
-                        }else{
-                            responseError errodata=gson.fromJson(jsonObject.get("error"), responseError.class);
-
-                            Log.e("Data display-error: " , errodata.getmessage());
-                        }
-
-
-
-                    } catch (Exception ex) {
-                    Log.e("Failed parseJSON due: " , String.valueOf(ex));
-                    //failedLoadingPosts();
-                }
-            } else {
-            Log.e("Server resp-statuscod: " , String.valueOf(statusLine.getStatusCode()));
-            //failedLoadingPosts();
+            Log.d("flag in if condtn", flag);
+            cls2.init(MainActivity.this);
         }
-        } catch(Exception ex) {
-            Log.e("FailtosendPOSTreqdue: " , String.valueOf(ex));
-            //failedLoadingPosts();
-        }
-        return null;
+else
+            Log.d("session is valid", flag);
+
+
+
     }
-
-
-    @Override
-        protected void onPostExecute(JSONObject json) {
-            pDialog.dismiss();
-
-            try {
-                jsonglobal=json;
-
-
-
-                Log.e("jsonglobal!!!!","");
-                Log.e(" json nnn", String.valueOf(json));
-                if(json==null) {
-                    Log.e(" if!!!!","");
-
-
-
-                    Toast.makeText(MainActivity.this, "Invalid Username and Password!!!!" , Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-
-                if(json.getString("data").equals("true"))
-                {
-
-                }
-                else
-                {
-                    Log.e("not a Chair Person!!!!","");
-
-                }
-
-
-
-
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-
-
-    private class JSONParse2 extends AsyncTask<String, String, JSONObject> {
-
-        private ProgressDialog pDialog;
-        JSONArray user = null;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-            //test
-        }
-
-
-
-
-        protected JSONObject doInBackground(String... args)
-        {
-
-
-            try {
-                //Create an HTTP client
-                HttpClient client = new DefaultHttpClient();
-                HttpPost post = new HttpPost(GlobalData.SERVER_GET_URL);
-
-
-
-                //Perform the request and check the status code
-                HttpResponse response = client.execute(post);
-                Log.e("Response: " , String.valueOf(response));
-
-                StatusLine statusLine = response.getStatusLine();
-
-                Log.e("statusLine: " , String.valueOf(statusLine));
-                if(statusLine.getStatusCode() == 200) {
-                    //HttpEntity entity = response.getEntity();
-                    //InputStream content = entity.getContent();
-
-                    String json_string = EntityUtils.toString(response.getEntity());
-
-                    Log.e("json_string: " ,json_string);
-                    // JSONObject jsonObject = new JSONObject(json_string);
-                    JsonParser parser = new JsonParser();
-                    JsonObject jsonObject = parser.parse(json_string).getAsJsonObject();
-                    Log.e("jsonObject: " , String.valueOf(jsonObject));
-                    try {
-                        //Read the server response and attempt to parse it as JSON
-                        // Reader reader = new InputStreamReader(content);
-
-                        GsonBuilder gsonBuilder = new GsonBuilder();
-                        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-                        Gson gson = gsonBuilder.create();
-
-
-
-                        if(jsonObject.get("success").toString()=="true")
-                        {
-
-
-                            Challenge challengedata=gson.fromJson(jsonObject.get("result"), Challenge.class);
-
-                            Log.e( "Data display succe: " , challengedata.getTokendata());
-
-
-                        }else{
-                            responseError errodata=gson.fromJson(jsonObject.get("error"), responseError.class);
-
-                            Log.e("Data display error: " , errodata.getmessage());
-                        }
-
-
-
-                        //content.close();
-
-                        //handlePostsList(posts);
-                    } catch (Exception ex) {
-                        Log.e("Failed parseJSON due: " , String.valueOf(ex));
-                        //failedLoadingPosts();
-                    }
-                } else {
-                    Log.e("Server resp-statuscod: " , String.valueOf(statusLine.getStatusCode()));
-                    //failedLoadingPosts();
-                }
-            } catch(Exception ex) {
-                Log.e("FailtosendPOSTreqdue: " , String.valueOf(ex));
-                //failedLoadingPosts();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject json) {
-            pDialog.dismiss();
-
-            try {
-                jsonglobal=json;
-
-
-
-                Log.e("jsonglobal!!!!","");
-                Log.e(" json nnn", String.valueOf(json));
-                if(json==null) {
-                    Log.e(" if!!!!","");
-
-
-
-                    Toast.makeText(MainActivity.this, "Invalid Username and Password!!!!" , Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                String aff=null;
-                if(json.getString("free_type").equals("Chair Person"))
-                {
-                    Log.e("Chair Person!!!!",json.getString("free_type"));//kk
-                    aff= json.getString("free_type");
-                }
-                else
-                {
-                    Log.e("not a Chair Person!!!!","");
-                    aff= json.getString("affiliation");
-                }
-
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
-
-
-
-
-
-
-
-
 
 
 
@@ -710,15 +453,14 @@ public class MainActivity extends ActionBarActivity {
                 overridePendingTransition(R.transition.left, R.transition.right);
 
             }
-            if (position == 4) {
-                //Intent intent = new Intent(MainActivity.this, RegisterPageActivity.class);
-                //startActivity(intent);
-                //Intent intent = new Intent(MainActivity.this, LocationActivity.class);
-                //Intent intent = new Intent(MainActivity.this, Questionier.class);
-                Intent intent = new Intent(MainActivity.this, AccordionWidgetDemoActivity.class);
+            if (position == 5) {
+               Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+
+               // Intent intent = new Intent(MainActivity.this, PersonalLoanMenuActivity.class);
                 // intent.putExtra("data","personal");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
+
             }
 
 
