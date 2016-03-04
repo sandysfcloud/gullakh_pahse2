@@ -31,7 +31,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="50dp" />
 
-            <EditText
+           <!-- <EditText
                 android:layout_width="250dp"
                 android:layout_height="45dp"
                 android:inputType="textPersonName"
@@ -44,7 +44,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:paddingLeft="10dp"
-                android:textColorHint="#b2b2b2" />
+                android:textColorHint="#b2b2b2" />-->
 
             <EditText
                 android:layout_width="250dp"
@@ -62,7 +62,7 @@
                 android:paddingLeft="10dp"
                 android:textColorHint="#b2b2b2" />
 
-            <EditText
+          <!--  <EditText
                 android:layout_width="250dp"
                 android:layout_height="45dp"
                 android:inputType="textPassword"
@@ -76,7 +76,7 @@
                 android:layout_marginRight="5dp"
                 android:typeface="sans"
                 android:paddingLeft="10dp"
-                android:textColorHint="#b2b2b2" />
+                android:textColorHint="#b2b2b2" />-->
 
             <EditText
                 android:layout_width="250dp"
