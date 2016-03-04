@@ -135,7 +135,7 @@ public class MaterialTextField extends FrameLayout {
         labelTopMargin = FrameLayout.LayoutParams.class.cast(label.getLayoutParams()).topMargin;
 
         customizeFromAttributes();
-
+        toggle();
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

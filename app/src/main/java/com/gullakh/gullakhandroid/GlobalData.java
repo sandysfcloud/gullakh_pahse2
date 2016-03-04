@@ -23,7 +23,7 @@ public class GlobalData extends Application {
     private ArrayList<Double> foir,accid;
 
     private String session;
-
+    private CharSequence[] banklist;
     //static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php?operation=create";
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php";
 
@@ -64,6 +64,10 @@ public class GlobalData extends Application {
 
     public ArrayList<Double> getaccid() {
         return accid;
+    }
+
+    public CharSequence[] getCharbanklist() {
+        return banklist;
     }
 
     public void setEmi(Double someVariable) {
@@ -107,6 +111,10 @@ public class GlobalData extends Application {
 
     public void setaccid(ArrayList<Double> questionVariable) {
         accid = questionVariable;
+    }
+
+    public void setCharbanklist(CharSequence[] questionVariable) {
+        banklist = questionVariable;
     }
 
 

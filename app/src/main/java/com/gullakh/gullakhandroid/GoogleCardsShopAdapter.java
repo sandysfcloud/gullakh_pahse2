@@ -27,7 +27,8 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	ArrayList<String>  rfixed_fee;
 	ArrayList<String> ronetime_fee;
 	int [] imageId;
-	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee) {
+	String tenure;
+	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
 		//super(context, 0, items);
 		cont=context;
 		result=prgmNameList;
@@ -37,6 +38,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		ronetime_fee=onetime_fee;
 
 		imageId=prgmImages;
+		tenure=tenur;
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -118,16 +120,17 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.image.setImageResource(imageId[position]);
 			holder.name.setText(result.get(position));
 			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.day.setText(rmonth_fee.get(position));
+			holder.day.setText(String.valueOf(rmonth_fee.get(position)));
 			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.description.setText("Monthly for "+tenure+ " Years");
 			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.t2.setText(rfixed_fee.get(position));
+			holder.t2.setText(String.valueOf(rfixed_fee.get(position)));
 			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t4= (TextView) convertView
 					.findViewById(R.id.t4);
-			holder.t4.setText(ronetime_fee.get(position));
+			holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
 			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 		}

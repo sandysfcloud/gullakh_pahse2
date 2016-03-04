@@ -3,8 +3,21 @@
     android:layout_height="match_parent"
     android:id="@+id/linear"
     android:background="#ffe0e0e0"
-    android:orientation="vertical">
 
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_margin="5dp"
+        android:background="#ffffff">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/filter"
+        android:layout_margin="8dp"
+        android:src="@drawable/filter"/>
+    </LinearLayout>
     <!--<ListView
         android:id="@+id/list_view"
         style="@style/ListViewStyle"

@@ -45,6 +45,7 @@ public class ServerConnect extends Activity
     RuleDetails[] RD_cobj;
     RuleMaster[] RM_cobj;
     BankList[] BL_cobj;
+    String loan_amt;
     //initialization function which gets session id
         public void init(Activity d) {
         activity=d;
@@ -323,7 +324,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
                             else if(args[1].equals("RuleDetails")){
                                 Log.e("RuleDetails test","");
-                                String loan_amt=((GlobalData) activity.getApplication()).getloanamt();
+                                loan_amt=((GlobalData) activity.getApplication()).getloanamt();
                                 Log.e("RuleDetail loan_amt", String.valueOf(loan_amt));
 
                                 client = new DefaultHttpClient();

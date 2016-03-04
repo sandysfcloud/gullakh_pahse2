@@ -25,7 +25,9 @@ import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -33,9 +35,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.*;
 
 public class GoogleCardsMediaActivity extends ActionBarActivity implements
-		OnDismissCallback {
+		OnDismissCallback, View.OnClickListener {
 
 	private static final int INITIAL_DELAY_MILLIS = 300;
 	LoanParaMaster[] cobj_LPid;
@@ -57,13 +60,17 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	public  String [] searchtime={"05:50pm","10:15am"};
 	ListView listView;
 	LinearLayout layout;
+	ImageView filter;
+	ArrayList<String> disbank;
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_display);
 
 		//ListView listView = (ListView) findViewById(R.id.list_view);
-	   layout = (LinearLayout) findViewById(R.id.linear);
+	    layout = (LinearLayout) findViewById(R.id.linear);
+		filter = (ImageView) findViewById(R.id.filter);
+		filter.setOnClickListener(this);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("data");
 		createListView();
@@ -187,7 +194,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 			ArrayList accid = new ArrayList<String>();
 			ArrayList tenure = new ArrayList<String>();
-			ArrayList disbank = new ArrayList<String>();
+			disbank = new ArrayList<String>();
 			ArrayList list_roi = new ArrayList<String>();
 			ArrayList list_profee = new ArrayList<String>();
 			ArrayList list_emi = new ArrayList<String>();
@@ -211,12 +218,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 					list_roi.add(cobj_RM[i].getfloating_interest_rate());
 					list_profee.add(cobj_RM[i].getprocessing_fee());
 					Log.d("accidname", Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-					double emi_value=FinanceLib.pmt(cobj_RM[i].getfloating_interest_rate()/12, Max_tenure, -final_bp, 0, false);
+					double emi_valu=FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate()/100)/12, Max_tenure, -final_bp, 0, false);
+					double emi_value = Math.ceil(emi_valu);
 					list_emi.add(emi_value);
 					Log.d("emi_value", String.valueOf(emi_value));
 				}
 
 			}
+
+			String Max_tenure_final= String.valueOf(Math.ceil(Max_tenure/12));
 
 			Log.d("disbank", String.valueOf(disbank));
 
@@ -235,7 +245,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			 onetime_fee=new String[]{"1,500","1,200","2,000","1,100","1,700","2,700"};
 
 			//mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,month_fee,fixed_fee,onetime_fee);
-			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,list_emi,list_roi,list_profee);
+			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,list_emi,list_roi,list_profee,Max_tenure_final);
 			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
 					new SwipeDismissAdapter(mGoogleCardsAdapter, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
@@ -317,5 +327,15 @@ public void createListView()
 		for (int position : reverseSortedPositions) {
 			//mGoogleCardsAdapter.remove(mGoogleCardsAdapter.getItem(position));
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		CharSequence[] cs = disbank.toArray(new CharSequence[disbank.size()]);
+		((GlobalData) this.getApplication()).setCharbanklist(cs);
+
+		Intent intent = new Intent(this, Filter.class);
+		startActivity(intent);
+		overridePendingTransition(R.transition.left, R.transition.right);
 	}
 }

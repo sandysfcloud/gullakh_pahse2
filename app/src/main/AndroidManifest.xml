@@ -13,8 +13,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".SplashScreensActivity"
             android:label="@string/app_name"
@@ -177,6 +176,10 @@
         <activity
             android:name=".DateOfBirth_questn"
             android:label="@string/title_activity_date_of_birth_questn" >
+        </activity>
+        <activity
+            android:name=".Filter"
+            android:label="@string/title_activity_filter" >
         </activity>
     </application>
 
