@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
+import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import java.util.ArrayList;
 
@@ -39,6 +41,20 @@ public class Filter extends AppCompatActivity implements View.OnClickListener {
 
         selectColoursButton.setOnClickListener(this);
         colours=((GlobalData) this.getApplication()).getCharbanklist();
+
+        RangeSeekBar<Float> rangeSeekBar= (RangeSeekBar) findViewById(R.id.rangsb);
+        rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Float>() {
+
+            @Override
+            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Float aFloat, Float t1) {
+                Log.d("value1", String.valueOf(aFloat));
+                Log.d("value2", String.valueOf(t1));
+
+
+            }
+
+
+        });
 
 
     }

@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
 
     android:layout_height="fill_parent"
-
+    android:background="@drawable/card_background_white"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dip">
@@ -70,8 +70,10 @@
     android:padding="5dip" />
 
 
-
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
 
         android:text="Interest Rate Type"
@@ -82,9 +84,31 @@
         android:layout_height="wrap_content"
         android:textColor="#616161"
         android:padding="5dip" />
+        <TextView
+
+            android:text="min"
+            android:id="@+id/min"
+            android:layout_width="fill_parent"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:textColor="#616161"
+            android:padding="5dip" />
+        <TextView
+
+            android:text="max"
+            android:id="@+id/max"
+            android:layout_width="fill_parent"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:textColor="#616161"
+            android:padding="5dip" />
+    </LinearLayout>
     <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/rangsb"
         app:absoluteMinValue="15.23"
         app:absoluteMaxValue="140.54"
         android:progressDrawable="@drawable/red_scrubber_progress"
