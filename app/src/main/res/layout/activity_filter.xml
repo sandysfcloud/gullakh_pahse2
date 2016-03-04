@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+
+    android:layout_height="fill_parent"
+
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dip">
+
+    <TextView
+
+        android:text="Select Banks"
+
+        android:id="@+id/textView1"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:textSize="16sp"
+        android:layout_height="wrap_content"
+       android:textColor="#616161"
+        android:padding="5dip" />
+
+    <Button
+
+        android:layout_height="wrap_content"
+
+        android:layout_width="fill_parent"
+
+        android:text="- None Selected -"
+        android:background="#D83C2F"
+        android:textColor="#ffffff"
+        android:id="@+id/select_colours"
+
+        android:padding="5dip" />
+
+
+    <TextView
+
+        android:text="Loan Amount"
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:textColor="#616161"
+        android:padding="5dip" />
+
+
+    <!--<org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/disseekbar"
+        app:dsb_min="10"
+        app:dsb_max="100"
+        app:dsb_indicatorColor="#D83C2F"
+        app:dsb_trackColor="#D83C2F"
+        />-->
+
+
+
+    <TextView
+
+    android:text="Tenure"
+    android:id="@+id/textView3"
+    android:layout_width="fill_parent"
+    android:textSize="16sp"
+    android:layout_marginTop="20dp"
+    android:layout_height="wrap_content"
+    android:textColor="#616161"
+    android:padding="5dip" />
+
+
+
+
+    <TextView
+
+        android:text="Interest Rate Type"
+        android:id="@+id/textView4"
+        android:layout_width="fill_parent"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:textColor="#616161"
+        android:padding="5dip" />
+    <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:absoluteMinValue="15.23"
+        app:absoluteMaxValue="140.54"
+        android:progressDrawable="@drawable/red_scrubber_progress"
+        android:thumb="@drawable/red_scrubber_control"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="bottom|center_horizontal">
+    <Button
+        android:id="@+id/apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/roundbutton_green"
+        android:text="Apply" />
+    </LinearLayout>
+</LinearLayout>

@@ -15,7 +15,7 @@
         android:background="@drawable/google_cards_background_bottom"
         android:gravity="right"
         android:orientation="vertical"
-        android:padding="8dp" >
+        android:padding="5dp" >
 
         <!--<com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/list_item_google_cards_shop_promo"
@@ -156,7 +156,7 @@
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
             android:paddingLeft="12dp"
-            android:paddingRight="12dp"
+            android:paddingRight="5dp"
 
             android:paddingBottom="8dp"
             android:orientation="vertical" >
@@ -188,8 +188,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="55dp"
             android:layout_weight="1"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
 
             android:paddingBottom="8dp"
             android:orientation="vertical" >

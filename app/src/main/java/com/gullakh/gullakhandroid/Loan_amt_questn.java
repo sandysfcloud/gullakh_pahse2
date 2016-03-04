@@ -23,6 +23,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.loan_amt);
         getSupportActionBar().setTitle("Car Loan - Loan Amount");
         ImageView back = (ImageView) findViewById(R.id.back);
+       // MaterialTextField obj=new MaterialTextField(this);
+       // obj.expand();
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
