@@ -3,6 +3,7 @@
     xmlns:lib="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="#ed1c24"
+    android:id="@+id/linearback"
     android:padding="20dp"
 
 
@@ -11,7 +12,9 @@
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-  android:id="@+id/errormessage"
+    android:gravity="center"
+    android:id="@+id/errormessage"
+    android:textColor="#FFFFFF"
     android:text="Error"/>
 
 

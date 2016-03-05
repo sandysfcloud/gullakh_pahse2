@@ -5,10 +5,12 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,12 +19,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +60,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	EditText emailadress;
 	EditText mobilenumber;
 	EditText password;
+	static EditText inpuotp;
+	static Typeface myfont;
+
 	public static Context baseContext;
 
 	@Override
@@ -64,12 +71,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		setContentView(R.layout.activity_register);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
+		myfont = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
 		Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
 		TextView signUptext= (TextView) findViewById(R.id.signupheading);
 		signUptext.setTypeface(myfont);
 		Button register = (Button) findViewById(R.id.Registerbutton);
-		Button signin = (Button) findViewById(R.id.signinbutton);
+
 		baseContext = getBaseContext();
 
 
@@ -80,36 +87,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 		register.setTypeface(myfontlight);
-		signin.setTypeface(myfontlight);
+
 
 		if (checkPlayServices()) {
 			gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 			regid = getRegistrationId(getApplicationContext());
 		}
-		signin.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View view) {
-				useremail = emailadress.getText().toString();
-				userpassword = md5(password.getText().toString());
-
-				urlchange="signin";
-
-
-
-				JSONParse asyncTask =new JSONParse(RegisterPageActivity.this);
-				asyncTask.delegate= RegisterPageActivity.this;
-				asyncTask.execute();
-
-
-
-
-
-
-
-
-			}
-		});
 
 
 		register.setOnClickListener(new View.OnClickListener() {
@@ -132,78 +116,19 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext())).execute();
 
 
-					final AlertDialog.Builder builder2 = new AlertDialog.Builder(RegisterPageActivity.this);
-					builder2.setTitle("Set Password");
+					String[] arraydata = new String[5];
+					arraydata[0]="registration";
+					arraydata[1]=useremail;
+					arraydata[2]=usermobno;
+					arraydata[3]=regid;
 
-					// Set up the input
-					final EditText inputpassword = new EditText(RegisterPageActivity.this);
-
-					// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-					inputpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-					builder2.setView(inputpassword);
-
-
-
-					// Set up the input
-					final EditText inputpassword2 = new EditText(RegisterPageActivity.this);
-
-					// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-					inputpassword2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-					//builder2.setView(inputpassword2);
-
-					// Set up the buttons
-					builder2.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							urlchange="password";
-							m_Text = inputpassword.getText().toString();
-							new JSONParse(RegisterPageActivity.this).execute();
-						}
-					});
-					builder2.setNegativeButton("", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.cancel();
-						}
-					});
+					urlchange="registration";
+					JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
+					asyncTask.delegate= RegisterPageActivity.this;
+					asyncTask.execute();
 
 
 
-
-					AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
-					builder.setTitle("Enter OTP");
-
-// Set up the input
-					final EditText input = new EditText(RegisterPageActivity.this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-					input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-					builder.setView(input);
-
-// Set up the buttons
-					builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							urlchange="otpcheck";
-							m_Text = input.getText().toString();
-							try {
-								JSONObject str_result = new JSONParse(RegisterPageActivity.this).execute().get();
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							} catch (ExecutionException e) {
-								e.printStackTrace();
-							}
-
-							builder2.show();
-						}
-					});
-					builder.setNegativeButton("", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.cancel();
-						}
-					});
-
-					builder.show();
 				}
 				else
 				{
@@ -233,54 +158,102 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 	public void  processFinish(JSONObject str_result){
 
-		try{
+		try {
+			final AlertDialog.Builder builder2 = new AlertDialog.Builder(RegisterPageActivity.this);
+			if(str_result.get("result").equals("true")) {
+				if(urlchange=="registration") {
+					AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
+					builder.setTitle("Enter OTP");
 
-		DataHandler dbobject = new DataHandler(RegisterPageActivity.this);
-		dbobject.addTable();
-		if(str_result.get("result").equals("true")) {
+// Set up the input
+					final EditText input = new EditText(RegisterPageActivity.this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+					input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					builder.setView(input);
 
-			Cursor cr = dbobject.displayData("select * from userlogin");
-			if(cr!=null) {
-				if (cr.moveToFirst()) {
-					dbobject.query("DELETE FROM userlogin");
+// Set up the buttons
+					builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
 
+							String[] arraydata = new String[5];
+							arraydata[0] = "otpcheck";
+							arraydata[1] = useremail;
+							arraydata[2] = usermobno;
+							arraydata[3] = regid;
+							arraydata[4] = input.getText().toString();
+							inpuotp=input;
+							urlchange = "otpregistration";
+							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
+							asyncTask.delegate= RegisterPageActivity.this;
+							asyncTask.execute();
+
+
+						}
+					});
+					builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});
+
+					builder.show();
 				}
+
+				if(urlchange=="otpregistration"){
+
+					builder2.setTitle("Set Password");
+
+					// Set up the input
+					final EditText inputpassword = new EditText(RegisterPageActivity.this);
+
+					// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+					inputpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					builder2.setView(inputpassword);
+
+
+
+					// Set up the input
+					final EditText inputpassword2 = new EditText(RegisterPageActivity.this);
+
+					// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+					inputpassword2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					//builder2.setView(inputpassword2);
+
+					// Set up the buttons
+					builder2.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							String[] arraydata = new String[5];
+							arraydata[0]="password";
+							arraydata[1]=useremail;
+							arraydata[2]=usermobno;
+							arraydata[3]=regid;
+							arraydata[4]=inputpassword.getText().toString();
+							urlchange = "setpassword";
+							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
+							asyncTask.delegate= RegisterPageActivity.this;
+							asyncTask.execute();
+						}
+					});
+					builder2.setNegativeButton("", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});
+					builder2.show();
+				}
+
+				if(urlchange=="setpassword"){
+					RegisterPageActivity.showErroralert(RegisterPageActivity.this,"Registered Successfully","success");
+				}
+
+            }else{
+				RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 			}
-
-			ContentValues values = new ContentValues();
-			values.put("usersession", str_result.get("session_id").toString());
-			values.put("useremail", useremail);
-			values.put("usermobile", usermobno);
-			dbobject.insertdata(values, "userlogin");
-
-		}else{
-			//dialogalert.dismiss();
-			Dialog dialog = new Dialog(RegisterPageActivity.this, R.style.PauseDialog);
-
-// 						Setting the title and layout for the dialog
-			dialog.setTitle("");
-			dialog.setContentView(R.layout.dialogdata);
-			TextView txterror = (TextView) dialog.findViewById(R.id.errormessage);
-			txterror.setText(str_result.get("error_message").toString());
-			Window window = dialog.getWindow();
-
-
-
-			WindowManager.LayoutParams wlp = window.getAttributes();
-
-			wlp.gravity = Gravity.BOTTOM;
-			wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-			window.setAttributes(wlp);
-
-			WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-			lp.copyFrom(dialog.getWindow().getAttributes());
-			lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-			//lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-			dialog.show();
-			dialog.getWindow().setAttributes(lp);
-
-
-		}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -365,6 +338,46 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 
+	public static Dialog showErroralert(Activity act, String msg, String flgsucfail){
+		//dialogalert.dismiss();
+		Dialog dialog = new Dialog(act, R.style.PauseDialog);
+
+// 						Setting the title and layout for the dialog
+		dialog.setTitle("");
+		dialog.setContentView(R.layout.dialogdata);
+
+		TextView txterror = (TextView) dialog.findViewById(R.id.errormessage);
+		LinearLayout linrlyt = (LinearLayout) dialog.findViewById(R.id.linearback);
+
+		if(flgsucfail.equals("success"))
+			linrlyt.setBackgroundColor(Color.GREEN);
+		else
+			linrlyt.setBackgroundColor(Color.RED);
+
+		txterror.setTypeface(myfont);
+
+
+		txterror.setText(msg);
+		Window window = dialog.getWindow();
+
+
+
+
+		WindowManager.LayoutParams wlp = window.getAttributes();
+
+		wlp.gravity = Gravity.BOTTOM;
+		wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+		window.setAttributes(wlp);
+
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+		//lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+		dialog.show();
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
+	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -372,6 +385,24 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			finish();
 			return true;
 		}
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_name) {
+			Intent intcall=new Intent(this, signin.class);
+			startActivity(intcall);
+			finish();
+			return true;
+		}
+
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_signup, menu);
+		return true;
+	}
+
 }

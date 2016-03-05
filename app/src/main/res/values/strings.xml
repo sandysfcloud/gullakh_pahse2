@@ -180,5 +180,6 @@
     <string name="title_activity_emi_questn">EMI_questn</string>
     <string name="title_activity_date_of_birth_questn">DateOfBirth_questn</string>
     <string name="title_activity_filter">Filter</string>
+    <string name="title_activity_signin">signin</string>
 
 </resources>

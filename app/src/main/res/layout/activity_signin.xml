@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/transparent_button_selector"
-                android:text="Sign Up Now..!!!"
+                android:text="Sign In Here..!!!"
                 android:textColor="#e7000000"
                 android:textSize="34sp"
 
@@ -31,26 +31,26 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="50dp" />
 
-           <!-- <EditText
-                android:layout_width="250dp"
-                android:layout_height="45dp"
-                android:inputType="textPersonName"
-                android:hint="Userame"
-                android:ems="10"
-                android:id="@+id/editText"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/edittextsimple"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:paddingLeft="10dp"
-                android:textColorHint="#b2b2b2" />-->
+            <!-- <EditText
+                 android:layout_width="250dp"
+                 android:layout_height="45dp"
+                 android:inputType="textPersonName"
+                 android:hint="Userame"
+                 android:ems="10"
+                 android:id="@+id/editText"
+                 android:layout_gravity="center_horizontal"
+                 android:background="@drawable/edittextsimple"
+                 android:layout_marginLeft="5dp"
+                 android:layout_marginTop="5dp"
+                 android:layout_marginRight="5dp"
+                 android:paddingLeft="10dp"
+                 android:textColorHint="#b2b2b2" />-->
 
             <EditText
                 android:layout_width="250dp"
                 android:layout_height="45dp"
                 android:inputType="textEmailAddress"
-                android:hint="Email"
+                android:hint="Email or Mobile"
                 android:ems="10"
                 android:id="@+id/emailaddress"
                 android:layout_gravity="center_horizontal"
@@ -62,29 +62,31 @@
                 android:paddingLeft="10dp"
                 android:textColorHint="#b2b2b2" />
 
-          <!--  <EditText
+            <!--  <EditText
+                  android:layout_width="250dp"
+                  android:layout_height="45dp"
+                  android:inputType="textPassword"
+                  android:hint="Password"
+                  android:ems="10"
+                  android:id="@+id/editText3"
+                  android:layout_gravity="center_horizontal"
+                  android:background="@drawable/edittextsimple"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginRight="5dp"
+                  android:typeface="sans"
+                  android:paddingLeft="10dp"
+                  android:textColorHint="#b2b2b2" />-->
+
+
+
+            <EditText
                 android:layout_width="250dp"
                 android:layout_height="45dp"
                 android:inputType="textPassword"
                 android:hint="Password"
                 android:ems="10"
-                android:id="@+id/editText3"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/edittextsimple"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:typeface="sans"
-                android:paddingLeft="10dp"
-                android:textColorHint="#b2b2b2" />-->
-
-            <EditText
-                android:layout_width="250dp"
-                android:layout_height="45dp"
-                android:inputType="phone"
-                android:hint="Mobile number"
-                android:ems="10"
-                android:id="@+id/mobilenumber"
+                android:id="@+id/password"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
                 android:layout_marginLeft="5dp"
@@ -94,18 +96,12 @@
                 android:paddingLeft="10dp"
                 android:textColorHint="#b2b2b2" />
 
-
-
-            <CheckBox
-                android:layout_width="250dp"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="I agree to the Terms and Conditions"
-                android:id="@+id/checkBox"
-                android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
-                android:textSize="13dp"
-                android:textColor="#747373">
-            </CheckBox>
+              android:layout_gravity="right"
+                android:padding="15dp"
+                android:text="Forgot Password"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -116,18 +112,18 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp">
 
+
+
                 <Button
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="125dp"
                     android:layout_height="match_parent"
-                    android:text="Register"
-                    android:id="@+id/Registerbutton"
+                    android:text="Login"
+                    android:id="@+id/signinbutton"
                     android:layout_gravity="left|bottom|center_horizontal"
                     android:background="@drawable/mainbutton"
                     android:textColor="#ffffff"
                     android:textSize="20dp" />
-
-
 
                 <TextView
                     android:layout_width="wrap_content"

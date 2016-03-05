@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 
+import android.app.Activity;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -35,7 +36,7 @@ public class JSONParsergcm {
 
     }
 
-    public JSONObject getJSONFromUrl(String url) {
+    public JSONObject getJSONFromUrl(String url,String[] arraydata) {
 
         // Making HTTP request
         try {
@@ -43,15 +44,15 @@ public class JSONParsergcm {
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("useremail", RegisterPageActivity.useremail));
-            nameValuePairs.add(new BasicNameValuePair("mobileno", RegisterPageActivity.usermobno));
-            nameValuePairs.add(new BasicNameValuePair("regid", RegisterPageActivity.regid));
-            if(RegisterPageActivity.urlchange=="otpcheck")
-                nameValuePairs.add(new BasicNameValuePair("userotp", RegisterPageActivity.m_Text));
-            else if(RegisterPageActivity.urlchange=="signin")
-                nameValuePairs.add(new BasicNameValuePair("userpassword", RegisterPageActivity.userpassword));
-            else
-                nameValuePairs.add(new BasicNameValuePair("userpassword", md5(RegisterPageActivity.m_Text)));
+            nameValuePairs.add(new BasicNameValuePair("useremail", arraydata[1]));
+            nameValuePairs.add(new BasicNameValuePair("mobileno", arraydata[2]));
+            nameValuePairs.add(new BasicNameValuePair("regid", arraydata[3]));
+            if(arraydata[0]=="otpcheck")
+                nameValuePairs.add(new BasicNameValuePair("userotp", arraydata[4]));
+            else if(arraydata[0]=="signin")
+                nameValuePairs.add(new BasicNameValuePair("userpassword", arraydata[4]));
+            else if(arraydata[0]=="password")
+                nameValuePairs.add(new BasicNameValuePair("userpassword", md5(arraydata[4])));
 
             //httpPost.setHeader("Content-Type", "application/json");
             httpPost.setHeader("Accept", "JSON");

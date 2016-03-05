@@ -1,5 +1,7 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,16 +19,30 @@ public class MyProfileActivity extends AppCompatActivity {
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         TextView prof= (TextView) findViewById(R.id.myprohead);
         prof.setTypeface(myfontlight);
-        TextView name= (TextView) findViewById(R.id.textView6);
-        name.setTypeface(myfontlight);
+        //TextView name= (TextView) findViewById(R.id.textView6);
+        //name.setTypeface(myfontlight);
         TextView email= (TextView) findViewById(R.id.textView10);
         email.setTypeface(myfontlight);
         TextView ph= (TextView) findViewById(R.id.textView11);
         ph.setTypeface(myfontlight);
-        TextView gen= (TextView) findViewById(R.id.textView12);
-        gen.setTypeface(myfontlight);
-        TextView loc= (TextView) findViewById(R.id.textView13);
-        loc.setTypeface(myfontlight);
+        //TextView gen= (TextView) findViewById(R.id.textView12);
+        //gen.setTypeface(myfontlight);
+        //TextView loc= (TextView) findViewById(R.id.textView13);
+        //loc.setTypeface(myfontlight);
+
+        DataHandler dbobject = new DataHandler(MyProfileActivity.this);
+        Cursor cr = dbobject.displayData("select * from userlogin");
+        if(cr!=null) {
+            if (cr.moveToFirst()) {
+                email.setText(cr.getString(1));
+                ph.setText(cr.getString(2));
+
+            }
+        }else{
+            Intent intentsignin=new Intent(this,signin.class);
+            startActivity(intentsignin);
+            finish();
+        }
 
     }
     @Override
