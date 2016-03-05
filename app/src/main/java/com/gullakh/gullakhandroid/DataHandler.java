@@ -44,6 +44,10 @@ public class DataHandler extends SQLiteOpenHelper {
 
             db.execSQL(android_metadata );
 
+            android_metadata= "CREATE TABLE IF NOT EXISTS userlogin (id INTEGER PRIMARY KEY AUTOINCREMENT,useremail VARCHAR,usermobile VARCHAR,usersession VARCHAR );";
+
+            db.execSQL(android_metadata );
+
            /* metainsert="INSERT INTO android_metadata VALUES ('en_US');";
             db.execSQL(metainsert);
 

@@ -48,6 +48,8 @@ public class JSONParsergcm {
             nameValuePairs.add(new BasicNameValuePair("regid", RegisterPageActivity.regid));
             if(RegisterPageActivity.urlchange=="otpcheck")
                 nameValuePairs.add(new BasicNameValuePair("userotp", RegisterPageActivity.m_Text));
+            else if(RegisterPageActivity.urlchange=="signin")
+                nameValuePairs.add(new BasicNameValuePair("userpassword", RegisterPageActivity.userpassword));
             else
                 nameValuePairs.add(new BasicNameValuePair("userpassword", md5(RegisterPageActivity.m_Text)));
 

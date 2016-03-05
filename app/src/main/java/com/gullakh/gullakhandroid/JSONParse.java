@@ -1,7 +1,11 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
+import android.view.WindowManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,36 +14,61 @@ import org.json.JSONObject;
 /**
  * Created by excellasoftware on 27/2/16.
  */
-public class JSONParse  extends AsyncTask<String, String, JSONObject> {
-
+public class JSONParse  extends AsyncTask<String, Void, JSONObject> {
+    public RegisterPageActivity activity;
      static String data="";
+    public JSONObject json;
     private String urlnew="http://54.200.200.39/gullakh_web/index.php/user/Webservices";
+Dialog dialogalert;
+    public AsyncResponse delegate = null;
+
+
+    public JSONParse(RegisterPageActivity a)
+    {
+        this.activity = a;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        //super.onPreExecute();
+        // DIALOG_DOWNLOAD_PROGRESS is defined as 0 at start of class
+         //dialogalert=showAlert();
+        Log.e("AsyncTask", "onPreExecute");
+        dialogalert=RegisterPageActivity.showAlert(activity);
+
+    }
+    @Override
+    protected void onPostExecute(JSONObject result) {
+
+        dialogalert.dismiss();
+        Log.e("AsyncTask", "Post");
+        delegate.processFinish(result);
+    }
+
 
     @Override
     protected JSONObject doInBackground(String... args)
     {
+
         JSONParsergcm jParser = new JSONParsergcm();
         // Getting JSON from URL
         if(RegisterPageActivity.urlchange=="otpcheck")
             urlnew=urlnew+"/Verify_Phone";
-        else
+        else if(RegisterPageActivity.urlchange=="signin")
+            urlnew=urlnew+"/user_login_process";
+            else
+
             urlnew=urlnew+"/update_password";
 
-        JSONObject json = jParser.getJSONFromUrl(urlnew);
-
+         json = jParser.getJSONFromUrl(urlnew);
+        Log.e("AsyncTask", "doinback1");
         try {
-            JSONArray obj = json.getJSONArray("info");
-            for (int i=0;i<obj.length();i++)
-            {
-                JSONObject c = obj.getJSONObject(i);
-                // Storing  JSON item in a Variable
-                String mov = c.getString("mobreg").toString();
-                data=mov;
-                Log.d("json data info:",data);
-            }
-        }  catch (JSONException e) {
+            Thread.sleep(2000);
+            Log.e("AsyncTask", "doinback2");
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         return json;
     }
 
@@ -47,4 +76,7 @@ public class JSONParse  extends AsyncTask<String, String, JSONObject> {
 
         return data;
     }
+
+
+
 }
