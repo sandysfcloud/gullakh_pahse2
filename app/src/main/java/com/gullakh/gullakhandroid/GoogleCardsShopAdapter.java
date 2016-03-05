@@ -28,17 +28,23 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	ArrayList<String> ronetime_fee;
 	int [] imageId;
 	String tenure;
-	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
+	private ArrayList data;
+	ListModel tempValues = null;
+	//public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
 		//super(context, 0, items);
+	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context,ArrayList d,int[] prgmImages)
+	{
 		cont=context;
-		result=prgmNameList;
+		/*result=prgmNameList;
 
 		rmonth_fee=month_fee;
 		rfixed_fee=fixed_fee;
 		ronetime_fee=onetime_fee;
 
 		imageId=prgmImages;
-		tenure=tenur;
+		tenure=tenur;*/
+		imageId=prgmImages;
+		data = d;
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -46,7 +52,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return result.size();
+		return data.size();
 	}
 
 	@Override
@@ -101,7 +107,8 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.t3 = (TextView) convertView
 					.findViewById(R.id.t3);
 
-
+			holder.t4 = (TextView) convertView
+					.findViewById(R.id.t4);
 
 
 			holder.apply= (Button) convertView
@@ -113,24 +120,38 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		if (result.size() <= 0) {
+		if (data.size() <= 0) {
 			holder.name.setText("No Data");
 
 		} else {
+
+
+
+			tempValues = null;
+			tempValues = (ListModel) data.get(position);
+
+
+			holder.name.setText(tempValues.getbanknam());
+			holder.day.setText(String.valueOf(tempValues.getemi_value()));
+			holder.description.setText("Monthly for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
+			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate()));
+			holder.t4.setText(String.valueOf(tempValues.getprocessing_fee()));
+
 			holder.image.setImageResource(imageId[position]);
-			holder.name.setText(result.get(position));
+		//	holder.name.setText(result.get(position));
 			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.day.setText(String.valueOf(rmonth_fee.get(position)));
+			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
+			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
 			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.description.setText("Monthly for "+tenure+ " Years");
-			holder.t1.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.t2.setText(String.valueOf(rfixed_fee.get(position)));
+			//holder.description.setText("Monthly for "+tenure+ " Years");
+			holder.t1.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			//holder.t2.setText(String.valueOf(rfixed_fee.get(position)));
 			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.t4= (TextView) convertView
 					.findViewById(R.id.t4);
-			holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
+			//holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
 			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 		}
@@ -160,6 +181,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		switch (v.getId()) {
 			case R.id.apply:
 				Intent intent = new Intent(cont, ListView_Click.class);
+
 				cont.startActivity(intent);
 				((GoogleCardsMediaActivity)cont).overridePendingTransition(R.transition.left, R.transition.right);
 				break;

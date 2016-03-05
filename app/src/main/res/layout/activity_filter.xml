@@ -33,7 +33,10 @@
 
         android:padding="5dip" />
 
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
 
         android:text="Loan Amount"
@@ -44,9 +47,40 @@
         android:layout_height="wrap_content"
         android:textColor="#616161"
         android:padding="5dip" />
+        <TextView
 
 
-    <!--<org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/loandata"
+            android:layout_width="fill_parent"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:textColor="#616161"
+            android:padding="5dip" />
+
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/loanamt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:max="10"
+        android:layout_marginTop="5dp" />
+
+
+    <!--  <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loanamt"
+        app:absoluteMinValue="2.0"
+        app:absoluteMaxValue="50.0"
+        app:singleThumb="true"
+        />
+
+
+  <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/disseekbar"
@@ -57,7 +91,10 @@
         />-->
 
 
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
 
     android:text="Tenure"
@@ -68,6 +105,28 @@
     android:layout_height="wrap_content"
     android:textColor="#616161"
     android:padding="5dip" />
+
+
+        <TextView
+
+
+            android:id="@+id/tenr"
+            android:layout_width="fill_parent"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:textColor="#616161"
+            android:padding="5dip" />
+
+    </LinearLayout>
+    <SeekBar
+        android:id="@+id/tenure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:max="10"
+        android:layout_marginTop="5dp" />
 
 
     <LinearLayout
@@ -86,7 +145,7 @@
         android:padding="5dip" />
         <TextView
 
-            android:text="min"
+
             android:id="@+id/min"
             android:layout_width="fill_parent"
             android:textSize="16sp"
@@ -96,7 +155,7 @@
             android:padding="5dip" />
         <TextView
 
-            android:text="max"
+
             android:id="@+id/max"
             android:layout_width="fill_parent"
             android:textSize="16sp"
@@ -105,14 +164,21 @@
             android:textColor="#616161"
             android:padding="5dip" />
     </LinearLayout>
+    <!--<com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rangsb"
+        app:absoluteMinValue="9"
+        app:absoluteMaxValue="14"
+        android:progressDrawable="@drawable/red_scrubber_progress"
+        android:thumb="@drawable/red_scrubber_control"
+        />-->
     <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rangsb"
-        app:absoluteMinValue="15.23"
-        app:absoluteMaxValue="140.54"
-        android:progressDrawable="@drawable/red_scrubber_progress"
-        android:thumb="@drawable/red_scrubber_control"
+        app:absoluteMinValue="9"
+        app:absoluteMaxValue="14"
         />
 
 
@@ -123,7 +189,7 @@
         android:layout_margin="10dp"
         android:gravity="bottom|center_horizontal">
     <Button
-        android:id="@+id/apply"
+        android:id="@+id/applyf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
@@ -131,7 +197,7 @@
         android:minWidth="0dp"
         android:padding="8dp"
         android:textColor="#ffffff"
-        android:background="@drawable/roundbutton_green"
+        android:background="@drawable/roundedbutton"
         android:text="Apply" />
     </LinearLayout>
 </LinearLayout>

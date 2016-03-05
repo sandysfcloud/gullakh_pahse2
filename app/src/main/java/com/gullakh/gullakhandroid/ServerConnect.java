@@ -274,7 +274,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                                 Cursor cr = dbobject.displayData("select * from session");
                                 if (cr.moveToFirst()) {
                                     //pass the session id to check wether its valid or not
-                                    Log.d("xi", String.valueOf(cr.getCount()) + " :value is:" + cr.getString(1));
+                                    Log.d("session value is", String.valueOf(cr.getCount()) + " :value is:" + cr.getString(1));
                                     client = new DefaultHttpClient();
                                     post = new HttpPost(GlobalData.SERVER_GET_URL + "?operation=describe&sessionName=" + cr.getString(1) + "&elementType=Accounts");
                                 }
