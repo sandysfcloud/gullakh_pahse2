@@ -13,48 +13,124 @@ import android.view.View;
 import android.widget.Button;
 
 
+import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class Filter extends AppCompatActivity implements View.OnClickListener {
     protected Button selectColoursButton;
-
+    public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
+    public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
     protected CharSequence[] colours = { "Red", "Green", "Blue", "Yellow", "Orange", "Purple" };
 
     protected ArrayList<CharSequence> selectedColours = new ArrayList<CharSequence>();
-
+    TextView min,max,loand,tenur;
+    SeekBar seekBar1;
+    Button apply;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
         selectColoursButton = (Button) findViewById(R.id.select_colours);
         TextView t1 = (TextView) findViewById(R.id.textView1);
+        min = (TextView) findViewById(R.id.min);
+        max = (TextView) findViewById(R.id.max);
+        loand = (TextView) findViewById(R.id.loandata);
+
+
+        CustomListViewValuesArr = (ArrayList<ListModel>) getIntent().getSerializableExtra("Obj");
+
+        Log.d("intent got",CustomListViewValuesArr.get(0).getfloating_interest_rate());
+
+        apply = (Button) findViewById(R.id.applyf);
+        apply.setOnClickListener(this);
+
+        tenur = (TextView) findViewById(R.id.tenr);
+
+        SeekBar seekBar1 = (SeekBar) findViewById(R.id.loanamt);
+
+        SeekBar tenure = (SeekBar) findViewById(R.id.tenure);
 
 
         selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         t1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         selectColoursButton.setOnClickListener(this);
-        colours=((GlobalData) this.getApplication()).getCharbanklist();
 
-        RangeSeekBar<Float> rangeSeekBar= (RangeSeekBar) findViewById(R.id.rangsb);
-        rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Float>() {
+      /*  for(int i=0;i<CustomListViewValuesArr.size();i++) {
+            disbank =CustomListViewValuesArr.get(i).getbanknam();
+        }*/
+
+        colours = ((GlobalData) this.getApplication()).getCharbanklist();
+
+        RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar) findViewById(R.id.rangsb);
+
+
+        rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
             @Override
-            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Float aFloat, Float t1) {
-                Log.d("value1", String.valueOf(aFloat));
+            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
+                Log.d("value1", String.valueOf(integer));
                 Log.d("value2", String.valueOf(t1));
-
-
+                min.setText(String.valueOf(integer) + " % -");
+                max.setText(String.valueOf(t1) + " %");
             }
 
 
         });
+
+
+        seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Double value = (progress / 10.0);
+
+                loand.setText(String.valueOf(progress));
+                // value now holds the decimal value between 0.0 and 10.0 of the progress
+                // Example:
+                // If the progress changed to 45, value would now hold 4.5
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+
+        tenure.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Double value = (progress / 10.0);
+                tenur.setText(String.valueOf(progress));
+                // value now holds the decimal value between 0.0 and 10.0 of the progress
+                // Example:
+                // If the progress changed to 45, value would now hold 4.5
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+
+
 
 
     }
@@ -95,6 +171,59 @@ public class Filter extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             default:
+
+            case  R.id.apply:
+
+                apply.setBackgroundResource(R.drawable.roundbutton_blue);
+                Log.d("Click size!!!!!", String.valueOf(CustomListViewValuesArr.size()));
+
+                Map<String,String> Arry_banknam = new HashMap<>();
+
+                for(int i=0;i<selectedColours.size();i++)
+                {
+                    //Arry_banknam.put("1",selectedColours.get(i));
+                }
+                Log.d("Arry_banknam", String.valueOf(Arry_banknam));
+
+
+                for(int i=0;i<CustomListViewValuesArr.size();i++) {
+                    Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
+                    Log.d("test2!!!!!", String.valueOf(selectedColours));
+                    if(CustomListViewValuesArr.get(i).getbanknam().equals(selectedColours.get(i)))
+                    {
+                        Log.d("CustomListViewValu!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+                        Log.d("selectedColours!!!!!", String.valueOf(selectedColours));
+                        newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
+                        Log.d("newCustomListView", newCustomListViewValuesArr.get(i).getbanknam());
+                    }
+                }
+
+               /* apply.setBackgroundResource(R.drawable.roundbutton_blue);
+                //charText = charText.toLowerCase(Locale.getDefault());
+                GoogleCardsMediaActivity obj=new GoogleCardsMediaActivity();
+                obj.CustomListViewValuesArr.clear();
+               // if (charText.length() == 0) {
+                obj.CustomListViewValuesArr.add(colours);
+
+                for(int i=0;i<colours.length;i++)
+                {
+                    worldpopulationlistz
+                }
+
+
+               // }
+               // else
+                {
+                    for (worldpopulationlist  : colours)
+                    {
+                        if (wp.getCountry().toLowerCase(Locale.getDefault()).contains(charText))
+                        {
+                            worldpopulationlist.add(wp);
+                        }
+                    }
+               // }
+                notifyDataSetChanged();
+        }*/
 
                 break;
 
@@ -158,4 +287,7 @@ public class Filter extends AppCompatActivity implements View.OnClickListener {
         selectColoursButton.setText(stringBuilder.toString());
 
     }
+
+
+
 }

@@ -51,7 +51,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	public  String [] month_fee;
 	public  String [] fixed_fee;
 	public  String [] onetime_fee;
-
+	public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
 	public  int age;
 
 	public  String [] search={"PERSONAL LOAN","CAR LOAN"};
@@ -93,6 +93,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 				//use LoanParameterMaster id and return RuleDetails id
 				cobj_RD = cls2.RuleDetails(this,loanpid);
 
+
+
+
 				ArrayList Arr_RDid = new ArrayList<String>();
 				for(int i=0;i<cobj_RD.length;i++)
 				{
@@ -133,33 +136,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			}
 
 
-
-
-
-			//********************************END*********************************
-
-
-
-
 			double Max_tenure,net_salry,emi;
 
-
-
-
 			net_salry=((GlobalData) getApplication()).getnetsalary();
-			/*foir=((GlobalData) getApplication()).getfoir();
-
-			foir=((GlobalData) getApplication()).getfoir();
-
-			roi=((GlobalData) getApplication()).getroi();
-
-			emi=((GlobalData) getApplication()).getEmi();
-			age=((GlobalData) getApplication()).getage();
-			Log.d("age is",String.valueOf(age));
-
-
-
-			accid=((GlobalData) getApplication()).getaccid();*/
 
             if((60-age)>7)
              {
@@ -175,22 +154,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 			emi=((GlobalData) getApplication()).getEmi();
 
-			/*for(int i=0;i<foir.size();i++) {
 
-				Log.d("checking roi value", String.valueOf(roi.get(i)));
-				Log.d("checking roi value", String.valueOf(foir.get(i)));
-				double bpd = FinanceLib.pmt((roi.get(i) / 100) / 12, Max_tenure, -100000, 0, false);
-
-				double bp = ((net_salry * (foir.get(i) / 100) - emi) / (bpd)) * 100000;
-				Log.d("checking bp", String.valueOf(bp));
-
-				double finalValue = Math.ceil(bp);
-				Log.d("finalValue bp", String.valueOf(finalValue));
-				if(finalValue<=loan_amt)
-					disbank.add(accid.get(i));
-				Log.d("accid", String.valueOf(accid.get(i)));
-
-			}*/
 
 			ArrayList accid = new ArrayList<String>();
 			ArrayList tenure = new ArrayList<String>();
@@ -211,7 +175,31 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 				Log.d("finalValue bp", String.valueOf(final_bp));
 				Log.d("loan_amt",String.valueOf(loan_amt));
 				if(loan_amt<=final_bp) {
-					accid.add(cobj_RM[i].getaccount_lender());
+
+					//*********
+
+					double emi_valu=FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate()/100)/12, Max_tenure, -final_bp, 0, false);
+					double emi_value = Math.ceil(emi_valu);
+
+
+
+					ListModel sched = new ListModel();
+					sched = new ListModel();
+					sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+					sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+					sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+					sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
+					sched.setemi_value(String.valueOf(emi_value));
+					CustomListViewValuesArr.add(sched);
+					disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+
+
+
+
+					//****************************
+
+
+				/*	accid.add(cobj_RM[i].getaccount_lender());
 					disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 					tenure.add(cobj_RM[i].gettenure());
 
@@ -221,12 +209,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 					double emi_valu=FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate()/100)/12, Max_tenure, -final_bp, 0, false);
 					double emi_value = Math.ceil(emi_valu);
 					list_emi.add(emi_value);
-					Log.d("emi_value", String.valueOf(emi_value));
+					Log.d("emi_value", String.valueOf(emi_value));*/
 				}
 
 			}
 
 			String Max_tenure_final= String.valueOf(Math.ceil(Max_tenure/12));
+
+			((GlobalData) this.getApplication()).settenure(Max_tenure_final);
 
 			Log.d("disbank", String.valueOf(disbank));
 
@@ -245,7 +235,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			 onetime_fee=new String[]{"1,500","1,200","2,000","1,100","1,700","2,700"};
 
 			//mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,month_fee,fixed_fee,onetime_fee);
-			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,list_emi,list_roi,list_profee,Max_tenure_final);
+			//mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,list_emi,list_roi,list_profee,Max_tenure_final);
+			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,CustomListViewValuesArr,prgmImages);
 			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
 					new SwipeDismissAdapter(mGoogleCardsAdapter, this));
 			swingBottomInAnimationAdapter.setAbsListView(listView);
@@ -335,6 +326,7 @@ public void createListView()
 		((GlobalData) this.getApplication()).setCharbanklist(cs);
 
 		Intent intent = new Intent(this, Filter.class);
+		intent.putExtra("Obj", CustomListViewValuesArr);
 		startActivity(intent);
 		overridePendingTransition(R.transition.left, R.transition.right);
 	}

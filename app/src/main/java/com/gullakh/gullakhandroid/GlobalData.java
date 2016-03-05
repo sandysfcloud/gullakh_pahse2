@@ -23,6 +23,7 @@ public class GlobalData extends Application {
     private ArrayList<Double> foir,accid;
 
     private String session;
+    private String tenure;
     private CharSequence[] banklist;
     //static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php?operation=create";
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php";
@@ -37,6 +38,10 @@ public class GlobalData extends Application {
 
     public String getemptype() {
         return cnameVariable;
+    }
+
+    public String gettenure() {
+        return tenure;
     }
 
     public String getloanamt() {
@@ -72,6 +77,10 @@ public class GlobalData extends Application {
 
     public void setEmi(Double someVariable) {
         this.someVariable = someVariable;
+    }
+
+    public void settenure(String someVariable) {
+        this.tenure = someVariable;
     }
     public void setDob(String locationVariable) {
         this.locationVariable = locationVariable;
