@@ -30,6 +30,7 @@
             android:id="@+id/email"
             android:ems="10"
             android:inputType="numberDecimal"
+            android:text="60000"
             android:textColorHint="#fff"
             android:textColor="#fff"
             android:textSize="15sp" />

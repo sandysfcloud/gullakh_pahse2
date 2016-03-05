@@ -34,7 +34,8 @@
                 android:inputType="numberDecimal"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:text="7500"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>
 

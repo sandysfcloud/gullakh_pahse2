@@ -28,6 +28,7 @@
             android:inputType="numberDecimal"
             android:textColorHint="#fff"
             android:textColor="#fff"
+            android:text="45172"
             android:textSize="15sp" />
 
     </com.gullakh.gullakhandroid.MaterialTextField>

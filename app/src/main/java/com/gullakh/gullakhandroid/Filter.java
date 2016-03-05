@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 
@@ -26,12 +28,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class Filter extends AppCompatActivity implements View.OnClickListener {
+public class Filter extends AppCompatActivity implements View.OnClickListener,OnDismissCallback {
     protected Button selectColoursButton;
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
     protected CharSequence[] colours = { "Red", "Green", "Blue", "Yellow", "Orange", "Purple" };
-
+    public  int [] prgmImages=new int[]{R.drawable.icici_bank_logo2,R.drawable.axisbank_logo,R.drawable.bankofindia_logo,R.drawable.hdfcbank_logo,R.drawable.hdfcbank_logo,R.drawable.hdfcbank_logo};
+    private static final int INITIAL_DELAY_MILLIS = 300;
     protected ArrayList<CharSequence> selectedColours = new ArrayList<CharSequence>();
     TextView min,max,loand,tenur;
     SeekBar seekBar1;
@@ -179,51 +182,47 @@ public class Filter extends AppCompatActivity implements View.OnClickListener {
 
                 Map<String,String> Arry_banknam = new HashMap<>();
 
-                for(int i=0;i<selectedColours.size();i++)
-                {
-                    //Arry_banknam.put("1",selectedColours.get(i));
-                }
                 Log.d("Arry_banknam", String.valueOf(Arry_banknam));
 
 
                 for(int i=0;i<CustomListViewValuesArr.size();i++) {
                     Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
                     Log.d("test2!!!!!", String.valueOf(selectedColours));
-                    if(CustomListViewValuesArr.get(i).getbanknam().equals(selectedColours.get(i)))
-                    {
-                        Log.d("CustomListViewValu!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-                        Log.d("selectedColours!!!!!", String.valueOf(selectedColours));
-                        newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
-                        Log.d("newCustomListView", newCustomListViewValuesArr.get(i).getbanknam());
-                    }
-                }
-
-               /* apply.setBackgroundResource(R.drawable.roundbutton_blue);
-                //charText = charText.toLowerCase(Locale.getDefault());
-                GoogleCardsMediaActivity obj=new GoogleCardsMediaActivity();
-                obj.CustomListViewValuesArr.clear();
-               // if (charText.length() == 0) {
-                obj.CustomListViewValuesArr.add(colours);
-
-                for(int i=0;i<colours.length;i++)
-                {
-                    worldpopulationlistz
-                }
-
-
-               // }
-               // else
-                {
-                    for (worldpopulationlist  : colours)
-                    {
-                        if (wp.getCountry().toLowerCase(Locale.getDefault()).contains(charText))
-                        {
-                            worldpopulationlist.add(wp);
+                    for(int j=0;j<selectedColours.size();j++) {
+                        if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedColours.get(j))) {
+                            Log.d("CustomListViewValu!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+                            Log.d("selectedColours!!!!!", String.valueOf(selectedColours));
+                            newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
+                           // Log.d("newCustomListView", newCustomListViewValuesArr.get(i).getbanknam());
                         }
                     }
-               // }
-                notifyDataSetChanged();
-        }*/
+                }
+                Log.d("newCustomListView", String.valueOf(newCustomListViewValuesArr));
+                /*GoogleCardsShopAdapter adapter_obj=new GoogleCardsShopAdapter(this,newCustomListViewValuesArr,null);
+                adapter_obj.data.clear();
+
+
+                GoogleCardsMediaActivity gc_obj=new GoogleCardsMediaActivity();
+                SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+                        new SwipeDismissAdapter(adapter_obj, this));
+                swingBottomInAnimationAdapter.setAbsListView(gc_obj.listView);*/
+
+
+                //listView.setAdapter(null);
+                //swingBottomInAnimationAdapter.notifyDataSetChanged();
+               // gc_obj.listView.setAdapter(swingBottomInAnimationAdapter);
+               // GoogleCardsShopAdapter.filter(newCustomListViewValuesArr);
+               // adapter_obj.notifyDataSetChanged();
+                GoogleCardsShopAdapter mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,newCustomListViewValuesArr,prgmImages);
+                mGoogleCardsAdapter.filter(selectedColours);
+                finish();
+
+                /*Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data", "filter");
+                intent.putExtra("filter", newCustomListViewValuesArr);
+                startActivity(intent);
+                finish();*/
+
 
                 break;
 
@@ -289,5 +288,8 @@ public class Filter extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+    @Override
+    public void onDismiss(@NonNull ViewGroup listView, @NonNull int[] reverseSortedPositions) {
 
+    }
 }

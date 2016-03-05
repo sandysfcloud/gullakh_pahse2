@@ -1,8 +1,10 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,23 +18,26 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class GoogleCardsShopAdapter extends BaseAdapter
 	implements OnClickListener {
 
 	private LayoutInflater mInflater;
     Context cont;
-	ArrayList<String> result;
+
 	ArrayList<String> rmonth_fee;
 	ArrayList<String>  rfixed_fee;
 	ArrayList<String> ronetime_fee;
 	int [] imageId;
 	String tenure;
-	private ArrayList data;
+
+	public ArrayList<ListModel> data;
+	public ArrayList<ListModel> original;
 	ListModel tempValues = null;
 	//public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
 		//super(context, 0, items);
-	public GoogleCardsShopAdapter(GoogleCardsMediaActivity context,ArrayList d,int[] prgmImages)
+	public GoogleCardsShopAdapter(Activity context,ArrayList<ListModel> d,int[] prgmImages)
 	{
 		cont=context;
 		/*result=prgmNameList;
@@ -45,6 +50,8 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		tenure=tenur;*/
 		imageId=prgmImages;
 		data = d;
+		this.original = new ArrayList<ListModel>();
+		this.original.addAll(data);
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -137,7 +144,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate()));
 			holder.t4.setText(String.valueOf(tempValues.getprocessing_fee()));
 
-			holder.image.setImageResource(imageId[position]);
+//			holder.image.setImageResource(imageId[position]);
 		//	holder.name.setText(result.get(position));
 			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
@@ -174,6 +181,25 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 	}
 
+	public  void filter(ArrayList<CharSequence> selectedColours ) {
+
+
+		data.clear();
+
+
+			for (ListModel wp : original)
+			{
+				if (selectedColours.contains(wp.getbanknam()))
+				{
+					data.add(wp);
+					Log.d("selected Bank - Sandeep",wp.getbanknam());
+				}
+			}
+
+		notifyDataSetChanged();
+	}
+
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -184,6 +210,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 				cont.startActivity(intent);
 				((GoogleCardsMediaActivity)cont).overridePendingTransition(R.transition.left, R.transition.right);
+
 				break;
 		}
 	}

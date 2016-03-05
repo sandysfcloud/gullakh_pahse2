@@ -15,27 +15,37 @@
  */
 package com.gullakh.gullakhandroid;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.*;
 
 public class GoogleCardsMediaActivity extends ActionBarActivity implements
 		OnDismissCallback, View.OnClickListener {
@@ -52,6 +62,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	public  String [] fixed_fee;
 	public  String [] onetime_fee;
 	public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
+	public ArrayList<ListModel> CustomListViewValuesArr2 = new ArrayList<ListModel>();
 	public  int age;
 
 	public  String [] search={"PERSONAL LOAN","CAR LOAN"};
@@ -62,6 +73,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	LinearLayout layout;
 	ImageView filter;
 	ArrayList<String> disbank;
+	Dialog dialog;
+	Button apply;
+	public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
+
+	protected ArrayList<CharSequence> selectedBanks = new ArrayList<CharSequence>();
+	protected Button selectColoursButton;
+	CharSequence[] bankfilter=null;
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -152,16 +170,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			 }
 			int loan_amt=Integer.parseInt(((GlobalData) getApplication()).getloanamt());
 
-			emi=((GlobalData) getApplication()).getEmi();
+			 emi=((GlobalData) getApplication()).getEmi();
 
-
-
-			ArrayList accid = new ArrayList<String>();
-			ArrayList tenure = new ArrayList<String>();
-			disbank = new ArrayList<String>();
-			ArrayList list_roi = new ArrayList<String>();
-			ArrayList list_profee = new ArrayList<String>();
-			ArrayList list_emi = new ArrayList<String>();
+			disbank= new ArrayList<String>();
 			for(int i=0;i<cobj_RM.length;i++) {
 
 				Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
@@ -195,21 +206,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-
-					//****************************
-
-
-				/*	accid.add(cobj_RM[i].getaccount_lender());
-					disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-					tenure.add(cobj_RM[i].gettenure());
-
-					list_roi.add(cobj_RM[i].getfloating_interest_rate());
-					list_profee.add(cobj_RM[i].getprocessing_fee());
-					Log.d("accidname", Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-					double emi_valu=FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate()/100)/12, Max_tenure, -final_bp, 0, false);
-					double emi_value = Math.ceil(emi_valu);
-					list_emi.add(emi_value);
-					Log.d("emi_value", String.valueOf(emi_value));*/
 				}
 
 			}
@@ -233,27 +229,19 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			 month_fee=new String[]{"2,500","2,200","2,700","2,100","2,300","2,100"};
 			 fixed_fee=new String[]{"20%","10%","30%","35%","25%","55%"};
 			 onetime_fee=new String[]{"1,500","1,200","2,000","1,100","1,700","2,700"};
-
+			  setadapter(CustomListViewValuesArr);
 			//mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,month_fee,fixed_fee,onetime_fee);
 			//mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,disbank,prgmImages,list_emi,list_roi,list_profee,Max_tenure_final);
-			mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,CustomListViewValuesArr,prgmImages);
-			SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-					new SwipeDismissAdapter(mGoogleCardsAdapter, this));
-			swingBottomInAnimationAdapter.setAbsListView(listView);
 
-
-			assert swingBottomInAnimationAdapter.getViewAnimator() != null;
-			swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
-					INITIAL_DELAY_MILLIS);
-
-			//listView.setAdapter(null);
-			//swingBottomInAnimationAdapter.notifyDataSetChanged();
-			listView.setAdapter(swingBottomInAnimationAdapter);
-
-
-			getSupportActionBar().setTitle("Result");
 
 		}
+		else if(data.equals("filter"))
+
+		{
+			CustomListViewValuesArr = (ArrayList<ListModel>) getIntent().getSerializableExtra("filter");
+			setadapter(CustomListViewValuesArr);
+		}
+
 		else {
 
 
@@ -279,7 +267,26 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	}
 
 
+public void setadapter(ArrayList<ListModel> arraylist)
+{CustomListViewValuesArr2=CustomListViewValuesArr;
+	CustomListViewValuesArr2=arraylist;
+	mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,CustomListViewValuesArr2,prgmImages);
+	SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+			new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+	swingBottomInAnimationAdapter.setAbsListView(listView);
 
+
+	assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+	swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+			INITIAL_DELAY_MILLIS);
+
+	//listView.setAdapter(null);
+	//swingBottomInAnimationAdapter.notifyDataSetChanged();
+	listView.setAdapter(swingBottomInAnimationAdapter);
+
+
+	getSupportActionBar().setTitle("Result");
+}
 
 public void createListView()
 {
@@ -322,12 +329,132 @@ public void createListView()
 
 	@Override
 	public void onClick(View v) {
-		CharSequence[] cs = disbank.toArray(new CharSequence[disbank.size()]);
-		((GlobalData) this.getApplication()).setCharbanklist(cs);
+		switch(v.getId()) {
+			case R.id.filter:
+		bankfilter = disbank.toArray(new CharSequence[disbank.size()]);
+		//((GlobalData) this.getApplication()).setCharbanklist(cs);
 
-		Intent intent = new Intent(this, Filter.class);
-		intent.putExtra("Obj", CustomListViewValuesArr);
-		startActivity(intent);
-		overridePendingTransition(R.transition.left, R.transition.right);
+		dialog = new Dialog(this, R.style.DialogSlideAnim);
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setContentView(R.layout.filter_dialog);
+		//Dialog dialog = new Dialog(this, android.R.style.Theme_Light);
+		SeekBar seekBar1 = (SeekBar) dialog.findViewById(R.id.loanamt);
+
+		SeekBar tenure = (SeekBar) dialog.findViewById(R.id.tenure);
+		apply = (Button) dialog.findViewById(R.id.applyf);
+		apply.setOnClickListener(this);
+		selectColoursButton = (Button)dialog. findViewById(R.id.select_colours);
+		selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+		selectColoursButton.setOnClickListener(this);
+
+		//seekBar1.setProgressDrawable(new ColorDrawable(Color.parseColor("#D83C2F")));
+		//tenure.setProgressDrawable(new ColorDrawable(Color.parseColor("#D83C2F")));
+
+		dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+		WindowManager.LayoutParams lp1 = dialog.getWindow().getAttributes();
+		lp1.dimAmount=0.7f;
+		dialog.getWindow().setAttributes(lp1);
+		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+		 dialog.show();
+
+				break;
+			case R.id.select_colours:
+
+				showSelectColoursDialog();
+
+				break;
+			case  R.id.applyf:
+
+				apply.setBackgroundResource(R.drawable.roundbutton_blue);
+				Log.d("Click size!!!!!", String.valueOf(CustomListViewValuesArr.size()));
+
+				newCustomListViewValuesArr.clear();
+
+				for(int i=0;i<CustomListViewValuesArr.size();i++) {
+					Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
+					Log.d("test2!!!!!", String.valueOf(selectedBanks));
+					for(int j=0;j<selectedBanks.size();j++) {
+						if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))) {
+							Log.d("CustomListViewValu!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+							Log.d("selectedColours!!!!!", String.valueOf(selectedBanks));
+							newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
+							// Log.d("newCustomListView", newCustomListViewValuesArr.get(i).getbanknam());
+						}
+					}
+				}
+				Log.d("newCustomListView", String.valueOf(newCustomListViewValuesArr));
+
+				//GoogleCardsShopAdapter mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,newCustomListViewValuesArr,prgmImages);
+				//mGoogleCardsAdapter.filter(selectedBanks);
+				setadapter(newCustomListViewValuesArr);
+				mGoogleCardsAdapter.notifyDataSetChanged();
+			    dialog.dismiss();
+
+
+				break;
+
+
+		}
 	}
+
+	protected void showSelectColoursDialog() {
+
+		boolean[] checkedColours = new boolean[bankfilter.length];
+
+		int count = bankfilter.length;
+
+		for(int i = 0; i < count; i++)
+
+			checkedColours[i] = selectedBanks.contains(bankfilter[i]);
+
+		DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+				if(isChecked)
+
+					selectedBanks.add(bankfilter[which]);
+
+				else
+
+					selectedBanks.remove(bankfilter[which]);
+
+				onChangeSelectedColours();
+
+			}
+
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle("Select Banks");
+
+		builder.setMultiChoiceItems(bankfilter, checkedColours, coloursDialogListener);
+
+		AlertDialog dialog = builder.create();
+
+		dialog.show();
+
+	}
+
+
+	protected void onChangeSelectedColours() {
+
+		StringBuilder stringBuilder = new StringBuilder();
+
+		for(CharSequence colour : selectedBanks)
+
+			stringBuilder.append(colour + ",");
+
+		selectColoursButton.setText(stringBuilder.toString());
+
+	}
+
+
+
 }
