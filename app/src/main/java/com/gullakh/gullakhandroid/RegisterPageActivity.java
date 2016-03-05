@@ -1,19 +1,26 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,12 +30,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class RegisterPageActivity extends AppCompatActivity
+import static com.gullakh.gullakhandroid.ServerConnect.md5;
+
+public class RegisterPageActivity extends AppCompatActivity  implements AsyncResponse
 {
 
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -39,11 +49,14 @@ public class RegisterPageActivity extends AppCompatActivity
 	static GoogleCloudMessaging gcm;
 	AtomicInteger msgId = new AtomicInteger();
 	static String regid;
-	static String useremail ;
+	static String useremail,userpassword ;
 	static String usermobno ;
 	static String m_Text;
 	static String urlchange;
-
+	EditText emailadress;
+	EditText mobilenumber;
+	EditText password;
+	public static Context baseContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +69,47 @@ public class RegisterPageActivity extends AppCompatActivity
 		TextView signUptext= (TextView) findViewById(R.id.signupheading);
 		signUptext.setTypeface(myfont);
 		Button register = (Button) findViewById(R.id.Registerbutton);
+		Button signin = (Button) findViewById(R.id.signinbutton);
+		baseContext = getBaseContext();
+
+
+		 emailadress=(EditText) findViewById(R.id.emailaddress);
+		 mobilenumber=(EditText) findViewById(R.id.mobilenumber);
+		password=(EditText) findViewById(R.id.password);
+
+
+
 		register.setTypeface(myfontlight);
+		signin.setTypeface(myfontlight);
 
 		if (checkPlayServices()) {
 			gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 			regid = getRegistrationId(getApplicationContext());
 		}
+		signin.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View view) {
+				useremail = emailadress.getText().toString();
+				userpassword = md5(password.getText().toString());
+
+				urlchange="signin";
+
+
+
+				JSONParse asyncTask =new JSONParse(RegisterPageActivity.this);
+				asyncTask.delegate= RegisterPageActivity.this;
+				asyncTask.execute();
+
+
+
+
+
+
+
+
+			}
+		});
 
 
 		register.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +118,8 @@ public class RegisterPageActivity extends AppCompatActivity
 			public void onClick(View view) {
 				// Check device for Play Services APK.
 
-				 useremail = "sandynew@test.com";
-				 usermobno = "988777777";
+				useremail = emailadress.getText().toString();
+				usermobno = mobilenumber.getText().toString();
 
 
 				//new JSONParse().execute();
@@ -110,7 +157,7 @@ public class RegisterPageActivity extends AppCompatActivity
 						public void onClick(DialogInterface dialog, int which) {
 							urlchange="password";
 							m_Text = inputpassword.getText().toString();
-							new JSONParse().execute();
+							new JSONParse(RegisterPageActivity.this).execute();
 						}
 					});
 					builder2.setNegativeButton("", new DialogInterface.OnClickListener() {
@@ -139,7 +186,7 @@ public class RegisterPageActivity extends AppCompatActivity
 							urlchange="otpcheck";
 							m_Text = input.getText().toString();
 							try {
-								JSONObject str_result = new JSONParse().execute().get();
+								JSONObject str_result = new JSONParse(RegisterPageActivity.this).execute().get();
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							} catch (ExecutionException e) {
@@ -184,6 +231,80 @@ public class RegisterPageActivity extends AppCompatActivity
 	}
 
 
+	public void  processFinish(JSONObject str_result){
+
+		try{
+
+		DataHandler dbobject = new DataHandler(RegisterPageActivity.this);
+		dbobject.addTable();
+		if(str_result.get("result").equals("true")) {
+
+			Cursor cr = dbobject.displayData("select * from userlogin");
+			if(cr!=null) {
+				if (cr.moveToFirst()) {
+					dbobject.query("DELETE FROM userlogin");
+
+				}
+			}
+
+			ContentValues values = new ContentValues();
+			values.put("usersession", str_result.get("session_id").toString());
+			values.put("useremail", useremail);
+			values.put("usermobile", usermobno);
+			dbobject.insertdata(values, "userlogin");
+
+		}else{
+			//dialogalert.dismiss();
+			Dialog dialog = new Dialog(RegisterPageActivity.this, R.style.PauseDialog);
+
+// 						Setting the title and layout for the dialog
+			dialog.setTitle("");
+			dialog.setContentView(R.layout.dialogdata);
+			TextView txterror = (TextView) dialog.findViewById(R.id.errormessage);
+			txterror.setText(str_result.get("error_message").toString());
+			Window window = dialog.getWindow();
+
+
+
+			WindowManager.LayoutParams wlp = window.getAttributes();
+
+			wlp.gravity = Gravity.BOTTOM;
+			wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+			window.setAttributes(wlp);
+
+			WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+			lp.copyFrom(dialog.getWindow().getAttributes());
+			lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+			//lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+			dialog.show();
+			dialog.getWindow().setAttributes(lp);
+
+
+		}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+	public static Dialog showAlert(Activity act)
+	{
+		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
+
+// 						Setting the title and layout for the dialog
+		dialog.setTitle("");
+		dialog.setContentView(R.layout.dialogloading);
+
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+		dialog.show();
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
+	}
 
 
 
