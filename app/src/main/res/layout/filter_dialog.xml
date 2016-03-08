@@ -73,7 +73,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
 
-        android:max="10"
+        android:max="50"
         android:layout_marginTop="5dp" />
 
 
@@ -120,7 +120,7 @@
             android:id="@+id/tenr"
             android:layout_width="fill_parent"
             android:textSize="16sp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:textColor="#616161"
             android:padding="5dip" />
@@ -156,6 +156,7 @@
             android:id="@+id/min"
             android:layout_width="fill_parent"
             android:textSize="16sp"
+            android:text="8% - "
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:textColor="#616161"
@@ -166,6 +167,7 @@
             android:id="@+id/max"
             android:layout_width="fill_parent"
             android:textSize="16sp"
+            android:text="14%"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:textColor="#616161"
@@ -180,11 +182,39 @@
         android:progressDrawable="@drawable/red_scrubber_progress"
         android:thumb="@drawable/red_scrubber_control"
         />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="9">
+        <TextView
+
+
+            android:id="@+id/tmax"
+            android:layout_width="fill_parent"
+            android:text="8"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#616161"
+            android:padding="5dip" />
+            <TextView
+                android:id="@+id/tmin"
+                android:layout_width="fill_parent"
+                android:text="14"
+                android:textSize="16sp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:textColor="#616161"
+                android:padding="5dip" />
+        </LinearLayout>
     <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rangsb"
-        app:absoluteMinValue="9"
+        android:layout_marginTop="-20dp"
+        app:absoluteMinValue="8"
         app:absoluteMaxValue="14"
         />
 
