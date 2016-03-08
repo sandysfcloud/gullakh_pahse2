@@ -47,7 +47,7 @@
                 android:minWidth="0dp"
 
                 android:id="@+id/img"
-                android:src="@drawable/newcar"
+                android:src="@drawable/salaried"
 
                 />
             <ImageView
@@ -58,7 +58,7 @@
                 android:minWidth="0dp"
 
                 android:id="@+id/img2"
-                android:src="@drawable/usedcar"
+                android:src="@drawable/selfbusiness"
 
                 />
         </LinearLayout>

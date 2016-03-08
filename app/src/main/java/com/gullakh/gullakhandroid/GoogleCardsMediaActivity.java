@@ -160,12 +160,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             if((60-age)>7)
              {
-	          Max_tenure=7*12;
-			  Log.d("Max_tenure- if",String.valueOf(Max_tenure));
+	          	Max_tenure=7*12;
+			  	Log.d("Max_tenure- if",String.valueOf(Max_tenure));
 			 }
 			else
 			 {
-			  Max_tenure=(60-age)*12;
+				 Max_tenure=(60-age)*12;
 				 Log.d("Max_tenure-else",String.valueOf(Max_tenure));
 			 }
 			int loan_amt=Integer.parseInt(((GlobalData) getApplication()).getloanamt());

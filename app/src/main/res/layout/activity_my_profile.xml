@@ -9,10 +9,10 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
+        android:weightSum="3">
 
         <TextView
-            android:layout_width="249dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="My Profile"
@@ -26,10 +26,19 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/imageButton"
-            android:layout_marginLeft="10dp"
+
             android:background="@drawable/edit"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_margin="15dp" />
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Logout"
+            android:id="@+id/signout"
+            android:layout_margin="15dp"
+            android:background="@drawable/mainbutton"
+            android:textColor="#ffffff"
+            android:textSize="16dp" />
 
     </LinearLayout>
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -528,9 +529,27 @@ else
     }
 
     private void goMyprofile() {
-        Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.transition.left, R.transition.right);
+        DataHandler dbobject = new DataHandler(MainActivity.this);
+        dbobject.addTable();
+
+
+            Cursor cr = dbobject.displayData("select * from userlogin");
+            if(cr!=null) {
+                if (cr.moveToFirst()) {
+                    Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else{
+                    Intent intent = new Intent(MainActivity.this, signin.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            }else{
+                Intent intent = new Intent(MainActivity.this, signin.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+            }
+
     }
 
     private void goReg() {

@@ -338,9 +338,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 
-	public static Dialog showErroralert(Activity act, String msg, String flgsucfail){
+	public static Dialog showErroralert(Activity act, String msg, String flgsucfail ){
 		//dialogalert.dismiss();
 		Dialog dialog = new Dialog(act, R.style.PauseDialog);
+		Typeface myfontnew = Typeface.createFromAsset(act.getAssets(), "fonts/RalewayThin.ttf");
 
 // 						Setting the title and layout for the dialog
 		dialog.setTitle("");
@@ -354,7 +355,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		else
 			linrlyt.setBackgroundColor(Color.RED);
 
-		txterror.setTypeface(myfont);
+		txterror.setTypeface(myfontnew);
 
 
 		txterror.setText(msg);

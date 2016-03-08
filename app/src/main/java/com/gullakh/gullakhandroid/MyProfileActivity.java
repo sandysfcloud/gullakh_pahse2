@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MyProfileActivity extends AppCompatActivity {
@@ -25,10 +27,25 @@ public class MyProfileActivity extends AppCompatActivity {
         email.setTypeface(myfontlight);
         TextView ph= (TextView) findViewById(R.id.textView11);
         ph.setTypeface(myfontlight);
+        Button signout = (Button) findViewById(R.id.signout);
+        signout.setTypeface(myfontlight);
         //TextView gen= (TextView) findViewById(R.id.textView12);
         //gen.setTypeface(myfontlight);
         //TextView loc= (TextView) findViewById(R.id.textView13);
         //loc.setTypeface(myfontlight);
+
+        signout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
+                dbobjectnew.query("DELETE FROM userlogin");
+                finish();
+            }
+        });
+
+
+
 
         DataHandler dbobject = new DataHandler(MyProfileActivity.this);
         Cursor cr = dbobject.displayData("select * from userlogin");
