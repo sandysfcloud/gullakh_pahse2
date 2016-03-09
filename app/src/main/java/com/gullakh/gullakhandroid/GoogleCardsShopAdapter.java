@@ -207,7 +207,11 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		switch (v.getId()) {
 			case R.id.apply:
 				Intent intent = new Intent(cont, ListView_Click.class);
-
+				intent.putExtra("bankname", tempValues.getbanknam());
+				intent.putExtra("tenure", ((GlobalData) cont.getApplicationContext()).gettenure());
+				intent.putExtra("roi", tempValues.getfloating_interest_rate());
+				intent.putExtra("one_time_fee", tempValues.getprocessing_fee());
+				//intent.putExtra("one_time_fee", tempValues.getprocessing_fee());
 				cont.startActivity(intent);
 				((GoogleCardsMediaActivity)cont).overridePendingTransition(R.transition.left, R.transition.right);
 

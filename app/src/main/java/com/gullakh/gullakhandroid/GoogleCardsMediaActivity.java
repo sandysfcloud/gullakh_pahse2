@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -276,7 +277,19 @@ public void setadapter(ArrayList<ListModel> arraylist)
 	//listView.setAdapter(null);
 	//swingBottomInAnimationAdapter.notifyDataSetChanged();
 	listView.setAdapter(swingBottomInAnimationAdapter);
-
+	listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+								long id) {
+			Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
+			Bundle bundleObject = new Bundle();
+			bundleObject.putSerializable("key", CustomListViewValuesArr);
+			intent.putExtras(bundleObject);
+			intent.putExtra("position", Integer.toString(position));
+			startActivity(intent);
+			(GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+		}
+	});
 
 	getSupportActionBar().setTitle("Result");
 }
@@ -301,6 +314,9 @@ public void createListView()
 	listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
 	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	layout.addView(listView);
+
+
+
 
 }
 	@Override
