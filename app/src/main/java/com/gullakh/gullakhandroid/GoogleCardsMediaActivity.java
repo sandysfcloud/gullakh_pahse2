@@ -249,17 +249,16 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 					emi = ((GlobalData) getApplication()).getEmi();
 
 					disbank = new ArrayList<String>();
-
 					calculate();
 					setadapter(CustomListViewValuesArr);
+
 
 
 				}},GoogleCardsMediaActivity.this,"4");
 
 
 			loan_amtcalcutn();
-			//calculate();
-			//setadapter(CustomListViewValuesArr);
+
 
 
 		}
@@ -423,7 +422,7 @@ public void setadapter(ArrayList<ListModel> arraylist)
 
 public void createListView()
 {
-	listView  = new ListView(this);
+	listView = new ListView(this);
 	listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
 
 
