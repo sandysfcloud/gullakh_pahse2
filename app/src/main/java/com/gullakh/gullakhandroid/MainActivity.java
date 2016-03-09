@@ -155,12 +155,12 @@ public class MainActivity extends ActionBarActivity {
         wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
             @Override
             public void onWheelItemClick(WheelView parent, int position, boolean isSelected) {
-                Intent intent = new Intent(MainActivity.this, Personalloan.class);
-                // intent.putExtra("data","personal");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-                // String msg = String.valueOf(position) + " " + isSelected;
-                //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                Log.d("position of wheelitem", String.valueOf(position));
+                if (position == 3) {
+                    Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
             }
         });
         wheelView.setWheelDrawable(R.drawable.wheelbg);
@@ -435,8 +435,26 @@ public class MainActivity extends ActionBarActivity {
                 mDrawerLayout.closeDrawers();
             }
             if (position == 2) {
-                Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
-                startActivity(intent);
+                DataHandler dbobject = new DataHandler(MainActivity.this);
+                dbobject.addTable();
+
+
+                Cursor cr = dbobject.displayData("select * from userlogin");
+                if(cr!=null) {
+                    if (cr.moveToFirst()) {
+                        Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else{
+                        Intent intent = new Intent(MainActivity.this, signin.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                }else{
+                    Intent intent = new Intent(MainActivity.this, signin.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 overridePendingTransition(R.transition.left, R.transition.right);
             }
             if (position == 3) {
@@ -449,10 +467,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
             if (position == 5) {
-               Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
-
-               // Intent intent = new Intent(MainActivity.this, PersonalLoanMenuActivity.class);
-                // intent.putExtra("data","personal");
+                Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
 

@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -246,6 +247,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 					}
 					Max_tenure = Max_tenure / 12;
 					Log.d("Max_tenure value is", String.valueOf(Max_tenure));
+					((GlobalData)getApplication()).settenure(String.valueOf(Max_tenure));
 					emi = ((GlobalData) getApplication()).getEmi();
 
 					disbank = new ArrayList<String>();
@@ -384,7 +386,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-			//((GlobalData) this.getApplication()).settenure(Max_tenure);
+
 
 			Log.d("disbank", String.valueOf(disbank));
 
@@ -415,7 +417,19 @@ public void setadapter(ArrayList<ListModel> arraylist)
 	//listView.setAdapter(null);
 	//swingBottomInAnimationAdapter.notifyDataSetChanged();
 	listView.setAdapter(swingBottomInAnimationAdapter);
-
+	listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+								long id) {
+			Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
+			Bundle bundleObject = new Bundle();
+			bundleObject.putSerializable("key", CustomListViewValuesArr);
+			intent.putExtras(bundleObject);
+			intent.putExtra("position", Integer.toString(position));
+			startActivity(intent);
+			(GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+		}
+	});
 
 	getSupportActionBar().setTitle("Result");
 }
@@ -440,6 +454,9 @@ public void createListView()
 	listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
 	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	layout.addView(listView);
+
+
+
 
 }
 	@Override
@@ -559,6 +576,7 @@ public void createListView()
 					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 						seektenure = progress;
 						tenur.setText(String.valueOf(progress));
+
 						// value now holds the decimal value between 0.0 and 10.0 of the progress
 						// Example:
 						// If the progress changed to 45, value would now hold 4.5
@@ -579,6 +597,7 @@ public void createListView()
 
 				break;
 			case  R.id.applyf:
+
 				newCustomListViewValuesArr.clear();
 				//if(tenur.getText().toString()!)
 				if(tenur.getText() != null)

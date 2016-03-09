@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class GoogleCardsShopAdapter extends BaseAdapter
-	implements OnClickListener {
+	{
 
 	private LayoutInflater mInflater;
     Context cont;
@@ -32,8 +32,14 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	int [] imageId;
 	String tenure;
 
+		int listpos;
+
 	public ArrayList<ListModel> data;
 	public ArrayList<ListModel> original;
+
+	public ArrayList<ListModel> passarraydata;
+
+
 	ListModel tempValues = null;
 	//public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
 		//super(context, 0, items);
@@ -75,8 +81,10 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder;
+		listpos=position;
+
 		if (convertView == null) {
 			convertView = mInflater.inflate(
 					R.layout.list_item_google_cards_shop, parent, false);
@@ -120,8 +128,14 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.apply= (Button) convertView
 					.findViewById(R.id.apply);
+			holder.apply.setTag(position);
 
-			holder.apply.setOnClickListener(GoogleCardsShopAdapter.this);
+			//holder.apply.setOnClickListener(GoogleCardsShopAdapter.this);
+
+
+
+
+
 			//holder.buy.setOnClickListener(this);
 			convertView.setTag(holder);
 		} else {
@@ -138,7 +152,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			tempValues = (ListModel) data.get(position);
 
 
-			holder.name.setText(tempValues.getbanknam());
+					holder.name.setText(tempValues.getbanknam());
 			holder.day.setText(String.valueOf(tempValues.getemi_value()));
 			holder.description.setText("Monthly for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate()));
@@ -161,8 +175,28 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			//holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
 			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+
+
+
+			holder.apply.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int pos= (int) v.getTag();
+					Intent intent = new Intent(cont, ListView_Click.class);
+					intent.putExtra("bankname", data.get(pos).getbanknam());
+					intent.putExtra("tenure", ((GlobalData) cont.getApplicationContext()).gettenure());
+					intent.putExtra("roi", data.get(pos).getfloating_interest_rate());
+					intent.putExtra("one_time_fee", data.get(pos).getprocessing_fee());
+					intent.putExtra("emi", data.get(pos).getemi_value());
+					cont.startActivity(intent);
+					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
+				}
+			});
+
 		}
-		
+
+
+
 //		holder.buy.setTag(position);
 		//DummyModel item = getItem(position);
 		//ImageUtil.displayImage(holder.image, item.getImageURL(), null);
@@ -200,18 +234,5 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	}
 
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		//int possition = (Integer) v.getTag();
-		switch (v.getId()) {
-			case R.id.apply:
-				Intent intent = new Intent(cont, ListView_Click.class);
 
-				cont.startActivity(intent);
-				((GoogleCardsMediaActivity)cont).overridePendingTransition(R.transition.left, R.transition.right);
-
-				break;
-		}
-	}
 }

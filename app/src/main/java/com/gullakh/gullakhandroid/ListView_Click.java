@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ListView_Click extends ActionBarActivity implements View.OnClickListener{
     PopupWindow popUp;
     LinearLayout layout;
@@ -29,34 +32,63 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     boolean click = true;
     TextView t7,t8,t9,t10,t11,title;
     Button fee,othr;
+    public ArrayList<ListModel> data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_click);
 
-        getSupportActionBar().setTitle("Result");
+         getSupportActionBar().setTitle("Result");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent intent = getIntent();
+        String bankname = intent.getStringExtra("bankname");
+        String tenure = intent.getStringExtra("tenure");
+        String roi = intent.getStringExtra("roi");
+        String one_time_fee = intent.getStringExtra("one_time_fee");
+        String emi = intent.getStringExtra("emi");
+
+
+       /*   Intent intent = getIntent();
+        Bundle bundleObject = getIntent().getExtras();
+        String pos = intent.getStringExtra("position");;
+        ArrayList<ListModel>dw = (ArrayList<ListModel>) bundleObject.getSerializable("key");
+
+
+        String bankname = dw.get(Integer.valueOf(pos)).getbanknam();
+        String tenure = ((GlobalData) this.getApplicationContext()).gettenure();
+        String roi = dw.get(Integer.valueOf(pos)).getfloating_interest_rate();
+        String one_time_fee = dw.get(Integer.valueOf(pos)).getprocessing_fee(); */
+
+
+
+
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
 
         TextView name= (TextView) findViewById(R.id.bankname);
         name.setTypeface(myfontlight);
+        name.setText(bankname);
         TextView t1= (TextView) findViewById(R.id.mt1);
         t1.setTypeface(myfontlight);
-        TextView t2= (TextView) findViewById(R.id.tmr);
-        t2.setTypeface(myfontlight);
+        t1.setText("Monthly for "+tenure+" years");
+        TextView temi= (TextView) findViewById(R.id.tmr);
+        temi.setTypeface(myfontlight);
+        temi.setText(emi);
         TextView t3= (TextView) findViewById(R.id.tf1);
         t3.setTypeface(myfontlight);
-        TextView t4= (TextView) findViewById(R.id.tf2);
-        t4.setTypeface(myfontlight);
+        TextView troi= (TextView) findViewById(R.id.tf2);
+        troi.setTypeface(myfontlight);
+        troi.setText(roi);
         TextView t5= (TextView) findViewById(R.id.t3);
         t5.setTypeface(myfontlight);
-        TextView t6= (TextView) findViewById(R.id.t4);
-        t6.setTypeface(myfontlight);
+        TextView tprofee= (TextView) findViewById(R.id.t4);
+        tprofee.setTypeface(myfontlight);
+        tprofee.setText(one_time_fee);
         title= (TextView) findViewById(R.id.titlet);
         title.setTypeface(myfontlight);
         t7= (TextView) findViewById(R.id.d1);
         t7.setTypeface(myfontlight);
+        t7.setText("Procloser Fee is Rs "+one_time_fee);
         t8= (TextView) findViewById(R.id.d2);
         t8.setTypeface(myfontlight);
         t9= (TextView) findViewById(R.id.d3);
@@ -67,6 +99,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         t11.setTypeface(myfontlight);
         Button apply= (Button) findViewById(R.id.apply);
         apply.setTypeface(myfontlight);
+        apply.setOnClickListener(this);
         mainLayout= (LinearLayout) findViewById(R.id.main);
         fee= (Button) findViewById(R.id.fee);
         fee.setOnClickListener(this);
@@ -125,7 +158,6 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.othr:
-               // mainLayout.removeAllViews();
                 othr.setBackgroundResource(R.drawable.roundbutton_blue);
                 fee.setBackgroundResource(R.drawable.roundedbutton);
                 title.setText("Other");
@@ -136,6 +168,11 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 t11.setText("");
                 mainLayout.startAnimation(bottomUp);
                 mainLayout.setVisibility(View.VISIBLE);
+                break;
+            case  R.id.apply:
+                Intent intent = new Intent(this, signin.class);
+                startActivity(intent);
+                this.overridePendingTransition(R.transition.left, R.transition.right);
                 break;
 
         }
