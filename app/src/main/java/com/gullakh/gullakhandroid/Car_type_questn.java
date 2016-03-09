@@ -64,9 +64,9 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         getSupportActionBar().setHomeButtonEnabled(true);
         onShakeImage();
 
-        email = (AutoCompleteTextView) findViewById(R.id.locatn);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        email.setOnClickListener(this);
+      //  email = (AutoCompleteTextView) findViewById(R.id.locatn);
+      //  email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // email.setOnClickListener(this);
 
 
     }
@@ -110,7 +110,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 }
                 else
                 {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    RegisterPageActivity.showErroralert(Car_type_questn.this, "Please select type of car loan!", "failed");
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setMessage("Please choose the car!")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -119,11 +120,12 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                                 }
                             });
                     AlertDialog alert = builder.create();
-                    alert.show();
+                    alert.show();*/
                 }
                 break;
             case R.id.back:
               finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.img:
                 sal.setBackgroundColor(Color.parseColor("#D83C2F"));
@@ -162,7 +164,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 Log.e("emplist frm server ", String.valueOf(liste2));
                 final ShowSuggtn fAdapter = new ShowSuggtn(this, android.R.layout.simple_dropdown_item_1line, liste2);
                 // AutoCompleteTextView textView = (AutoCompleteTextView)  v.findViewById(R.id.locatn);
-                email.setAdapter(fAdapter);
+               // email.setAdapter(fAdapter);
                 break;
 
 

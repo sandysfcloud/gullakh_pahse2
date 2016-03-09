@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -41,7 +42,13 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +69,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	private GoogleCardsShopAdapter mGoogleCardsAdapter;
 	private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
 	public  int [] prgmImages;
+	String sessionid=null;
 	public  String [] month_fee;
 	public  String [] fixed_fee;
 	public  String [] onetime_fee;
@@ -89,6 +97,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	protected Button selectColoursButton;
 	CharSequence[] bankfilter=null;
 	String prev_selectbank=null;
+	JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4;
+	String globalidentity;
+	Dialog dgthis;
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,12 +115,152 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 		if (data.equals("carloan")) {
 
-			    loan_amtcalcutn();
-			    calculate();
-				setadapter(CustomListViewValuesArr);
+			 requestgetserver = new JSONServerGet(new AsyncResponse(){
+				@Override
+				public void processFinish(JSONObject output) {
+
+				}
+
+				public void processFinishString(String str_result,Dialog dg){
+					dgthis=dg;
+
+					GsonBuilder gsonBuilder = new GsonBuilder();
+					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+					Gson gson = gsonBuilder.create();
+
+					JsonParser parser = new JsonParser();
+					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+					LoanParaMaster[] LoanP_cobj = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
+					String loanpid = LoanP_cobj[0].getid();
+
+						requestgetserver2.execute("token", "RuleDetails", sessionid,loanpid);
+
+
+				}},GoogleCardsMediaActivity.this,"1");
 
 
 
+			requestgetserver2 = new JSONServerGet(new AsyncResponse(){
+				@Override
+				public void processFinish(JSONObject output) {
+
+				}
+
+				public void processFinishString(String str_result,Dialog dg){
+					GsonBuilder gsonBuilder = new GsonBuilder();
+					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+					Gson gson = gsonBuilder.create();
+
+					JsonParser parser = new JsonParser();
+					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+					Log.e("Check final data here2", str_result);
+
+					RuleDetails[] RD_cobj = gson.fromJson(jsonObject.get("result"), RuleDetails[].class);
+					ArrayList Arr_RDid = new ArrayList<String>();
+					for (int i = 0; i < RD_cobj.length; i++) {
+						Log.d("RD id list", String.valueOf(RD_cobj[i].getrmid()));
+						Log.d("RD lenght", String.valueOf(RD_cobj.length));
+						Arr_RDid.add(RD_cobj[i].getrmid());
+
+					}
+
+					String listid=Arr_RDid.toString();
+					listid = listid.toString().replace("[", "").replace("]", "");
+
+
+
+					requestgetserver3.execute("token", "RuleMaster", sessionid,listid);
+
+
+				}},GoogleCardsMediaActivity.this,"2");
+
+
+
+
+			requestgetserver3 = new JSONServerGet(new AsyncResponse(){
+				@Override
+				public void processFinish(JSONObject output) {
+
+				}
+
+				public void processFinishString(String str_result,Dialog dg){
+					GsonBuilder gsonBuilder = new GsonBuilder();
+					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+					Gson gson = gsonBuilder.create();
+
+					JsonParser parser = new JsonParser();
+					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+					Log.e("Check final data here3", str_result);
+
+					RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
+					ArrayList Arr_RMid = new ArrayList<String>();
+					for (int i = 0; i < RM_cobj.length; i++) {
+						Arr_RMid.add(RM_cobj[i].getaccount_lender());
+					}
+
+					cobj_RM=RM_cobj;
+					String listid=Arr_RMid.toString();
+					Log.e("listid2",listid);
+					listid = listid.toString().replace("[", "").replace("]", "");
+
+					requestgetserver4.execute("token", "accountname", sessionid, listid);
+
+
+
+
+				}},GoogleCardsMediaActivity.this,"3");
+
+
+			requestgetserver4 = new JSONServerGet(new AsyncResponse(){
+				@Override
+				public void processFinish(JSONObject output) {
+
+				}
+
+				public void processFinishString(String str_result,Dialog dg){
+					GsonBuilder gsonBuilder = new GsonBuilder();
+					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+					Gson gson = gsonBuilder.create();
+
+					JsonParser parser = new JsonParser();
+					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+					Log.e("Check final data here3", str_result);
+
+					dgthis.dismiss();
+					BankList[] BL_cobj= gson.fromJson(jsonObject.get("result"), BankList[].class);
+					Map<String, String> Arry_banknamtemp=new HashMap<>();;
+					for (int i = 0; i < BL_cobj.length; i++) {
+						Arry_banknamtemp.put(BL_cobj[i].getid(), BL_cobj[i].getaccountname());
+					}
+
+
+					Arry_banknam=Arry_banknamtemp;
+
+					net_salry = ((GlobalData) getApplication()).getnetsalary();
+
+					if ((60 - age) > 7) {
+						Max_tenure = 7 * 12;
+						Log.d("Max_tenure- if", String.valueOf(Max_tenure));
+					} else {
+						Max_tenure = (60 - age) * 12;
+						Log.d("Max_tenure-else", String.valueOf(Max_tenure));
+					}
+					Max_tenure = Max_tenure / 12;
+					Log.d("Max_tenure value is", String.valueOf(Max_tenure));
+					emi = ((GlobalData) getApplication()).getEmi();
+
+					disbank = new ArrayList<String>();
+
+					calculate();
+					setadapter(CustomListViewValuesArr);
+
+
+				}},GoogleCardsMediaActivity.this,"4");
+
+
+			loan_amtcalcutn();
+			//calculate();
+			//setadapter(CustomListViewValuesArr);
 
 
 		}
@@ -121,16 +272,24 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 		ServerConnect cls2 = new ServerConnect();
+		DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
+		Cursor cr =dbobject.displayData("select * from session");
+		if(cr.moveToFirst())
+		{
+			sessionid=cr.getString(1);
+			Log.e("sessionid-cartypes", sessionid);
+		}
 
-		try {
-			//return LoanParameterMaster id
-			cobj_LPid = cls2.LoanParameterMaster(this);
-			String loanpid = cobj_LPid[0].getid();
-			Log.d("LoanParameterM id", loanpid);
-			//***********************************
+		requestgetserver.execute("token","LoanParameterMaster",sessionid);
 
+		//return LoanParameterMaster id
+		//String loanparameterresult =cls2.LoanParameterMaster(this);
+		//String loanpid = cobj_LPid[0].getid();
+		//Log.d("LoanParameterM id", loanparameterresult);
+		//***********************************
+/*
 			//use LoanParameterMaster id and return RuleDetails id
-			cobj_RD = cls2.RuleDetails(this, loanpid);
+			cls2.RuleDetails(this, loanpid);
 
 
 			ArrayList Arr_RDid = new ArrayList<String>();
@@ -144,7 +303,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			//****************************************
 
 
-			cobj_RM = cls2.RuleMaster(this, Arr_RDid);
+			cls2.RuleMaster(this, Arr_RDid);
 			ArrayList Arr_RMid = new ArrayList<String>();
 			for (int i = 0; i < cobj_RM.length; i++) {
 				Arr_RMid.add(cobj_RM[i].getaccount_lender());
@@ -159,29 +318,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 				Arry_banknam.put(cobj_BL[i].getid(), cobj_BL[i].getaccountname());
 			}
 			Log.d("Arry_banknam", String.valueOf(Arry_banknam));
-
-
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-
-		net_salry = ((GlobalData) getApplication()).getnetsalary();
-
-		if ((60 - age) > 7) {
-			Max_tenure = 7 * 12;
-			Log.d("Max_tenure- if", String.valueOf(Max_tenure));
-		} else {
-			Max_tenure = (60 - age) * 12;
-			Log.d("Max_tenure-else", String.valueOf(Max_tenure));
-		}
-		Max_tenure = Max_tenure / 12;
-		Log.d("Max_tenure value is", String.valueOf(Max_tenure));
-		emi = ((GlobalData) getApplication()).getEmi();
-
-		disbank = new ArrayList<String>();
+*/
 
 
 		// prgmNameList = new String[]{"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK"};
@@ -192,72 +329,75 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 	}
 
 
-public void calculate()
-{
-	int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
-	double final_bp,emi_valu,emi_value,bp;
-	CustomListViewValuesArr.clear();
-	disbank.clear();
-	for (int i = 0; i < cobj_RM.length; i++) {
 
-		Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
-		if (seektenure!=0) {
-			Log.d("seektenure value", String.valueOf(seektenure));
-		    emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -100000, 0, false);
+
+	public void calculate()
+	{
+		int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
+		double final_bp,emi_valu,emi_value,bp;
+		CustomListViewValuesArr.clear();
+		disbank.clear();
+		for (int i = 0; i < cobj_RM.length; i++) {
+
+			Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
+
+			if (seektenure!=0) {
+				Log.d("seektenure value", String.valueOf(seektenure));
+				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -100000, 0, false);
+				emi_value = Math.ceil(emi_valu);
+				bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
+
+			} else {
+
+
+				double bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+
+				bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
+				//Log.d("checking bp", String.valueOf(bp));
+
+
+			}
+			final_bp = Math.ceil(bp);
+			Log.d("finalValue bp", String.valueOf(final_bp));
+			Log.d("loan_amt", String.valueOf(loan_amt));
+			emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -final_bp, 0, false);
 			emi_value = Math.ceil(emi_valu);
-			 bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
+			if (loan_amt <= final_bp) {
 
-		} else {
+				//********
+
+				double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
+
+				ListModel sched = new ListModel();
+				sched = new ListModel();
+				sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+				sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+				sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+				sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
+				sched.setemi_value(String.valueOf(emi_value));
+				CustomListViewValuesArr.add(sched);
+				disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 
 
-			double bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
-
-		      bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
-			//Log.d("checking bp", String.valueOf(bp));
+			}
 
 
-		}
-		final_bp = Math.ceil(bp);
-		Log.d("finalValue bp", String.valueOf(final_bp));
-		Log.d("loan_amt", String.valueOf(loan_amt));
-		emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -final_bp, 0, false);
-		emi_value = Math.ceil(emi_valu);
-		if (loan_amt <= final_bp) {
 
-			//********
 
-			double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
 
-			ListModel sched = new ListModel();
-			sched = new ListModel();
-			sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-			sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-			sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-			sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
-			sched.setemi_value(String.valueOf(emi_value));
-			CustomListViewValuesArr.add(sched);
-			disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+			//((GlobalData) this.getApplication()).settenure(Max_tenure);
 
+			Log.d("disbank", String.valueOf(disbank));
+
+
+			double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
+			Log.d("checking PMT", String.valueOf(Emi));
 
 		}
-
-
-
-
-
-		//((GlobalData) this.getApplication()).settenure(Max_tenure);
-
-		Log.d("disbank", String.valueOf(disbank));
-
-
-		double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
-		Log.d("checking PMT", String.valueOf(Emi));
-
-	}
 //*********************
 
-}
+	}
 
 
 public void setadapter(ArrayList<ListModel> arraylist)
@@ -340,7 +480,6 @@ public void createListView()
 	public void onClick(View v) {
 		switch(v.getId()) {
 			case R.id.filter:
-				//selectedBanks.clear();
 		bankfilter = disbank.toArray(new CharSequence[disbank.size()]);
 		//((GlobalData) this.getApplication()).setCharbanklist(cs);
 

@@ -106,22 +106,16 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 else
                 {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("Please choose employee type!")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                    RegisterPageActivity.showErroralert(Emp_type_Qustn.this, "Please choose employee type!", "failed");
+
                 }
 
                 break;
             case R.id.back:
 
                 finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
+
 
                 break;
             case R.id.img:

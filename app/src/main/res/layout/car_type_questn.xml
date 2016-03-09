@@ -118,7 +118,7 @@
             android:text="Used Car Loan"
             />
     </LinearLayout>
-        <com.gullakh.gullakhandroid.MaterialTextField
+      <!--  <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                 android:textColor="#fff"
                 android:textSize="15sp" />
 
-        </com.gullakh.gullakhandroid.MaterialTextField>
+        </com.gullakh.gullakhandroid.MaterialTextField>-->
 
 
 </LinearLayout>

@@ -44,7 +44,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
-        Dob = (EditText) findViewById(R.id.company);
+        Dob = (EditText) findViewById(R.id.birthdate);
         Dob.setOnClickListener(this);
         Dob.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -116,46 +116,41 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                     Toast.makeText(this, "cartype: " + cartype, Toast.LENGTH_SHORT).show();*/
 
                     int age=getAge(yearv,month,day);
-                    ((GlobalData) getApplication()).setage(age);
+
+                    if(age>18) {
+                        ((GlobalData) getApplication()).setage(age);
 
 
-
-
-
-
-                    Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                    intent.putExtra("data","carloan");
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                        Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                        intent.putExtra("data", "carloan");
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else{
+                        RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
+                    }
                 }
                // ((GlobalData) getApplication()).getEmi()-(Dob.getText().toString());
                 //Intent intent = new Intent(DateOfBirth_questn.this, EmployerNam_Qustn.class);
                // startActivity(intent);
                 else
                 {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("Please enter your DOB!")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter DOB", "failed");
                 }
                 break;
             case R.id.back:
                 finish();
                 break;
-            case R.id.company:
+            case R.id.birthdate:
                 Calendar now = Calendar.getInstance();
+                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         DateOfBirth_questn.this,
                         now.get(Calendar.YEAR),
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
                 );
+                //now.add(Calendar.YEAR, -16);
+                //dpd.setMinDate(now);
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 //dpd.vibrate(vibrateDate.isChecked());
                 dpd.showYearPickerFirst(true);

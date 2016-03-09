@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -22,18 +24,21 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by njfernandis on 06/02/16.
  */
-public class ServerConnect extends Activity
+public class ServerConnect extends Activity implements AsyncResponse
 {
     public Activity activity;
     public String token,flag="false";
@@ -46,14 +51,24 @@ public class ServerConnect extends Activity
     RuleMaster[] RM_cobj;
     BankList[] BL_cobj;
     String loan_amt;
+    Dialog dialogalert;
+    String jsonObjectfinal;
+    public String globalindetity;
+    public AsyncResponse delegate = null;
     //initialization function which gets session id
         public void init(Activity d) {
         activity=d;
         DataHandler dbobject = new DataHandler(activity);
         dbobject.addTable();
 
-                new JSONParse().execute("token", "init");
-                new JSONParse().execute("sessn", "init");
+             //   new JSONParse().execute("token", "init");
+             //   new JSONParse().execute("sessn", "init");
+            JSONParse asyncTask =new JSONParse();
+            asyncTask.delegate= ServerConnect.this;
+            asyncTask.execute("token", "init");
+
+
+
         }
 
 
@@ -79,7 +94,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
     //query table LoanParameterMaster
-   public LoanParaMaster[] LoanParameterMaster (Activity d)throws ExecutionException, InterruptedException
+   public String LoanParameterMaster (Activity d)throws ExecutionException, InterruptedException
    {
 
 
@@ -92,46 +107,60 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
            Log.e("sessionid-cartypes", sessionid);
        }
 
-       new JSONParse().execute("token","LoanParameterMaster",sessionid).get();
+       JSONParse asyncTask =new JSONParse();
+       asyncTask.delegate= ServerConnect.this;
+       String retrunresult=asyncTask.execute("token","LoanParameterMaster",sessionid).get();
 
-       return LoanP_cobj;
+       //new JSONParse().execute("token","LoanParameterMaster",sessionid).get();
+
+       return retrunresult;
    }
 
 
 
 
     //query table RuleDetails
-    public RuleDetails[] RuleDetails (Activity d,String loanid)throws ExecutionException, InterruptedException
+    public void RuleDetails (Activity d,String loanid)throws ExecutionException, InterruptedException
     {
 
         activity=d;
         loanpid=loanid;
-        new JSONParse().execute("token","RuleDetails",sessionid).get();
-        return RD_cobj;
+        JSONParse asyncTask =new JSONParse();
+        asyncTask.delegate= ServerConnect.this;
+        asyncTask.execute("token", "RuleDetails", sessionid);
+
+       // new JSONParse().execute("token","RuleDetails",sessionid).get();
+        //return RD_cobj;
     }
 
 
 
     //query table RuleMaster
-    public RuleMaster[] RuleMaster (Activity d,ArrayList<String> rdid)throws ExecutionException, InterruptedException
+    public void RuleMaster (Activity d,ArrayList<String> rdid)throws ExecutionException, InterruptedException
     {
 
         activity=d;
         Arry_RDid=rdid;
-        new JSONParse().execute("token","RuleMaster",sessionid).get();
-        return RM_cobj;
+        //new JSONParse().execute("token","RuleMaster",sessionid).get();
+        JSONParse asyncTask =new JSONParse();
+        asyncTask.delegate= ServerConnect.this;
+        asyncTask.execute("token", "RuleMaster", sessionid);
+        //return RM_cobj;
     }
 
 
 
     //query table accountname
-    public BankList[] accountname (Activity d,ArrayList<String> rmid)throws ExecutionException, InterruptedException
+    public void accountname (Activity d,ArrayList<String> rmid)throws ExecutionException, InterruptedException
     {
 
         activity=d;
         Arry_RMid=rmid;
-        new JSONParse().execute("token","accountname",sessionid).get();
-        return BL_cobj;
+        JSONParse asyncTask =new JSONParse();
+        asyncTask.delegate= ServerConnect.this;
+        asyncTask.execute("token", "accountname", sessionid);
+       // new JSONParse().execute("token","accountname",sessionid).get();
+       // return BL_cobj;
     }
 
 
@@ -156,10 +185,14 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
 
-    public String checkAPI(Activity d) throws ExecutionException, InterruptedException { activity=d;
+    public void checkAPI(Activity d) throws ExecutionException, InterruptedException { activity=d;
       Log.d("checkAPIfun", flag);
-        new JSONParse().execute("token", "checkapi").get();
-      return flag;
+    //    new JSONParse().execute("token", "checkapi").get();
+        JSONParse asyncTask =new JSONParse();
+        asyncTask.delegate= ServerConnect.this;
+        asyncTask.execute("token", "checkapi");
+
+      //return flag;
 
        }
 
@@ -191,24 +224,21 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
 
-        class JSONParse extends AsyncTask<String, String, JSONObject> {
+        class JSONParse extends AsyncTask<String, String, String> {
             String test;
             public ProgressDialog pDialog;
+            public AsyncResponse delegate = null;
             JSONArray user = null;
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                pDialog = new ProgressDialog(activity);
-                pDialog.setMessage("Please wait...");
-                pDialog.setIndeterminate(false);
-                pDialog.setCancelable(true);
-                pDialog.show();
+                dialogalert=RegisterPageActivity.showAlert(activity);
                 //test
             }
 
 
-            protected JSONObject doInBackground(String... args) {
+            protected String doInBackground(String... args) {
 
 
                 try {
@@ -227,6 +257,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                     HttpResponse response = null;
 
                     if(identifier.equals("sessn")) {
+                        globalindetity="sessn";
                         //get token use it to get session id (post request)
                         Log.e("if!!!!!", identifier);
                         JSONParser jParser = new JSONParser();
@@ -268,6 +299,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
                             if (args[1].equals("checkapi")) {
+                                globalindetity="checkapi";
                                 //check if session is valid(post)
                                 Log.e("checkapi!!!!!", args[1]);
                                 DataHandler dbobject = new DataHandler(activity);
@@ -305,6 +337,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
                             else if(args[1].equals("init")){
+                                globalindetity="init";
 
                                 Log.e("token is exec", identifier);
                                 client = new DefaultHttpClient();
@@ -315,6 +348,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
                             else if(args[1].equals("LoanParameterMaster"))
                             {
+                                globalindetity="LoanParameterMaster";
                                 Log.e("LoanParameterMasterexec", identifier);
                                 client = new DefaultHttpClient();
                                 post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanParameterMaster where parameter_name='Loan Amount';")).toString());
@@ -323,7 +357,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
                             else if(args[1].equals("RuleDetails")){
-                                Log.e("RuleDetails test","");
+                                globalindetity="RuleDetails";
                                 loan_amt=((GlobalData) activity.getApplication()).getloanamt();
                                 Log.e("RuleDetail loan_amt", String.valueOf(loan_amt));
 
@@ -335,7 +369,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
                             else if(args[1].equals("RuleMaster")){
-                                Log.e("RuleMaster test", "");
+                                globalindetity="RuleMaster";
                                 String listid=Arry_RDid.toString();
                                 listid = listid.toString().replace("[", "").replace("]", "");
 
@@ -350,6 +384,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
 
                             else if(args[1].equals("accountname")){
+                                globalindetity="accountname";
                                 //get token (post)
                                 Log.e("accountname test","");
 
@@ -377,6 +412,17 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                     Log.e("statusLine: ", String.valueOf(statusLine));
                     //if the response is valid
                     if (statusLine.getStatusCode() == 200) {
+
+                        String json_string = EntityUtils.toString(response.getEntity());
+
+                        Log.e("json_string: ", json_string);
+                        // JSONObject jsonObject = new JSONObject(json_string);
+                        JsonParser parser = new JsonParser();
+                        jsonObjectfinal = json_string;
+
+                        //return jsonObject;
+
+                        /*
 
                         //HttpEntity entity = response.getEntity();
                         //InputStream content = entity.getContent();
@@ -506,7 +552,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
                             } else {
                                 responseError errodata = gson.fromJson(jsonObject.get("error"), responseError.class);
-
+                                RegisterPageActivity.showErroralert(ServerConnect.this,errodata.getmessage().toString(),"error");
                                 Log.e("Data display-error: ", errodata.getmessage());
                             }
 
@@ -514,7 +560,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                         } catch (Exception ex) {
                             Log.e("Failed parseJSON due: ", String.valueOf(ex));
                             //failedLoadingPosts();
-                        }
+                        }*/
                     } else {
                         Log.e("Server resp-statuscod: ", String.valueOf(statusLine.getStatusCode()));
                         //failedLoadingPosts();
@@ -523,38 +569,39 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                     Log.e("FailtosendPOSTreqdue: ", String.valueOf(ex));
                     //failedLoadingPosts();
                 }
-                return null;
+                return jsonObjectfinal;
             }
 
 
             @Override
-            protected void onPostExecute(JSONObject json) {
-                pDialog.dismiss();
-
+            protected void onPostExecute(String json) {
+                dialogalert.dismiss();
+                Log.e("Sandeep JSON!!!!", json.toString());
+               // delegate.processFinishString(json);
                 try {
 
 
-                    Log.e("jsonglobal!!!!", "");
-                    Log.e(" json nnn", String.valueOf(json));
-                    if (json == null) {
-                        Log.e(" json is null!!!!", "");
-                        return;
-                    }
-
-
-                    if (json.getString("data").equals("true")) {
-                        Log.e("trueee!!!!", "");
-                        flag="true";
-
-                    }
-                    if (json.getString("data").equals("false")) {
-                        Log.e("false!!!!", "");
-                        flag="false";
-
-                    }else {
-                        Log.e("else in postexcec!!!!", "");
-
-                    }
+////                    Log.e("jsonglobal!!!!", "");
+////                    Log.e(" json nnn", String.valueOf(json));
+////                    if (json == null) {
+////                        Log.e(" json is null!!!!", "");
+////                        return;
+////                    }
+////
+////
+////                    if (json.getString("data").equals("true")) {
+////                        Log.e("trueee!!!!", "");
+////                        flag="true";
+////
+////                    }
+////                    if (json.getString("data").equals("false")) {
+////                        Log.e("false!!!!", "");
+////                        flag="false";
+////
+////                    }else {
+////                        Log.e("else in postexcec!!!!", "");
+//
+//                    }
 
 
                 } catch (Exception e) {
@@ -562,6 +609,134 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                 }
             }
         }
+
+
+    @Override
+    public void processFinish(JSONObject str_result) {
+
+    }
+
+
+    @Override
+    public void processFinishString(String str_result,Dialog dg) {
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        Gson gson = gsonBuilder.create();
+
+        JsonParser parser = new JsonParser();
+        JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+
+        try {
+            if (globalindetity=="checkapi"){
+
+                if (jsonObject.get("success").toString().equals("true")) {
+                    flag="true";
+
+                }else{
+
+                        //Log.d("flag in if condtn", flag);
+                        init(activity);
+
+                }
+            }
+
+            if (globalindetity=="init"){
+
+                if (jsonObject.get("success").toString().equals("true")) {
+
+                    Challenge challengedata = gson.fromJson(jsonObject.get("result"), Challenge.class);
+                    token = challengedata.getTokendata();
+                    Log.e("Token data  value: ",token+" "+jsonObject.get("result").toString());
+
+
+                    JSONParse asyncTask =new JSONParse();
+                    asyncTask.delegate= ServerConnect.this;
+                    asyncTask.execute("sessn", "init");
+
+                }
+            }
+
+            if (globalindetity=="sessn") {
+
+                if (jsonObject.get("success").toString().equals("true")) {
+
+                    APIsession APIsessiondata = gson.fromJson(jsonObject.get("result"), APIsession.class);
+                    Log.e("server sessionid: ", APIsessiondata.getSessionId());
+
+                    DataHandler dbobject = new DataHandler(activity);
+                    //delete previous invalid session id from table
+                    Cursor cr = dbobject.displayData("select * from session");
+                    if (cr.moveToFirst()) {
+                        dbobject.query("DELETE FROM session");
+                        Log.e("old session id", "is deleted");
+                    }
+
+                    ContentValues values = new ContentValues();
+                    values.put("sessn", APIsessiondata.getSessionId());
+                    dbobject.insertdata(values, "session");
+
+
+                }
+            }
+
+                if(globalindetity=="LoanParameterMaster"){
+                    LoanP_cobj = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
+                    String loanpid = LoanP_cobj[0].getid();
+
+                    RuleDetails(this, loanpid);
+
+                    Log.e("Sandeep Loan Parae", LoanP_cobj.toString());
+                }
+
+                if(globalindetity=="Ruledetails"){
+                    Log.e("RuleDetails ", "test");
+                    RD_cobj = gson.fromJson(jsonObject.get("result"), RuleDetails[].class);
+                    ArrayList Arr_RDid = new ArrayList<String>();
+                    for (int i = 0; i < RD_cobj.length; i++) {
+                        Log.d("RD id list", String.valueOf(RD_cobj[i].getrmid()));
+                        Log.d("RD lenght", String.valueOf(RD_cobj.length));
+                        Arr_RDid.add(RD_cobj[i].getrmid());
+
+                    }
+                    RuleMaster(this, Arr_RDid);
+                }
+
+                if(globalindetity=="RuleMaster"){
+                    Log.e("RuleMaster ", "test");
+                    RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
+                    ArrayList Arr_RMid = new ArrayList<String>();
+                    for (int i = 0; i < RM_cobj.length; i++) {
+                        Arr_RMid.add(RM_cobj[i].getaccount_lender());
+                    }
+                    accountname(this, Arr_RMid);
+
+
+                }
+
+                if(globalindetity=="RuleMaster") {
+                    Log.e("accountname ", "test");
+
+                    BL_cobj= gson.fromJson(jsonObject.get("result"), BankList[].class);
+                    Map<String, String> Arry_banknam=new HashMap<>();;
+                    for (int i = 0; i < BL_cobj.length; i++) {
+                        Arry_banknam.put(BL_cobj[i].getid(), BL_cobj[i].getaccountname());
+                    }
+                    GoogleCardsMediaActivity googleCdsMEdiaActivity=new GoogleCardsMediaActivity();
+                    //googleCdsMEdiaActivity.calculateoriginal(RM_cobj, Arry_banknam);
+
+                }
+
+
+
+
+          //  LoanP_cobj = gson.fromJson((JsonElement) str_result.get("result"), LoanParaMaster[].class);
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     }

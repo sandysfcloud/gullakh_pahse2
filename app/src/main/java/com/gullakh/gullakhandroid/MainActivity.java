@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -241,20 +242,14 @@ public class MainActivity extends ActionBarActivity {
         //check wether session-id is valid or not
         String flag= null;
         try {
-            flag = cls2.checkAPI(MainActivity.this);
-            Log.d("flag returned", flag);
+            cls2.checkAPI(MainActivity.this);
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(flag.equals("false"))//if not valid or user opens for 1st time get new session id from server
-        {
-            Log.d("flag in if condtn", flag);
-            cls2.init(MainActivity.this);
-        }
-else
-            Log.d("session is valid", flag);
+
 
 
 
@@ -528,9 +523,27 @@ else
     }
 
     private void goMyprofile() {
-        Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.transition.left, R.transition.right);
+        DataHandler dbobject = new DataHandler(MainActivity.this);
+        dbobject.addTable();
+
+
+            Cursor cr = dbobject.displayData("select * from userlogin");
+            if(cr!=null) {
+                if (cr.moveToFirst()) {
+                    Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else{
+                    Intent intent = new Intent(MainActivity.this, signin.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            }else{
+                Intent intent = new Intent(MainActivity.this, signin.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+            }
+
     }
 
     private void goReg() {
