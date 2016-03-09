@@ -31,7 +31,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
-        review = (ImageView) findViewById(R.id.review);
+        //review = (ImageView) findViewById(R.id.review);
         next.setOnClickListener(this);
 
         TextView  ts = (TextView) findViewById(R.id.t1);
@@ -43,7 +43,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         sal.setOnClickListener(this);
         self = (ImageView) findViewById(R.id.img2);
         self.setOnClickListener(this);
-        review.setOnClickListener(this);
+//        review.setOnClickListener(this);
      //   EditText email = (EditText) findViewById(R.id.email);
        // email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         onShakeImage();
