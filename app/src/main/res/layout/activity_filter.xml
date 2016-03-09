@@ -3,11 +3,12 @@
     android:layout_width="fill_parent"
 
     android:layout_height="fill_parent"
-    android:background="@drawable/card_background_white"
+
     android:orientation="vertical"
+    android:background="#000"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dip">
-
+   <!-- android:background="@drawable/card_background_white"-->
     <TextView
 
         android:text="Select Banks"
