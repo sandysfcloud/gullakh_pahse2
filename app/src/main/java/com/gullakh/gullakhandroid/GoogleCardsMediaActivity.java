@@ -247,6 +247,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 					}
 					Max_tenure = Max_tenure / 12;
 					Log.d("Max_tenure value is", String.valueOf(Max_tenure));
+					((GlobalData)getApplication()).settenure(String.valueOf(Max_tenure));
 					emi = ((GlobalData) getApplication()).getEmi();
 
 					disbank = new ArrayList<String>();
@@ -386,7 +387,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-			//((GlobalData) this.getApplication()).settenure(Max_tenure);
+
 
 			Log.d("disbank", String.valueOf(disbank));
 
@@ -576,6 +577,7 @@ public void createListView()
 					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 						seektenure = progress;
 						tenur.setText(String.valueOf(progress));
+
 						// value now holds the decimal value between 0.0 and 10.0 of the progress
 						// Example:
 						// If the progress changed to 45, value would now hold 4.5
@@ -596,6 +598,7 @@ public void createListView()
 
 				break;
 			case  R.id.applyf:
+
 				newCustomListViewValuesArr.clear();
 				//if(tenur.getText().toString()!)
 				if(tenur.getText() != null)

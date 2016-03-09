@@ -38,10 +38,17 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_click);
 
-        getSupportActionBar().setTitle("Result");
+         getSupportActionBar().setTitle("Result");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         Intent intent = getIntent();
+        String bankname = intent.getStringExtra("bankname");
+        String tenure = intent.getStringExtra("tenure");
+        String roi = intent.getStringExtra("roi");
+        String one_time_fee = intent.getStringExtra("one_time_fee");
+        String emi = intent.getStringExtra("emi");
+
+
+       /*   Intent intent = getIntent();
         Bundle bundleObject = getIntent().getExtras();
         String pos = intent.getStringExtra("position");;
         ArrayList<ListModel>dw = (ArrayList<ListModel>) bundleObject.getSerializable("key");
@@ -50,7 +57,9 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         String bankname = dw.get(Integer.valueOf(pos)).getbanknam();
         String tenure = ((GlobalData) this.getApplicationContext()).gettenure();
         String roi = dw.get(Integer.valueOf(pos)).getfloating_interest_rate();
-        String one_time_fee = dw.get(Integer.valueOf(pos)).getprocessing_fee();
+        String one_time_fee = dw.get(Integer.valueOf(pos)).getprocessing_fee(); */
+
+
 
 
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
@@ -61,9 +70,10 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         name.setText(bankname);
         TextView t1= (TextView) findViewById(R.id.mt1);
         t1.setTypeface(myfontlight);
-        TextView t_tenure= (TextView) findViewById(R.id.tmr);
-        t_tenure.setTypeface(myfontlight);
-        t_tenure.setText(tenure);
+        t1.setText("Monthly for "+tenure+" years");
+        TextView temi= (TextView) findViewById(R.id.tmr);
+        temi.setTypeface(myfontlight);
+        temi.setText(emi);
         TextView t3= (TextView) findViewById(R.id.tf1);
         t3.setTypeface(myfontlight);
         TextView troi= (TextView) findViewById(R.id.tf2);
@@ -89,6 +99,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         t11.setTypeface(myfontlight);
         Button apply= (Button) findViewById(R.id.apply);
         apply.setTypeface(myfontlight);
+        apply.setOnClickListener(this);
         mainLayout= (LinearLayout) findViewById(R.id.main);
         fee= (Button) findViewById(R.id.fee);
         fee.setOnClickListener(this);
@@ -147,7 +158,6 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.othr:
-               // mainLayout.removeAllViews();
                 othr.setBackgroundResource(R.drawable.roundbutton_blue);
                 fee.setBackgroundResource(R.drawable.roundedbutton);
                 title.setText("Other");
@@ -158,6 +168,11 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 t11.setText("");
                 mainLayout.startAnimation(bottomUp);
                 mainLayout.setVisibility(View.VISIBLE);
+                break;
+            case  R.id.apply:
+                Intent intent = new Intent(this, signin.class);
+                startActivity(intent);
+                this.overridePendingTransition(R.transition.left, R.transition.right);
                 break;
 
         }

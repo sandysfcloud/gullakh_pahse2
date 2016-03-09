@@ -58,8 +58,8 @@ public class ServerConnect extends Activity implements AsyncResponse
     //initialization function which gets session id
         public void init(Activity d) {
         activity=d;
-        DataHandler dbobject = new DataHandler(activity);
-        dbobject.addTable();
+       // DataHandler dbobject = new DataHandler(activity);
+       // dbobject.addTable();
 
              //   new JSONParse().execute("token", "init");
              //   new JSONParse().execute("sessn", "init");
@@ -187,7 +187,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
     public void checkAPI(Activity d) throws ExecutionException, InterruptedException { activity=d;
       Log.d("checkAPIfun", flag);
-    //    new JSONParse().execute("token", "checkapi").get();
+
         JSONParse asyncTask =new JSONParse();
         asyncTask.delegate= ServerConnect.this;
         asyncTask.execute("token", "checkapi");
@@ -243,11 +243,11 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
                 try {
 
-                    Log.e("test", "1");
+                    Log.e("test data", "1");
                     String identifier = args[0];
-                    Log.e("test", "1.1");
+                    Log.e("test data", "1.1");
                     //String api=null;
-                    Log.e("test", "1.2");
+                    Log.e("test data", "1.2");
                    /* if(!args[1].equals(null)) {
                         Log.e("args[1]", String.valueOf(args[1]));
                        api = args[1];
@@ -301,15 +301,28 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                             if (args[1].equals("checkapi")) {
                                 globalindetity="checkapi";
                                 //check if session is valid(post)
-                                Log.e("checkapi!!!!!", args[1]);
+
                                 DataHandler dbobject = new DataHandler(activity);
+                               // dbobject.addTable();
+                                Log.e("checkapi!!!!!", args[1]);
                                 Cursor cr = dbobject.displayData("select * from session");
-                                if (cr.moveToFirst()) {
-                                    //pass the session id to check wether its valid or not
-                                    Log.d("session value is", String.valueOf(cr.getCount()) + " :value is:" + cr.getString(1));
-                                    client = new DefaultHttpClient();
-                                    post = new HttpPost(GlobalData.SERVER_GET_URL + "?operation=describe&sessionName=" + cr.getString(1) + "&elementType=Accounts");
+                                Log.e("checkapi!!!!!2", args[1]);
+                                String sessionidnew = null;
+                                Log.e("checkapi!!!!!3", args[1]);
+                                if(cr.getCount()>0) {
+                                    if (cr.moveToFirst()) {
+                                        //pass the session id to check wether its valid or not
+                                        Log.d("session value is", String.valueOf(cr.getCount()) + " :value is:" + cr.getString(1));
+                                        sessionidnew = cr.getString(1);
+
+                                    }
+                                }else{
+                                    sessionidnew=null;
                                 }
+                               // Log.e("checkapi!!!!!4", sessionidnew);
+                                    client = new DefaultHttpClient();
+                                    post = new HttpPost(GlobalData.SERVER_GET_URL + "?operation=describe&sessionName=" + sessionidnew + "&elementType=Accounts");
+
 
 
                             }
@@ -577,7 +590,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
             protected void onPostExecute(String json) {
                 dialogalert.dismiss();
                 Log.e("Sandeep JSON!!!!", json.toString());
-               // delegate.processFinishString(json);
+                delegate.processFinishString(json, dialogalert);
                 try {
 
 

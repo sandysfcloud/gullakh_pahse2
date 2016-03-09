@@ -32,7 +32,9 @@ public class SplashScreensActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		getWindow().requestFeature(Window.FEATURE_NO_TITLE); //Removing ActionBar
 		setContentView(R.layout.activity_splash_screen);
-		
+
+		DataHandler dbobject = new DataHandler(this);
+		dbobject.addTable();
 		//mKenBurns = (KenBurnsView) findViewById(R.id.ken_burns_images);
 		mLogo = (ImageView) findViewById(R.id.logo);
 		//welcomeText = (TextView) findViewById(R.id.welcome_text);

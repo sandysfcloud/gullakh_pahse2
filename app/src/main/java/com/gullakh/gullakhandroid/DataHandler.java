@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -29,7 +30,7 @@ public class DataHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        addTable();
+       // addTable();
     }
 
     public void addTable() {
@@ -69,6 +70,7 @@ public class DataHandler extends SQLiteOpenHelper {
 
         } catch (Exception e1)
         {
+            Log.d("error in table creation", e1.toString());
             Toast.makeText(context, "errror in table creation .." + e1.toString(), Toast.LENGTH_LONG).show();
         }
 

@@ -3,6 +3,7 @@ package com.gullakh.gullakhandroid;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
@@ -45,6 +46,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Sign In");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         TextView signUptext= (TextView) findViewById(R.id.signupheading);
@@ -113,6 +115,9 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_name) {
+            Intent intent = new Intent(this, RegisterPageActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
             return true;
         }
 
