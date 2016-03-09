@@ -345,24 +345,30 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 			if (seektenure!=0) {
 				Log.d("seektenure value", String.valueOf(seektenure));
-				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -100000, 0, false);
+				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -loan_amt, 0, false);
+				Log.d("emi_valu", String.valueOf(emi_valu));
+				Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+				Log.d("seektenure", String.valueOf(seektenure));
+				Log.d("-loan_amt", String.valueOf(-loan_amt));
 				emi_value = Math.ceil(emi_valu);
-				bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
+				//bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
 
 			} else {
 
 
-				double bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
 
-				bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
+				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
+
 				//Log.d("checking bp", String.valueOf(bp));
 
 
 			}
+			double bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+			bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
 			final_bp = Math.ceil(bp);
 			Log.d("finalValue bp", String.valueOf(final_bp));
 			Log.d("loan_amt", String.valueOf(loan_amt));
-			emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -final_bp, 0, false);
+
 			emi_value = Math.ceil(emi_valu);
 			if (loan_amt <= final_bp) {
 
@@ -625,7 +631,7 @@ public void createListView()
 
 				for(int i=0;i<CustomListViewValuesArr.size();i++) {
 					Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.size()));
-					Log.d("test2!!!!!", String.valueOf(selectedBanks));
+					Log.d("test2!!!!!", String.valueOf(CustomListViewValuesArr));
 					if(selectedBanks.size()==0)
 					{
 						Log.d("selectedBanks!!!!!", String.valueOf(selectedBanks.size()));
@@ -638,14 +644,14 @@ public void createListView()
 						Log.d("selectedBanks size is!", String.valueOf(selectedBanks.size()));
 						Log.d("selectedBanks data is!", String.valueOf(selectedBanks));
 						double roi = Double.parseDouble(CustomListViewValuesArr.get(i).getfloating_interest_rate());
-						Log.d("foir!!!!!", String.valueOf(roi));
-						Log.d("foir_min!!!!!", String.valueOf(roi_min));
-						Log.d("foir_max!!!!!", String.valueOf(roi_max));
+						Log.d("roi!!!!!", String.valueOf(roi));
+						Log.d("roi_min!!!!!", String.valueOf(roi_min));
+						Log.d("roi_max!!!!!", String.valueOf(roi_max));
 						Log.d("CustomListView value!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
 						Log.d("selectedBanks value!!", String.valueOf(selectedBanks.get(j)));
-						if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))&&roi>=roi_min&&roi<=roi_max) {
-							Log.d("CustomListViewValu!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-							Log.d("selectedColours!!!!!", String.valueOf(selectedBanks));
+						if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))||(roi>=roi_min&&roi<=roi_max)) {
+							Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+							Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
 							newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
 							// Log.d("newCustomListView", newCustomListViewValuesArr.get(i).getbanknam());
 						}

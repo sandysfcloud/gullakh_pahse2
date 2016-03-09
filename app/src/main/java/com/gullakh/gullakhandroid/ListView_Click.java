@@ -171,6 +171,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 break;
             case  R.id.apply:
                 Intent intent = new Intent(this, signin.class);
+                //Intent intent = new Intent(this, cl_car_make.class);
                 startActivity(intent);
                 this.overridePendingTransition(R.transition.left, R.transition.right);
                 break;
