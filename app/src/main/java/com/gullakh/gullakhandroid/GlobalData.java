@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Application;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +28,7 @@ public class GlobalData extends Application {
     private CharSequence[] banklist;
     //static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php?operation=create";
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php";
+
 
 
     public Double getEmi() {

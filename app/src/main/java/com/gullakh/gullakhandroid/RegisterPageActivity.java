@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -283,6 +285,75 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.getWindow().setAttributes(lp);
 		return dialog;
 	}
+
+	public static Dialog showAlertreview(Activity act,Integer questionno)
+	{
+		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
+
+// 		Setting the title and layout for the dialog
+		dialog.setTitle("");
+		dialog.setContentView(R.layout.questionreview);
+
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+
+
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.dimAmount=0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+
+
+
+		LinearLayout linrlyt = (LinearLayout) dialog.findViewById(R.id.linearmain);
+
+		LayoutInflater inflater = (LayoutInflater)act .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		ArrayList<String>carloan_que_salary_new=new ArrayList<String>();
+		carloan_que_salary_new.add("Employee Type: ");
+		carloan_que_salary_new.add("Car Loan Type: ");
+		carloan_que_salary_new.add("Loan Amount: ");
+		carloan_que_salary_new.add("Net Monthly Salry: ");
+		carloan_que_salary_new.add("Total EMI's you pay: ");
+
+		ArrayList<String>carloan_que_salary_new_ans=new ArrayList<String>();
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcartype());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
+		if(((GlobalData) act.getApplication()).getnetsalary()!=null)
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getnetsalary().toString());
+		if(((GlobalData) act.getApplication()).getEmi()!=null)
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getEmi().toString());
+
+
+
+
+		for(int i=1;i<questionno;i++){
+
+
+
+			View view = inflater.inflate(R.layout.linearreviewquestions, null);
+			TextView tv=(TextView) view.findViewById(R.id.headertype);
+			LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.linerlytclick);
+			linearLayoutclick.setTag(i);
+			linearLayoutclick.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					//Intent intclick=new Intent(act,Emp_type_Qustn.class);
+
+					//startActivity(intclick);
+					// Perform action on click
+				}
+			});
+
+			TextView tvans=(TextView) view.findViewById(R.id.selectedanswer);
+			tv.setText(carloan_que_salary_new.get(i-1));
+			tvans.setText(carloan_que_salary_new_ans.get(i-1));
+			linrlyt.addView(view);
+		}
+		dialog.show();
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
+	}
+
 
 
 

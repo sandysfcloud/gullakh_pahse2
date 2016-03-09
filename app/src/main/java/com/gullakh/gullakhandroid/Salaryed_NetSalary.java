@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClickListener {
     EditText sal;
-    ImageView next;
+    ImageView next,review;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     @Override
@@ -36,6 +36,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
+        review = (ImageView) findViewById(R.id.review);
+        review.setOnClickListener(this);
+
         sal = (EditText) findViewById(R.id.netsalary);
         sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -125,6 +128,11 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.review:
+                RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,4);
+                break;
+
 
             case R.id.next:
                 if(!sal.getText().toString().matches("")) {

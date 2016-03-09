@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class EMI_questn extends AppCompatActivity  implements View.OnClickListener{
     EditText emipaying;
-    ImageView next;
+    ImageView next,review;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     @Override
@@ -36,6 +36,9 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
+        review = (ImageView) findViewById(R.id.review);
+        review.setOnClickListener(this);
+
         emipaying = (EditText) findViewById(R.id.emipaying);
         onetext = (TextView) findViewById(R.id.onetext);
         onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -130,6 +133,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
 
         switch (v.getId()) {
+
+            case R.id.review:
+                RegisterPageActivity.showAlertreview(EMI_questn.this,5);
+                break;
 
             case R.id.next:
                // if(!emi.getText().toString().matches("")) {

@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 
 
 public class Car_type_questn extends AppCompatActivity implements View.OnClickListener {
-    ImageView sal,self,next;
+    ImageView sal,self,next,review;
     AutoCompleteTextView email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,9 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
 
         ImageView back = (ImageView) findViewById(R.id.back);
+        review = (ImageView) findViewById(R.id.review);
+        review.setOnClickListener(this);
+
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
@@ -100,6 +103,11 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         Intent intent;
 
         switch (v.getId()) {
+
+
+            case R.id.review:
+                RegisterPageActivity.showAlertreview(Car_type_questn.this,2);
+                break;
 
             case R.id.next:
                 //Intent intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
