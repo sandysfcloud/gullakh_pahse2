@@ -156,6 +156,11 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 
+	@Override
+	public void processFinishString(String str_result,Dialog dg) {
+
+	}
+
 	public void  processFinish(JSONObject str_result){
 
 		try {

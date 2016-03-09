@@ -120,6 +120,12 @@ public class signin extends AppCompatActivity implements AsyncResponse {
     }
 
     @Override
+    public void processFinishString(String str_result,Dialog dg) {
+
+    }
+
+
+    @Override
     public void processFinish(JSONObject str_result) {
         try{
 

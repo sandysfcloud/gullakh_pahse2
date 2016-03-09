@@ -242,20 +242,14 @@ public class MainActivity extends ActionBarActivity {
         //check wether session-id is valid or not
         String flag= null;
         try {
-            flag = cls2.checkAPI(MainActivity.this);
-            Log.d("flag returned", flag);
+            cls2.checkAPI(MainActivity.this);
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(flag.equals("false"))//if not valid or user opens for 1st time get new session id from server
-        {
-            Log.d("flag in if condtn", flag);
-            cls2.init(MainActivity.this);
-        }
-else
-            Log.d("session is valid", flag);
+
 
 
 
