@@ -245,7 +245,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 						Max_tenure = (60 - age) * 12;
 						Log.d("Max_tenure-else", String.valueOf(Max_tenure));
 					}
-					Max_tenure = Max_tenure / 12;
+					//Max_tenure = Max_tenure / 12;
 					Log.d("Max_tenure value is", String.valueOf(Max_tenure));
 					((GlobalData)getApplication()).settenure(String.valueOf(Max_tenure));
 					emi = ((GlobalData) getApplication()).getEmi();
@@ -358,7 +358,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 
-				//Log.d("checking bp", String.valueOf(bp));
+				Log.d("checking emisandeep", String.valueOf(emi_valu)+" "+Max_tenure);
 
 
 			}

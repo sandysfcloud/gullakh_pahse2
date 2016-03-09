@@ -312,7 +312,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		carloan_que_salary_new.add("Employee Type: ");
 		carloan_que_salary_new.add("Car Loan Type: ");
 		carloan_que_salary_new.add("Loan Amount: ");
-		carloan_que_salary_new.add("Net Monthly Salry: ");
+		carloan_que_salary_new.add("Net Monthly Salary: ");
 		carloan_que_salary_new.add("Total EMI's you pay: ");
 
 		ArrayList<String>carloan_que_salary_new_ans=new ArrayList<String>();
