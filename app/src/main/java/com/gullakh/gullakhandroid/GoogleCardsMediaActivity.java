@@ -631,7 +631,7 @@ public void createListView()
 
 				for(int i=0;i<CustomListViewValuesArr.size();i++) {
 					Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.size()));
-					Log.d("test2!!!!!", String.valueOf(CustomListViewValuesArr));
+					Log.d("test2!!!!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
 					if(selectedBanks.size()==0)
 					{
 						Log.d("selectedBanks!!!!!", String.valueOf(selectedBanks.size()));
@@ -649,11 +649,22 @@ public void createListView()
 						Log.d("roi_max!!!!!", String.valueOf(roi_max));
 						Log.d("CustomListView value!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
 						Log.d("selectedBanks value!!", String.valueOf(selectedBanks.get(j)));
-						if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))||(roi>=roi_min&&roi<=roi_max)) {
-							Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-							Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
-							newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
-							// Log.d("newCustomListView", newCustomListViewValuesArr.get(i).getbanknam());
+						if (roi_min == 0 && roi_max == 0) {
+							if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))) {
+								Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+								Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
+								newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
+								Log.d("newCustomListV roi 0", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
+							}
+						} else {
+
+
+							if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j)) && (roi >= roi_min && roi <= roi_max)) {
+								Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+								Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
+								newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
+								Log.d("newCustomListV dataif", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
+							}
 						}
 					}
 				}
