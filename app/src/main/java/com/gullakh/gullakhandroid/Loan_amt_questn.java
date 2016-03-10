@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class Loan_amt_questn extends AppCompatActivity implements View.OnClickListener{
     EditText amt;
-    ImageView next;
+    ImageView next,review;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     @Override
@@ -49,6 +49,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
         onetext = (TextView) findViewById(R.id.onetext);
         onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+        review = (ImageView) findViewById(R.id.review);
+        review.setOnClickListener(this);
+
         amt.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -133,6 +137,11 @@ if(!amt.getText().toString().equals(""))
 
 
         switch (v.getId()) {
+
+            case R.id.review:
+
+                RegisterPageActivity.showAlertreview(Loan_amt_questn.this,3);
+                break;
 
             case R.id.next:
                 if(amt.getText().toString().matches("")) {

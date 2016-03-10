@@ -22,15 +22,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
-    ImageView sal,self,next;
+    ImageView sal,self,next,review;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_type__qustn);
-        getSupportActionBar().setTitle("Car Loan - Emoloyee Type");
+        getSupportActionBar().setTitle("Car Loan - Employee Type");
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
+        //review = (ImageView) findViewById(R.id.review);
         next.setOnClickListener(this);
 
         TextView  ts = (TextView) findViewById(R.id.t1);
@@ -42,6 +43,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         sal.setOnClickListener(this);
         self = (ImageView) findViewById(R.id.img2);
         self.setOnClickListener(this);
+//        review.setOnClickListener(this);
      //   EditText email = (EditText) findViewById(R.id.email);
        // email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         onShakeImage();
@@ -96,6 +98,15 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
+
+            case R.id.review:
+
+                    //RegisterPageActivity.showAlertreview(Emp_type_Qustn.this,2);
+
+
+
+                break;
+
 
             case R.id.next:
                 if(((GlobalData) getApplication()).getemptype()!=null)

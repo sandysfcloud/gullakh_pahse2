@@ -30,7 +30,7 @@ import java.util.concurrent.ExecutionException;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
-    ImageView next;
+    ImageView next,review;
     int day,month,yearv;
 
 
@@ -43,6 +43,9 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
+
+        review = (ImageView) findViewById(R.id.review);
+        review.setOnClickListener(this);
         next.setOnClickListener(this);
         Dob = (EditText) findViewById(R.id.birthdate);
         Dob.setOnClickListener(this);
@@ -95,6 +98,10 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
     public void onClick(View v) {
 
         switch (v.getId()) {
+            case R.id.review:
+                RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,6);
+                break;
+
 
             case R.id.next:
                 if(!Dob.getText().toString().matches("")) {

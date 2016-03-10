@@ -108,6 +108,18 @@
                 android:src="@drawable/backimgnw"
 
                 />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:id="@+id/review"
+
+                android:layout_gravity="bottom|right"
+                android:src="@drawable/reviewred"
+
+                />
+
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"

@@ -186,7 +186,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             Log.e("RuleDetail loan_amt", String.valueOf(loan_amt));
 
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from RuleDetails where rule_parameter='"+args[3]+"' AND min_value<="+loan_amt+" and max_value>="+loan_amt+";")).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from RuleDetails where rule_parameter='"+args[3]+"' AND min_value<="+args[4]+" and max_value>="+args[4]+";")).toString());
 
                         }
 

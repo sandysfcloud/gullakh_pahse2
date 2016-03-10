@@ -132,8 +132,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
 					LoanParaMaster[] LoanP_cobj = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
 					String loanpid = LoanP_cobj[0].getid();
+					String loan_amt=((GlobalData) getApplication()).getloanamt();
 
-						requestgetserver2.execute("token", "RuleDetails", sessionid,loanpid);
+						requestgetserver2.execute("token", "RuleDetails", sessionid,loanpid,loan_amt);
 
 
 				}},GoogleCardsMediaActivity.this,"1");
@@ -245,23 +246,22 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 						Max_tenure = (60 - age) * 12;
 						Log.d("Max_tenure-else", String.valueOf(Max_tenure));
 					}
-					Max_tenure = Max_tenure / 12;
+					//Max_tenure = Max_tenure / 12;
 					Log.d("Max_tenure value is", String.valueOf(Max_tenure));
-					((GlobalData)getApplication()).settenure(String.valueOf(Max_tenure));
+					((GlobalData)getApplication()).settenure(String.valueOf(Max_tenure/12));
 					emi = ((GlobalData) getApplication()).getEmi();
 
 					disbank = new ArrayList<String>();
-
 					calculate();
 					setadapter(CustomListViewValuesArr);
+
 
 
 				}},GoogleCardsMediaActivity.this,"4");
 
 
 			loan_amtcalcutn();
-			//calculate();
-			//setadapter(CustomListViewValuesArr);
+
 
 
 		}
@@ -359,7 +359,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 
-				//Log.d("checking bp", String.valueOf(bp));
+				Log.d("checking emisandeep", String.valueOf(emi_valu)+" "+Max_tenure);
 
 
 			}
@@ -443,7 +443,7 @@ public void setadapter(ArrayList<ListModel> arraylist)
 
 public void createListView()
 {
-	listView  = new ListView(this);
+	listView = new ListView(this);
 	listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
 
 
@@ -574,7 +574,7 @@ public void createListView()
 					}
 				});
 
-				tenure.setMax(Max_tenure);
+				tenure.setMax(Max_tenure/12);
 
 				tenur.setText(Integer.toString(seektenure));
 				tenure.setProgress(seektenure);
