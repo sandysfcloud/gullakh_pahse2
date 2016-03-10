@@ -70,9 +70,14 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
             public void afterTextChanged(Editable s) {
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                if (!emipaying.getText().toString().equals(""))
+                if(!emipaying.getText().toString().equals("")) {
+                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(emipaying.getText()))));
 
-                    mSeekArcProgress.setText(String.valueOf(format.format(new BigDecimal(String.valueOf(emipaying.getText())))));
+                    strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+
+                    mSeekArcProgress.setText(strtemp);
+                }
 
             }
         });
@@ -99,7 +104,12 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 
 
-                mSeekArcProgress.setText(String.valueOf(format.format(new BigDecimal(String.valueOf(progress)))));
+                String strtemp=String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+
+                strtemp=strtemp.substring(0,strtemp.length()-3);
+
+
+                mSeekArcProgress.setText(strtemp);
                 emipaying.setText(String.valueOf(progress));
 
 

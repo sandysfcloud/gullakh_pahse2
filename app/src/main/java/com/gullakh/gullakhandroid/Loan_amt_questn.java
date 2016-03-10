@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,9 +71,14 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             public void afterTextChanged(Editable s) {
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-if(!amt.getText().toString().equals(""))
+                if(!amt.getText().toString().equals("")) {
+                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()))));
 
-                mSeekArcProgress.setText(String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText())))));
+                    strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+
+                    mSeekArcProgress.setText(strtemp);
+                }
 
             }
         });
@@ -96,7 +102,9 @@ if(!amt.getText().toString().equals(""))
                                                         progress = (progress + 1) * 50000;
                                                         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                                                         String strtemp=String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+
                                                         strtemp=strtemp.substring(0,strtemp.length()-3);
+
 
                                                         mSeekArcProgress.setText(strtemp);
                                                         amt.setText(String.valueOf(progress));

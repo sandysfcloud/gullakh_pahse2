@@ -67,9 +67,14 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             public void afterTextChanged(Editable s) {
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                if (!sal.getText().toString().equals(""))
+                if(!sal.getText().toString().equals("")) {
+                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(sal.getText()))));
 
-                    mSeekArcProgress.setText(String.valueOf(format.format(new BigDecimal(String.valueOf(sal.getText())))));
+                    strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+
+                    mSeekArcProgress.setText(strtemp);
+                }
 
             }
         });
@@ -90,11 +95,16 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             public void onProgressChanged(SeekArc seekArc, int progress,
                                           boolean fromUser) {
 
-                progress = (progress + 1) * 10000;
+                progress = (progress + 1) * 5000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 
 
-                mSeekArcProgress.setText(String.valueOf(format.format(new BigDecimal(String.valueOf(progress)))));
+                String strtemp=String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+
+                strtemp=strtemp.substring(0,strtemp.length()-3);
+
+
+                mSeekArcProgress.setText(strtemp);
                 sal.setText(String.valueOf(progress));
 
 

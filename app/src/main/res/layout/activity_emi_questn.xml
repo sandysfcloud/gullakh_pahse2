@@ -30,7 +30,7 @@
                 android:padding="30dp"
                 seekarc:arcColor="@color/red"
                 seekarc:clockwise="true"
-                seekarc:max="25"
+                seekarc:max="99"
 
                 seekarc:progressColor="@color/main_color_500"
                 seekarc:rotation="180"

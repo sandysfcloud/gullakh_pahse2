@@ -280,7 +280,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-        wheelView.setWheelDrawable(R.drawable.wheelbg);
+        wheelView.setWheelDrawable(R.drawable.wheelbg3);
 
 
         //initialise the selection drawable with the first contrast color
