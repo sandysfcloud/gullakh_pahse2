@@ -281,6 +281,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		lp.copyFrom(dialog.getWindow().getAttributes());
 		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 		lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.dimAmount=0.9f;
 		dialog.show();
 		dialog.getWindow().setAttributes(lp);
 		return dialog;

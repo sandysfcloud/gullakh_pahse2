@@ -48,6 +48,9 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         review.setOnClickListener(this);
         next.setOnClickListener(this);
         Dob = (EditText) findViewById(R.id.birthdate);
+        if(((GlobalData) getApplication()).getDob()!=null)
+            Dob.setText(((GlobalData) getApplication()).getDob().toString());
+
         Dob.setOnClickListener(this);
         Dob.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

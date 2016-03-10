@@ -93,11 +93,12 @@ if(!amt.getText().toString().equals(""))
                                                     public void onProgressChanged(SeekArc seekArc, int progress,
                                                                                   boolean fromUser) {
 
-                                                        progress = (progress + 1) * 100000;
+                                                        progress = (progress + 1) * 50000;
                                                         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+                                                        String strtemp=String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+                                                        strtemp=strtemp.substring(0,strtemp.length()-3);
 
-
-                                                        mSeekArcProgress.setText(String.valueOf(format.format(new BigDecimal(String.valueOf(progress)))));
+                                                        mSeekArcProgress.setText(strtemp);
                                                         amt.setText(String.valueOf(progress));
 
 
