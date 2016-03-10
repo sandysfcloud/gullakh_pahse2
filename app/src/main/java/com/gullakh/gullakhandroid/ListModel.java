@@ -45,6 +45,7 @@ public class ListModel implements Serializable{
     private  String sdate="";
 
 
+
     /*********** Set Methods ******************/
 
    public void setAgenda_Date(String agenda_date)
@@ -74,7 +75,7 @@ public class ListModel implements Serializable{
         this.desc= desc;
     }
 
-    public void setlocatn(String loctn)
+    public void setbp(String loctn)
     {
         this.loctn = loctn;
     }
@@ -205,7 +206,7 @@ public class ListModel implements Serializable{
         return this.desc;
     }
 
-    public String getloctn(){return this.loctn;
+    public String getbp(){return this.loctn;
     }
     public String getA_datetime()
     {

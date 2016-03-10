@@ -108,6 +108,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 		//ListView listView = (ListView) findViewById(R.id.list_view);
 		layout = (LinearLayout) findViewById(R.id.linear);
 		filter = (ImageView) findViewById(R.id.filter);
+		TextView loan_amt = (TextView) findViewById(R.id.loan_amt);
+		TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
+		TextView tfilter = (TextView) findViewById(R.id.tfilter);
+		loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+		tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+		tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+		String loan_value=((GlobalData) this.getApplication()).getloanamt();
+		loan_amt.setText(loan_value);
 		filter.setOnClickListener(this);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("data");
@@ -344,6 +352,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 			Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
 			if (seektenure!=0) {
+				((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
 				Log.d("seektenure value", String.valueOf(seektenure));
 				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -loan_amt, 0, false);
 				Log.d("emi_valu", String.valueOf(emi_valu));
@@ -383,6 +392,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 				sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
 				sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
 				sched.setemi_value(String.valueOf(emi_value));
+				sched.setbp(String.valueOf(final_bp));
 				CustomListViewValuesArr.add(sched);
 				disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 
@@ -555,8 +565,8 @@ public void createListView()
 					@Override
 					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 						Double value = (progress / 10.0);
-						seek_loanamt=progress;
-						loand.setText(String.valueOf(progress)+" Lakh");
+						seek_loanamt = progress;
+						loand.setText(String.valueOf(progress) + " Lakh");
 						// value now holds the decimal value between 0.0 and 10.0 of the progress
 						// Example:
 						// If the progress changed to 45, value would now hold 4.5
@@ -574,15 +584,17 @@ public void createListView()
 					}
 				});
 
-				tenure.setMax(Max_tenure/12);
+				tenure.setMax(Max_tenure / 12);
 
 				tenur.setText(Integer.toString(seektenure));
 				tenure.setProgress(seektenure);
+
 				tenure.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 					@Override
 					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 						seektenure = progress;
 						tenur.setText(String.valueOf(progress));
+
 
 						// value now holds the decimal value between 0.0 and 10.0 of the progress
 						// Example:

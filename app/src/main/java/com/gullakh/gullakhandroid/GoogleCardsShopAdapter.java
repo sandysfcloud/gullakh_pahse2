@@ -124,6 +124,8 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.t4 = (TextView) convertView
 					.findViewById(R.id.t4);
+			holder.bp = (TextView) convertView
+					.findViewById(R.id.bp);
 
 
 			holder.apply= (Button) convertView
@@ -153,11 +155,11 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 
 					holder.name.setText(tempValues.getbanknam());
-			holder.day.setText(String.valueOf(tempValues.getemi_value()));
-			holder.description.setText("Monthly for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
-			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate()));
-			holder.t4.setText(String.valueOf(tempValues.getprocessing_fee()));
-
+			holder.day.setText(String.format("%.0f", Double.parseDouble(tempValues.getemi_value())));
+			holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
+			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
+			holder.t4.setText(String.format("%.0f",Double.parseDouble(tempValues.getprocessing_fee())));
+			holder.bp.setText(String.valueOf("Your Borrowing Power is " + String.format("%.0f",Double.parseDouble(tempValues.getbp().toString()))));
 //			holder.image.setImageResource(imageId[position]);
 		//	holder.name.setText(result.get(position));
 			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
@@ -174,6 +176,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 					.findViewById(R.id.t4);
 			//holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
 			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 
 
@@ -207,7 +210,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	private static class ViewHolder {
 		public ImageView image;
 		public TextView promo,name,t1,t2,t3,t4;
-		public TextView discount;
+		public TextView bp;
 		public TextView price;
 		public TextView description;
 		public TextView day;
