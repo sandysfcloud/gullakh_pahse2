@@ -77,6 +77,12 @@
                 android:layout_margin="20dp"
                 android:textSize="28dp" />
 
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/imageViewCoin"
+                android:layout_gravity="center" />
+
         </FrameLayout>
 
      <include

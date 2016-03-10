@@ -1,5 +1,7 @@
 package com.gullakh.gullakhandroid;
 
+import android.animation.AnimatorInflater;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +18,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -31,7 +34,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -79,6 +85,16 @@ public class MainActivity extends ActionBarActivity {
 
     // Connection detector class
     ConnectionDetector cd;
+    private int touchPositionX;
+    private int touchPositionY;
+    private ImageView coin;
+    private TranslateAnimation animationvu;
+    private TranslateAnimation animationvd;
+    private int duration=750;
+    private int wheelheight;
+    private View viewwheel;
+    private int wheelwidth;
+    private ObjectAnimator anim1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +102,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+        coin=(ImageView)findViewById(R.id.imageViewCoin);
+
         TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
         signUptext.setTypeface(myfontthin);
         myprof = (Button) findViewById(R.id.buttonMyprof);
@@ -118,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
         //*****************************wheel
 
         final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);
-
+        viewwheel=findViewById(R.id.wheelview);
         //create data for the adapter
         List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(ITEM_COUNT);
         for (int i = 0; i < ITEM_COUNT; i++) {
@@ -152,7 +170,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
+       /* wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
             @Override
             public void onWheelItemClick(WheelView parent, int position, boolean isSelected) {
                 Log.d("position of wheelitem", String.valueOf(position));
@@ -162,8 +180,108 @@ public class MainActivity extends ActionBarActivity {
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
             }
+        });*/
+
+        wheelView.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                touchPositionX = (int) event.getX();
+                touchPositionY = (int) event.getY();
+                return false;
+            }
+        });
+
+        wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
+            @Override
+            public void onWheelItemClick(WheelView parent, int position, boolean isSelected)
+            {
+                int[]  myImageList2 = new int[]{R.drawable.personalloannew, R.drawable.busineeloan, R.drawable.homeloan, R.drawable.carloan};
+                final MediaPlayer mp = MediaPlayer.create(getApplication(),R.raw.coindrop);
+                String msg = String.valueOf(position) + " " + isSelected;
+                Toast.makeText(MainActivity.this, String.valueOf(touchPositionY), Toast.LENGTH_SHORT).show();
+                coin.setX(touchPositionX-30);
+                coin.setY(touchPositionY);
+                //   Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                coin.setImageResource(myImageList2[position]);
+                Display display = getWindowManager().getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                int windowWidth = size.x;
+                int windowHeight= size.y;
+                Log.d("Wheel ht wd", windowHeight + " & " + windowWidth);
+                int centerYPos=windowHeight/2;
+                int centerXPos=windowWidth/2;
+                anim1 = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.rotate);
+                anim1.setRepeatCount(3);
+                anim1.setTarget(coin);
+                anim1.setDuration(duration);
+                Log.d("Wheel ht wd", wheelheight + " & " + wheelwidth);
+                // animationvd = new TranslateAnimation(0, windowWidth/2-touchPositionX-10, 0, windowHeight/2-touchPositionY-30);
+                int centerX=(windowWidth/2+touchPositionX/2)/2;
+                if(windowWidth/2>touchPositionX)
+                {
+                    animationvu = new TranslateAnimation(0,(centerXPos-touchPositionX)/2, 0,-touchPositionY);
+                    animationvd = new TranslateAnimation((centerXPos-touchPositionX)/2, (centerXPos-touchPositionX)-75,-touchPositionY,-50-touchPositionY+wheelheight);
+                }else
+                {
+                    animationvu = new TranslateAnimation(0,(centerXPos-touchPositionX)/2, 0,-touchPositionY);
+                    animationvd = new TranslateAnimation((centerXPos-touchPositionX)/2, (centerXPos-touchPositionX)-75,-touchPositionY, -50-touchPositionY+wheelheight);
+                }
+
+
+                animationvu.setDuration(duration);  // animation duration
+                animationvu.setFillAfter(true);
+
+                animationvd.setDuration(duration);  // animation duration
+                animationvd.setFillAfter(true);
+
+                animationvu.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        coin.startAnimation(animationvd);
+                        anim1.start();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                animationvd.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        mp.start();
+                        coin.clearAnimation();
+                        for(int i=0;i<1000*1500*1500;i++);
+                            coin.setVisibility(View.INVISIBLE);
+                            Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                coin.startAnimation(animationvu);
+                anim1.start();
+
+
+
+
+            }
         });
         wheelView.setWheelDrawable(R.drawable.wheelbg);
+
 
         //initialise the selection drawable with the first contrast color
         wheelView.setSelectionColor(getContrastColor(entries.get(0)));
@@ -597,5 +715,11 @@ public class MainActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        wheelheight=viewwheel.getHeight()/2+viewwheel.getTop()-37;
+        wheelwidth=viewwheel.getWidth()/2+viewwheel.getLeft()-37;
+        Log.d("Wheel inside ht wd", wheelheight + " & " + wheelwidth);
+    }
 }
