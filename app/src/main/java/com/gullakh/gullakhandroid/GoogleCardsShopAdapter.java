@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.text.Format;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -155,11 +158,31 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 
 					holder.name.setText(tempValues.getbanknam());
-			holder.day.setText(String.format("%.0f", Double.parseDouble(tempValues.getemi_value())));
+
+			Log.d("value from model", tempValues.getemi_value());
+			Log.d("emi value is test", String.format("%.0f", Double.parseDouble(tempValues.getemi_value())));
+
+
+
+			Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+			String emi=String.valueOf(format.format(new BigDecimal(tempValues.getemi_value())));
+			emi = emi.replaceAll("\\.00", "");
+			emi = emi.replaceAll("Rs.", "");
+
+			String profee=String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
+			profee = profee.replaceAll("\\.00", "");
+			profee = profee.replaceAll("Rs.", "");
+
+			String bp=String.valueOf(format.format(new BigDecimal(tempValues.getbp().toString())));
+			bp = bp.replaceAll("\\.00", "");
+			bp = bp.replaceAll("Rs.", "");
+
+
+			holder.day.setText("\u20B9"+emi);
 			holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
-			holder.t4.setText(String.format("%.0f",Double.parseDouble(tempValues.getprocessing_fee())));
-			holder.bp.setText(String.valueOf("Your Borrowing Power is " + String.format("%.0f",Double.parseDouble(tempValues.getbp().toString()))));
+			holder.t4.setText("\u20B9"+profee);
+			holder.bp.setText(String.valueOf("Your Borrowing Power is \u20B9" + bp));
 //			holder.image.setImageResource(imageId[position]);
 		//	holder.name.setText(result.get(position));
 			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));

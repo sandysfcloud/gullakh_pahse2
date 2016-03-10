@@ -248,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:maxLines="2"
-                    android:text="One Time Fee"
+                    android:text="Processing Fee"
                     android:textColor="#616161"
                     android:textSize="14sp"
                     />

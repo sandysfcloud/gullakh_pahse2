@@ -50,10 +50,14 @@ import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.text.Format;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -114,8 +118,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 		loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 		tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 		tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-		String loan_value=((GlobalData) this.getApplication()).getloanamt();
-		loan_amt.setText(loan_value);
+
+
+		Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+		String loan=String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
+		loan = loan.replaceAll("\\.00", "");
+		loan = loan.replaceAll("Rs.", "");
+
+		loan_amt.setText("\u20B9"+loan);
 		filter.setOnClickListener(this);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("data");
