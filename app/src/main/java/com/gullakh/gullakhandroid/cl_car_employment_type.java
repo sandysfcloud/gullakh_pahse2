@@ -14,7 +14,7 @@ public class cl_car_employment_type extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_employment_type);
-        onShakeImage();
+        //onShakeImage();
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
     }

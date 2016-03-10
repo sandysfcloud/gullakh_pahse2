@@ -2,17 +2,14 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -39,10 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 public class RegisterPageActivity extends AppCompatActivity  implements AsyncResponse
 {
@@ -256,6 +250,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 				if(urlchange=="setpassword"){
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,"Registered Successfully","success");
+					Intent intent = new Intent(this, cl_car_make.class);
+					startActivity(intent);
 				}
 
             }else{

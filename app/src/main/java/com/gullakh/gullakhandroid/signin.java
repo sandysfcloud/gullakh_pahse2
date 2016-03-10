@@ -6,20 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,13 +80,6 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 JSONParse asyncTask =new JSONParse(signin.this,arraydata);
                 asyncTask.delegate= signin.this;
                 asyncTask.execute();
-
-
-
-
-
-
-
 
             }
         });

@@ -1,16 +1,12 @@
 package com.gullakh.gullakhandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class cl_car_make extends AppCompatActivity implements View.OnClickListener{
     ImageView next;
@@ -18,7 +14,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_make);
-        onShakeImage();
+        //onShakeImage();
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
     }
