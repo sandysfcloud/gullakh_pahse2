@@ -3,13 +3,16 @@
     android:layout_width="fill_parent"
 
     android:layout_height="fill_parent"
-    android:background="@drawable/card_background_white"
+    android:background="#000"
     android:orientation="vertical"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dip">
+    <!-- android:background="@drawable/card_background_white"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_margin="12dp"
         android:orientation="vertical">
 
@@ -66,7 +69,7 @@
 
     </LinearLayout>
 
-    <SeekBar
+   <!-- <SeekBar
         android:id="@+id/loanamt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +77,15 @@
         android:layout_centerHorizontal="true"
 
         android:max="50"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp" />-->
+        <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+            android:layout_width="fill_parent"
+            android:id="@+id/loanamt"
+            android:layout_height="wrap_content"
+            app:absoluteMinValue="20"
+            app:absoluteMaxValue="150"
+            app:singleThumb="true"
+            />
 
 
     <!--  <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
@@ -126,14 +137,22 @@
             android:padding="5dip" />
 
     </LinearLayout>
-    <SeekBar
-        android:id="@+id/tenure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:max="10"
-        android:layout_marginTop="5dp" />
+        <!-- <SeekBar
+            android:id="@+id/tenure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:max="10"
+            android:layout_marginTop="5dp" />-->
+            <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
+                 android:layout_width="fill_parent"
+                 android:id="@+id/tenure"
+                 android:layout_height="wrap_content"
+                 app:absoluteMinValue="20"
+                 app:absoluteMaxValue="150"
+                 app:singleThumb="true"
+                 />
 
 
     <LinearLayout

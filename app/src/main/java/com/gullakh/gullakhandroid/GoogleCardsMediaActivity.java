@@ -63,251 +63,248 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public class GoogleCardsMediaActivity extends ActionBarActivity implements
-		OnDismissCallback, View.OnClickListener {
-
-	private static final int INITIAL_DELAY_MILLIS = 300;
-	LoanParaMaster[] cobj_LPid;
-	RuleDetails[] cobj_RD;
-	RuleMaster[] cobj_RM;
-	BankList[] cobj_BL;
-	private GoogleCardsShopAdapter mGoogleCardsAdapter;
-	private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
-	public  int [] prgmImages;
-	String sessionid=null;
-	public  String [] month_fee;
-	public  String [] fixed_fee;
-	public  String [] onetime_fee;
-	public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
-	public ArrayList<ListModel> CustomListViewValuesArr2 = new ArrayList<ListModel>();
-	public  int age;
-	TextView min,max,loand,tenur;
-	public  String [] search={"PERSONAL LOAN","CAR LOAN"};
-	public  int [] searchimg={R.drawable.personalloannew,R.drawable.carloan};
-	public  String [] searchdate={"30-1-2016","1-02-2016"};
-	public  String [] searchtime={"05:50pm","10:15am"};
-	ListView listView;
-	LinearLayout layout;
-	ImageView filter;
-	ArrayList<String> disbank;
-	Dialog dialog;
-	Button apply;
-	int Max_tenure,filter_tenure,seektenure=0;
-	double net_salry,emi;
-	public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
-	public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
-	int roi_min=0,roi_max=0,seek_loanamt;
-	Map<String, String> Arry_banknam=new HashMap<>();;
-	protected ArrayList<CharSequence> selectedBanks = new ArrayList<CharSequence>();
-	protected Button selectColoursButton;
-	CharSequence[] bankfilter=null;
-	String prev_selectbank=null;
-	JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4;
-	String globalidentity;
-	Dialog dgthis;
-	@Override
-	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list_display);
-
-		//ListView listView = (ListView) findViewById(R.id.list_view);
-		layout = (LinearLayout) findViewById(R.id.linear);
-		filter = (ImageView) findViewById(R.id.filter);
-		TextView loan_amt = (TextView) findViewById(R.id.loan_amt);
-		TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
-		TextView tfilter = (TextView) findViewById(R.id.tfilter);
-		loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-		tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-		tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-
-
-		Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-		String loan=String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
-		loan = loan.replaceAll("\\.00", "");
-		loan = loan.replaceAll("Rs.", "");
-
-		loan_amt.setText("\u20B9"+loan);
-		filter.setOnClickListener(this);
-		Intent intent = getIntent();
-		String data = intent.getStringExtra("data");
-		createListView();
+        OnDismissCallback, View.OnClickListener {
+
+    private static final int INITIAL_DELAY_MILLIS = 300;
+    LoanParaMaster[] cobj_LPid;
+    RuleDetails[] cobj_RD;
+    RuleMaster[] cobj_RM;
+    BankList[] cobj_BL;
+    private GoogleCardsShopAdapter mGoogleCardsAdapter;
+    private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
+    public int[] prgmImages;
+    String sessionid = null;
+    public String[] month_fee;
+    public String[] fixed_fee;
+    public String[] onetime_fee;
+    public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
+    public ArrayList<ListModel> CustomListViewValuesArr2 = new ArrayList<ListModel>();
+    public int age;
+    TextView min, max, loand, tenur;
+    public String[] search = {"PERSONAL LOAN", "CAR LOAN"};
+    public int[] searchimg = {R.drawable.personalloannew, R.drawable.carloan};
+    public String[] searchdate = {"30-1-2016", "1-02-2016"};
+    public String[] searchtime = {"05:50pm", "10:15am"};
+    ListView listView;
+    LinearLayout layout;
+    ImageView filter;
+    ArrayList<String> disbank;
+    Dialog dialog;
+    Button apply;
+    int Max_tenure, filter_tenure, seektenure = 0;
+    double net_salry, emi;
+    public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
+    public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
+    int roi_min = 0, roi_max = 0, seek_loanamt;
+    Map<String, String> Arry_banknam = new HashMap<>();
+    ;
+    protected ArrayList<CharSequence> selectedBanks = new ArrayList<CharSequence>();
+    protected Button selectColoursButton;
+    CharSequence[] bankfilter = null;
+    String prev_selectbank = null;
+    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4;
+    String globalidentity;
+    Dialog dgthis;
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.list_display);
+
+        //ListView listView = (ListView) findViewById(R.id.list_view);
+        layout = (LinearLayout) findViewById(R.id.linear);
+        filter = (ImageView) findViewById(R.id.filter);
+        TextView loan_amt = (TextView) findViewById(R.id.loan_amt);
+        TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
+        TextView tfilter = (TextView) findViewById(R.id.tfilter);
+        loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+
+        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+        String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
+        loan = loan.replaceAll("\\.00", "");
+        loan = loan.replaceAll("Rs.", "");
+
+        loan_amt.setText("\u20B9" + loan);
+        filter.setOnClickListener(this);
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("data");
+        createListView();
+
+        if (data.equals("carloan")) {
+
+            requestgetserver = new JSONServerGet(new AsyncResponse() {
+                @Override
+                public void processFinish(JSONObject output) {
+
+                }
+
+                public void processFinishString(String str_result, Dialog dg) {
+                    dgthis = dg;
+
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                    Gson gson = gsonBuilder.create();
+
+                    JsonParser parser = new JsonParser();
+                    JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                    LoanParaMaster[] LoanP_cobj = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
+                    String loanpid = LoanP_cobj[0].getid();
+                    String loan_amt = ((GlobalData) getApplication()).getloanamt();
+
+                    requestgetserver2.execute("token", "RuleDetails", sessionid, loanpid, loan_amt);
+
+
+                }
+            }, GoogleCardsMediaActivity.this, "1");
+
+
+            requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+                @Override
+                public void processFinish(JSONObject output) {
 
-		if (data.equals("carloan")) {
+                }
 
-			 requestgetserver = new JSONServerGet(new AsyncResponse(){
-				@Override
-				public void processFinish(JSONObject output) {
+                public void processFinishString(String str_result, Dialog dg) {
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                    Gson gson = gsonBuilder.create();
 
-				}
+                    JsonParser parser = new JsonParser();
+                    JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                    Log.e("Check final data here2", str_result);
 
-				public void processFinishString(String str_result,Dialog dg){
-					dgthis=dg;
+                    RuleDetails[] RD_cobj = gson.fromJson(jsonObject.get("result"), RuleDetails[].class);
+                    ArrayList Arr_RDid = new ArrayList<String>();
+                    for (int i = 0; i < RD_cobj.length; i++) {
+                        Log.d("RD id list", String.valueOf(RD_cobj[i].getrmid()));
+                        Log.d("RD lenght", String.valueOf(RD_cobj.length));
+                        Arr_RDid.add(RD_cobj[i].getrmid());
 
-					GsonBuilder gsonBuilder = new GsonBuilder();
-					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-					Gson gson = gsonBuilder.create();
+                    }
 
-					JsonParser parser = new JsonParser();
-					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-					LoanParaMaster[] LoanP_cobj = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
-					String loanpid = LoanP_cobj[0].getid();
-					String loan_amt=((GlobalData) getApplication()).getloanamt();
+                    String listid = Arr_RDid.toString();
+                    listid = listid.toString().replace("[", "").replace("]", "");
 
-						requestgetserver2.execute("token", "RuleDetails", sessionid,loanpid,loan_amt);
 
+                    requestgetserver3.execute("token", "RuleMaster", sessionid, listid);
 
-				}},GoogleCardsMediaActivity.this,"1");
 
+                }
+            }, GoogleCardsMediaActivity.this, "2");
 
 
-			requestgetserver2 = new JSONServerGet(new AsyncResponse(){
-				@Override
-				public void processFinish(JSONObject output) {
+            requestgetserver3 = new JSONServerGet(new AsyncResponse() {
+                @Override
+                public void processFinish(JSONObject output) {
 
-				}
+                }
 
-				public void processFinishString(String str_result,Dialog dg){
-					GsonBuilder gsonBuilder = new GsonBuilder();
-					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-					Gson gson = gsonBuilder.create();
+                public void processFinishString(String str_result, Dialog dg) {
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                    Gson gson = gsonBuilder.create();
 
-					JsonParser parser = new JsonParser();
-					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-					Log.e("Check final data here2", str_result);
+                    JsonParser parser = new JsonParser();
+                    JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                    Log.e("Check final data here3", str_result);
 
-					RuleDetails[] RD_cobj = gson.fromJson(jsonObject.get("result"), RuleDetails[].class);
-					ArrayList Arr_RDid = new ArrayList<String>();
-					for (int i = 0; i < RD_cobj.length; i++) {
-						Log.d("RD id list", String.valueOf(RD_cobj[i].getrmid()));
-						Log.d("RD lenght", String.valueOf(RD_cobj.length));
-						Arr_RDid.add(RD_cobj[i].getrmid());
+                    RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
+                    ArrayList Arr_RMid = new ArrayList<String>();
+                    for (int i = 0; i < RM_cobj.length; i++) {
+                        Arr_RMid.add(RM_cobj[i].getaccount_lender());
+                    }
 
-					}
+                    cobj_RM = RM_cobj;
+                    String listid = Arr_RMid.toString();
+                    Log.e("listid2", listid);
+                    listid = listid.toString().replace("[", "").replace("]", "");
 
-					String listid=Arr_RDid.toString();
-					listid = listid.toString().replace("[", "").replace("]", "");
+                    requestgetserver4.execute("token", "accountname", sessionid, listid);
 
 
+                }
+            }, GoogleCardsMediaActivity.this, "3");
 
-					requestgetserver3.execute("token", "RuleMaster", sessionid,listid);
 
+            requestgetserver4 = new JSONServerGet(new AsyncResponse() {
+                @Override
+                public void processFinish(JSONObject output) {
 
-				}},GoogleCardsMediaActivity.this,"2");
+                }
 
+                public void processFinishString(String str_result, Dialog dg) {
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                    Gson gson = gsonBuilder.create();
 
+                    JsonParser parser = new JsonParser();
+                    JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                    Log.e("Check final data here3", str_result);
 
+                    dgthis.dismiss();
+                    BankList[] BL_cobj = gson.fromJson(jsonObject.get("result"), BankList[].class);
+                    Map<String, String> Arry_banknamtemp = new HashMap<>();
+                    ;
+                    for (int i = 0; i < BL_cobj.length; i++) {
+                        Arry_banknamtemp.put(BL_cobj[i].getid(), BL_cobj[i].getaccountname());
+                    }
 
-			requestgetserver3 = new JSONServerGet(new AsyncResponse(){
-				@Override
-				public void processFinish(JSONObject output) {
 
-				}
+                    Arry_banknam = Arry_banknamtemp;
 
-				public void processFinishString(String str_result,Dialog dg){
-					GsonBuilder gsonBuilder = new GsonBuilder();
-					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-					Gson gson = gsonBuilder.create();
+                    net_salry = ((GlobalData) getApplication()).getnetsalary();
 
-					JsonParser parser = new JsonParser();
-					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-					Log.e("Check final data here3", str_result);
+                    if ((60 - age) > 7) {
+                        Max_tenure = 7 * 12;
+                        Log.d("Max_tenure- if", String.valueOf(Max_tenure));
+                    } else {
+                        Max_tenure = (60 - age) * 12;
+                        Log.d("Max_tenure-else", String.valueOf(Max_tenure));
+                    }
+                    //Max_tenure = Max_tenure / 12;
+                    Log.d("Max_tenure value is", String.valueOf(Max_tenure));
+                    ((GlobalData) getApplication()).settenure(String.valueOf(Max_tenure / 12));
+                    emi = ((GlobalData) getApplication()).getEmi();
 
-					RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
-					ArrayList Arr_RMid = new ArrayList<String>();
-					for (int i = 0; i < RM_cobj.length; i++) {
-						Arr_RMid.add(RM_cobj[i].getaccount_lender());
-					}
+                    disbank = new ArrayList<String>();
+                    calculate();
+                    setadapter(CustomListViewValuesArr);
 
-					cobj_RM=RM_cobj;
-					String listid=Arr_RMid.toString();
-					Log.e("listid2",listid);
-					listid = listid.toString().replace("[", "").replace("]", "");
 
-					requestgetserver4.execute("token", "accountname", sessionid, listid);
+                }
+            }, GoogleCardsMediaActivity.this, "4");
 
 
+            loan_amtcalcutn();
 
 
-				}},GoogleCardsMediaActivity.this,"3");
+        }
+    }
 
+    public void loan_amtcalcutn() {
+        //***************************serverconnect***********************
 
-			requestgetserver4 = new JSONServerGet(new AsyncResponse(){
-				@Override
-				public void processFinish(JSONObject output) {
 
-				}
+        ServerConnect cls2 = new ServerConnect();
+        DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
 
-				public void processFinishString(String str_result,Dialog dg){
-					GsonBuilder gsonBuilder = new GsonBuilder();
-					gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-					Gson gson = gsonBuilder.create();
+        requestgetserver.execute("token", "LoanParameterMaster", sessionid);
 
-					JsonParser parser = new JsonParser();
-					JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-					Log.e("Check final data here3", str_result);
-
-					dgthis.dismiss();
-					BankList[] BL_cobj= gson.fromJson(jsonObject.get("result"), BankList[].class);
-					Map<String, String> Arry_banknamtemp=new HashMap<>();;
-					for (int i = 0; i < BL_cobj.length; i++) {
-						Arry_banknamtemp.put(BL_cobj[i].getid(), BL_cobj[i].getaccountname());
-					}
-
-
-					Arry_banknam=Arry_banknamtemp;
-
-					net_salry = ((GlobalData) getApplication()).getnetsalary();
-
-					if ((60 - age) > 7) {
-						Max_tenure = 7 * 12;
-						Log.d("Max_tenure- if", String.valueOf(Max_tenure));
-					} else {
-						Max_tenure = (60 - age) * 12;
-						Log.d("Max_tenure-else", String.valueOf(Max_tenure));
-					}
-					//Max_tenure = Max_tenure / 12;
-					Log.d("Max_tenure value is", String.valueOf(Max_tenure));
-					((GlobalData)getApplication()).settenure(String.valueOf(Max_tenure/12));
-					emi = ((GlobalData) getApplication()).getEmi();
-
-					disbank = new ArrayList<String>();
-					calculate();
-					setadapter(CustomListViewValuesArr);
-
-
-
-				}},GoogleCardsMediaActivity.this,"4");
-
-
-			loan_amtcalcutn();
-
-
-
-		}
-	}
-
-	public void loan_amtcalcutn()
-	{
-		//***************************serverconnect***********************
-
-
-		ServerConnect cls2 = new ServerConnect();
-		DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
-		Cursor cr =dbobject.displayData("select * from session");
-		if(cr.moveToFirst())
-		{
-			sessionid=cr.getString(1);
-			Log.e("sessionid-cartypes", sessionid);
-		}
-
-		requestgetserver.execute("token","LoanParameterMaster",sessionid);
-
-		//return LoanParameterMaster id
-		//String loanparameterresult =cls2.LoanParameterMaster(this);
-		//String loanpid = cobj_LPid[0].getid();
-		//Log.d("LoanParameterM id", loanparameterresult);
-		//***********************************
+        //return LoanParameterMaster id
+        //String loanparameterresult =cls2.LoanParameterMaster(this);
+        //String loanpid = cobj_LPid[0].getid();
+        //Log.d("LoanParameterM id", loanparameterresult);
+        //***********************************
 /*
-			//use LoanParameterMaster id and return RuleDetails id
+            //use LoanParameterMaster id and return RuleDetails id
 			cls2.RuleDetails(this, loanpid);
 
 
@@ -340,238 +337,420 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 */
 
 
-		// prgmNameList = new String[]{"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK"};
-		prgmImages = new int[]{R.drawable.icici_bank_logo2, R.drawable.axisbank_logo, R.drawable.bankofindia_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo};
+        // prgmNameList = new String[]{"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK"};
+        prgmImages = new int[]{R.drawable.icici_bank_logo2, R.drawable.axisbank_logo, R.drawable.bankofindia_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo};
 
 
-
-	}
-
+    }
 
 
+    public void calculate() {
+        int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
+        double final_bp, emi_valu, emi_value, bp;
+        CustomListViewValuesArr.clear();
+        disbank.clear();
+        for (int i = 0; i < cobj_RM.length; i++) {
+
+            Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
+
+            if (seektenure != 0) {
+                ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
+                Log.d("seektenure value", String.valueOf(seektenure));
+                emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -loan_amt, 0, false);
+                Log.d("emi_valu", String.valueOf(emi_valu));
+                Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                Log.d("seektenure", String.valueOf(seektenure));
+                Log.d("-loan_amt", String.valueOf(-loan_amt));
+                emi_value = Math.ceil(emi_valu);
+                //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
+
+            } else {
 
 
-	public void calculate()
-	{
-		int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
-		double final_bp,emi_valu,emi_value,bp;
-		CustomListViewValuesArr.clear();
-		disbank.clear();
-		for (int i = 0; i < cobj_RM.length; i++) {
+                emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 
-			Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
-
-			if (seektenure!=0) {
-				((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
-				Log.d("seektenure value", String.valueOf(seektenure));
-				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -loan_amt, 0, false);
-				Log.d("emi_valu", String.valueOf(emi_valu));
-				Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-				Log.d("seektenure", String.valueOf(seektenure));
-				Log.d("-loan_amt", String.valueOf(-loan_amt));
-				emi_value = Math.ceil(emi_valu);
-				//bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
-
-			} else {
+                Log.d("checking emisandeep", String.valueOf(emi_valu) + " " + Max_tenure);
 
 
+            }
+            double bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+            bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
+            final_bp = Math.ceil(bp);
+            Log.d("finalValue bp", String.valueOf(final_bp));
+            Log.d("loan_amt", String.valueOf(loan_amt));
 
-				emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
+            emi_value = Math.ceil(emi_valu);
+            if (loan_amt <= final_bp) {
 
-				Log.d("checking emisandeep", String.valueOf(emi_valu)+" "+Max_tenure);
+                //********
 
+                double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
 
-			}
-			double bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
-			bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
-			final_bp = Math.ceil(bp);
-			Log.d("finalValue bp", String.valueOf(final_bp));
-			Log.d("loan_amt", String.valueOf(loan_amt));
-
-			emi_value = Math.ceil(emi_valu);
-			if (loan_amt <= final_bp) {
-
-				//********
-
-				double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
-
-				ListModel sched = new ListModel();
-				sched = new ListModel();
-				sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-				sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-				sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-				sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
-				sched.setemi_value(String.valueOf(emi_value));
-				sched.setbp(String.valueOf(final_bp));
-				CustomListViewValuesArr.add(sched);
-				disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                ListModel sched = new ListModel();
+                sched = new ListModel();
+                sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
+                sched.setemi_value(String.valueOf(emi_value));
+                sched.setbp(String.valueOf(final_bp));
+                CustomListViewValuesArr.add(sched);
+                disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 
 
-			}
+            }
 
 
+            Log.d("disbank", String.valueOf(disbank));
 
 
+            double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
+            Log.d("checking PMT", String.valueOf(Emi));
 
-
-
-			Log.d("disbank", String.valueOf(disbank));
-
-
-			double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
-			Log.d("checking PMT", String.valueOf(Emi));
-
-		}
+        }
 //*********************
 
-	}
+    }
 
 
-public void setadapter(ArrayList<ListModel> arraylist)
-{
-	CustomListViewValuesArr2=CustomListViewValuesArr;
-	CustomListViewValuesArr2=arraylist;
-	mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,CustomListViewValuesArr2,prgmImages);
-	SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-			new SwipeDismissAdapter(mGoogleCardsAdapter, this));
-	swingBottomInAnimationAdapter.setAbsListView(listView);
+    public void setadapter(ArrayList<ListModel> arraylist) {
+        CustomListViewValuesArr2 = CustomListViewValuesArr;
+        CustomListViewValuesArr2 = arraylist;
+        mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
+        SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+                new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+        swingBottomInAnimationAdapter.setAbsListView(listView);
 
 
-	assert swingBottomInAnimationAdapter.getViewAnimator() != null;
-	swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
-			INITIAL_DELAY_MILLIS);
+        assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+        swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+                INITIAL_DELAY_MILLIS);
 
-	//listView.setAdapter(null);
-	//swingBottomInAnimationAdapter.notifyDataSetChanged();
-	listView.setAdapter(swingBottomInAnimationAdapter);
-	listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-								long id) {
-			Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
-			Bundle bundleObject = new Bundle();
-			bundleObject.putSerializable("key", CustomListViewValuesArr);
-			intent.putExtras(bundleObject);
-			intent.putExtra("position", Integer.toString(position));
-			startActivity(intent);
-			(GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
-		}
-	});
+        //listView.setAdapter(null);
+        //swingBottomInAnimationAdapter.notifyDataSetChanged();
+        listView.setAdapter(swingBottomInAnimationAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
+                Bundle bundleObject = new Bundle();
+                bundleObject.putSerializable("key", CustomListViewValuesArr);
+                intent.putExtras(bundleObject);
+                intent.putExtra("position", Integer.toString(position));
+                startActivity(intent);
+                (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+            }
+        });
 
-	getSupportActionBar().setTitle("Result");
+        getSupportActionBar().setTitle("Result");
+    }
+
+    public void createListView() {
+        listView = new ListView(this);
+        listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
+
+
+        listView.setClipToPadding(false);
+        listView.setDivider(null);
+        Resources r = getResources();
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                8, r.getDisplayMetrics());
+        listView.setDividerHeight(px);
+        listView.setFadingEdgeLength(0);
+        listView.setFitsSystemWindows(true);
+        px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
+                r.getDisplayMetrics());
+        listView.setPadding(px, px, px, px);
+        listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        layout.addView(listView);
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDismiss(@NonNull final ViewGroup listView,
+                          @NonNull final int[] reverseSortedPositions) {
+        for (int position : reverseSortedPositions) {
+            //mGoogleCardsAdapter.remove(mGoogleCardsAdapter.getItem(position));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.filter:
+                bankfilter = disbank.toArray(new CharSequence[disbank.size()]);
+                //((GlobalData) this.getApplication()).setCharbanklist(cs);
+
+                dialog = new Dialog(this, R.style.DialogSlideAnim);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.filter_dialog);
+                //Dialog dialog = new Dialog(this, android.R.style.Theme_Light);
+
+                RangeSeekBar seekBar1 = (RangeSeekBar) dialog.findViewById(R.id.loanamt);
+
+                RangeSeekBar tenure = (RangeSeekBar) dialog.findViewById(R.id.tenure);
+                TextView t1 = (TextView) dialog.findViewById(R.id.textView1);
+                min = (TextView) dialog.findViewById(R.id.min);
+                max = (TextView) dialog.findViewById(R.id.max);
+                if (roi_min != 0) {
+                    min.setText(String.valueOf(roi_min) + " % -");
+                    max.setText(String.valueOf(roi_max) + " %");
+                }
+
+
+                loand = (TextView) dialog.findViewById(R.id.loandata);
+                tenur = (TextView) dialog.findViewById(R.id.tenr);
+
+                apply = (Button) dialog.findViewById(R.id.applyf);
+                apply.setOnClickListener(this);
+                selectColoursButton = (Button) dialog.findViewById(R.id.select_colours);
+                selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+                if (prev_selectbank != null)
+                    selectColoursButton.setText(prev_selectbank);
+                else
+                    selectColoursButton.setText("-None Selected-");
+                selectColoursButton.setOnClickListener(this);
+
+                //seekBar1.setProgressDrawable(new ColorDrawable(Color.parseColor("#D83C2F")));
+                //tenure.setProgressDrawable(new ColorDrawable(Color.parseColor("#D83C2F")));
+
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                WindowManager.LayoutParams lp1 = dialog.getWindow().getAttributes();
+                lp1.dimAmount = 0.7f;
+                dialog.getWindow().setAttributes(lp1);
+                dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                dialog.show();
+
+                RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar) dialog.findViewById(R.id.rangsb);
+                if (roi_max != 0)
+                    rangeSeekBar.setRangeValues(roi_min, roi_max);
+                rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+
+                    @Override
+                    public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
+                        Log.d("value1", String.valueOf(integer));
+                        Log.d("value2", String.valueOf(t1));
+                        roi_min = integer;
+                        roi_max = t1;
+                        min.setText(String.valueOf(integer) + " % -");
+                        max.setText(String.valueOf(t1) + " %");
+                    }
+
+
+                });
+
+
+                seekBar1.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+
+                    @Override
+                    public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
+                        Log.d("loan-value1", String.valueOf(integer));
+                        Log.d("loan-value2", String.valueOf(t1));
+                        Double value = (t1 / 10.0);
+                        seek_loanamt = t1;
+                        loand.setText(String.valueOf(t1) + " Lakh");
+                    }
+
+
+                });
+
+
+
+                tenure.setSelectedMaxValue(Max_tenure / 12);
+                tenur.setText(Integer.toString(seektenure));
+                rangeSeekBar.setRangeValues(0, seektenure);
+                tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+
+                    @Override
+                    public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
+                        Log.d("tenure-value1", String.valueOf(integer));
+                        Log.d("tenure-value2", String.valueOf(t1));
+                        seektenure = t1;
+                        tenur.setText(String.valueOf(t1));
+                    }
+
+
+                });
+
+
+                break;
+            case R.id.select_colours:
+
+                showSelectColoursDialog();
+
+                break;
+            case R.id.applyf:
+
+                newCustomListViewValuesArr.clear();
+                //if(tenur.getText().toString()!)
+                if (tenur.getText() != null) {
+
+                    calculate();
+
+
+                }
+                if (seek_loanamt > 0) {
+                    Log.d("loan seekbar moved!!!!!", "");
+                    ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
+                    loan_amtcalcutn();
+                    calculate();
+
+
+                }
+
+                apply.setBackgroundResource(R.drawable.roundbutton_blue);
+                Log.d("Click size!!!!!", String.valueOf(CustomListViewValuesArr.size()));
+
+
+                for (int i = 0; i < CustomListViewValuesArr.size(); i++) {
+                    Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.size()));
+                    Log.d("test2!!!!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
+                    if (selectedBanks.size() == 0) {
+                        Log.d("selectedBanks!!!!!", String.valueOf(selectedBanks.size()));
+                        for (int k = 0; k < CustomListViewValuesArr.size(); k++) {
+                            selectedBanks.add(CustomListViewValuesArr.get(k).getbanknam());
+                        }
+                    }
+                    for (int j = 0; j < selectedBanks.size(); j++) {
+                        Log.d("selectedBanks size is!", String.valueOf(selectedBanks.size()));
+                        Log.d("selectedBanks data is!", String.valueOf(selectedBanks));
+                        double roi = Double.parseDouble(CustomListViewValuesArr.get(i).getfloating_interest_rate());
+                        Log.d("roi!!!!!", String.valueOf(roi));
+                        Log.d("roi_min!!!!!", String.valueOf(roi_min));
+                        Log.d("roi_max!!!!!", String.valueOf(roi_max));
+                        Log.d("CustomListView value!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
+                        Log.d("selectedBanks value!!", String.valueOf(selectedBanks.get(j)));
+                        if (roi_min == 0 && roi_max == 0) {
+                            if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))) {
+                                Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+                                Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
+                                newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
+                                Log.d("newCustomListV roi 0", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
+                            }
+                        } else {
+
+
+                            if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j)) && (roi >= roi_min && roi <= roi_max)) {
+                                Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
+                                Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
+                                newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
+                                Log.d("newCustomListV dataif", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
+                            }
+                        }
+                    }
+                }
+                Log.d("newCustomListView", String.valueOf(newCustomListViewValuesArr));
+
+                //GoogleCardsShopAdapter mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,newCustomListViewValuesArr,prgmImages);
+                //mGoogleCardsAdapter.filter(selectedBanks);
+                setadapter(newCustomListViewValuesArr);
+                mGoogleCardsAdapter.notifyDataSetChanged();
+                dialog.dismiss();
+
+
+                break;
+
+
+        }
+    }
+
+    protected void showSelectColoursDialog() {
+
+        boolean[] checkedColours = new boolean[bankfilter.length];
+
+        int count = bankfilter.length;
+
+        for (int i = 0; i < count; i++)
+
+            checkedColours[i] = selectedBanks.contains(bankfilter[i]);
+
+        DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
+
+            @Override
+
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+                if (isChecked)
+
+                    selectedBanks.add(bankfilter[which]);
+
+                else
+
+                    selectedBanks.remove(bankfilter[which]);
+
+                onChangeSelectedColours();
+
+            }
+
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Select Banks");
+
+        builder.setMultiChoiceItems(bankfilter, checkedColours, coloursDialogListener);
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+    }
+
+
+    protected void onChangeSelectedColours() {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (CharSequence colour : selectedBanks)
+
+            stringBuilder.append(colour + ",");
+        prev_selectbank = stringBuilder.toString();
+        selectColoursButton.setText(stringBuilder.toString());
+
+    }
+
+
 }
 
-public void createListView()
-{
-	listView = new ListView(this);
-	listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
+//tenure.setMax(Max_tenure / 12);
+//tenure.setProgress(seektenure);
+                /*tenure.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        seektenure = progress;
+                        tenur.setText(String.valueOf(progress));
 
 
-	listView.setClipToPadding(false);
-	listView.setDivider(null);
-	Resources r = getResources();
-	int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-			8, r.getDisplayMetrics());
-	listView.setDividerHeight(px);
-	listView.setFadingEdgeLength(0);
-	listView.setFitsSystemWindows(true);
-	px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12,
-			r.getDisplayMetrics());
-	listView.setPadding(px, px, px, px);
-	listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-	layout.addView(listView);
+                        // value now holds the decimal value between 0.0 and 10.0 of the progress
+                        // Example:
+                        // If the progress changed to 45, value would now hold 4.5
+                    }
 
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
 
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });*/
 
-
-}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			finish();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onDismiss(@NonNull final ViewGroup listView,
-			@NonNull final int[] reverseSortedPositions) {
-		for (int position : reverseSortedPositions) {
-			//mGoogleCardsAdapter.remove(mGoogleCardsAdapter.getItem(position));
-		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch(v.getId()) {
-			case R.id.filter:
-		bankfilter = disbank.toArray(new CharSequence[disbank.size()]);
-		//((GlobalData) this.getApplication()).setCharbanklist(cs);
-
-		dialog = new Dialog(this, R.style.DialogSlideAnim);
-		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		dialog.setContentView(R.layout.filter_dialog);
-		//Dialog dialog = new Dialog(this, android.R.style.Theme_Light);
-
-				SeekBar seekBar1 = (SeekBar) dialog.findViewById(R.id.loanamt);
-
-				SeekBar tenure = (SeekBar) dialog. findViewById(R.id.tenure);
-				TextView t1 = (TextView)  dialog.findViewById(R.id.textView1);
-				min = (TextView)  dialog.findViewById(R.id.min);
-				max = (TextView)  dialog.findViewById(R.id.max);
-            if(roi_min!=0) {
-	         min.setText(String.valueOf(roi_min) + " % -");
-	         max.setText(String.valueOf(roi_max) + " %");
-               }
-
-
-				loand = (TextView) dialog.findViewById(R.id.loandata);
-				tenur = (TextView) dialog.findViewById(R.id.tenr);
-
-				apply = (Button) dialog.findViewById(R.id.applyf);
-		apply.setOnClickListener(this);
-		selectColoursButton = (Button)dialog. findViewById(R.id.select_colours);
-		selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-		if(prev_selectbank != null)
-		selectColoursButton.setText(prev_selectbank);
-		else
-		selectColoursButton.setText("-None Selected-");
-		selectColoursButton.setOnClickListener(this);
-
-				//seekBar1.setProgressDrawable(new ColorDrawable(Color.parseColor("#D83C2F")));
-		//tenure.setProgressDrawable(new ColorDrawable(Color.parseColor("#D83C2F")));
-
-		dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-
-		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-		WindowManager.LayoutParams lp1 = dialog.getWindow().getAttributes();
-		lp1.dimAmount=0.7f;
-		dialog.getWindow().setAttributes(lp1);
-		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-				dialog.show();
-
-				RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar)  dialog.findViewById(R.id.rangsb);
-				if(roi_max!=0)
-				rangeSeekBar.setRangeValues(roi_min,roi_max);
-				rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
-
-					@Override
-					public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
-						Log.d("value1", String.valueOf(integer));
-						Log.d("value2", String.valueOf(t1));
-						roi_min = integer;
-						roi_max = t1;
-						min.setText(String.valueOf(integer) + " % -");
-						max.setText(String.valueOf(t1) + " %");
-					}
-
-
-				});
-
-
-				seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//*********
+	/*seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 					@Override
 					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 						Double value = (progress / 10.0);
@@ -592,174 +771,4 @@ public void createListView()
 					public void onStopTrackingTouch(SeekBar seekBar) {
 
 					}
-				});
-
-				tenure.setMax(Max_tenure / 12);
-
-				tenur.setText(Integer.toString(seektenure));
-				tenure.setProgress(seektenure);
-
-				tenure.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-					@Override
-					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-						seektenure = progress;
-						tenur.setText(String.valueOf(progress));
-
-
-						// value now holds the decimal value between 0.0 and 10.0 of the progress
-						// Example:
-						// If the progress changed to 45, value would now hold 4.5
-					}
-
-					@Override
-					public void onStartTrackingTouch(SeekBar seekBar) {
-					}
-
-					@Override
-					public void onStopTrackingTouch(SeekBar seekBar) {
-					}
-				});
-					break;
-			case R.id.select_colours:
-
-				showSelectColoursDialog();
-
-				break;
-			case  R.id.applyf:
-
-				newCustomListViewValuesArr.clear();
-				//if(tenur.getText().toString()!)
-				if(tenur.getText() != null)
-				{
-
-					calculate();
-
-
-				}
-				if(seek_loanamt>0)
-				{
-					Log.d("loan seekbar moved!!!!!", "");
-					((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt)+"00000");
-					loan_amtcalcutn();
-					calculate();
-
-
-				}
-
-				apply.setBackgroundResource(R.drawable.roundbutton_blue);
-				Log.d("Click size!!!!!", String.valueOf(CustomListViewValuesArr.size()));
-
-
-
-				for(int i=0;i<CustomListViewValuesArr.size();i++) {
-					Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.size()));
-					Log.d("test2!!!!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
-					if(selectedBanks.size()==0)
-					{
-						Log.d("selectedBanks!!!!!", String.valueOf(selectedBanks.size()));
-						for(int k=0;k<CustomListViewValuesArr.size();k++)
-						{
-							selectedBanks.add(CustomListViewValuesArr.get(k).getbanknam());
-						}
-					}
-					for(int j=0;j<selectedBanks.size(); j++) {
-						Log.d("selectedBanks size is!", String.valueOf(selectedBanks.size()));
-						Log.d("selectedBanks data is!", String.valueOf(selectedBanks));
-						double roi = Double.parseDouble(CustomListViewValuesArr.get(i).getfloating_interest_rate());
-						Log.d("roi!!!!!", String.valueOf(roi));
-						Log.d("roi_min!!!!!", String.valueOf(roi_min));
-						Log.d("roi_max!!!!!", String.valueOf(roi_max));
-						Log.d("CustomListView value!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
-						Log.d("selectedBanks value!!", String.valueOf(selectedBanks.get(j)));
-						if (roi_min == 0 && roi_max == 0) {
-							if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))) {
-								Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-								Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
-								newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
-								Log.d("newCustomListV roi 0", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
-							}
-						} else {
-
-
-							if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j)) && (roi >= roi_min && roi <= roi_max)) {
-								Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-								Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
-								newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
-								Log.d("newCustomListV dataif", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
-							}
-						}
-					}
-				}
-				Log.d("newCustomListView", String.valueOf(newCustomListViewValuesArr));
-
-				//GoogleCardsShopAdapter mGoogleCardsAdapter = new GoogleCardsShopAdapter(this,newCustomListViewValuesArr,prgmImages);
-				//mGoogleCardsAdapter.filter(selectedBanks);
-				setadapter(newCustomListViewValuesArr);
-				mGoogleCardsAdapter.notifyDataSetChanged();
-			    dialog.dismiss();
-
-
-				break;
-
-
-		}
-	}
-
-	protected void showSelectColoursDialog() {
-
-		boolean[] checkedColours = new boolean[bankfilter.length];
-
-		int count = bankfilter.length;
-
-		for(int i = 0; i < count; i++)
-
-			checkedColours[i] = selectedBanks.contains(bankfilter[i]);
-
-		DialogInterface.OnMultiChoiceClickListener coloursDialogListener = new DialogInterface.OnMultiChoiceClickListener() {
-
-			@Override
-
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-
-				if(isChecked)
-
-					selectedBanks.add(bankfilter[which]);
-
-				else
-
-					selectedBanks.remove(bankfilter[which]);
-
-				onChangeSelectedColours();
-
-			}
-
-		};
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-		builder.setTitle("Select Banks");
-
-		builder.setMultiChoiceItems(bankfilter, checkedColours, coloursDialogListener);
-
-		AlertDialog dialog = builder.create();
-
-		dialog.show();
-
-	}
-
-
-	protected void onChangeSelectedColours() {
-
-		StringBuilder stringBuilder = new StringBuilder();
-
-		for(CharSequence colour : selectedBanks)
-
-			stringBuilder.append(colour + ",");
-		prev_selectbank=stringBuilder.toString();
-		selectColoursButton.setText(stringBuilder.toString());
-
-	}
-
-
-
-}
+				});*/
