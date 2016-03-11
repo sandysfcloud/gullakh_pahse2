@@ -122,7 +122,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
-		loan_amt.setText(""+loan);
+
 		filter.setOnClickListener(this);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("data");
@@ -132,10 +132,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         loan = loan.replaceAll("\\.00", "");
         loan = loan.replaceAll("Rs.", "");
 
-        loan_amt.setText("\u20B9" + loan);
+        loan_amt.setText("" + loan);
         filter.setOnClickListener(this);
-        Intent intent = getIntent();
-        String data = intent.getStringExtra("data");
+		intent = getIntent();
+		data = intent.getStringExtra("data");
         createListView();
 
         if (data.equals("carloan")) {
@@ -303,46 +303,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         requestgetserver.execute("token", "LoanParameterMaster", sessionid);
 
-        //return LoanParameterMaster id
-        //String loanparameterresult =cls2.LoanParameterMaster(this);
-        //String loanpid = cobj_LPid[0].getid();
-        //Log.d("LoanParameterM id", loanparameterresult);
-        //***********************************
-/*
-            //use LoanParameterMaster id and return RuleDetails id
-			cls2.RuleDetails(this, loanpid);
-
-
-			ArrayList Arr_RDid = new ArrayList<String>();
-			for (int i = 0; i < cobj_RD.length; i++) {
-				Log.d("RD id list", String.valueOf(cobj_RD[i].getrmid()));
-				Log.d("RD lenght", String.valueOf(cobj_RD.length));
-				Arr_RDid.add(cobj_RD[i].getrmid());
-
-			}
-			Log.d("Arr_RDid", String.valueOf(Arr_RDid));
-			//****************************************
-
-
-			cls2.RuleMaster(this, Arr_RDid);
-			ArrayList Arr_RMid = new ArrayList<String>();
-			for (int i = 0; i < cobj_RM.length; i++) {
-				Arr_RMid.add(cobj_RM[i].getaccount_lender());
-			}
-			Log.d("Arr_RMid", String.valueOf(Arr_RMid));
-			//****************************************
-
-
-			cobj_BL = cls2.accountname(this, Arr_RMid);
-
-			for (int i = 0; i < cobj_BL.length; i++) {
-				Arry_banknam.put(cobj_BL[i].getid(), cobj_BL[i].getaccountname());
-			}
-			Log.d("Arry_banknam", String.valueOf(Arry_banknam));
-*/
-
-
-        // prgmNameList = new String[]{"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK"};
         prgmImages = new int[]{R.drawable.icici_bank_logo2, R.drawable.axisbank_logo, R.drawable.bankofindia_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo};
 
 
@@ -777,3 +737,44 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 					}
 				});*/
+
+//return LoanParameterMaster id
+//String loanparameterresult =cls2.LoanParameterMaster(this);
+//String loanpid = cobj_LPid[0].getid();
+//Log.d("LoanParameterM id", loanparameterresult);
+//***********************************
+/*
+            //use LoanParameterMaster id and return RuleDetails id
+			cls2.RuleDetails(this, loanpid);
+
+
+			ArrayList Arr_RDid = new ArrayList<String>();
+			for (int i = 0; i < cobj_RD.length; i++) {
+				Log.d("RD id list", String.valueOf(cobj_RD[i].getrmid()));
+				Log.d("RD lenght", String.valueOf(cobj_RD.length));
+				Arr_RDid.add(cobj_RD[i].getrmid());
+
+			}
+			Log.d("Arr_RDid", String.valueOf(Arr_RDid));
+			//****************************************
+
+
+			cls2.RuleMaster(this, Arr_RDid);
+			ArrayList Arr_RMid = new ArrayList<String>();
+			for (int i = 0; i < cobj_RM.length; i++) {
+				Arr_RMid.add(cobj_RM[i].getaccount_lender());
+			}
+			Log.d("Arr_RMid", String.valueOf(Arr_RMid));
+			//****************************************
+
+
+			cobj_BL = cls2.accountname(this, Arr_RMid);
+
+			for (int i = 0; i < cobj_BL.length; i++) {
+				Arry_banknam.put(cobj_BL[i].getid(), cobj_BL[i].getaccountname());
+			}
+			Log.d("Arry_banknam", String.valueOf(Arry_banknam));
+*/
+
+
+// prgmNameList = new String[]{"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK"};

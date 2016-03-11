@@ -58,9 +58,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	EditText password;
 	static EditText inpuotp;
 	static Typeface myfont;
-
+	static Activity CurrentAct;
 	public static Context baseContext;
-
+	static String classnam;
+	static  ArrayList<String>carloan_que_salary_new;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -301,6 +302,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 	public static Dialog showAlertreview(Activity act,Integer questionno)
 	{
+		CurrentAct=act;
 		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
 
 // 		Setting the title and layout for the dialog
@@ -321,12 +323,14 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		LayoutInflater inflater = (LayoutInflater)act .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		ArrayList<String>carloan_que_salary_new=new ArrayList<String>();
+		carloan_que_salary_new=new ArrayList<String>();
 		carloan_que_salary_new.add("Employee Type: ");
 		carloan_que_salary_new.add("Car Loan Type: ");
 		carloan_que_salary_new.add("Loan Amount: ");
 		carloan_que_salary_new.add("Net Monthly Salary: ");
 		carloan_que_salary_new.add("Total EMI's you pay: ");
+
+
 
 		ArrayList<String>carloan_que_salary_new_ans=new ArrayList<String>();
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
@@ -340,7 +344,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
-		for(int i=1;i<7;i++){
+		for(int i=1;i<questionno;i++){
 
 
 
@@ -358,9 +362,31 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			});
 
 			TextView tvans=(TextView) view.findViewById(R.id.selectedanswer);
-			tv.setText(carloan_que_salary_new.get(i-1));
+			tv.setText(carloan_que_salary_new.get(i - 1));
 			tvans.setText(carloan_que_salary_new_ans.get(i-1));
 			linrlyt.addView(view);
+
+
+			tv.setOnClickListener(new View.OnClickListener() {
+				Intent intclick;
+				public void onClick(View v) {
+					Log.d("Review clicked", "!!!!");
+					if(carloan_que_salary_new.equals("Employee Type: "))
+						intclick=new Intent(CurrentAct,Emp_type_Qustn.class);
+					if(carloan_que_salary_new.equals("Car Loan Type: "))
+						intclick=new Intent(CurrentAct,Car_type_questn.class);
+					if(carloan_que_salary_new.equals("Loan Amount: "))
+						intclick=new Intent(CurrentAct,Loan_amt_questn.class);
+					if(carloan_que_salary_new.equals("Net Monthly Salary: "))
+						intclick=new Intent(CurrentAct,Salaryed_NetSalary.class);
+					if(carloan_que_salary_new.equals("Total EMI's you pay: "))
+						intclick=new Intent(CurrentAct,EMI_questn.class);
+					    CurrentAct.startActivity(intclick);
+					    // Perform action on click
+				}
+			});
+
+
 		}
 		dialog.show();
 		dialog.getWindow().setAttributes(lp);
