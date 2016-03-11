@@ -233,7 +233,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                dialogalert=RegisterPageActivity.showAlert(activity);
+                dialogalert=RegisterPageActivity.showAlertinit(activity);
                 //test
             }
 

@@ -14,7 +14,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_gender);
-        onShakeImage();
+        //onShakeImage();
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
     }
@@ -30,8 +30,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
 
             case R.id.next:
-                Intent intent = new Intent(this, cl_car_employment_type.class);
-                startActivity(intent);
+               // Intent intent = new Intent(this, cl_car_employment_type.class);
+               // startActivity(intent);
 
                 break;
 

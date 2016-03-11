@@ -20,7 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.text.Format;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ListView_Click extends ActionBarActivity implements View.OnClickListener{
     PopupWindow popUp;
@@ -70,20 +74,28 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         name.setText(bankname);
         TextView t1= (TextView) findViewById(R.id.mt1);
         t1.setTypeface(myfontlight);
-        t1.setText("Monthly for "+tenure+" years");
+        t1.setText("EMI for " + tenure + " years");
         TextView temi= (TextView) findViewById(R.id.tmr);
         temi.setTypeface(myfontlight);
-        temi.setText(emi);
+        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+        String emival=String.valueOf(format.format(new BigDecimal(emi)));
+        emival = emival.replaceAll("\\.00", "");
+
+        temi.setText(emival);
         TextView t3= (TextView) findViewById(R.id.tf1);
         t3.setTypeface(myfontlight);
         TextView troi= (TextView) findViewById(R.id.tf2);
         troi.setTypeface(myfontlight);
-        troi.setText(roi);
+        troi.setText(roi + "%");
         TextView t5= (TextView) findViewById(R.id.t3);
         t5.setTypeface(myfontlight);
         TextView tprofee= (TextView) findViewById(R.id.t4);
         tprofee.setTypeface(myfontlight);
-        tprofee.setText(one_time_fee);
+        String one_time_fee_temp=String.valueOf(format.format(new BigDecimal(one_time_fee)));
+        one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
+
+
+        tprofee.setText(one_time_fee_temp);
         title= (TextView) findViewById(R.id.titlet);
         title.setTypeface(myfontlight);
         t7= (TextView) findViewById(R.id.d1);

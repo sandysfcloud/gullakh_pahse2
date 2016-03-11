@@ -31,7 +31,7 @@
             android:layout_height="50dp"
             android:id="@+id/searchimg"
             android:paddingBottom="6dp"
-            android:src="@drawable/personalloannew"
+            android:src="@drawable/carloan"
 
 
             />
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:maxLines="2"
-                android:text="Monthly for 3 years"
+                android:text="EMI for 3 years"
                 android:textColor="#ff00719b"
                 android:textSize="14sp"
                 />
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:maxLines="2"
-                android:text="Fixed"
+                android:text="ROI"
                 android:textColor="#ff00719b"
                 android:textSize="14sp"
                 />
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:maxLines="2"
-                android:text="One Time Fee"
+                android:text="Processing Fee"
                 android:textColor="#ff00719b"
                 android:textSize="14sp"
                 />

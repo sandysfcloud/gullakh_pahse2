@@ -263,7 +263,23 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 
+	public static Dialog showAlertinit(Activity act)
+	{
+		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
 
+// 						Setting the title and layout for the dialog
+		dialog.setTitle("");
+		dialog.setContentView(R.layout.dialogloadingwomsg);
+
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.dimAmount=0.9f;
+		dialog.show();
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
+	}
 
 	public static Dialog showAlert(Activity act)
 	{
@@ -324,7 +340,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
-		for(int i=1;i<questionno;i++){
+		for(int i=1;i<7;i++){
 
 
 

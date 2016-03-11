@@ -29,7 +29,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.next:
-                Intent intent = new Intent(this, cl_car_residence.class);
+                Intent intent = new Intent(this, cl_car_gender.class);
                 startActivity(intent);
 
                 break;

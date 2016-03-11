@@ -122,6 +122,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
+		loan_amt.setText(""+loan);
+		filter.setOnClickListener(this);
+		Intent intent = getIntent();
+		String data = intent.getStringExtra("data");
+		createListView();
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
         loan = loan.replaceAll("\\.00", "");

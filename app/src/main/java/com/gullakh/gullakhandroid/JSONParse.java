@@ -36,7 +36,7 @@ Dialog dialogalert;
         // DIALOG_DOWNLOAD_PROGRESS is defined as 0 at start of class
          //dialogalert=showAlert();
         Log.e("AsyncTask", "onPreExecute");
-        dialogalert=RegisterPageActivity.showAlert(activity);
+        dialogalert=RegisterPageActivity.showAlertinit(activity);
 
     }
     @Override
