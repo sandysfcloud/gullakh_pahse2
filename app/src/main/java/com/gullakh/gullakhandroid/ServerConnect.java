@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -24,7 +23,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
@@ -474,7 +472,17 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                                      liste = new ArrayList<String>();
                                      for(int i=0;i<=size;i++) {
                                          Log.e("employerdata "+i, enums[i].getemployername());
-                                         liste.add(enums[i].getemployername());
+                                         liste.add(enums[i].getemployerna//**************************internet connection check
+        cd = new ConnectionDetector(getApplicationContext());
+        isInternetPresent = cd.isConnectingToInternet();
+
+        // check for Internet status
+        if (!isInternetPresent) {
+            // Internet connection is not present
+            // Ask user to connect to Internet
+            showAlertDialog(MainActivity.this, "No Internet Connection",
+                    " Oops! You don't have internet connection.", false);
+        }me());
                                      }
 
                                  }

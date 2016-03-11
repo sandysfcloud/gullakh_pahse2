@@ -23,7 +23,6 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -39,7 +38,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -55,12 +53,8 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 public class GoogleCardsMediaActivity extends ActionBarActivity implements
         OnDismissCallback, View.OnClickListener {
@@ -122,11 +116,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
-		loan_amt.setText(""+loan);
-		filter.setOnClickListener(this);
-		Intent intent = getIntent();
-		String data = intent.getStringExtra("data");
-		createListView();
+		//loan_amt.setText(""+loan);
+		//filter.setOnClickListener(this);
+		//Intent intent = getIntent();
+		//String data = intent.getStringExtra("data");
+		//createListView();
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
         loan = loan.replaceAll("\\.00", "");
