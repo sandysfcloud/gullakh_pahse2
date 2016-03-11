@@ -95,7 +95,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             public void onProgressChanged(SeekArc seekArc, int progress,
                                           boolean fromUser) {
 
-                progress = (progress + 1) * 5000;
+                progress = (progress + 4) * 5000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 
 

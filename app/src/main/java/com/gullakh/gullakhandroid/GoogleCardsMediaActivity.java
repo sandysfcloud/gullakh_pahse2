@@ -125,7 +125,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 		loan = loan.replaceAll("\\.00", "");
 		loan = loan.replaceAll("Rs.", "");
 
-		loan_amt.setText("\u20B9"+loan);
+		loan_amt.setText(""+loan);
 		filter.setOnClickListener(this);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("data");

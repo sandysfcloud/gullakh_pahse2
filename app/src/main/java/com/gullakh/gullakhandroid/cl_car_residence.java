@@ -14,7 +14,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_residence);
-        onShakeImage();
+        //onShakeImage();
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
     }

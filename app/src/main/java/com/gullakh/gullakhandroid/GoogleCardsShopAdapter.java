@@ -178,11 +178,11 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			bp = bp.replaceAll("Rs.", "");
 
 
-			holder.day.setText("\u20B9"+emi);
+			holder.day.setText(""+emi);
 			holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
-			holder.t4.setText("\u20B9"+profee);
-			holder.bp.setText(String.valueOf("Your Borrowing Power is \u20B9" + bp));
+			holder.t4.setText(""+profee);
+			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 //			holder.image.setImageResource(imageId[position]);
 		//	holder.name.setText(result.get(position));
 			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
