@@ -23,16 +23,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="2">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Which car are you interested in?"
-                android:id="@+id/carmake"
+                android:id="@+id/TextViewHeading2"
                 android:textColor="#4b4b4b"
                 android:layout_marginTop="20dp"
                 android:textSize="20dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +47,7 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img"
+                    android:id="@+id/ImageButtonCar1"
 
                     android:background="@drawable/usedcar"
                     android:layout_marginLeft="20dp"
@@ -56,7 +58,7 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img2"
+                    android:id="@+id/ImageButtonCar2"
 
                     android:background="@drawable/caramaze"
                     android:layout_marginLeft="20dp"
@@ -65,26 +67,27 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:weightSum="2"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginBottom="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/alto"
+                    android:textSize="18dp"
                     android:textColor="#3f3f3f"
                     android:text="Maruti Alto"
 
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp" />
+                    android:layout_marginRight="30dp"
+                    android:id="@+id/TextViewOption1" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/amaze"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption2"
                     android:textColor="#3f3f3f"
                     android:text="Honda Amaze"
                     android:layout_marginLeft="30dp"
@@ -102,7 +105,7 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img3"
+                    android:id="@+id/ImageButtonCar3"
 
                     android:background="@drawable/careon"
                     android:layout_marginLeft="20dp"
@@ -113,7 +116,7 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img4"
+                    android:id="@+id/ImageButtonCar4"
 
                     android:background="@drawable/newcar"
                     android:layout_marginLeft="20dp"
@@ -122,15 +125,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:weightSum="2"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/eon"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption3"
                     android:textColor="#3f3f3f"
                     android:text="Hyundai Eon"
 
@@ -140,8 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/swift"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption4"
                     android:textColor="#3f3f3f"
                     android:text="Maruti Swift"
                     android:layout_marginLeft="30dp"
@@ -178,15 +181,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="bottom"
                 android:weightSum="2"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="10dp">
                 <ImageButton
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:id="@+id/back"
                     android:gravity="left"
-                    android:layout_marginRight="80dp"
+                    android:layout_marginRight="100dp"
                     android:layout_gravity="bottom|left"
 
                     android:background="@drawable/backimgnw" />

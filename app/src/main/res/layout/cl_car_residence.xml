@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Where do you live currently ?"
-                android:id="@+id/carmake"
+                android:id="@+id/TextViewHeading1"
                 android:textColor="#4b4b4b"
                 android:layout_marginTop="20dp"
                 android:textSize="20dp"
@@ -45,9 +45,9 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img"
+                    android:id="@+id/ImageButtonPlace1"
 
-                    android:background="@drawable/bangalore"
+                    android:background="@drawable/locbang"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp" />
                 <ImageButton
@@ -56,9 +56,9 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img2"
+                    android:id="@+id/ImageButtonPlace2"
 
-                    android:background="@drawable/chennai"
+                    android:background="@drawable/locchn"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp" />
             </LinearLayout>
@@ -67,13 +67,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:weightSum="2"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/alto"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption1"
                     android:textColor="#3f3f3f"
                     android:text="Bengaluru"
 
@@ -83,8 +84,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/amaze"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption2"
                     android:textColor="#3f3f3f"
                     android:text="Chennai"
                     android:layout_marginLeft="40dp"
@@ -102,9 +103,9 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img3"
+                    android:id="@+id/ImageButtonPlace3"
 
-                    android:background="@drawable/kolkata"
+                    android:background="@drawable/lockol"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp" />
                 <ImageButton
@@ -113,9 +114,9 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/img4"
+                    android:id="@+id/ImageButtonPlace4"
 
-                    android:background="@drawable/mumbainew"
+                    android:background="@drawable/locmum"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp" />
             </LinearLayout>
@@ -129,8 +130,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/eon"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption3"
                     android:textColor="#3f3f3f"
                     android:text="Kolkata"
 
@@ -140,8 +141,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/swift"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption4"
                     android:textColor="#3f3f3f"
                     android:text="Mumbai"
                     android:layout_marginLeft="50dp"
@@ -180,23 +181,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:weightSum="2"
-                android:gravity="center" >
-
-                <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:id="@+id/back"
-                    android:gravity="left"
-                    android:layout_marginRight="80dp"
-                    android:layout_gravity="bottom|left"
-                    android:background="@drawable/backimgnw" />
+                android:gravity="right" >
 
                 <ImageButton
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:id="@+id/next"
-                    android:layout_marginLeft="100dp"
-                    android:background="@drawable/nextimgnw" />
+                    android:background="@drawable/nextimgnw"
+                    android:layout_marginRight="40dp" />
             </LinearLayout>
 
 

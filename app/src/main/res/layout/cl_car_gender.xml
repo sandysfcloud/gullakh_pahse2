@@ -3,22 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/bgque"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:layout_height="match_parent">
-
-    <!--<Spinner
-        android:layout_margin="20dp"
-        android:id="@+id/spinner"
-        android:padding="8dp"
-        android:background="@drawable/imageview_stroke"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-
-    />-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -32,11 +17,11 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
 
-            android:id="@+id/maleuser"
+            android:id="@+id/usermale"
 
-            android:background="@drawable/male"
+            android:background="@drawable/usermale"
             android:layout_weight="1"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="10dp" />
         <ImageButton
             android:layout_width="100dp"
@@ -44,12 +29,12 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
 
-            android:id="@+id/femaleuser"
+            android:id="@+id/userfemale"
 
-            android:background="@drawable/female"
+            android:background="@drawable/userfemale"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="40dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,22 +48,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20dp"
-            android:id="@+id/male"
+            android:textSize="18dp"
+            android:id="@+id/TextViewOption1"
             android:textColor="#4b4b4b"
             android:text="Male"
 
-            />
+            android:layout_marginLeft="40dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20dp"
-            android:id="@+id/female"
+            android:textSize="18dp"
+            android:id="@+id/TextViewOption2"
             android:textColor="#4b4b4b"
             android:text="Female"
-            />
+            android:layout_marginRight="40dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -88,12 +73,12 @@
         android:weightSum="2"
         android:gravity="center"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="75dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select your  Gender ?"
-            android:id="@+id/carmake"
+            android:id="@+id/TextViewHeading3"
             android:gravity="left"
             android:textColor="#4b4b4b"
             android:textSize="20dp" />
@@ -105,14 +90,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:weightSum="2"
-        android:gravity="center" >
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
 
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/back"
             android:gravity="left"
-            android:layout_marginRight="80dp"
+            android:layout_marginRight="100dp"
             android:layout_gravity="bottom|left"
             android:background="@drawable/backimgnw" />
 

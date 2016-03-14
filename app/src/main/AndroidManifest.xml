@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gullakh.gullakhandroid" >
+    package="com.gullakh.gullakhandroid">
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,14 +22,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <receiver
             android:name=".GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -43,13 +43,7 @@
             android:name=".SplashScreensActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:label=" Home"
@@ -100,144 +94,130 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Questionier1"
-            android:label="@string/title_activity_questionier1" >
-        </activity>
+            android:label="@string/title_activity_questionier1" />
         <activity
             android:name=".Your_Info_Questn"
-            android:label="@string/title_activity_questionier2" >
-        </activity>
+            android:label="@string/title_activity_questionier2" />
         <activity
             android:name=".Pan_No_Qustn"
-            android:label="@string/title_activity_questionier3" >
-        </activity>
+            android:label="@string/title_activity_questionier3" />
         <activity
             android:name=".Loan_amt_questn"
-            android:label="@string/title_activity_cartypes__questn" >
-        </activity>
+            android:label="@string/title_activity_cartypes__questn" />
         <activity
             android:name=".Choose_Car_Questn"
-            android:label="@string/title_activity_choose__car__questn" >
-        </activity>
+            android:label="@string/title_activity_choose__car__questn" />
         <activity
             android:name=".Your_Comp_Questn"
-            android:label="@string/title_activity_your__comp__questn" >
-        </activity>
+            android:label="@string/title_activity_your__comp__questn" />
         <activity
             android:name=".Net_Salry_Qutsn"
-            android:label="@string/title_activity_net__salry__qutsn" >
-        </activity>
+            android:label="@string/title_activity_net__salry__qutsn" />
         <activity
             android:name=".Emp_type_Qustn"
-            android:label="@string/title_activity_emp_type__qustn" >
-        </activity>
+            android:label="@string/title_activity_emp_type__qustn" />
         <activity
             android:name=".SelfBusiness_type_Questn"
-            android:label="@string/title_activity_self_business_type__questn" >
-        </activity>
+            android:label="@string/title_activity_self_business_type__questn" />
         <activity
             android:name=".Self_Business_StartDate"
-            android:label="@string/title_activity_self__business__start_date" >
-        </activity>
+            android:label="@string/title_activity_self__business__start_date" />
         <activity
             android:name=".Self_Business_Professn"
-            android:label="@string/title_activity_self__business__professn" >
-        </activity>
+            android:label="@string/title_activity_self__business__professn" />
         <activity
             android:name=".Self_Business_AnualTurnOver"
-            android:label="@string/title_activity_self__business__anual_turn_over" >
-        </activity>
+            android:label="@string/title_activity_self__business__anual_turn_over" />
         <activity
             android:name=".Self_Business_EMIpaid"
-            android:label="@string/title_activity_self__business__emipaid" >
-        </activity>
+            android:label="@string/title_activity_self__business__emipaid" />
         <activity
             android:name=".Salaryed_NetSalary"
-            android:label="@string/title_activity_salaryed__net_salary" >
-        </activity>
+            android:label="@string/title_activity_salaryed__net_salary" />
         <activity
             android:name=".Salaried_Credited_Bank"
-            android:label="@string/title_activity_salaried__credited__bank" >
-        </activity>
+            android:label="@string/title_activity_salaried__credited__bank" />
         <activity
             android:name=".Salaried_EMI_Paid"
-            android:label="@string/title_activity_salaried__emi__paid" >
-        </activity>
+            android:label="@string/title_activity_salaried__emi__paid" />
         <activity
             android:name=".SelfBussinessMan_BussTyp"
-            android:label="@string/title_activity_self_bussiness_man__buss_typ" >
-        </activity>
+            android:label="@string/title_activity_self_bussiness_man__buss_typ" />
         <activity
             android:name=".EmployerNam_Qustn"
-            android:label="@string/title_activity_employer_nam__qustn" >
-        </activity>
+            android:label="@string/title_activity_employer_nam__qustn" />
         <activity
             android:name=".WorkingYear_Employer"
-            android:label="@string/title_activity_working_year__employer" >
-        </activity>
+            android:label="@string/title_activity_working_year__employer" />
         <activity
             android:name=".Total_WorkYear_Qustn"
-            android:label="@string/title_activity_total__work_year__qustn" >
-        </activity>
+            android:label="@string/title_activity_total__work_year__qustn" />
         <activity
             android:name=".CurrentCity_Residing_years"
-            android:label="@string/title_activity_current_city__residing_years" >
-        </activity>
+            android:label="@string/title_activity_current_city__residing_years" />
         <activity
             android:name=".Current_Residence_Questn"
-            android:label="@string/title_activity_current__residence__questn" >
-        </activity>
+            android:label="@string/title_activity_current__residence__questn" />
         <activity
             android:name=".Your_InfoFinal_Questn"
-            android:label="@string/title_activity_your__info_final__questn" >
-        </activity>
+            android:label="@string/title_activity_your__info_final__questn" />
         <activity
             android:name=".Your_Info_City"
-            android:label="@string/title_activity_your__info_final__questn" >
-        </activity>
+            android:label="@string/title_activity_your__info_final__questn" />
         <activity
             android:name=".EMI_questn"
-            android:label="@string/title_activity_emi_questn" >
-        </activity>
+            android:label="@string/title_activity_emi_questn" />
         <activity
             android:name=".DateOfBirth_questn"
-            android:label="@string/title_activity_date_of_birth_questn" >
-        </activity>
+            android:label="@string/title_activity_date_of_birth_questn" />
         <activity
             android:name=".Filter"
-            android:label="@string/title_activity_filter" >
-        </activity>
+            android:label="@string/title_activity_filter" />
         <activity
             android:name=".signin"
-            android:label="@string/title_activity_signin" >
-        </activity>
+            android:label="@string/title_activity_signin" />
         <activity
             android:name=".cl_car_employment_type"
-            android:label="@string/title_activity_signin" >
-        </activity>
+            android:label="Employment Type"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_gender"
-            android:label="@string/title_activity_signin" >
-        </activity>
+            android:label="Gender" />
         <activity
             android:name=".cl_car_job_experience"
-            android:label="@string/title_activity_signin" >
-        </activity>
+            android:label="@string/title_activity_signin"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_joining_year"
-            android:label="@string/title_activity_signin" >
-        </activity>
+            android:label="" />
         <activity
             android:name=".cl_car_make"
-            android:label="@string/title_activity_signin" >
-        </activity>
+            android:label="Select Cars"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_residence"
-            android:label="@string/title_activity_signin" >
+            android:label="Select Location"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".cl_salary_mode"
-            android:label="@string/title_activity_signin" >
-        </activity>
+            android:label="Salary Mode"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".cl_car_residence_type"
+            android:label="Select Residence"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".cl_car_saraied"
+            android:label="Salaried"/>
+        <activity android:name=".cl_car_selfempbusiness"
+            android:label="Self Employed-Business"/>
+        <activity android:name=".cl_car_selfempbusinesprofs"
+            android:label="Self Employed Professional"/>
     </application>
 
 </manifest>

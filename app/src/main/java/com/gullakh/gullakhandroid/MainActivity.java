@@ -111,6 +111,12 @@ public class MainActivity extends ActionBarActivity {
             final View view = factory.inflate(R.layout.nointernetconn, null);
             alertadd.setView(view);
             alertadd.setCancelable(false);
+            alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                   //
+                }
+            });
             alertadd.show();
         }else {
 

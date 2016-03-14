@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -38,6 +39,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -53,8 +55,12 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 public class GoogleCardsMediaActivity extends ActionBarActivity implements
         OnDismissCallback, View.OnClickListener {
@@ -116,20 +122,20 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
-		//loan_amt.setText(""+loan);
-		//filter.setOnClickListener(this);
-		//Intent intent = getIntent();
-		//String data = intent.getStringExtra("data");
-		//createListView();
+
+		filter.setOnClickListener(this);
+		Intent intent = getIntent();
+		String data = intent.getStringExtra("data");
+		createListView();
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
         loan = loan.replaceAll("\\.00", "");
         loan = loan.replaceAll("Rs.", "");
 
-        loan_amt.setText("\u20B9" + loan);
+        loan_amt.setText("" + loan);
         filter.setOnClickListener(this);
-        Intent intent = getIntent();
-        String data = intent.getStringExtra("data");
+		intent = getIntent();
+		data = intent.getStringExtra("data");
         createListView();
 
         if (data.equals("carloan")) {
@@ -297,46 +303,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         requestgetserver.execute("token", "LoanParameterMaster", sessionid);
 
-        //return LoanParameterMaster id
-        //String loanparameterresult =cls2.LoanParameterMaster(this);
-        //String loanpid = cobj_LPid[0].getid();
-        //Log.d("LoanParameterM id", loanparameterresult);
-        //***********************************
-/*
-            //use LoanParameterMaster id and return RuleDetails id
-			cls2.RuleDetails(this, loanpid);
-
-
-			ArrayList Arr_RDid = new ArrayList<String>();
-			for (int i = 0; i < cobj_RD.length; i++) {
-				Log.d("RD id list", String.valueOf(cobj_RD[i].getrmid()));
-				Log.d("RD lenght", String.valueOf(cobj_RD.length));
-				Arr_RDid.add(cobj_RD[i].getrmid());
-
-			}
-			Log.d("Arr_RDid", String.valueOf(Arr_RDid));
-			//****************************************
-
-
-			cls2.RuleMaster(this, Arr_RDid);
-			ArrayList Arr_RMid = new ArrayList<String>();
-			for (int i = 0; i < cobj_RM.length; i++) {
-				Arr_RMid.add(cobj_RM[i].getaccount_lender());
-			}
-			Log.d("Arr_RMid", String.valueOf(Arr_RMid));
-			//****************************************
-
-
-			cobj_BL = cls2.accountname(this, Arr_RMid);
-
-			for (int i = 0; i < cobj_BL.length; i++) {
-				Arry_banknam.put(cobj_BL[i].getid(), cobj_BL[i].getaccountname());
-			}
-			Log.d("Arry_banknam", String.valueOf(Arry_banknam));
-*/
-
-
-        // prgmNameList = new String[]{"ICICI BANK","AXIS BANK","BANK OF INDIA","HDFC BANK"};
         prgmImages = new int[]{R.drawable.icici_bank_logo2, R.drawable.axisbank_logo, R.drawable.bankofindia_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo};
 
 

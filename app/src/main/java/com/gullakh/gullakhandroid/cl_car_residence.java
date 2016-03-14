@@ -1,21 +1,48 @@
 package com.gullakh.gullakhandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class cl_car_residence extends AppCompatActivity implements View.OnClickListener{
     ImageView next;
+    ImageButton place1,place2,place3,place4;
+    TextView heading,option1,option2,option3,option4;
+    String dataLocation="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_residence);
         //onShakeImage();
+
+        heading= (TextView) findViewById(R.id.TextViewHeading1);
+        option1= (TextView) findViewById(R.id.TextViewOption1);
+        option2= (TextView) findViewById(R.id.TextViewOption2);
+        option3= (TextView) findViewById(R.id.TextViewOption3);
+        option4= (TextView) findViewById(R.id.TextViewOption4);
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+        place1 = (ImageButton) findViewById(R.id.ImageButtonPlace1);
+        place2 = (ImageButton) findViewById(R.id.ImageButtonPlace2);
+        place3 = (ImageButton) findViewById(R.id.ImageButtonPlace3);
+        place4 = (ImageButton) findViewById(R.id.ImageButtonPlace4);
         next = (ImageView) findViewById(R.id.next);
+        place1.setOnClickListener(this);
+        place2.setOnClickListener(this);
+        place3.setOnClickListener(this);
+        place4.setOnClickListener(this);
         next.setOnClickListener(this);
     }
     public void onShakeImage() {
@@ -30,14 +57,46 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
 
             case R.id.next:
-                Intent intent = new Intent(this, cl_car_gender.class);
+                if(dataLocation.equals(""))
+                {
+                    RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
+                }else{
+                    Intent intent = new Intent(this, cl_car_make.class);
+                    startActivity(intent);
+                    break;
+                }
+
+            case R.id.ImageButtonPlace1:
+                dataLocation="Bengaluru";
+                setDataToArrayList(dataLocation);
+                Intent intent = new Intent(this, cl_car_make.class);
                 startActivity(intent);
-
                 break;
-
-
+            case R.id.ImageButtonPlace2:
+                dataLocation="Chennai";
+                setDataToArrayList(dataLocation);
+                intent = new Intent(this, cl_car_make.class);
+                startActivity(intent);
+                break;
+            case R.id.ImageButtonPlace3:
+                dataLocation="Kolkata";
+                setDataToArrayList(dataLocation);
+                intent = new Intent(this, cl_car_make.class);
+                startActivity(intent);
+                break;
+            case R.id.ImageButtonPlace4:
+                dataLocation="Mumbai";
+                setDataToArrayList(dataLocation);
+                intent = new Intent(this, cl_car_make.class);
+                startActivity(intent);
+                break;
 
         }
 
+    }
+
+    public void setDataToArrayList(String data)
+    {
+        cl_car_global_data.data.add(data);
     }
 }
