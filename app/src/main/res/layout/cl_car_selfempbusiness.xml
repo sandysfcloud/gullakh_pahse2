@@ -1,0 +1,139 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/bgque"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_gravity="center_horizontal|bottom"
+        android:weightSum="2"
+        android:layout_marginBottom="20dp">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/back"
+            android:gravity="left"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/backimgnw"
+
+            />
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/next"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/nextimgnw"
+
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/heading1"
+            android:textColor="#000"
+            android:text="Industry Type"
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:background="#94ababab" />
+
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/spinner1"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="center_horizontal"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Start date of current business ?"
+            android:id="@+id/heading2"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:background="#94ababab" />
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="#D83C2F"
+            app:mtf_image="@drawable/loan_amt"
+            android:layout_below="@+id/heading2"
+            android:layout_alignLeft="@+id/view"
+            android:layout_alignStart="@+id/view">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Join Date in Current Employer"
+                android:id="@+id/joindateofemp"
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Type of firm ?"
+            android:id="@+id/heading3"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:background="#94ababab"
+            android:layout_marginTop="30dp" />
+
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/spinner2"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="center_horizontal"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple" />
+    </LinearLayout>
+</FrameLayout>

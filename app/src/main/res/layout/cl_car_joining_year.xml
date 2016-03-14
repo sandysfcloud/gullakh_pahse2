@@ -1,8 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#fff"
+    android:background="@drawable/bgque"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -18,60 +18,95 @@
         android:layout_height="wrap_content"
 
     />-->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="The year you joined the company?"
-                android:id="@+id/joining_year"
-                android:gravity="left"
-                android:textColor="#000"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="40dp"
-                android:textSize="18dp" />
 
-
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="20dp"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#D83C2F"
-                app:mtf_image="@drawable/loan_amt"
-                >
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Year of joining"
-                    android:id="@+id/joiningyear"
-                    android:textColorHint="#fff"
-
-                    android:textColor="#fff"
-                    android:textSize="15sp" />
-
-            </com.gullakh.gullakhandroid.MaterialTextField>
-
-        </LinearLayout>
-    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Which year you joined the current company ?"
+            android:id="@+id/joining_year"
+            android:gravity="left"
+            android:textColor="#4a4a4a"
+            android:textSize="20dp" />
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_height="wrap_content"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="#D83C2F"
+            app:mtf_image="@drawable/loan_amt">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Year of joining"
+                android:id="@+id/joiningyear"
+                android:textColorHint="#fff"
+
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:layout_marginTop="200dp">
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Total Experince ?"
+            android:id="@+id/joining_year"
+            android:gravity="left"
+            android:textColor="#4a4a4a"
+            android:textSize="20dp" />
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="20dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="#D83C2F"
+            app:mtf_image="@drawable/loan_amt"
+            >
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Year and month of joining"
+                android:id="@+id/totalexp"
+                android:textColorHint="#fff"
+
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
         android:layout_weight="1"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_horizontal|bottom"
         android:weightSum="2"
         >
         <ImageView
@@ -97,4 +132,4 @@
             />
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

@@ -100,6 +100,40 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //**************************internet connection check
+        cd = new ConnectionDetector(getApplicationContext());
+        isInternetPresent = cd.isConnectingToInternet();
+
+        // check for Internet status
+        if (!isInternetPresent) {
+            AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
+            LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+            final View view = factory.inflate(R.layout.nointernetconn, null);
+            alertadd.setView(view);
+            alertadd.setCancelable(false);
+            alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                   //
+                }
+            });
+            alertadd.show();
+        }else {
+
+            //new JSONParse().execute();
+            ServerConnect  cls2= new ServerConnect();
+            //check wether session-id is valid or not
+            String flag= null;
+            try {
+                cls2.checkAPI(MainActivity.this);
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         coin=(ImageView)findViewById(R.id.imageViewCoin);
@@ -122,17 +156,7 @@ public class MainActivity extends ActionBarActivity {
                 goReg();
             }
         });
-        //**************************internet connection check
-        cd = new ConnectionDetector(getApplicationContext());
-        isInternetPresent = cd.isConnectingToInternet();
 
-        // check for Internet status
-        if (!isInternetPresent) {
-            // Internet connection is not present
-            // Ask user to connect to Internet
-            showAlertDialog(MainActivity.this, "No Internet Connection",
-                    " Oops! You don't have internet connection.", false);
-        }
         //*****************************wheel
 
         final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);
@@ -197,7 +221,6 @@ public class MainActivity extends ActionBarActivity {
                 int[]  myImageList2 = new int[]{R.drawable.personalloannew, R.drawable.busineeloan, R.drawable.homeloan, R.drawable.carloan};
                 final MediaPlayer mp = MediaPlayer.create(getApplication(),R.raw.coindrop);
                 String msg = String.valueOf(position) + " " + isSelected;
-                Toast.makeText(MainActivity.this, String.valueOf(touchPositionY), Toast.LENGTH_SHORT).show();
                 coin.setX(touchPositionX-30);
                 coin.setY(touchPositionY);
                 //   Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -352,24 +375,6 @@ public class MainActivity extends ActionBarActivity {
         Resources r = getResources();
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 50, r.getDisplayMetrics());
-
-
-
-        //new JSONParse().execute();
-        ServerConnect  cls2= new ServerConnect();
-        //check wether session-id is valid or not
-        String flag= null;
-        try {
-            cls2.checkAPI(MainActivity.this);
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
 
     }
 

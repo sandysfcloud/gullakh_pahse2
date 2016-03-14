@@ -2,11 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#fff"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
     <!--<Spinner
@@ -31,123 +27,121 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Type of employment?"
-                android:id="@+id/carmake"
-                android:gravity="left"
+                android:id="@+id/TextViewHeading4"
                 android:textColor="#000"
+                android:textSize="22dp"
+                android:gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="40dp"
-                android:textSize="18dp" />
+                android:layout_marginBottom="20dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:weightSum="2">
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_weight="1"
+                android:weightSum="2"
+                android:gravity="center">
+                <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/salried"
-                    android:src="@drawable/salried"
+                    android:id="@+id/ImageButtonSal1"
 
-                    />
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_weight="1"
+                    android:background="@drawable/salaried"
+                    android:layout_marginRight="40dp" />
+                <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/selfempl"
-                    android:src="@drawable/selfemployed"
+                    android:id="@+id/ImageButtonSal2"
 
-                    />
+                    android:background="@drawable/selfempbus"
+                    android:layout_marginLeft="40dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:gravity="center">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/salaried"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption1"
                     android:textColor="#000"
                     android:text="Salaried"
 
-                    />
+                    android:layout_gravity="top" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="16dp"
-                    android:id="@+id/selfemp"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption2"
                     android:textColor="#000"
-                    android:text="Self Employed"
-                    />
+                    android:text="Self Employed-Business"
+                    android:layout_marginRight="30dp" />
             </LinearLayout>
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="20dp"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#D83C2F"
-                app:mtf_image="@drawable/loan_amt"
-                >
+                android:layout_gravity="center_horizontal"
+                android:gravity="center">
 
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:id="@+id/ImageButtonSal3"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/selfempprof"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="381dp"
                     android:layout_height="wrap_content"
-                    android:hint="Name of the employer"
-                    android:id="@+id/employername"
-                    android:textColorHint="#fff"
-
-                    android:textColor="#fff"
-                    android:textSize="15sp" />
-
-            </com.gullakh.gullakhandroid.MaterialTextField>
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption3"
+                    android:textColor="#000"
+                    android:text="Self Employed Professional"
+                    android:layout_gravity="right" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:layout_weight="1"
-        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
         android:weightSum="2"
-        >
-        <ImageView
+        android:gravity="center"
+        android:layout_marginTop="100dp">
+        <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_weight="1"
             android:id="@+id/back"
             android:gravity="left"
             android:layout_marginRight="80dp"
             android:layout_gravity="bottom|left"
-            android:src="@drawable/backimgnw"
 
-            />
-        <ImageView
+            android:background="@drawable/backimgnw" />
+        <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_weight="1"
             android:id="@+id/next"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="100dp"
             android:layout_gravity="bottom|right"
-            android:src="@drawable/nextimgnw"
 
-            />
+            android:background="@drawable/nextimgnw" />
     </LinearLayout>
 
 </LinearLayout>

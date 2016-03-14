@@ -23,10 +23,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -81,8 +81,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		 emailadress=(EditText) findViewById(R.id.emailaddress);
 		 mobilenumber=(EditText) findViewById(R.id.mobilenumber);
-		password=(EditText) findViewById(R.id.password);
-
+		 password=(EditText) findViewById(R.id.password);
+		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
 
 
 		register.setTypeface(myfontlight);
@@ -99,61 +99,41 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 			@Override
 			public void onClick(View view) {
-				// Check device for Play Services APK.
-
-				useremail = emailadress.getText().toString();
-				usermobno = mobilenumber.getText().toString();
-
-
-				//new JSONParse().execute();
-
-
-				if (checkPlayServices())
+				if (mobilenumber.getText().equals("")||mobilenumber.length()<10)
 				{
-					gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-					regid = getRegistrationId(getApplicationContext());
-					new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext())).execute();
+					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
+				}else{
+					if (checkBox.isChecked())
+					{
+						useremail = emailadress.getText().toString();
+						usermobno = mobilenumber.getText().toString();
+						// Check device for Play Services APK.
+						if (checkPlayServices()) {
+							gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+							regid = getRegistrationId(getApplicationContext());
+							new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext())).execute();
 
+							String[] arraydata = new String[5];
+							arraydata[0] = "registration";
+							arraydata[1] = useremail;
+							arraydata[2] = usermobno;
+							arraydata[3] = regid;
 
-					String[] arraydata = new String[5];
-					arraydata[0]="registration";
-					arraydata[1]=useremail;
-					arraydata[2]=usermobno;
-					arraydata[3]=regid;
+							urlchange = "registration";
+							JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
+							asyncTask.delegate = RegisterPageActivity.this;
+							asyncTask.execute();
 
-					urlchange="registration";
-					JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
-					asyncTask.delegate= RegisterPageActivity.this;
-					asyncTask.execute();
-
-
-
-				}
-				else
-				{
-					Log.i(TAG, "No valid Google Play Services APK found.");
+						} else {
+							Log.i(TAG, "No valid Google Play Services APK found.");
+						}
+					} else {
+						RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+					}
 				}
 			}
 		});
-
-
-
-
-
 	}
-
-
-
-
-	private void goToRegPage(String data)
-	{
-		if (data.equals("success")) {
-
-		} else {
-			Toast.makeText(getApplicationContext(), "This Mobile Number is already registered.", Toast.LENGTH_SHORT).show();
-		}
-	}
-
 
 	@Override
 	public void processFinishString(String str_result,Dialog dg) {
@@ -164,10 +144,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		try {
 			final AlertDialog.Builder builder2 = new AlertDialog.Builder(RegisterPageActivity.this);
+			builder2.setCancelable(false);
 			if(str_result.get("result").equals("true")) {
 				if(urlchange=="registration") {
 					AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
 					builder.setTitle("Enter OTP");
+					builder.setCancelable(false);
 
 // Set up the input
 					final EditText input = new EditText(RegisterPageActivity.this);
@@ -195,13 +177,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 						}
 					});
-					builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+					builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.cancel();
 						}
 					});
-
+					//Resend CODE here ...!!!!
 					builder.show();
 				}
 
@@ -253,7 +235,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 				if(urlchange=="setpassword"){
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,"Registered Successfully","success");
-					Intent intent = new Intent(this, cl_car_make.class);
+					Intent intent = new Intent(this, cl_car_residence.class);
 					startActivity(intent);
 				}
 

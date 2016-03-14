@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.gullakh.gullakhandroid.cl_car_saraied"
+    android:background="@drawable/bgque">
+
+    <com.gullakh.gullakhandroid.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_cardColor="#D83C2F"
+        app:mtf_image="@drawable/loan_amt"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:id="@+id/view">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name of employer"
+            android:id="@+id/salEmpname"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+    </com.gullakh.gullakhandroid.MaterialTextField>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name of current Employer ?"
+        android:id="@+id/heading1"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:background="#94ababab"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Joining date of current employer?"
+        android:id="@+id/heading2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:background="#94ababab" />
+    <com.gullakh.gullakhandroid.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_cardColor="#D83C2F"
+        app:mtf_image="@drawable/loan_amt"
+        android:layout_below="@+id/heading2"
+        android:layout_alignLeft="@+id/view"
+        android:layout_alignStart="@+id/view">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Join Date in Current Employer"
+            android:id="@+id/saljoindateofemp"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+    </com.gullakh.gullakhandroid.MaterialTextField>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal|bottom"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/back"
+            android:gravity="left"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/backimgnw" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/next"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/nextimgnw" />
+    </LinearLayout>
+
+</RelativeLayout>
