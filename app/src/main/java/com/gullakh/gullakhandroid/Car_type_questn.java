@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,8 +23,10 @@ import java.util.concurrent.ExecutionException;
 
 
 public class Car_type_questn extends AppCompatActivity implements View.OnClickListener {
-    ImageView sal,self,next,review;
+    ImageView sal,self,next,review,done;
     AutoCompleteTextView email;
+    Dialog dg;
+    String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,9 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
 
+        done = (ImageView) findViewById(R.id.done);
+        done.setOnClickListener(this);
+
         TextView title = (TextView) findViewById(R.id.title);
         title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
@@ -65,12 +71,27 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        onShakeImage();
+        //onShakeImage();
 
-      //  email = (AutoCompleteTextView) findViewById(R.id.locatn);
-      //  email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-       // email.setOnClickListener(this);
+        if(((GlobalData) getApplication()).getcartype()!=null) {
+            if (((GlobalData) getApplication()).getcartype().equals("New Car Loan"))
+                sal.setBackgroundColor(Color.parseColor("#D83C2F"));
+            else
+                self.setBackgroundColor(Color.parseColor("#D83C2F"));
+        }
 
+        Intent intent = getIntent();
+        data = intent.getStringExtra("review");
+        if(data!=null) {
+            if (data.equals("review")) {
+                next.setVisibility(View.INVISIBLE);
+                back.setVisibility(View.INVISIBLE);
+                done.setVisibility(View.VISIBLE);
+                review.setVisibility(View.INVISIBLE);
+            }
+        }
+        else
+            onShakeImage();
 
     }
     public void onShakeImage() {
@@ -106,7 +127,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
 
             case R.id.review:
-                RegisterPageActivity.showAlertreview(Car_type_questn.this,2);
+                dg=RegisterPageActivity.showAlertreview(Car_type_questn.this, 2);
+
                 break;
 
             case R.id.next:
@@ -135,22 +157,30 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
               finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
+            case R.id.done:
+
+                finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.img:
                 sal.setBackgroundColor(Color.parseColor("#D83C2F"));
                 self.setBackgroundColor(Color.parseColor("#ffffff"));
                 ((GlobalData) getApplication()).setcartype("New Car Loan");
-                intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if(data==null) {
+                    intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
 
                 break;
             case R.id.img2:
                 self.setBackgroundColor(Color.parseColor("#D83C2F"));
                 sal.setBackgroundColor(Color.parseColor("#ffffff"));
                 ((GlobalData) getApplication()).setcartype("Used Car Loan");
+            {
                 intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
+            }
                 break;
             case R.id.locatn:
 

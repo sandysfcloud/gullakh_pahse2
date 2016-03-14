@@ -3,7 +3,6 @@
     android:layout_height="match_parent"
     android:id="@+id/linear"
     android:background="#ffe0e0e0"
-
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,6 +57,33 @@
             android:layout_marginLeft="8dp"
             android:text="Filter "/>
     </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:id="@+id/linedit"
+        android:orientation="horizontal"
+
+       android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#ffffff">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:src="@drawable/editnew"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+        android:textColor="#616161"
+        android:id="@+id/edit"
+        android:textSize="16sp"
+
+        android:text="Edit Your Details"/>
     </LinearLayout>
     <!--<ListView
         android:id="@+id/list_view"

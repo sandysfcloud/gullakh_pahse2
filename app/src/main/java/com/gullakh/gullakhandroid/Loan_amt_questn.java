@@ -25,9 +25,10 @@ import java.util.Locale;
 
 public class Loan_amt_questn extends AppCompatActivity implements View.OnClickListener{
     EditText amt;
-    ImageView next,review;
+    ImageView next,review,done;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
+    String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        onShakeImage();
+       // onShakeImage();
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
         mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -53,7 +54,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
         review = (ImageView) findViewById(R.id.review);
         review.setOnClickListener(this);
-
+        done = (ImageView) findViewById(R.id.done);
+        done.setOnClickListener(this);
         amt.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -71,7 +73,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             public void afterTextChanged(Editable s) {
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                if(!amt.getText().toString().equals("")) {
+                if (!amt.getText().toString().equals("")) {
                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -101,9 +103,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
                                                         progress = (progress + 1) * 50000;
                                                         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                                                        String strtemp=String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+                                                        String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 
-                                                        strtemp=strtemp.substring(0,strtemp.length()-3);
+                                                        strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
                                                         mSeekArcProgress.setText(strtemp);
@@ -114,6 +116,21 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                                                 }
 
             );
+
+
+        Intent intent = getIntent();
+        data = intent.getStringExtra("review");
+        if(data!=null) {
+            if (data.equals("review")) {
+                next.setVisibility(View.INVISIBLE);
+                back.setVisibility(View.INVISIBLE);
+                done.setVisibility(View.VISIBLE);
+                review.setVisibility(View.INVISIBLE);
+
+            }
+        }
+        else
+            onShakeImage();
         }
 
     public void onShakeImage() {
@@ -151,6 +168,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
                 RegisterPageActivity.showAlertreview(Loan_amt_questn.this,3);
                 break;
+            case R.id.done:
+Log.d("done clicked loan_amt","check");
+                finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
 
             case R.id.next:
                 if(amt.getText().toString().matches("")) {
@@ -159,7 +180,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 }
                 else
                 {
+                    Log.d("intent next loanamt","check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString());
+                    String loan= ((GlobalData) getApplication()).getloanamt();
+                    amt.setText(loan);
                     Intent intent = new Intent(Loan_amt_questn.this, Salaryed_NetSalary.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

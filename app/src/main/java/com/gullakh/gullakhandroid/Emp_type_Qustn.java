@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telecom.Call;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,17 +23,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
-    ImageView sal,self,next,review;
+    ImageView sal,self,next,review,done,back;
+    String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_type__qustn);
         getSupportActionBar().setTitle("Car Loan - Employee Type");
-        ImageView back = (ImageView) findViewById(R.id.back);
+        back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         //review = (ImageView) findViewById(R.id.review);
         next.setOnClickListener(this);
+
+        done = (ImageView) findViewById(R.id.done);
+        done.setOnClickListener(this);
 
         TextView  ts = (TextView) findViewById(R.id.t1);
         TextView  ts2 = (TextView) findViewById(R.id.t2);
@@ -46,33 +51,36 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 //        review.setOnClickListener(this);
      //   EditText email = (EditText) findViewById(R.id.email);
        // email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        onShakeImage();
+
 
         TextView typ = (TextView) findViewById(R.id.empt);
         typ.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        /*Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
 
-        // Spinner Drop down elements
-        ArrayList categories = new ArrayList();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
 
-        // Creating adapter for spinner
-        android.widget.ArrayAdapter<String> dataAdapter = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        if(((GlobalData) getApplication()).getemptype()!=null) {
+            Log.d("emp type not null",((GlobalData) getApplication()).getemptype());
+            if (((GlobalData) getApplication()).getemptype().equals("Salaried"))
+                sal.setBackgroundColor(Color.parseColor("#D83C2F"));
+            else
+                self.setBackgroundColor(Color.parseColor("#D83C2F"));
+        }
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);*/
+        Intent intent = getIntent();
+        data = intent.getStringExtra("review");
+        if(data!=null) {
+            if (data.equals("review")) {
+                next.setVisibility(View.INVISIBLE);
+                back.setVisibility(View.INVISIBLE);
+                done.setVisibility(View.VISIBLE);
+
+            }
+        }
+        else
+            onShakeImage();
+
     }
     public void onShakeImage() {
         Animation shake;
@@ -129,22 +137,34 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
 
                 break;
+            case R.id.done:
+
+                finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
+
+
+                break;
             case R.id.img:
                 sal.setBackgroundColor(Color.parseColor("#D83C2F"));
                 self.setBackgroundColor(Color.parseColor("#ffffff"));
                 ((GlobalData) getApplication()).setemptype("Salaried");
-                intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if(data==null) {
+                    intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
 
                 break;
             case R.id.img2:
+
                 self.setBackgroundColor(Color.parseColor("#D83C2F"));
                 sal.setBackgroundColor(Color.parseColor("#ffffff"));
                 ((GlobalData) getApplication()).setemptype("Self Employed");
-                intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if(data==null) {
+                    intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
 
 
@@ -166,3 +186,24 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
     }
 }
+ /*Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
+
+        // Spinner Drop down elements
+        ArrayList categories = new ArrayList();
+        categories.add("Automobile");
+        categories.add("Business Services");
+        categories.add("Computers");
+        categories.add("Education");
+        categories.add("Personal");
+        categories.add("Travel");
+
+        // Creating adapter for spinner
+        android.widget.ArrayAdapter<String> dataAdapter = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);*/

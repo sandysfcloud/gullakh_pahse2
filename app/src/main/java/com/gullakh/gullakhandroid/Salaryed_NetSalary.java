@@ -24,9 +24,10 @@ import java.util.Locale;
 
 public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClickListener {
     EditText sal;
-    ImageView next,review;
+    ImageView next,review,done;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
+    String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +44,14 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        onShakeImage();
+        //onShakeImage();
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
         mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         onetext = (TextView) findViewById(R.id.onetext);
         onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-
+        done = (ImageView) findViewById(R.id.done);
+        done.setOnClickListener(this);
         sal.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -67,7 +69,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             public void afterTextChanged(Editable s) {
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                if(!sal.getText().toString().equals("")) {
+                if (!sal.getText().toString().equals("")) {
                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(sal.getText()))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -99,9 +101,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 
 
-                String strtemp=String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+                String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 
-                strtemp=strtemp.substring(0,strtemp.length()-3);
+                strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
                 mSeekArcProgress.setText(strtemp);
@@ -110,7 +112,19 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
             }
         });
+        Intent intent = getIntent();
+        data = intent.getStringExtra("review");
+        if(data!=null) {
+            if (data.equals("review")) {
+                next.setVisibility(View.INVISIBLE);
+                back.setVisibility(View.INVISIBLE);
+                review.setVisibility(View.INVISIBLE);
+                done.setVisibility(View.VISIBLE);
 
+            }
+        }
+        else
+            onShakeImage();
 
     }
     public void onShakeImage() {
@@ -143,7 +157,10 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,4);
                 break;
 
+            case R.id.done:
 
+                finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.next:
                 if(!sal.getText().toString().matches("")) {
                     if(Float.parseFloat(sal.getText().toString()) > 3000) {

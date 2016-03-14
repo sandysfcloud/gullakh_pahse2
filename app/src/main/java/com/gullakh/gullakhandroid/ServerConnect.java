@@ -389,7 +389,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                                 Log.e("Arry_RDid", String.valueOf(Arry_RDid));
 
                                 client = new DefaultHttpClient();
-                                post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from  RuleMaster where id IN "+listid+";")).toString());
+                                post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from  RuleMasters where id IN "+listid+";")).toString());
 
                             }
 

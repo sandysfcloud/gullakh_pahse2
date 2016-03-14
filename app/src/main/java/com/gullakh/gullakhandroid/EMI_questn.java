@@ -24,9 +24,10 @@ import java.util.Locale;
 
 public class EMI_questn extends AppCompatActivity  implements View.OnClickListener{
     EditText emipaying;
-    ImageView next,review;
+    ImageView next,review,done;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
+    String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,41 +47,47 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        onShakeImage();
+        //onShakeImage();
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
         mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
-        emipaying.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        if(((GlobalData) getApplication()).getEmi()!=null)
+        {
+            emipaying.setText(((GlobalData) getApplication()).getEmi().toString());
+        }
 
-            }
+                emipaying.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Format format = NumberFormat.getInstance();
-                // you can call or do what you want with your EditText here
-                //amt.setText(String.valueOf());
-            }
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            public void afterTextChanged(Editable s) {
+                    }
 
-                Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                if(!emipaying.getText().toString().equals("")) {
-                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(emipaying.getText()))));
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        Format format = NumberFormat.getInstance();
+                        // you can call or do what you want with your EditText here
+                        //amt.setText(String.valueOf());
+                    }
 
-                    strtemp = strtemp.substring(0, strtemp.length() - 3);
+                    public void afterTextChanged(Editable s) {
+
+                        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+                        if (!emipaying.getText().toString().equals("")) {
+                            String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(emipaying.getText()))));
+
+                            strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
-                    mSeekArcProgress.setText(strtemp);
-                }
+                            mSeekArcProgress.setText(strtemp);
+                        }
 
-            }
-        });
+                    }
+                });
 
         mSeekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener()
 
@@ -97,16 +104,16 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
             @Override
             public void onProgressChanged(SeekArc seekArc, int progress,
                                           boolean fromUser) {
-                if(progress!=0)
-                progress = (progress + 1) * 1000;
+                if (progress != 0)
+                    progress = (progress + 1) * 1000;
 
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 
 
-                String strtemp=String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+                String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 
-                strtemp=strtemp.substring(0,strtemp.length()-3);
+                strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
                 mSeekArcProgress.setText(strtemp);
@@ -115,7 +122,19 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
             }
         });
+        Intent intent = getIntent();
+        data = intent.getStringExtra("review");
+        if(data!=null) {
+            if (data.equals("review")) {
+                next.setVisibility(View.INVISIBLE);
+                back.setVisibility(View.INVISIBLE);
+                review.setVisibility(View.INVISIBLE);
+                done.setVisibility(View.VISIBLE);
 
+            }
+        }
+        else
+            onShakeImage();
 
     }
 
@@ -147,7 +166,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
             case R.id.review:
                 RegisterPageActivity.showAlertreview(EMI_questn.this,5);
                 break;
+            case R.id.done:
 
+                finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.next:
                // if(!emi.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString()));

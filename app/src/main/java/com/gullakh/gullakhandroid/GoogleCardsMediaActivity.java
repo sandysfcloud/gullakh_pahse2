@@ -24,6 +24,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -86,7 +87,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public String[] searchdate = {"30-1-2016", "1-02-2016"};
     public String[] searchtime = {"05:50pm", "10:15am"};
     ListView listView;
-    LinearLayout layout;
+    LinearLayout layout,linedit;
     ImageView filter;
     ArrayList<String> disbank;
     Dialog dialog;
@@ -99,6 +100,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     Map<String, String> Arry_banknam = new HashMap<>();
     ;
     protected ArrayList<CharSequence> selectedBanks = new ArrayList<CharSequence>();
+    protected ArrayList<CharSequence> selectedBanks2 = new ArrayList<CharSequence>();
     protected Button selectColoursButton;
     CharSequence[] bankfilter = null;
     String prev_selectbank = null;
@@ -113,6 +115,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         //ListView listView = (ListView) findViewById(R.id.list_view);
         layout = (LinearLayout) findViewById(R.id.linear);
+        linedit = (LinearLayout) findViewById(R.id.linedit);
         filter = (ImageView) findViewById(R.id.filter);
         TextView loan_amt = (TextView) findViewById(R.id.loan_amt);
         TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
@@ -122,7 +125,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
-
+        linedit.setOnClickListener(this);
 		filter.setOnClickListener(this);
 		Intent intent = getIntent();
 		String data = intent.getStringExtra("data");
@@ -466,6 +469,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 RangeSeekBar seekBar1 = (RangeSeekBar) dialog.findViewById(R.id.loanamt);
 
                 RangeSeekBar tenure = (RangeSeekBar) dialog.findViewById(R.id.tenure);
+               // SeekBar tenure = (SeekBar) dialog.findViewById(R.id.tenure);
                 TextView t1 = (TextView) dialog.findViewById(R.id.textView1);
                 min = (TextView) dialog.findViewById(R.id.min);
                 max = (TextView) dialog.findViewById(R.id.max);
@@ -501,8 +505,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 dialog.show();
 
                 RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar) dialog.findViewById(R.id.rangsb);
-                if (roi_max != 0)
-                    rangeSeekBar.setRangeValues(roi_min, roi_max);
+               // if (roi_max != 0)
+                    //rangeSeekBar.setRangeValues(roi_min, roi_max);
+                rangeSeekBar.setSelectedMaxValue(roi_max);
+                rangeSeekBar.setSelectedMinValue(roi_min);
                 rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
                     @Override
@@ -517,6 +523,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
                 });
+
+
+                seekBar1.setSelectedMaxValue(seek_loanamt);
+
+                seekBar1.setRangeValues(1, 12);
+                Log.d("check tenure", String.valueOf(seek_loanamt));
+
+
 
 
                 seekBar1.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
@@ -535,9 +549,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-                tenure.setSelectedMaxValue(Max_tenure / 12);
+                //tenure.setSelectedMaxValue(Max_tenure / 12);
+
                 tenur.setText(Integer.toString(seektenure));
-                rangeSeekBar.setRangeValues(0, seektenure);
+                tenure.setRangeValues(0, Max_tenure / 12);
+
+                Log.d("check tenure", String.valueOf(Max_tenure / 12));
+                tenure.setSelectedMaxValue(seektenure);
                 tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
                     @Override
@@ -558,6 +576,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 showSelectColoursDialog();
 
                 break;
+            case R.id.linedit:
+
+                Intent edit = new Intent(this, Emp_type_Qustn.class);
+                edit.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                 startActivity(edit);
+
+                break;
             case R.id.applyf:
 
                 newCustomListViewValuesArr.clear();
@@ -571,7 +596,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 if (seek_loanamt > 0) {
                     Log.d("loan seekbar moved!!!!!", "");
                     ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
-                    loan_amtcalcutn();
+                   // loan_amtcalcutn();
                     calculate();
 
 
@@ -579,41 +604,43 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 apply.setBackgroundResource(R.drawable.roundbutton_blue);
                 Log.d("Click size!!!!!", String.valueOf(CustomListViewValuesArr.size()));
-
-
+                selectedBanks2.clear();
+                selectedBanks2.addAll(selectedBanks);
                 for (int i = 0; i < CustomListViewValuesArr.size(); i++) {
                     Log.d("test1!!!!!", String.valueOf(CustomListViewValuesArr.size()));
                     Log.d("test2!!!!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
-                    if (selectedBanks.size() == 0) {
+                    if (selectedBanks2.size() == 0) {
+                        selectColoursButton.setText("- None Selected -");
                         Log.d("selectedBanks!!!!!", String.valueOf(selectedBanks.size()));
                         for (int k = 0; k < CustomListViewValuesArr.size(); k++) {
-                            selectedBanks.add(CustomListViewValuesArr.get(k).getbanknam());
+                            selectedBanks2.add(CustomListViewValuesArr.get(k).getbanknam());
+
                         }
                     }
-                    for (int j = 0; j < selectedBanks.size(); j++) {
-                        Log.d("selectedBanks size is!", String.valueOf(selectedBanks.size()));
-                        Log.d("selectedBanks data is!", String.valueOf(selectedBanks));
+                    for (int j = 0; j < selectedBanks2.size(); j++) {
+                        Log.d("selectedBanks size is!", String.valueOf(selectedBanks2.size()));
+                        Log.d("selectedBanks data is!", String.valueOf(selectedBanks2));
                         double roi = Double.parseDouble(CustomListViewValuesArr.get(i).getfloating_interest_rate());
                         Log.d("roi!!!!!", String.valueOf(roi));
                         Log.d("roi_min!!!!!", String.valueOf(roi_min));
                         Log.d("roi_max!!!!!", String.valueOf(roi_max));
                         Log.d("CustomListView value!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
-                        Log.d("selectedBanks value!!", String.valueOf(selectedBanks.get(j)));
+                        Log.d("selectedBanks value!!", String.valueOf(selectedBanks2.get(j)));
                         if (roi_min == 0 && roi_max == 0) {
-                            if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j))) {
+                            if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks2.get(j))) {
                                 Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-                                Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
+                                Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks2));
                                 newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
                                 Log.d("newCustomListV roi 0", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
                             }
                         } else {
 
 
-                            if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks.get(j)) && (roi >= roi_min && roi <= roi_max)) {
+                            if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks2.get(j)) && (roi >= roi_min && roi <= roi_max)) {
                                 Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-                                Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks));
+                                Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks2));
                                 newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
-                                Log.d("newCustomListV dataif", String.valueOf(newCustomListViewValuesArr.get(j).getbanknam()));
+                                Log.d("newCustomListV dataif", String.valueOf(newCustomListViewValuesArr.get(i).getbanknam()));
                             }
                         }
                     }

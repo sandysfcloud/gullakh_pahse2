@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linerlytclick">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linemp"
+        android:orientation="horizontal">
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -23,8 +27,126 @@
             android:textColor="#ff00"
             android:id="@+id/selectedanswer"
             android:text="Salaried"/>
-    <View
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"></View>
+    </LinearLayout>
+   <!-- <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"></View>
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/lincar"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
 
+            android:src="@drawable/rightred"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/car"
+            android:textColor="#fff"
+            android:text="Car Loan Type: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#ff00"
+            android:id="@+id/carvalue"
+            android:text="Salaried"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"></View>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/linloan"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
+            android:src="@drawable/rightred"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/loan"
+            android:textColor="#fff"
+            android:text="Loan Amount: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#ff00"
+            android:id="@+id/loanvalue"
+            android:text="Salaried"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"></View>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/linsal"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
+            android:src="@drawable/rightred"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/sal"
+            android:textColor="#fff"
+            android:text="Net Monthly Salary: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#ff00"
+            android:id="@+id/salvalue"
+            android:text="Salaried"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"></View>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/linemi"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
+            android:src="@drawable/rightred"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/emi"
+            android:textColor="#fff"
+            android:text="Total EMI's you pay: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#ff00"
+            android:id="@+id/emivalue"
+            android:text="Salaried"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"></View>
+    </LinearLayout>-->
 </LinearLayout>

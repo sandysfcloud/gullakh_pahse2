@@ -30,8 +30,9 @@ import java.util.concurrent.ExecutionException;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
-    ImageView next,review;
+    ImageView next,review,done;
     int day,month,yearv;
+    String data;
 
 
 
@@ -43,6 +44,8 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
+        done = (ImageView) findViewById(R.id.done);
+        done.setOnClickListener(this);
 
         review = (ImageView) findViewById(R.id.review);
         review.setOnClickListener(this);
@@ -55,7 +58,19 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         Dob.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        onShakeImage();
+        Intent intent = getIntent();
+        data = intent.getStringExtra("review");
+        if(data!=null) {
+            if (data.equals("review")) {
+                next.setVisibility(View.INVISIBLE);
+                back.setVisibility(View.INVISIBLE);
+                review.setVisibility(View.INVISIBLE);
+                done.setVisibility(View.VISIBLE);
+
+            }
+        }
+        else
+            onShakeImage();
     }
 
 
@@ -105,7 +120,10 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                 RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,6);
                 break;
 
+            case R.id.done:
 
+                finish();
+                overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.next:
                 if(!Dob.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setDob(Dob.getText().toString());

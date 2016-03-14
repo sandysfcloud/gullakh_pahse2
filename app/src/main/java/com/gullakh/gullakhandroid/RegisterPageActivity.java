@@ -62,6 +62,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	public static Context baseContext;
 	static String classnam;
 	static  ArrayList<String>carloan_que_salary_new;
+	static String textdata;
+	static  TextView temp,tcar,tloan,temi,tsal;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -266,6 +268,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 	public static Dialog showAlertinit(Activity act)
 	{
+		CurrentAct=act;
 		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
 
 // 						Setting the title and layout for the dialog
@@ -284,6 +287,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 	public static Dialog showAlert(Activity act)
 	{
+		CurrentAct=act;
 		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
 
 // 						Setting the title and layout for the dialog
@@ -302,8 +306,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 	public static Dialog showAlertreview(Activity act,Integer questionno)
 	{
+
 		CurrentAct=act;
-		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
+		final Dialog dialog = new Dialog(act, R.style.PauseDialog2);
 
 // 		Setting the title and layout for the dialog
 		dialog.setTitle("");
@@ -343,48 +348,84 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
+		TextView tv;
 
 		for(int i=1;i<questionno;i++){
 
 
 
 			View view = inflater.inflate(R.layout.linearreviewquestions, null);
-			TextView tv=(TextView) view.findViewById(R.id.headertype);
+			 tv=(TextView) view.findViewById(R.id.headertype);
 			LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.linerlytclick);
-			linearLayoutclick.setTag(i);
-			linearLayoutclick.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					//Intent intclick=new Intent(act,Emp_type_Qustn.class);
 
-					//startActivity(intclick);
+			tv.setTag(i);
+			tv.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					Log.d("check number",v.getTag().toString() );
+					if(v.getTag().toString().equals("1")) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, Emp_type_Qustn.class);
+						intclick.putExtra("review", "review");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("2")) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, Car_type_questn.class);
+						intclick.putExtra("review", "review");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("3")) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, Loan_amt_questn.class);
+						intclick.putExtra("review", "review");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("4")) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, Salaryed_NetSalary.class);
+						intclick.putExtra("review", "review");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("5")) {
+						Log.d("check number click", v.getTag().toString());
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, EMI_questn.class);
+						intclick.putExtra("review", "review");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("6")) {
+
+						Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+						intclick.putExtra("review", "review");
+						CurrentAct.startActivity(intclick);
+					}
 					// Perform action on click
 				}
 			});
 
 			TextView tvans=(TextView) view.findViewById(R.id.selectedanswer);
 			tv.setText(carloan_que_salary_new.get(i - 1));
-			tvans.setText(carloan_que_salary_new_ans.get(i-1));
+			 //textdata=carloan_que_salary_new.get(i - 1);
+			tvans.setText(carloan_que_salary_new_ans.get(i - 1));
 			linrlyt.addView(view);
 
 
-			tv.setOnClickListener(new View.OnClickListener() {
-				Intent intclick;
-				public void onClick(View v) {
-					Log.d("Review clicked", "!!!!");
-					if(carloan_que_salary_new.equals("Employee Type: "))
-						intclick=new Intent(CurrentAct,Emp_type_Qustn.class);
-					if(carloan_que_salary_new.equals("Car Loan Type: "))
-						intclick=new Intent(CurrentAct,Car_type_questn.class);
-					if(carloan_que_salary_new.equals("Loan Amount: "))
-						intclick=new Intent(CurrentAct,Loan_amt_questn.class);
-					if(carloan_que_salary_new.equals("Net Monthly Salary: "))
-						intclick=new Intent(CurrentAct,Salaryed_NetSalary.class);
-					if(carloan_que_salary_new.equals("Total EMI's you pay: "))
-						intclick=new Intent(CurrentAct,EMI_questn.class);
-					    CurrentAct.startActivity(intclick);
-					    // Perform action on click
-				}
-			});
+			final TextView finalTv = tv;
+//			tv.setOnClickListener(new View.OnClickListener() {
+//
+//
+//				public void onClick(View v) {
+//					textdata= finalTv.getText().toString();
+//
+//				}
+//			});
+//			tvans.setOnClickListener(new View.OnClickListener() {
+//
+//
+//				public void onClick(View v) {
+//
+//				}
+//			});
 
 
 		}
@@ -394,7 +435,33 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 
-
+public static void editdata()
+{
+	Intent intclick=null;
+	Log.d("Review clicked",textdata);
+	if (textdata.equals("Employee Type: ")) {
+		Log.d("Review clicked", "Employee Type: ");
+		intclick = new Intent(CurrentAct, Emp_type_Qustn.class);
+	}
+	if (textdata.equals("Car Loan Type: ")) {
+		Log.d("Car Loan Type: ", "");
+		intclick = new Intent(CurrentAct, Car_type_questn.class);
+	}
+	if (textdata.equals("Loan Amount: ")) {
+		Log.d("Loan Amount: ", "");
+		intclick = new Intent(CurrentAct, Loan_amt_questn.class);
+	}
+	if (textdata.equals("Net Monthly Salary: ")) {
+		Log.d("Net Monthly Salary: ", "");
+		intclick = new Intent(CurrentAct, Salaryed_NetSalary.class);
+	}
+	if (textdata.equals("Total EMI's you pay: ")) {
+		Log.d("Total EMI's you pay: ", "");
+		intclick = new Intent(CurrentAct, EMI_questn.class);
+	}
+	CurrentAct.startActivity(intclick);
+	// Perform action on click
+}
 
 	private boolean checkPlayServices() {
 		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -522,3 +589,114 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 }
+
+//View view = inflater.inflate(R.layout.linearreviewquestions, null);
+		/*
+		temp=(TextView) view.findViewById(R.id.empvalue);
+		tcar=(TextView) view.findViewById(R.id.carvalue);
+		tloan=(TextView) view.findViewById(R.id.loanvalue);
+		tsal=(TextView) view.findViewById(R.id.salvalue);
+		temi=(TextView) view.findViewById(R.id.emivalue);
+		LinearLayout linemp=(LinearLayout) view.findViewById(R.id.linemp);
+		LinearLayout lincar=(LinearLayout) view.findViewById(R.id.lincar);
+		LinearLayout linloan=(LinearLayout) view.findViewById(R.id.linloan);
+		LinearLayout linsal=(LinearLayout) view.findViewById(R.id.linsal);
+		LinearLayout linemi=(LinearLayout) view.findViewById(R.id.linemi);
+		linrlyt.addView(view);
+
+
+
+		linemp.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Log.d("Review clicked", "Carrrrr");
+
+				//CurrentAct.finish();
+				Intent iemp = new Intent(CurrentAct, Emp_type_Qustn.class);
+				//iemp.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				iemp.putExtra("review", "review");
+				CurrentAct.startActivity(iemp);
+			}
+		});
+
+		lincar.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Log.d("Review clicked","Carrrrr");
+				Intent icar = new Intent(CurrentAct, Car_type_questn.class);
+				icar.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				CurrentAct.startActivity(icar);
+			}
+		});
+		linloan.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Log.d("Review clicked","Carrrrr");
+				Intent iloan = new Intent(CurrentAct, Loan_amt_questn.class);
+				iloan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				CurrentAct.startActivity(iloan);
+			}
+		});
+		linsal.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Log.d("Review clicked","Carrrrr");
+				Intent isal= new Intent(CurrentAct, Salaryed_NetSalary.class);
+				isal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				CurrentAct.startActivity(isal);
+			}
+		});
+		linemi.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Log.d("Review clicked","Carrrrr");
+				Intent iemi = new Intent(CurrentAct, EMI_questn.class);
+				iemi.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				CurrentAct.startActivity(iemi);
+			}
+		});
+
+
+
+		if(questionno==2)
+		{
+			temp.setText(((GlobalData) act.getApplication()).getemptype());
+		}
+		if(questionno==3)
+		{
+
+			lincar.setVisibility(View.VISIBLE);
+			temp.setText(((GlobalData) act.getApplication()).getemptype());
+			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+		}
+
+		if(questionno==4)
+		{
+			lincar.setVisibility(View.VISIBLE);
+			linloan.setVisibility(View.VISIBLE);
+			temp.setText(((GlobalData) act.getApplication()).getemptype());
+			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+			tloan.setText(((GlobalData) act.getApplication()).getloanamt());
+		}
+		if(questionno==5)
+		{
+			lincar.setVisibility(View.VISIBLE);
+			linloan.setVisibility(View.VISIBLE);
+			linsal.setVisibility(View.VISIBLE);
+			temp.setText(((GlobalData) act.getApplication()).getemptype());
+			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+			tloan.setText(((GlobalData) act.getApplication()).getloanamt());
+			tsal.setText(((GlobalData) act.getApplication()).getnetsalary().toString());
+		}
+		if(questionno==6)
+		{
+			lincar.setVisibility(View.VISIBLE);
+			linloan.setVisibility(View.VISIBLE);
+			linsal.setVisibility(View.VISIBLE);
+			linemi.setVisibility(View.VISIBLE);
+			temp.setText(((GlobalData) act.getApplication()).getemptype());
+			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+			tloan.setText(((GlobalData) act.getApplication()).getloanamt());
+			tsal.setText(((GlobalData) act.getApplication()).getnetsalary().toString());
+			temi.setText(((GlobalData) act.getApplication()).getEmi().toString());
+		}
+
+
+
+
+*/
