@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GullakhAndroid.iml" filepath="$PROJECT_DIR$/GullakhAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/gullakh_borrowerapp1.iml" filepath="$PROJECT_DIR$/gullakh_borrowerapp1.iml" />
     </modules>

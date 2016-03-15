@@ -181,5 +181,11 @@
     <string name="title_activity_date_of_birth_questn">DateOfBirth_questn</string>
     <string name="title_activity_filter">Filter</string>
     <string name="title_activity_signin">signin</string>
+    <string-array name="sortby">
+        <item>Sort By</item>
+        <item>Best Rate</item>
+        <item>Processing Fee</item>
 
+    </string-array>
+    <string name="sortybylabel">Sort By</string>
 </resources>

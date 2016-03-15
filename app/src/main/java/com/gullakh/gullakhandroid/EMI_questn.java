@@ -170,6 +170,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
+                break;
             case R.id.next:
                // if(!emi.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString()));

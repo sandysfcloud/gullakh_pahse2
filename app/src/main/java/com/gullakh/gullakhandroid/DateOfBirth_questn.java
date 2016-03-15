@@ -124,6 +124,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
+                break;
             case R.id.next:
                 if(!Dob.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setDob(Dob.getText().toString());

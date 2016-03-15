@@ -2,11 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#fff"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
         <!--<Spinner
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="2">
+        android:weightSum="3">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:minWidth="0dp"
 
                 android:id="@+id/img2"
-                android:src="@drawable/selfbusiness"
+                android:src="@drawable/selfempbus"
 
                 />
         </LinearLayout>
@@ -66,6 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
             android:weightSum="2">
             <TextView
                 android:layout_width="match_parent"
@@ -86,10 +88,37 @@
                 android:textSize="16dp"
                 android:id="@+id/t2"
                 android:textColor="#000"
-                android:text="Self Employed"
+                android:text="Self Employed Business"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
 
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+                android:id="@+id/business"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/selfempprof"
+                 />
+
+            <TextView
+                android:layout_width="381dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:id="@+id/tbusiness"
+                android:textColor="#000"
+                android:text="Self Employed Professional"
+                android:layout_gravity="right" />
+        </LinearLayout>
 
     </LinearLayout>
 

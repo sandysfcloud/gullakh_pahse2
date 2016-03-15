@@ -47,7 +47,13 @@
         <activity
             android:name=".MainActivity"
             android:label=" Home"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".RegisterPageActivity"
             android:label="Sign Up"
@@ -198,11 +204,7 @@
             android:name=".cl_car_residence"
             android:label="Select Location"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".cl_salary_mode"
