@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -20,10 +21,13 @@ import java.util.List;
 
 public class cl_car_selfempbusiness extends AppCompatActivity implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
-    private TextView heading1,heading2,heading3;
+    private TextView heading1,heading2,heading3,heading4;
     private EditText Doj;
     int day,month,yearv;
     private String date="";
+    private Spinner spinner1,spinner2;
+    private EditText netProfit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +39,18 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         heading1 = (TextView) findViewById(R.id.heading1);
         heading2 = (TextView) findViewById(R.id.heading2);
         heading3 = (TextView) findViewById(R.id.heading3);
+        heading4 = (TextView) findViewById(R.id.heading4);
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        heading4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        netProfit= (EditText) findViewById(R.id.NetProfit);
         // Spinner click listener
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
 
@@ -102,14 +110,30 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
 
         switch (v.getId()) {
             case R.id.next:
-                if(!Doj.getText().toString().matches("")) {
-                    String jdate=getDate();
-                    Intent intent = new Intent(cl_car_selfempbusiness.this, cl_car_residence_type.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
-                else {
-                    RegisterPageActivity.showErroralert(cl_car_selfempbusiness.this, "Please enter date", "failed");
+                if(!spinner1.getSelectedItem().toString().equals("select")) {
+                    if (!Doj.getText().toString().matches("")) {
+                        if (!spinner2.getSelectedItem().toString().equals("select"))
+                        {
+                            if (!netProfit.getText().toString().equals("")) {
+                                String jdate = getDate();
+                                setDataToHashMap("ind_type",spinner1.getSelectedItem().toString());
+                                setDataToHashMap("start_date_of_cur_business",jdate);
+                                setDataToHashMap("firm_type",spinner2.getSelectedItem().toString());
+                                setDataToHashMap("last_two_yrs_net_profit",netProfit.getText().toString());
+                                Intent intent = new Intent(cl_car_selfempbusiness.this, cl_car_residence_type.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            } else {
+                                RegisterPageActivity.showErroralert(cl_car_selfempbusiness.this, "Please enter net profit", "failed");
+                            }
+                        }else {
+                            RegisterPageActivity.showErroralert(cl_car_selfempbusiness.this, "Please select type of firm", "failed");
+                        }
+                    } else {
+                        RegisterPageActivity.showErroralert(cl_car_selfempbusiness.this, "Please enter date", "failed");
+                    }
+                }else {
+                    RegisterPageActivity.showErroralert(cl_car_selfempbusiness.this, "Please select your business", "failed");
                 }
                 break;
             case R.id.back:
@@ -150,5 +174,11 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
      public String getDate()
     {
         return date;
+    }
+
+    public void setDataToHashMap(String Key,String data)
+    {
+        cl_car_global_data.dataWithAns.put(Key, data);
+        Log.d("HashMap", cl_car_global_data.dataWithAns.get("ind_type"));
     }
 }

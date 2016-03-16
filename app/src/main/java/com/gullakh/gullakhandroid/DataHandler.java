@@ -170,17 +170,15 @@ public class DataHandler extends SQLiteOpenHelper {
 
     }
 
-    public void insertdata(ContentValues values,String tablenam){
+    public void insertdata(ContentValues values,String tablenam)
+    {
         try {
             db = this.getReadableDatabase();
-
             db.insert(tablenam, null, values);
         }catch(Exception e)
         {
             System.out.println("error " + e.toString());
-
         }
-
     }
 
     public void query(String query)
@@ -194,14 +192,7 @@ public class DataHandler extends SQLiteOpenHelper {
             {
                 //  Log.w("***********************d2","");
                 db.execSQL(cmd);
-
-
-
             }
-
-
-
-
         }
         catch(Exception e)
         {
@@ -232,5 +223,15 @@ public class DataHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+    public void updateDatatoDB(String tablenam,ContentValues values,String loantype)
+    {
+        try {
+            db = this.getReadableDatabase();
+            db.update(tablenam, values, "loantype="+loantype,null);
+        }catch(Exception e)
+        {
+            System.out.println("error " + e.toString());
+        }
     }
 }

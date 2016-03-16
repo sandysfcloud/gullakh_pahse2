@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -23,6 +24,9 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
     private EditText Doj;
     int day,month,yearv;
     private String date="";
+    private Spinner spinner1,spinner2;
+    private EditText netProfit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +43,9 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        netProfit= (EditText) findViewById(R.id.NetProfit);
         // Spinner click listener
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -105,15 +110,32 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
 
         switch (v.getId()) {
             case R.id.next:
-                if(!Doj.getText().toString().matches("")) {
-                    String jdate=getDate();
-                    Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_residence_type.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
-                else
+                if(!spinner1.getSelectedItem().toString().matches("Select"))
                 {
+                    if (!Doj.getText().toString().matches(""))
+                    {
+                        if (!spinner2.getSelectedItem().toString().equals("select"))
+                        {
+                            if(!netProfit.getText().toString().equals(""))
+                            {
+                                setDataToHashMap("profession",spinner1.getSelectedItem().toString());
+                                setDataToHashMap("start_date_of_current_business_prof",getDate());
+                                setDataToHashMap("firm_type_prof",spinner1.getSelectedItem().toString());
+                                setDataToHashMap("last_two_yrs_net_profit_prof",netProfit.getText().toString());
+                                Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_residence_type.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            }else {
+                                RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please enter Net profit", "failed");
+                            }
+                        } else {
+                        RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your firm", "failed");
+                        }
+                    }else {
                     RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please enter date", "failed");
+                    }
+                }else{
+                    RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your profession", "failed");
                 }
                 break;
             case R.id.back:
@@ -134,8 +156,6 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                 dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
-
-
         }
     }
     @Override
@@ -153,8 +173,13 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         yearv=year;
         Doj.setText(date);
     }
-
-    public String getDate() {
+    public String getDate()
+    {
         return date;
+    }
+    public void setDataToHashMap(String Key,String data)
+    {
+        cl_car_global_data.dataWithAns.put(Key,data);
+        Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
     }
 }

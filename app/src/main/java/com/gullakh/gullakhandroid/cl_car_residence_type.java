@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -103,9 +104,9 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                         {
                             RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence", "failed");
                         }else {
-                            setDataToArrayList(dataResType);
-                            setDataToArrayList(currentCity.getText().toString());
-                            setDataToArrayList(currentResidence.getText().toString());
+                            setDataToHashMap("current_res",dataResType);
+                            setDataToHashMap("period_of_stay_in_cur_city",currentCity.getText().toString());
+                            setDataToHashMap("period_of_stay_in_cur_res",currentResidence.getText().toString());
                             Intent intent = new Intent(this, cl_car_residence.class);
                             startActivity(intent);
                         }
@@ -118,10 +119,10 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                 finish();
                 break;
         }
-
     }
-    public void setDataToArrayList(String data)
+    public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.data.add(data);
+        cl_car_global_data.dataWithAns.put(Key,data);
+
     }
 }

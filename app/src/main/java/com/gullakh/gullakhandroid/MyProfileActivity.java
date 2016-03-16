@@ -44,9 +44,6 @@ public class MyProfileActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         DataHandler dbobject = new DataHandler(MyProfileActivity.this);
         Cursor cr = dbobject.displayData("select * from userlogin");
         if(cr!=null) {
@@ -60,7 +57,6 @@ public class MyProfileActivity extends AppCompatActivity {
             startActivity(intentsignin);
             finish();
         }
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -70,6 +66,4 @@ public class MyProfileActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

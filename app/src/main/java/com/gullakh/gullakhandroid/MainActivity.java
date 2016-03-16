@@ -95,6 +95,7 @@ public class MainActivity extends ActionBarActivity {
     private View viewwheel;
     private int wheelwidth;
     private ObjectAnimator anim1;
+    private String loanType="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,7 +221,16 @@ public class MainActivity extends ActionBarActivity {
             {
                 int[]  myImageList2 = new int[]{R.drawable.personalloannew, R.drawable.busineeloan, R.drawable.homeloan, R.drawable.carloan};
                 final MediaPlayer mp = MediaPlayer.create(getApplication(),R.raw.coindrop);
-                String msg = String.valueOf(position) + " " + isSelected;
+                Log.d("position",String.valueOf(position));
+                if(position==0){
+                    loanType = "Personal Loan";
+                }else if (position==1){
+                    loanType = "Loan against Property";
+                }else if (position==2){
+                    loanType = "Home Loan";
+                }else if(position==3){
+                    loanType = "Car Loan";
+                }
                 coin.setX(touchPositionX-30);
                 coin.setY(touchPositionY);
                 //   Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();

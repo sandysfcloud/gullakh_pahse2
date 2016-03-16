@@ -2,7 +2,6 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Application;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -127,6 +126,4 @@ public class GlobalData extends Application {
     public void setCharbanklist(CharSequence[] questionVariable) {
         banklist = questionVariable;
     }
-
-
 }

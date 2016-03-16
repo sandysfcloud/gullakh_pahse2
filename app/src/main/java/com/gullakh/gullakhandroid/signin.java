@@ -141,8 +141,6 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
             }else{
                 RegisterPageActivity.showErroralert(signin.this,str_result.get("error_message").toString(),"error");
-
-
             }
         } catch (JSONException e) {
             e.printStackTrace();

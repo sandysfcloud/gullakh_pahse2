@@ -24,6 +24,7 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
     int day,month,yearv;
     private TextView heading1,heading2;
     private String date="";
+    private EditText Exp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,6 +43,7 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
         Doj.setOnClickListener(this);
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         Emp = (EditText) findViewById(R.id.salEmpname);
+        Exp = (EditText) findViewById(R.id.totalexp);
         onShakeImage();
     }
     public void onShakeImage() {
@@ -57,12 +59,12 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
                 if(!Emp.getText().toString().matches("")) {
                     if (!Doj.getText().toString().matches("")) {
                         String EmpName = Emp.getText().toString();
-                        setDataToArrayList(EmpName);
+                        setDataToHashMap("name_of_current_emp",EmpName);
                         String jdate = getDate();
-                        setDataToArrayList(jdate);
+                        setDataToHashMap("year_you_joined_current_comp", jdate);
+                        setDataToHashMap("year_you_joined_current_comp", Exp.getText().toString());
                         Intent intent = new Intent(cl_car_saraied.this, cl_salary_mode.class);
                         startActivity(intent);
-                        Log.d("ArrayList",cl_car_global_data.data.get(0)+cl_car_global_data.data.get(1)+cl_car_global_data.data.size());
                         overridePendingTransition(R.transition.left, R.transition.right);
                     } else {
                         RegisterPageActivity.showErroralert(cl_car_saraied.this, "Please enter date", "failed");
@@ -74,9 +76,9 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
             case R.id.back:
                 finish();
                 break;
-            case R.id.joindateofemp:
+            case R.id.saljoindateofemp:
                 Calendar now = Calendar.getInstance();
-                now.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_saraied.this,
                         now.get(Calendar.YEAR),
@@ -89,8 +91,6 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
                 dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
-
-
         }
     }
     @Override
@@ -111,8 +111,9 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
     public String getDate() {
         return date;
     }
-    public void setDataToArrayList(String data)
+    public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.data.add(data);
+        cl_car_global_data.dataWithAns.put(Key,data);
+        Log.d("HashMap", cl_car_global_data.getAllValuePrintedHashMap());
     }
 }

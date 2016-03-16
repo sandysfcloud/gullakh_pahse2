@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -59,6 +60,7 @@ public class cl_salary_mode extends AppCompatActivity implements View.OnClickLis
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode.this, "Select your Salaried Bank", "failed");
                 }else{
+                    setDataToHashMap("sal_dep_to",dataBankType);
                     Intent intent = new Intent(this, cl_car_residence_type.class);
                     startActivity(intent);
                 }
@@ -67,46 +69,27 @@ public class cl_salary_mode extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.ImageButtonBank1:
                 dataBankType="Axis Bank";
-                setDataToArrayList(dataBankType);
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonBank2:
                 dataBankType="ICICI Bank";
-                setDataToArrayList(dataBankType);
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonBank3:
                 dataBankType="HDFC Bank";
-                setDataToArrayList(dataBankType);
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonBank4:
                 dataBankType="Others";
-                setDataToArrayList(dataBankType);
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonBank5:
                 dataBankType="cheque";
-                setDataToArrayList(dataBankType);
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonBank6:
                 dataBankType="cash";
-                setDataToArrayList(dataBankType);
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
                 break;
-
         }
-
     }
-    public void setDataToArrayList(String data)
+    public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.data.add(data);
+        cl_car_global_data.dataWithAns.put(Key,data);
+        Log.d("HashMap", cl_car_global_data.getAllValuePrintedHashMap());
     }
 }

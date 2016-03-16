@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -60,43 +61,37 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 if(dataLocation.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
-                }else{
+                }else
+                {
+                    setDataToHashMap("currently_living_in",dataLocation);
+                    cl_car_global_data.addDataToDataBase(this, "questans",cl_car_global_data.getHashMapInString(),cl_car_global_data.checkDataToDataBase(this));
+                    //Cursor cr=cl_car_global_data.getDataToDataBase(this,"SELECT * FROM mysearch");
+                   /* DataHandler dbobject = new DataHandler(this);
+                    Cursor cr = dbobject.displayData("SELECT * FROM mysearch");
+                    cr.moveToFirst();
+                    Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));*/
                     Intent intent = new Intent(this, cl_car_make.class);
                     startActivity(intent);
                     break;
                 }
-
             case R.id.ImageButtonPlace1:
                 dataLocation="Bengaluru";
-                setDataToArrayList(dataLocation);
-                Intent intent = new Intent(this, cl_car_make.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonPlace2:
                 dataLocation="Chennai";
-                setDataToArrayList(dataLocation);
-                intent = new Intent(this, cl_car_make.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonPlace3:
                 dataLocation="Kolkata";
-                setDataToArrayList(dataLocation);
-                intent = new Intent(this, cl_car_make.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonPlace4:
                 dataLocation="Mumbai";
-                setDataToArrayList(dataLocation);
-                intent = new Intent(this, cl_car_make.class);
-                startActivity(intent);
                 break;
-
         }
-
     }
 
-    public void setDataToArrayList(String data)
+    public void setDataToHashMap(String key,String data)
     {
-        cl_car_global_data.data.add(data);
+        cl_car_global_data.dataWithAns.put(key,data);
+        Log.d("HashMapData",cl_car_global_data.dataWithAns.get("currently_living_in"));
     }
 }

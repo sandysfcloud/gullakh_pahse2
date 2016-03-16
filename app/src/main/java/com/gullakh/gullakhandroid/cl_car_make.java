@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -57,35 +58,24 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
             case R.id.next:
                 if(dataCar.equals(""))
                 {
-                    RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Location", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 }else{
+                    setDataToHashMap("interested_car",dataCar);
                     Intent intent = new Intent(this, cl_car_gender.class);
                     startActivity(intent);
                     break;
                 }
             case R.id.ImageButtonCar1:
                 dataCar="Maruti Alto";
-                setDataToArrayList(dataCar);
-                Intent intent = new Intent(this, cl_car_gender.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonCar2:
                 dataCar="Honda amaze";
-                setDataToArrayList(dataCar);
-                intent = new Intent(this, cl_car_gender.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonCar3:
                 dataCar="Hundai eon";
-                setDataToArrayList(dataCar);
-                intent = new Intent(this, cl_car_gender.class);
-                startActivity(intent);
                 break;
             case R.id.ImageButtonCar4:
                 dataCar="Maruti swift";
-                setDataToArrayList(dataCar);
-                intent = new Intent(this, cl_car_gender.class);
-                startActivity(intent);
                 break;
             case R.id.back:
                 finish();
@@ -93,8 +83,10 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         }
 
     }
-    public void setDataToArrayList(String data)
+    public void setDataToHashMap(String key,String data)
     {
-        cl_car_global_data.data.add(data);
+        cl_car_global_data.dataWithAns.put(key,data);
+        Log.d("HashMapData", cl_car_global_data.dataWithAns.get("interested_car"));
+        Log.d("HashMap", cl_car_global_data.getAllValuePrintedHashMap());
     }
 }

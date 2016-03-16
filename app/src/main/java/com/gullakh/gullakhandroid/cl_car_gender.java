@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     TextView heading,option1,option2;
     ImageButton gen1,gen2;
     String dataGender="";
+    private EditText firstName,lastName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
+        firstName= (EditText)findViewById(R.id.FirstName);
+        lastName=(EditText)findViewById(R.id.LastName);
         gen1 = (ImageButton) findViewById(R.id.usermale);
         gen2 = (ImageButton) findViewById(R.id.userfemale);
         next = (ImageView) findViewById(R.id.next);
@@ -42,38 +47,40 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
         next.setAnimation(shake);
     }
-
     @Override
     public void onClick(View v) {
 
         switch (v.getId())
         {
             case R.id.next:
-                if(dataGender.equals(""))
-                {
-                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
-                }else{
-                    Intent intent = new Intent(this, cl_car_employment_type.class);
-                    startActivity(intent);
+                if(firstName.getText().toString().equals("")) {
+                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
+                } else {
+                    if (lastName.getText().toString().equals("")) {
+                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter Last Name", "failed");
+                    }else{
+                        if (dataGender.equals("")) {
+                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
+                        } else {
+                            setDataToArrayList(firstName.getText().toString());
+                            setDataToArrayList(lastName.getText().toString());
+                            setDataToArrayList(dataGender);
+                            Intent intent = new Intent(this, cl_car_employment_type.class);
+                            startActivity(intent);
+                        }
+                    }
                 }
                 break;
             case R.id.usermale:
                 dataGender="male";
-                setDataToArrayList(dataGender);
-                Intent intent = new Intent(this, cl_car_employment_type.class);
-                startActivity(intent);
                 break;
             case R.id.userfemale:
                 dataGender="female";
-                setDataToArrayList(dataGender);
-                intent = new Intent(this, cl_car_employment_type.class);
-                startActivity(intent);
                 break;
             case R.id.back:
                 finish();
                 break;
         }
-
     }
     public void setDataToArrayList(String data)
     {

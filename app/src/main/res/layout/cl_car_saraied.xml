@@ -50,11 +50,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Joining date of current employer?"
         android:id="@+id/heading2"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:gravity="center"
-        android:background="#94ababab" />
+        android:background="#94ababab"
+        android:layout_below="@+id/view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <com.gullakh.gullakhandroid.MaterialTextField
         android:layout_width="300dp"
         android:layout_gravity="center_horizontal"
@@ -64,7 +64,8 @@
         app:mtf_image="@drawable/loan_amt"
         android:layout_below="@+id/heading2"
         android:layout_alignLeft="@+id/view"
-        android:layout_alignStart="@+id/view">
+        android:layout_alignStart="@+id/view"
+        android:id="@+id/textView15">
 
         <EditText
             android:layout_width="match_parent"
@@ -76,6 +77,42 @@
             android:textSize="15sp" />
 
     </com.gullakh.gullakhandroid.MaterialTextField>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Total Experince ?"
+        android:id="@+id/heading3"
+        android:textColor="#4a4a4a"
+        android:textSize="20dp"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:background="#94ababab" />
+
+    <com.gullakh.gullakhandroid.MaterialTextField
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        app:mtf_cardCollapsedHeight="4dp"
+        app:mtf_cardColor="#D83C2F"
+        app:mtf_image="@drawable/loan_amt"
+        android:layout_below="@+id/heading3"
+        android:layout_alignLeft="@+id/textView15">
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Experience in years"
+            android:id="@+id/totalexp"
+            android:textColorHint="#fff"
+
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+    </com.gullakh.gullakhandroid.MaterialTextField>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
