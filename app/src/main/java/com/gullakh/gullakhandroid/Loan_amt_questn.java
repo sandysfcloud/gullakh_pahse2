@@ -169,10 +169,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 RegisterPageActivity.showAlertreview(Loan_amt_questn.this,3);
                 break;
             case R.id.done:
-Log.d("done clicked loan_amt","check");
+Log.d("done clicked loan_amt", "check");
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
-
+                break;
             case R.id.next:
                 if(amt.getText().toString().matches("")) {
 

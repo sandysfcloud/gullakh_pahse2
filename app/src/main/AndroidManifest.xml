@@ -47,9 +47,7 @@
         <activity
             android:name=".MainActivity"
             android:label=" Home"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterPageActivity"
             android:label="Sign Up"
@@ -184,7 +182,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_gender"
-            android:label="Personal Info" />
+            android:label="Gender" />
         <activity
             android:name=".cl_car_job_experience"
             android:label="@string/title_activity_signin"

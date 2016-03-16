@@ -161,6 +161,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
+                break;
             case R.id.next:
                 if(!sal.getText().toString().matches("")) {
                     if(Float.parseFloat(sal.getText().toString()) > 3000) {

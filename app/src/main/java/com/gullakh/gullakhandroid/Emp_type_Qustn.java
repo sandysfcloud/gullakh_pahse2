@@ -23,7 +23,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
-    ImageView sal,self,next,review,done,back;
+    ImageView sal,self,next,review,done,back,business;
     String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,17 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
         TextView  ts = (TextView) findViewById(R.id.t1);
         TextView  ts2 = (TextView) findViewById(R.id.t2);
+        TextView  tbusiness = (TextView) findViewById(R.id.tbusiness);
         ts.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         ts2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        tbusiness.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         sal = (ImageView) findViewById(R.id.img);
         sal.setOnClickListener(this);
         self = (ImageView) findViewById(R.id.img2);
         self.setOnClickListener(this);
+        business = (ImageView) findViewById(R.id.business);
+        business.setOnClickListener(this);
 //        review.setOnClickListener(this);
      //   EditText email = (EditText) findViewById(R.id.email);
        // email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -147,7 +151,13 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             case R.id.img:
                 sal.setBackgroundColor(Color.parseColor("#D83C2F"));
                 self.setBackgroundColor(Color.parseColor("#ffffff"));
+                business.setBackgroundColor(Color.parseColor("#ffffff"));
                 ((GlobalData) getApplication()).setemptype("Salaried");
+
+                String emptype=((GlobalData) getApplication()).getemptype();
+
+                Log.e("getting set data", emptype);
+
                 if(data==null) {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
@@ -159,7 +169,20 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 self.setBackgroundColor(Color.parseColor("#D83C2F"));
                 sal.setBackgroundColor(Color.parseColor("#ffffff"));
-                ((GlobalData) getApplication()).setemptype("Self Employed");
+                business.setBackgroundColor(Color.parseColor("#ffffff"));
+                ((GlobalData) getApplication()).setemptype("Self Employed Business");
+                if(data==null) {
+                    intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+                break;
+            case R.id.business:
+
+                self.setBackgroundColor(Color.parseColor("#ffffff"));
+                sal.setBackgroundColor(Color.parseColor("#ffffff"));
+                business.setBackgroundColor(Color.parseColor("#D83C2F"));
+                ((GlobalData) getApplication()).setemptype("Self Employed Professional");
                 if(data==null) {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
