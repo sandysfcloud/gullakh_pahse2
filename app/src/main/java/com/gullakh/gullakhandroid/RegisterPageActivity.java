@@ -338,10 +338,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 			View view = inflater.inflate(R.layout.linearreviewquestions, null);
 			 tv=(TextView) view.findViewById(R.id.headertype);
-			LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.linerlytclick);
+			//LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.linerlytclick);
+			LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.vlinemp);
 
-			tv.setTag(i);
-			tv.setOnClickListener(new View.OnClickListener() {
+			LinearLayout LL = new LinearLayout(CurrentAct);
+			//LL.setBackgroundColor(Color.CYAN);
+			LL.setOrientation(LinearLayout.VERTICAL);
+
+			LL.setTag(i);
+			LL.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					Log.d("check number",v.getTag().toString() );
 					if(v.getTag().toString().equals("1")) {
@@ -389,7 +394,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			tv.setText(carloan_que_salary_new.get(i - 1));
 			 //textdata=carloan_que_salary_new.get(i - 1);
 			tvans.setText(carloan_que_salary_new_ans.get(i - 1));
-			linrlyt.addView(view);
+			LL.addView(view);
+			linrlyt.addView(LL);
 
 
 			final TextView finalTv = tv;

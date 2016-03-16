@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -33,12 +34,15 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emi_questn);
         getSupportActionBar().setTitle("Car Loan - EMI");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         review = (ImageView) findViewById(R.id.review);
         review.setOnClickListener(this);
+        done = (ImageView) findViewById(R.id.done);
+        done.setOnClickListener(this);
 
         emipaying = (EditText) findViewById(R.id.emipaying);
         onetext = (TextView) findViewById(R.id.onetext);

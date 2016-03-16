@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salaryed__net_salary);
         getSupportActionBar().setTitle("Car Loan - Net Salary");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
@@ -158,8 +160,14 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.done:
-
-                finish();
+                if(Float.parseFloat(sal.getText().toString()) > 3000) {
+                    ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString()));
+                    finish();
+                }
+                else
+                {
+                    RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
+                }
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.next:

@@ -18,6 +18,14 @@
             android:layout_height="wrap_content"
 
         />-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,8 +124,9 @@
                 android:textSize="16dp"
                 android:id="@+id/tbusiness"
                 android:textColor="#000"
+                android:layout_gravity="center_horizontal"
                 android:text="Self Employed Professional"
-                android:layout_gravity="right" />
+                />
         </LinearLayout>
 
     </LinearLayout>
@@ -171,4 +180,6 @@ android:visibility="gone"
             android:src="@drawable/nextimgnw"
 
             />
-    </LinearLayout></LinearLayout>
+    </LinearLayout> </LinearLayout>
+    </ScrollView>
+</LinearLayout>

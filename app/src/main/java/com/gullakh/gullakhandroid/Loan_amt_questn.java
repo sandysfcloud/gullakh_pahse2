@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -34,6 +35,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loan_amt);
         getSupportActionBar().setTitle("Car Loan - Loan Amount");
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ImageView back = (ImageView) findViewById(R.id.back);
        // MaterialTextField obj=new MaterialTextField(this);
        // obj.expand();
@@ -170,6 +173,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.done:
 Log.d("done clicked loan_amt", "check");
+                ((GlobalData) getApplication()).setloanamt(amt.getText().toString());
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;

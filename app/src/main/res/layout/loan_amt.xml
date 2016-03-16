@@ -62,9 +62,7 @@
             android:textSize="20sp" />
     </FrameLayout>
 </LinearLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -75,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginTop="40dp"
+
         app:mtf_cardCollapsedHeight="4dp"
         app:mtf_cardColor="#D83C2F"
         app:mtf_image="@drawable/loan_amt"
@@ -103,8 +101,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/done"
-        android:layout_marginTop="20dp"
-        android:visibility="invisible"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:layout_gravity="bottom|center"
         android:src="@drawable/donenew"
 
@@ -154,7 +152,7 @@
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
-</ScrollView>
+
     </LinearLayout>
 
 

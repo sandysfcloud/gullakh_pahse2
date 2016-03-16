@@ -37,6 +37,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -95,12 +96,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     ImageView filter;
     ArrayList<String> disbank;
     Dialog dialog;
-    Button apply;
-    int Max_tenure, filter_tenure, seektenure = 0;
+    Button apply,reset;
+    int Max_tenure, filter_tenure, seektenure =1,prevloan=0;
     double net_salry, emi;
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
-    int roi_min = 0, roi_max = 0, seek_loanamt,sortbyposition;
+    int roi_min = 4, roi_max = 8, seek_loanamt=1,sortbyposition;
     Map<String, String> Arry_banknam = new HashMap<>();
     ;
     protected ArrayList<CharSequence> selectedBanks = new ArrayList<CharSequence>();
@@ -111,7 +112,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4,requestgetserver5;
     String globalidentity,loantype;
     Dialog dgthis;
-
+    EditText editloan;
+    TextView loan_amt;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +123,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         layout = (LinearLayout) findViewById(R.id.linear);
         linedit = (LinearLayout) findViewById(R.id.linedit);
         filter = (ImageView) findViewById(R.id.filter);
-        TextView loan_amt = (TextView) findViewById(R.id.loan_amt);
+        loan_amt = (TextView) findViewById(R.id.loan_amt);
         TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
         TextView tfilter = (TextView) findViewById(R.id.tfilter);
         loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -135,11 +137,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 		String data = intent.getStringExtra("data");
 		createListView();
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-       /* String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
+        //nullpointer
+        String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
         loan = loan.replaceAll("\\.00", "");
         loan = loan.replaceAll("Rs.", "");
 
-        loan_amt.setText("" + loan);*/
+        loan_amt.setText("" + loan);
         filter.setOnClickListener(this);
 		intent = getIntent();
 		data = intent.getStringExtra("data");
@@ -147,10 +150,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         if (data.equals("carloan")) {
 
-
-            loan_amtcalcutn();
-
-
+            Log.e("flow test carloan", String.valueOf(0));
+            loan_amtcalcutn("oncreate");
+            Log.e("flow test loan cal done", String.valueOf(CustomListViewValuesArr.size()));
+           // setadapter(CustomListViewValuesArr);
         }
 
 
@@ -177,7 +180,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     }
 
-    public void loan_amtcalcutn() {
+    public void loan_amtcalcutn(final String param) {
+
         //***************************serverconnect***********************
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -333,7 +337,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 dgthis.dismiss();
                 BankList[] BL_cobj = gson.fromJson(jsonObject.get("result"), BankList[].class);
                 Map<String, String> Arry_banknamtemp = new HashMap<>();
-                ;
+
                 for (int i = 0; i < BL_cobj.length; i++) {
                     Arry_banknamtemp.put(BL_cobj[i].getid(), BL_cobj[i].getaccountname());
                 }
@@ -356,9 +360,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 emi = ((GlobalData) getApplication()).getEmi();
 
                 disbank = new ArrayList<String>();
+                Log.e("flow test calculte called", "1");
                 calculate();
-                setadapter(CustomListViewValuesArr);
 
+                Log.e("flow test", String.valueOf(CustomListViewValuesArr.size()));
+                if(param.equals("oncreate"))
+                    setadapter(CustomListViewValuesArr);
+                Log.e("flow test", String.valueOf(1));
 
             }
         }, GoogleCardsMediaActivity.this, "5");
@@ -373,9 +381,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         }
         requestgetserver5.execute("token", "LoanType", sessionid);
 
-
+        Log.e("flow test", String.valueOf(3));
         prgmImages = new int[]{R.drawable.icici_bank_logo2, R.drawable.axisbank_logo, R.drawable.bankofindia_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo};
-
+        prevloan=0;
 
     }
 
@@ -389,7 +397,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
-            if (seektenure != 0) {
+            if (seektenure != 1) {
                 ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
                 Log.d("seektenure value", String.valueOf(seektenure));
                 emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -loan_amt, 0, false);
@@ -447,15 +455,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-        Collections.sort(CustomListViewValuesArr, new Comparator<ListModel>(){
-            public int compare(ListModel obj1, ListModel obj2)
-            {
+        Collections.sort(CustomListViewValuesArr, new Comparator<ListModel>() {
+            public int compare(ListModel obj1, ListModel obj2) {
                 // TODO Auto-generated method stub
-                if(sortbyposition==1) {
+                if (sortbyposition == 1) {
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
-                }else if(sortbyposition==2){
+                } else if (sortbyposition == 2) {
                     return (Float.valueOf(obj1.getprocessing_fee()) < Float.valueOf(obj2.getprocessing_fee())) ? -1 : (Float.valueOf(obj1.getprocessing_fee()) > Float.valueOf(obj2.getprocessing_fee())) ? 1 : 0;
-                }else
+                } else
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
             }
         });
@@ -468,8 +475,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
     public void setadapter(ArrayList<ListModel> arraylist) {
-        CustomListViewValuesArr2 = CustomListViewValuesArr;
-        CustomListViewValuesArr2 = arraylist;
+       // CustomListViewValuesArr2 = CustomListViewValuesArr;
+        Log.d("setadapter param", String.valueOf(arraylist));
+        CustomListViewValuesArr2.clear();
+        CustomListViewValuesArr2.addAll(arraylist);
+        Log.d("CustomListViewValuesArr value check", String.valueOf(CustomListViewValuesArr2.size()));
         mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
 
         SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
@@ -541,10 +551,16 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         }
     }
 
+    public void updateloanamt(int Current) {
+        prevloan=Current;
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.filter:
+
                 bankfilter = disbank.toArray(new CharSequence[disbank.size()]);
                 //((GlobalData) this.getApplication()).setCharbanklist(cs);
 
@@ -553,11 +569,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 dialog.setContentView(R.layout.filter_dialog);
                 //Dialog dialog = new Dialog(this, android.R.style.Theme_Light);
 
-                RangeSeekBar seekBar1 = (RangeSeekBar) dialog.findViewById(R.id.loanamt);
+                final RangeSeekBar seekBar1 = (RangeSeekBar) dialog.findViewById(R.id.loanamt);
 
-                RangeSeekBar tenure = (RangeSeekBar) dialog.findViewById(R.id.tenure);
+                final RangeSeekBar tenure = (RangeSeekBar) dialog.findViewById(R.id.tenure);
+                final RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar) dialog.findViewById(R.id.rangsb);
                // SeekBar tenure = (SeekBar) dialog.findViewById(R.id.tenure);
-                TextView t1 = (TextView) dialog.findViewById(R.id.textView1);
+                final TextView t1 = (TextView) dialog.findViewById(R.id.textView1);
+                editloan = (EditText) dialog.findViewById(R.id.loanamountid);
                 min = (TextView) dialog.findViewById(R.id.min);
                 max = (TextView) dialog.findViewById(R.id.max);
                 if (roi_min != 0) {
@@ -571,6 +589,32 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 apply = (Button) dialog.findViewById(R.id.applyf);
                 apply.setOnClickListener(this);
+                reset = (Button) dialog.findViewById(R.id.reset);
+                reset.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("reset clicked", "1");
+                        seek_loanamt=1;
+                        seekBar1.setSelectedMaxValue(1);
+                        loand.setText("1 Lakh");
+                        editloan.setText("100000");
+
+
+                        roi_min=8;
+                        roi_max=14;
+                        rangeSeekBar.setSelectedMaxValue(roi_max);
+                        rangeSeekBar.setSelectedMinValue(roi_min);
+                        min.setText(String.valueOf(roi_max) + " % -");
+                        max.setText(String.valueOf(roi_min) + " %");
+
+                        seektenure=1;
+                        tenur.setText("7 Years");
+                        tenure.setSelectedMaxValue(7);
+
+                        selectedBanks.clear();
+                        selectColoursButton.setText("-None Selected-");
+                    }
+                });
                 selectColoursButton = (Button) dialog.findViewById(R.id.select_colours);
                 selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
                 if (prev_selectbank != null)
@@ -591,7 +635,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 dialog.show();
 
-                RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar) dialog.findViewById(R.id.rangsb);
+
                // if (roi_max != 0)
                     //rangeSeekBar.setRangeValues(roi_min, roi_max);
                 rangeSeekBar.setSelectedMaxValue(roi_max);
@@ -612,24 +656,26 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 });
 
 
-                seekBar1.setSelectedMaxValue(seek_loanamt);
+
 
                 seekBar1.setRangeValues(1, 10);
-                Log.d("check tenure", String.valueOf(seek_loanamt));
-
-
-
+                Log.d("selected loan", String.valueOf(seek_loanamt));
+                seekBar1.setSelectedMaxValue(seek_loanamt);
+                editloan.setText(String.valueOf(seek_loanamt) + "00000");
+                loand.setText(String.valueOf(seek_loanamt) + " Lakh");
 
                 seekBar1.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
                     @Override
                     public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
+
                         Log.d("loan-value1", String.valueOf(integer));
                         Log.d("loan-value2", String.valueOf(t1));
                         Double value = (t1 / 10.0);
                         seek_loanamt = t1;
                         loand.setText(String.valueOf(t1) + " Lakh");
-
+                        editloan.setText(String.valueOf(t1) + "00000");
+                        updateloanamt(seek_loanamt);
 
                     }
 
@@ -637,22 +683,29 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 });
 
 
-
-                //tenure.setSelectedMaxValue(Max_tenure / 12);
-
-                tenur.setText(Integer.toString(seektenure));
                 tenure.setRangeValues(0, Max_tenure / 12);
+                //tenure.setSelectedMaxValue(Max_tenure / 12);
+                if(seektenure==1) {
+                    //when filter is clicked at 1st
+                    tenur.setText("7 Years");
+                    tenure.setSelectedMaxValue(7);
+                }
+                else {
+                    tenur.setText(Integer.toString(seektenure) + " Years");
+                    tenure.setSelectedMaxValue(seektenure);
+                }
 
                 Log.d("check tenure", String.valueOf(Max_tenure / 12));
-                tenure.setSelectedMaxValue(seektenure);
+                Log.d("selected tenure", String.valueOf(seektenure));
+
                 tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
                     @Override
                     public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
                         Log.d("tenure-value1", String.valueOf(integer));
                         Log.d("tenure-value2", String.valueOf(t1));
-                        seektenure = t1;
-                        tenur.setText(String.valueOf(t1));
+                        seektenure = t1+1;
+                        tenur.setText(String.valueOf(t1+1)+" Years");
                     }
 
 
@@ -672,20 +725,28 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                  startActivity(edit);
 
                 break;
+
             case R.id.applyf:
+                loan_amt.setText(String.valueOf(seek_loanamt)+"00000");
 
                 newCustomListViewValuesArr.clear();
                 //if(tenur.getText().toString()!)
                 if (tenur.getText() != null) {
+                    if (seek_loanamt > 0) {
+                        ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
+                    }
 
                     calculate();
 
 
+
                 }
-                if (seek_loanamt > 0) {
+                Log.d("prevloan!!!!!", String.valueOf(prevloan));
+                Log.d("seek_loanamt!!!!!", String.valueOf(seek_loanamt));
+                if (seek_loanamt == prevloan) {
                     Log.d("loan seekbar moved!!!!!", "");
                     ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
-                    loan_amtcalcutn();
+                    loan_amtcalcutn("loan");
                     //calculate();
 
 
@@ -715,7 +776,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         Log.d("roi_max!!!!!", String.valueOf(roi_max));
                         Log.d("CustomListView value!!", String.valueOf(CustomListViewValuesArr.get(i).getbanknam()));
                         Log.d("selectedBanks value!!", String.valueOf(selectedBanks2.get(j)));
-                        if (roi_min == 0 && roi_max == 0) {
+                        if (roi_min == 4 && roi_max == 8) {
                             if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks2.get(j))) {
                                 Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
                                 Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks2));
@@ -727,9 +788,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                             if (CustomListViewValuesArr.get(i).getbanknam().equals(selectedBanks2.get(j)) && (roi >= roi_min && roi <= roi_max)) {
                                 Log.d("if cond-Cust!!!!!", CustomListViewValuesArr.get(i).getbanknam());
-                                Log.d("if cond-Select!!!!!", String.valueOf(selectedBanks2));
+                                Log.d("newCustomListViewValuesArr before!!!!!", String.valueOf(newCustomListViewValuesArr));
                                 newCustomListViewValuesArr.add(CustomListViewValuesArr.get(i));
-//                                Log.d("newCustomListV dataif", String.valueOf(newCustomListViewValuesArr.get(i).getbanknam()));
+                                //Log.d("newCustomListViewValuesArr after", String.valueOf(newCustomListViewValuesArr.get(i).getbanknam()));
                             }
                         }
                     }
