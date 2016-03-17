@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -41,6 +42,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_of_birth_questn);
         getSupportActionBar().setTitle("Car Loan - Date of birth");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);

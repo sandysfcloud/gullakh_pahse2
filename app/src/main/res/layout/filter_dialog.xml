@@ -18,7 +18,43 @@
 
         android:layout_margin="12dp"
         android:orientation="vertical">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+        <Button
+            android:id="@+id/applyf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_margin="5dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/rectbutton_red"
+            android:text="Apply Filter" />
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:layout_margin="5dp"
+                android:minWidth="0dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/rectbutton_red"
+                android:text="Reset Filter" />
+            </LinearLayout>
     <TextView
 
         android:text="Select Banks"
@@ -39,7 +75,7 @@
         android:layout_width="fill_parent"
 
         android:text="- None Selected -"
-        android:background="#D83C2F"
+        android:background="@color/main_color_500"
         android:textColor="#ffffff"
         android:id="@+id/select_colours"
 
@@ -81,6 +117,8 @@
 
         android:max="50"
         android:layout_marginTop="5dp" />-->
+
+
         <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
             android:layout_width="fill_parent"
             android:id="@+id/loanamt"
@@ -91,7 +129,29 @@
 
             />
 
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="@color/main_color_500"
+            app:mtf_image="@drawable/loan_amt"
+            >
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Other"
+                android:id="@+id/loanamountid"
+                android:ems="10"
+                android:inputType="phone"
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
     <!--  <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -210,6 +270,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingBottom="10dp"
             android:weightSum="9">
         <TextView
 
@@ -249,19 +310,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:gravity="bottom|center_horizontal">
-        <Button
+        android:layout_margin="20dp"
+        android:gravity="top|center_horizontal">
+       <!-- <Button
             android:id="@+id/applyf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_gravity="top|center_horizontal"
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:padding="8dp"
             android:textColor="#ffffff"
             android:background="@drawable/roundedbutton"
-            android:text="Apply" />
+            android:text="Apply" />-->
     </LinearLayout>
 </LinearLayout>
     </ScrollView>

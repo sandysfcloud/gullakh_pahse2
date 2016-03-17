@@ -174,6 +174,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         {
                             globalindetity="LoanParameterMaster";
                             Log.e("LoanParameterMasterexec", identifier);
+                            Log.e("LoanParameterMasterexec-query", "select * from LoanParameterMaster where parameter_name='Loan Amount' and loan_type="+args[3]+";");
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanParameterMaster where parameter_name='Loan Amount' and loan_type="+args[3]+";")).toString());
                         }
