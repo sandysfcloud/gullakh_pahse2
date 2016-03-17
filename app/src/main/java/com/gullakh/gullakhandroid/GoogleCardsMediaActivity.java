@@ -513,7 +513,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     public void createListView() {
         listView = new ListView(this);
-        listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
+        //listView.setBackgroundColor(Color.parseColor("#ffe0e0e0"));
 
 
         listView.setClipToPadding(false);

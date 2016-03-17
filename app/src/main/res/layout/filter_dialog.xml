@@ -75,7 +75,7 @@
         android:layout_width="fill_parent"
 
         android:text="- None Selected -"
-        android:background="#D83C2F"
+        android:background="@color/main_color_500"
         android:textColor="#ffffff"
         android:id="@+id/select_colours"
 
@@ -136,7 +136,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_cardColor="#D83C2F"
+            app:mtf_cardColor="@color/main_color_500"
             app:mtf_image="@drawable/loan_amt"
             >
 

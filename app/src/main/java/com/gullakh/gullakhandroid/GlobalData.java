@@ -25,6 +25,10 @@ public class GlobalData extends Application {
     private String session;
     private String tenure;
     private CharSequence[] banklist;
+    private Double pat;
+    private Double pat2;
+    private Double depreciation;
+    private Double depreciation2;
     //static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php?operation=create";
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php";
 
@@ -33,8 +37,21 @@ public class GlobalData extends Application {
     public Double getEmi() {
         return someVariable;
     }
+    public Double getPat() {
+        return pat;
+    }
+    public Double getPat2() {
+        return pat2;
+    }
     public String getDob() {
         return locationVariable;
+    }
+    public Double getdepreciation() {
+        return depreciation;
+    }
+
+    public Double getdepreciation2() {
+        return depreciation2;
     }
 
     public String getemptype() {
@@ -125,5 +142,18 @@ public class GlobalData extends Application {
 
     public void setCharbanklist(CharSequence[] questionVariable) {
         banklist = questionVariable;
+    }
+
+    public void setpat(Double value) {
+        pat = value;
+    }
+    public void setpat2(Double value) {
+        pat2 = value;
+    }
+    public void setdepreciation(Double value) {
+        depreciation = value;
+    }
+    public void setdepreciation2(Double value) {
+        depreciation2 = value;
     }
 }

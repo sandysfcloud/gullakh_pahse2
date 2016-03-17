@@ -184,11 +184,20 @@ Log.d("done clicked loan_amt", "check");
                 }
                 else
                 {
-                    Log.d("intent next loanamt","check");
+
+
+
+                    Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString());
-                    String loan= ((GlobalData) getApplication()).getloanamt();
-                    amt.setText(loan);
-                    Intent intent = new Intent(Loan_amt_questn.this, Salaryed_NetSalary.class);
+
+                    Intent intent;
+                    String emptype=((GlobalData) getApplication()).getemptype();
+                    if(emptype.equals("Self Employed Business")||emptype.equals("Self Employed Professional"))
+                    {
+                        intent = new Intent(Loan_amt_questn.this, Car_Loan_PAT.class);
+                    }
+                    else
+                    intent = new Intent(Loan_amt_questn.this, Salaryed_NetSalary.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
 

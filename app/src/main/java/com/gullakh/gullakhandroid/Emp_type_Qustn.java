@@ -149,9 +149,10 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 break;
             case R.id.img:
-                sal.setBackgroundColor(Color.parseColor("#D83C2F"));
-                self.setBackgroundColor(Color.parseColor("#ffffff"));
-                business.setBackgroundColor(Color.parseColor("#ffffff"));
+                sal.setImageResource(R.drawable.selected);
+                //sal.setBackgroundColor(Color.parseColor("#D83C2F"));
+                self.setImageResource(R.drawable.selfempbus);
+                business.setImageResource(R.drawable.selfempprof);
                 ((GlobalData) getApplication()).setemptype("Salaried");
 
                 String emptype=((GlobalData) getApplication()).getemptype();
@@ -167,9 +168,10 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.img2:
 
-                self.setBackgroundColor(Color.parseColor("#D83C2F"));
-                sal.setBackgroundColor(Color.parseColor("#ffffff"));
-                business.setBackgroundColor(Color.parseColor("#ffffff"));
+                self.setImageResource(R.drawable.selected);
+                sal.setImageResource(R.drawable.salaried);
+                business.setImageResource(R.drawable.selfempprof);
+
                 ((GlobalData) getApplication()).setemptype("Self Employed Business");
                 if(data==null) {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
@@ -179,9 +181,9 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.business:
 
-                self.setBackgroundColor(Color.parseColor("#ffffff"));
-                sal.setBackgroundColor(Color.parseColor("#ffffff"));
-                business.setBackgroundColor(Color.parseColor("#D83C2F"));
+                business.setImageResource(R.drawable.selected);
+                sal.setImageResource(R.drawable.salaried);
+                self.setImageResource(R.drawable.selfempbus);
                 ((GlobalData) getApplication()).setemptype("Self Employed Professional");
                 if(data==null) {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);

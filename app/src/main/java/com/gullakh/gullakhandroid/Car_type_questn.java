@@ -162,8 +162,10 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.img:
-                sal.setBackgroundColor(Color.parseColor("#D83C2F"));
-                self.setBackgroundColor(Color.parseColor("#ffffff"));
+               // sal.setBackgroundColor(Color.parseColor("#D83C2F"));
+                //self.setBackgroundColor(Color.parseColor("#ffffff"));
+                sal.setImageResource(R.drawable.selected);
+                self.setImageResource(R.drawable.usedcar);
                 ((GlobalData) getApplication()).setcartype("New Car Loan");
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
@@ -173,11 +175,13 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.img2:
-                self.setBackgroundColor(Color.parseColor("#D83C2F"));
-                sal.setBackgroundColor(Color.parseColor("#ffffff"));
+                sal.setImageResource(R.drawable.newcar);
+                self.setImageResource(R.drawable.selected);
                 ((GlobalData) getApplication()).setcartype("Used Car Loan");
             {
+
                 intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
+
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
             }

@@ -188,4 +188,6 @@
 
     </string-array>
     <string name="sortybylabel">Sort By</string>
+    <string name="title_activity_car__loan__pat">Car_Loan_PAT</string>
+    <string name="title_activity_car_loan__depreciation">CarLoan_Depreciation</string>
 </resources>

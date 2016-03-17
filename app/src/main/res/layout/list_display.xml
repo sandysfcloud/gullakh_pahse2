@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linear"
-    android:background="#ffe0e0e0"
+    android:background="@drawable/bgque"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"

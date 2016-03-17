@@ -346,6 +346,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			LL.setOrientation(LinearLayout.VERTICAL);
 
 			LL.setTag(i);
+
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+			layoutParams.setMargins(0, 0, 0, 15);
+
 			LL.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					Log.d("check number",v.getTag().toString() );
@@ -394,7 +400,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			tv.setText(carloan_que_salary_new.get(i - 1));
 			 //textdata=carloan_que_salary_new.get(i - 1);
 			tvans.setText(carloan_que_salary_new_ans.get(i - 1));
-			LL.addView(view);
+			LL.addView(view,layoutParams);
 			linrlyt.addView(LL);
 
 

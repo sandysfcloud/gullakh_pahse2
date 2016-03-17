@@ -8,7 +8,7 @@
     <View
         android:id="@+id/ken_burns_images"
         android:layout_width="match_parent"
-        android:background="#D83C2F"
+        android:background="@color/main_color_500"
         android:layout_height="match_parent" />
 
     <!-- We use dps for font size: we don't want our logo
