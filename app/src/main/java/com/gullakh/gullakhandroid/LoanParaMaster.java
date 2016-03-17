@@ -5,12 +5,20 @@ package com.gullakh.gullakhandroid;
  */
 public class LoanParaMaster {
     public String id;
-
+    public String webreference;
     public String getid(){
         return id;
     }
 
     public void setid(String token){
         id=token;
+    }
+
+    public void setWebreference(String webreference) {
+        this.webreference = webreference;
+    }
+
+    public String getWebreference() {
+        return webreference;
     }
 }

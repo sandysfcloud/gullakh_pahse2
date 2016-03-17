@@ -4,18 +4,16 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class cl_car_make extends AppCompatActivity implements View.OnClickListener{
     ImageView next,back;
     TextView heading,option1,option2,option3,option4;
-    ImageButton car1,car2,car3,car4;
+    ImageView car1,car2,car3,car4;
     String dataCar="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +30,13 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option4= (TextView) findViewById(R.id.TextViewOption4);
         option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        car1 = (ImageButton) findViewById(R.id.ImageButtonCar1);
+        car1 = (ImageView) findViewById(R.id.ImageViewCar1);
         car1.setOnClickListener(this);
-        car2 = (ImageButton) findViewById(R.id.ImageButtonCar2);
+        car2 = (ImageView) findViewById(R.id.ImageViewCar2);
         car2.setOnClickListener(this);
-        car3 = (ImageButton) findViewById(R.id.ImageButtonCar3);
+        car3 = (ImageView) findViewById(R.id.ImageViewCar3);
         car3.setOnClickListener(this);
-        car4 = (ImageButton) findViewById(R.id.ImageButtonCar4);
+        car4 = (ImageView) findViewById(R.id.ImageViewCar4);
         car4.setOnClickListener(this);
         back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -61,20 +59,48 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 }else{
                     setDataToHashMap("interested_car",dataCar);
-                    Intent intent = new Intent(this, cl_car_gender.class);
-                    startActivity(intent);
+                    Intent i = new Intent(this, cl_car_saraied.class);
+                    startActivity(i);
+                    /*String LoanType=((GlobalData) getApplication()).getemptype();
+                    if(LoanType.equals("Salaried")) {
+                        Intent intent = new Intent(this, cl_car_saraied.class);
+                        startActivity(intent);
+                    }else if(LoanType.equals("Self Employed Business")){
+                        Intent intent = new Intent(this, cl_car_selfempbusiness.class);
+                        startActivity(intent);
+                    }else if(LoanType.equals("Self Employed Professional"))
+                    {
+                        Intent intent = new Intent(this, cl_car_selfempbusinesprofs.class);
+                        startActivity(intent);
+                    }*/
                     break;
                 }
-            case R.id.ImageButtonCar1:
+            case R.id.ImageViewCar1:
+                car1.setImageResource(R.drawable.buttonselecteffect);
+                car2.setImageResource(R.drawable.caramaze);
+                car3.setImageResource(R.drawable.careon);
+                car4.setImageResource(R.drawable.newcar);
                 dataCar="Maruti Alto";
                 break;
-            case R.id.ImageButtonCar2:
+            case R.id.ImageViewCar2:
+                car1.setImageResource(R.drawable.usedcar);
+                car2.setImageResource(R.drawable.buttonselecteffect);
+                car3.setImageResource(R.drawable.careon);
+                car4.setImageResource(R.drawable.newcar);
                 dataCar="Honda amaze";
                 break;
-            case R.id.ImageButtonCar3:
+            case R.id.ImageViewCar3:
+                car1.setImageResource(R.drawable.usedcar);
+                car2.setImageResource(R.drawable.caramaze);
+                car3.setImageResource(R.drawable.buttonselecteffect);
+                car4.setImageResource(R.drawable.newcar);
                 dataCar="Hundai eon";
                 break;
-            case R.id.ImageButtonCar4:
+            case R.id.ImageViewCar4:
+                car1.setImageResource(R.drawable.usedcar);
+                car2.setImageResource(R.drawable.caramaze);
+                car3.setImageResource(R.drawable.careon);
+                car4.setImageResource(R.drawable.buttonselecteffect);
                 dataCar="Maruti swift";
                 break;
             case R.id.back:
@@ -86,7 +112,5 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
     public void setDataToHashMap(String key,String data)
     {
         cl_car_global_data.dataWithAns.put(key,data);
-        Log.d("HashMapData", cl_car_global_data.dataWithAns.get("interested_car"));
-        Log.d("HashMap", cl_car_global_data.getAllValuePrintedHashMap());
     }
 }

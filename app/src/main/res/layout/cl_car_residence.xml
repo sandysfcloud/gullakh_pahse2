@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:id="@+id/TextViewHeading1"
                 android:textColor="#4b4b4b"
                 android:layout_marginTop="20dp"
-                android:textSize="20dp"
+                android:textSize="22dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center" />
             <LinearLayout
@@ -39,28 +39,33 @@
                 android:layout_weight="1"
                 android:weightSum="2"
                 android:gravity="center">
-                <ImageButton
+                <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/ImageButtonPlace1"
+                    android:id="@+id/ImageViewPlace1"
 
+                    android:focusable="false"
+                    android:clickable="false"
+                    style='"?android:selectableItemBackgroundBorderless"'
                     android:background="@drawable/locbang"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-                <ImageButton
+                    android:layout_weight="1"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp" />
+                <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/ImageButtonPlace2"
+                    android:id="@+id/ImageViewPlace2"
 
                     android:background="@drawable/locchn"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,8 +83,7 @@
                     android:textColor="#3f3f3f"
                     android:text="Bengaluru"
 
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="30dp" />
+                    android:layout_weight="1" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,8 +92,7 @@
                     android:id="@+id/TextViewOption2"
                     android:textColor="#3f3f3f"
                     android:text="Chennai"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_weight="1" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,31 +100,33 @@
                 android:layout_weight="1"
                 android:weightSum="2"
                 android:gravity="center">
-                <ImageButton
+                <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/ImageButtonPlace3"
+                    android:id="@+id/ImageViewPlace3"
 
                     android:background="@drawable/lockol"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-                <ImageButton
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1" />
+                <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
 
-                    android:id="@+id/ImageButtonPlace4"
+                    android:id="@+id/ImageViewPlace4"
 
                     android:background="@drawable/locmum"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1" />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:weightSum="2"
@@ -135,8 +140,7 @@
                     android:textColor="#3f3f3f"
                     android:text="Kolkata"
 
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp" />
+                    android:layout_weight="1" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,8 +149,7 @@
                     android:id="@+id/TextViewOption4"
                     android:textColor="#3f3f3f"
                     android:text="Mumbai"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_weight="1" />
             </LinearLayout>
 
 
@@ -183,7 +186,7 @@
                 android:weightSum="2"
                 android:gravity="right" >
 
-                <ImageButton
+                <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:id="@+id/next"
@@ -196,4 +199,4 @@
     </ScrollView>
 
 
-</LinearLayout>
+</FrameLayout>

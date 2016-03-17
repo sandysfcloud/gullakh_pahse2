@@ -193,7 +193,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             globalindetity="RuleDetails";
                             loan_amt=((GlobalData) act.getApplication()).getloanamt();
                             Log.e("RuleDetail loan_amt", String.valueOf(loan_amt));
-Log.d("Rule details query", "select * from RuleDetails where rule_parameter='"+args[3]+"' AND min_value<="+args[4]+" and max_value>="+args[4]+";");
+                            Log.d("Rule details query", "select * from RuleDetails where rule_parameter='"+args[3]+"' AND min_value<="+args[4]+" and max_value>="+args[4]+";");
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from RuleDetails where rule_parameter='"+args[3]+"' AND min_value<="+args[4]+" and max_value>="+args[4]+";")).toString());
 
@@ -217,20 +217,97 @@ Log.d("Rule details query", "select * from RuleDetails where rule_parameter='"+a
 
 
                         else if(args[1].equals("accountname")){
-                            /*globalindetity="accountname";
-                            //get token (post)
-                            Log.e("accountname test","");
-
-                            Log.e("Arry_RDid", String.valueOf(Arry_RMid));
-
-                            String listid=Arry_RMid.toString();
-                            Log.e("listid2",listid);
-                            listid = listid.toString().replace("[", "").replace("]", "");*/
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select accountname from Accounts where id in "+args[3]+";")).toString());
 
+                        } else if(args[1].equals("getaccount")){
+
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Accounts where accountname ='City-"+args[3]+"';")).toString());
+                            Log.e("Check query getaccount","select * from Accounts where accountname ='City-"+args[3]+"';");
                         }
+                     else if(args[1].equals("getcontact")){
+
+                        client = new DefaultHttpClient();
+                        post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Contacts where email ='"+args[3]+"' or mobile='"+args[4]+"';")).toString());
+
+                    }
+                        else if(args[1].equals("getloancase")){
+
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanRequestCase;")).toString());
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+                    else if(args[1].equals("createaccount")){
+
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "create"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "Accounts"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"accounttype\":\"Borrower\",\"accountname\":\"City-"+args[3]+"\",\"assigned_user_id\":\"admin\"}"));
+                            client = new DefaultHttpClient();
+
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                    } else if(args[1].equals("createcontact")){
+
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "create"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "Contacts"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"lastname\":\""+args[6]+"\",\"assigned_user_id\":\"admin\"}"));
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        }else if(args[1].equals("createcase"))
+                        {
+
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "create"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "LoanRequestCase"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\""+args[3]+"\",\"stage\":\""+args[4]+"\",\"assigned_user_id\":\"admin\"}"));
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        }else if(args[1].equals("createloanvalue"))
+                        {
+
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "create"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "LoanApplicationValues"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("element",args[3]));
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        }
+                        else if(args[1].equals("LoanParameterMasterForWebRef"))
+                        {
+                            globalindetity="LoanParameterMaster";
+                            Log.e("LoanParameterMasterexec", identifier);
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanParameterMaster where loan_type="+args[3]+";")).toString());
+                        }
+
 
                         //Perform the request and check the status code
                         response = client.execute(post);

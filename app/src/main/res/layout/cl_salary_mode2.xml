@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.gullakh.gullakhandroid.cl_car_saraied"
+    android:background="@drawable/bgque"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_gravity="center_horizontal|bottom"
+        android:weightSum="2"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/back"
+            android:gravity="left"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/backimgnw" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/next"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/nextimgnw" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:layout_weight="0.77">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Select your Salaried Bank"
+            android:id="@+id/TextViewHeading"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_marginTop="30dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TextViewHeading"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="29dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ImageViewBank1"
+                android:layout_weight="1"
+                android:background="@drawable/bankaxis"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ImageViewBank2"
+                android:layout_weight="1"
+                android:background="@drawable/bankicici"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Axis Bank"
+                android:id="@+id/TextViewOption1"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ICICI Bank"
+                android:id="@+id/TextViewOption2"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/LinearLayout">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ImageViewBank3"
+                android:layout_weight="1"
+                android:background="@drawable/bankhdfc"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/ImageViewBank4"
+                android:layout_weight="1"
+                android:background="@drawable/bankother"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="HDFC Bank"
+                android:id="@+id/TextViewOption3"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Other Bank"
+                android:id="@+id/TextViewOption4"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="20dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="#D83C2F"
+            app:mtf_image="@drawable/loan_amt"
+            android:layout_marginBottom="100dp">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Other"
+                android:id="@+id/locatn"
+                android:textColorHint="#fff"
+
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+    </LinearLayout>
+
+</FrameLayout>

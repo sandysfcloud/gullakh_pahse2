@@ -26,7 +26,7 @@ public class GlobalData extends Application {
     private String tenure;
     private CharSequence[] banklist;
     //static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php?operation=create";
-    static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php";
+    static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice_new.php";
 
 
 

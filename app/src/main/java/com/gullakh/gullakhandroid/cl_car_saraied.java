@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -62,8 +61,8 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
                         setDataToHashMap("name_of_current_emp",EmpName);
                         String jdate = getDate();
                         setDataToHashMap("year_you_joined_current_comp", jdate);
-                        setDataToHashMap("year_you_joined_current_comp", Exp.getText().toString());
-                        Intent intent = new Intent(cl_car_saraied.this, cl_salary_mode.class);
+                        setDataToHashMap("total_exp", Exp.getText().toString());
+                        Intent intent = new Intent(cl_car_saraied.this, cl_salary_mode1.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     } else {
@@ -113,7 +112,6 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
     }
     public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.dataWithAns.put(Key,data);
-        Log.d("HashMap", cl_car_global_data.getAllValuePrintedHashMap());
+        cl_car_global_data.dataWithAns.put(Key, data);
     }
 }
