@@ -54,6 +54,9 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
         mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
+        review = (ImageView) findViewById(R.id.review);
+        review.setOnClickListener(this);
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
@@ -187,6 +190,14 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.review:
+                if(data.equals("data"))
+                    RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this,5);
+                if(data.equals("dep2"))
+                    RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this,7);
+                break;
+
             case R.id.done:
 
 

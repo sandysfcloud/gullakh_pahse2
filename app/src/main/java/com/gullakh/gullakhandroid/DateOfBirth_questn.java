@@ -119,6 +119,10 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 
         switch (v.getId()) {
             case R.id.review:
+                String emptyp=((GlobalData) getApplication()).getemptype();
+                if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
+                    RegisterPageActivity.showAlertreview(this,9);
+                else
                 RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,6);
                 break;
 

@@ -50,6 +50,7 @@ import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
