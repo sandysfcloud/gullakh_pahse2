@@ -49,12 +49,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
 
         //add pre question to map and database
-       /* setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
         setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        cl_car_global_data.addDataToDataBase(this, "questans", cl_car_global_data.getHashMapInString(), cl_car_global_data.checkDataToDataBase(this));*/
+        setDataToHashMap("car_loan_type",((GlobalData) getApplication()).getcartype());
+        setDataToHashMap("cl_loanamount",((GlobalData) getApplication()).getloanamt());
+        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+        setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
+        setDataToHashMap("dob",((GlobalData) getApplication()).getDob());
+       // cl_car_global_data.addDataToDataBase(this, "questans", cl_car_global_data.getHashMapInString(), cl_car_global_data.checkDataToDataBase(this));*/
 
     }
     public void onShakeImage() {

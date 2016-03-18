@@ -73,6 +73,6 @@
     <color name="progress_gray_dark">#FF383838</color>
  <color name="grey">#FFBEBBBB</color>
 
- <color name="colorPrimaryDark">#D83C2F</color>
+ <color name="colorPrimaryDark">#ed1c24</color>
     <color name="red">#ed1c24</color>
 </resources>
