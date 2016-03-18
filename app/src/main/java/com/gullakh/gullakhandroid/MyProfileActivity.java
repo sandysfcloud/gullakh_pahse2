@@ -5,12 +5,15 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class MyProfileActivity extends AppCompatActivity {
+
+    static boolean signinstate=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +26,9 @@ public class MyProfileActivity extends AppCompatActivity {
         prof.setTypeface(myfontlight);
         //TextView name= (TextView) findViewById(R.id.textView6);
         //name.setTypeface(myfontlight);
-        TextView email= (TextView) findViewById(R.id.textView10);
+        TextView email= (TextView) findViewById(R.id.textViewEmail);
         email.setTypeface(myfontlight);
-        TextView ph= (TextView) findViewById(R.id.textView11);
+        TextView ph= (TextView) findViewById(R.id.textViewMobNo);
         ph.setTypeface(myfontlight);
         Button signout = (Button) findViewById(R.id.signout);
         signout.setTypeface(myfontlight);
@@ -38,8 +41,11 @@ public class MyProfileActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                signinstate=false;
                 DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
                 dbobjectnew.query("DELETE FROM userlogin");
+                Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -49,13 +55,23 @@ public class MyProfileActivity extends AppCompatActivity {
         if(cr!=null) {
             if (cr.moveToFirst()) {
                 email.setText(cr.getString(1));
-                ph.setText(cr.getString(2));
-
+                Cursor crmob = dbobject.displayData("select * from signindetails where email='" + cr.getString(1) + "'");
+                try {
+                    if (crmob != null) {
+                        if (crmob.moveToFirst()) {
+                            Log.d("mobno", crmob.getString(1) + " email no :" + cr.getString(1));
+                            ph.setText(crmob.getString(2));
+                        }
+                    }
+                }catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         }else{
             Intent intentsignin=new Intent(this,signin.class);
             startActivity(intentsignin);
-            finish();
+                finish();
         }
     }
     @Override

@@ -146,21 +146,26 @@ public class MainActivity extends ActionBarActivity {
         signUptext.setTypeface(myfontthin);
         myprof = (Button) findViewById(R.id.buttonMyprof);
         myprof.setTypeface(myfontlight);
-        myprof.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goMyprofile();
-            }
-        });
+
         reg = (Button) findViewById(R.id.buttonReg);
         reg.setTypeface(myfontlight);
-        reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goReg();
-            }
-        });
-
+        if(MyProfileActivity.signinstate){
+            reg.setVisibility(View.INVISIBLE);
+            myprof.setVisibility(View.INVISIBLE);
+        }else{
+            reg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goReg();
+                }
+            });
+            myprof.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goMyprofile();
+                }
+            });
+        }
         //*****************************wheel
 
         final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);

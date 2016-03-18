@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -234,6 +235,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				}
 
 				if(urlchange=="setpassword"){
+					storedatatoDatabase();
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,"Registered Successfully","success");
 					Intent intent = new Intent(this, cl_car_residence.class);
 					startActivity(intent);
@@ -245,6 +247,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void storedatatoDatabase() {
+		DataHandler dbobject = new DataHandler(RegisterPageActivity.this);
+		dbobject.addTable();
+		ContentValues values = new ContentValues();
+		values.put("email", useremail);
+		values.put("mobno", usermobno);
+		dbobject.insertdata(values, "signindetails");
 	}
 
 

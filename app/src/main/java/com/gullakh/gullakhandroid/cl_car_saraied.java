@@ -21,7 +21,7 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
     EditText Doj,Emp;
     ImageView next,back;
     int day,month,yearv;
-    private TextView heading1,heading2;
+    private TextView heading1,heading2,heading3;
     private String date="";
     private EditText Exp;
 
@@ -32,8 +32,10 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.cl_car_saraied);
         heading1= (TextView) findViewById(R.id.heading1);
         heading2= (TextView) findViewById(R.id.heading2);
+        heading3= (TextView) findViewById(R.id.heading3);
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);

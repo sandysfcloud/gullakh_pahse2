@@ -35,10 +35,10 @@
             android:layout_height="40dp"
             android:text="Logout"
             android:id="@+id/signout"
-            android:layout_margin="15dp"
             android:background="@drawable/mainbutton"
             android:textColor="#ffffff"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:layout_margin="15dp" />
 
     </LinearLayout>
 
@@ -68,16 +68,16 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="  chetankn.riverdale@gmail.com"
                 android:drawableLeft="@drawable/email"
-                android:id="@+id/textView10"
+                android:id="@+id/textViewEmail"
                 android:layout_margin="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=" 9019852506"
+                android:text="9999999999"
                 android:drawableLeft="@drawable/phone"
-                android:id="@+id/textView11"
+                android:id="@+id/textViewMobNo"
                 android:layout_margin="10dp" />
 
            <!-- <TextView

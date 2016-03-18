@@ -58,10 +58,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 {
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 }else{
-                    setDataToHashMap("interested_car",dataCar);
-                    Intent i = new Intent(this, cl_car_saraied.class);
-                    startActivity(i);
-                    /*String LoanType=((GlobalData) getApplication()).getemptype();
+                    setDataToHashMap("interested_car", dataCar);
+                   String LoanType=((GlobalData) getApplication()).getemptype();
                     if(LoanType.equals("Salaried")) {
                         Intent intent = new Intent(this, cl_car_saraied.class);
                         startActivity(intent);
@@ -72,7 +70,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                     {
                         Intent intent = new Intent(this, cl_car_selfempbusinesprofs.class);
                         startActivity(intent);
-                    }*/
+                    }
                     break;
                 }
             case R.id.ImageViewCar1:
