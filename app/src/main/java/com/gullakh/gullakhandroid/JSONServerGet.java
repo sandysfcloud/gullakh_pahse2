@@ -179,6 +179,15 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanParameterMaster where parameter_name='Loan Amount' and loan_type="+args[3]+";")).toString());
                         }
 
+                        else if(args[1].equals("employerlist"))
+                        {
+                            globalindetity="employerlist";
+                            Log.e("LoanParameterMasterexec", identifier);
+                            Log.e("LoanParameterMasterexec-query", "select * from Employermaster;");
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Employermaster;")).toString());
+                        }
+
 
                         else if(args[1].equals("LoanType"))
                         {
@@ -194,7 +203,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             globalindetity="RuleDetails";
                             loan_amt=((GlobalData) act.getApplication()).getloanamt();
                             Log.e("RuleDetail loan_amt", String.valueOf(loan_amt));
-                            Log.d("Rule details query", "select * from RuleDetails where rule_parameter='"+args[3]+"' AND min_value<="+args[4]+" and max_value>="+args[4]+";");
+                            Log.d("Rule details query", "select * from RuleDetails where rule_parameter='" + args[3] + "' AND min_value<=" + args[4] + " and max_value>=" + args[4] + ";");
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from RuleDetails where rule_parameter='"+args[3]+"' AND min_value<="+args[4]+" and max_value>="+args[4]+";")).toString());
 

@@ -5,8 +5,7 @@ package com.gullakh.gullakhandroid;
  */
 public class Employer {
     public String employer_name;
-    public String createdtime;
-    public String modifiedtime;
+
 
     public String getemployername(){
         return employer_name;
@@ -18,7 +17,7 @@ public class Employer {
         return expierTime;
     }*/
 
-    public void setTokendata(String token){
+    public void setEmployer_name(String token){
         employer_name=token;
     }
    /* public void setserverTime(String serverTime){

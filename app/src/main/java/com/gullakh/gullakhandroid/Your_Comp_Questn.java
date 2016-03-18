@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +13,19 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class Your_Comp_Questn extends AppCompatActivity  implements View.OnClickListener{
     AutoCompleteTextView email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +87,11 @@ public class Your_Comp_Questn extends AppCompatActivity  implements View.OnClick
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+
+
+
+
 
                 //Employer[] enums=null;
                 // Log.e("employerdata expandab ", enums[0].getemployername());

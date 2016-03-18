@@ -1,29 +1,44 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.ExecutionException;
 
 public class cl_car_saraied extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
 
-    EditText Doj,Emp;
+    EditText Doj;
     ImageView next,back;
     int day,month,yearv;
     private TextView heading1,heading2,heading3;
     private String date="";
     private EditText Exp;
+    AutoCompleteTextView Emp;
+    JSONServerGet requestgetserver;
+    String sessionid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,7 +58,10 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
         Doj = (EditText) findViewById(R.id.saljoindateofemp);
         Doj.setOnClickListener(this);
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        Emp = (EditText) findViewById(R.id.salEmpname);
+        //Emp = (EditText) findViewById(R.id.salEmpname);
+        Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
+        Emp.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        Emp.setOnClickListener(this);
         Exp = (EditText) findViewById(R.id.totalexp);
         onShakeImage();
     }
@@ -91,6 +109,67 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
                 dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
+                break;
+
+            case R.id.salEmpname:
+
+
+
+                /*ArrayList<String> liste2=null;
+                String flag= null;
+                ServerConnect  cls2= new ServerConnect();
+                try {
+                    liste2 =cls2.getEmployerList(this);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+
+                requestgetserver = new JSONServerGet(new AsyncResponse() {
+                    @Override
+                    public void processFinish(JSONObject output) {
+
+                    }
+
+                    public void processFinishString(String str_result, Dialog dg) {
+
+
+                        GsonBuilder gsonBuilder = new GsonBuilder();
+                        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                        Gson gson = gsonBuilder.create();
+
+                        JsonParser parser = new JsonParser();
+                        JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                        Employer[] enums = gson.fromJson(jsonObject.get("result"), Employer[].class);
+
+                        int size=enums.length;
+                        Log.e("emplist frm server ", String.valueOf(size));
+                       ArrayList<String> liste =new ArrayList<String>();
+                        for(int i=0;i<size;i++) {
+                            liste.add(enums[i].getemployername());
+                        }
+                        final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_saraied.this, android.R.layout.simple_dropdown_item_1line, liste);
+                        Emp.setAdapter(fAdapter);
+
+
+                        Log.e("emplist frm server ", String.valueOf(liste));
+
+
+
+                    }
+                }, cl_car_saraied.this, "2");
+                DataHandler dbobject = new DataHandler(cl_car_saraied.this);
+                Cursor cr = dbobject.displayData("select * from session");
+                if (cr.moveToFirst()) {
+                    sessionid = cr.getString(1);
+                    Log.e("sessionid-cartypes", sessionid);
+                }
+
+                requestgetserver.execute("token", "employerlist", sessionid);
+
+
+
                 break;
         }
     }
