@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Where do you live currently ?"
+                android:text="Where do you live currently?"
                 android:id="@+id/TextViewHeading1"
                 android:textColor="#4b4b4b"
                 android:layout_marginTop="20dp"

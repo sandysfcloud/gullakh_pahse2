@@ -121,13 +121,24 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                         if(currentResidence.getText().toString().matches(""))
                         {
                             RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence", "failed");
-                        }else {
+                        }else
+                        {
                             setDataToHashMap("current_res", dataResType);
                             setDataToHashMap("period_of_stay_in_cur_city",currentCity.getText().toString());
-                            setDataToHashMap("period_of_stay_in_cur_res",currentResidence.getText().toString());
-                            savetoserver();
-                            Intent intent = new Intent(this, cl_car_residence.class);
-                            startActivity(intent);
+                            setDataToHashMap("period_of_stay_in_cur_res", currentResidence.getText().toString());
+                           // savetoserver();
+                                String LoanType=((GlobalData) getApplication()).getemptype();
+                                if(LoanType.equals("Salaried")) {
+                                    Intent intent = new Intent(this, cl_car_saraied.class);
+                                    startActivity(intent);
+                                }else if(LoanType.equals("Self Employed Business")){
+                                    Intent intent = new Intent(this, cl_car_selfempbusiness.class);
+                                    startActivity(intent);
+                                }else if(LoanType.equals("Self Employed Professional"))
+                                {
+                                    Intent intent = new Intent(this, cl_car_selfempbusinesprofs.class);
+                                    startActivity(intent);
+                                }
                         }
                     }
                 }else {
@@ -372,10 +383,6 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                 }
                 Log.d("finally got", jsonArray.toString());
                 requestgetserver6.execute("token", "createloanvalue", sessionid,jsonArray.toString());
-
-
-
-
             }
         }, cl_car_residence_type.this, "8");
     }

@@ -49,7 +49,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Select your Salaried Bank"
+            android:text="Salary deposited to?"
             android:id="@+id/TextViewHeading"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"

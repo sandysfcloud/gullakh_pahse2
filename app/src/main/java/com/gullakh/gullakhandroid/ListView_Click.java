@@ -180,7 +180,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
             case  R.id.apply:
                 applyFlag=MainActivity.loanType;
                 if(MyProfileActivity.signinstate){
-                    Intent intent = new Intent(this, cl_car_residence.class);
+                    Intent intent = new Intent(this, cl_car_make.class);
                     startActivity(intent);
                     this.overridePendingTransition(R.transition.left, R.transition.right);
                 }else {
