@@ -1,11 +1,15 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -85,6 +89,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                             //setDataToHashMap("lastname",lastName.getText().toString());
                            // setDataToHashMap("gender", dataGender);
                             savetoserver();
+
                         }
                     }
                 }
@@ -104,6 +109,27 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
+    private void showdialog() {
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(cl_car_gender.this);
+        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+        final View view = factory.inflate(R.layout.thankyou, null);
+        TextView caseno = (TextView) view.findViewById(R.id.appno);
+        caseno.setText(borrowercaseid);
+        alertadd.setView(view);
+
+        alertadd.setCancelable(false);
+        alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(cl_car_gender.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+            }
+        });
+        alertadd.show();
+    }
+
     public void setDataToHashMap(String Key,String data)
     {
         cl_car_global_data.dataWithAns.put(Key, data);
@@ -256,6 +282,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("Application values jsonobj", String.valueOf(jsonObject));
                 dg.dismiss();
+                showdialog();
 
             }
         }, cl_car_gender.this, "6");
