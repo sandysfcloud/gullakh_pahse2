@@ -262,6 +262,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 borrowercaseid = Borrower_case.getId();
 
 
+
                 requestgetserver7.execute("token", "LoanType", sessionid);
 
 
@@ -280,8 +281,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Log.d("Application values jsonobj", String.valueOf(jsonObject));
-                dg.dismiss();
+                //Log.d("Application values jsonobj", String.valueOf(jsonObject));
+                dgthis.dismiss();
                 showdialog();
 
             }
@@ -299,7 +300,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                dgthis = dg;
+
 
                 LoanType[] LT = gson.fromJson(jsonObject.get("result"), LoanType[].class);
 
