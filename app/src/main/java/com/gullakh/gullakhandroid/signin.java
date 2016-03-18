@@ -138,12 +138,28 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 values.put("useremail", useremail);
                 values.put("usermobile", usermobno);
                 dbobject.insertdata(values, "userlogin");
-
-                Intent intent = new Intent(signin.this, MainActivity.class);
-                MyProfileActivity.signinstate=true;
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-
+                if(ListView_Click.applyFlag.equals("Car Loan")){
+                    Intent intent = new Intent(signin.this, cl_car_residence.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else if(ListView_Click.applyFlag.equals("Home Loan")){
+                    Intent intent = new Intent(signin.this, cl_car_residence.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else if(ListView_Click.applyFlag.equals("Loan against Property")){
+                    Intent intent = new Intent(signin.this, cl_car_residence.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else if(ListView_Click.applyFlag.equals("Personal Loan")){
+                    Intent intent = new Intent(signin.this, cl_car_residence.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else if(ListView_Click.applyFlag.equals("none")) {
+                    Intent intent = new Intent(signin.this, MainActivity.class);
+                    MyProfileActivity.signinstate = true;
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
             }else{
                 RegisterPageActivity.showErroralert(signin.this,str_result.get("error_message").toString(),"error");
             }

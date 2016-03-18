@@ -37,9 +37,8 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="446dp"
-        android:id="@+id/scrollView5"
-        android:layout_gravity="center_horizontal|top">
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView5">
 
         <LinearLayout
             android:orientation="vertical"
@@ -58,7 +57,8 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="18dp"
                 android:gravity="center"
-                android:background="#94ababab" />
+                android:background="#94ababab"
+                android:layout_marginTop="50dp" />
 
             <Spinner
                 android:layout_width="300dp"
@@ -100,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Join Date in Current Employer"
+                    android:inputType="text"
                     android:id="@+id/joindateofemp"
                     android:textColorHint="#fff"
                     android:textColor="#fff"

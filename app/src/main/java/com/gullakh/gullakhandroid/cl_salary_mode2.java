@@ -13,6 +13,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     TextView heading,option1,option2,option3,option4;
     ImageView bank1,bank2,bank3,bank4,bank5,bank6;
     String dataBankType="";
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +54,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
                     setDataToHashMap("sal_dep_to",dataBankType);
-                    Intent intent = new Intent(cl_salary_mode2.this, cl_car_residence_type.class);
+                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                     startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
                 }
                 break;
             case R.id.ImageViewBank1:
@@ -62,6 +65,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="Axis Bank";
+                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewBank2:
                 bank1.setImageResource(R.drawable.bankaxis);
@@ -69,6 +75,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="ICICI Bank";
+                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewBank3:
                 bank1.setImageResource(R.drawable.bankaxis);
@@ -76,6 +85,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.buttonselecteffect);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="HDFC Bank";
+                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewBank4:
                 bank1.setImageResource(R.drawable.bankaxis);
@@ -83,8 +95,12 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.buttonselecteffect);
                 dataBankType="Others";
+                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
         }

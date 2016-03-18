@@ -125,12 +125,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             setDataToHashMap("current_res", dataResType);
                             setDataToHashMap("period_of_stay_in_cur_city",currentCity.getText().toString());
                             setDataToHashMap("period_of_stay_in_cur_res",currentResidence.getText().toString());
-
-
                             savetoserver();
-
-
-
                             Intent intent = new Intent(this, cl_car_residence.class);
                             startActivity(intent);
                         }
@@ -158,14 +153,14 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
-        sessionid="6c8947df56ea3dd84e2f3";
-
-        cr = dbobject.displayData("select * from userlogin");
-        if (cr.moveToFirst()) {
-            useremail ="testsan@test.com";
-            usermobile = "9586946849";
+        //sessionid="6c8947df56ea3dd84e2f3";
+        Cursor cre = dbobject.displayData("select * from userlogin");
+        if(cre!=null) {
+            if (cre.moveToFirst()) {
+                useremail = cre.getString(1);
+                usermobile = "9999999999";
+            }
         }
-
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {

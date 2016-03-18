@@ -72,7 +72,7 @@
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:text="Select your  Gender ?"
-            android:id="@+id/TextViewHeading3"
+            android:id="@+id/TextViewHeading1"
             android:textColor="#4b4b4b"
             android:textSize="20dp"
             android:layout_gravity="center"
@@ -86,7 +86,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginTop="10dp">
-            <ImageButton
+            <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:minHeight="0dp"
@@ -97,7 +97,7 @@
                 android:background="@drawable/usermale"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="10dp" />
-            <ImageButton
+            <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:minHeight="0dp"

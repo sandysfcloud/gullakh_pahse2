@@ -1,20 +1,14 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -37,6 +31,8 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     TextView t7,t8,t9,t10,t11,title;
     Button fee,othr;
     public ArrayList<ListModel> data;
+    static String applyFlag="none";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,10 +178,17 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.apply:
-                Intent intent = new Intent(this, signin.class);
-                //Intent intent = new Intent(this, cl_car_make.class);
-                startActivity(intent);
-                this.overridePendingTransition(R.transition.left, R.transition.right);
+                applyFlag=MainActivity.loanType;
+                if(MyProfileActivity.signinstate){
+                    Intent intent = new Intent(this, cl_car_residence.class);
+                    startActivity(intent);
+                    this.overridePendingTransition(R.transition.left, R.transition.right);
+                }else {
+                    Intent intent = new Intent(this, signin.class);
+                    startActivity(intent);
+                    this.overridePendingTransition(R.transition.left, R.transition.right);
+                }
+
                 break;
 
         }

@@ -1,8 +1,6 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -164,7 +161,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
             case R.id.img:
                // sal.setBackgroundColor(Color.parseColor("#D83C2F"));
                 //self.setBackgroundColor(Color.parseColor("#ffffff"));
-                sal.setImageResource(R.drawable.selected);
+                sal.setImageResource(R.drawable.buttonselecteffect);
                 self.setImageResource(R.drawable.usedcar);
                 ((GlobalData) getApplication()).setcartype("New Car Loan");
                 if(data==null) {
@@ -176,7 +173,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.img2:
                 sal.setImageResource(R.drawable.newcar);
-                self.setImageResource(R.drawable.selected);
+                self.setImageResource(R.drawable.buttonselecteffect);
                 ((GlobalData) getApplication()).setcartype("Used Car Loan");
             {
 

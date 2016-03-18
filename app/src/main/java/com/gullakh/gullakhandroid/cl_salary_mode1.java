@@ -52,9 +52,11 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                     if(dataSalDeposite.equals("Bank")) {
                         Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
                         startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
                     }else{
-                        Intent intent = new Intent(cl_salary_mode1.this, cl_car_residence_type.class);
+                        Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                         startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
                     }
                 }break;
             case R.id.imageViewpay1:
@@ -62,19 +64,30 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay2.setImageResource(R.drawable.bankcheque);
                 pay3.setImageResource(R.drawable.bankcash);
                 dataSalDeposite="Bank";
-
+                setDataToHashMap("sal_pay_option", dataSalDeposite);
+                Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.imageViewpay2:
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.buttonselecteffect);
                 pay3.setImageResource(R.drawable.bankcash);
                 dataSalDeposite="Cheque";
+                setDataToHashMap("sal_pay_option", dataSalDeposite);
+                Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                startActivity(intent2);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.imageViewpay3:
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.bankcheque);
                 pay3.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cash";
+                setDataToHashMap("sal_pay_option", dataSalDeposite);
+                Intent intent3 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                startActivity(intent3);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.back:
                 finish();

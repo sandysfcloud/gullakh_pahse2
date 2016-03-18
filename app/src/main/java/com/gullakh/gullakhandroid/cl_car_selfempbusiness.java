@@ -120,7 +120,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
                                 setDataToHashMap("start_date_of_cur_business",jdate);
                                 setDataToHashMap("firm_type",spinner2.getSelectedItem().toString());
                                 setDataToHashMap("last_two_yrs_net_profit",netProfit.getText().toString());
-                                Intent intent = new Intent(cl_car_selfempbusiness.this, cl_car_residence_type.class);
+                                Intent intent = new Intent(cl_car_selfempbusiness.this, cl_car_gender.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             } else {

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MyProfileActivity extends AppCompatActivity {
 
-    static boolean signinstate=true;
+    static boolean signinstate=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

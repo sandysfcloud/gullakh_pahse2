@@ -71,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Join Date in Current Employer"
+            android:inputType="text"
             android:id="@+id/saljoindateofemp"
             android:textColorHint="#fff"
             android:textColor="#fff"
@@ -107,7 +108,7 @@
             android:hint="Experience in years"
             android:id="@+id/totalexp"
             android:textColorHint="#fff"
-
+            android:inputType="number"
             android:textColor="#fff"
             android:textSize="15sp" />
 

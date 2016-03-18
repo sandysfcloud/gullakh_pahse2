@@ -77,8 +77,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 }else
                 {
 
-                    setDataToHashMap("currently_living_in",dataLocation);
-                    cl_car_global_data.addDataToDataBase(this, "questans",cl_car_global_data.getHashMapInString(),cl_car_global_data.checkDataToDataBase(this));
+                    setDataToHashMap("currently_living_in", dataLocation);
+                    //cl_car_global_data.addDataToDataBase(this, "questans",cl_car_global_data.getHashMapInString(),cl_car_global_data.checkDataToDataBase(this));
 
 
 
@@ -90,6 +90,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                     //Intent intent = new Intent(this, cl_car_make.class);
                     Intent intent = new Intent(this, cl_car_make.class);
                     startActivity(intent);
+
+                    overridePendingTransition(R.transition.left, R.transition.right);
                     break;
                 }
             case R.id.ImageViewPlace1:
@@ -98,6 +100,11 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Bengaluru";
+                setDataToHashMap("currently_living_in",dataLocation);
+                Intent intent1 = new Intent(this, cl_car_make.class);
+                startActivity(intent1);
+                System.gc();
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewPlace2:
                 place1.setImageResource(R.drawable.locbang);
@@ -105,6 +112,11 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Chennai";
+                setDataToHashMap("currently_living_in", dataLocation);
+                Intent intent2 = new Intent(this, cl_car_make.class);
+                startActivity(intent2);
+                System.gc();
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewPlace3:
                 place1.setImageResource(R.drawable.locbang);
@@ -112,6 +124,11 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Kolkata";
+                setDataToHashMap("currently_living_in", dataLocation);
+                Intent intent3 = new Intent(this, cl_car_make.class);
+                startActivity(intent3);
+                System.gc();
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewPlace4:
                 place1.setImageResource(R.drawable.locbang);
@@ -119,6 +136,11 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 dataLocation="Mumbai";
+                setDataToHashMap("currently_living_in", dataLocation);
+                Intent intent4 = new Intent(this, cl_car_make.class);
+                startActivity(intent4);
+                System.gc();
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
         }
     }

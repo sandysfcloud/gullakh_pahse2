@@ -122,7 +122,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                                 setDataToHashMap("start_date_of_current_business_prof",getDate());
                                 setDataToHashMap("firm_type_prof",spinner1.getSelectedItem().toString());
                                 setDataToHashMap("last_two_yrs_net_profit_prof",netProfit.getText().toString());
-                                Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_residence_type.class);
+                                Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_gender.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }else {

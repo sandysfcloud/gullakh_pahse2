@@ -59,18 +59,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 }else{
                     setDataToHashMap("interested_car", dataCar);
-                   String LoanType=((GlobalData) getApplication()).getemptype();
-                    if(LoanType.equals("Salaried")) {
-                        Intent intent = new Intent(this, cl_car_saraied.class);
-                        startActivity(intent);
-                    }else if(LoanType.equals("Self Employed Business")){
-                        Intent intent = new Intent(this, cl_car_selfempbusiness.class);
-                        startActivity(intent);
-                    }else if(LoanType.equals("Self Employed Professional"))
-                    {
-                        Intent intent = new Intent(this, cl_car_selfempbusinesprofs.class);
-                        startActivity(intent);
-                    }
+                    goToLoanSpecificQue();
                     break;
                 }
             case R.id.ImageViewCar1:
@@ -79,6 +68,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car3.setImageResource(R.drawable.careon);
                 car4.setImageResource(R.drawable.newcar);
                 dataCar="Maruti Alto";
+                setDataToHashMap("interested_car", dataCar);
+                goToLoanSpecificQue();
                 break;
             case R.id.ImageViewCar2:
                 car1.setImageResource(R.drawable.usedcar);
@@ -86,6 +77,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car3.setImageResource(R.drawable.careon);
                 car4.setImageResource(R.drawable.newcar);
                 dataCar="Honda amaze";
+                setDataToHashMap("interested_car", dataCar);
+                goToLoanSpecificQue();
                 break;
             case R.id.ImageViewCar3:
                 car1.setImageResource(R.drawable.usedcar);
@@ -93,6 +86,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car3.setImageResource(R.drawable.buttonselecteffect);
                 car4.setImageResource(R.drawable.newcar);
                 dataCar="Hundai eon";
+                setDataToHashMap("interested_car", dataCar);
+                goToLoanSpecificQue();
                 break;
             case R.id.ImageViewCar4:
                 car1.setImageResource(R.drawable.usedcar);
@@ -100,6 +95,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car3.setImageResource(R.drawable.careon);
                 car4.setImageResource(R.drawable.buttonselecteffect);
                 dataCar="Maruti swift";
+                setDataToHashMap("interested_car", dataCar);
+                goToLoanSpecificQue();
                 break;
             case R.id.back:
                 finish();
@@ -107,8 +104,24 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         }
 
     }
+
     public void setDataToHashMap(String key,String data)
     {
         cl_car_global_data.dataWithAns.put(key,data);
     }
+    private void goToLoanSpecificQue() {
+        String LoanType=((GlobalData) getApplication()).getemptype();
+        if(LoanType.equals("Salaried")) {
+            Intent intent = new Intent(this, cl_car_saraied.class);
+            startActivity(intent);
+        }else if(LoanType.equals("Self Employed Business")){
+            Intent intent = new Intent(this, cl_car_selfempbusiness.class);
+            startActivity(intent);
+        }else if(LoanType.equals("Self Employed Professional"))
+        {
+            Intent intent = new Intent(this, cl_car_selfempbusinesprofs.class);
+            startActivity(intent);
+        }
+    }
+
 }

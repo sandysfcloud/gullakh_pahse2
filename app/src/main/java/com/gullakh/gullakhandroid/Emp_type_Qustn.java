@@ -1,26 +1,18 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telecom.Call;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
     ImageView sal,self,next,review,done,back,business;
@@ -149,7 +141,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 break;
             case R.id.img:
-                sal.setImageResource(R.drawable.selected);
+                sal.setImageResource(R.drawable.buttonselecteffect);
                 //sal.setBackgroundColor(Color.parseColor("#D83C2F"));
                 self.setImageResource(R.drawable.selfempbus);
                 business.setImageResource(R.drawable.selfempprof);
@@ -168,7 +160,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.img2:
 
-                self.setImageResource(R.drawable.selected);
+                self.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 business.setImageResource(R.drawable.selfempprof);
 
@@ -181,7 +173,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.business:
 
-                business.setImageResource(R.drawable.selected);
+                business.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
                 ((GlobalData) getApplication()).setemptype("Self Employed Professional");

@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
     private View viewwheel;
     private int wheelwidth;
     private ObjectAnimator anim1;
-    private String loanType="";
+    static String loanType="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
