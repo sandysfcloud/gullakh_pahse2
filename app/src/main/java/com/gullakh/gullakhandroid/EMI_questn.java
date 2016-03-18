@@ -168,6 +168,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.review:
+                String emptyp=((GlobalData) getApplication()).getemptype();
+                if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
+                    RegisterPageActivity.showAlertreview(EMI_questn.this,8);
+                else
                 RegisterPageActivity.showAlertreview(EMI_questn.this,5);
                 break;
             case R.id.done:
