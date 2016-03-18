@@ -101,7 +101,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Bengaluru";
                 setDataToHashMap("currently_living_in",dataLocation);
-                Intent intent1 = new Intent(this, cl_car_make.class);
+                Intent intent1 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent1);
                 System.gc();
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -113,7 +113,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Chennai";
                 setDataToHashMap("currently_living_in", dataLocation);
-                Intent intent2 = new Intent(this, cl_car_make.class);
+                Intent intent2 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent2);
                 System.gc();
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -125,7 +125,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Kolkata";
                 setDataToHashMap("currently_living_in", dataLocation);
-                Intent intent3 = new Intent(this, cl_car_make.class);
+                Intent intent3 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent3);
                 System.gc();
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -137,7 +137,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 dataLocation="Mumbai";
                 setDataToHashMap("currently_living_in", dataLocation);
-                Intent intent4 = new Intent(this, cl_car_make.class);
+                Intent intent4 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent4);
                 System.gc();
                 overridePendingTransition(R.transition.left, R.transition.right);

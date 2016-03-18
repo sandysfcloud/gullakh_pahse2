@@ -11,6 +11,7 @@
         android:gravity="bottom"
         android:layout_gravity="center_horizontal|bottom"
         android:weightSum="2"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp">
         <ImageView
             android:layout_width="60dp"
@@ -39,46 +40,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/textLoc"
-            android:textColor="#000"
-            android:text="Current Residence is"
-            android:layout_gravity="center_vertical"
-            android:textSize="18dp"
-            android:gravity="center"
-            android:layout_marginTop="20dp" />
-
-        <Spinner
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/spinnerloc"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:spinnerMode="dropdown"
-            android:layout_gravity="center_horizontal"
-            android:dropDownSelector="#c2c2c2"
-            android:dropDownWidth="match_parent"
-            android:background="@drawable/edittextsimple" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Period of stay in current city ?"
+            android:text="Period of stay in current city?"
             android:id="@+id/textView"
             android:layout_gravity="center" />
 
@@ -93,23 +62,55 @@
             android:layout_marginBottom="20dp"
             android:hint="EX: 5 Years" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Period of stay in current residence ?"
-            android:id="@+id/textView7"
-            android:layout_gravity="center" />
+            android:layout_gravity="center_horizontal|top">
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/currentResidence"
-            android:inputType="number"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:hint="EX: 5 Years" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textLoc"
+                android:textColor="#000"
+                android:text="Residence type?"
+                android:layout_gravity="center_vertical"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp" />
+
+            <Spinner
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/spinnerloc"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:spinnerMode="dropdown"
+                android:layout_gravity="center_horizontal"
+                android:dropDownSelector="#c2c2c2"
+                android:dropDownWidth="match_parent"
+                android:background="@drawable/edittextsimple" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Period of stay in current residence?"
+                android:id="@+id/textView7"
+                android:layout_gravity="center" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/currentResidence"
+                android:inputType="number"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="EX: 5 Years" />
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
