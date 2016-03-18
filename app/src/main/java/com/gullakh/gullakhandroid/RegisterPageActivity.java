@@ -346,6 +346,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
+
 		ArrayList<String>carloan_que_salary_new_ans=new ArrayList<String>();
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcartype());

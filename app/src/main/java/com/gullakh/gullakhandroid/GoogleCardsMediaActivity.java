@@ -88,7 +88,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     ArrayList<String> disbank;
     Dialog dialog;
     Button apply,reset;
-    int Max_tenure, filter_tenure, seektenure =1,prevloan=0;
+    int Max_tenure, filter_tenure, seektenure =0,prevloan=0;
     double net_salry, emi;
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
@@ -338,12 +338,24 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 net_salry = ((GlobalData) getApplication()).getnetsalary();
 
-                if ((60 - age) > 7) {
-                    Max_tenure = 7 * 12;
-                    Log.d("Max_tenure- if", String.valueOf(Max_tenure));
-                } else {
-                    Max_tenure = (60 - age) * 12;
-                    Log.d("Max_tenure-else", String.valueOf(Max_tenure));
+                if(((GlobalData) getApplication()).getemptype().equals("Salaried")) {
+
+                    if ((60 - age) > 7) {
+                        Max_tenure = 7 * 12;
+                        Log.d("Max_tenure- if", String.valueOf(Max_tenure));
+                    } else {
+                        Max_tenure = (60 - age) * 12;
+                        Log.d("Max_tenure-else", String.valueOf(Max_tenure));
+                    }
+
+                }else{
+                    if ((65 - age) > 5) {
+                        Max_tenure = 5 * 12;
+                        Log.d("Max_tenure- if", String.valueOf(Max_tenure));
+                    } else {
+                        Max_tenure = (65 - age) * 12;
+                        Log.d("Max_tenure-else", String.valueOf(Max_tenure));
+                    }
                 }
                 //Max_tenure = Max_tenure / 12;
                 Log.d("Max_tenure value is", String.valueOf(Max_tenure));
@@ -388,13 +400,17 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
-            if (seektenure != 1) {
+            if (seektenure != 0) {
+
+                int seekmonth=seektenure*12;
                 ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
                 Log.d("seektenure value", String.valueOf(seektenure));
-                emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seektenure, -loan_amt, 0, false);
+                //this emi is used for display purpose only not calclation
+                emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -loan_amt, 0, false);
+               // emi_valu = FinanceLib.pmt((75 / 100) / 12, seekmonth, -loan_amt, 0, false);
                 Log.d("emi_valu", String.valueOf(emi_valu));
                 Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-                Log.d("seektenure", String.valueOf(seektenure));
+                Log.d("seektenure", String.valueOf(seekmonth));
                 Log.d("-loan_amt", String.valueOf(-loan_amt));
                 emi_value = Math.ceil(emi_valu);
                 //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
@@ -408,13 +424,21 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             }
-            double bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+            double bpd;
+            if (seektenure != 0) {
+                int seekmonth=seektenure*12;
+                bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
+            }
+            else {
+               bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+            }
             bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
             final_bp = Math.ceil(bp);
             Log.d("finalValue bp", String.valueOf(final_bp));
             Log.d("loan_amt", String.valueOf(loan_amt));
 
-            emi_value = Math.ceil(emi_valu);
+            emi_valu = Math.ceil(emi_valu);
+
             if (loan_amt <= final_bp) {
 
                 //********
@@ -427,7 +451,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
                 sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
                 sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
-                sched.setemi_value(String.valueOf(emi_value));
+                sched.setemi_value(String.valueOf(emi_valu));
                 sched.setbp(String.valueOf(final_bp));
                 CustomListViewValuesArr.add(sched);
                 disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
@@ -439,8 +463,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             Log.d("disbank", String.valueOf(disbank));
 
 
-            double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
-            Log.d("checking PMT", String.valueOf(Emi));
+           // double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
+            //Log.d("checking PMT", String.valueOf(Emi));
 
         }
 
@@ -674,9 +698,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 });
 
 
-                tenure.setRangeValues(0, Max_tenure / 12);
+                tenure.setRangeValues(1, Max_tenure / 12);
                 //tenure.setSelectedMaxValue(Max_tenure / 12);
-                if(seektenure==1) {
+                if(seektenure==0) {
                     //when filter is clicked at 1st
                     tenur.setText("7 Years");
                     tenure.setSelectedMaxValue(7);
@@ -693,10 +717,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                     @Override
                     public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
-                        Log.d("tenure-value1", String.valueOf(integer));
+
                         Log.d("tenure-value2", String.valueOf(t1));
-                        seektenure = t1+1;
-                        tenur.setText(String.valueOf(t1+1)+" Years");
+                       // seektenure = t1+1;
+                       // tenur.setText(String.valueOf(t1+1)+" Years");
+                        seektenure = t1;
+                        tenur.setText(String.valueOf(t1)+" Years");
                     }
 
 
@@ -854,6 +880,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         prev_selectbank = stringBuilder.toString();
         selectColoursButton.setText(stringBuilder.toString());
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 
 
