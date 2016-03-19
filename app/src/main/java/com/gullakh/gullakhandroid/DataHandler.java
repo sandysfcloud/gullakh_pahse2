@@ -232,7 +232,8 @@ public class DataHandler extends SQLiteOpenHelper {
     {
         try {
             db = this.getReadableDatabase();
-            db.update(tablenam, values, "loantype="+loantype,null);
+            db.update(tablenam, values, "loantype='"+loantype+"';",null);
+            Log.d("updated successfully",loantype);
         }catch(Exception e)
         {
             System.out.println("error " + e.toString());

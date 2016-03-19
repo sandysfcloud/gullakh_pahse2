@@ -163,8 +163,8 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="20dp"
                 app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#D83C2F"
-                app:mtf_image="@drawable/loan_amt"
+                app:mtf_cardColor="@color/main_color_500"
+                app:mtf_image="@drawable/home">
                 >
 
                 <AutoCompleteTextView
@@ -182,16 +182,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:gravity="bottom"
                 android:weightSum="2"
-                android:gravity="right" >
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="20dp">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:id="@+id/back"
+                    android:gravity="left"
+                    android:layout_marginRight="80dp"
+                    android:layout_gravity="bottom|left"
+                    android:src="@drawable/backimgnw" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
                     android:id="@+id/next"
-                    android:background="@drawable/nextimgnw"
-                    android:layout_marginRight="40dp" />
+                    android:layout_marginLeft="80dp"
+                    android:layout_gravity="bottom|right"
+                    android:src="@drawable/nextimgnw" />
             </LinearLayout>
 
 

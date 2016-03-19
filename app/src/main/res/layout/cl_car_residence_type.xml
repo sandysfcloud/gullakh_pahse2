@@ -45,22 +45,37 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Period of stay in current city?"
-            android:id="@+id/textView"
-            android:layout_gravity="center" />
-
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/currentCity"
-            android:inputType="number"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:layout_marginTop="20dp"
+            android:id="@+id/heading1"
+            android:layout_gravity="center"
+            android:textColor="#707070"
+            android:gravity="center"
             android:layout_marginBottom="20dp"
-            android:hint="EX: 5 Years" />
+            android:textSize="20dp" />
+
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="@color/main_color_500"
+            app:mtf_image="@drawable/home">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex:5 years"
+                android:inputType="number"
+                android:id="@+id/currentCity"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
 
         <LinearLayout
             android:orientation="vertical"
@@ -70,15 +85,16 @@
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textLoc"
-                android:textColor="#000"
+                android:id="@+id/heading2"
+                android:textColor="#707070"
                 android:text="Residence type?"
                 android:layout_gravity="center_vertical"
-                android:textSize="18dp"
+                android:textSize="20dp"
                 android:gravity="center"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
 
             <Spinner
                 android:layout_width="300dp"
@@ -95,22 +111,34 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Period of stay in current residence?"
-                android:id="@+id/textView7"
-                android:layout_gravity="center" />
+                android:id="@+id/heading3"
+                android:layout_gravity="center"
+                android:textColor="#707070"
+                android:gravity="center"
+                android:textSize="20dp" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:id="@+id/currentResidence"
-                android:inputType="number"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/edittextsimple"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:hint="EX: 5 Years" />
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_cardColor="@color/main_color_500"
+                app:mtf_image="@drawable/home">
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ex:5 years"
+                    android:inputType="number"
+                    android:id="@+id/currentResidence"
+                    android:textColor="#fff"
+                    android:textSize="15sp" />
+            </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.annotation.TargetApi;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -13,15 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class cl_car_residence extends AppCompatActivity implements View.OnClickListener{
-    ImageView next,place;
+    ImageView next,back;
     ImageView place1,place2,place3,place4;
     TextView heading,option1,option2,option3,option4;
     String dataLocation="";
+    private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_residence);
+        contentValues=new ContentValues();
         //onShakeImage();
 
         heading= (TextView) findViewById(R.id.TextViewHeading1);
@@ -40,22 +43,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         place3 = (ImageView) findViewById(R.id.ImageViewPlace3);
         place4 = (ImageView) findViewById(R.id.ImageViewPlace4);
         next = (ImageView) findViewById(R.id.next);
+        back = (ImageView) findViewById(R.id.back);
+        back.setOnClickListener(this);
         place1.setOnClickListener(this);
         place2.setOnClickListener(this);
         place3.setOnClickListener(this);
         place4.setOnClickListener(this);
         next.setOnClickListener(this);
-
-
-
-        //add pre question to map and database
-        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        setDataToHashMap("car_loan_type",((GlobalData) getApplication()).getcartype());
-        setDataToHashMap("cl_loanamount",((GlobalData) getApplication()).getloanamt());
-        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
-        setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
-        setDataToHashMap("dob",((GlobalData) getApplication()).getDob());
-       // cl_car_global_data.addDataToDataBase(this, "questans", cl_car_global_data.getHashMapInString(), cl_car_global_data.checkDataToDataBase(this));*/
 
     }
     public void onShakeImage() {
@@ -76,24 +70,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
                 }else
                 {
-
                     setDataToHashMap("currently_living_in", dataLocation);
-                    //cl_car_global_data.addDataToDataBase(this, "questans",cl_car_global_data.getHashMapInString(),cl_car_global_data.checkDataToDataBase(this));
-
-
-
-                    //Cursor cr=cl_car_global_data.getDataToDataBase(this,"SELECT * FROM mysearch");
-                   /* DataHandler dbobject = new DataHandler(this);
-                    Cursor cr = dbobject.displayData("SELECT * FROM mysearch");
-                    cr.moveToFirst();
-                    Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));*/
-                    //Intent intent = new Intent(this, cl_car_make.class);
-                    Intent intent = new Intent(this, cl_car_make.class);
+                    goToDatabase();
+                    Intent intent = new Intent(this, cl_car_residence_type.class);
                     startActivity(intent);
-
                     overridePendingTransition(R.transition.left, R.transition.right);
-                    break;
                 }
+                break;
             case R.id.ImageViewPlace1:
                 place1.setImageResource(R.drawable.buttonselecteffect);
                 place2.setImageResource(R.drawable.locchn);
@@ -101,6 +84,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Bengaluru";
                 setDataToHashMap("currently_living_in",dataLocation);
+                goToDatabase();
                 Intent intent1 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent1);
                 System.gc();
@@ -113,6 +97,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Chennai";
                 setDataToHashMap("currently_living_in", dataLocation);
+                goToDatabase();
                 Intent intent2 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent2);
                 System.gc();
@@ -125,6 +110,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Kolkata";
                 setDataToHashMap("currently_living_in", dataLocation);
+                goToDatabase();
                 Intent intent3 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent3);
                 System.gc();
@@ -137,10 +123,15 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 dataLocation="Mumbai";
                 setDataToHashMap("currently_living_in", dataLocation);
+                goToDatabase();
                 Intent intent4 = new Intent(this, cl_car_residence_type.class);
                 startActivity(intent4);
                 System.gc();
                 overridePendingTransition(R.transition.left, R.transition.right);
+                break;
+            case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
+                finish();
                 break;
         }
     }
@@ -148,5 +139,12 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     public void setDataToHashMap(String key,String data)
     {
         cl_car_global_data.dataWithAns.put(key,data);
+    }
+    private void goToDatabase()
+    {
+        contentValues.put("loantype", "Car Loan");
+        contentValues.put("questans", "cl_car_residence");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this));
     }
 }

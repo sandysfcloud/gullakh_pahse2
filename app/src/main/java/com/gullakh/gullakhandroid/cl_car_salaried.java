@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -26,9 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.concurrent.ExecutionException;
 
-public class cl_car_saraied extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
+public class cl_car_salaried extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
 
     EditText Doj;
     ImageView next,back;
@@ -39,12 +39,14 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
     AutoCompleteTextView Emp;
     JSONServerGet requestgetserver;
     String sessionid;
+    private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_saraied);
+        contentValues=new ContentValues();
         heading1= (TextView) findViewById(R.id.heading1);
         heading2= (TextView) findViewById(R.id.heading2);
         heading3= (TextView) findViewById(R.id.heading3);
@@ -75,31 +77,36 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
 
         switch (v.getId()) {
             case R.id.next:
-                if(!Emp.getText().toString().matches("")) {
-                    if (!Doj.getText().toString().matches("")) {
+                if(!Emp.getText().toString().matches(""))
+                {
+                    if (!Doj.getText().toString().matches(""))
+                    {
                         String EmpName = Emp.getText().toString();
                         setDataToHashMap("name_of_current_emp",EmpName);
                         String jdate = getDate();
                         setDataToHashMap("year_you_joined_current_comp", jdate);
                         setDataToHashMap("total_exp", Exp.getText().toString());
-                        Intent intent = new Intent(cl_car_saraied.this, cl_salary_mode1.class);
+                        goToDatabase();
+                        Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    } else {
-                        RegisterPageActivity.showErroralert(cl_car_saraied.this, "Please enter date", "failed");
+                    } else
+                    {
+                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter date", "failed");
                     }
                 }else {
-                    RegisterPageActivity.showErroralert(cl_car_saraied.this, "Please enter Company Name", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter Company Name", "failed");
                 }
                 break;
             case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
             case R.id.saljoindateofemp:
                 Calendar now = Calendar.getInstance();
                 now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
-                        cl_car_saraied.this,
+                        cl_car_salaried.this,
                         now.get(Calendar.YEAR),
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
@@ -110,7 +117,6 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
                 dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
-
             case R.id.salEmpname:
 
 
@@ -149,7 +155,7 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
                         for(int i=0;i<size;i++) {
                             liste.add(enums[i].getemployername());
                         }
-                        final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_saraied.this, android.R.layout.simple_dropdown_item_1line, liste);
+                        final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_salaried.this, android.R.layout.simple_dropdown_item_1line, liste);
                         Emp.setAdapter(fAdapter);
 
 
@@ -158,8 +164,8 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
 
 
                     }
-                }, cl_car_saraied.this, "2");
-                DataHandler dbobject = new DataHandler(cl_car_saraied.this);
+                }, cl_car_salaried.this, "2");
+                DataHandler dbobject = new DataHandler(cl_car_salaried.this);
                 Cursor cr = dbobject.displayData("select * from session");
                 if (cr.moveToFirst()) {
                     sessionid = cr.getString(1);
@@ -194,5 +200,12 @@ public class cl_car_saraied extends AppCompatActivity implements View.OnClickLis
     public void setDataToHashMap(String Key,String data)
     {
         cl_car_global_data.dataWithAns.put(Key, data);
+    }
+    private void goToDatabase()
+    {
+        contentValues.put("loantype", "Car Loan");
+        contentValues.put("questans", "cl_car_salaried");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
     }
 }

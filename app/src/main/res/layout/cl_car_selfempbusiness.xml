@@ -90,8 +90,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#D83C2F"
-                app:mtf_image="@drawable/loan_amt"
+                app:mtf_cardColor="@color/main_color_500"
+                app:mtf_image="@drawable/business"
                 android:layout_below="@+id/heading2"
                 android:layout_alignLeft="@+id/view"
                 android:layout_alignStart="@+id/view">
@@ -99,10 +99,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Join Date in Current Employer"
                     android:inputType="text"
                     android:id="@+id/joindateofemp"
-                    android:textColorHint="#fff"
                     android:textColor="#fff"
                     android:textSize="15sp" />
 
@@ -147,14 +145,27 @@
                 android:background="#67d1d1d1"
                 android:layout_marginTop="20dp" />
 
+            <com.gullakh.gullakhandroid.MaterialTextField
+                android:layout_width="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_cardColor="@color/main_color_500"
+                app:mtf_image="@drawable/business"
+                android:layout_below="@+id/heading2"
+                android:layout_alignLeft="@+id/view"
+                android:layout_alignStart="@+id/view">
+
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:id="@+id/editText4"
+                android:id="@+id/NetProfit"
                 android:inputType="number"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
                 android:hint="EX :1,00,000 " />
+
+            </com.gullakh.gullakhandroid.MaterialTextField>
 
         </LinearLayout>
     </ScrollView>

@@ -5,38 +5,9 @@
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:layout_gravity="center_horizontal|bottom"
-        android:weightSum="2">
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/back"
-            android:gravity="left"
-            android:layout_marginRight="80dp"
-            android:layout_gravity="bottom|left"
-            android:src="@drawable/backimgnw"
-
-            />
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/next"
-            android:layout_marginLeft="80dp"
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/nextimgnw"
-
-            />
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="441dp"
+        android:layout_height="fill_parent"
         android:id="@+id/scrollView3" >
 
         <LinearLayout
@@ -98,8 +69,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_height="80dp"
                     app:mtf_cardCollapsedHeight="4dp"
-                    app:mtf_cardColor="#D83C2F"
-                    app:mtf_image="@drawable/loan_amt"
+                    app:mtf_cardColor="@color/main_color_500"
+                    app:mtf_image="@drawable/business"
                     android:layout_below="@+id/heading2"
                     android:layout_alignLeft="@+id/view"
                     android:layout_alignStart="@+id/view">
@@ -151,16 +122,56 @@
                     android:textColor="#000"
                     android:background="#67d1d1d1"
                     android:layout_marginTop="20dp" />
-
-                <EditText
+                <com.gullakh.gullakhandroid.MaterialTextField
                     android:layout_width="300dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/NetProfit"
-                    android:inputType="number"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/edittextsimple"
-                    android:hint="EX :1,00,000 "
-                    android:layout_marginTop="10dp" />
+                    android:layout_height="wrap_content"
+                    app:mtf_cardCollapsedHeight="4dp"
+                    app:mtf_cardColor="@color/main_color_500"
+                    app:mtf_image="@drawable/business"
+                    android:layout_below="@+id/heading2"
+                    android:layout_alignLeft="@+id/view"
+                    android:layout_alignStart="@+id/view">
+
+                    <EditText
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/NetProfit"
+                        android:inputType="number"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/edittextsimple"
+                        android:hint="EX :1,00,000 " />
+
+                </com.gullakh.gullakhandroid.MaterialTextField>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_gravity="center_horizontal|bottom"
+                android:weightSum="2">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:id="@+id/back"
+                    android:gravity="left"
+                    android:layout_marginRight="80dp"
+                    android:layout_gravity="bottom|left"
+                    android:src="@drawable/backimgnw"
+
+                    />
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:id="@+id/next"
+                    android:layout_marginLeft="80dp"
+                    android:layout_gravity="bottom|right"
+                    android:src="@drawable/nextimgnw"
+
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -20,9 +20,9 @@
     <application
         android:name=".GlobalData"
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.gms.version"
@@ -44,7 +44,7 @@
             android:name=".SplashScreensActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -200,23 +200,21 @@
         <activity
             android:name=".cl_car_make"
             android:label="Select Cars"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".cl_car_residence"
             android:label="Select Location"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".cl_salary_mode2"
             android:label="Salaried Bank"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".cl_car_residence_type"
             android:label="Select Residence"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".cl_car_saraied"
+            android:name=".cl_car_salaried"
             android:label="Salaried" />
         <activity
             android:name=".cl_car_selfempbusiness"
@@ -226,16 +224,14 @@
             android:label="Self Employed Professional" />
         <activity
             android:name=".Car_Loan_PAT"
-            android:label="@string/title_activity_car__loan__pat" >
-        </activity>
+            android:label="@string/title_activity_car__loan__pat"></activity>
         <activity
             android:name=".CarLoan_Depreciation"
-            android:label="@string/title_activity_car_loan__depreciation" >
-        </activity>
-        <activity android:name=".cl_salary_mode1"
-            android:label="Salary Deposited to">
-
-        </activity>
+            android:label="@string/title_activity_car_loan__depreciation"></activity>
+        <activity
+            android:name=".cl_salary_mode1"
+            android:label="Salary Deposited to"></activity>
+        <activity android:name=".cl_car_recentsearch"></activity>
     </application>
 
 </manifest>

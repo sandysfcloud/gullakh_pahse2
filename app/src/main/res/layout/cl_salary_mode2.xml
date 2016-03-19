@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.cl_car_saraied"
+    tools:context=".cl_car_salaried"
     android:background="@drawable/bgque"
     android:orientation="vertical"
     android:weightSum="1">

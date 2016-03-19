@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -42,10 +43,14 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     String sessionid;
     Dialog dgthis;
     String borrowercityid,useremail,usermobile,borrowercontactid,borrowercaseid;
+    private String borrowercaseno="";
+    private ContentValues contentValues;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_gender);
+        contentValues=new ContentValues();
         //onShakeImage();
         heading= (TextView) findViewById(R.id.TextViewHeading1);
         option1= (TextView) findViewById(R.id.TextViewOption1);
@@ -88,6 +93,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                             //setDataToHashMap("firstname",firstName.getText().toString());
                             //setDataToHashMap("lastname",lastName.getText().toString());
                            // setDataToHashMap("gender", dataGender);
+                            goToDatabase();
                             savetoserver();
 
                         }
@@ -115,7 +121,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
         final View view = factory.inflate(R.layout.thankyou, null);
         TextView caseno = (TextView) view.findViewById(R.id.appno);
-        caseno.setText(borrowercaseid);
+        caseno.setText(borrowercaseno);
         alertadd.setView(view);
 
         alertadd.setCancelable(false);
@@ -220,7 +226,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     borrowercontactid = Borrower_contact[0].getId();
                     requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
                 }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,"NandreChetan");
+                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,firstName.getText().toString()+" "+lastName.getText().toString());
                 }
             }
         }, cl_car_gender.this, "2");
@@ -260,7 +266,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 Log.d("Borrower jsonobj", String.valueOf(jsonObject));
                 LoanReq Borrower_case = gson.fromJson(jsonObject.get("result"), LoanReq.class);
                 borrowercaseid = Borrower_case.getId();
-
+                borrowercaseno= Borrower_case.getCase_number();
 
 
                 requestgetserver7.execute("token", "LoanType", sessionid);
@@ -360,5 +366,12 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             }
         }, cl_car_gender.this, "8");
+    }
+    private void goToDatabase()
+    {
+        contentValues.put("loantype", "Car Loan");
+        contentValues.put("questans", "cl_car_residence_type");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
     }
 }

@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,11 +14,13 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     ImageView next,back;
     private String dataSalDeposite="";
     private ImageView pay1,pay2,pay3;
+    private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_salary_mode1);
+        contentValues=new ContentValues();
         heading= (TextView) findViewById(R.id.heading);
         heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option1= (TextView) findViewById(R.id.TextViewOption1);
@@ -50,10 +53,12 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 }else{
                     setDataToHashMap("sal_pay_option", dataSalDeposite);
                     if(dataSalDeposite.equals("Bank")) {
+                        goToDatabase();
                         Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else{
+                        goToDatabase();
                         Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
@@ -65,6 +70,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay3.setImageResource(R.drawable.bankcash);
                 dataSalDeposite="Bank";
                 setDataToHashMap("sal_pay_option", dataSalDeposite);
+                goToDatabase();
                 Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -75,6 +81,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay3.setImageResource(R.drawable.bankcash);
                 dataSalDeposite="Cheque";
                 setDataToHashMap("sal_pay_option", dataSalDeposite);
+                goToDatabase();
                 Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                 startActivity(intent2);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -85,6 +92,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay3.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cash";
                 setDataToHashMap("sal_pay_option", dataSalDeposite);
+                goToDatabase();
                 Intent intent3 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                 startActivity(intent3);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -98,5 +106,12 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     public void setDataToHashMap(String key,String data)
     {
         cl_car_global_data.dataWithAns.put(key,data);
+    }
+    private void goToDatabase()
+    {
+        contentValues.put("loantype", "Car Loan");
+        contentValues.put("questans", "cl_salary_mode1");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
     }
 }

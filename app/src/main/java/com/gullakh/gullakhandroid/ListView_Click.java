@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -32,12 +33,13 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     Button fee,othr;
     public ArrayList<ListModel> data;
     static String applyFlag="none";
+    private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_click);
-
+        contentValues = new ContentValues();
          getSupportActionBar().setTitle("Result");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
@@ -178,7 +180,10 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.apply:
-                applyFlag=MainActivity.loanType;
+                storeData();
+                goToDatabase();
+
+            applyFlag=MainActivity.loanType;
                 if(MyProfileActivity.signinstate){
                     Intent intent = new Intent(this, cl_car_make.class);
                     startActivity(intent);
@@ -195,5 +200,29 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
     }
 
+    private void storeData() {
+        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
+        setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getcartype());
+        setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
+        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+        setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
+        setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).gettenure()));
+        setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
+        setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
+        setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
+        setDataToHashMap("dep_amount", String.valueOf(((GlobalData) getApplication()).getdepreciation()));
+        setDataToHashMap("dep_amount_last", String.valueOf(((GlobalData) getApplication()).getdepreciation2()));
+    }
+
+    private void goToDatabase()
+    {
+        contentValues.put("loantype", "Car Loan");
+        contentValues.put("questans","cl_car_make");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+    }
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
 
 }

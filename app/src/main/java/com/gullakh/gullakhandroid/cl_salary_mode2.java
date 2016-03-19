@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,11 +15,13 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     ImageView bank1,bank2,bank3,bank4,bank5,bank6;
     String dataBankType="";
     private Intent intent;
+    private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_salary_mode2);
+        contentValues=new ContentValues();
         //onShakeImage();
         heading= (TextView) findViewById(R.id.TextViewHeading);
         option1= (TextView) findViewById(R.id.TextViewOption1);
@@ -108,5 +111,12 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     public void setDataToHashMap(String Key,String data)
     {
         cl_car_global_data.dataWithAns.put(Key, data);
+    }
+    private void goToDatabase()
+    {
+        contentValues.put("loantype", "Car Loan");
+        contentValues.put("questans", "cl_salary_mode2");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
     }
 }

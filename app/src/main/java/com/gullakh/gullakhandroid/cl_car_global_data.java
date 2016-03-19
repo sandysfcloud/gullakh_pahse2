@@ -58,23 +58,19 @@ public class cl_car_global_data
     }
 
 
-    static void addDataToDataBase(Context c, String Col, String Data,Boolean dataInDatabase) {
+    static void addDataToDataBase(Context c,ContentValues contentValues,Boolean dataInDatabase) {
         DataHandler dbobject = new DataHandler(c);
+        ContentValues cv=contentValues;
         if (dataInDatabase) {
-            dbobject.addTable();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("loantype", "Car Loan");
-            contentValues.put(Col, Data);
             String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            contentValues.put("created_date", date);
-            dbobject.insertdata(contentValues, "mysearch");
+            dbobject.addTable();
+            cv.put("created_date", date);
+            dbobject.updateDatatoDB("mysearch",cv,"Car Loan");
         }else{
-            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             dbobject.addTable();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(Col, Data);
-            contentValues.put("created_date", date);
-            dbobject.updateDatatoDB("mysearch",contentValues,"'Car Loan'");
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            cv.put("created_date", date);
+            dbobject.insertdata(cv, "mysearch");
         }
     }
 
@@ -94,7 +90,7 @@ public class cl_car_global_data
     static boolean checkDataToDataBase(Context c)
     {DataHandler dbobject = new DataHandler(c);
         boolean dataPresent = false;
-        Cursor cursor = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan");
+        Cursor cursor = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 dataPresent = true;

@@ -57,14 +57,14 @@ public class cl_car_employment_type extends AppCompatActivity implements View.On
                 if(dataEmpType.equals("")) {
                     RegisterPageActivity.showErroralert(cl_car_employment_type.this, "Select Employment Type", "failed");
                 }else {
-                    Intent intent = new Intent(this, cl_car_saraied.class);
+                    Intent intent = new Intent(this, cl_car_salaried.class);
                     startActivity(intent);
                 }
                 break;
             case R.id.ImageButtonSal1:
                 dataEmpType="Salaried";
                 setDataToArrayList(dataEmpType);
-                 Intent intent = new Intent(this, cl_car_saraied.class);
+                 Intent intent = new Intent(this, cl_car_salaried.class);
                 startActivity(intent);
                 break;
             case R.id.ImageButtonSal2:
