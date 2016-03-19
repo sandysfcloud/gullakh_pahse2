@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +51,15 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
         mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+        if(((GlobalData) getApplication()).getnetsalary()!=null) {
+
+            String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 5000)));
+            mSeekArcProgress.setText(netsalary);
+            sal.setText(netsalary);
+        }
+
         onetext = (TextView) findViewById(R.id.onetext);
         onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         done = (ImageView) findViewById(R.id.done);

@@ -79,11 +79,11 @@ public class ListModel implements Serializable{
     {
         this.loctn = loctn;
     }
-    public void setA_datetime(String datetime)
+    public void setsearchtnam(String datetime)
     {
         this.datetime= datetime;
     }
-    public void setA_serverid(String ag_sid)
+    public void setsearchdate(String ag_sid)
     {
         this.ag_sid= ag_sid;
     }
@@ -208,11 +208,11 @@ public class ListModel implements Serializable{
 
     public String getbp(){return this.loctn;
     }
-    public String getA_datetime()
+    public String getsearchtnam()
     {
         return this.datetime;
     }
-    public String getA_serverid()
+    public String getsearchdate()
     {
         return this.ag_sid;
     }

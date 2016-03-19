@@ -69,10 +69,11 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(depv2))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
-
+                    mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(strtemp) / 50000)));
+                    mSeekArcProgress.setText(strtemp);
 
                     amt.setText(depv2.toString());
-                    mSeekArcProgress.setText(strtemp);
+
                 }
 
                 data="dep2";
@@ -88,6 +89,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(depv))));
 
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
+                mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(depv.intValue()) / 50000)));
                 mSeekArcProgress.setText(strtemp);
 
             }

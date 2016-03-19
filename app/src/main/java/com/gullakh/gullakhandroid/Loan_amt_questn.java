@@ -63,7 +63,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         if(((GlobalData) getApplication()).getloanamt()!=null) {
             Log.d("loan amt not null value:", ((GlobalData) getApplication()).getloanamt());
             String loanamt=((GlobalData) getApplication()).getloanamt();
-            mSeekArc.setProgress(Integer.parseInt(loanamt));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
             mSeekArcProgress.setText(loanamt);
             amt.setText(loanamt);
         }
