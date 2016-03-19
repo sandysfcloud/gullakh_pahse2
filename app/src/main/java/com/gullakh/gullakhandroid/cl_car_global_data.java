@@ -41,8 +41,8 @@ public class cl_car_global_data
     {
         Gson gson = new Gson();
         String json = gson.toJson(dataWithAns);
-        String arrayListdata = json.toString();
-        return arrayListdata;
+        String hashmap = json.toString();
+        return hashmap;
     }
 
     static String getArraylistInString()

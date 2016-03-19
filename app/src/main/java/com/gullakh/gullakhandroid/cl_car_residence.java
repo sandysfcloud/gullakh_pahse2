@@ -3,15 +3,20 @@ package com.gullakh.gullakhandroid;
 import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class cl_car_residence extends AppCompatActivity implements View.OnClickListener{
     ImageView next,back;
@@ -19,6 +24,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     TextView heading,option1,option2,option3,option4;
     String dataLocation="";
     private ContentValues contentValues;
+    private String city="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         place3.setOnClickListener(this);
         place4.setOnClickListener(this);
         next.setOnClickListener(this);
-
+        getCity();
     }
     public void onShakeImage() {
         Animation shake;
@@ -138,7 +144,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
     public void setDataToHashMap(String key,String data)
     {
-        cl_car_global_data.dataWithAns.put(key,data);
+        cl_car_global_data.dataWithAns.put(key, data);
     }
     private void goToDatabase()
     {
@@ -147,4 +153,35 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         contentValues.put("data", cl_car_global_data.getHashMapInString());
         cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this));
     }
+    private void getCity()
+    {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        cr.moveToFirst();
+        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+        try {
+            JSONObject reader = new JSONObject(cr.getString(3));
+            city=reader.getString("currently_living_in");
+            setCar();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCar() {
+        if(city.equals("Bengaluru")){
+            place1.setImageResource(R.drawable.buttonselecteffect);
+            dataLocation = "Bengaluru";
+        }else if(city.equals("Chennai")){
+            place1.setImageResource(R.drawable.buttonselecteffect);
+            dataLocation = "Chennai";
+        }else if(city.equals("Kolkata")){
+            place1.setImageResource(R.drawable.buttonselecteffect);
+            dataLocation = "Kolkata";
+        }else if(city.equals("Mumbai")){
+            place1.setImageResource(R.drawable.buttonselecteffect);
+            dataLocation = "Mumbai";
+        }
+    }
 }
+

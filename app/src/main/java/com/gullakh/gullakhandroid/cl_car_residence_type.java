@@ -2,15 +2,20 @@ package com.gullakh.gullakhandroid;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +28,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
     private TextView heading1,heading2,heading3;
     private ImageView back,next;
     private ContentValues contentValues;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +47,9 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         next.setOnClickListener(this);
         currentCity = (EditText) findViewById(R.id.currentCity);
         currentResidence = (EditText) findViewById(R.id.currentResidence);
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerloc);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner = (Spinner) findViewById(R.id.spinnerloc);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id)
             {
@@ -150,5 +157,27 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         contentValues.put("questans", "cl_car_residence_type");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
         cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+    }
+    private void getCity()
+    {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        cr.moveToFirst();
+        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+        try {
+            JSONObject reader = new JSONObject(cr.getString(3));
+            currentCity.setText(reader.getString("period_of_stay_in_cur_city"));
+            if(reader.getString("current_res").equals("")) {
+               // spinner.setSelected(1);
+            }
+            currentResidence.setText(reader.getString("period_of_stay_in_cur_res"));
+            setCar();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCar() {
+
     }
 }

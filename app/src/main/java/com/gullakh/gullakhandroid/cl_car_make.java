@@ -13,12 +13,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class cl_car_make extends AppCompatActivity implements View.OnClickListener {
     ImageView next, back;
     TextView heading, option1, option2, option3, option4;
     ImageView car1, car2, car3, car4;
     String dataCar = "";
     private ContentValues contentValues;
+    private String car="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +48,11 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         car3.setOnClickListener(this);
         car4 = (ImageView) findViewById(R.id.ImageViewCar4);
         car4.setOnClickListener(this);
-
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
+        getCar();
 
     }
-
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
@@ -149,6 +152,36 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
 
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
+    }
+    private void getCar() {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        cr.moveToFirst();
+        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+        try {
+            JSONObject reader = new JSONObject(cr.getString(3));
+            car=reader.getString("interested_car");
+            setDataToHashMap("currently_living_in",reader.getString("currently_living_in"));
+            setCar();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCar() {
+        if(car.equals("Maruti Alto")){
+            car1.setImageResource(R.drawable.buttonselecteffect);
+            dataCar = "Maruti Alto";
+        }else if(car.equals("Honda amaze")){
+            car2.setImageResource(R.drawable.buttonselecteffect);
+            dataCar = "Honda amaze";
+        }else if(car.equals("Hundai eon")){
+            car3.setImageResource(R.drawable.buttonselecteffect);
+            dataCar = "Hundai eon";
+        }else if(car.equals("Maruti swift")){
+            car4.setImageResource(R.drawable.buttonselecteffect);
+            dataCar = "Maruti swift";
+        }
     }
 }
 
