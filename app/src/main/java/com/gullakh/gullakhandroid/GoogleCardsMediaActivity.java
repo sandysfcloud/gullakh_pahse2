@@ -77,14 +77,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> CustomListViewValuesArr2 = new ArrayList<ListModel>();
     public int age;
-    TextView min, max, loand, tenur;
+    TextView min, max, loand, tenur,tten;
     public String[] search = {"PERSONAL LOAN", "CAR LOAN"};
     public int[] searchimg = {R.drawable.personalloannew, R.drawable.carloan};
     public String[] searchdate = {"30-1-2016", "1-02-2016"};
     public String[] searchtime = {"05:50pm", "10:15am"};
     ListView listView;
-    LinearLayout layout,linedit;
-    ImageView filter;
+    LinearLayout layout,linedit,filter;
     ArrayList<String> disbank;
     Dialog dialog;
     Button apply,reset;
@@ -104,7 +103,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     String globalidentity,loantype;
     Dialog dgthis;
     EditText editloan;
-    TextView loan_amt;
+    TextView loan_amt,tenr_amt;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,15 +112,18 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         //ListView listView = (ListView) findViewById(R.id.list_view);
         layout = (LinearLayout) findViewById(R.id.linear);
         linedit = (LinearLayout) findViewById(R.id.linedit);
-        filter = (ImageView) findViewById(R.id.filter);
+        filter = (LinearLayout) findViewById(R.id.filter);
         loan_amt = (TextView) findViewById(R.id.loan_amt);
+        tenr_amt = (TextView) findViewById(R.id.tenr_amt);
+        tten = (TextView) findViewById(R.id.tenure);
         TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
         TextView tfilter = (TextView) findViewById(R.id.tfilter);
         loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-
-
+        tenr_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        tten.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        
         linedit.setOnClickListener(this);
 		filter.setOnClickListener(this);
 		Intent intent = getIntent();
@@ -134,6 +136,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         loan = loan.replaceAll("Rs.", "");
 
         loan_amt.setText("" + loan);
+
         filter.setOnClickListener(this);
 		intent = getIntent();
 		data = intent.getStringExtra("data");
@@ -151,14 +154,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
         Spinner s1 = (Spinner) findViewById(R.id.spinner1);
-
+        s1.setPrompt("Sort By");
         s1.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         sortbyposition=position;
                         Log.d("test position",String.valueOf(position));
-                        if(position!=0)
+                       // if(position!=0)
                         calculate();
                         setadapter(CustomListViewValuesArr);
                     }
@@ -357,6 +360,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         Log.d("Max_tenure-else", String.valueOf(Max_tenure));
                     }
                 }
+
+                tenr_amt.setText(String.valueOf(Max_tenure / 12));
                 //Max_tenure = Max_tenure / 12;
                 Log.d("Max_tenure value is", String.valueOf(Max_tenure));
                 ((GlobalData) getApplication()).settenure(String.valueOf(Max_tenure / 12));
@@ -395,6 +400,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
         double final_bp, emi_valu, emi_value, bp;
         CustomListViewValuesArr.clear();
+        if(!disbank.equals(null))
         disbank.clear();
         for (int i = 0; i < cobj_RM.length; i++) {
 
@@ -426,6 +432,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
             double bpd;
             if (seektenure != 0) {
+                tenr_amt.setText(String.valueOf(seektenure));
                 int seekmonth=seektenure*12;
                 bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
             }
@@ -473,9 +480,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         Collections.sort(CustomListViewValuesArr, new Comparator<ListModel>() {
             public int compare(ListModel obj1, ListModel obj2) {
                 // TODO Auto-generated method stub
-                if (sortbyposition == 1) {
+                if (sortbyposition == 0) {
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
-                } else if (sortbyposition == 2) {
+                } else if (sortbyposition == 1) {
                     return (Float.valueOf(obj1.getprocessing_fee()) < Float.valueOf(obj2.getprocessing_fee())) ? -1 : (Float.valueOf(obj1.getprocessing_fee()) > Float.valueOf(obj2.getprocessing_fee())) ? 1 : 0;
                 } else
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;

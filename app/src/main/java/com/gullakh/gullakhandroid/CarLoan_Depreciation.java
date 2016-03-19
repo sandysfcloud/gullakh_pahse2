@@ -232,7 +232,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                         Log.d("cdep2 ", String.valueOf(cpat2));
 
                         resultsal=((cpat1+cpat2+cdep1+cdep2)/24);
-                        Toast.makeText(CarLoan_Depreciation.this, "Salary is: "+resultsal.toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(CarLoan_Depreciation.this, "Salary is: "+resultsal.toString(), Toast.LENGTH_SHORT).show();
                         if(resultsal > 3000) {
                             ((GlobalData) getApplication()).setnetsalary(resultsal);
                             Log.d("salary of self emp", String.valueOf(resultsal));

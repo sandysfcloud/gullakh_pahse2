@@ -59,6 +59,15 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         review.setOnClickListener(this);
         done = (ImageView) findViewById(R.id.done);
         done.setOnClickListener(this);
+
+        if(((GlobalData) getApplication()).getloanamt()!=null) {
+            Log.d("loan amt not null value:", ((GlobalData) getApplication()).getloanamt());
+            String loanamt=((GlobalData) getApplication()).getloanamt();
+            mSeekArc.setProgress(Integer.parseInt(loanamt));
+            mSeekArcProgress.setText(loanamt);
+            amt.setText(loanamt);
+        }
+
         amt.addTextChangedListener(new TextWatcher() {
 
             @Override

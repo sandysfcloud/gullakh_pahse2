@@ -72,9 +72,10 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
         if(((GlobalData) getApplication()).getcartype()!=null) {
             if (((GlobalData) getApplication()).getcartype().equals("New Car Loan"))
-                sal.setBackgroundColor(Color.parseColor("#D83C2F"));
+                sal.setImageResource(R.drawable.buttonselecteffect);
             else
-                self.setBackgroundColor(Color.parseColor("#D83C2F"));
+                self.setImageResource(R.drawable.buttonselecteffect);
+
         }
 
         Intent intent = getIntent();

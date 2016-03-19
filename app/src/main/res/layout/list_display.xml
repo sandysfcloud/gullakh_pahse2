@@ -7,10 +7,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="right"
         android:layout_margin="5dp"
-        android:weightSum="3"
-
+        android:layout_gravity="right"
         android:orientation="horizontal"
         android:background="#ffffff">
         <TextView
@@ -20,7 +26,7 @@
             android:textColor="#616161"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
-          android:layout_marginLeft="5dp"
+
             android:text="Loan Amount: "/>
         <TextView
             android:layout_width="wrap_content"
@@ -35,34 +41,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:id="@+id/filter"
+           android:layout_marginTop="15dp"
+           android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:background="@drawable/rectbutton_red"
             android:orientation="horizontal"
-            android:background="#ffffff">
+            >
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/filter"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
 
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="30dp"
+
         android:src="@drawable/filter"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#616161"
+            android:textColor="#ffffff"
             android:id="@+id/tfilter"
             android:textSize="16sp"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:text="Filter "/>
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="-15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tenure"
+            android:textColor="#616161"
+
+            android:textSize="16sp"
+            android:layout_marginLeft="5dp"
+            android:text="Tenure Value: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tenr_amt"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            android:textColor="#616161"
+
+            android:text="data"/>
     </LinearLayout>
     </LinearLayout>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:weightSum="2"
-    android:layout_marginTop="5dp"
+    android:layout_marginTop="10dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:background="#ffffff"
@@ -71,15 +104,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:layout_weight="1"
+android:layout_weight="1"
         android:id="@+id/linedit"
+
         android:orientation="horizontal"
 
       >
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-
             android:src="@drawable/editnew"/>
     <TextView
         android:layout_width="wrap_content"
@@ -100,7 +133,7 @@
             android:drawSelectorOnTop="true"
             android:entries="@array/sortby"
             android:spinnerMode="dialog"
-            android:prompt="@string/sortybylabel"
+
             />
     </LinearLayout>
     <!--<ListView

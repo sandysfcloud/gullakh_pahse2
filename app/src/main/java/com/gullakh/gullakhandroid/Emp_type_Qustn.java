@@ -56,11 +56,13 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
 
         if(((GlobalData) getApplication()).getemptype()!=null) {
-            Log.d("emp type not null",((GlobalData) getApplication()).getemptype());
+            Log.d("emp type not null", ((GlobalData) getApplication()).getemptype());
             if (((GlobalData) getApplication()).getemptype().equals("Salaried"))
-                sal.setBackgroundColor(Color.parseColor("#D83C2F"));
+                sal.setImageResource(R.drawable.buttonselecteffect);
+            else if(((GlobalData) getApplication()).getemptype().equals("Self Employed Business"))
+                self.setImageResource(R.drawable.buttonselecteffect);
             else
-                self.setBackgroundColor(Color.parseColor("#D83C2F"));
+                business.setImageResource(R.drawable.buttonselecteffect);
         }
 
 
