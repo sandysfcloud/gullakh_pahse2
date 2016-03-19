@@ -65,7 +65,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     private static final int INITIAL_DELAY_MILLIS = 300;
     LoanParaMaster[] cobj_LPid;
     RuleDetails[] cobj_RD;
-    RuleMaster[] cobj_RM;
+    RuleMaster[] cobj_RM=new RuleMaster[0];
     BankList[] cobj_BL;
     private GoogleCardsShopAdapter mGoogleCardsAdapter;
     private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
@@ -84,7 +84,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public String[] searchtime = {"05:50pm", "10:15am"};
     ListView listView;
     LinearLayout layout,linedit,filter;
-    ArrayList<String> disbank;
+    ArrayList<String> disbank=new ArrayList<String>();
     Dialog dialog;
     Button apply,reset;
     int Max_tenure, filter_tenure, seektenure =0,prevloan=0;
@@ -402,18 +402,20 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         CustomListViewValuesArr.clear();
         if(!disbank.equals(null))
         disbank.clear();
+        if(!cobj_RM.equals(null))
+        {
         for (int i = 0; i < cobj_RM.length; i++) {
 
             Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
             if (seektenure != 0) {
 
-                int seekmonth=seektenure*12;
+                int seekmonth = seektenure * 12;
                 ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
                 Log.d("seektenure value", String.valueOf(seektenure));
                 //this emi is used for display purpose only not calclation
                 emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -loan_amt, 0, false);
-               // emi_valu = FinanceLib.pmt((75 / 100) / 12, seekmonth, -loan_amt, 0, false);
+                // emi_valu = FinanceLib.pmt((75 / 100) / 12, seekmonth, -loan_amt, 0, false);
                 Log.d("emi_valu", String.valueOf(emi_valu));
                 Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
                 Log.d("seektenure", String.valueOf(seekmonth));
@@ -433,11 +435,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             double bpd;
             if (seektenure != 0) {
                 tenr_amt.setText(String.valueOf(seektenure));
-                int seekmonth=seektenure*12;
+                int seekmonth = seektenure * 12;
                 bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
-            }
-            else {
-               bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+            } else {
+                bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
             }
             bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
             final_bp = Math.ceil(bp);
@@ -469,7 +470,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             Log.d("disbank", String.valueOf(disbank));
 
-
+        }
            // double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
             //Log.d("checking PMT", String.valueOf(Emi));
 
