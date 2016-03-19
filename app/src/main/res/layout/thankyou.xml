@@ -9,22 +9,24 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Thank you ...!!!"
-        android:id="@+id/textView9"
+        android:id="@+id/textView1"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_marginTop="71dp"
+        android:textColor="#ed1c24" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Your application number is"
-        android:id="@+id/textView14"
-        android:layout_below="@+id/textView9"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="#ed1c24" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,6 +34,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="LT101"
         android:id="@+id/appno"
-        android:layout_below="@+id/textView14"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ed1c24" />
 </RelativeLayout>

@@ -121,6 +121,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
         final View view = factory.inflate(R.layout.thankyou, null);
         TextView caseno = (TextView) view.findViewById(R.id.appno);
+        ((TextView) view.findViewById(R.id.appno)).setTextColor(getResources().getColor(R.color.red));
+        ((TextView) view.findViewById(R.id.textView1)).setTextColor(getResources().getColor(R.color.red));
+        ((TextView) view.findViewById(R.id.textView2)).setTextColor(getResources().getColor(R.color.red));
         caseno.setText(borrowercaseno);
         alertadd.setView(view);
 

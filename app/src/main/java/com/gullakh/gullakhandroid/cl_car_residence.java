@@ -173,13 +173,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             place1.setImageResource(R.drawable.buttonselecteffect);
             dataLocation = "Bengaluru";
         }else if(city.equals("Chennai")){
-            place1.setImageResource(R.drawable.buttonselecteffect);
+            place2.setImageResource(R.drawable.buttonselecteffect);
             dataLocation = "Chennai";
         }else if(city.equals("Kolkata")){
-            place1.setImageResource(R.drawable.buttonselecteffect);
+            place3.setImageResource(R.drawable.buttonselecteffect);
             dataLocation = "Kolkata";
         }else if(city.equals("Mumbai")){
-            place1.setImageResource(R.drawable.buttonselecteffect);
+            place4.setImageResource(R.drawable.buttonselecteffect);
             dataLocation = "Mumbai";
         }
     }
