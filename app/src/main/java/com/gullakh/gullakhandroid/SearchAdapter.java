@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigDecimal;
 import java.text.Format;
 import java.text.NumberFormat;
@@ -45,6 +48,7 @@ public class SearchAdapter extends BaseAdapter
 
 
     ListModel tempValues = null;
+    ListModel globalstore = null;
     //public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
     //super(context, 0, items);
     public SearchAdapter(Activity context,ArrayList<ListModel> d,int[] prgmImages)
@@ -64,6 +68,11 @@ public class SearchAdapter extends BaseAdapter
         this.original.addAll(data);
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+
+
+
     }
 
     @Override
@@ -90,6 +99,40 @@ public class SearchAdapter extends BaseAdapter
         listpos=position;
 
         if (convertView == null) {
+
+
+
+            globalstore = null;
+            globalstore = (ListModel) data.get(position);
+            Log.d("all search data Kavya", globalstore.getserchcartyp());
+
+            try {
+                JSONObject obj = new JSONObject(globalstore.getserchcartyp());
+                Log.d("JSON OBj Kavya", String.valueOf(obj));
+                ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("cl_loanamount"));
+                ((GlobalData) cont.getApplicationContext()).setemptype(obj.getString("type_employment"));
+                if(!(obj.getString("type_employment").equals("Salaried"))) {
+                    ((GlobalData) cont.getApplicationContext()).setpat(Double.parseDouble(obj.getString("pat_amount")));
+                    ((GlobalData) cont.getApplicationContext()).setpat2(Double.parseDouble(obj.getString("pat_amount_last")));
+                    ((GlobalData) cont.getApplicationContext()).setdepreciation(Double.parseDouble(obj.getString("dep_amount")));
+                    ((GlobalData) cont.getApplicationContext()).setdepreciation2(Double.parseDouble(obj.getString("dep_amount_last")));
+                }
+                ((GlobalData) cont.getApplicationContext()).setnetsalary(Double.parseDouble(obj.getString("net_mon_salary")));
+                ((GlobalData) cont.getApplicationContext()).setEmi(Double.parseDouble(obj.getString("total_emi")));
+                ((GlobalData) cont.getApplicationContext()).setcartype(obj.getString("car_loan_type"));
+
+
+                ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
+
+                ((GlobalData) cont.getApplicationContext()).settenure(obj.getString("loan_tenure"));
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
             convertView = mInflater.inflate(
                     R.layout.searchadapter, parent, false);
             holder = new ViewHolder();
@@ -97,8 +140,8 @@ public class SearchAdapter extends BaseAdapter
                     .findViewById(R.id.bankimg);
 
 
-            holder.name = (TextView) convertView
-                    .findViewById(R.id.pbanknam);
+          /*  holder.name = (TextView) convertView
+                    .findViewById(R.id.pbanknam);*/
 
 
 
@@ -148,7 +191,7 @@ public class SearchAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
         if (data.size() <= 0) {
-            holder.name.setText("No Data");
+            holder.description.setText("No Data");
 
         } else {
 
@@ -158,7 +201,9 @@ public class SearchAdapter extends BaseAdapter
             tempValues = (ListModel) data.get(position);
 
 
-            holder.name.setText(tempValues.getsearchtnam());
+            //holder.name.setText(tempValues.getsearchtnam());
+
+
 
            // Log.d("value from model", tempValues.getemi_value());
             holder.day.setText(""+tempValues.getsearchdate());
@@ -204,14 +249,14 @@ public class SearchAdapter extends BaseAdapter
             holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));*/
             holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 
-            holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+            //holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos= (int) v.getTag();
-                    Intent intent = new Intent(cont, cl_car_recentsearch.class);
-
+                    Intent intent = new Intent(cont, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "carloan");
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }

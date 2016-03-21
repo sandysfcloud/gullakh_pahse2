@@ -8,7 +8,12 @@
         <item name="colorPrimary">#ed1c24</item>
 
         <item name="colorPrimaryDark">#ed1c24</item>
+        <item name="android:windowTitleSize">40dip</item>
+
     </style>
+
+
+
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBarStyle</item>

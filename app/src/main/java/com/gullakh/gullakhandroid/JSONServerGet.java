@@ -223,7 +223,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                         }
 
+                        else if(args[1].equals("cityname")){
 
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City ;")).toString());
+
+                        }
 
 
                         else if(args[1].equals("accountname")){
@@ -231,7 +236,9 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select accountname from Accounts where id in "+args[3]+";")).toString());
 
-                        } else if(args[1].equals("getaccount")){
+                        }
+
+                        else if(args[1].equals("getaccount")){
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Accounts where accountname ='City-"+args[3]+"';")).toString());

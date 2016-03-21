@@ -47,6 +47,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_saraied);
         contentValues=new ContentValues();
+
+
         heading1= (TextView) findViewById(R.id.heading1);
         heading2= (TextView) findViewById(R.id.heading2);
         heading3= (TextView) findViewById(R.id.heading3);
@@ -64,13 +66,67 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
         Emp.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         Emp.setOnClickListener(this);
+        getemplist();
         Exp = (EditText) findViewById(R.id.totalexp);
         onShakeImage();
+
+
     }
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
         next.setAnimation(shake);
+    }
+
+
+    public void getemplist()
+    {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Employer[] enums = gson.fromJson(jsonObject.get("result"), Employer[].class);
+
+                int size=enums.length;
+                Log.e("emplist frm server ", String.valueOf(size));
+                ArrayList<String> liste =new ArrayList<String>();
+                for(int i=0;i<size;i++) {
+                    liste.add(enums[i].getemployername());
+                }
+                final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_salaried.this, android.R.layout.simple_dropdown_item_1line, liste);
+                Emp.setAdapter(fAdapter);
+
+
+                Log.e("emplist frm server ", String.valueOf(liste));
+
+
+
+            }
+        }, cl_car_salaried.this, "2");
+        DataHandler dbobject = new DataHandler(cl_car_salaried.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("token", "employerlist", sessionid);
+
+
+
+
     }
     @Override
     public void onClick(View v) {
@@ -131,48 +187,6 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }*/
-
-                requestgetserver = new JSONServerGet(new AsyncResponse() {
-                    @Override
-                    public void processFinish(JSONObject output) {
-
-                    }
-
-                    public void processFinishString(String str_result, Dialog dg) {
-
-
-                        GsonBuilder gsonBuilder = new GsonBuilder();
-                        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-                        Gson gson = gsonBuilder.create();
-
-                        JsonParser parser = new JsonParser();
-                        JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                        Employer[] enums = gson.fromJson(jsonObject.get("result"), Employer[].class);
-
-                        int size=enums.length;
-                        Log.e("emplist frm server ", String.valueOf(size));
-                       ArrayList<String> liste =new ArrayList<String>();
-                        for(int i=0;i<size;i++) {
-                            liste.add(enums[i].getemployername());
-                        }
-                        final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_salaried.this, android.R.layout.simple_dropdown_item_1line, liste);
-                        Emp.setAdapter(fAdapter);
-
-
-                        Log.e("emplist frm server ", String.valueOf(liste));
-
-
-
-                    }
-                }, cl_car_salaried.this, "2");
-                DataHandler dbobject = new DataHandler(cl_car_salaried.this);
-                Cursor cr = dbobject.displayData("select * from session");
-                if (cr.moveToFirst()) {
-                    sessionid = cr.getString(1);
-                    Log.e("sessionid-cartypes", sessionid);
-                }
-
-                requestgetserver.execute("token", "employerlist", sessionid);
 
 
 

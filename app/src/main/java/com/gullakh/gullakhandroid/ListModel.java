@@ -1,13 +1,14 @@
 package com.gullakh.gullakhandroid;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by riverdale on 24/5/14.
  */
 public class ListModel implements Serializable{
 
-    private  String agenda_date="";
+
     private String id="";
     private  String time="";
     private  String title="";
@@ -43,12 +44,12 @@ public class ListModel implements Serializable{
 
     private  String squtn="";
     private  String sdate="";
-
+    String agenda_date;
 
 
     /*********** Set Methods ******************/
 
-   public void setAgenda_Date(String agenda_date)
+   public void setserchcartyp( String agenda_date)
     {
         this.agenda_date= agenda_date;
     }
@@ -179,7 +180,7 @@ public class ListModel implements Serializable{
 
     /*********** Get Methods ****************/
 
-    public String getAgenda_date()
+    public String getserchcartyp()
     {
         return this.agenda_date;
     }

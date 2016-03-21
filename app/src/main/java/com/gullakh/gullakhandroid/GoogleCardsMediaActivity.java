@@ -185,38 +185,67 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         }
 
         else if (data.equals("search")) {
-            setContentView(R.layout.seach_display);
-            layout = (LinearLayout) findViewById(R.id.linear);
-
-            DataHandler dh1 = new DataHandler(this);
-            Cursor cr = dh1.displayData("select * from mysearch");
-
-            try {
-                if (cr.moveToFirst()) {
-                    Log.w("news", cr.getString(1) + " " + cr.getString(2));
-                    while (cr.isAfterLast() == false) {
-                        ListModel sched = new ListModel();
-                        sched = new ListModel();
-                        sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                         sched.setsearchdate(cr.getString(4));
-                        //  sched.setspeakpath(cr.getString(4));
-                        cr.moveToNext();
-                        searchlistviewArry.add(sched);
 
 
+            DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
+            Cursor crobj = dbobject.displayData("select * from userlogin");
+
+                if (crobj.moveToFirst()) {
+                    Log.e("moveToFirst", crobj.getString(1));
+                    Cursor crmob = dbobject.displayData("select * from signindetails where email='" + crobj.getString(1) + "'");
+                    try {
+                        if (crmob != null) {
+                            if (crmob.moveToFirst()) {
+                                Log.e("moveToFirst2", crmob.getString(1));
+                                setContentView(R.layout.seach_display);
+                                layout = (LinearLayout) findViewById(R.id.linear);
+
+                                DataHandler dh1 = new DataHandler(this);
+                                Cursor cr = dh1.displayData("select * from mysearch");
+
+                                try {
+                                    if (cr.moveToFirst()) {
+                                        Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2));
+                                        while (cr.isAfterLast() == false) {
+                                            ListModel sched = new ListModel();
+                                            sched = new ListModel();
+                                            sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                                            sched.setsearchdate(cr.getString(4));
+                                            sched.setserchcartyp(cr.getString(3));
+                                            cr.moveToNext();
+                                            searchlistviewArry.add(sched);
+
+
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("error3 " + e.toString());
+                                    dh1.cr.close();
+                                    dh1.db.close();
+                                } finally {
+
+                                    dh1.cr.close();
+                                    dh1.db.close();
+                                }
+                                createListView();
+                                setsearchadapter(searchlistviewArry);
+
+                            }
+                        }
+                    }catch(Exception e)
+                    {
+                        e.printStackTrace();
                     }
-                }
-            } catch (Exception e) {
-                System.out.println("error3 " + e.toString());
-                dh1.cr.close();
-                dh1.db.close();
-            } finally {
 
-                dh1.cr.close();
-                dh1.db.close();
+            }else {
+                Log.e("You are not logged in", String.valueOf(0));
+                Intent intentsignin=new Intent(this,signin.class);
+                startActivity(intentsignin);
+                finish();
+
+
             }
-            createListView();
-            setsearchadapter(searchlistviewArry);
+
 
 
 
@@ -582,7 +611,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
         });
 
-        getSupportActionBar().setTitle("Result");
+        getSupportActionBar().setTitle("Search Result");
     }
 
 

@@ -113,7 +113,7 @@
                 android:padding="8dp"
                 android:textColor="#ffffff"
                 android:background="@drawable/rectbutton_org"
-                android:text="Apply" />
+                android:text="Details" />
         </LinearLayout>
             <View
                 android:layout_width="fill_parent"

@@ -160,8 +160,9 @@ public class MaterialTextField extends FrameLayout {
     }
 
     public void toggle() {
-        if (expanded)
-            reduce();
+       if (expanded)
+          //  reduce();
+        expand();
         else
             expand();
     }

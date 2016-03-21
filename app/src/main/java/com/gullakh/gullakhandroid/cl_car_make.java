@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,11 +11,19 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class cl_car_make extends AppCompatActivity implements View.OnClickListener {
     ImageView next, back;
@@ -23,7 +32,9 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
     String dataCar = "";
     private ContentValues contentValues;
     private String car="";
-
+    JSONServerGet requestgetserver;
+    AutoCompleteTextView carmak;
+    String sessionid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +61,67 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         car4.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
+
+        carmak = (AutoCompleteTextView) findViewById(R.id.locatn);
+        carmak.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        carmak.setOnClickListener(this);
+        getcarmake();
         getCar();
 
     }
+
+    public void getcarmake()
+    {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Cartypes[] enums = gson.fromJson(jsonObject.get("result"), Cartypes[].class);
+
+                int size=enums.length;
+                Log.e("emplist frm server ", String.valueOf(size));
+                ArrayList<String> liste =new ArrayList<String>();
+                for(int i=0;i<size;i++) {
+                    liste.add(enums[i].getcartype());
+                }
+                final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_make.this, android.R.layout.simple_dropdown_item_1line, liste);
+                carmak.setAdapter(fAdapter);
+
+
+                Log.e("emplist frm server ", String.valueOf(liste));
+
+
+
+            }
+        }, cl_car_make.this, "2");
+        DataHandler dbobject = new DataHandler(cl_car_make.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("token", "cartype", sessionid);
+
+
+
+
+    }
+
+
+
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);

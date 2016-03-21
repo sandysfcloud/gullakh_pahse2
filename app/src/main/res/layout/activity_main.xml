@@ -37,7 +37,7 @@
                 app:wheelItemCount="4"
                 app:wheelPadding="13dp"
                 app:wheelItemRadius="50dp"
-                android:layout_gravity="right|top"
+                android:layout_gravity="center_horizontal"
 
                 android:layout_marginTop="20dp" />
 
@@ -68,7 +68,7 @@
                 android:layout_margin="20dp"
                 android:textSize="20dp" />
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -76,7 +76,7 @@
                 android:id="@+id/wellcometogullakh"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_margin="20dp"
-                android:textSize="28dp" />
+                android:textSize="28dp" />-->
 
             <ImageView
                 android:layout_width="75dp"

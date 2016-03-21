@@ -36,6 +36,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
@@ -99,7 +100,12 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+       // requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+       // getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.my_custom_title);
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
         DataHandler dbobject = new DataHandler(this);
@@ -107,6 +113,9 @@ public class MainActivity extends ActionBarActivity {
         //**************************internet connection check
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
+
+
+
 
         // check for Internet status
         if (!isInternetPresent) {
@@ -142,8 +151,8 @@ public class MainActivity extends ActionBarActivity {
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         coin=(ImageView)findViewById(R.id.imageViewCoin);
 
-        TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
-        signUptext.setTypeface(myfontthin);
+      //  TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
+      //  signUptext.setTypeface(myfontthin);
         myprof = (Button) findViewById(R.id.buttonMyprof);
         myprof.setTypeface(myfontlight);
 
@@ -626,7 +635,7 @@ public class MainActivity extends ActionBarActivity {
         commitFragment(fragment);
 
         mDrawerList.setItemChecked(position, true);
-        setTitle(mDrawerItems.get(position).getTitle());
+       // setTitle(mDrawerItems.get(position).getTitle());
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 

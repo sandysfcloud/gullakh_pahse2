@@ -41,12 +41,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp" >
+        android:layout_height="80dp" >
 
         <ImageView
 
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="80dp"
             android:contentDescription="cd_main_image"
             android:scaleType="centerCrop" />
 
@@ -62,7 +62,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="80dp"
 
             />
         <LinearLayout
@@ -73,41 +73,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="5"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <com.gullakh.gullakhandroid.font.RobotoTextView
-                    android:id="@+id/pbanknam"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_margin="8dp"
-                    android:background="@android:color/transparent"
-                    android:text="ICICI BANK"
 
-                    android:textColor="#177bbd"
-                    android:textSize="18sp"
-                    />
                 <ImageView
                     android:id="@+id/bankimg"
                     android:layout_weight="1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="60dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+
                     android:layout_marginTop="5dp"
                     android:src="@drawable/carloan"
                     android:background="@android:color/transparent"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/list_item_google_cards_shop_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:text="Search Date:"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/list_item_google_cards_shop_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="2"
+                    android:text="2,300"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
                     />
 
                 <Button
                     android:id="@+id/apply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
 
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="15dp"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     android:padding="8dp"
@@ -121,10 +135,12 @@
                 android:id="@+id/line"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="4dp"
                 android:background="#80616161"/>
         </LinearLayout>
+
+
         <!--<com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/list_item_google_cards_shop_buy"
             android:layout_width="wrap_content"
@@ -150,7 +166,7 @@
             android:weightSum="3"
             android:orientation="horizontal">
 
-            <LinearLayout
+           <!-- <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="55dp"
@@ -184,7 +200,7 @@
                     android:textSize="16sp"
                     />
 
-            </LinearLayout>
+            </LinearLayout>-->
             <!--<View
               android:layout_width="1px"
               android:layout_height="40dp"
