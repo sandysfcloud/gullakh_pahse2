@@ -73,9 +73,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 } else {
                     setDataToHashMap("interested_car", dataCar);
                     goToDatabase();
-                    Intent intent = new Intent(this, cl_car_residence.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    goToIntent();
                 }
                 break;
             case R.id.ImageViewCar1:
@@ -86,9 +84,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Maruti Alto";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                Intent intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewCar2:
                 car1.setImageResource(R.drawable.usedcar);
@@ -98,9 +94,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Honda amaze";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewCar3:
                 car1.setImageResource(R.drawable.usedcar);
@@ -110,9 +104,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Hundai eon";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewCar4:
                 car1.setImageResource(R.drawable.usedcar);
@@ -122,9 +114,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Maruti swift";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -132,6 +122,20 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 break;
         }
     }
+    private void goToIntent()
+    {
+        Intent intent;
+        if(Car_type_questn.CarType)
+        {
+             intent = new Intent(this, cl_car_yearofmft.class);
+        }else
+        {
+             intent = new Intent(this, cl_car_residence.class);
+        }
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+    }
+
     private void goToDatabase()
     {
         contentValues.put("loantype", "Car Loan");

@@ -66,7 +66,21 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Emp.setOnClickListener(this);
         Exp = (EditText) findViewById(R.id.totalexp);
         onShakeImage();
+        getDataFromHashMap();
     }
+
+    private void getDataFromHashMap() {
+        if(cl_car_global_data.dataWithAns.get("name_of_current_emp")!=null&&
+                cl_car_global_data.dataWithAns.get("year_you_joined_current_comp")!=null&&
+                    cl_car_global_data.dataWithAns.get("total_exp")!=null
+                )
+        {
+            Emp.setText(cl_car_global_data.dataWithAns.get("name_of_current_emp"));
+            Doj.setText(cl_car_global_data.dataWithAns.get("year_you_joined_current_comp"));
+            Exp.setText(cl_car_global_data.dataWithAns.get("total_exp"));
+        }
+    }
+
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
@@ -111,7 +125,10 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
                 );
+                //now.add(Calendar.YEAR, -16);
+                //dpd.setMinDate(now);
                 dpd.setAccentColor(R.color.mdtp_background_color);
+                //dpd.vibrate(vibrateDate.isChecked());
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
                 dpd.setTitle("DatePicker Title");

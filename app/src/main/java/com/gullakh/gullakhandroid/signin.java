@@ -123,7 +123,8 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
             DataHandler dbobject = new DataHandler(signin.this);
             dbobject.addTable();
-            if(str_result.get("result").equals("true")) {
+            if(str_result.get("result").equals("true"))
+            {
 
                 Cursor cr = dbobject.displayData("select * from userlogin");
                 if(cr!=null) {

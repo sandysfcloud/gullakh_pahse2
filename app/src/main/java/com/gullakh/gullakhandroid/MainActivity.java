@@ -96,7 +96,8 @@ public class MainActivity extends ActionBarActivity {
     private int wheelwidth;
     private ObjectAnimator anim1;
     static String loanType="";
-
+    static boolean MyRecentSearchClicked=false;
+    static boolean signinstate=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +140,8 @@ public class MainActivity extends ActionBarActivity {
             }
 
         }
+        Cursor checkSignInState = dbobject.displayData("select * from userlogin");
+
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         coin=(ImageView)findViewById(R.id.imageViewCoin);
@@ -150,7 +153,12 @@ public class MainActivity extends ActionBarActivity {
 
         reg = (Button) findViewById(R.id.buttonReg);
         reg.setTypeface(myfontlight);
-        if(MyProfileActivity.signinstate){
+        if(checkSignInState!=null) {
+            if (checkSignInState.moveToFirst()) {
+                signinstate=true;
+            }
+        }
+        if(signinstate){
             reg.setVisibility(View.INVISIBLE);
             myprof.setVisibility(View.INVISIBLE);
         }else{
@@ -605,6 +613,7 @@ public class MainActivity extends ActionBarActivity {
 //                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
 //                intent.putExtra("data", "search");
 //                startActivity(intent);
+                MyRecentSearchClicked=true;
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 intent.putExtra("data", "search");
                 startActivity(intent);
@@ -749,4 +758,5 @@ public class MainActivity extends ActionBarActivity {
         wheelwidth=viewwheel.getWidth()/2+viewwheel.getLeft()-37;
         Log.d("Wheel inside ht wd", wheelheight + " & " + wheelwidth);
     }
+
 }
