@@ -605,7 +605,8 @@ public class MainActivity extends ActionBarActivity {
 //                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
 //                intent.putExtra("data", "search");
 //                startActivity(intent);
-                Intent intent = new Intent(MainActivity.this, cl_car_recentsearch.class);
+                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data", "search");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
 

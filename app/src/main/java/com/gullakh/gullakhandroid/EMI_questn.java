@@ -62,8 +62,9 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         if(((GlobalData) getApplication()).getEmi()!=null)
         {
             emipaying.setText(((GlobalData) getApplication()).getEmi().toString());
-            mSeekArcProgress.setText(((GlobalData) getApplication()).getEmi().toString());
-            mSeekArc.setProgress(((GlobalData) getApplication()).getEmi().intValue());
+
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getEmi().intValue()) / 1000)));
+            mSeekArcProgress.setText(((GlobalData) getApplication()).getEmi().intValue());
         }
 
                 emipaying.addTextChangedListener(new TextWatcher() {

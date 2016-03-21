@@ -69,6 +69,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     BankList[] cobj_BL;
     private GoogleCardsShopAdapter mGoogleCardsAdapter;
     private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
+    private SearchAdapter SearchAdapterobj;
     public int[] prgmImages;
     String sessionid = null;
     public String[] month_fee;
@@ -91,6 +92,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     double net_salry, emi;
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
+    public ArrayList<ListModel> searchlistviewArry = new ArrayList<ListModel>();
     int roi_min = 4, roi_max = 8, seek_loanamt=1,sortbyposition;
     Map<String, String> Arry_banknam = new HashMap<>();
     ;
@@ -107,38 +109,49 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_display);
 
-        //ListView listView = (ListView) findViewById(R.id.list_view);
-        layout = (LinearLayout) findViewById(R.id.linear);
-        linedit = (LinearLayout) findViewById(R.id.linedit);
-        filter = (LinearLayout) findViewById(R.id.filter);
-        loan_amt = (TextView) findViewById(R.id.loan_amt);
-        tenr_amt = (TextView) findViewById(R.id.tenr_amt);
-        tten = (TextView) findViewById(R.id.tenure);
-        TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
-        TextView tfilter = (TextView) findViewById(R.id.tfilter);
-        loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        tenr_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        tten.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        
-        linedit.setOnClickListener(this);
-		filter.setOnClickListener(this);
-		Intent intent = getIntent();
-		String data = intent.getStringExtra("data");
-		createListView();
-        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-        //nullpointer
-        String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
-        loan = loan.replaceAll("\\.00", "");
-        loan = loan.replaceAll("Rs.", "");
 
-        loan_amt.setText("" + loan);
+        Intent intent = getIntent();
+        String data = intent.getStringExtra("data");
 
-        filter.setOnClickListener(this);
-		intent = getIntent();
+        if (data.equals("carloan")) {
+            Log.e("flow test carloan", String.valueOf(0));
+            loan_amtcalcutn("oncreate");
+            Log.e("flow test loan cal done", String.valueOf(CustomListViewValuesArr.size()));
+
+
+            setContentView(R.layout.list_display);
+
+            //ListView listView = (ListView) findViewById(R.id.list_view);
+            layout = (LinearLayout) findViewById(R.id.linear);
+            linedit = (LinearLayout) findViewById(R.id.linedit);
+            filter = (LinearLayout) findViewById(R.id.filter);
+            loan_amt = (TextView) findViewById(R.id.loan_amt);
+            tenr_amt = (TextView) findViewById(R.id.tenr_amt);
+            tten = (TextView) findViewById(R.id.tenure);
+            TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
+            TextView tfilter = (TextView) findViewById(R.id.tfilter);
+            loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+            tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+            tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+            tenr_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+            tten.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+            linedit.setOnClickListener(this);
+            filter.setOnClickListener(this);
+
+            // createListView();
+            Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+            //nullpointer
+            String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
+            loan = loan.replaceAll("\\.00", "");
+            loan = loan.replaceAll("Rs.", "");
+
+            loan_amt.setText("" + loan);
+
+            filter.setOnClickListener(this);
+            createListView();
+		/*intent = getIntent();
 		data = intent.getStringExtra("data");
         createListView();
 
@@ -148,31 +161,73 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             loan_amtcalcutn("oncreate");
             Log.e("flow test loan cal done", String.valueOf(CustomListViewValuesArr.size()));
            // setadapter(CustomListViewValuesArr);
+        }*/
+
+
+            Spinner s1 = (Spinner) findViewById(R.id.spinner1);
+            s1.setPrompt("Sort By");
+            s1.setOnItemSelectedListener(
+                    new AdapterView.OnItemSelectedListener() {
+                        public void onItemSelected(
+                                AdapterView<?> parent, View view, int position, long id) {
+                            sortbyposition = position;
+                            Log.d("test position", String.valueOf(position));
+                            // if(position!=0)
+                            calculate();
+                            setadapter(CustomListViewValuesArr);
+                        }
+
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+        }
+
+        else if (data.equals("search")) {
+            setContentView(R.layout.seach_display);
+            layout = (LinearLayout) findViewById(R.id.linear);
+
+            DataHandler dh1 = new DataHandler(this);
+            Cursor cr = dh1.displayData("select * from mysearch");
+
+            try {
+                if (cr.moveToFirst()) {
+                    Log.w("news", cr.getString(1) + " " + cr.getString(2));
+                    while (cr.isAfterLast() == false) {
+                        ListModel sched = new ListModel();
+                        sched = new ListModel();
+                        sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                         sched.setsearchdate(cr.getString(4));
+                        //  sched.setspeakpath(cr.getString(4));
+                        cr.moveToNext();
+                        searchlistviewArry.add(sched);
+
+
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("error3 " + e.toString());
+                dh1.cr.close();
+                dh1.db.close();
+            } finally {
+
+                dh1.cr.close();
+                dh1.db.close();
+            }
+            createListView();
+            setsearchadapter(searchlistviewArry);
+
+
+
         }
 
 
 
 
-        Spinner s1 = (Spinner) findViewById(R.id.spinner1);
-        s1.setPrompt("Sort By");
-        s1.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(
-                            AdapterView<?> parent, View view, int position, long id) {
-                        sortbyposition=position;
-                        Log.d("test position",String.valueOf(position));
-                       // if(position!=0)
-                        calculate();
-                        setadapter(CustomListViewValuesArr);
-                    }
-
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-
     }
+//*************************************************************************************End of Oncreate
+
 
     public void loan_amtcalcutn(final String param) {
 
@@ -477,7 +532,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         }
 
 
-
         Collections.sort(CustomListViewValuesArr, new Comparator<ListModel>() {
             public int compare(ListModel obj1, ListModel obj2) {
                 // TODO Auto-generated method stub
@@ -494,6 +548,41 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 //*********************
 
+    }
+
+
+    public void setsearchadapter(ArrayList<ListModel> arraylist) {
+
+        Log.d("CustomListViewValuesArr value check", String.valueOf(arraylist.size()));
+        SearchAdapterobj = new SearchAdapter(this, arraylist, prgmImages);
+
+        SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+                new SwipeDismissAdapter(SearchAdapterobj, this));
+        swingBottomInAnimationAdapter.setAbsListView(listView);
+
+
+        assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+        swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+                INITIAL_DELAY_MILLIS);
+
+        //listView.setAdapter(null);
+        //swingBottomInAnimationAdapter.notifyDataSetChanged();
+        listView.setAdapter(swingBottomInAnimationAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
+                Bundle bundleObject = new Bundle();
+                bundleObject.putSerializable("key", CustomListViewValuesArr);
+                intent.putExtras(bundleObject);
+                intent.putExtra("position", Integer.toString(position));
+                startActivity(intent);
+                (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+            }
+        });
+
+        getSupportActionBar().setTitle("Result");
     }
 
 
@@ -533,6 +622,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         getSupportActionBar().setTitle("Result");
     }
+
+
+
+
 
     public void createListView() {
         listView = new ListView(this);

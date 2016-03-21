@@ -68,6 +68,8 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(patv2))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+                    mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(strtemp) / 50000)));
                     mSeekArcProgress.setText(strtemp);
                     amt.setText(patv2.toString());
                 }
@@ -86,6 +88,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(patv))));
 
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
+                mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(patv.intValue()) / 50000)));
                 mSeekArcProgress.setText(strtemp);
             }
             title.setText("PAT for Last FY");
