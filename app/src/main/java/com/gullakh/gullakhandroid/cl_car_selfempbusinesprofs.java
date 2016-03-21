@@ -38,14 +38,12 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         heading1= (TextView) findViewById(R.id.heading1);
         heading2= (TextView) findViewById(R.id.heading2);
         heading3= (TextView) findViewById(R.id.heading3);
-        heading4= (TextView) findViewById(R.id.heading4);
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
-        netProfit= (EditText) findViewById(R.id.NetProfit);
         // Spinner click listener
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -104,6 +102,40 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         Doj = (EditText) findViewById(R.id.joindateofemp);
         Doj.setOnClickListener(this);
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        getDataFromHashMap();
+    }
+    private void getDataFromHashMap()
+    {
+        if(cl_car_global_data.dataWithAns.get("profession")!=null &&
+                cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof")!=null &&
+                cl_car_global_data.dataWithAns.get("firm_type_prof")!=null)
+        {
+            Doj.setText(cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof"));
+        }
+        if(cl_car_global_data.dataWithAns.get("profession").equals("CA")) {
+            spinner1.setSelection(1);
+        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Doctor")) {
+            spinner1.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Architect")) {
+            spinner1.setSelection(3);
+        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Lawyer")) {
+            spinner1.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Engineer")) {
+            spinner1.setSelection(3);
+        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Others")) {
+            spinner1.setSelection(3);
+        }
+        if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Proprietorship")) {
+            spinner1.setSelection(1);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Partnership")) {
+            spinner1.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("LLP")) {
+            spinner1.setSelection(3);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Pvt. Ltd. Company")) {
+            spinner1.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Public Ltd. Company")) {
+            spinner1.setSelection(3);
+        }
     }
     @Override
     public void onClick(View v) {
@@ -116,18 +148,12 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                     {
                         if (!spinner2.getSelectedItem().toString().equals("select"))
                         {
-                            if(!netProfit.getText().toString().equals(""))
-                            {
                                 setDataToHashMap("profession",spinner1.getSelectedItem().toString());
                                 setDataToHashMap("start_date_of_current_business_prof",getDate());
                                 setDataToHashMap("firm_type_prof",spinner1.getSelectedItem().toString());
-                                setDataToHashMap("last_two_yrs_net_profit_prof",netProfit.getText().toString());
                                 Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_gender.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
-                            }else {
-                                RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please enter Net profit", "failed");
-                            }
                         } else {
                         RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your firm", "failed");
                         }

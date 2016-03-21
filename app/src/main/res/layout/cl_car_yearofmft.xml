@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.gullakh.gullakhandroid.cl_car_yearofmft"
+    android:background="@drawable/bgque">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Year of manufacture?"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal|top"
+            android:gravity="center" />
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="20dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="@color/main_color_500"
+            app:mtf_image="@drawable/car">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/yom"
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal|bottom"
+        android:weightSum="2"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/back"
+            android:gravity="left"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/backimgnw" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/next"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/nextimgnw" />
+    </LinearLayout>
+
+</FrameLayout>

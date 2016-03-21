@@ -2,12 +2,17 @@ package com.gullakh.gullakhandroid;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickListener {
     ImageView next,back;
@@ -45,6 +50,45 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         bank4.setOnClickListener(this);
         next.setOnClickListener(this);
         back.setOnClickListener(this);
+        getDataFromHashMap();
+        if(MainActivity.MyRecentSearchClicked) {
+            getInfo();
+        }
+    }
+
+    private void getInfo() {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        cr.moveToFirst();
+        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+        try {
+            JSONObject reader = new JSONObject(cr.getString(3));
+            String b = reader.getString("sal_dep_to");
+            setDeopsiteSalary(b);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getDataFromHashMap()
+    {
+        if(cl_car_global_data.dataWithAns.get("sal_dep_to")!=null)
+        {
+            dataBankType=cl_car_global_data.dataWithAns.get("sal_dep_to");
+            setDeopsiteSalary(dataBankType);
+        }
+    }
+
+    private void setDeopsiteSalary(String SalDeposite) {
+        if(SalDeposite.equals("Axis Bank")){
+            bank1.setImageResource(R.drawable.buttonselecteffect);
+        }else if(SalDeposite.equals("ICICI Bank")){
+            bank2.setImageResource(R.drawable.buttonselecteffect);
+        }else if(SalDeposite.equals("HDFC Bank")){
+            bank3.setImageResource(R.drawable.buttonselecteffect);
+        }else if(SalDeposite.equals("Others")){
+            bank4.setImageResource(R.drawable.buttonselecteffect);
+        }
     }
     @Override
     public void onClick(View v) {
@@ -57,6 +101,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
                     setDataToHashMap("sal_dep_to",dataBankType);
+                    goToDatabase();
                     intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
@@ -68,6 +113,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="Axis Bank";
+                setDataToHashMap("sal_dep_to",dataBankType);
+                goToDatabase();
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -78,6 +125,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="ICICI Bank";
+                setDataToHashMap("sal_dep_to",dataBankType);
+                goToDatabase();
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -88,6 +137,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.buttonselecteffect);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="HDFC Bank";
+                setDataToHashMap("sal_dep_to",dataBankType);
+                goToDatabase();
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -98,6 +149,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.buttonselecteffect);
                 dataBankType="Others";
+                setDataToHashMap("sal_dep_to",dataBankType);
+                goToDatabase();
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);

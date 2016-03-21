@@ -25,6 +25,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -69,11 +70,56 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         gen2.setOnClickListener(this);
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
+        getDataFromHashMap();
+        if(MainActivity.MyRecentSearchClicked) {
+            getInfo();
+        }
     }
+    private void getInfo() {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        cr.moveToFirst();
+        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+        try {
+            JSONObject reader = new JSONObject(cr.getString(3));
+            String gen = reader.getString("gender");
+            firstName.setText(reader.getString("firstname"));
+            lastName.setText(reader.getString("lastName"));
+            setInfo(gen);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setInfo(String gen) {
+        dataGender = gen;
+        if (gen.equals("male")) {
+            gen1.setImageResource(R.drawable.buttonselecteffect);
+        } else if (gen.equals("female")) {
+            gen2.setImageResource(R.drawable.buttonselecteffect);
+        }
+    }
+
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
         submit.setAnimation(shake);
+    }
+    private void getDataFromHashMap() {
+        if(cl_car_global_data.dataWithAns.get("firstname")!=null &&
+                cl_car_global_data.dataWithAns.get("lastname")!=null &&
+                cl_car_global_data.dataWithAns.get("gender")!=null)
+        {
+
+            firstName.setText(cl_car_global_data.dataWithAns.get("firstname"));
+            lastName.setText(cl_car_global_data.dataWithAns.get("lastname"));
+            if(cl_car_global_data.dataWithAns.get("gender").equals("male")){
+                gen1.setImageResource(R.drawable.buttonselecteffect);
+            }else if(cl_car_global_data.dataWithAns.get("gender").equals("female")){
+                gen2.setImageResource(R.drawable.buttonselecteffect);
+            }
+            dataGender=cl_car_global_data.dataWithAns.get("gender");
+        }
     }
     @Override
     public void onClick(View v) {
@@ -90,9 +136,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         if (dataGender.equals("")) {
                             RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
                         } else {
-                            //setDataToHashMap("firstname",firstName.getText().toString());
-                            //setDataToHashMap("lastname",lastName.getText().toString());
-                           // setDataToHashMap("gender", dataGender);
+
                             goToDatabase();
                             savetoserver();
 
@@ -104,11 +148,19 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 gen1.setImageResource(R.drawable.buttonselecteffect);
                 gen2.setImageResource(R.drawable.userfemale);
                 dataGender="male";
+                goToDatabase();
+                setDataToHashMap("firstname", firstName.getText().toString());
+                setDataToHashMap("lastname",lastName.getText().toString());
+                setDataToHashMap("gender", dataGender);
                 break;
             case R.id.userfemale:
                 gen1.setImageResource(R.drawable.usermale);
                 gen2.setImageResource(R.drawable.buttonselecteffect);
                 dataGender="female";
+                setDataToHashMap("firstname", firstName.getText().toString());
+                setDataToHashMap("lastname", lastName.getText().toString());
+                setDataToHashMap("gender", dataGender);
+                goToDatabase();
                 break;
             case R.id.back:
                 finish();
@@ -152,10 +204,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }
         //sessionid="6c8947df56ea3dd84e2f3";
         Cursor cre = dbobject.displayData("select * from userlogin");
+        Cursor mobfromdb = dbobject.displayData("select * from signindetails");
         if(cre!=null) {
             if (cre.moveToFirst()) {
                 useremail = cre.getString(1);
-                usermobile = "9999999999";
+                if (mobfromdb.moveToFirst()) {
+                    usermobile = mobfromdb.getString(2);
+                }
             }
         }
         requestgetserver = new JSONServerGet(new AsyncResponse() {

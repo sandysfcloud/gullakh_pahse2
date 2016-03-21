@@ -27,6 +27,8 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
     private String date="";
     private Spinner spinner1,spinner2;
     private EditText netProfit;
+    private String data1 ="";
+    private String data2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +41,21 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         heading1 = (TextView) findViewById(R.id.heading1);
         heading2 = (TextView) findViewById(R.id.heading2);
         heading3 = (TextView) findViewById(R.id.heading3);
-        heading4 = (TextView) findViewById(R.id.heading4);
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
-        netProfit= (EditText) findViewById(R.id.NetProfit);
         // Spinner click listener
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                {
 
+                }
             }
 
             @Override
@@ -64,6 +66,9 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                {
+
+                }
 
             }
 
@@ -92,18 +97,54 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories1);
         // Drop down layout style - list view with radio button
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to spinner
+        // attaching data1 adapter to spinner
         spinner1.setAdapter(dataAdapter1);
 
         android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories2);
         // Drop down layout style - list view with radio button
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to spinner
+        // attaching data1 adapter to spinner
         spinner2.setAdapter(dataAdapter2);
 
         Doj = (EditText) findViewById(R.id.joindateofemp);
         Doj.setOnClickListener(this);
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        getDataFromHashMap();
+        if(MainActivity.MyRecentSearchClicked) {
+            getInfo();
+        }
+    }
+
+    private void getInfo() {
+
+    }
+
+    private void getDataFromHashMap()
+    {
+        if(cl_car_global_data.dataWithAns.get("ind_type")!=null &&
+                cl_car_global_data.dataWithAns.get("start_date_of_cur_business")!=null &&
+                    cl_car_global_data.dataWithAns.get("firm_type")!=null)
+        {
+            Doj.setText(cl_car_global_data.dataWithAns.get("start_date_of_cur_business"));
+        }
+        if(cl_car_global_data.dataWithAns.get("ind_type").equals("Manufacturing")) {
+            spinner1.setSelection(1);
+        }else if(cl_car_global_data.dataWithAns.get("ind_type").equals("Trading")) {
+            spinner1.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("ind_type").equals("Service")) {
+            spinner1.setSelection(3);
+        }
+        if(cl_car_global_data.dataWithAns.get("firm_type").equals("Proprietorship")) {
+            spinner1.setSelection(1);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("Partnership")) {
+            spinner1.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("LLP")) {
+            spinner1.setSelection(3);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("Pvt. Ltd. Company")) {
+            spinner1.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("Public Ltd. Company")) {
+            spinner1.setSelection(3);
+        }
     }
     @Override
     public void onClick(View v) {
@@ -114,18 +155,13 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
                     if (!Doj.getText().toString().matches("")) {
                         if (!spinner2.getSelectedItem().toString().equals("select"))
                         {
-                            if (!netProfit.getText().toString().equals("")) {
                                 String jdate = getDate();
                                 setDataToHashMap("ind_type",spinner1.getSelectedItem().toString());
                                 setDataToHashMap("start_date_of_cur_business",jdate);
                                 setDataToHashMap("firm_type",spinner2.getSelectedItem().toString());
-                                setDataToHashMap("last_two_yrs_net_profit",netProfit.getText().toString());
                                 Intent intent = new Intent(cl_car_selfempbusiness.this, cl_car_gender.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
-                            } else {
-                                RegisterPageActivity.showErroralert(cl_car_selfempbusiness.this, "Please enter net profit", "failed");
-                            }
                         }else {
                             RegisterPageActivity.showErroralert(cl_car_selfempbusiness.this, "Please select type of firm", "failed");
                         }

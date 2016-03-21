@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".cl_car_salaried"
-    android:background="@drawable/bgque">
+    android:background="@drawable/bgque"
+    android:orientation="vertical">
 
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/scrollView6" >
+        android:layout_height="445dp"
+        android:id="@+id/scrollView6"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +29,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:background="#94ababab"
+                android:background="#67d1d1d1"
                 android:gravity="center"
                 android:textColor="#707070" />
 
@@ -68,7 +70,7 @@
                 android:text="Joining date of current employer?"
                 android:id="@+id/heading2"
                 android:gravity="center"
-                android:background="#94ababab"
+                android:background="#67d1d1d1"
                 android:layout_below="@+id/view"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -107,7 +109,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
-                android:background="#94ababab"
+                android:background="#67d1d1d1"
                 android:layout_marginTop="20dp" />
 
             <com.gullakh.gullakhandroid.MaterialTextField
@@ -120,7 +122,7 @@
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="@color/main_color_500"
                 app:mtf_image="@drawable/home">
-                <AutoCompleteTextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Ex:5 years"
@@ -130,42 +132,41 @@
                     android:textSize="15sp" />
             </com.gullakh.gullakhandroid.MaterialTextField>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal|bottom"
-                android:weightSum="2"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:id="@+id/back"
-                    android:gravity="left"
-                    android:layout_marginRight="80dp"
-                    android:layout_gravity="bottom|left"
-                    android:src="@drawable/backimgnw" />
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:id="@+id/next"
-                    android:layout_marginLeft="80dp"
-                    android:layout_gravity="bottom|right"
-                    android:src="@drawable/nextimgnw" />
-
-            </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal|bottom"
+        android:weightSum="2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/back"
+            android:gravity="left"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/backimgnw" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/next"
+            android:layout_marginLeft="80dp"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/nextimgnw" />
+
+    </LinearLayout>
+
+</LinearLayout>

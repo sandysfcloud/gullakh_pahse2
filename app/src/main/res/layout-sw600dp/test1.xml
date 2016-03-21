@@ -22,7 +22,7 @@
             android:layout_height="50dp"
             android:layout_marginRight="20dp"
             android:id="@+id/imageView2"
-            android:src="@drawable/rupee"
+            android:src="@drawable/loan_amt"
            />
         <TextView
             android:layout_width="wrap_content"

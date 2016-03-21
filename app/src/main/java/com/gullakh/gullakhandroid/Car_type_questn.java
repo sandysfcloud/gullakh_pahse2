@@ -2,7 +2,6 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +23,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
     AutoCompleteTextView email;
     Dialog dg;
     String data;
+    static boolean CarType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,7 +178,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 self.setImageResource(R.drawable.buttonselecteffect);
                 ((GlobalData) getApplication()).setcartype("Used Car Loan");
             {
-
+                CarType=true;
                 intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
 
                 startActivity(intent);

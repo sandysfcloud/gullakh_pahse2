@@ -96,12 +96,39 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+        if(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city")!=null&&
+                cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res")!=null&&
+                cl_car_global_data.dataWithAns.get("current_res")!=null)
+        {
+            getDataFromHashMap();
+        }
+    }
+    private void getDataFromHashMap() {
+        currentCity.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city"));
+        currentResidence.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res"));
+        if(cl_car_global_data.dataWithAns.get("current_res").equals("Self/Spouse owned")) {
+            spinner.setSelection(1);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Owned by parents/sibling")) {
+            spinner.setSelection(2);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Rented with family")) {
+            spinner.setSelection(3);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Rented with friends")) {
+            spinner.setSelection(4);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Rented staying alone")) {
+            spinner.setSelection(5);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Hostel")) {
+            spinner.setSelection(6);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Paying guest")) {
+            spinner.setSelection(7);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Company provided")) {
+            spinner.setSelection(8);
+        }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Others")) {
+            spinner.setSelection(9);
+        }
     }
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
-
             case R.id.next:
                 if(!dataResType.equals(""))
                 {
@@ -118,11 +145,12 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             setDataToHashMap("period_of_stay_in_cur_city",currentCity.getText().toString());
                             setDataToHashMap("period_of_stay_in_cur_res", currentResidence.getText().toString());
                             goToDatabase();
-                            Intent intent = new Intent(this, cl_car_salaried.class);
-                            startActivity(intent);
+                           // Intent intent = new Intent(this, cl_car_salaried.class);
+                           // startActivity(intent);
 
-                           /*String LoanType=((GlobalData) getApplication()).getemptype();
-                           if(LoanType.equals("Salaried"))
+                           String LoanType=((GlobalData) getApplication()).getemptype();
+                            Intent intent;
+                            if(LoanType.equals("Salaried"))
                             {
                                     intent = new Intent(this, cl_car_salaried.class);
                                     startActivity(intent);
@@ -134,7 +162,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             {
                                     intent = new Intent(this, cl_car_selfempbusinesprofs.class);
                                     startActivity(intent);
-                            }*/
+                            }
                         }
                     }
                 }else {

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     AutoCompleteTextView citynam;
     JSONServerGet requestgetserver;
     String sessionid;
+    private EditText locationField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +70,16 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         place3.setOnClickListener(this);
         place4.setOnClickListener(this);
         next.setOnClickListener(this);
-        getCity();
+        //getCity();
         citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
         citynam.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         citynam.setOnClickListener(this);
         getcitynam();
+        locationField= (EditText) findViewById(R.id.locatn);
+        getDataFromHashMap();
+        if(MainActivity.MyRecentSearchClicked) {
+            getCity();
+        }
     }
 
 
@@ -133,6 +141,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
         next.setAnimation(shake);
     }
+    private void getDataFromHashMap() {
+        if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null)
+        {
+            dataLocation=cl_car_global_data.dataWithAns.get("currently_living_in");
+            setCity(dataLocation);
+        }
+        }
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -232,13 +247,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         try {
             JSONObject reader = new JSONObject(cr.getString(3));
             city=reader.getString("currently_living_in");
-            setCar();
+            setCity(city);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void setCar() {
+    private void setCity(String city) {
         if(city.equals("Bengaluru")){
             place1.setImageResource(R.drawable.buttonselecteffect);
             dataLocation = "Bengaluru";

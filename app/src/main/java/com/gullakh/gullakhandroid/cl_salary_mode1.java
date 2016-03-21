@@ -17,7 +17,8 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     private ContentValues contentValues;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_salary_mode1);
         contentValues=new ContentValues();
@@ -39,6 +40,29 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
+        getDataFromHashMap();
+    }
+
+    private void getDataFromHashMap()
+    {
+        if(cl_car_global_data.dataWithAns.get("sal_pay_option")!=null)
+        {
+            dataSalDeposite=cl_car_global_data.dataWithAns.get("sal_pay_option");
+            setDeopsiteSalary(dataSalDeposite);
+        }
+    }
+
+    private void setDeopsiteSalary(String SalDeposite) {
+        if(SalDeposite.equals("Bank")){
+            pay1.setImageResource(R.drawable.buttonselecteffect);
+        }else if(SalDeposite.equals("Cheque")){
+            pay2.setImageResource(R.drawable.buttonselecteffect);
+        }else if(SalDeposite.equals("Cash")){
+            pay3.setImageResource(R.drawable.buttonselecteffect);
+        }
+    }
+    private void setCity(String city) {
+
     }
 
     @Override

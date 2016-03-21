@@ -184,7 +184,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 goToDatabase();
 
             applyFlag=MainActivity.loanType;
-                if(MyProfileActivity.signinstate){
+                if(MainActivity.signinstate){
                     Intent intent = new Intent(this, cl_car_make.class);
                     startActivity(intent);
                     this.overridePendingTransition(R.transition.left, R.transition.right);

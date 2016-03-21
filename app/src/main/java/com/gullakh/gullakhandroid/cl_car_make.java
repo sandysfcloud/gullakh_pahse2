@@ -61,12 +61,16 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         car4.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
+        if(MainActivity.MyRecentSearchClicked)
+        {
+            getCar();
+        }
 
         carmak = (AutoCompleteTextView) findViewById(R.id.locatn);
         carmak.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         carmak.setOnClickListener(this);
         getcarmake();
-        getCar();
+        //getCar();
 
     }
 
@@ -205,6 +209,19 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 break;
         }
 
+    }
+    private void goToIntent()
+    {
+        Intent intent;
+        if(Car_type_questn.CarType)
+        {
+             intent = new Intent(this, cl_car_yearofmft.class);
+        }else
+        {
+             intent = new Intent(this, cl_car_residence.class);
+        }
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
     }
 
     private void goToDatabase()

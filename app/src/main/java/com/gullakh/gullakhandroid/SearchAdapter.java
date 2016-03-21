@@ -249,7 +249,7 @@ public class SearchAdapter extends BaseAdapter
             holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));*/
             holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 
-            //holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+           // holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -301,6 +301,7 @@ public class SearchAdapter extends BaseAdapter
 
         notifyDataSetChanged();
     }
+
 
 
 
