@@ -97,6 +97,7 @@ public class MainActivity extends ActionBarActivity {
     private ObjectAnimator anim1;
     static String loanType="";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

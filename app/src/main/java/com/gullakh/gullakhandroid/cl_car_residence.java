@@ -56,7 +56,10 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         place3.setOnClickListener(this);
         place4.setOnClickListener(this);
         next.setOnClickListener(this);
-        getCity();
+        if(MainActivity.MyRecentSearchClicked)
+        {
+            getCity();
+        }
     }
     public void onShakeImage() {
         Animation shake;

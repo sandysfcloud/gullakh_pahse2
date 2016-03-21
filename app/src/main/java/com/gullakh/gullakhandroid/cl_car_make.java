@@ -50,8 +50,10 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         car4.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
-        getCar();
-
+        if(MainActivity.MyRecentSearchClicked)
+        {
+            getCar();
+        }
     }
     public void onShakeImage() {
         Animation shake;
@@ -70,12 +72,6 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 } else {
                     setDataToHashMap("interested_car", dataCar);
-                    //Cursor cr=cl_car_global_data.getDataToDataBase(this,"SELECT * FROM mysearch");
-                   /* DataHandler dbobject = new DataHandler(this);
-                    Cursor cr = dbobject.displayData("SELECT * FROM mysearch");
-                    cr.moveToFirst();
-                    Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));*/
-                    //Intent intent = new Intent(this, cl_car_make.class);
                     goToDatabase();
                     Intent intent = new Intent(this, cl_car_residence.class);
                     startActivity(intent);
@@ -135,9 +131,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 finish();
                 break;
         }
-
     }
-
     private void goToDatabase()
     {
         contentValues.put("loantype", "Car Loan");
@@ -167,7 +161,6 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
     }
-
     private void setCar() {
         if(car.equals("Maruti Alto")){
             car1.setImageResource(R.drawable.buttonselecteffect);

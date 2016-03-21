@@ -152,10 +152,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }
         //sessionid="6c8947df56ea3dd84e2f3";
         Cursor cre = dbobject.displayData("select * from userlogin");
+        Cursor mobfromdb = dbobject.displayData("select * from signindetails");
         if(cre!=null) {
             if (cre.moveToFirst()) {
                 useremail = cre.getString(1);
-                usermobile = "9999999999";
+                if (mobfromdb.moveToFirst()) {
+                    usermobile = mobfromdb.getString(2);
+                }
             }
         }
         requestgetserver = new JSONServerGet(new AsyncResponse() {
