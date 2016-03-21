@@ -87,7 +87,11 @@
                     android:src="@drawable/carloan"
                     android:background="@android:color/transparent"
                     />
-
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
                 <com.gullakh.gullakhandroid.font.RobotoTextView
                     android:id="@+id/list_item_google_cards_shop_description"
                     android:layout_width="wrap_content"
@@ -95,7 +99,7 @@
                     android:background="@android:color/transparent"
                     android:maxLines="2"
                     android:layout_marginTop="15dp"
-                    android:layout_weight="1"
+
                     android:text="Search Date:"
                     android:textColor="#616161"
                     android:textSize="16sp"
@@ -107,13 +111,13 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:maxLines="1"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="2"
+                    android:layout_marginTop="5dp"
+
                     android:text="2,300"
                     android:textColor="#616161"
                     android:textSize="16sp"
                     />
-
+</LinearLayout>
                 <Button
                     android:id="@+id/apply"
                     android:layout_width="wrap_content"
@@ -129,7 +133,7 @@
                     android:background="@drawable/rectbutton_org"
                     android:text="Go" />
             </LinearLayout>
-            <View
+           <!-- <View
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
                 android:id="@+id/line"
@@ -137,7 +141,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="4dp"
-                android:background="#80616161"/>
+                android:background="#80616161"/>-->
         </LinearLayout>
 
 

@@ -191,12 +191,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             Cursor crobj = dbobject.displayData("select * from userlogin");
 
                 if (crobj.moveToFirst()) {
-                    Log.e("moveToFirst", crobj.getString(1));
-                    Cursor crmob = dbobject.displayData("select * from signindetails where email='" + crobj.getString(1) + "'");
-                    try {
-                        if (crmob != null) {
-                            if (crmob.moveToFirst()) {
-                                Log.e("moveToFirst2", crmob.getString(1));
+
                                 setContentView(R.layout.seach_display);
                                 layout = (LinearLayout) findViewById(R.id.linear);
 
@@ -230,12 +225,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 createListView();
                                 setsearchadapter(searchlistviewArry);
 
-                            }
-                        }
-                    }catch(Exception e)
-                    {
-                        e.printStackTrace();
-                    }
 
             }else {
                 Log.e("You are not logged in", String.valueOf(0));
