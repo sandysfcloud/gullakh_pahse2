@@ -157,7 +157,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }else if(ListView_Click.applyFlag.equals("none")) {
                     Intent intent = new Intent(signin.this, MainActivity.class);
-                    MyProfileActivity.signinstate = true;
+                    MainActivity.signinstate = true;
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }

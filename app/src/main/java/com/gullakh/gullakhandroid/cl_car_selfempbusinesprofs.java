@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -26,11 +27,13 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
     private String date="";
     private Spinner spinner1,spinner2;
     private EditText netProfit;
+    private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_selfempbusinessprof);
+        contentValues=new ContentValues();
         ImageView back = (ImageView) findViewById(R.id.back);
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
@@ -41,7 +44,6 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        heading4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         // Spinner click listener
@@ -111,31 +113,32 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                 cl_car_global_data.dataWithAns.get("firm_type_prof")!=null)
         {
             Doj.setText(cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof"));
+            if(cl_car_global_data.dataWithAns.get("profession").equals("CA")) {
+                spinner1.setSelection(1);
+            }else if(cl_car_global_data.dataWithAns.get("profession").equals("Doctor")) {
+                spinner1.setSelection(2);
+            }else if(cl_car_global_data.dataWithAns.get("profession").equals("Architect")) {
+                spinner1.setSelection(4);
+            }else if(cl_car_global_data.dataWithAns.get("profession").equals("Lawyer")) {
+                spinner1.setSelection(5);
+            }else if(cl_car_global_data.dataWithAns.get("profession").equals("Engineer")) {
+                spinner1.setSelection(6);
+            }else if(cl_car_global_data.dataWithAns.get("profession").equals("Others")) {
+                spinner1.setSelection(7);
+            }
+            if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Proprietorship")) {
+                spinner2.setSelection(1);
+            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Partnership")) {
+                spinner2.setSelection(2);
+            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("LLP")) {
+                spinner2.setSelection(3);
+            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Pvt. Ltd. Company")) {
+                spinner2.setSelection(4);
+            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Public Ltd. Company")) {
+                spinner2.setSelection(5);
+            }
         }
-        if(cl_car_global_data.dataWithAns.get("profession").equals("CA")) {
-            spinner1.setSelection(1);
-        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Doctor")) {
-            spinner1.setSelection(2);
-        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Architect")) {
-            spinner1.setSelection(3);
-        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Lawyer")) {
-            spinner1.setSelection(2);
-        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Engineer")) {
-            spinner1.setSelection(3);
-        }else if(cl_car_global_data.dataWithAns.get("profession").equals("Others")) {
-            spinner1.setSelection(3);
-        }
-        if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Proprietorship")) {
-            spinner1.setSelection(1);
-        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Partnership")) {
-            spinner1.setSelection(2);
-        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("LLP")) {
-            spinner1.setSelection(3);
-        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Pvt. Ltd. Company")) {
-            spinner1.setSelection(2);
-        }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Public Ltd. Company")) {
-            spinner1.setSelection(3);
-        }
+
     }
     @Override
     public void onClick(View v) {
@@ -151,6 +154,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                                 setDataToHashMap("profession",spinner1.getSelectedItem().toString());
                                 setDataToHashMap("start_date_of_current_business_prof",getDate());
                                 setDataToHashMap("firm_type_prof",spinner1.getSelectedItem().toString());
+                                goToDatabase();
                                 Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_gender.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -207,5 +211,12 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
     {
         cl_car_global_data.dataWithAns.put(Key,data);
         Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
+    }
+    private void goToDatabase()
+    {
+        contentValues.put("loantype", "Car Loan");
+        contentValues.put("questans", "cl_car_selfempbusiness");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
     }
 }

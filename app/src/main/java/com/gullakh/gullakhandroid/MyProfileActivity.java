@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 public class MyProfileActivity extends AppCompatActivity {
 
-    static boolean signinstate=false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +39,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                signinstate=false;
+                MainActivity.signinstate=false;
                 DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
                 dbobjectnew.query("DELETE FROM userlogin");
                 Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
