@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class cl_car_gender extends AppCompatActivity implements View.OnClickListener{
-    ImageView back;
+    Button back;
     TextView heading,option1,option2;
     ImageView gen1,gen2;
     String dataGender="";
@@ -65,7 +65,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         gen1 = (ImageView) findViewById(R.id.usermale);
         gen2 = (ImageView) findViewById(R.id.userfemale);
         submit = (Button) findViewById(R.id.Submit);
-        back = (ImageView) findViewById(R.id.back);
+        back = (Button) findViewById(R.id.back);
         gen1.setOnClickListener(this);
         gen2.setOnClickListener(this);
         back.setOnClickListener(this);
@@ -284,7 +284,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     borrowercontactid = Borrower_contact[0].getId();
                     requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
                 }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,firstName.getText().toString()+" "+lastName.getText().toString());
+                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,firstName.getText().toString(),lastName.getText().toString());
                 }
             }
         }, cl_car_gender.this, "2");

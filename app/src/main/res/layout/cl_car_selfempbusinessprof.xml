@@ -48,26 +48,56 @@
             android:textColor="#000"
             android:background="#67d1d1d1"
             android:layout_marginTop="20dp" />
-        <com.gullakh.gullakhandroid.MaterialTextField
-            android:layout_width="300dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="80dp"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_cardColor="@color/main_color_500"
-            app:mtf_image="@drawable/business"
-            android:layout_below="@+id/heading2"
-            android:layout_alignLeft="@+id/view"
-            android:layout_alignStart="@+id/view">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
-            <EditText
-                android:layout_width="match_parent"
+            <com.gullakh.gullakhandroid.MaterialTextField
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/joindateofemp"
-                android:textColorHint="#fff"
-                android:textColor="#fff"
-                android:textSize="15sp" />
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_cardColor="@color/main_color_500"
+                app:mtf_image="@drawable/business"
+                android:layout_below="@+id/heading2"
+                android:layout_alignLeft="@+id/view"
+                android:layout_alignStart="@+id/view"
+                android:layout_weight="1">
 
-        </com.gullakh.gullakhandroid.MaterialTextField>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:id="@+id/joindateofempyr"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    android:hint="Ex:2001" />
+
+            </com.gullakh.gullakhandroid.MaterialTextField>
+            <com.gullakh.gullakhandroid.MaterialTextField
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_cardColor="@color/main_color_500"
+                app:mtf_image="@drawable/business"
+                android:layout_below="@+id/heading2"
+                android:layout_alignLeft="@+id/view"
+                android:layout_alignStart="@+id/view"
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:id="@+id/joindateofempmn"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    android:hint="Ex:Aug" />
+
+            </com.gullakh.gullakhandroid.MaterialTextField>
+        </LinearLayout>
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="50dp"

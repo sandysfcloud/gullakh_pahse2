@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class cl_car_make extends AppCompatActivity implements View.OnClickListener {
-    ImageView next, back;
+    Button next;
     TextView heading, option1, option2, option3, option4;
     ImageView car1, car2, car3, car4;
     String dataCar = "";
@@ -59,7 +60,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         car3.setOnClickListener(this);
         car4 = (ImageView) findViewById(R.id.ImageViewCar4);
         car4.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         if(MainActivity.MyRecentSearchClicked)
         {
@@ -150,9 +151,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                     Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));*/
                     //Intent intent = new Intent(this, cl_car_make.class);
                     goToDatabase();
-                    Intent intent = new Intent(this, cl_car_residence.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    goToIntent();
                 }
                 break;
             case R.id.ImageViewCar1:
@@ -163,9 +162,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Maruti Alto";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                Intent intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewCar2:
                 car1.setImageResource(R.drawable.usedcar);
@@ -175,9 +172,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Honda amaze";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewCar3:
                 car1.setImageResource(R.drawable.usedcar);
@@ -187,9 +182,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Hundai eon";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewCar4:
                 car1.setImageResource(R.drawable.usedcar);
@@ -199,9 +192,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Maruti swift";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);

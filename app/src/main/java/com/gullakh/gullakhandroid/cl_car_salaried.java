@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -31,7 +31,7 @@ import java.util.Calendar;
 public class cl_car_salaried extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
 
     EditText Doj;
-    ImageView next,back;
+    Button next,back;
     int day,month,yearv;
     private TextView heading1,heading2,heading3;
     private String date="";
@@ -53,11 +53,11 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        back = (ImageView) findViewById(R.id.back);
+        next = (Button) findViewById(R.id.next);
+        back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
-        Doj = (EditText) findViewById(R.id.saljoindateofemp);
+        Doj = (EditText) findViewById(R.id.saljoindateofempyr);
         Doj.setOnClickListener(this);
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         //Emp = (EditText) findViewById(R.id.salEmpname);
@@ -65,7 +65,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Emp.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         Emp.setOnClickListener(this);
         getemplist();
-        Exp = (EditText) findViewById(R.id.totalexp);
+        Exp = (EditText) findViewById(R.id.totalexpyr);
         onShakeImage();
         getDataFromHashMap();
     }
@@ -168,7 +168,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                 overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
-            case R.id.saljoindateofemp:
+            case R.id.saljoindateofempyr:
                 Calendar now = Calendar.getInstance();
                 now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(

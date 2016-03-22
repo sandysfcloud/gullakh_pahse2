@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgque">
+    android:background="@drawable/bgque"
+    android:weightSum="1">
 
     <!--<Spinner
         android:layout_margin="20dp"
@@ -14,190 +15,201 @@
         android:layout_height="wrap_content"
 
     />-->
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Which car are you interested in?"
+            android:id="@+id/TextViewHeading2"
+            android:textColor="#4b4b4b"
+            android:layout_marginTop="20dp"
+            android:textSize="22dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_weight="1" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="2">
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Which car are you interested in?"
-                android:id="@+id/TextViewHeading2"
-                android:textColor="#4b4b4b"
-                android:layout_marginTop="20dp"
-                android:textSize="22dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center" />
+                android:id="@+id/ImageViewCar1"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:weightSum="2"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
+                android:background="@drawable/usedcar"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
 
-                    android:id="@+id/ImageViewCar1"
+                android:id="@+id/ImageViewCar2"
 
-                    android:background="@drawable/usedcar"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-
-                    android:id="@+id/ImageViewCar2"
-
-                    android:background="@drawable/caramaze"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:weightSum="2"
-                android:gravity="center"
-                android:layout_marginBottom="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:textColor="#3f3f3f"
-                    android:text="Maruti Alto"
-
-                    android:id="@+id/TextViewOption1"
-                    android:layout_weight="1" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption2"
-                    android:textColor="#3f3f3f"
-                    android:text="Honda Amaze"
-                    android:layout_weight="1" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:weightSum="2"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-
-                    android:id="@+id/ImageViewCar3"
-
-                    android:background="@drawable/careon"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-
-                    android:id="@+id/ImageViewCar4"
-
-                    android:background="@drawable/newcar"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:gravity="center"
-                android:layout_marginTop="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption3"
-                    android:textColor="#3f3f3f"
-                    android:text="Hyundai Eon"
-
-                    android:layout_weight="1" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption4"
-                    android:textColor="#3f3f3f"
-                    android:text="Maruti Swift"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-
-
-
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="20dp"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="@color/main_color_500"
-                app:mtf_image="@drawable/car"
-                >
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Other"
-                    android:id="@+id/locatn"
-                    android:textColorHint="#fff"
-                    android:inputType="text"
-                    android:textColor="#fff"
-                    android:textSize="15sp" />
-
-            </com.gullakh.gullakhandroid.MaterialTextField>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:weightSum="2"
-                android:layout_marginTop="10dp"
-                android:gravity="right"
-                android:layout_marginBottom="20dp">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:id="@+id/next"
-
-                    android:background="@drawable/nextimgnw"
-                    android:layout_marginRight="20dp" />
-            </LinearLayout>
-
-
+                android:background="@drawable/caramaze"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
         </LinearLayout>
-    </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textColor="#3f3f3f"
+                android:text="Maruti Alto"
+
+                android:id="@+id/TextViewOption1"
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption2"
+                android:textColor="#3f3f3f"
+                android:text="Honda Amaze"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewCar3"
+
+                android:background="@drawable/careon"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewCar4"
+
+                android:background="@drawable/newcar"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption3"
+                android:textColor="#3f3f3f"
+                android:text="Hyundai Eon"
+
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption4"
+                android:textColor="#3f3f3f"
+                android:text="Maruti Swift"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+
+
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="20dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="@color/main_color_500"
+            app:mtf_image="@drawable/car"
+            android:layout_weight="1">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Other"
+                android:id="@+id/locatn"
+                android:textColorHint="#fff"
+                android:inputType="text"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#b8546e7a"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Next "
+            android:drawableRight="@drawable/arrowright"
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:gravity="center"
+            android:paddingRight="130dp"
+            android:paddingLeft="160dp" />
+    </LinearLayout>
 
 
 </LinearLayout>

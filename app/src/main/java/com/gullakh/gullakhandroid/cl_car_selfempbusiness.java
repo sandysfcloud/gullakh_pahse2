@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -37,8 +38,8 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_selfempbusiness);
         contentValues=new ContentValues();
-        ImageView back = (ImageView) findViewById(R.id.back);
-        ImageView next = (ImageView) findViewById(R.id.next);
+        Button back = (Button) findViewById(R.id.back);
+        Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         back.setOnClickListener(this);
         heading1 = (TextView) findViewById(R.id.heading1);
@@ -108,7 +109,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         // attaching data1 adapter to spinner
         spinner2.setAdapter(dataAdapter2);
 
-        Doj = (EditText) findViewById(R.id.joindateofemp);
+        Doj = (EditText) findViewById(R.id.joindateofempyr);
         Doj.setOnClickListener(this);
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         getDataFromHashMap();
@@ -179,7 +180,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
             case R.id.back:
                 finish();
                 break;
-            case R.id.joindateofemp:
+            case R.id.joindateofempyr:
                 Calendar now = Calendar.getInstance();
                 now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(

@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -26,7 +26,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
     private EditText currentCity;
     private EditText currentResidence;
     private TextView heading1,heading2,heading3;
-    private ImageView back,next;
+    private Button back,next;
     private ContentValues contentValues;
     private Spinner spinner;
 
@@ -41,12 +41,12 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        back = (ImageView) findViewById(R.id.back);
+        next = (Button) findViewById(R.id.next);
+        back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
-        currentCity = (EditText) findViewById(R.id.currentCity);
-        currentResidence = (EditText) findViewById(R.id.currentResidence);
+        currentCity = (EditText) findViewById(R.id.currentCityyr);
+        currentResidence = (EditText) findViewById(R.id.currentResidenceyr);
         spinner = (Spinner) findViewById(R.id.spinnerloc);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -148,8 +148,10 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                            // Intent intent = new Intent(this, cl_car_salaried.class);
                            // startActivity(intent);
 
-                           String LoanType=((GlobalData) getApplication()).getemptype();
+                            String LoanType=cl_car_global_data.dataWithAns.get("type_employment");
                             Intent intent;
+                            intent = new Intent(this, cl_car_salaried.class);
+                            startActivity(intent);
                             if(LoanType.equals("Salaried"))
                             {
                                     intent = new Intent(this, cl_car_salaried.class);

@@ -1,9 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgque">
+    android:background="@drawable/bgque"
+    android:weightSum="1">
 
     <!--<Spinner
         android:layout_margin="20dp"
@@ -14,202 +15,203 @@
         android:layout_height="wrap_content"
 
     />-->
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Where do you live currently?"
+            android:id="@+id/TextViewHeading1"
+            android:textColor="#4b4b4b"
+            android:layout_marginTop="20dp"
+            android:textSize="22dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_weight="1" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Where do you live currently?"
-                android:id="@+id/TextViewHeading1"
-                android:textColor="#4b4b4b"
-                android:layout_marginTop="20dp"
-                android:textSize="22dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewPlace1"
+
+                android:focusable="false"
+                android:clickable="false"
+                style='"?android:selectableItemBackgroundBorderless"'
+                android:background="@drawable/locbang"
                 android:layout_weight="1"
-                android:weightSum="2"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
 
-                    android:id="@+id/ImageViewPlace1"
+                android:id="@+id/ImageViewPlace2"
 
-                    android:focusable="false"
-                    android:clickable="false"
-                    style='"?android:selectableItemBackgroundBorderless"'
-                    android:background="@drawable/locbang"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp" />
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-
-                    android:id="@+id/ImageViewPlace2"
-
-                    android:background="@drawable/locchn"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:weightSum="2"
-                android:gravity="center"
-                android:layout_marginBottom="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption1"
-                    android:textColor="#3f3f3f"
-                    android:text="Bengaluru"
-
-                    android:layout_weight="1" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption2"
-                    android:textColor="#3f3f3f"
-                    android:text="Chennai"
-                    android:layout_weight="1" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:background="@drawable/locchn"
                 android:layout_weight="1"
-                android:weightSum="2"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-
-                    android:id="@+id/ImageViewPlace3"
-
-                    android:background="@drawable/lockol"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-
-                    android:id="@+id/ImageViewPlace4"
-
-                    android:background="@drawable/locmum"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:weightSum="2"
-                android:gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption3"
-                    android:textColor="#3f3f3f"
-                    android:text="Kolkata"
-
-                    android:layout_weight="1" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption4"
-                    android:textColor="#3f3f3f"
-                    android:text="Mumbai"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-
-
-
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="20dp"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="@color/main_color_500"
-                app:mtf_image="@drawable/home">
-                >
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Other"
-                    android:inputType="text"
-                    android:id="@+id/locatn"
-                    android:textColorHint="#fff"
-                    android:textColor="#fff"
-                    android:textSize="15sp" />
-
-            </com.gullakh.gullakhandroid.MaterialTextField>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:weightSum="2"
-                android:layout_marginBottom="40dp"
-                android:layout_marginTop="20dp">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:id="@+id/back"
-                    android:gravity="left"
-                    android:layout_marginRight="80dp"
-                    android:layout_gravity="bottom|left"
-                    android:src="@drawable/backimgnw" />
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:id="@+id/next"
-                    android:layout_marginLeft="80dp"
-                    android:layout_gravity="bottom|right"
-                    android:src="@drawable/nextimgnw" />
-            </LinearLayout>
-
-
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
         </LinearLayout>
-    </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption1"
+                android:textColor="#3f3f3f"
+                android:text="Bengaluru"
+
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption2"
+                android:textColor="#3f3f3f"
+                android:text="Chennai"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewPlace3"
+
+                android:background="@drawable/lockol"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewPlace4"
+
+                android:background="@drawable/locmum"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption3"
+                android:textColor="#3f3f3f"
+                android:text="Kolkata"
+
+                android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption4"
+                android:textColor="#3f3f3f"
+                android:text="Mumbai"
+                android:layout_weight="1" />
+        </LinearLayout>
 
 
-</FrameLayout>
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="@color/main_color_500"
+            app:mtf_image="@drawable/home"
+            android:layout_weight="1">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Others"
+                android:inputType="text"
+                android:id="@+id/locatn"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#b8546e7a"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Previous"
+            android:id="@+id/back"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/arrowleft"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+            android:gravity="fill" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Next"
+            android:drawableRight="@drawable/arrowright"
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:paddingRight="15dp"
+            android:paddingLeft="95dp" />
+    </LinearLayout>
+</LinearLayout>

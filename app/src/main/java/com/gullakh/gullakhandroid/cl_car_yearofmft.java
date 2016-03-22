@@ -7,8 +7,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -17,7 +17,7 @@ import java.util.Calendar;
 
 public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
 
-    private ImageView back,next;
+    private Button back,next;
     private EditText yom;
     int day,month,yearv;
     private String date="";
@@ -32,9 +32,9 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         contentValues=new ContentValues();
         heading = (TextView) findViewById(R.id.textView);
         heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        back = (ImageView) findViewById(R.id.back);
+        back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         yom= (EditText) findViewById(R.id.yom);
         yom.setOnClickListener(this);
