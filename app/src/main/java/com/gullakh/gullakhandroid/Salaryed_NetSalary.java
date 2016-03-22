@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,12 +10,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,19 +38,47 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salaryed__net_salary);
-        getSupportActionBar().setTitle("Car Loan - Net Salary");
+        //getSupportActionBar().setTitle("Car Loan - Net Salary");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ImageView back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
-        review = (ImageView) findViewById(R.id.review);
+
+
+
+
+        //********************changing actionbar
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  titl = (TextView) v.findViewById(R.id.title);
+        review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        close.setOnClickListener(this);
+        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        titl.setText("Net Salary");
+        actionBar.setCustomView(v);
+
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
+
+//**********
+
+       // review = (ImageView) findViewById(R.id.review);
+        //review.setOnClickListener(this);
 
         sal = (EditText) findViewById(R.id.netsalary);
         sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setHomeButtonEnabled(true);
         //onShakeImage();
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
@@ -165,10 +197,15 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
         switch (v.getId()) {
 
-            case R.id.review:
+            case R.id.edit:
                 RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,4);
                 break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
 
+                break;
             case R.id.done:
                 if(Float.parseFloat(sal.getText().toString()) > 3000) {
                     ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString()));

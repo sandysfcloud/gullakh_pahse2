@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
 
         />-->
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -182,5 +182,170 @@ android:visibility="gone"
             android:src="@drawable/nextimgnw"
 
             />
+    </LinearLayout>-->
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Employee Type"
+            android:id="@+id/empt"
+           android:gravity="center_horizontal"
+            android:textColor="#000"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="18dp" />
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:id="@+id/img"
+            android:background="@drawable/salaried" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:id="@+id/t1"
+            android:textColor="#000"
+            android:text="Salaried"
+            android:layout_marginBottom="10dp"
+
+            />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:id="@+id/img2"
+            android:background="@drawable/selfempbus" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:id="@+id/t2"
+            android:textColor="#000"
+            android:text="Self Employed Business"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:id="@+id/business"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/selfempprof" />
+        <TextView
+            android:layout_width="381dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:id="@+id/tbusiness"
+            android:textColor="#000"
+            android:layout_gravity="center_horizontal"
+            android:text="Self Employed Professional"
+            />
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/review"
+            android:src="@drawable/reviewred"
+android:visibility="gone"
+            />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_gravity="center_horizontal|bottom"
+        >
+      <!--  <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/back"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/backimgnw"
+
+            />-->
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&lt; Previous"
+            android:id="@+id/back"
+            android:padding="12dp"
+            android:background="#FF4F4F4F"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            />
+        <View
+            android:layout_width="1px"
+            android:layout_height="47dp"
+
+            android:background="#ed1c24"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next &gt;"
+            android:id="@+id/next"
+            android:background="#FF4F4F4F"
+            android:padding="12dp"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:textSize="20dp" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Done"
+            android:id="@+id/done"
+            android:background="#FF4F4F4F"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:textSize="20dp" />
+
+       <!-- <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:id="@+id/next"
+            android:gravity="right"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/nextimgnw"
+
+            />-->
     </LinearLayout>
 </FrameLayout>

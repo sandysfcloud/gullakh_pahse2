@@ -1,34 +1,41 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
-    ImageView sal,self,next,review,done,back,business;
+    ImageView sal,self,review,business;
     String data;
+    Button next,back,done;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp_type__qustn);
-        getSupportActionBar().setTitle("Car Loan - Employee Type");
-        back = (ImageView) findViewById(R.id.back);
+        //getSupportActionBar().setTitle("Employee Type");
+        back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         //review = (ImageView) findViewById(R.id.review);
         next.setOnClickListener(this);
 
-        done = (ImageView) findViewById(R.id.done);
+        done = (Button) findViewById(R.id.done);
         done.setOnClickListener(this);
 
         TextView  ts = (TextView) findViewById(R.id.t1);
@@ -51,8 +58,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
         TextView typ = (TextView) findViewById(R.id.empt);
         typ.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setHomeButtonEnabled(true);
 
 
         if(((GlobalData) getApplication()).getemptype()!=null) {
@@ -76,8 +83,35 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
             }
         }
-        else
-            onShakeImage();
+      //  else
+           // onShakeImage();
+
+
+        //********************changing actionbar
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  title = (TextView) v.findViewById(R.id.title);
+        ImageView  edit = (ImageView) v.findViewById(R.id.edit);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        close.setOnClickListener(this);
+        edit.setVisibility(View.INVISIBLE);
+        title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        title.setText("Employee Type");
+        actionBar.setCustomView(v);
+
+        /*getSupportActionBar().setDisplayShowCustomEnabled(true);
+        Toolbar parent =(Toolbar) v.getParent();//first get parent toolbar of current action bar
+        parent.setContentInsetsAbsolute(0,0);*/
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
+        //********************End of Oncreate
 
     }
     public void onShakeImage() {
@@ -112,7 +146,12 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
 
                 break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
 
+                break;
 
             case R.id.next:
                 if(((GlobalData) getApplication()).getemptype()!=null)

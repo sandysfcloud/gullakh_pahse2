@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,6 +31,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,7 +60,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener{
     Typeface myfontlight;
     Button myprof;
     Button reg;
@@ -88,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
     ConnectionDetector cd;
     private int touchPositionX;
     private int touchPositionY;
-    private ImageView coin;
+    private ImageView coin,carloan;
     private TranslateAnimation animationvu;
     private TranslateAnimation animationvd;
     private int duration=750;
@@ -115,6 +117,10 @@ public class MainActivity extends ActionBarActivity {
         //**************************internet connection check
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
+
+        carloan = (ImageView) findViewById(R.id.carln);
+        carloan.setOnClickListener(this);
+
 
 
 
@@ -186,7 +192,7 @@ public class MainActivity extends ActionBarActivity {
         }
         //*****************************wheel
 
-        final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);
+        /*final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);
         viewwheel=findViewById(R.id.wheelview);
         //create data for the adapter
         List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(ITEM_COUNT);
@@ -195,7 +201,7 @@ public class MainActivity extends ActionBarActivity {
             Map.Entry<String, Integer> entry = MaterialColor.random(this, "\\D*_500$");
             entries.add(entry);
 
-        }
+        }*/
 //**********************calculation
 
 
@@ -209,7 +215,7 @@ public class MainActivity extends ActionBarActivity {
 //*****************calculation
 
         //populate the adapter, that knows how to draw each item (as you would do with a ListAdapter)
-        wheelView.setAdapter(new MaterialColorAdapter(entries));
+       /* wheelView.setAdapter(new MaterialColorAdapter(entries));
 
         //a listener for receiving a callback for when the item closest to the selection angle changes
         wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectListener() {
@@ -219,7 +225,7 @@ public class MainActivity extends ActionBarActivity {
                 Map.Entry<String, Integer> selectedEntry = ((MaterialColorAdapter) parent.getAdapter()).getItem(position);
                 parent.setSelectionColor(getContrastColor(selectedEntry));
             }
-        });
+        });*/
 
        /* wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
             @Override
@@ -233,7 +239,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });*/
 
-        wheelView.setOnTouchListener(new View.OnTouchListener() {
+        /*wheelView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent event) {
                 touchPositionX = (int) event.getX();
                 touchPositionY = (int) event.getY();
@@ -302,7 +308,7 @@ public class MainActivity extends ActionBarActivity {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         coin.startAnimation(animationvd);
-                        anim1.start();
+                       // anim1.start();
                     }
 
                     @Override
@@ -332,7 +338,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
                 coin.startAnimation(animationvu);
-                anim1.start();
+                //anim1.start();
 
 
 
@@ -343,7 +349,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         //initialise the selection drawable with the first contrast color
-        wheelView.setSelectionColor(getContrastColor(entries.get(0)));
+        wheelView.setSelectionColor(getContrastColor(entries.get(0)));*/
 
 
         //***********************************
@@ -412,6 +418,18 @@ public class MainActivity extends ActionBarActivity {
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 50, r.getDisplayMetrics());
 
+//********************changing actionbar
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar, null);
+
+        actionBar.setCustomView(v);
+
+
+        //********************End of Oncreate
     }
 
 
@@ -419,6 +437,20 @@ public class MainActivity extends ActionBarActivity {
     private int getContrastColor(Map.Entry<String, Integer> entry) {
         String colorName = MaterialColor.getColorName(entry);
         return MaterialColor.getContrastColor(colorName);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.carln:
+                Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+
+                break;
+        }
+
     }
 
     class MaterialColorAdapter extends WheelArrayAdapter<Map.Entry<String, Integer>> {
@@ -760,12 +792,12 @@ public class MainActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    @Override
+    /*@Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         wheelheight=viewwheel.getHeight()/2+viewwheel.getTop()-37;
         wheelwidth=viewwheel.getWidth()/2+viewwheel.getLeft()-37;
         Log.d("Wheel inside ht wd", wheelheight + " & " + wheelwidth);
-    }
+    }*/
 
 }

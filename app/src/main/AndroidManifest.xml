@@ -123,7 +123,7 @@
             android:label="@string/title_activity_net__salry__qutsn" />
         <activity
             android:name=".Emp_type_Qustn"
-            android:label="@string/title_activity_emp_type__qustn" />
+            android:label="" />
         <activity
             android:name=".SelfBusiness_type_Questn"
             android:label="@string/title_activity_self_business_type__questn" />
