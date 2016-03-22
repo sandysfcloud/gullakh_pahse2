@@ -19,9 +19,10 @@
            android:id="@+id/content_frame"
            android:layout_width="match_parent"
             android:background="@drawable/bgque"
+
            android:layout_height="match_parent" >
 
-            <com.gullakh.gullakhandroid.WheelView
+            <!--<com.gullakh.gullakhandroid.WheelView
                 android:id="@+id/wheelview"
                 android:layout_width="match_parent"
                 android:layout_height="475dp"
@@ -39,35 +40,113 @@
                 app:wheelItemRadius="50dp"
                 android:layout_gravity="center_horizontal"
 
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="25dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+              android:layout_marginBottom="-15dp"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:id="@+id/persol"
+                android:src="@drawable/personalloannew"
+               />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:id="@+id/home"
+                    android:src="@drawable/homeloan"
+                    />
+            </LinearLayout>
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/pig"
+                    android:src="@drawable/piggi"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:layout_marginTop="-15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:id="@+id/busin"
+                        android:src="@drawable/busineeloan"
+                        />
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:id="@+id/carln"
+                        android:src="@drawable/carloan"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:gravity="bottom"
+
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
 
             <Button
-                android:layout_width="150dp"
-                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="My Profile"
                 android:id="@+id/buttonMyprof"
-                android:layout_gravity="left|bottom"
-                android:background="@drawable/mainbutton"
+                android:padding="12dp"
+                android:background="#FF4F4F4F"
                 android:textColor="#ffffff"
                 android:onClick="onClick"
                 android:textAllCaps="false"
-                android:layout_margin="20dp"
-                android:textSize="20dp"
-                android:textStyle="bold" />
 
+                android:textSize="20dp"
+              />
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="47dp"
+
+                    android:background="#ed1c24"/>
             <Button
-                android:layout_width="150dp"
-                android:layout_height="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Register"
                 android:id="@+id/buttonReg"
-                android:layout_gravity="bottom|right"
-                android:background="@drawable/mainbutton"
+                android:background="#FF4F4F4F"
+                android:padding="12dp"
                 android:textColor="#ffffff"
                 android:onClick="onClick"
                 android:textAllCaps="false"
-                android:layout_margin="20dp"
-                android:textSize="20dp" />
 
+                android:textSize="20dp" />
+            </LinearLayout>
             <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -23,7 +23,7 @@
         android:layout_marginRight="4dp"
         android:layout_marginTop="20dp"
         app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_cardColor="@color/main_color_500"
+        app:mtf_cardColor="#fff"
         app:mtf_image="@drawable/bdy"
         >
 
@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:hint="When is your BirthDay"
             android:id="@+id/birthdate"
-            android:textColorHint="#fff"
-            android:textColor="#fff"
+            android:textColorHint="#000"
+            android:textColor="#000"
             android:textSize="15sp" />
 
     </com.gullakh.gullakhandroid.MaterialTextField>

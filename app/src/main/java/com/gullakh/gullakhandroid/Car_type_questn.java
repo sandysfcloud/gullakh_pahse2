@@ -1,16 +1,21 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,17 +24,17 @@ import java.util.concurrent.ExecutionException;
 
 
 public class Car_type_questn extends AppCompatActivity implements View.OnClickListener {
-    ImageView sal,self,next,review,done;
+    ImageView sal,self,review;
     AutoCompleteTextView email;
     Dialog dg;
     String data;
     static boolean CarType;
-
+    Button next,done;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_type_questn);
-        getSupportActionBar().setTitle("Car Loan - Type of car");
+       // getSupportActionBar().setTitle("Car Loan - Type of car");
 
         sal = (ImageView) findViewById(R.id.img);
         sal.setOnClickListener(this);
@@ -41,18 +46,39 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         ts.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         ts2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
+        //********************changing actionbar
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
 
-
-        ImageView back = (ImageView) findViewById(R.id.back);
-        review = (ImageView) findViewById(R.id.review);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  titl = (TextView) v.findViewById(R.id.title);
+        review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        close.setOnClickListener(this);
+        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        titl.setText("Car Type");
+        actionBar.setCustomView(v);
+
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
+
+//**********
+
+        Button back = (Button) findViewById(R.id.back);
+        //review = (ImageView) findViewById(R.id.review);
+
 
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
 
-        done = (ImageView) findViewById(R.id.done);
+        done = (Button) findViewById(R.id.done);
         done.setOnClickListener(this);
 
         TextView title = (TextView) findViewById(R.id.title);
@@ -67,8 +93,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         //TextView email = (TextView) findViewById(R.id.email);
         //email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setHomeButtonEnabled(true);
         //onShakeImage();
 
         if(((GlobalData) getApplication()).getcartype()!=null) {
@@ -91,6 +117,11 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         }
         else
             onShakeImage();
+
+
+
+
+
 
     }
     public void onShakeImage() {
@@ -124,12 +155,19 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
         switch (v.getId()) {
 
-
-            case R.id.review:
+            case R.id.edit:
+                dg=RegisterPageActivity.showAlertreview(Car_type_questn.this, 2);
+                break;
+           /* case R.id.review:
                 dg=RegisterPageActivity.showAlertreview(Car_type_questn.this, 2);
 
-                break;
+                break;*/
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
 
+                break;
             case R.id.next:
                 //Intent intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
                 if(((GlobalData) getApplication()).getcartype()!=null) {

@@ -75,7 +75,7 @@
         android:layout_marginRight="4dp"
 
         app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_cardColor="@color/main_color_500"
+        app:mtf_cardColor="#ffffff"
         app:mtf_image="@drawable/loan_amt"
         >
 
@@ -87,8 +87,8 @@
             android:ems="10"
             android:inputType="phone"
             android:text="50000"
-            android:textColorHint="#fff"
-            android:textColor="#fff"
+            android:textColorHint="#000"
+            android:textColor="#000"
             android:textSize="15sp" />
 
     </com.gullakh.gullakhandroid.MaterialTextField>
