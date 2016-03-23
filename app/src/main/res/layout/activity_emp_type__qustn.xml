@@ -197,6 +197,15 @@ android:visibility="gone"
         android:layout_marginBottom="15dp"
         android:orientation="vertical"
         >
+
+       <!-- <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birth year: "
+            android:textColor="#000"
+            android:textSize="12sp"
+            app:typeface="robotoBlackItalic" />-->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

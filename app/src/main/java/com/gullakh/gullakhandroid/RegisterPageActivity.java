@@ -14,6 +14,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +27,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -321,6 +323,19 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		LinearLayout linrlyt = (LinearLayout) dialog.findViewById(R.id.linearmain);
 
+		ImageView close = (ImageView) dialog.findViewById(R.id.close);
+
+
+		close.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Log.d("close clicked", String.valueOf(1));
+				dialog.dismiss();
+				}
+			});
+
+
+
+
 		LayoutInflater inflater = (LayoutInflater)act .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
@@ -511,32 +526,17 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 
-public static void editdata()
+	public static String insertcomma(Editable view)
 {
-	Intent intclick=null;
-	Log.d("Review clicked",textdata);
-	if (textdata.equals("Employee Type: ")) {
-		Log.d("Review clicked", "Employee Type: ");
-		intclick = new Intent(CurrentAct, Emp_type_Qustn.class);
+	double doubleValue = 0;
+	String s = null;
+	try {
+		// The comma in the format specifier does the trick
+		s = String.format("%,d", Long.parseLong(view.toString()));
+	} catch (NumberFormatException e) {
 	}
-	if (textdata.equals("Car Loan Type: ")) {
-		Log.d("Car Loan Type: ", "");
-		intclick = new Intent(CurrentAct, Car_type_questn.class);
-	}
-	if (textdata.equals("Loan Amount: ")) {
-		Log.d("Loan Amount: ", "");
-		intclick = new Intent(CurrentAct, Loan_amt_questn.class);
-	}
-	if (textdata.equals("Net Monthly Salary: ")) {
-		Log.d("Net Monthly Salary: ", "");
-		intclick = new Intent(CurrentAct, Salaryed_NetSalary.class);
-	}
-	if (textdata.equals("Total EMI's you pay: ")) {
-		Log.d("Total EMI's you pay: ", "");
-		intclick = new Intent(CurrentAct, EMI_questn.class);
-	}
-	CurrentAct.startActivity(intclick);
-	// Perform action on click
+
+	return s;
 }
 
 	private boolean checkPlayServices() {

@@ -98,7 +98,8 @@ public class RobotoTextView extends TextView {
 			return Roboto.sRobotoItalic;
 		case Roboto.ROBOTO_LIGHT:
 			if (Roboto.sRobotoLight == null) {
-				Roboto.sRobotoLight = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
+				//Roboto.sRobotoLight = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
+				Roboto.sRobotoLight = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Light.ttf");
 			}
 			return Roboto.sRobotoLight;
 		case Roboto.ROBOTO_LIGHT_ITALIC:

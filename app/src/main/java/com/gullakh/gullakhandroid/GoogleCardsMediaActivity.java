@@ -1003,11 +1003,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        startActivity(intent);
+        Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+        intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intenth);
     }
 
 

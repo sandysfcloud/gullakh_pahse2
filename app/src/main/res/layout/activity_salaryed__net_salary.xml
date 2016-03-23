@@ -74,7 +74,7 @@
         android:layout_marginTop="20dp"
         app:mtf_cardCollapsedHeight="4dp"
         app:mtf_cardColor="#ffffff"
-        app:mtf_image="@drawable/company_img"
+        app:mtf_image="@drawable/loan_amt"
         >
 
         <EditText

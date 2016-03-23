@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,6 +35,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     String data;
+    String valuewithcomma;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
         amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+        amt.addTextChangedListener(new NumberTextWatcher(amt));
+
+
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setHomeButtonEnabled(true);
        // onShakeImage();
@@ -93,9 +101,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         if(((GlobalData) getApplication()).getloanamt()!=null) {
             Log.d("loan amt not null value:", ((GlobalData) getApplication()).getloanamt());
             String loanamt=((GlobalData) getApplication()).getloanamt();
+            int loanamtint=(int)Double.parseDouble(((GlobalData) getApplication()).getloanamt());
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
             mSeekArcProgress.setText(loanamt);
-            amt.setText(loanamt);
+            amt.setText(loanamtint);
         }
 
         amt.addTextChangedListener(new TextWatcher() {
@@ -175,6 +184,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             onShakeImage();
         }
 
+
+
+
+
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
@@ -195,6 +208,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
   /*  @Override
     public void finish() {
         super.finish();
