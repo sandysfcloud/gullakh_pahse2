@@ -1,6 +1,8 @@
 package com.gullakh.gullakhandroid;
 
+import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +19,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -28,11 +31,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -153,6 +160,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         //coin=(ImageView)findViewById(R.id.imageViewCoin);
+       // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
+      //  Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+       // coin=(ImageView)findViewById(R.id.imageViewCoin);
 
       //  TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
       //  signUptext.setTypeface(myfontthin);

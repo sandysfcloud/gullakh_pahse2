@@ -1,13 +1,16 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -179,7 +181,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
                 review.setVisibility(View.INVISIBLE);
-                //done.setVisibility(View.VISIBLE);
+                done.setVisibility(View.VISIBLE);
 
             }
         }

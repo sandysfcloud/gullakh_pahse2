@@ -1,11 +1,18 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,8 +98,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
 
 
-       // done = (ImageView) findViewById(R.id.done);
-        //done.setOnClickListener(this);
+      //  done = (ImageView) findViewById(R.id.done);
+       // done.setOnClickListener(this);
 
         if(((GlobalData) getApplication()).getloanamt()!=null) {
             Log.d("loan amt not null value:", ((GlobalData) getApplication()).getloanamt());
@@ -178,7 +185,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             if (data.equals("review")) {
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
-                //done.setVisibility(View.VISIBLE);
+                done.setVisibility(View.VISIBLE);
                 review.setVisibility(View.INVISIBLE);
 
             }
@@ -249,6 +256,9 @@ Log.d("done clicked loan_amt", "check");
                 }
                 else
                 {
+
+
+
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
 
