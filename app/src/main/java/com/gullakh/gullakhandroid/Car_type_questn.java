@@ -78,8 +78,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
 
-        done = (Button) findViewById(R.id.done);
-        done.setOnClickListener(this);
+        //done = (Button) findViewById(R.id.done);
+        //done.setOnClickListener(this);
 
         TextView title = (TextView) findViewById(R.id.title);
         title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -111,7 +111,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
             if (data.equals("review")) {
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.VISIBLE);
+                //done.setVisibility(View.VISIBLE);
                 review.setVisibility(View.INVISIBLE);
             }
         }

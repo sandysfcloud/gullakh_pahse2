@@ -2,11 +2,9 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,8 +33,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         //review = (ImageView) findViewById(R.id.review);
         next.setOnClickListener(this);
 
-        done = (Button) findViewById(R.id.done);
-        done.setOnClickListener(this);
+        //done = (Button) findViewById(R.id.done);
+        //done.setOnClickListener(this);
 
         TextView  ts = (TextView) findViewById(R.id.t1);
         TextView  ts2 = (TextView) findViewById(R.id.t2);
@@ -79,7 +77,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             if (data.equals("review")) {
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.VISIBLE);
+                //done.setVisibility(View.VISIBLE);
 
             }
         }

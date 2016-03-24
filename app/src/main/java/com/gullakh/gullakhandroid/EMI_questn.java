@@ -1,16 +1,13 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +15,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +27,9 @@ import java.util.Locale;
 
 public class EMI_questn extends AppCompatActivity  implements View.OnClickListener{
     EditText emipaying;
-    ImageView next,review,done;
+    Button next;
+    ImageView review;
+    ImageView done;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     String data;
@@ -39,9 +39,9 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         setContentView(R.layout.activity_emi_questn);
         //getSupportActionBar().setTitle("Car Loan - EMI");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        ImageView back = (ImageView) findViewById(R.id.back);
+        Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
 
 
@@ -73,8 +73,8 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
         //review = (ImageView) findViewById(R.id.review);
         //review.setOnClickListener(this);
-        done = (ImageView) findViewById(R.id.done);
-        done.setOnClickListener(this);
+        //done = (ImageView) findViewById(R.id.done);
+        //done.setOnClickListener(this);
 
         emipaying = (EditText) findViewById(R.id.emipaying);
         onetext = (TextView) findViewById(R.id.onetext);
@@ -168,7 +168,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
                 review.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.VISIBLE);
+                //done.setVisibility(View.VISIBLE);
 
             }
         }

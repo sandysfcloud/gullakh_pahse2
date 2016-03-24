@@ -154,7 +154,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 temp1 = imageFromSdcard;
                 pathfromuser1.setText(selectedImagePath);
                 String FileExtension = getExt(selectedImagePath);
-                savetoserver(temp1, FileExtension);
+                savetoserver(temp1, FileExtension,"IdProof");
             } else if (requestCode == 2) {
                 temp2 = imageFromSdcard;
                 pathfromuser2.setText(selectedImagePath);
@@ -185,7 +185,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    public void savetoserver(String Data, String exe) {
+    public void savetoserver(String Data, String exe,String title) {
         DataHandler dbobject = new DataHandler(UploadDocument2.this);
         Cursor cr = dbobject.displayData("select * from session");
         if (cr.moveToFirst()) {
@@ -213,6 +213,6 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 }
             }
         }, UploadDocument2.this, "1");
-        requestgetserver.execute("token", "document", sessionid,cl_car_gender.borrowercontactid,Data, exe,"IdProof");
+        requestgetserver.execute("token", "document", sessionid,cl_car_gender.borrowercontactid,Data, exe,title);
     }
 }

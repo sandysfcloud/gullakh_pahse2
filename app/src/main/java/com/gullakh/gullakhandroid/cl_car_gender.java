@@ -374,7 +374,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 //Log.d("Application values jsonobj", String.valueOf(jsonObject));
                 dgthis.dismiss();
-                showdialog();
+                goToIntent();
+                //showdialog();
 
             }
         }, cl_car_gender.this, "6");
@@ -452,6 +453,12 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             }
         }, cl_car_gender.this, "8");
     }
+
+    private void goToIntent() {
+        Intent intent = new Intent(this, UploadDocument1.class);
+        startActivity(intent);
+    }
+
     private void goToDatabase()
     {
         contentValues.put("loantype", "Car Loan");
