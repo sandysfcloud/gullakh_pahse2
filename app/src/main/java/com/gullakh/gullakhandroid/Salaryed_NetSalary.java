@@ -101,8 +101,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
         onetext = (TextView) findViewById(R.id.onetext);
      //   onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        done = (ImageView) findViewById(R.id.done);
-        done.setOnClickListener(this);
+     //   done = (ImageView) findViewById(R.id.done);
+      //  done.setOnClickListener(this);
         sal.addTextChangedListener(new TextWatcher() {
 
             @Override

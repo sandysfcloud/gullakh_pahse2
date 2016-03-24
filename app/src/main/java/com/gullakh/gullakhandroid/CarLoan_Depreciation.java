@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,12 +27,13 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class CarLoan_Depreciation extends AppCompatActivity implements View.OnClickListener{
-    ImageView sal,self,next,review,done,back,business;
+    ImageView sal,self,review,done,back,business;
     EditText amt;
     String data="data";
     TextView title;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
+    Button next;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
        // getSupportActionBar().setTitle("Car Loan - Depreciation");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        ImageView back = (ImageView) findViewById(R.id.back);
+        Button back = (Button) findViewById(R.id.back);
         title = (TextView) findViewById(R.id.title);
      //   title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
@@ -48,7 +50,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         // MaterialTextField obj=new MaterialTextField(this);
         // obj.expand();
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
        // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -87,7 +89,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
       //  review = (ImageView) findViewById(R.id.review);
       //  review.setOnClickListener(this);
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
             if (extras.containsKey("data")) {
@@ -111,7 +113,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
             }
         }
         else
-        {
+        {*/
             Double depv  =((GlobalData) getApplication()).getdepreciation();
             if(depv!=null) {
                 amt.setText(depv.toString());
@@ -124,7 +126,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
             }
             title.setText("Depreciation for Last FY");
-        }
+       // }
 
 
 
@@ -238,7 +240,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
 
                 Log.d("done clicked loan_amt", "check");
-                ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
+
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
@@ -249,25 +251,26 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                 }
                 else
                 {
-                    Log.d("data is", data);
-                    if(data.equals("dep2"))
-                    {
+                    ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
+                   // Log.d("data is", data);
+                   // if(data.equals("dep2"))
+                   // {
                         Log.d("check calculatn", "check");
-                        ((GlobalData) getApplication()).setdepreciation2(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
+                        //((GlobalData) getApplication()).setdepreciation2(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
 
                         Double cpat1,cpat2,cdep1,cdep2,resultsal;
                         cpat1= ((GlobalData) getApplication()).getPat();
-                         cpat2= ((GlobalData) getApplication()).getPat2();
+                       //  cpat2= ((GlobalData) getApplication()).getPat2();
                         cdep1= ((GlobalData) getApplication()).getdepreciation();
-                         cdep2= ((GlobalData) getApplication()).getdepreciation2();
+                         //cdep2= ((GlobalData) getApplication()).getdepreciation2();
 
                         Log.d("cpat1 ", String.valueOf(cpat1));
-                        Log.d("cpat2 ", String.valueOf(cpat2));
+                       // Log.d("cpat2 ", String.valueOf(cpat2));
                         Log.d("cdep1 ", String.valueOf(cpat1));
-                        Log.d("cdep2 ", String.valueOf(cpat2));
+                        //Log.d("cdep2 ", String.valueOf(cpat2));
 
-                        resultsal=((cpat1+cpat2+cdep1+cdep2)/24);
+                        resultsal=((cpat1+cdep1)/12);
                        // Toast.makeText(CarLoan_Depreciation.this, "Salary is: "+resultsal.toString(), Toast.LENGTH_SHORT).show();
                         if(resultsal > 3000) {
                             ((GlobalData) getApplication()).setnetsalary(resultsal);
@@ -282,7 +285,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                         }
 
                     }
-                    else
+                  /*  else
                     {
                         Log.d("continue", "check");
                         ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
@@ -293,9 +296,9 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                         intent.putExtra("data", "again");
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }
+                    }*/
 
-                }
+
                 break;
             case R.id.back:
                 finish();

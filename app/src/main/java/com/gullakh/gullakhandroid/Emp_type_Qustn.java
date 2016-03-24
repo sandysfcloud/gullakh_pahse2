@@ -35,8 +35,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         //review = (ImageView) findViewById(R.id.review);
         next.setOnClickListener(this);
 
-        done = (Button) findViewById(R.id.done);
-        done.setOnClickListener(this);
+       // done = (Button) findViewById(R.id.done);
+       // done.setOnClickListener(this);
 
         TextView  ts = (TextView) findViewById(R.id.t1);
         TextView  ts2 = (TextView) findViewById(R.id.t2);

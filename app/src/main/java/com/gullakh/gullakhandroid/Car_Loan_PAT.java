@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,12 +26,13 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickListener{
-    ImageView sal,self,next,review,done,back,business;
+    ImageView sal,self,review,done,back,business;
     EditText amt;
     String data="data";
     TextView title;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
+    Button next;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
        // getSupportActionBar().setTitle("Car Loan - PAT");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        ImageView back = (ImageView) findViewById(R.id.back);
+        Button back = (Button) findViewById(R.id.back);
         title = (TextView) findViewById(R.id.title);
         onetext = (TextView) findViewById(R.id.onetext);
       //  onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -47,7 +49,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         // MaterialTextField obj=new MaterialTextField(this);
         // obj.expand();
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
       //  amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
@@ -254,21 +256,21 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         else
         {
             Log.d("intent next loanamt", "check");
-            if(data.equals("pat2")) {
+            /*if(data.equals("pat2")) {
                 ((GlobalData) getApplication()).setpat2(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
                 Intent intent = new Intent(Car_Loan_PAT.this, CarLoan_Depreciation.class);
                 intent.putExtra("data","again");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
-            }
-            else {
+            }*/
+            //else {
                 ((GlobalData) getApplication()).setpat(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
                 Intent intent = new Intent(Car_Loan_PAT.this, CarLoan_Depreciation.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
-            }
+            //}
 
 
 

@@ -159,7 +159,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
        // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
       //  Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
-        coin=(ImageView)findViewById(R.id.imageViewCoin);
+       // coin=(ImageView)findViewById(R.id.imageViewCoin);
 
       //  TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
       //  signUptext.setTypeface(myfontthin);

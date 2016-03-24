@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,10 +37,10 @@ import java.util.concurrent.ExecutionException;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
-    ImageView next,review,done;
+    ImageView review,done;
     int day,month,yearv;
     String data;
-
+    Button next;
 
 
     @Override
@@ -48,11 +49,11 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         setContentView(R.layout.activity_date_of_birth_questn);
        // getSupportActionBar().setTitle("Car Loan - Date of birth");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        ImageView back = (ImageView) findViewById(R.id.back);
+        Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
-        done = (ImageView) findViewById(R.id.done);
-        done.setOnClickListener(this);
+        next = (Button) findViewById(R.id.next);
+        //done = (ImageView) findViewById(R.id.done);
+       // done.setOnClickListener(this);
 
 
         //********************changing actionbar

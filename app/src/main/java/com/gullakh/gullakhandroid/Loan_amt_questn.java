@@ -98,8 +98,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
 
 
-        done = (ImageView) findViewById(R.id.done);
-        done.setOnClickListener(this);
+      //  done = (ImageView) findViewById(R.id.done);
+       // done.setOnClickListener(this);
 
         if(((GlobalData) getApplication()).getloanamt()!=null) {
             Log.d("loan amt not null value:", ((GlobalData) getApplication()).getloanamt());
