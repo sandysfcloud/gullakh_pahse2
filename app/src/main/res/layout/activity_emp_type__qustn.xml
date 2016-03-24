@@ -1,366 +1,133 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
-        <!--<Spinner
-            android:layout_margin="20dp"
-            android:id="@+id/spinner"
-            android:padding="8dp"
-            android:background="@drawable/imageview_stroke"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+    [24/03/16 7:32:42 pm] Chetan Nandre: <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_weight="1">
+    [24/03/16 7:32:49 pm] Chetan Nandre: <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Employee Type"
+    android:id="@+id/empt"
+    android:gravity="center_horizontal"
+    android:textColor="#000"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:textSize="18dp" />
 
-        />-->
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="3">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Employee Type"
-            android:id="@+id/empt"
-            android:gravity="left"
-            android:textColor="#000"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="40dp"
-            android:textSize="18dp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:weightSum="2">
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-
-                android:id="@+id/img"
-
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/salaried" />
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-
-                android:id="@+id/img2"
-
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/selfempbus" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:id="@+id/t1"
-                android:textColor="#000"
-                android:text="Salaried"
-
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:id="@+id/t2"
-                android:textColor="#000"
-                android:text="Self Employed Business"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:id="@+id/business"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/selfempprof" />
-
-            <TextView
-                android:layout_width="381dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:id="@+id/tbusiness"
-                android:textColor="#000"
-                android:layout_gravity="center_horizontal"
-                android:text="Self Employed Professional"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/done"
-        android:gravity="left"
-        android:layout_marginTop="100dp"
-android:visibility="gone"
-        android:layout_gravity="bottom|center"
-        android:src="@drawable/donenew"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:id="@+id/img"
+        android:background="@drawable/salaried" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:id="@+id/t1"
+        android:textColor="#000"
+        android:text="Salaried"
+        android:layout_marginBottom="10dp"
 
         />
-        </LinearLayout>
-    </ScrollView>
-
-    <LinearLayout
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:id="@+id/img2"
+        android:background="@drawable/selfempbus" />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
         android:layout_weight="1"
-        android:weightSum="3"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="20dp">
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/back"
-            android:layout_gravity="bottom|left"
-            android:src="@drawable/backimgnw"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:id="@+id/t2"
+        android:textColor="#000"
+        android:text="Self Employed Business"
+        android:layout_marginBottom="10dp"
+        />
 
-            />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:id="@+id/review"
-
-            android:layout_gravity="bottom|right"
-
-
-            />
-
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/next"
-            android:gravity="right"
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/nextimgnw"
-
-            />
-    </LinearLayout>-->
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:id="@+id/business"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="15dp"
-        android:orientation="vertical"
-        >
-
-       <!-- <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Birth year: "
-            android:textColor="#000"
-            android:textSize="12sp"
-            app:typeface="robotoBlackItalic" />-->
-
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Employee Type"
-            android:id="@+id/empt"
-           android:gravity="center_horizontal"
-            android:textColor="#000"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            app:typeface="robotoLight"
-            android:textSize="18dp" />
+        android:background="@drawable/selfempprof" />
+    <TextView
+        android:layout_width="381dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:id="@+id/tbusiness"
+        android:textColor="#000"
+        android:layout_gravity="center_horizontal"
+        android:text="Self Employed Professional"
+        android:layout_marginBottom="20dp" />
 
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:id="@+id/img"
-            android:background="@drawable/salaried" />
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:id="@+id/t1"
-            android:textColor="#000"
-            android:text="Salaried"
-            android:layout_marginBottom="10dp"
-            app:typeface="robotoLight"
-            />
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:id="@+id/img2"
-            android:background="@drawable/selfempbus" />
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:id="@+id/t2"
-            android:textColor="#000"
-            android:text="Self Employed Business"
-            android:layout_marginBottom="10dp"
-            app:typeface="robotoLight"
-            />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:id="@+id/business"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/selfempprof" />
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="381dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:id="@+id/tbusiness"
-            android:textColor="#000"
-            android:layout_gravity="center_horizontal"
-            android:text="Self Employed Professional"
-            app:typeface="robotoLight"
-            />
-
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/review"
-            android:src="@drawable/reviewred"
-android:visibility="gone"
-            />
-        </LinearLayout>
-
-    </ScrollView>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/review"
+        android:src="@drawable/reviewred"
+        android:visibility="gone"
+        />
+</LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout11"
+        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:layout_gravity="center_horizontal|bottom"
-        >
-      <!--  <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:background="#b8546e7a" >
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Previous"
             android:id="@+id/back"
-            android:layout_gravity="bottom|left"
-            android:src="@drawable/backimgnw"
-
-            />-->
-
-        <com.gullakh.gullakhandroid.font.RobotoButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="&lt; Previous"
-            android:id="@+id/back"
-            android:padding="12dp"
-            android:background="#FF4F4F4F"
-            android:textColor="#ffffff"
+            android:drawableLeft="@drawable/arrowleft"
+            android:background="#00ffffff"
             android:textAllCaps="false"
-            android:textSize="20dp"
-            app:typeface="robotoLight"
-            />
-        <View
-            android:layout_width="1px"
-            android:layout_height="47dp"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+            android:gravity="fill" />
 
-            android:background="#ed1c24"/>
-        <com.gullakh.gullakhandroid.font.RobotoButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Next &gt;"
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Next"
+            android:drawableRight="@drawable/arrowright"
             android:id="@+id/next"
-            android:background="#FF4F4F4F"
-            android:padding="12dp"
-            android:textColor="#ffffff"
-            android:textAllCaps="false"
-            app:typeface="robotoLight"
-            android:textSize="20dp" />
-
-
-        <com.gullakh.gullakhandroid.font.RobotoButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Done"
-            android:id="@+id/done"
-            android:background="#FF4F4F4F"
-            android:padding="12dp"
-            android:visibility="gone"
-            android:textColor="#ffffff"
             android:textAllCaps="false"
-            app:typeface="robotoLight"
-            android:textSize="20dp" />
-
-       <!-- <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/next"
-            android:gravity="right"
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/nextimgnw"
-
-            />-->
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:paddingRight="15dp"
+            android:paddingLeft="95dp" />
     </LinearLayout>
-</FrameLayout>
+
+
+</LinearLayout>

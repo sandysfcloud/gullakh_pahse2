@@ -5,145 +5,245 @@
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="384dp"
+        android:id="@+id/scrollView3"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <Spinner
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/spinner"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittextsimple"
+                    android:layout_marginLeft="10dp" />
+
+                <EditText
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/FirstName"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="First Name"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editText7"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="Middle Name"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/LastName"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="Last Name"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption1"
+                    android:textColor="#4b4b4b"
+                    android:text="Male"
+
+                    android:gravity="right"
+                    android:layout_marginRight="10dp" />
+
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+
+                    android:id="@+id/usermale"
+
+                    android:background="@drawable/usermale"
+                    android:layout_marginRight="10dp" />
+
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+
+                    android:id="@+id/userfemale"
+
+                    android:background="@drawable/userfemale"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:id="@+id/TextViewOption2"
+                    android:textColor="#4b4b4b"
+                    android:text="Female"
+                    android:gravity="left"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Residential Address"
+                android:id="@+id/textView7"
+                android:textColor="#4b4b4b"
+                android:textSize="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="right"
+                android:gravity="center" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:id="@+id/editText4"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="Address  line 1"
+                android:gravity="center"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:id="@+id/editText5"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="Address  line 2"
+                android:gravity="center"
+                android:layout_marginTop="5dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:id="@+id/editText6"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="PIN code"
+                android:gravity="center"
+                android:layout_marginTop="5dp" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:id="@+id/editText8"
+                android:background="@drawable/edittextsimple"
+                android:hint="City"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:id="@+id/editText9"
+                android:background="@drawable/edittextsimple"
+                android:hint="State"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center">
 
-        <EditText
-            android:layout_width="300dp"
+        <Button
+            android:layout_width="100dp"
             android:layout_height="50dp"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/FirstName"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:hint="First Name"
-            android:gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="10dp" />
+            android:text="Previous"
+            android:id="@+id/back"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/arrowleft"
+            android:background="#b8546e7a"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:paddingLeft="15dp"
+            android:gravity="fill" />
 
-        <EditText
-            android:layout_width="300dp"
+        <Button
+            android:layout_width="100dp"
             android:layout_height="50dp"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/LastName"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:hint="Last Name"
-            android:gravity="center"
-            android:layout_marginBottom="10dp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="Select your  gender ?"
-            android:id="@+id/TextViewHeading1"
-            android:textColor="#4b4b4b"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="#b1b7b7b7" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp">
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-
-                android:id="@+id/usermale"
-
-                android:background="@drawable/usermale"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp" />
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-
-                android:id="@+id/userfemale"
-
-                android:background="@drawable/userfemale"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="40dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="18dp"
-                android:id="@+id/TextViewOption1"
-                android:textColor="#4b4b4b"
-                android:text="Male"
-
-                android:layout_marginLeft="40dp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="18dp"
-                android:id="@+id/TextViewOption2"
-                android:textColor="#4b4b4b"
-                android:text="Female"
-                android:layout_marginRight="40dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:text="Create Application"
+            android:id="@+id/Submit"
+            android:background="#b8546e7a"
+            android:textColor="#ffffff"
+            android:drawableRight="@drawable/arrowright"
+            android:textAllCaps="false"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:layout_marginTop="30dp">
-
-            <ImageButton
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:id="@+id/back"
-                android:gravity="left"
-                android:layout_gravity="left|bottom"
-                android:background="@drawable/backimgnw"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginRight="20dp" />
-
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:text="Submit Application"
-                android:id="@+id/Submit"
-                android:layout_gravity="right|bottom"
-                android:background="@drawable/submitbutton"
-                android:textColor="#ffffff"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="20dp" />
-        </LinearLayout>
-
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:textSize="18dp"
+            android:paddingRight="15dp" />
     </LinearLayout>
 
 </LinearLayout>

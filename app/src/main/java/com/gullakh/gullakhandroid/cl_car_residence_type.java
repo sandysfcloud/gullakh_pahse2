@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,11 +22,10 @@ import java.util.List;
 
 public class cl_car_residence_type extends AppCompatActivity implements View.OnClickListener{
 
-    String dataResType="";
     private EditText currentCity;
     private EditText currentResidence;
     private TextView heading1,heading2,heading3;
-    private ImageView back,next;
+    private Button back,next;
     private ContentValues contentValues;
     private Spinner spinner;
 
@@ -41,37 +40,17 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        back = (ImageView) findViewById(R.id.back);
+        next = (Button) findViewById(R.id.next);
+        back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
-        currentCity = (EditText) findViewById(R.id.currentCity);
-        currentResidence = (EditText) findViewById(R.id.currentResidence);
+        currentCity = (EditText) findViewById(R.id.currentCityyr);
+        currentResidence = (EditText) findViewById(R.id.currentResidenceyr);
         spinner = (Spinner) findViewById(R.id.spinnerloc);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id)
-            {
-                if(position==1){
-                    dataResType="Self/Spouse owned";
-                }else if(position==2){
-                dataResType="Owned by parents/sibling";
-                }else if(position==3){
-                    dataResType="Rented with family";
-                }else if(position==4){
-                    dataResType="Rented with friends";
-                }else if(position==5){
-                    dataResType="Rented staying alone";
-                }else if(position==6){
-                    dataResType="Hostel";
-                }else if(position==7){
-                    dataResType="Paying guest";
-                }else if(position==8){
-                    dataResType="Company provided";
-                }else if(position==9){
-                    dataResType="Others";
-                }
+                                       int position, long id) {
             }
 
             @Override
@@ -130,7 +109,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                if(!dataResType.equals(""))
+                if(!spinner.getSelectedItem().toString().matches("Select"))
                 {
                     if(currentCity.getText().toString().matches(""))
                     {
@@ -141,15 +120,15 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence", "failed");
                         }else
                         {
-                            setDataToHashMap("current_res", dataResType);
+                            setDataToHashMap("current_res", spinner.getSelectedItem().toString());
                             setDataToHashMap("period_of_stay_in_cur_city",currentCity.getText().toString());
                             setDataToHashMap("period_of_stay_in_cur_res", currentResidence.getText().toString());
                             goToDatabase();
-                           // Intent intent = new Intent(this, cl_car_salaried.class);
-                           // startActivity(intent);
 
-                           String LoanType=((GlobalData) getApplication()).getemptype();
-                            Intent intent;
+                            Intent intent = new Intent(this, cl_car_salaried.class);
+                            startActivity(intent);
+
+                            /*String LoanType=cl_car_global_data.dataWithAns.get("type_employment");
                             if(LoanType.equals("Salaried"))
                             {
                                     intent = new Intent(this, cl_car_salaried.class);
@@ -162,7 +141,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             {
                                     intent = new Intent(this, cl_car_selfempbusinesprofs.class);
                                     startActivity(intent);
-                            }
+                            }*/
                         }
                     }
                 }else {

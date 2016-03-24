@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,16 +29,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class cl_car_residence extends AppCompatActivity implements View.OnClickListener{
-    ImageView next,back;
-    ImageView place1,place2,place3,place4;
-    TextView heading,option1,option2,option3,option4;
+    Button next,back;
+    ImageView place1,place2,place3,place4,place5,place6;
+    TextView heading,option1,option2,option3,option4,option5,option6;
     String dataLocation="";
     private ContentValues contentValues;
     private String city="";
     AutoCompleteTextView citynam;
     JSONServerGet requestgetserver;
     String sessionid;
-    private EditText locationField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,32 +56,30 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-
         place1 = (ImageView) findViewById(R.id.ImageViewPlace1);
         place2 = (ImageView) findViewById(R.id.ImageViewPlace2);
         place3 = (ImageView) findViewById(R.id.ImageViewPlace3);
         place4 = (ImageView) findViewById(R.id.ImageViewPlace4);
-        next = (ImageView) findViewById(R.id.next);
-        back = (ImageView) findViewById(R.id.back);
-        back.setOnClickListener(this);
+        next = (Button) findViewById(R.id.next);
+        back = (Button) findViewById(R.id.back);
+        next.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        back.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         place1.setOnClickListener(this);
         place2.setOnClickListener(this);
         place3.setOnClickListener(this);
         place4.setOnClickListener(this);
+        back.setOnClickListener(this);
         next.setOnClickListener(this);
-        //getCity();
+
         citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
         citynam.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         citynam.setOnClickListener(this);
-        getcitynam();
-        locationField= (EditText) findViewById(R.id.locatn);
         getDataFromHashMap();
         if(MainActivity.MyRecentSearchClicked) {
             getCity();
         }
+
     }
-
-
     public void getcitynam()
     {
 
@@ -127,15 +124,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
 
         requestgetserver.execute("token", "cityname", sessionid);
-
-
-
-
     }
-
-
-
-
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
@@ -156,6 +145,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
 
             case R.id.next:
+                dataLocation=citynam.getText().toString();
                 if(dataLocation.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
@@ -163,9 +153,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 {
                     setDataToHashMap("currently_living_in", dataLocation);
                     goToDatabase();
-                    Intent intent = new Intent(this, cl_car_residence_type.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    goToIntent();
                 }
                 break;
             case R.id.ImageViewPlace1:
@@ -174,12 +162,9 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Bengaluru";
-                setDataToHashMap("currently_living_in",dataLocation);
+                setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                Intent intent1 = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent1);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewPlace2:
                 place1.setImageResource(R.drawable.locbang);
@@ -189,10 +174,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 dataLocation="Chennai";
                 setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                Intent intent2 = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent2);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewPlace3:
                 place1.setImageResource(R.drawable.locbang);
@@ -202,10 +184,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 dataLocation="Kolkata";
                 setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                Intent intent3 = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent3);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewPlace4:
                 place1.setImageResource(R.drawable.locbang);
@@ -215,10 +194,14 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 dataLocation="Mumbai";
                 setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                Intent intent4 = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent4);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
+                break;
+            case R.id.locatn:
+                place1.setImageResource(R.drawable.locbang);
+                place2.setImageResource(R.drawable.locchn);
+                place3.setImageResource(R.drawable.lockol);
+                place4.setImageResource(R.drawable.locmum);
+                getcitynam();
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -267,6 +250,12 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             place4.setImageResource(R.drawable.buttonselecteffect);
             dataLocation = "Mumbai";
         }
+    }
+    public void goToIntent(){
+        System.gc();
+        Intent intent = new Intent(this, cl_car_residence_type.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
     }
 }
 

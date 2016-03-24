@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gullakh.gullakhandroid.UploadDocument2"
+    android:orientation="vertical"
+    android:background="@drawable/bgque"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Upload Documents"
+            android:id="@+id/textView26"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/path1"
+                android:layout_alignBottom="@+id/buttonUpload1"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:background="@drawable/edittextsimple"
+                android:hint="ID Proof &amp; DOB Proof" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="Choose File"
+                android:id="@+id/buttonUpload1"
+                android:textAllCaps="false"
+                android:background="#515151"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/path2"
+                android:layout_alignBottom="@+id/buttonUpload2"
+                android:layout_toRightOf="@+id/buttonUpload2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload2"
+                android:gravity="center"
+                android:background="@drawable/edittextsimple"
+                android:hint="Address Proof" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="Choose File"
+                android:id="@+id/buttonUpload2"
+                android:textAllCaps="false"
+                android:background="#515151"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/path3"
+                android:layout_alignBottom="@+id/buttonUpload3"
+                android:layout_toRightOf="@+id/buttonUpload3"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload3"
+                android:gravity="center"
+                android:background="@drawable/edittextsimple"
+                android:hint="Signature Proof" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="Choose File"
+                android:id="@+id/buttonUpload3"
+                android:textAllCaps="false"
+                android:background="#515151"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/path4"
+                android:layout_alignBottom="@+id/buttonUpload4"
+                android:layout_toRightOf="@+id/buttonUpload4"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload4"
+                android:gravity="center"
+                android:background="@drawable/edittextsimple"
+                android:hint="Payslips" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="Choose File"
+                android:id="@+id/buttonUpload4"
+                android:textAllCaps="false"
+                android:background="#515151"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/path5"
+                android:layout_alignBottom="@+id/buttonUpload5"
+                android:layout_toRightOf="@+id/buttonUpload5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload5"
+                android:gravity="center"
+                android:background="@drawable/edittextsimple"
+                android:hint="Bank Statement/Passbook of Salary account" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="Choose File"
+                android:id="@+id/buttonUpload5"
+                android:textAllCaps="false"
+                android:background="#515151"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/path6"
+                android:layout_alignBottom="@+id/buttonUpload6"
+                android:layout_toRightOf="@+id/buttonUpload6"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload6"
+                android:gravity="center"
+                android:background="@drawable/edittextsimple"
+                android:hint="FORM-16/ ITR" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="Choose File"
+                android:id="@+id/buttonUpload6"
+                android:textAllCaps="false"
+                android:background="#515151"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/path7"
+                android:layout_alignBottom="@+id/buttonUpload7"
+                android:layout_toRightOf="@+id/buttonUpload7"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload7"
+                android:gravity="center"
+                android:background="@drawable/edittextsimple"
+                android:hint="Passport Size Photograph" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text="Choose File"
+                android:id="@+id/buttonUpload7"
+                android:textAllCaps="false"
+                android:background="#515151"
+                android:textColor="#ffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Upload Documents"
+            android:id="@+id/uploadButton"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="1"
+            android:background="#b8546e7a"
+            android:textSize="22dp" />
+    </LinearLayout>
+</LinearLayout>

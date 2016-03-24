@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gullakh.gullakhandroid.UploadDocument1"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Dear &lt; FristName>,"
+        android:id="@+id/textView14"
+        android:textSize="22dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/ImageGullakh"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Your application # is &lt;from CRM No>."
+        android:id="@+id/textView16"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="You are just one step away from loan processing."
+        android:id="@+id/textView17"
+        android:layout_gravity="right"
+        android:gravity="center"
+        android:layout_marginBottom="15dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ImageUpload"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/uploaddoc" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Submit documents online"
+        android:id="@+id/textView18"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/ImageGullakh"
+        android:background="@drawable/logosmall"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ImageUpload"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Let Gullakh collect documents"
+        android:id="@+id/textView19"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="50dp" />
+
+</LinearLayout>

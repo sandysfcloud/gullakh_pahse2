@@ -287,7 +287,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("operation", "create"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "Contacts"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"lastname\":\""+args[6]+"\",\"assigned_user_id\":\"admin\"}"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"salutationtype\":\""+args[6]+"\",\"firstname\":\""+args[7]+"\",\"lastname\":\""+args[8]+"\",\"assigned_user_id\":\"admin\"}"));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -323,6 +323,20 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             Log.e("LoanParameterMasterexec", identifier);
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanParameterMaster where loan_type="+args[3]+";")).toString());
+                        }
+                        else if(args[1].equals("document"))
+                        {
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "documentupload"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("recordid",args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("filedata",args[4]));
+                            nameValuePairs.add(new BasicNameValuePair("fileextension",args[5]));
+                            nameValuePairs.add(new BasicNameValuePair("title",args[6]));
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }
 
 
