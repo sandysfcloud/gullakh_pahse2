@@ -27,13 +27,14 @@
         app:mtf_image="@drawable/bdy"
         >
 
-        <EditText
+        <com.gullakh.gullakhandroid.font.RobotoEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="When is your BirthDay"
             android:id="@+id/birthdate"
             android:textColorHint="#000"
             android:textColor="#000"
+            app:typeface="robotoLight"
             android:textSize="15sp" />
 
     </com.gullakh.gullakhandroid.MaterialTextField>

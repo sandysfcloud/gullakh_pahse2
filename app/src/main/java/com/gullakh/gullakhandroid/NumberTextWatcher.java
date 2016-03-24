@@ -19,9 +19,11 @@ public class NumberTextWatcher implements TextWatcher {
     private EditText et;
 
     public NumberTextWatcher(EditText et) {
-        df = new DecimalFormat("#,###.##");
+        //df = new DecimalFormat("#,###.##");
+        df = new DecimalFormat("#,##,###");
         df.setDecimalSeparatorAlwaysShown(true);
-        dfnd = new DecimalFormat("#,###");
+       // dfnd = new DecimalFormat("#,###");
+        dfnd = new DecimalFormat("#,##,###");
         this.et = et;
         hasFractionalPart = false;
     }

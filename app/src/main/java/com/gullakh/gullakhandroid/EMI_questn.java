@@ -57,7 +57,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         titl.setText("Your EMI");
         actionBar.setCustomView(v);
 
@@ -78,8 +78,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
         emipaying = (EditText) findViewById(R.id.emipaying);
         onetext = (TextView) findViewById(R.id.onetext);
-        onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        emipaying.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //emipaying.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+        emipaying.addTextChangedListener(new NumberTextWatcher(emipaying));
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setHomeButtonEnabled(true);
@@ -87,16 +89,25 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-        mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
 
         if(((GlobalData) getApplication()).getEmi()!=null)
         {
+            String emi=String.valueOf(((GlobalData) getApplication()).getEmi().intValue());
             emipaying.setText(((GlobalData) getApplication()).getEmi().toString());
 
+
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getEmi().intValue()) / 1000)));
-            mSeekArcProgress.setText(((GlobalData) getApplication()).getEmi().intValue()+"");
+
+
+            Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+            String strtemp = String.valueOf(format.format(new BigDecimal(emi.toString())));
+            strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+
+            mSeekArcProgress.setText(strtemp+"");
         }
 
                 emipaying.addTextChangedListener(new TextWatcher() {
@@ -222,7 +233,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 break;
             case R.id.next:
                // if(!emi.getText().toString().matches("")) {
-                    ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString()));
+                    ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));
                     Intent intent = new Intent(EMI_questn.this, DateOfBirth_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

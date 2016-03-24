@@ -80,6 +80,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public int age;
     TextView min, max, loand, tenur,tten;
     public String[] search = {"PERSONAL LOAN", "CAR LOAN"};
+
+
     public int[] searchimg = {R.drawable.personalloannew, R.drawable.carloan};
     public String[] searchdate = {"30-1-2016", "1-02-2016"};
     public String[] searchtime = {"05:50pm", "10:15am"};
@@ -131,11 +133,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             tten = (TextView) findViewById(R.id.tenure);
             TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
             TextView tfilter = (TextView) findViewById(R.id.tfilter);
-            loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+            /*loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
             tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
             tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
             tenr_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-            tten.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+            tten.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));*/
 
             linedit.setOnClickListener(this);
             filter.setOnClickListener(this);
@@ -165,7 +167,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             Spinner s1 = (Spinner) findViewById(R.id.spinner1);
+
             s1.setPrompt("Sort By");
+
+
             s1.setOnItemSelectedListener(
                     new AdapterView.OnItemSelectedListener() {
                         public void onItemSelected(
@@ -173,6 +178,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                             sortbyposition = position;
                             Log.d("test position", String.valueOf(position));
                             // if(position!=0)
+
                             calculate();
                             setadapter(CustomListViewValuesArr);
                         }
@@ -750,7 +756,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     }
                 });
                 selectColoursButton = (Button) dialog.findViewById(R.id.select_colours);
-                selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+               // selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
                 if (prev_selectbank != null)
                     selectColoursButton.setText(prev_selectbank);
                 else
@@ -863,12 +869,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 break;
 
             case R.id.applyf:
-                loan_amt.setText(String.valueOf(seek_loanamt)+"00000");
+
+
+
 
                 newCustomListViewValuesArr.clear();
                 //if(tenur.getText().toString()!)
                 if (tenur.getText() != null) {
-                    if (seek_loanamt > 0) {
+
+                    if (seek_loanamt > 0 && seek_loanamt == prevloan) {
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
                     }
 
@@ -880,6 +889,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.d("prevloan!!!!!", String.valueOf(prevloan));
                 Log.d("seek_loanamt!!!!!", String.valueOf(seek_loanamt));
                 if (seek_loanamt == prevloan) {
+                    loan_amt.setText(String.valueOf(seek_loanamt)+"00000");
                     Log.d("loan seekbar moved!!!!!", "");
                     ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
                     loan_amtcalcutn("loan");

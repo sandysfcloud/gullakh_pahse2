@@ -206,7 +206,7 @@ android:visibility="gone"
             android:textSize="12sp"
             app:typeface="robotoBlackItalic" />-->
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Employee Type"
@@ -215,6 +215,7 @@ android:visibility="gone"
             android:textColor="#000"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            app:typeface="robotoLight"
             android:textSize="18dp" />
 
 
@@ -225,7 +226,7 @@ android:visibility="gone"
             android:minWidth="0dp"
             android:id="@+id/img"
             android:background="@drawable/salaried" />
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -235,7 +236,7 @@ android:visibility="gone"
             android:textColor="#000"
             android:text="Salaried"
             android:layout_marginBottom="10dp"
-
+            app:typeface="robotoLight"
             />
         <ImageView
             android:layout_width="100dp"
@@ -244,7 +245,7 @@ android:visibility="gone"
             android:minWidth="0dp"
             android:id="@+id/img2"
             android:background="@drawable/selfempbus" />
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -254,6 +255,7 @@ android:visibility="gone"
             android:textColor="#000"
             android:text="Self Employed Business"
             android:layout_marginBottom="10dp"
+            app:typeface="robotoLight"
             />
 
         <ImageView
@@ -264,7 +266,7 @@ android:visibility="gone"
             android:id="@+id/business"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/selfempprof" />
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="381dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -273,6 +275,7 @@ android:visibility="gone"
             android:textColor="#000"
             android:layout_gravity="center_horizontal"
             android:text="Self Employed Professional"
+            app:typeface="robotoLight"
             />
 
 
@@ -303,7 +306,7 @@ android:visibility="gone"
 
             />-->
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -314,13 +317,14 @@ android:visibility="gone"
             android:textColor="#ffffff"
             android:textAllCaps="false"
             android:textSize="20dp"
+            app:typeface="robotoLight"
             />
         <View
             android:layout_width="1px"
             android:layout_height="47dp"
 
             android:background="#ed1c24"/>
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -330,10 +334,11 @@ android:visibility="gone"
             android:padding="12dp"
             android:textColor="#ffffff"
             android:textAllCaps="false"
+            app:typeface="robotoLight"
             android:textSize="20dp" />
 
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -344,6 +349,7 @@ android:visibility="gone"
             android:visibility="gone"
             android:textColor="#ffffff"
             android:textAllCaps="false"
+            app:typeface="robotoLight"
             android:textSize="20dp" />
 
        <!-- <ImageView

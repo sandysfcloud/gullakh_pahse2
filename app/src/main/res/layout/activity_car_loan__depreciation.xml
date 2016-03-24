@@ -39,16 +39,17 @@
                 seekarc:thumb="@drawable/custom_seek_arc_control_selector"
                 seekarc:touchInside="true" />
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:id="@+id/seekArcProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="50,000"
                 android:textColor="@color/main_color_500"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                app:typeface="robotoLight"/>
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:id="@+id/onetext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,10 +57,11 @@
                 android:text="Depreciation Amount"
                 android:layout_marginTop="75dp"
                 android:textColor="@color/main_color_500"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                app:typeface="robotoLight"/>
         </FrameLayout>
     </LinearLayout>
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,7 +70,8 @@
         android:layout_marginBottom="5dp"
         android:text="50,000"
         android:textColor="@color/main_color_500"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:typeface="robotoLight"/>
     <com.gullakh.gullakhandroid.MaterialTextField
         android:layout_width="300dp"
         android:layout_gravity="center_horizontal"
@@ -81,7 +84,7 @@
         app:mtf_image="@drawable/loan_amt"
         >
 
-        <EditText
+        <com.gullakh.gullakhandroid.font.RobotoEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint=""
@@ -91,7 +94,8 @@
             android:text=""
             android:textColorHint="#000"
             android:textColor="#000"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:typeface="robotoLight"/>
 
     </com.gullakh.gullakhandroid.MaterialTextField>
     <LinearLayout

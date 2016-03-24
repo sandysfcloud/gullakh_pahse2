@@ -43,8 +43,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
         TextView  ts = (TextView) findViewById(R.id.t1);
         TextView  ts2 = (TextView) findViewById(R.id.t2);
-        ts.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        ts2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  ts.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  ts2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         //********************changing actionbar
 
@@ -58,7 +58,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         titl.setText("Car Type");
         actionBar.setCustomView(v);
 
@@ -82,13 +82,13 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         done.setOnClickListener(this);
 
         TextView title = (TextView) findViewById(R.id.title);
-        title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         TextView t1 = (TextView) findViewById(R.id.t1);
-        t1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // t1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         TextView t2 = (TextView) findViewById(R.id.t2);
-        t2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // t2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         //TextView email = (TextView) findViewById(R.id.email);
         //email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));

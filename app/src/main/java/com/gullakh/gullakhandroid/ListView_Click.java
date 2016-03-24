@@ -65,31 +65,31 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
 
 
-        Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+       // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
+       // Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
 
         TextView name= (TextView) findViewById(R.id.bankname);
-        name.setTypeface(myfontlight);
+       // name.setTypeface(myfontlight);
         name.setText(bankname);
         TextView t1= (TextView) findViewById(R.id.mt1);
-        t1.setTypeface(myfontlight);
+        //t1.setTypeface(myfontlight);
         t1.setText("EMI for " + tenure + " years");
         TextView temi= (TextView) findViewById(R.id.tmr);
-        temi.setTypeface(myfontlight);
+        //temi.setTypeface(myfontlight);
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String emival=String.valueOf(format.format(new BigDecimal(emi)));
         emival = emival.replaceAll("\\.00", "");
 
         temi.setText(emival);
         TextView t3= (TextView) findViewById(R.id.tf1);
-        t3.setTypeface(myfontlight);
+        //t3.setTypeface(myfontlight);
         TextView troi= (TextView) findViewById(R.id.tf2);
-        troi.setTypeface(myfontlight);
+        //troi.setTypeface(myfontlight);
         troi.setText(roi + "%");
         TextView t5= (TextView) findViewById(R.id.t3);
-        t5.setTypeface(myfontlight);
+        //t5.setTypeface(myfontlight);
         TextView tprofee= (TextView) findViewById(R.id.t4);
-        tprofee.setTypeface(myfontlight);
+        //tprofee.setTypeface(myfontlight);
         String one_time_fee_temp=String.valueOf(format.format(new BigDecimal(one_time_fee)));
         one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -119,16 +119,16 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
        // title= (TextView) findViewById(R.id.titlet);
         //title.setTypeface(myfontlight);
         t7= (TextView) findViewById(R.id.d1);
-        t7.setTypeface(myfontlight);
+        //t7.setTypeface(myfontlight);
         t7.setText("Procloser Fee is Rs "+one_time_fee);
         t8= (TextView) findViewById(R.id.d2);
-        t8.setTypeface(myfontlight);
+       // t8.setTypeface(myfontlight);
         t9= (TextView) findViewById(R.id.d3);
-        t9.setTypeface(myfontlight);
+        //t9.setTypeface(myfontlight);
         t10= (TextView) findViewById(R.id.d4);
-        t10.setTypeface(myfontlight);
+       // t10.setTypeface(myfontlight);
         t11= (TextView) findViewById(R.id.d5);
-        t11.setTypeface(myfontlight);
+       // t11.setTypeface(myfontlight);
         /*Button apply= (Button) findViewById(R.id.apply);
         apply.setTypeface(myfontlight);
         apply.setOnClickListener(this);

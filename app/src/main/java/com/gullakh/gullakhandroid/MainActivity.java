@@ -157,8 +157,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
         Cursor checkSignInState = dbobject.displayData("select * from userlogin");
 
-        Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+       // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
+      //  Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         coin=(ImageView)findViewById(R.id.imageViewCoin);
 
       //  TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
