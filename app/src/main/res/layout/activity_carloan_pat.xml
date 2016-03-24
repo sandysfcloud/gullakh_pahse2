@@ -7,7 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gullakh.gullakhandroid.Questionier1">
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -143,47 +142,3 @@
     </LinearLayout>
 
 </LinearLayout>
-<!--
- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-
-        android:layout_gravity="bottom"
-        android:weightSum="3"
-        >
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/back"
-            android:gravity="left"
-            android:layout_marginRight="80dp"
-            android:layout_gravity="bottom|left"
-            android:src="@drawable/backimgnw"
-
-            />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:id="@+id/review"
-
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/reviewred"
-
-            />
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/next"
-            android:layout_marginLeft="80dp"
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/nextimgnw"
-
-            />
-    </LinearLayout>
--->

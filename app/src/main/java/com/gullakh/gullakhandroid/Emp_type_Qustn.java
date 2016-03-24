@@ -39,9 +39,9 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         TextView  ts = (TextView) findViewById(R.id.t1);
         TextView  ts2 = (TextView) findViewById(R.id.t2);
         TextView  tbusiness = (TextView) findViewById(R.id.tbusiness);
-        ts.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        ts2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        tbusiness.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  ts.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  ts2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //tbusiness.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         sal = (ImageView) findViewById(R.id.img);
         sal.setOnClickListener(this);
@@ -55,7 +55,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
 
         TextView typ = (TextView) findViewById(R.id.empt);
-        typ.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+     //   typ.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -97,7 +97,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         edit.setVisibility(View.INVISIBLE);
-        title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         title.setText("Employee Type");
         actionBar.setCustomView(v);
 

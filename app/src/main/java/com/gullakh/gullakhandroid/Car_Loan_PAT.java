@@ -42,15 +42,16 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         ImageView back = (ImageView) findViewById(R.id.back);
         title = (TextView) findViewById(R.id.title);
         onetext = (TextView) findViewById(R.id.onetext);
-        onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         // MaterialTextField obj=new MaterialTextField(this);
         // obj.expand();
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-        amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        amt.addTextChangedListener(new NumberTextWatcher(amt));
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -65,7 +66,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         TextView  titl = (TextView) v.findViewById(R.id.title);
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
-        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         titl.setText("PAT Amount");
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
@@ -83,10 +84,10 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-        mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
             if (extras.containsKey("data")) {
@@ -97,7 +98,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
-                    mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(strtemp) / 50000)));
+                    mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(patv2.intValue()) / 50000)));
                     mSeekArcProgress.setText(strtemp);
                     amt.setText(patv2.toString());
                 }
@@ -107,7 +108,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
             }
         }
         else
-        {
+        {*/
             Double patv  =((GlobalData) getApplication()).getPat();
             if(patv!=null) {
                 amt.setText(patv.toString());
@@ -120,7 +121,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 mSeekArcProgress.setText(strtemp);
             }
             title.setText("PAT for Last FY");
-        }
+       // }
 
 
 
@@ -254,7 +255,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         {
             Log.d("intent next loanamt", "check");
             if(data.equals("pat2")) {
-                ((GlobalData) getApplication()).setpat2(Double.parseDouble(amt.getText().toString()));
+                ((GlobalData) getApplication()).setpat2(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
                 Intent intent = new Intent(Car_Loan_PAT.this, CarLoan_Depreciation.class);
                 intent.putExtra("data","again");
@@ -262,7 +263,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 overridePendingTransition(R.transition.left, R.transition.right);
             }
             else {
-                ((GlobalData) getApplication()).setpat(Double.parseDouble(amt.getText().toString()));
+                ((GlobalData) getApplication()).setpat(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
                 Intent intent = new Intent(Car_Loan_PAT.this, CarLoan_Depreciation.class);
                 startActivity(intent);

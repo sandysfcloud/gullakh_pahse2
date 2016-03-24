@@ -55,6 +55,8 @@ public abstract class ArrayAdapter<T> extends BaseAdapter implements Swappable, 
         }
     }
 
+
+
     @Override
     public int getCount() {
         return mItems.size();

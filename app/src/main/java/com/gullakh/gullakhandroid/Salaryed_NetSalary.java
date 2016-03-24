@@ -60,7 +60,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         titl.setText("Net Salary");
         actionBar.setCustomView(v);
 
@@ -76,24 +76,31 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         //review.setOnClickListener(this);
 
         sal = (EditText) findViewById(R.id.netsalary);
-        sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
-        //onShakeImage();
+       // sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+        sal.addTextChangedListener(new NumberTextWatcher(sal));
+
+
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-        mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         if(((GlobalData) getApplication()).getnetsalary()!=null) {
 
             String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 5000)));
-            mSeekArcProgress.setText(netsalary);
+
+
+            Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+            String strtemp = String.valueOf(format.format(new BigDecimal(netsalary)));
+            strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+            mSeekArcProgress.setText(strtemp);
             sal.setText(netsalary);
         }
 
         onetext = (TextView) findViewById(R.id.onetext);
-        onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+     //   onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         done = (ImageView) findViewById(R.id.done);
         done.setOnClickListener(this);
         sal.addTextChangedListener(new TextWatcher() {
@@ -208,7 +215,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.done:
                 if(Float.parseFloat(sal.getText().toString()) > 3000) {
-                    ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString()));
+                    ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString().replaceAll(",", "")));
                     finish();
                 }
                 else
@@ -219,8 +226,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.next:
                 if(!sal.getText().toString().matches("")) {
-                    if(Float.parseFloat(sal.getText().toString()) > 3000) {
-                        ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString()));
+                    if(Float.parseFloat(sal.getText().toString().replaceAll(",", "")) > 3000) {
+                        ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString().replaceAll(",", "")));
                         Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);

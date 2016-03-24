@@ -29,7 +29,7 @@
             android:textSize="16sp"
             android:text="Loan Amount: "
             app:typeface="robotoLight"/>
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/loan_amt"
@@ -37,7 +37,8 @@
             android:textSize="16sp"
             android:textColor="#616161"
             android:layout_marginTop="16dp"
-            android:text="data"/>
+            android:text="data"
+            app:typeface="robotoLight"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +100,7 @@
 
         android:layout_marginTop="-15dp"
         android:orientation="horizontal">
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tenure"
@@ -107,8 +108,9 @@
 
             android:textSize="16sp"
             android:layout_marginLeft="5dp"
-            android:text="Tenure Value: "/>
-        <TextView
+            android:text="Tenure Value: "
+            app:typeface="robotoLight"/>
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tenr_amt"
@@ -116,7 +118,8 @@
             android:textSize="16sp"
             android:textColor="#616161"
 
-            android:text="data"/>
+            android:text="data"
+            app:typeface="robotoLight"/>
     </LinearLayout>
     </LinearLayout>
 <LinearLayout
@@ -161,7 +164,7 @@ android:layout_weight="1"
         android:id="@+id/filter"
         android:padding="5dp"
         android:layout_weight="1"
-        android:background="@drawable/rectbutton_red"
+
         android:orientation="horizontal"
         >
         <ImageView
@@ -171,14 +174,16 @@ android:layout_weight="1"
             android:layout_marginTop="8dp"
 
             android:src="@drawable/filter"/>
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
+            android:textColor="#616161"
             android:id="@+id/tfilter"
             android:textSize="16sp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
-            android:text="Filter "/>
+            android:text="Filter "
+            app:typeface="robotoLight"/>
     </LinearLayout>
         <Spinner android:id="@+id/spinner1"
             android:layout_width="107dp"
@@ -188,9 +193,11 @@ android:layout_weight="1"
             android:layout_weight="1"
             android:drawSelectorOnTop="true"
             android:entries="@array/sortby"
+
             android:spinnerMode="dialog"
 
             />
+
     </LinearLayout>
     <!--<ListView
         android:id="@+id/list_view"

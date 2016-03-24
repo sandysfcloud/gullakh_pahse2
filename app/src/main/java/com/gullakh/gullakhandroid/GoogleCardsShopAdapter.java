@@ -185,7 +185,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 //			holder.image.setImageResource(imageId[position]);
 		//	holder.name.setText(result.get(position));
-			holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			/*holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
 			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
 			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
@@ -200,7 +200,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			//holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
 			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
 			holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));*/
 
 
 

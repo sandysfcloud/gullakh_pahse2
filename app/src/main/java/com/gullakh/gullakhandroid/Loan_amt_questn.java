@@ -2,11 +2,8 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -48,9 +45,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-        amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
-        amt.addTextChangedListener(new NumberTextWatcher(amt));
 
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,10 +54,14 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
        // onShakeImage();
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-        mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+
+
+        amt.addTextChangedListener(new NumberTextWatcher(amt));
 
         onetext = (TextView) findViewById(R.id.onetext);
-        onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
 
@@ -77,7 +77,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         titl.setText("Loan Amount");
         actionBar.setCustomView(v);
 
@@ -99,11 +99,18 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             String loanamt=((GlobalData) getApplication()).getloanamt();
             int loanamtint=(int)Double.parseDouble(((GlobalData) getApplication()).getloanamt());
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
-            mSeekArcProgress.setText(loanamt);
-            amt.setText(loanamtint);
+
+
+            Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+            String strtemp = String.valueOf(format.format(new BigDecimal(loanamt)));
+            strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+
+            mSeekArcProgress.setText(strtemp);
+            amt.setText(String.valueOf(loanamtint));
         }
 
-        amt.addTextChangedListener(new TextWatcher() {
+      /*  amt.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -130,7 +137,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 }
 
             }
-        });
+        });*/
 
             mSeekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener()
 
@@ -231,7 +238,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.done:
 Log.d("done clicked loan_amt", "check");
-                ((GlobalData) getApplication()).setloanamt(amt.getText().toString());
+                ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
@@ -243,7 +250,7 @@ Log.d("done clicked loan_amt", "check");
                 else
                 {
                     Log.d("intent next loanamt", "check");
-                    ((GlobalData) getApplication()).setloanamt(amt.getText().toString());
+                    ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
 
                     Intent intent;
                     String emptype=((GlobalData) getApplication()).getemptype();

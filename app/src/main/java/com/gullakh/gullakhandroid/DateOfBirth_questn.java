@@ -1,42 +1,36 @@
 package com.gullakh.gullakhandroid;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-
-
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.concurrent.ExecutionException;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
-    ImageView next,review,done;
+    Button next;
+    ImageView review;
+    ImageView done;
     int day,month,yearv;
     String data;
 
@@ -48,11 +42,11 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         setContentView(R.layout.activity_date_of_birth_questn);
        // getSupportActionBar().setTitle("Car Loan - Date of birth");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        ImageView back = (ImageView) findViewById(R.id.back);
+        Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
-        done = (ImageView) findViewById(R.id.done);
-        done.setOnClickListener(this);
+        next = (Button) findViewById(R.id.next);
+        //done = (ImageView) findViewById(R.id.done);
+       // done.setOnClickListener(this);
 
 
         //********************changing actionbar
@@ -67,7 +61,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         titl.setText("Your DOB");
         actionBar.setCustomView(v);
 
@@ -88,7 +82,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
             Dob.setText(((GlobalData) getApplication()).getDob().toString());
 
         Dob.setOnClickListener(this);
-        Dob.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  Dob.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setHomeButtonEnabled(true);
         Intent intent = getIntent();
@@ -98,7 +92,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
                 review.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.VISIBLE);
+                //done.setVisibility(View.VISIBLE);
 
             }
         }

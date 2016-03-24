@@ -496,6 +496,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			TextView tvans=(TextView) view.findViewById(R.id.selectedanswer);
 			tv.setText(carloan_que_salary_new.get(i - 1));
 			 //textdata=carloan_que_salary_new.get(i - 1);
+			tv.setTypeface(Typeface.createFromAsset(CurrentAct.getAssets(), "fonts/OpenSans-Light.ttf"));
+			tvans.setTypeface(Typeface.createFromAsset(CurrentAct.getAssets(), "fonts/OpenSans-Light.ttf"));
 			tvans.setText(carloan_que_salary_new_ans.get(i - 1));
 			LL.addView(view,layoutParams);
 			linrlyt.addView(LL);

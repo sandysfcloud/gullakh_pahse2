@@ -177,8 +177,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rangsb"
-        app:absoluteMinValue="9"
-        app:absoluteMaxValue="14"
+        app:absoluteMinValue="9.5"
+        app:absoluteMaxValue="14.5"
         />
 
 

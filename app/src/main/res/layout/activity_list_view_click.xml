@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:id="@+id/main"
     android:background="@drawable/bgque"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -49,6 +49,7 @@
 
             android:textColor="#D83C2F"
             android:textSize="20sp"
+            app:typeface="robotoLight"
             />
 
     </LinearLayout>
@@ -88,6 +89,7 @@
                 android:text="EMI for 3 years"
                 android:textColor="#ff00719b"
                 android:textSize="14sp"
+                app:typeface="robotoLight"
                 />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -99,6 +101,7 @@
                 android:text="2,300"
                 android:textColor="#616161"
                 android:textSize="16sp"
+                app:typeface="robotoLight"
                 />
         </LinearLayout>
         <LinearLayout
@@ -121,6 +124,7 @@
                 android:text="ROI"
                 android:textColor="#ff00719b"
                 android:textSize="14sp"
+                app:typeface="robotoLight"
                 />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -132,6 +136,7 @@
                 android:text="20%"
                 android:textColor="#616161"
                 android:textSize="16sp"
+                app:typeface="robotoLight"
                 />
         </LinearLayout>
 
@@ -155,6 +160,7 @@
                 android:text="Processing Fee"
                 android:textColor="#ff00719b"
                 android:textSize="14sp"
+                app:typeface="robotoLight"
                 />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -166,6 +172,7 @@
                 android:text="1500"
                 android:textColor="#616161"
                 android:textSize="16sp"
+                app:typeface="robotoLight"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -228,7 +235,7 @@
                                 android:textSize="15dp"
                                 android:textColor="#4cae4c"
                                 android:text="Fee"/>-->
-                            <TextView
+                            <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/d1"
@@ -236,14 +243,16 @@
                                 android:layout_marginTop="5dp"
                                 android:textSize="14dp"
                                 android:textColor="#616161"
-                                android:text="Processing Fee is Rs 1603"/>
-                            <TextView
+                                android:text="Processing Fee is Rs 1603"
+                                app:typeface="robotoLight"/>
+                            <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/d2"
                                 android:textSize="14dp"
                                 android:textColor="#616161"
-                                android:text="Procloser Fee is 4% of pricipal outstanding(plus st)"/>
+                                android:text="Procloser Fee is 4% of pricipal outstanding(plus st)"
+                                app:typeface="robotoLight"/>
                             <View
                                 android:layout_width="fill_parent"
                                 android:layout_height="1px"
@@ -252,29 +261,32 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginBottom="10dp"
                                 android:background="#B3757575"/>
-                            <TextView
+                            <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/d3"
                                 android:layout_marginBottom="10dp"
                                 android:textSize="14dp"
                                 android:textColor="#616161"
-                                android:text="Other Details"/>
-                            <TextView
+                                android:text="Other Details"
+                                app:typeface="robotoLight"/>
+                            <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/d4"
                                 android:textSize="14dp"
                                 android:textColor="#616161"
-                                android:text="Response Time"/>
-                            <TextView
+                                android:text="Response Time"
+                                app:typeface="robotoLight"/>
+                            <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/d5"
                                 android:layout_marginTop="2dp"
                                 android:textSize="14dp"
                                 android:textColor="#616161"
-                                android:text="Within 30 min"/>
+                                android:text="Within 30 min"
+                                app:typeface="robotoLight"/>
 
                         </LinearLayout>
 
@@ -291,7 +303,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-                        <TextView
+                        <com.gullakh.gullakhandroid.font.RobotoTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/tdocum"
@@ -299,7 +311,8 @@
                             android:layout_marginTop="5dp"
                             android:textSize="14dp"
                             android:textColor="#616161"
-                            android:text="documents"/>
+                            android:text="documents"
+                            app:typeface="robotoLight"/>
 
                     </LinearLayout>
                     </FrameLayout>
@@ -313,7 +326,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
-                            <TextView
+                            <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/tothr"
@@ -321,7 +334,8 @@
                                 android:layout_marginTop="5dp"
                                 android:textSize="14dp"
                                 android:textColor="#616161"
-                                android:text="other detail"/>
+                                android:text="other detail"
+                                app:typeface="robotoLight"/>
 
                         </LinearLayout>
 

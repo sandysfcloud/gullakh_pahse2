@@ -24,7 +24,7 @@
             android:weightSum="2"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:id="@+id/applyf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,8 +38,9 @@
             android:layout_margin="5dp"
             android:textColor="#ffffff"
             android:background="@drawable/rectbutton_red"
-            android:text="Apply Filter" />
-            <Button
+            android:text="Apply Filter"
+            app:typeface="robotoLight"/>
+            <com.gullakh.gullakhandroid.font.RobotoButton
                 android:id="@+id/reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,9 +54,10 @@
                 android:paddingRight="20dp"
                 android:textColor="#ffffff"
                 android:background="@drawable/rectbutton_red"
-                android:text="Reset Filter" />
+                android:text="Reset Filter"
+                app:typeface="robotoLight"/>
             </LinearLayout>
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
 
         android:text="Select Banks"
 
@@ -66,9 +68,10 @@
         android:textSize="16sp"
         android:layout_height="wrap_content"
         android:textColor="#616161"
-        android:padding="5dip" />
+        android:padding="5dip"
+        app:typeface="robotoLight"/>
 
-    <Button
+    <com.gullakh.gullakhandroid.font.RobotoButton
 
         android:layout_height="wrap_content"
 
@@ -79,13 +82,14 @@
         android:textColor="#ffffff"
         android:id="@+id/select_colours"
 
-        android:padding="5dip" />
+        android:padding="5dip"
+        app:typeface="robotoLight"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
 
             android:text="Loan Amount"
             android:id="@+id/textView2"
@@ -94,8 +98,9 @@
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:textColor="#616161"
-            android:padding="5dip" />
-        <TextView
+            android:padding="5dip"
+            app:typeface="robotoLight"/>
+        <com.gullakh.gullakhandroid.font.RobotoTextView
 
 
             android:id="@+id/loandata"
@@ -104,7 +109,8 @@
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:textColor="#616161"
-            android:padding="5dip" />
+            android:padding="5dip"
+            app:typeface="robotoLight"/>
 
     </LinearLayout>
 
@@ -149,7 +155,8 @@
                 android:inputType="phone"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>
     <!--  <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
@@ -177,7 +184,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
 
             android:text="Tenure"
             android:id="@+id/textView3"
@@ -186,10 +193,11 @@
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:textColor="#616161"
-            android:padding="5dip" />
+            android:padding="5dip"
+            app:typeface="robotoLight"/>
 
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
 
 
             android:id="@+id/tenr"
@@ -198,7 +206,8 @@
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:textColor="#616161"
-            android:padding="5dip" />
+            android:padding="5dip"
+            app:typeface="robotoLight"/>
 
     </LinearLayout>
         <!--<SeekBar
@@ -224,7 +233,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
 
         android:text="Interest Rate Type"
         android:id="@+id/textView4"
@@ -233,8 +242,9 @@
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:textColor="#616161"
-        android:padding="5dip" />
-    <TextView
+        android:padding="5dip"
+        app:typeface="robotoLight"/>
+    <com.gullakh.gullakhandroid.font.RobotoTextView
 
 
         android:id="@+id/min"
@@ -244,8 +254,9 @@
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:textColor="#616161"
-        android:padding="5dip" />
-    <TextView
+        android:padding="5dip"
+        app:typeface="robotoLight"/>
+    <com.gullakh.gullakhandroid.font.RobotoTextView
 
 
         android:id="@+id/max"
@@ -255,7 +266,8 @@
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:textColor="#616161"
-        android:padding="5dip" />
+        android:padding="5dip"
+        app:typeface="robotoLight"/>
 </LinearLayout>
 <!--<com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
     android:layout_width="fill_parent"
@@ -272,7 +284,7 @@
             android:orientation="horizontal"
             android:paddingBottom="10dp"
             android:weightSum="9">
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
 
 
             android:id="@+id/tmax"
@@ -282,8 +294,9 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="#616161"
-            android:padding="5dip" />
-            <TextView
+            android:padding="5dip"
+            app:typeface="robotoLight"/>
+            <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:id="@+id/tmin"
                 android:layout_width="fill_parent"
                 android:text="14"
@@ -292,7 +305,8 @@
                 android:layout_weight="8"
                 android:layout_height="wrap_content"
                 android:textColor="#616161"
-                android:padding="5dip" />
+                android:padding="5dip"
+                app:typeface="robotoLight"/>
         </LinearLayout>
     <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
         android:layout_width="fill_parent"

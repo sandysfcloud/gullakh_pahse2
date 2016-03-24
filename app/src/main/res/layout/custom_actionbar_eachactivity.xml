@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@color/main_color_500"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
         android:layout_marginLeft="-10dp"
         android:src="@drawable/editiconnew" />
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
@@ -26,6 +27,7 @@
             android:gravity="center_horizontal"
             android:layout_weight="4"
             android:textColor="#ffffff"
+            app:typeface="robotoLight"
             android:textSize="18dp" />
 
         <ImageView

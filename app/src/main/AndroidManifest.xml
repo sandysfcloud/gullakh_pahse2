@@ -45,11 +45,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -189,7 +185,9 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_gender"
-            android:label="Gender" />
+            android:label="Gender" >
+
+        </activity>
         <activity
             android:name=".cl_car_job_experience"
             android:label="@string/title_activity_signin"
@@ -240,6 +238,11 @@
         <activity android:name=".cl_car_yearofmft" />
         <activity android:name=".signinPrepage" />
         <activity android:name=".UploadDocument1" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".UploadDocument2"
             android:label="Upload Documents">

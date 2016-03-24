@@ -192,7 +192,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
-       // sessionid = "327531cb56effa5f2f67f";
+        sessionid = "327531cb56effa5f2f67f";
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -213,6 +213,6 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 }
             }
         }, UploadDocument2.this, "1");
-        requestgetserver.execute("token", "document", sessionid,cl_car_gender.borrowercontactid,Data, exe,title);
+        requestgetserver.execute("token", "document", sessionid,"1047",Data, exe,title);
     }
 }

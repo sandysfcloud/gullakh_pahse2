@@ -229,7 +229,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
-        //sessionid="6c8947df56ea3dd84e2f3";
+        sessionid="327531cb56effa5f2f67f";
         Cursor cre = dbobject.displayData("select * from userlogin");
         Cursor mobfromdb = dbobject.displayData("select * from signindetails");
         if(cre!=null) {

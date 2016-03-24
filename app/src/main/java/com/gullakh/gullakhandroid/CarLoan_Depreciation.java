@@ -41,22 +41,24 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         ImageView back = (ImageView) findViewById(R.id.back);
         title = (TextView) findViewById(R.id.title);
-        title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+     //   title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
         onetext = (TextView) findViewById(R.id.onetext);
-        onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+     //  onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         // MaterialTextField obj=new MaterialTextField(this);
         // obj.expand();
         back.setOnClickListener(this);
         next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-        amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+
+        amt.addTextChangedListener(new NumberTextWatcher(amt));
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setHomeButtonEnabled(true);
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-        mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
 
         //********************changing actionbar
@@ -69,7 +71,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         TextView  titl = (TextView) v.findViewById(R.id.title);
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
-        titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         titl.setText("DEP Amount");
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
@@ -97,7 +99,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(depv2))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
-                    mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(strtemp) / 50000)));
+                    mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(depv2.intValue()) / 50000)));
                     mSeekArcProgress.setText(strtemp);
 
                     amt.setText(depv2.toString());
@@ -236,7 +238,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
 
                 Log.d("done clicked loan_amt", "check");
-                ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString()));
+                ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
@@ -251,7 +253,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                     if(data.equals("dep2"))
                     {
                         Log.d("check calculatn", "check");
-                        ((GlobalData) getApplication()).setdepreciation2(Double.parseDouble(amt.getText().toString()));
+                        ((GlobalData) getApplication()).setdepreciation2(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
 
                         Double cpat1,cpat2,cdep1,cdep2,resultsal;
@@ -283,7 +285,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                     else
                     {
                         Log.d("continue", "check");
-                        ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString()));
+                        ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
 
 
