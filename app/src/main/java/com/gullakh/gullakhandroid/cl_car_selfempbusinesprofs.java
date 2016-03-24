@@ -23,7 +23,6 @@ import java.util.List;
 public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
     private TextView heading1,heading2,heading3,heading4;
     private EditText Doj;
-    int day,month,yearv;
     private String date="";
     private Spinner spinner1,spinner2;
     private EditText netProfit;
@@ -46,6 +45,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
+
         // Spinner click listener
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -197,10 +197,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        day=dayOfMonth;
-        month=++monthOfYear;
-        yearv=year;
+        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
         Doj.setText(date);
     }
     public String getDate()

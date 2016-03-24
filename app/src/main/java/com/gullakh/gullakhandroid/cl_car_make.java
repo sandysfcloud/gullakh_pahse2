@@ -67,11 +67,10 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
             getCar();
         }
 
-        carmak = (AutoCompleteTextView) findViewById(R.id.locatn);
+        carmak = (AutoCompleteTextView) findViewById(R.id.OtherCar);
         carmak.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         carmak.setOnClickListener(this);
-        getcarmake();
-        //getCar();
+       // getcarmake();
 
     }
 
@@ -139,17 +138,12 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.next:
+                dataCar=carmak.getText().toString();
                 if (dataCar.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 } else {
                     setDataToHashMap("interested_car", dataCar);
-                    //Cursor cr=cl_car_global_data.getDataToDataBase(this,"SELECT * FROM mysearch");
-                   /* DataHandler dbobject = new DataHandler(this);
-                    Cursor cr = dbobject.displayData("SELECT * FROM mysearch");
-                    cr.moveToFirst();
-                    Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));*/
-                    //Intent intent = new Intent(this, cl_car_make.class);
                     goToDatabase();
                     goToIntent();
                 }
@@ -193,6 +187,13 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase();
                 goToIntent();
+                break;
+            case R.id.OtherCar:
+                car1.setImageResource(R.drawable.usedcar);
+                car2.setImageResource(R.drawable.caramaze);
+                car3.setImageResource(R.drawable.careon);
+                car4.setImageResource(R.drawable.newcar);
+                getcarmake();
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);

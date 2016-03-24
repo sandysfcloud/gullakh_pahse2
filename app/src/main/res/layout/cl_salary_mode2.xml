@@ -148,7 +148,8 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_cardColor="@color/main_color_500"
+            android:focusable="false"
+            app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/home"
             android:layout_marginTop="10dp"
             android:layout_weight="1">
@@ -159,7 +160,7 @@
                 android:hint="Others"
                 android:inputType="text"
                 android:id="@+id/bank"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="15sp" />
         </com.gullakh.gullakhandroid.MaterialTextField>
 

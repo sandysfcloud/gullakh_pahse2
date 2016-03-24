@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     String dataBankType="";
     private Intent intent;
     private ContentValues contentValues;
+    private AutoCompleteTextView other;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         bank2 = (ImageView) findViewById(R.id.ImageViewBank2);
         bank3 = (ImageView) findViewById(R.id.ImageViewBank3);
         bank4 = (ImageView) findViewById(R.id.ImageViewBank4);
+        other=(AutoCompleteTextView)findViewById(R.id.bank);
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
         bank1.setOnClickListener(this);
@@ -89,6 +92,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
             bank3.setImageResource(R.drawable.buttonselecteffect);
         }else if(SalDeposite.equals("IDBI Bank")){
             bank4.setImageResource(R.drawable.buttonselecteffect);
+        }else{
+            other.setText(SalDeposite);
         }
     }
     @Override

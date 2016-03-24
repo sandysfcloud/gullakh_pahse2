@@ -151,12 +151,9 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
                 }else
                 {
-
                     setDataToHashMap("currently_living_in", dataLocation);
                     goToDatabase();
-                    Intent intent = new Intent(this, cl_car_residence_type.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    goToIntent();
                 }
                 break;
             case R.id.ImageViewPlace1:
@@ -167,10 +164,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 dataLocation="Bengaluru";
                 setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                Intent intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewPlace2:
                 place1.setImageResource(R.drawable.locbang);
@@ -180,10 +174,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 dataLocation="Chennai";
                 setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewPlace3:
                 place1.setImageResource(R.drawable.locbang);
@@ -193,10 +184,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 dataLocation="Kolkata";
                 setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.ImageViewPlace4:
                 place1.setImageResource(R.drawable.locbang);
@@ -206,10 +194,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 dataLocation="Mumbai";
                 setDataToHashMap("currently_living_in", dataLocation);
                 goToDatabase();
-                intent = new Intent(this, cl_car_residence_type.class);
-                startActivity(intent);
-                System.gc();
-                overridePendingTransition(R.transition.left, R.transition.right);
+                goToIntent();
                 break;
             case R.id.locatn:
                 place1.setImageResource(R.drawable.locbang);
@@ -265,6 +250,12 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             place4.setImageResource(R.drawable.buttonselecteffect);
             dataLocation = "Mumbai";
         }
+    }
+    public void goToIntent(){
+        System.gc();
+        Intent intent = new Intent(this, cl_car_residence_type.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
     }
 }
 

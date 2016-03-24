@@ -14,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -28,7 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class cl_car_gender extends AppCompatActivity implements View.OnClickListener{
@@ -46,6 +50,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     String borrowercityid,useremail,usermobile,borrowercontactid,borrowercaseid;
     private String borrowercaseno="";
     private ContentValues contentValues;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-
+        spinner = (Spinner) findViewById(R.id.spinner1);
         firstName= (EditText)findViewById(R.id.FirstName);
         lastName=(EditText)findViewById(R.id.LastName);
         gen1 = (ImageView) findViewById(R.id.usermale);
@@ -74,6 +79,26 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();
         }
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        List<String> categories = new ArrayList<String>();
+        categories.add("Title");
+        categories.add("Mr.");
+        categories.add("Ms.");
+        categories.add("Mrs.");
+        categories.add("Dr.");
+        android.widget.ArrayAdapter<String> dataAdapter = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
     }
     private void getInfo() {
         DataHandler dbobject = new DataHandler(this);
@@ -127,21 +152,22 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.Submit:
-                if(firstName.getText().toString().equals("")) {
-                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
-                } else {
-                    if (lastName.getText().toString().equals("")) {
-                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter Last Name", "failed");
-                    }else{
-                        if (dataGender.equals("")) {
-                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
+                    if (firstName.getText().toString().equals("")) {
+                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
+                    } else {
+                        if (lastName.getText().toString().equals("")) {
+                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter Last Name", "failed");
                         } else {
+                            if (dataGender.equals("")) {
+                                RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
+                            } else {
 
-                            goToDatabase();
-                            savetoserver();
+                                goToDatabase();
+                                savetoserver();
 
+                            }
                         }
-                    }
+
                 }
                 break;
             case R.id.usermale:
@@ -284,7 +310,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     borrowercontactid = Borrower_contact[0].getId();
                     requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
                 }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,firstName.getText().toString(),lastName.getText().toString());
+                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString());
                 }
             }
         }, cl_car_gender.this, "2");

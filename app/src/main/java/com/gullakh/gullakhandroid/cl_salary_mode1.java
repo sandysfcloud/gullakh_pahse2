@@ -2,16 +2,21 @@ package com.gullakh.gullakhandroid;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickListener{
-    TextView heading,option1,option2,option3;
+    TextView heading,option1,option2;
     Button next,back;
     private String dataSalDeposite="";
     private ImageView pay1,pay2;
@@ -38,6 +43,22 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         back.setOnClickListener(this);
         next.setOnClickListener(this);
         getDataFromHashMap();
+        if(MainActivity.MyRecentSearchClicked) {
+            getInfo();
+        }
+    }
+    private void getInfo() {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        cr.moveToFirst();
+        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+        try {
+            JSONObject reader = new JSONObject(cr.getString(3));
+            String b = reader.getString("sal_pay_option");
+            setDeopsiteSalary(b);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getDataFromHashMap()
@@ -55,9 +76,6 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         }else if(SalDeposite.equals("Cheque")){
             pay2.setImageResource(R.drawable.buttonselecteffect);
         }
-    }
-    private void setCity(String city) {
-
     }
 
     @Override

@@ -164,7 +164,7 @@
             android:layout_marginRight="4dp"
             android:layout_marginTop="20dp"
             app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_cardColor="@color/main_color_500"
+            app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/car"
             android:layout_weight="1">
 
@@ -172,10 +172,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Other"
-                android:id="@+id/locatn"
+                android:id="@+id/OtherCar"
                 android:textColorHint="#fff"
                 android:inputType="text"
-                android:textColor="#fff"
+                android:textColor="#3f3f3f"
                 android:textSize="15sp" />
 
         </com.gullakh.gullakhandroid.MaterialTextField>

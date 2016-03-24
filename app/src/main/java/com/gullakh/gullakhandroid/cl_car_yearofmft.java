@@ -2,16 +2,21 @@ package com.gullakh.gullakhandroid;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -39,9 +44,26 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         yom= (EditText) findViewById(R.id.yom);
         yom.setOnClickListener(this);
         getDataFromHashMap();
+        if(MainActivity.MyRecentSearchClicked)
+        {
+            getCarYear();
+        }
 
     }
-
+    public void getCarYear()
+    {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        cr.moveToFirst();
+        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+        try {
+            JSONObject reader = new JSONObject(cr.getString(3));
+            yom.setText(reader.getString("cl_car_yearofmft"));
+            setDataToHashMap("cl_car_yearofmft", reader.getString("cl_car_yearofmft"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     private void getDataFromHashMap()
     {
         if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null) {
@@ -107,7 +129,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

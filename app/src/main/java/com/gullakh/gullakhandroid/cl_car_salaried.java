@@ -30,7 +30,6 @@ import java.util.Calendar;
 
 public class cl_car_salaried extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
 
-    EditText Doj;
     Button next,back;
     int day,month,yearv;
     private TextView heading1,heading2,heading3;
@@ -40,6 +39,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     JSONServerGet requestgetserver;
     String sessionid;
     private ContentValues contentValues;
+    private EditText Doj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,7 +57,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
-        Doj = (EditText) findViewById(R.id.saljoindateofempyr);
+        Doj = (EditText)findViewById(R.id.saljoindateofempyr);
         Doj.setOnClickListener(this);
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         //Emp = (EditText) findViewById(R.id.salEmpname);
@@ -186,18 +186,6 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
             case R.id.salEmpname:
 
 
-
-                /*ArrayList<String> liste2=null;
-                String flag= null;
-                ServerConnect  cls2= new ServerConnect();
-                try {
-                    liste2 =cls2.getEmployerList(this);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-
                 requestgetserver = new JSONServerGet(new AsyncResponse() {
                     @Override
                     public void processFinish(JSONObject output) {
@@ -254,7 +242,9 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+       // date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        Log.d("Date",DateWithMMYY.formatMonth((monthOfYear))+"-"+year);
+        date = DateWithMMYY.formatMonth((monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;
