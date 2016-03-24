@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -34,7 +35,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     public ArrayList<ListModel> data;
     static String applyFlag="none";
     private ContentValues contentValues;
-
+    TabHost.TabSpec spec1,spec2,spec3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,11 +92,32 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         tprofee.setTypeface(myfontlight);
         String one_time_fee_temp=String.valueOf(format.format(new BigDecimal(one_time_fee)));
         one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
+        TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
+        tabHost.setup();                                   //creates the tabhost
+
+        spec1 = tabHost.newTabSpec("");
+        spec1.setContent(R.id.fee);
+        spec1.setIndicator("FEE");
+                           //creates the 1st tab with name days
+        spec2 = tabHost.newTabSpec("");
+        spec2.setIndicator("DOCUMENTS");
+        spec2.setContent(R.id.documents);
+
+        spec3 = tabHost.newTabSpec("");
+        spec3.setIndicator("OTHER");
+        spec3.setContent(R.id.othr);            //creates the 2nd tab with the name ongoing
+
+
+
+        /** Add the tabs  to the TabHost to display. */
+        tabHost.addTab(spec1);
+        tabHost.addTab(spec2);
+        tabHost.addTab(spec3);
 
 
         tprofee.setText(one_time_fee_temp);
-        title= (TextView) findViewById(R.id.titlet);
-        title.setTypeface(myfontlight);
+       // title= (TextView) findViewById(R.id.titlet);
+        //title.setTypeface(myfontlight);
         t7= (TextView) findViewById(R.id.d1);
         t7.setTypeface(myfontlight);
         t7.setText("Procloser Fee is Rs "+one_time_fee);
@@ -107,7 +129,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         t10.setTypeface(myfontlight);
         t11= (TextView) findViewById(R.id.d5);
         t11.setTypeface(myfontlight);
-        Button apply= (Button) findViewById(R.id.apply);
+        /*Button apply= (Button) findViewById(R.id.apply);
         apply.setTypeface(myfontlight);
         apply.setOnClickListener(this);
         mainLayout= (LinearLayout) findViewById(R.id.main);
@@ -118,10 +140,26 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         othr.setOnClickListener(this);
         othr.setTypeface(myfontlight);
         mainLayout= (LinearLayout) findViewById(R.id.popup);
-        fee.setBackgroundResource(R.drawable.roundbutton_blue);
+        fee.setBackgroundResource(R.drawable.roundbutton_blue);*/
        // tv = new TextView(this);
        // tv.setText("Hi this is a sample text for popup window");
        // mainLayout.addView(tv);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
@@ -155,7 +193,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 R.anim.bottom_up);
         switch (v.getId()) {
 
-            case  R.id.fee:
+            /*case  R.id.fee:
                 fee.setBackgroundResource(R.drawable.roundbutton_blue);
                 othr.setBackgroundResource(R.drawable.roundedbutton);
                 title.setText("Fee");
@@ -194,7 +232,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                     this.overridePendingTransition(R.transition.left, R.transition.right);
                 }
 
-                break;
+                break;*/
 
         }
 

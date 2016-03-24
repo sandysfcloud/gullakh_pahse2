@@ -5,5 +5,13 @@
     android:id="@+id/linearmain"
     android:padding="10dp">
 
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/close"
+        android:src="@drawable/close_red"/>
 
 </LinearLayout>

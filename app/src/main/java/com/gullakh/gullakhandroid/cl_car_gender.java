@@ -47,7 +47,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
     String sessionid;
     Dialog dgthis;
-    String borrowercityid,useremail,usermobile,borrowercontactid,borrowercaseid;
+    String borrowercityid,useremail,usermobile,borrowercaseid;
+    static String borrowercontactid;
     private String borrowercaseno="";
     private ContentValues contentValues;
     private Spinner spinner;

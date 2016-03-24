@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,16 +16,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class UploadDocument2 extends AppCompatActivity implements View.OnClickListener{
-    private Bitmap bitmap;
-    private String imageFromSdcard="",temp1="",temp2="",temp3="",temp4="",temp5="",temp6="",temp7="";
-    Button buttonUpoadFile1,buttonUpoadFile2,buttonUpoadFile3,buttonUpoadFile4,buttonUpoadFile5,buttonUpoadFile6,buttonUpoadFile7;
-    TextView pathfromuser1,pathfromuser2,pathfromuser3,pathfromuser4,pathfromuser5,pathfromuser6,pathfromuser7;
-    private String selectedImagePath="";
+public class UploadDocument2 extends AppCompatActivity implements View.OnClickListener {
+    String temp1 = "";
+    String temp2 = "";
+    String temp3 = "";
+    String temp4 = "";
+    String temp5 = "";
+    String temp6 = "";
+    String temp7 = "";
+    Button buttonUpoadFile1, buttonUpoadFile2, buttonUpoadFile3, buttonUpoadFile4, buttonUpoadFile5, buttonUpoadFile6, buttonUpoadFile7;
+    TextView pathfromuser1, pathfromuser2, pathfromuser3, pathfromuser4, pathfromuser5, pathfromuser6, pathfromuser7;
+    private String sessionid;
+    private JSONServerGet requestgetserver;
+    private Dialog dgthis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +70,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonUpload1:
                 Intent i1 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -95,6 +109,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -107,11 +122,19 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             }
             Cursor cursor = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-                cursor = cursorLoader.loadInBackground();
+                if (cursorLoader != null) {
+                    cursor = cursorLoader.loadInBackground();
+                }
             }
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            cursor.moveToFirst();
-            selectedImagePath = cursor.getString(column_index);
+            int column_index = 0;
+            String selectedImagePath = "";
+            if (cursor != null) {
+                column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                cursor.moveToFirst();
+                selectedImagePath = cursor.getString(column_index);
+            }
+
+
             Bitmap bm;
             InputStream is = null;
             try {
@@ -119,37 +142,77 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            bitmap = BitmapFactory.decodeStream(is);
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
 //------------------------------------------------------------------
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
             byte[] byteFormat = stream.toByteArray();
             // get the base 64 string
-            imageFromSdcard = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+            String imageFromSdcard = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
             Log.d("Base64 encode data", imageFromSdcard);
-            if(requestCode==1){
-                temp1=imageFromSdcard;
+            if (requestCode == 1) {
+                temp1 = imageFromSdcard;
                 pathfromuser1.setText(selectedImagePath);
-            }else if(requestCode==2){
-                temp2=imageFromSdcard;
+                String FileExtension = getExt(selectedImagePath);
+                savetoserver(temp1, FileExtension);
+            } else if (requestCode == 2) {
+                temp2 = imageFromSdcard;
                 pathfromuser2.setText(selectedImagePath);
-            }else if(requestCode==3){
-                temp3=imageFromSdcard;
+                String FileExtension = getExt(selectedImagePath);
+            } else if (requestCode == 3) {
+                temp3 = imageFromSdcard;
                 pathfromuser3.setText(selectedImagePath);
-            }else if(requestCode==4){
-                temp4=imageFromSdcard;
+            } else if (requestCode == 4) {
+                temp4 = imageFromSdcard;
                 pathfromuser4.setText(selectedImagePath);
-            }else if(requestCode==5){
-                temp5=imageFromSdcard;
+            } else if (requestCode == 5) {
+                temp5 = imageFromSdcard;
                 pathfromuser5.setText(selectedImagePath);
-            }else if(requestCode==6){
-                temp6=imageFromSdcard;
+            } else if (requestCode == 6) {
+                temp6 = imageFromSdcard;
                 pathfromuser6.setText(selectedImagePath);
-            }else if(requestCode==7){
-                temp7=imageFromSdcard;
+            } else if (requestCode == 7) {
+                temp7 = imageFromSdcard;
                 pathfromuser7.setText(selectedImagePath);
             }
 
         }
+    }
+
+    private String getExt(String fileurl) {
+        String fileext = fileurl.substring(fileurl.lastIndexOf("/") + 1);
+        return fileext;
+    }
+
+
+    public void savetoserver(String Data, String exe) {
+        DataHandler dbobject = new DataHandler(UploadDocument2.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+       // sessionid = "327531cb56effa5f2f67f";
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+                dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                if (!jsonObject.get("result").toString().equals("[]")) {
+
+                } else {
+
+                }
+            }
+        }, UploadDocument2.this, "1");
+        requestgetserver.execute("token", "document", sessionid,cl_car_gender.borrowercontactid,Data, exe,"IdProof");
     }
 }

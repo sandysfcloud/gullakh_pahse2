@@ -164,10 +164,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
       //  TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
       //  signUptext.setTypeface(myfontthin);
         myprof = (Button) findViewById(R.id.buttonMyprof);
-        myprof.setTypeface(myfontlight);
+       // myprof.setTypeface(myfontlight);
 
         reg = (Button) findViewById(R.id.buttonReg);
-        reg.setTypeface(myfontlight);
+       // reg.setTypeface(myfontlight);
         if(checkSignInState!=null) {
             if (checkSignInState.moveToFirst()) {
                 signinstate=true;

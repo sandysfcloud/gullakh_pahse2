@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/main"
-    android:background="#0De0e0e0"
+    android:background="@drawable/bgque"
+
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -169,7 +170,169 @@
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>
-        <LinearLayout
+
+
+        <TabHost
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@android:id/tabhost">
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:orientation="vertical"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent">
+                </TabWidget>
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent">
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/fee"
+                        android:layout_height="match_parent"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@drawable/card_background_white"
+
+                            android:id="@+id/popup"
+                            android:layout_weight="1">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:background="@drawable/google_cards_background_bottom"
+                                android:gravity="right"
+                                android:orientation="vertical"
+                                android:padding="5dp" >
+
+                            </LinearLayout>
+                            <!--<TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/titlet"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="5dp"
+                                android:textSize="15dp"
+                                android:textColor="#4cae4c"
+                                android:text="Fee"/>-->
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/d1"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="5dp"
+                                android:textSize="14dp"
+                                android:textColor="#616161"
+                                android:text="Processing Fee is Rs 1603"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/d2"
+                                android:textSize="14dp"
+                                android:textColor="#616161"
+                                android:text="Procloser Fee is 4% of pricipal outstanding(plus st)"/>
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1px"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="#B3757575"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/d3"
+                                android:layout_marginBottom="10dp"
+                                android:textSize="14dp"
+                                android:textColor="#616161"
+                                android:text="Other Details"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/d4"
+                                android:textSize="14dp"
+                                android:textColor="#616161"
+                                android:text="Response Time"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/d5"
+                                android:layout_marginTop="2dp"
+                                android:textSize="14dp"
+                                android:textColor="#616161"
+                                android:text="Within 30 min"/>
+
+                        </LinearLayout>
+
+
+
+                    </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/documents"
+                    android:layout_height="match_parent"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tdocum"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="14dp"
+                            android:textColor="#616161"
+                            android:text="documents"/>
+
+                    </LinearLayout>
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/othr"
+                        android:layout_height="match_parent"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tothr"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="5dp"
+                                android:textSize="14dp"
+                                android:textColor="#616161"
+                                android:text="other detail"/>
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </TabHost>
+
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -306,6 +469,6 @@
                 android:background="@drawable/roundedbutton"
                 android:text="Other" />
         </LinearLayout>
-    </RelativeLayout>
+    </RelativeLayout>-->
     </LinearLayout>
 </LinearLayout>

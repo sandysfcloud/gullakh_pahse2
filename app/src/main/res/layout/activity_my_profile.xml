@@ -9,7 +9,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="3">
+        android:weightSum="3"
+        android:layout_marginRight="10dp">
 
         <TextView
             android:layout_width="150dp"
@@ -28,17 +29,19 @@
             android:id="@+id/imageButton"
 
             android:background="@drawable/edit"
-            android:layout_margin="15dp" />
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="15dp" />
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="40dp"
             android:text="Logout"
             android:id="@+id/signout"
             android:background="@drawable/mainbutton"
             android:textColor="#ffffff"
             android:textSize="16dp"
-            android:layout_margin="15dp" />
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp" />
 
     </LinearLayout>
 
@@ -63,22 +66,26 @@
                 android:layout_margin="10dp" />-->
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="  chetankn.riverdale@gmail.com"
+                android:text="abc@gmail.com"
                 android:drawableLeft="@drawable/email"
                 android:id="@+id/textViewEmail"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:padding="10dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="9999999999"
                 android:drawableLeft="@drawable/phone"
                 android:id="@+id/textViewMobNo"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:padding="10dp" />
 
            <!-- <TextView
                 android:layout_width="wrap_content"

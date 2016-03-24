@@ -84,9 +84,10 @@
             android:layout_height="wrap_content"
             android:hint="Other"
             android:id="@+id/loanamountid"
-            android:ems="10"
-            android:inputType="phone"
-            android:text="50000"
+
+            android:inputType="numberDecimal"
+            android:digits="0123456789.,"
+
             android:textColorHint="#000"
             android:textColor="#000"
             android:textSize="15sp" />

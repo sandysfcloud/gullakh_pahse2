@@ -35,7 +35,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -1003,11 +1002,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        startActivity(intent);
+        Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+        intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intenth);
     }
 
 
