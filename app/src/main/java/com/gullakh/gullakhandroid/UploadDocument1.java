@@ -15,13 +15,15 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_document1);
+        Intent intent = getIntent();
         upload= (ImageView) findViewById(R.id.ImageUpload);
         upload.setOnClickListener(this);
         team= (ImageView) findViewById(R.id.ImageGullakh);
         team.setOnClickListener(this);
         TextView name= (TextView) findViewById(R.id.name);
         TextView applno= (TextView) findViewById(R.id.applno);
-
+        name.setText("Dear "+intent.getStringExtra("name")+",");
+        applno.setText("Your application # is "+intent.getStringExtra("applno")+".");
     }
 
     @Override

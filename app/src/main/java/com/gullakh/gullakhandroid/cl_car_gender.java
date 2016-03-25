@@ -454,6 +454,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
     private void goToIntent() {
         Intent intent = new Intent(this, UploadDocument1.class);
+        intent.putExtra("name",firstName.getText().toString());
+        intent.putExtra("applno",borrowercaseno);
         startActivity(intent);
     }
 
