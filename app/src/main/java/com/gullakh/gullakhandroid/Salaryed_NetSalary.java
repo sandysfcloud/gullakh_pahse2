@@ -1,17 +1,12 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +14,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +26,8 @@ import java.util.Locale;
 
 public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClickListener {
     EditText sal;
-    ImageView next,review,done;
+    Button next;
+    ImageView review;//,done;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     String data;
@@ -40,9 +37,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_salaryed__net_salary);
         //getSupportActionBar().setTitle("Car Loan - Net Salary");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        ImageView back = (ImageView) findViewById(R.id.back);
+        Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
 
 
@@ -169,8 +166,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             if (data.equals("review")) {
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
-                review.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.VISIBLE);
+                //review.setVisibility(View.INVISIBLE);
+                //done.setVisibility(View.VISIBLE);
 
             }
         }
@@ -213,17 +210,17 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 startActivity(intenth);
 
                 break;
-            case R.id.done:
-                if(Float.parseFloat(sal.getText().toString()) > 3000) {
-                    ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString().replaceAll(",", "")));
-                    finish();
-                }
-                else
-                {
-                    RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
-                }
-                overridePendingTransition(R.transition.left, R.transition.right);
-                break;
+//            case R.id.done:
+//                if(Float.parseFloat(sal.getText().toString()) > 3000) {
+//                    ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString().replaceAll(",", "")));
+//                    finish();
+//                }
+//                else
+//                {
+//                    RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
+//                }
+//                overridePendingTransition(R.transition.left, R.transition.right);
+//                break;
             case R.id.next:
                 if(!sal.getText().toString().matches("")) {
                     if(Float.parseFloat(sal.getText().toString().replaceAll(",", "")) > 3000) {

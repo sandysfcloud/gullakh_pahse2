@@ -210,7 +210,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
              intent = new Intent(this, cl_car_yearofmft.class);
         }else
         {
-             intent = new Intent(this, cl_car_residence.class);
+             intent = new Intent(this, cl_car_residence_type.class);
         }
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);

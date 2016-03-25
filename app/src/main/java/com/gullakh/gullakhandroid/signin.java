@@ -140,6 +140,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 values.put("usermobile", usermobno);
                 dbobject.insertdata(values, "userlogin");
                 if(ListView_Click.applyFlag.equals("Car Loan")){
+                    MainActivity.signinstate=true;
                     Intent intent = new Intent(signin.this, cl_car_make.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

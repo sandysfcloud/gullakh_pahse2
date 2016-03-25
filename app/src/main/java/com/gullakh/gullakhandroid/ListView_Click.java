@@ -2,7 +2,6 @@ package com.gullakh.gullakhandroid;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -148,18 +147,18 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
 
        // t11.setTypeface(myfontlight);
-        /*Button apply= (Button) findViewById(R.id.apply);
-        apply.setTypeface(myfontlight);
+        Button apply= (Button) findViewById(R.id.Buttonapply);
+        //apply.setTypeface(myfontlight);
         apply.setOnClickListener(this);
         mainLayout= (LinearLayout) findViewById(R.id.main);
-        fee= (Button) findViewById(R.id.fee);
+        fee= (Button) findViewById(R.id.Buttonfee);
         fee.setOnClickListener(this);
-        fee.setTypeface(myfontlight);
-        othr= (Button) findViewById(R.id.othr);
+        //fee.setTypeface(myfontlight);
+        othr= (Button) findViewById(R.id.Buttonothr);
         othr.setOnClickListener(this);
-        othr.setTypeface(myfontlight);
+        //othr.setTypeface(myfontlight);
         mainLayout= (LinearLayout) findViewById(R.id.popup);
-        fee.setBackgroundResource(R.drawable.roundbutton_blue);*/
+        fee.setBackgroundResource(R.drawable.roundbutton_blue);
        // tv = new TextView(this);
        // tv.setText("Hi this is a sample text for popup window");
        // mainLayout.addView(tv);
@@ -212,15 +211,15 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 R.anim.bottom_up);
         switch (v.getId()) {
 
-            /*case  R.id.fee:
+            case  R.id.fee:
                 fee.setBackgroundResource(R.drawable.roundbutton_blue);
                 othr.setBackgroundResource(R.drawable.roundedbutton);
                 title.setText("Fee");
-                t7.setText("Processing Fee is Rs 1603");
-                t8.setText("Procloser Fee is 4% of pricipal outstanding (plus st) ");
-                t9.setText("Other Details:");
-                t10.setText("Response Time");
-                t11.setText("Within 30 min");
+//                t7.setText("Processing Fee is Rs 1603");
+//                t8.setText("Procloser Fee is 4% of pricipal outstanding (plus st) ");
+//                t9.setText("Other Details:");
+//                t10.setText("Response Time");
+//                t11.setText("Within 30 min");
                 mainLayout.startAnimation(bottomUp);
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
@@ -228,15 +227,15 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 othr.setBackgroundResource(R.drawable.roundbutton_blue);
                 fee.setBackgroundResource(R.drawable.roundedbutton);
                 title.setText("Other");
-                t7.setText("Documents: 1) KYC-PAN, address & ID proof");
-                t8.setText("2) Income proof,bank statement and one photograph:");
-                t9.setText("Think about:");
-                t10.setText("No part payment option");
+//                t7.setText("Documents: 1) KYC-PAN, address & ID proof");
+//                t8.setText("2) Income proof,bank statement and one photograph:");
+//                t9.setText("Think about:");
+//                t10.setText("No part payment option");
                 t11.setText("");
                 mainLayout.startAnimation(bottomUp);
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
-            case  R.id.apply:
+            case  R.id.Buttonapply:
                 storeData();
                 goToDatabase();
 
@@ -246,18 +245,19 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                     startActivity(intent);
                     this.overridePendingTransition(R.transition.left, R.transition.right);
                 }else {
-                    Intent intent = new Intent(this, signin.class);
+                    Intent intent = new Intent(this, signinPrepage.class);
                     startActivity(intent);
                     this.overridePendingTransition(R.transition.left, R.transition.right);
                 }
 
-                break;*/
+                break;
 
         }
 
     }
 
     private void storeData() {
+        setDataToHashMap("currently_living_in", cl_car_residence.dataLocation);
         setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
         setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getcartype());
         setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());

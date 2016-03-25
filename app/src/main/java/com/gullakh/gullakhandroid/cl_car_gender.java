@@ -42,8 +42,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     String dataGender="";
     private EditText firstName,lastName;
     private Button submit;
-    private EditText currentCity;
-    private EditText currentResidence;
     JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
     String sessionid;
     Dialog dgthis;
@@ -228,8 +226,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         if (cr.moveToFirst()) {
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
+            cr.close();
         }
-        sessionid="327531cb56effa5f2f67f";
+        //sessionid="327531cb56effa5f2f67f";
         Cursor cre = dbobject.displayData("select * from userlogin");
         Cursor mobfromdb = dbobject.displayData("select * from signindetails");
         if(cre!=null) {
@@ -237,7 +236,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 useremail = cre.getString(1);
                 if (mobfromdb.moveToFirst()) {
                     usermobile = mobfromdb.getString(2);
+                    cre.close();
+                    dbobject.close();
+
                 }
+
             }
         }
         requestgetserver = new JSONServerGet(new AsyncResponse() {
@@ -263,7 +266,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     requestgetserver2.execute("token", "createaccount", sessionid,cl_car_global_data.dataWithAns.get("currently_living_in"));
                 }
             }
-        }, cl_car_gender.this, "1");
+        }, cl_car_gender.this, "wait");
         requestgetserver.execute("token", "getaccount", sessionid,cl_car_global_data.dataWithAns.get("currently_living_in"));
 
 
@@ -286,7 +289,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
 
             }
-        }, cl_car_gender.this, "2");
+        }, cl_car_gender.this, "wait");
 
 
 
@@ -311,10 +314,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     borrowercontactid = Borrower_contact[0].getId();
                     requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
                 }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString());
+                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,firstName.getText().toString(),lastName.getText().toString());
                 }
             }
-        }, cl_car_gender.this, "2");
+        }, cl_car_gender.this, "wait");
 
         requestgetserver4 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -335,7 +338,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 Log.d("Borrower contact id", borrowercontactid);
                 requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
             }
-        }, cl_car_gender.this, "2");
+        }, cl_car_gender.this, "wait");
 
         requestgetserver5 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -359,7 +362,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
                 // requestgetserver6.execute("token", "createloanvalue", sessionid,borrowercaseid);
             }
-        }, cl_car_gender.this, "2");
+        }, cl_car_gender.this, "wait");
 
         requestgetserver6 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -378,7 +381,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 //showdialog();
 
             }
-        }, cl_car_gender.this, "6");
+        }, cl_car_gender.this, "wait");
 
 
         requestgetserver7 = new JSONServerGet(new AsyncResponse() {
@@ -406,7 +409,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 // Log.e("Check final data her", emptype);
                 requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loantype);
             }
-        },cl_car_gender.this, "7");
+        },cl_car_gender.this, "wait");
 
         requestgetserver8 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -429,10 +432,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 }
 
                 JSONArray jsonArray = new JSONArray();
-
-
-
-
                 for (Map.Entry<String, String> entry : cl_car_global_data.dataWithAns.entrySet())
                 {
                     JSONObject LoanData = new JSONObject();
@@ -444,14 +443,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                     jsonArray.put(LoanData);
                 }
                 Log.d("finally got", jsonArray.toString());
                 requestgetserver6.execute("token", "createloanvalue", sessionid,jsonArray.toString());
 
             }
-        }, cl_car_gender.this, "8");
+        }, cl_car_gender.this, "wait");
     }
 
     private void goToIntent() {

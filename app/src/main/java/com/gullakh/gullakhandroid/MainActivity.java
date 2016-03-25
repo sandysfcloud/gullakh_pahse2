@@ -1,8 +1,6 @@
 package com.gullakh.gullakhandroid;
 
-import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,7 +17,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -31,15 +28,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -62,8 +55,6 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
     Typeface myfontlight;
-    Button myprof;
-    Button reg;
     private ListView mDrawerList;
     //private AnimatedExpandableListView  mDrawerList;
     private TypedArray navMenuIcons;
@@ -101,6 +92,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     static String loanType="";
     static boolean MyRecentSearchClicked=false;
     static boolean signinstate=false;
+    private Button signinbutton,registerbutton,myapplbutton,mysearchbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +100,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
        // requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
        // getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.my_custom_title);
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_main);
 
         DataHandler dbobject = new DataHandler(this);
@@ -122,8 +112,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         carloan.setOnClickListener(this);
 
 
-
-
+        signinbutton= (Button) findViewById(R.id.buttonSignin);
+        signinbutton.setOnClickListener(this);
+        registerbutton= (Button) findViewById(R.id.buttonReg);
+        registerbutton.setOnClickListener(this);
+        myapplbutton = (Button) findViewById(R.id.buttonMyappl);
+        myapplbutton.setOnClickListener(this);
+        mysearchbutton = (Button) findViewById(R.id.buttonMysearch);
+        mysearchbutton.setOnClickListener(this);
 
         // check for Internet status
         if (!isInternetPresent) {
@@ -156,7 +152,25 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         }
         Cursor checkSignInState = dbobject.displayData("select * from userlogin");
+        if(checkSignInState!=null) {
+            if (checkSignInState.moveToFirst()) {
+                signinstate=true;
+            }
+        }
+        View llsignin=findViewById(R.id.llsignin);
+        View llsignout=findViewById(R.id.llsignout);
+        if(signinstate){
+//            myapplbutton.setVisibility(View.VISIBLE);
+//            mysearchbutton.setVisibility(View.VISIBLE);
+//            signinbutton.setVisibility(View.GONE);
+//            registerbutton.setVisibility(View.GONE);
+            llsignin.setVisibility(View.GONE);
+            llsignout.setVisibility(View.VISIBLE);
 
+        }else{
+            llsignin.setVisibility(View.VISIBLE);
+            llsignout.setVisibility(View.GONE);
+        }
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
         Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
         //coin=(ImageView)findViewById(R.id.imageViewCoin);
@@ -166,33 +180,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
       //  TextView signUptext = (TextView) findViewById(R.id.wellcometogullakh);
       //  signUptext.setTypeface(myfontthin);
-        myprof = (Button) findViewById(R.id.buttonMyprof);
+
        // myprof.setTypeface(myfontlight);
 
-        reg = (Button) findViewById(R.id.buttonReg);
        // reg.setTypeface(myfontlight);
-        if(checkSignInState!=null) {
-            if (checkSignInState.moveToFirst()) {
-                signinstate=true;
-            }
-        }
-        if(signinstate){
-            reg.setVisibility(View.INVISIBLE);
-            myprof.setVisibility(View.INVISIBLE);
-        }else{
-            reg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    goReg();
-                }
-            });
-            myprof.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    goMyprofile();
-                }
-            });
-        }
+
+
         //*****************************wheel
 
         /*final WheelView wheelView = (WheelView) findViewById(R.id.wheelview);
@@ -447,10 +440,30 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.carln:
-                Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+                loanType="Car Loan";
+                Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
-
+                break;
+            case R.id.buttonSignin:
+                intent = new Intent(MainActivity.this, signinPrepage.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+                break;
+            case R.id.buttonReg:
+                goReg();
+                break;
+            case R.id.buttonMyappl:
+                intent = new Intent(MainActivity.this,GoogleCardsMediaActivity.class);
+                intent.putExtra("data", "search");
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+                break;
+            case R.id.buttonMysearch:
+                intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data", "search");
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
         }
 
@@ -644,12 +657,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else{
-                        Intent intent = new Intent(MainActivity.this, signin.class);
+                        Intent intent = new Intent(MainActivity.this, signinPrepage.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
                 }else{
-                    Intent intent = new Intent(MainActivity.this, signin.class);
+                    Intent intent = new Intent(MainActivity.this, signinPrepage.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
@@ -758,12 +771,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }else{
-                    Intent intent = new Intent(MainActivity.this, signin.class);
+                    Intent intent = new Intent(MainActivity.this, signinPrepage.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
             }else{
-                Intent intent = new Intent(MainActivity.this, signin.class);
+                Intent intent = new Intent(MainActivity.this, signinPrepage.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
             }

@@ -2,9 +2,8 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -239,15 +238,15 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 startActivity(intenth);
 
                 break;
-        case R.id.done:
-        Log.d("done clicked pattt", "check");
-            if(data.equals("pat2"))
-                ((GlobalData) getApplication()).setpat2(Double.parseDouble(amt.getText().toString()));
-              else
-        ((GlobalData) getApplication()).setpat(Double.parseDouble(amt.getText().toString()));
-        finish();
-        overridePendingTransition(R.transition.left, R.transition.right);
-        break;
+//        case R.id.done:
+//        Log.d("done clicked pattt", "check");
+//            if(data.equals("pat2"))
+//                ((GlobalData) getApplication()).setpat2(Double.parseDouble(amt.getText().toString()));
+//              else
+//        ((GlobalData) getApplication()).setpat(Double.parseDouble(amt.getText().toString()));
+//        finish();
+//        overridePendingTransition(R.transition.left, R.transition.right);
+//        break;
         case R.id.next:
         if(amt.getText().toString().matches("")) {
 

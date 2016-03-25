@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class UploadDocument1 extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,6 +19,9 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
         upload.setOnClickListener(this);
         team= (ImageView) findViewById(R.id.ImageGullakh);
         team.setOnClickListener(this);
+        TextView name= (TextView) findViewById(R.id.name);
+        TextView applno= (TextView) findViewById(R.id.applno);
+
     }
 
     @Override
@@ -25,15 +29,11 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.ImageUpload:
-                upload.setImageResource(R.drawable.buttonselecteffect);
-                team.setImageResource(R.drawable.logosmall);
                 Intent intent = new Intent(this, UploadDocument2.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageGullakh:
-                upload.setImageResource(R.drawable.uploaddoc);
-                team.setImageResource(R.drawable.buttonselecteffect);
                 break;
         }
     }

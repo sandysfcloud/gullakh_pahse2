@@ -1,18 +1,14 @@
 package com.gullakh.gullakhandroid;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,7 +19,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,7 +27,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     Button next,back;
     ImageView place1,place2,place3,place4,place5,place6;
     TextView heading,option1,option2,option3,option4,option5,option6;
-    String dataLocation="";
+    static String dataLocation="";
     private ContentValues contentValues;
     private String city="";
     AutoCompleteTextView citynam;
@@ -74,11 +69,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
         citynam.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         citynam.setOnClickListener(this);
-        getDataFromHashMap();
-        if(MainActivity.MyRecentSearchClicked) {
-            getCity();
-        }
-
     }
     public void getcitynam()
     {
@@ -90,7 +80,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             }
 
             public void processFinishString(String str_result, Dialog dg) {
-
 
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -125,20 +114,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
         requestgetserver.execute("token", "cityname", sessionid);
     }
-    public void onShakeImage() {
-        Animation shake;
-        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
-    }
-    private void getDataFromHashMap() {
-        if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null)
-        {
-            dataLocation=cl_car_global_data.dataWithAns.get("currently_living_in");
-            setCity(dataLocation);
-        }
-        }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onClick(View v) {
 
@@ -149,10 +125,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 if(dataLocation.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
-                }else
-                {
-                    setDataToHashMap("currently_living_in", dataLocation);
-                    goToDatabase();
+                }else {
                     goToIntent();
                 }
                 break;
@@ -162,8 +135,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Bengaluru";
-                setDataToHashMap("currently_living_in", dataLocation);
-                goToDatabase();
                 goToIntent();
                 break;
             case R.id.ImageViewPlace2:
@@ -172,8 +143,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Chennai";
-                setDataToHashMap("currently_living_in", dataLocation);
-                goToDatabase();
                 goToIntent();
                 break;
             case R.id.ImageViewPlace3:
@@ -182,8 +151,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
                 dataLocation="Kolkata";
-                setDataToHashMap("currently_living_in", dataLocation);
-                goToDatabase();
                 goToIntent();
                 break;
             case R.id.ImageViewPlace4:
@@ -192,8 +159,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 dataLocation="Mumbai";
-                setDataToHashMap("currently_living_in", dataLocation);
-                goToDatabase();
                 goToIntent();
                 break;
             case R.id.locatn:
@@ -209,12 +174,34 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+    public void goToIntent(){
+        System.gc();
+        Intent intent = new Intent(this, Emp_type_Qustn.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+    }
+}
 
-    public void setDataToHashMap(String key,String data)
+/*
+public void onShakeImage() {
+        Animation shake;
+        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+        next.setAnimation(shake);
+    }
+    private void getDataFromHashMap() {
+        if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null)
+        {
+            dataLocation=cl_car_global_data.dataWithAns.get("currently_living_in");
+            setCity(dataLocation);
+        }
+        }
+
+public void setDataToHashMap(String key,String data)
     {
         cl_car_global_data.dataWithAns.put(key, data);
     }
-    private void goToDatabase()
+
+     private void goToDatabase()
     {
         contentValues.put("loantype", "Car Loan");
         contentValues.put("questans", "cl_car_residence");
@@ -251,11 +238,4 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             dataLocation = "Mumbai";
         }
     }
-    public void goToIntent(){
-        System.gc();
-        Intent intent = new Intent(this, cl_car_residence_type.class);
-        startActivity(intent);
-        overridePendingTransition(R.transition.left, R.transition.right);
-    }
-}
-
+    */

@@ -37,7 +37,6 @@ import java.util.concurrent.ExecutionException;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
-
     ImageView review;
     ImageView done;
     int day,month,yearv;
@@ -166,11 +165,11 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                 startActivity(intenth);
 
                 break;
-            case R.id.done:
+            /*case R.id.done:
 
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
-                break;
+                break;*/
             case R.id.next:
                 if(!Dob.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setDob(Dob.getText().toString());

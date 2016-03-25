@@ -1,16 +1,12 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -182,7 +178,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 next.setVisibility(View.INVISIBLE);
                 back.setVisibility(View.INVISIBLE);
                 review.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.VISIBLE);
+                //done.setVisibility(View.VISIBLE);
 
             }
         }
@@ -194,7 +190,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
+        //next.setAnimation(shake);
     }
 
     @Override
@@ -229,11 +225,11 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
                 break;
-            case R.id.done:
-
-                finish();
-                overridePendingTransition(R.transition.left, R.transition.right);
-                break;
+//            case R.id.done:
+//
+//                finish();
+//                overridePendingTransition(R.transition.left, R.transition.right);
+//                break;
             case R.id.next:
                // if(!emi.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));

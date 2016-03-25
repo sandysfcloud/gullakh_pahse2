@@ -2,9 +2,8 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.text.Format;
@@ -236,14 +234,14 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
                 break;
-            case R.id.done:
-
-
-                Log.d("done clicked loan_amt", "check");
-
-                finish();
-                overridePendingTransition(R.transition.left, R.transition.right);
-                break;
+//            case R.id.done:
+//
+//
+//                Log.d("done clicked loan_amt", "check");
+//
+//                finish();
+//                overridePendingTransition(R.transition.left, R.transition.right);
+//                break;
             case R.id.next:
                 if(amt.getText().toString().matches("")) {
 
