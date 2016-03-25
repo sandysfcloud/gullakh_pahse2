@@ -69,6 +69,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     private GoogleCardsShopAdapter mGoogleCardsAdapter;
     private GoogleCardsMediaAdapter mGoogleCardsAdapter2;
     private SearchAdapter SearchAdapterobj;
+    private MyApplicatnAdapter ApplctnAdapterobj;
     public int[] prgmImages;
     String sessionid = null;
     public String[] month_fee;
@@ -94,7 +95,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> searchlistviewArry = new ArrayList<ListModel>();
-    int roi_min = 4, roi_max = 8, seek_loanamt=1,sortbyposition;
+    int seek_loanamt=1,sortbyposition;
+    Float roi_min=4.0f, roi_max = 8.0f ;
     Map<String, String> Arry_banknam = new HashMap<>();
     ;
     protected ArrayList<CharSequence> selectedBanks = new ArrayList<CharSequence>();
@@ -245,7 +247,29 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         }
 
+      if (data.equals("mysearch")) {
 
+
+
+                setContentView(R.layout.seach_display);
+                layout = (LinearLayout) findViewById(R.id.linear);
+
+
+                            ListModel sched = new ListModel();
+                            sched = new ListModel();
+                            sched.setapplno("124561");//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                            sched.setappldate("4-march-2016");
+                            sched.setstatus("active");
+
+                            searchlistviewArry.add(sched);
+
+
+
+                createListView();
+                setapplicatnadapter(searchlistviewArry);
+
+
+            }
 
 
     }
@@ -539,6 +563,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
                 sched.setemi_value(String.valueOf(emi_valu));
                 sched.setbp(String.valueOf(final_bp));
+                sched.setfee_charges(cobj_RM[i].getfee_charges_details());
+                Log.d("check fee here", cobj_RM[i].getfee_charges_details());
+                sched.setother_details(cobj_RM[i].getother_details());
                 CustomListViewValuesArr.add(sched);
                 disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 
@@ -546,7 +573,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
 
 
-            Log.d("disbank", String.valueOf(disbank));
+           // Log.d("disbank", String.valueOf(disbank));
 
         }
            // double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
@@ -607,6 +634,44 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         getSupportActionBar().setTitle("Search Result");
     }
+
+
+
+
+    public void setapplicatnadapter(ArrayList<ListModel> arraylist) {
+
+        Log.d("CustomListViewValuesArr value check", String.valueOf(arraylist.size()));
+        ApplctnAdapterobj = new MyApplicatnAdapter(this, arraylist, prgmImages);
+
+        SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+                new SwipeDismissAdapter(ApplctnAdapterobj, this));
+        swingBottomInAnimationAdapter.setAbsListView(listView);
+
+
+        assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+        swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+                INITIAL_DELAY_MILLIS);
+
+        //listView.setAdapter(null);
+        //swingBottomInAnimationAdapter.notifyDataSetChanged();
+        listView.setAdapter(swingBottomInAnimationAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+
+                Intent intent = new Intent(GoogleCardsMediaActivity.this, Myapplication.class);
+                intent.putExtra("data", "carloan");
+                 startActivity(intent);
+                (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+
+            }
+        });
+
+        getSupportActionBar().setTitle("My Application");
+    }
+
+
 
 
     public void setadapter(ArrayList<ListModel> arraylist) {
@@ -711,7 +776,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 final RangeSeekBar seekBar1 = (RangeSeekBar) dialog.findViewById(R.id.loanamt);
 
                 final RangeSeekBar tenure = (RangeSeekBar) dialog.findViewById(R.id.tenure);
-                final RangeSeekBar<Integer> rangeSeekBar = (RangeSeekBar) dialog.findViewById(R.id.rangsb);
+                final RangeSeekBar<Float> rangeSeekBar = (RangeSeekBar) dialog.findViewById(R.id.rangsb);
                // SeekBar tenure = (SeekBar) dialog.findViewById(R.id.tenure);
                 final TextView t1 = (TextView) dialog.findViewById(R.id.textView1);
                 editloan = (EditText) dialog.findViewById(R.id.loanamountid);
@@ -739,8 +804,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         editloan.setText("100000");
 
 
-                        roi_min=8;
-                        roi_max=14;
+                        roi_min=8.0f;
+                        roi_max=14.0f;
                         rangeSeekBar.setSelectedMaxValue(roi_max);
                         rangeSeekBar.setSelectedMinValue(roi_min);
                         min.setText(String.valueOf(roi_max) + " % -");
@@ -779,10 +844,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     //rangeSeekBar.setRangeValues(roi_min, roi_max);
                 rangeSeekBar.setSelectedMaxValue(roi_max);
                 rangeSeekBar.setSelectedMinValue(roi_min);
-                rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+             //   rangeSeekBar.setRangeValues()
+
+
+                rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Float>() {
 
                     @Override
-                    public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
+                    public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Float integer, Float t1) {
+
                         Log.d("value1", String.valueOf(integer));
                         Log.d("value2", String.valueOf(t1));
                         roi_min = integer;

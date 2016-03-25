@@ -590,8 +590,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 R.string.drawer_title_image_gallery,
                 DrawerItem.DRAWER_ITEM_TAG_IMAGE_GALLERY));
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(5, -1),
+                R.string.drawer_title_my_application,
+                DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(6, -1),
                 R.string.drawer_title_shape_image_views,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
+
 
 
     }
@@ -666,6 +670,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
             if (position == 5) {
                 Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+
+            }
+            if (position == 6) {
+                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data", "mysearch");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
 

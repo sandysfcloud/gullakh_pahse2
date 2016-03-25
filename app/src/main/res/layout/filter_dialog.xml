@@ -313,8 +313,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/rangsb"
         android:layout_marginTop="-20dp"
-        app:absoluteMinValue="8"
-        app:absoluteMaxValue="14"
+        app:absoluteMinValue="8.0"
+        app:absoluteMaxValue="14.0"
 
 
         />

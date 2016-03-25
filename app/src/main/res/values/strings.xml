@@ -35,6 +35,7 @@
     <string name="drawer_title_progress_bars">Progress Bars</string>
     <!-- <string name="drawer_title_buttons">Buttons</string> -->
     <string name="drawer_title_shape_image_views">Policy And Licences</string>
+    <string name="drawer_title_my_application">My Application</string>
     <string name="drawer_title_text_views">Text Views</string>
     <string name="drawer_title_search_bars">Search Bars</string>
     <string name="drawer_title_login_page">Personal Loan</string>
@@ -136,6 +137,7 @@
         <item>@drawable/loan</item>
         <item>@drawable/carloan_icon</item>
         <item>@drawable/policy</item>
+        <item>@drawable/my_application</item>
 
     </array>
     <string-array name="accordion_sections">
@@ -191,4 +193,5 @@
     <string name="title_activity_car__loan__pat">Car_Loan_PAT</string>
     <string name="title_activity_car_loan__depreciation">CarLoan_Depreciation</string>
     <string name="title_activity_search_page">SearchPage</string>
+    <string name="title_activity_myapplication">Myapplication</string>
 </resources>

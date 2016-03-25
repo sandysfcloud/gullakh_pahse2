@@ -130,11 +130,7 @@ public class SeekArc extends View {
 		 * 
 		 * @param seekArc
 		 *            The SeekArc whose progress has changed
-		 * @param progress
-		 *            The current progress level. This will be in the range
-		 *            0..max where max was set by
-		 *            {@link ProgressArc#setMax(int)}. (The default value for
-		 *            max is 100.)
+		 *
 		 * @param fromUser
 		 *            True if the progress change was initiated by the user.
 		 */
@@ -208,7 +204,7 @@ public class SeekArc extends View {
 					thumbHalfheight);
 
 			mMax = a.getInteger(R.styleable.SeekArc_max, mMax);
-			mProgress = a.getInteger(R.styleable.SeekArc_progress, mProgress);
+			mProgress = a.getInteger(R.styleable.SeekArc_progressarc, mProgress);
 			mProgressWidth = (int) a.getDimension(
 					R.styleable.SeekArc_progressWidth, mProgressWidth);
 			mArcWidth = (int) a.getDimension(R.styleable.SeekArc_arcWidth,

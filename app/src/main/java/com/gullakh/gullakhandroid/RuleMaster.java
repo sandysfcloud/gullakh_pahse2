@@ -10,6 +10,8 @@ public class RuleMaster {
     public Double floating_interest_rate;
     public String tenure;
     public String processing_fee;
+    public String fee_char_detail;
+    public String other_details;
 
     public String getaccount_lender(){
         return account_lender;
@@ -51,4 +53,21 @@ public class RuleMaster {
         processing_fee=token;
     }
 
+    public String getfee_charges_details(){
+        return fee_char_detail;
+    }
+
+    public void setfee_charges_details(String token){
+        fee_char_detail=token;
+    }
+
+
+
+    public String getother_details(){
+        return other_details;
+    }
+
+    public void setother_details(String token){
+        other_details=token;
+    }
 }

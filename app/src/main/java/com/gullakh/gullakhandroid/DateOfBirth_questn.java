@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ import java.util.concurrent.ExecutionException;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
-    Button next;
+
     ImageView review;
     ImageView done;
     int day,month,yearv;

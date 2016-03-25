@@ -216,16 +216,18 @@
 
                             android:id="@+id/popup"
                             android:layout_weight="1">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0"
-                                android:background="@drawable/google_cards_background_bottom"
-                                android:gravity="right"
-                                android:orientation="vertical"
-                                android:padding="5dp" >
 
-                            </LinearLayout>
+                                <com.gullakh.gullakhandroid.font.RobotoTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/tfee"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:textSize="14dp"
+                                    android:textColor="#616161"
+                                    android:text="Processing Fee is Rs 1603"
+                                    app:typeface="robotoLight"/>
+
                             <!--<TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -235,7 +237,7 @@
                                 android:textSize="15dp"
                                 android:textColor="#4cae4c"
                                 android:text="Fee"/>-->
-                            <com.gullakh.gullakhandroid.font.RobotoTextView
+                          <!--  <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/d1"
@@ -244,7 +246,7 @@
                                 android:textSize="14dp"
                                 android:textColor="#616161"
                                 android:text="Processing Fee is Rs 1603"
-                                app:typeface="robotoLight"/>
+                                app:typeface="robotoFothLight"/>
                             <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -286,7 +288,7 @@
                                 android:textSize="14dp"
                                 android:textColor="#616161"
                                 android:text="Within 30 min"
-                                app:typeface="robotoLight"/>
+                                app:typeface="robotoLight"/>-->
 
                         </LinearLayout>
 
@@ -302,6 +304,7 @@
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/card_background_white"
                         android:orientation="vertical">
                         <com.gullakh.gullakhandroid.font.RobotoTextView
                             android:layout_width="match_parent"
@@ -325,6 +328,7 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="match_parent"
+                            android:background="@drawable/card_background_white"
                             android:orientation="vertical">
                             <com.gullakh.gullakhandroid.font.RobotoTextView
                                 android:layout_width="match_parent"

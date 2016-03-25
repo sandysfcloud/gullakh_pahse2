@@ -1,0 +1,210 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgque"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.gullakh.gullakhandroid.Myapplication">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
+
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/tf1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:maxLines="2"
+            android:text="Car Loan Type: "
+            android:textColor="#616161"
+            android:textSize="16sp"
+            app:typeface="robotoLight"
+            />
+
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:id="@+id/tf2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:text="data"
+            android:textColor="#616161"
+            android:textSize="16sp"
+            app:typeface="robotoLight"
+            />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Bank: "
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/banknam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="data"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Loan Amount: "
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/loan_amt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="data"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Tenure: "
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/tenure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="data"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal" >
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="ROI: "
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/roi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="data"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <com.natasa.progressviews.CircleSegmentBar
+                android:id="@+id/segment_bar"
+                android:layout_width="320dp"
+                android:layout_height="240dp"
+                android:layout_alignRight="@+id/line_progressbar"
+                android:layout_alignTop="@+id/circle_progress"
+                android:visibility="visible"
+                app:bar_width="10dp"
+
+                app:progress_color="#f77630"
+
+                app:progress_width="10dp" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/status"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="Status"
+                android:textColor="#616161"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -89,23 +89,23 @@ public class ListModel implements Serializable{
         this.ag_sid= ag_sid;
     }
 
-    public void setHotelnam(String hotnam)
+    public void setfee_charges(String hotnam)
     {
         this.hotnam= hotnam;
     }
-    public void sethotno(String hotno)
+    public void setother_details(String hotno)
     {
         this.hotno = hotno;
     }
-    public void setHoteldes(String  hotdes)
+    public void setapplno(String  hotdes)
     {
         this. hotdes= hotdes;
     }
-    public void setHoteladdr(String hotaddr)
+    public void setstatus(String hotaddr)
     {
         this.hotaddr = hotaddr;
     }
-    public void sethoteml(String hoteml)
+    public void setappldate(String hoteml)
     {
         this.hoteml = hoteml;
     }
@@ -218,23 +218,23 @@ public class ListModel implements Serializable{
         return this.ag_sid;
     }
 
-    public String gethotnam()
+    public String getfee_charges()
     {
         return this.hotnam;
     }
-    public String gethotno()
+    public String getother_details()
     {
         return this.hotno;
     }
-    public String gethotdes()
+    public String getapplno()
     {
         return this.hotdes;
     }
-    public String gethotaddr()
+    public String getstatus()
     {
         return this.hotaddr;
     }
-    public String gethotemal()
+    public String getappldate()
     {
         return this.hoteml;
     }

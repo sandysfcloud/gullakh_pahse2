@@ -214,6 +214,10 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 					intent.putExtra("roi", data.get(pos).getfloating_interest_rate());
 					intent.putExtra("one_time_fee", data.get(pos).getprocessing_fee());
 					intent.putExtra("emi", data.get(pos).getemi_value());
+
+					Log.d("check fee here2", data.get(pos).getfee_charges());
+					intent.putExtra("fee", data.get(pos).getfee_charges());
+					intent.putExtra("other", data.get(pos).getother_details());
 					cont.startActivity(intent);
 					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
 				}

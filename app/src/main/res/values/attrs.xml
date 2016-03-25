@@ -56,6 +56,9 @@
         <attr name="mtf_animationDuration" format="integer"/>
         <attr name="mtf_openKeyboardOnFocus" format="boolean"/>
     </declare-styleable>
+
+
+
     <declare-styleable name="WheelView">
         <attr name="wheelDrawable" format="reference"/>
         <attr name="wheelColor" format="color"/>
@@ -97,7 +100,7 @@
         <attr name="max" format="integer" />
         <attr name="progressWidth" format="dimension" />
         <attr name="arcWidth" format="dimension" />
-        <attr name="progress" format="integer" />
+        <attr name="progressarc" format="integer" />
         <attr name="rotation" format="integer" />
         <attr name="startAngle" format="integer" />
         <attr name="sweepAngle" format="integer" />

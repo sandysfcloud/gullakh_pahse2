@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.text.Format;
@@ -30,7 +33,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     LinearLayout mainLayout;
     Button but;
     boolean click = true;
-    TextView t7,t8,t9,t10,t11,title;
+    TextView tfee,t8,t9,t10,t11,title,t_other;
     Button fee,othr;
     public ArrayList<ListModel> data;
     static String applyFlag="none";
@@ -49,47 +52,61 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         String roi = intent.getStringExtra("roi");
         String one_time_fee = intent.getStringExtra("one_time_fee");
         String emi = intent.getStringExtra("emi");
-
-
-       /*   Intent intent = getIntent();
-        Bundle bundleObject = getIntent().getExtras();
-        String pos = intent.getStringExtra("position");;
-        ArrayList<ListModel>dw = (ArrayList<ListModel>) bundleObject.getSerializable("key");
-
-
-        String bankname = dw.get(Integer.valueOf(pos)).getbanknam();
-        String tenure = ((GlobalData) this.getApplicationContext()).gettenure();
-        String roi = dw.get(Integer.valueOf(pos)).getfloating_interest_rate();
-        String one_time_fee = dw.get(Integer.valueOf(pos)).getprocessing_fee(); */
+        String fee = intent.getStringExtra("fee");
+        String other = intent.getStringExtra("other");
 
 
 
+        Log.d("all fee data before" , fee);
+        String[] sepfee = fee.split(";");
+        Log.d("all fee data after" , String.valueOf(sepfee));
 
-       // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-       // Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+
+
+        Log.d("all other data before" , other);
+        String[] sepother = other.split(";");
+        Log.d("all other data after" , String.valueOf(sepother[0]));
+
+
+
+
+        String feedata="";
+        for (int i=0;i<sepfee.length;i++)
+        {
+            feedata=feedata+sepfee[i]+"\n";
+            Log.d("fee info",+i+" "+sepfee[0]);
+        }
+
+        String othrdata="";
+        for (int i=0;i<sepother.length;i++)
+        {
+            othrdata=othrdata+sepother[i]+"\n";
+            Log.d("sepother info", +i + " " + sepother[i]);
+        }
+
+        Log.d("final sepother info",othrdata);
 
         TextView name= (TextView) findViewById(R.id.bankname);
-       // name.setTypeface(myfontlight);
+
         name.setText(bankname);
         TextView t1= (TextView) findViewById(R.id.mt1);
-        //t1.setTypeface(myfontlight);
+
         t1.setText("EMI for " + tenure + " years");
         TextView temi= (TextView) findViewById(R.id.tmr);
-        //temi.setTypeface(myfontlight);
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String emival=String.valueOf(format.format(new BigDecimal(emi)));
         emival = emival.replaceAll("\\.00", "");
 
         temi.setText(emival);
         TextView t3= (TextView) findViewById(R.id.tf1);
-        //t3.setTypeface(myfontlight);
+
         TextView troi= (TextView) findViewById(R.id.tf2);
-        //troi.setTypeface(myfontlight);
+
         troi.setText(roi + "%");
         TextView t5= (TextView) findViewById(R.id.t3);
-        //t5.setTypeface(myfontlight);
+
         TextView tprofee= (TextView) findViewById(R.id.t4);
-        //tprofee.setTypeface(myfontlight);
+
         String one_time_fee_temp=String.valueOf(format.format(new BigDecimal(one_time_fee)));
         one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
@@ -115,19 +132,21 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         tabHost.addTab(spec3);
 
 
-        tprofee.setText(one_time_fee_temp);
-       // title= (TextView) findViewById(R.id.titlet);
-        //title.setTypeface(myfontlight);
-        t7= (TextView) findViewById(R.id.d1);
-        //t7.setTypeface(myfontlight);
-        t7.setText("Procloser Fee is Rs "+one_time_fee);
-        t8= (TextView) findViewById(R.id.d2);
+
+        tfee= (TextView) findViewById(R.id.tfee);
+        tfee.setText(feedata);
+        t_other= (TextView) findViewById(R.id.tothr);
+        t_other.setText(othrdata);
+
+        /*t8= (TextView) findViewById(R.id.d2);
        // t8.setTypeface(myfontlight);
         t9= (TextView) findViewById(R.id.d3);
         //t9.setTypeface(myfontlight);
         t10= (TextView) findViewById(R.id.d4);
        // t10.setTypeface(myfontlight);
         t11= (TextView) findViewById(R.id.d5);
+
+
        // t11.setTypeface(myfontlight);
         /*Button apply= (Button) findViewById(R.id.apply);
         apply.setTypeface(myfontlight);

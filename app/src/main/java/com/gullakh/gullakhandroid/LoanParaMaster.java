@@ -6,6 +6,7 @@ package com.gullakh.gullakhandroid;
 public class LoanParaMaster {
     public String id;
     public String webreference;
+
     public String getid(){
         return id;
     }
@@ -21,4 +22,8 @@ public class LoanParaMaster {
     public String getWebreference() {
         return webreference;
     }
+
+
+
+
 }
