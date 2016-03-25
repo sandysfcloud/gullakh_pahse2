@@ -14,6 +14,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -40,6 +41,8 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     private String sessionid;
     private JSONServerGet requestgetserver;
     private Dialog dgthis;
+    private boolean uploadStatus=false;
+    private ImageView del1,del2,del3,del4,del5,del6,del7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,13 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         buttonUpoadFile5 = (Button) findViewById(R.id.buttonUpload5);
         buttonUpoadFile6 = (Button) findViewById(R.id.buttonUpload6);
         buttonUpoadFile7 = (Button) findViewById(R.id.buttonUpload7);
+        del1 = (ImageView) findViewById(R.id.del1);
+        del2 = (ImageView) findViewById(R.id.del2);
+        del3 = (ImageView) findViewById(R.id.del3);
+        del4 = (ImageView) findViewById(R.id.del4);
+        del5 = (ImageView) findViewById(R.id.del5);
+        del6 = (ImageView) findViewById(R.id.del6);
+        del7 = (ImageView) findViewById(R.id.del7);
         pathfromuser1 = (TextView) findViewById(R.id.path1);
         pathfromuser2 = (TextView) findViewById(R.id.path2);
         pathfromuser3 = (TextView) findViewById(R.id.path3);
@@ -67,6 +77,13 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         buttonUpoadFile5.setOnClickListener(this);
         buttonUpoadFile6.setOnClickListener(this);
         buttonUpoadFile7.setOnClickListener(this);
+        del1.setOnClickListener(this);
+        del2.setOnClickListener(this);
+        del3.setOnClickListener(this);
+        del4.setOnClickListener(this);
+        del5.setOnClickListener(this);
+        del6.setOnClickListener(this);
+        del7.setOnClickListener(this);
     }
 
     @Override
@@ -154,45 +171,59 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 temp1 = imageFromSdcard;
                 pathfromuser1.setText(selectedImagePath);
                 String FileExtension = getExt(selectedImagePath);
-                savetoserver(temp1, FileExtension,"IdProof");
+                savetoserver(temp1, FileExtension, "ID Proof & DOB Proof", requestCode);
+
             } else if (requestCode == 2) {
                 temp2 = imageFromSdcard;
                 pathfromuser2.setText(selectedImagePath);
                 String FileExtension = getExt(selectedImagePath);
+                savetoserver(temp2, FileExtension,"Address Proof",requestCode);
             } else if (requestCode == 3) {
                 temp3 = imageFromSdcard;
                 pathfromuser3.setText(selectedImagePath);
+                String FileExtension = getExt(selectedImagePath);
+                savetoserver(temp3, FileExtension, "Signature Proof",requestCode);
             } else if (requestCode == 4) {
                 temp4 = imageFromSdcard;
                 pathfromuser4.setText(selectedImagePath);
+                String FileExtension = getExt(selectedImagePath);
+                savetoserver(temp4, FileExtension, "Payslips",requestCode);
             } else if (requestCode == 5) {
                 temp5 = imageFromSdcard;
                 pathfromuser5.setText(selectedImagePath);
+                String FileExtension = getExt(selectedImagePath);
+                savetoserver(temp5, FileExtension, "Bank Statement/Passbook of Salary account",requestCode);
             } else if (requestCode == 6) {
                 temp6 = imageFromSdcard;
                 pathfromuser6.setText(selectedImagePath);
+                String FileExtension = getExt(selectedImagePath);
+                savetoserver(temp6, FileExtension, "FORM-16/ ITR",requestCode);
             } else if (requestCode == 7) {
                 temp7 = imageFromSdcard;
                 pathfromuser7.setText(selectedImagePath);
+                String FileExtension = getExt(selectedImagePath);
+                savetoserver(temp7, FileExtension, "Passport Size Photograph",requestCode);
             }
 
         }
     }
 
     private String getExt(String fileurl) {
-        String fileext = fileurl.substring(fileurl.lastIndexOf("/") + 1);
+        String fileext = fileurl.substring(fileurl.lastIndexOf(".") + 1);
         return fileext;
     }
 
 
-    public void savetoserver(String Data, String exe,String title) {
+    public boolean savetoserver(String Data, String exe,String title, final int rc) {
+
         DataHandler dbobject = new DataHandler(UploadDocument2.this);
         Cursor cr = dbobject.displayData("select * from session");
         if (cr.moveToFirst()) {
             sessionid = cr.getString(1);
-            Log.e("sessionid-cartypes", sessionid);
+            Log.e("sessionid-cartypes", sessionid+" "+exe+" "+title);
         }
-        sessionid = "327531cb56effa5f2f67f";
+        //sessionid = "6899f56c56f4c846d4235";
+        Log.e("sessionid-cartypes", sessionid + " " + exe + " " + title);
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -206,13 +237,59 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                if (!jsonObject.get("result").toString().equals("[]")) {
-
-                } else {
-
+                Log.d("uploadresult", String.valueOf(jsonObject.get("result")));
+                if (String.valueOf(jsonObject.get("result")).equals("\"true\"")) {
+                if(rc==1) {
+                    Log.d("changinAttributehere", "check");
+                    pathfromuser1.setBackgroundColor(getResources().getColor(R.color.cpb_green_dark));
+                    pathfromuser1.setTextColor(getResources().getColor(R.color.cpb_white));
+                    pathfromuser1.setText("Uploaded Successfully");
+                    buttonUpoadFile1.setVisibility(View.GONE);
+                    del1.setVisibility(View.VISIBLE);
+                } else if (rc == 2) {
+                    pathfromuser2.setBackgroundColor(getResources().getColor(R.color.cpb_green_dark));
+                    pathfromuser2.setTextColor(getResources().getColor(R.color.cpb_white));
+                    pathfromuser2.setText("Uploaded Successfully");
+                    buttonUpoadFile2.setVisibility(View.GONE);
+                    del2.setVisibility(View.VISIBLE);
+                } else if (rc == 3) {
+                    pathfromuser3.setBackgroundColor(getResources().getColor(R.color.cpb_green_dark));
+                    pathfromuser3.setTextColor(getResources().getColor(R.color.cpb_white));
+                    pathfromuser3.setText("Uploaded Successfully");
+                    buttonUpoadFile3.setVisibility(View.GONE);
+                    del3.setVisibility(View.VISIBLE);
+                } else if (rc == 4) {
+                    pathfromuser4.setBackgroundColor(getResources().getColor(R.color.cpb_green_dark));
+                    pathfromuser4.setTextColor(getResources().getColor(R.color.cpb_white));
+                    pathfromuser4.setText("Uploaded Successfully");
+                    buttonUpoadFile4.setVisibility(View.GONE);
+                    del4.setVisibility(View.VISIBLE);
+                } else if (rc == 5) {
+                    pathfromuser5.setBackgroundColor(getResources().getColor(R.color.cpb_green_dark));
+                    pathfromuser5.setTextColor(getResources().getColor(R.color.cpb_white));
+                    pathfromuser5.setText("Uploaded Successfully");
+                    buttonUpoadFile5.setVisibility(View.GONE);
+                    del5.setVisibility(View.VISIBLE);
+                } else if (rc == 6) {
+                    pathfromuser6.setBackgroundColor(getResources().getColor(R.color.cpb_green_dark));
+                    pathfromuser6.setTextColor(getResources().getColor(R.color.cpb_white));
+                    pathfromuser6.setText("Uploaded Successfully");
+                    buttonUpoadFile6.setVisibility(View.GONE);
+                    del6.setVisibility(View.VISIBLE);
+                }else if (rc == 7) {
+                    pathfromuser7.setBackgroundColor(getResources().getColor(R.color.cpb_green_dark));
+                    pathfromuser7.setTextColor(getResources().getColor(R.color.cpb_white));
+                    pathfromuser7.setText("Uploaded Successfully");
+                    buttonUpoadFile7.setVisibility(View.GONE);
+                    del7.setVisibility(View.VISIBLE);
                 }
+                } else {
+                   Log.d("FailToUpload","");
+                }
+                dgthis.dismiss();
             }
-        }, UploadDocument2.this, "1");
-        requestgetserver.execute("token", "document", sessionid,"1047",Data, exe,title);
+        }, UploadDocument2.this, "wait");
+            requestgetserver.execute("token", "document", sessionid, "2297", Data, exe, title);
+        return uploadStatus;
     }
 }

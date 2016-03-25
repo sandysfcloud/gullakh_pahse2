@@ -3,7 +3,6 @@ package com.gullakh.gullakhandroid;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -194,10 +193,10 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
               finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
-            case R.id.done:
-
-                finish();
-                overridePendingTransition(R.transition.left, R.transition.right);
+//            case R.id.done:
+//
+//                finish();
+//                overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.img:
                // sal.setBackgroundColor(Color.parseColor("#D83C2F"));
                 //self.setBackgroundColor(Color.parseColor("#ffffff"));

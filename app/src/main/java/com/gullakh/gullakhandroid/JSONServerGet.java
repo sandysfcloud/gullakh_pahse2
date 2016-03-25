@@ -56,9 +56,11 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if(seq=="1")
-            dialogalert=RegisterPageActivity.showAlert(act);
-            //test
+            if (seq == "1") {
+                dialogalert = RegisterPageActivity.showAlert(act);
+            } else if (seq == "wait"){
+                dialogalert = RegisterPageActivity.showWaitdialog(act);
+        }
         }
 
 
@@ -287,7 +289,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("operation", "create"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "Contacts"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"salutationtype\":\""+args[6]+"\",\"firstname\":\""+args[7]+"\",\"lastname\":\""+args[8]+"\",\"assigned_user_id\":\"admin\"}"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"firstname\":\""+args[6]+"\",\"lastname\":\""+args[7]+"\",\"assigned_user_id\":\"admin\"}"));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -334,6 +336,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("filedata",args[4]));
                             nameValuePairs.add(new BasicNameValuePair("fileextension",args[5]));
                             nameValuePairs.add(new BasicNameValuePair("title",args[6]));
+                            Log.d("argsumentsfromdoc",args.toString());
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));

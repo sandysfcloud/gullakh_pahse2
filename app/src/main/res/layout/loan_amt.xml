@@ -3,21 +3,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:seekarc="http://schemas.android.com/apk/res/com.gullakh.gullakhandroid"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="@drawable/bgque"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.Questionier1">
+    tools:context="com.gullakh.gullakhandroid.Questionier1"
+    android:orientation="vertical">
 
 
-<LinearLayout
+    <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_gravity="center_horizontal"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
     <FrameLayout
         android:id="@+id/seekArcContainer"
         android:layout_width="300dp"
@@ -63,40 +62,86 @@
             android:textSize="20sp"
             app:typeface="robotoLight"/>
     </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<com.gullakh.gullakhandroid.MaterialTextField
+    android:layout_width="300dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+
+    app:mtf_cardCollapsedHeight="4dp"
+    app:mtf_cardColor="#ffffff"
+    app:mtf_image="@drawable/loan_amt"
+    >
+
+    <com.gullakh.gullakhandroid.font.RobotoEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Other"
+        android:id="@+id/loanamountid"
+
+        android:inputType="numberDecimal"
+        android:digits="0123456789.,"
+
+        android:textColorHint="#000"
+        android:textColor="#000"
+        android:textSize="15sp"
+        app:typeface="robotoLight"/>
+
+</com.gullakh.gullakhandroid.MaterialTextField>
+
+</LinearLayout>
 </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    <com.gullakh.gullakhandroid.MaterialTextField
-        android:layout_width="300dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_cardColor="#ffffff"
-        app:mtf_image="@drawable/loan_amt"
-        >
-
-        <com.gullakh.gullakhandroid.font.RobotoEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Other"
-            android:id="@+id/loanamountid"
-
-            android:inputType="numberDecimal"
-            android:digits="0123456789.,"
-
-            android:textColorHint="#000"
-            android:textColor="#000"
-            android:textSize="15sp"
-            app:typeface="robotoLight"/>
-
-    </com.gullakh.gullakhandroid.MaterialTextField>
     <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout15"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#b8546e7a"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Previous"
+            android:id="@+id/back"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/arrowleft"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+            android:gravity="fill" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Next"
+            android:drawableRight="@drawable/arrowright"
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:paddingRight="15dp"
+            android:paddingLeft="95dp" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+<!--
+ <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
@@ -112,7 +157,9 @@
 
         />
 
-        <LinearLayout
+
+    </LinearLayout>
+<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="bottom"
@@ -154,13 +201,8 @@
 
                 />
         </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
 
-    </LinearLayout>
-
-
-
+-->
 
 
     <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

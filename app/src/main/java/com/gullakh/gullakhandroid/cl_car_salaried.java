@@ -34,7 +34,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     int day,month,yearv;
     private TextView heading1,heading2,heading3;
     private String date="";
-    private EditText Exp;
+    private EditText Expyr,Expmn;
     AutoCompleteTextView Emp;
     JSONServerGet requestgetserver;
     String sessionid;
@@ -65,7 +65,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Emp.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         Emp.setOnClickListener(this);
         getemplist();
-        Exp = (EditText) findViewById(R.id.totalexpyr);
+        Expyr = (EditText) findViewById(R.id.totalexpyr);
+        Expmn = (EditText) findViewById(R.id.totalexpmn);
         onShakeImage();
         getDataFromHashMap();
     }
@@ -78,7 +79,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         {
             Emp.setText(cl_car_global_data.dataWithAns.get("name_of_current_emp"));
             Doj.setText(cl_car_global_data.dataWithAns.get("year_you_joined_current_comp"));
-            Exp.setText(cl_car_global_data.dataWithAns.get("total_exp"));
+            Expyr.setText(cl_car_global_data.dataWithAns.get("total_exp"));
         }
     }
 
@@ -151,7 +152,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                         setDataToHashMap("name_of_current_emp",EmpName);
                         String jdate = getDate();
                         setDataToHashMap("year_you_joined_current_comp", jdate);
-                        setDataToHashMap("total_exp", Exp.getText().toString());
+                        setDataToHashMap("total_exp", Expyr.getText().toString()+" Year "+Expmn.getText().toString()+" Month");
                         goToDatabase();
                         Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
                         startActivity(intent);

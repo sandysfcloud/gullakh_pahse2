@@ -20,10 +20,10 @@
         android:textSize="16dp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:text="We are working to get best offers..."
+        android:text="We are processing your request...!!!"
 
-        android:textColor="#fff"
-        />
+        android:textColor="#ffffff"
+        android:phoneNumber="true" />
 
     <com.github.glomadrian.loadingballs.BallView
         android:layout_margin="30dp"

@@ -67,7 +67,7 @@ public class MyProfileActivity extends AppCompatActivity {
                 }
             }
         }else{
-            Intent intentsignin=new Intent(this,signin.class);
+            Intent intentsignin=new Intent(this,signinPrepage.class);
             startActivity(intentsignin);
                 finish();
         }

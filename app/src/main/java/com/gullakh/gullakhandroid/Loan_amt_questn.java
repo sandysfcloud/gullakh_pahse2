@@ -1,18 +1,11 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +13,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +25,9 @@ import java.util.Locale;
 
 public class Loan_amt_questn extends AppCompatActivity implements View.OnClickListener{
     EditText amt;
-    ImageView next,review,done;
+    Button next;
+    Button back;
+    ImageView review;//,done;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     String data;
@@ -45,12 +41,13 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
       //  getSupportActionBar().setTitle("Car Loan - Loan Amount");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        ImageView back = (ImageView) findViewById(R.id.back);
+
        // MaterialTextField obj=new MaterialTextField(this);
        // obj.expand();
-        back.setOnClickListener(this);
-        next = (ImageView) findViewById(R.id.next);
+        next= (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
+        back= (Button) findViewById(R.id.back);
+        back.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
        // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
 
@@ -183,10 +180,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         data = intent.getStringExtra("review");
         if(data!=null) {
             if (data.equals("review")) {
-                next.setVisibility(View.INVISIBLE);
-                back.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.VISIBLE);
-                review.setVisibility(View.INVISIBLE);
+                //next.setVisibility(View.INVISIBLE);
+                //back.setVisibility(View.INVISIBLE);
+               // done.setVisibility(View.VISIBLE);
+               // review.setVisibility(View.INVISIBLE);
 
             }
         }
@@ -201,7 +198,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
+        //next.setAnimation(shake);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -243,12 +240,12 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
                 break;
-            case R.id.done:
-Log.d("done clicked loan_amt", "check");
-                ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
-                finish();
-                overridePendingTransition(R.transition.left, R.transition.right);
-                break;
+//            case R.id.done:
+//Log.d("done clicked loan_amt", "check");
+//                ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
+//                finish();
+//                overridePendingTransition(R.transition.left, R.transition.right);
+//                break;
             case R.id.next:
                 if(amt.getText().toString().matches("")) {
 
@@ -256,9 +253,6 @@ Log.d("done clicked loan_amt", "check");
                 }
                 else
                 {
-
-
-
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
 

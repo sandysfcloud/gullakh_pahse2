@@ -233,7 +233,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             }else {
                 Log.e("You are not logged in", String.valueOf(0));
-                Intent intentsignin=new Intent(this,signin.class);
+                Intent intentsignin=new Intent(this,signinPrepage.class);
                 startActivity(intentsignin);
                 finish();
 

@@ -127,8 +127,49 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:id="@+id/linearLayout12"
+        android:id="@+id/llsignout"
         android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:background="#b8546e7a" >
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="My search"
+            android:id="@+id/buttonMysearch"
+            android:layout_weight="1"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:onClick="onClick" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="My application"
+            android:id="@+id/buttonMyappl"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:onClick="onClick" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/llsignin"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="#b8546e7a" >
@@ -136,15 +177,20 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="My Profile"
-            android:id="@+id/buttonMyprof"
+            android:text="Sign in"
+            android:id="@+id/buttonSignin"
             android:layout_weight="1"
             android:background="#00ffffff"
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textSize="22dp"
             android:onClick="onClick" />
-
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
         <Button
             android:layout_width="100dp"
             android:layout_height="50dp"

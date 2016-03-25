@@ -1,42 +1,33 @@
 package com.gullakh.gullakhandroid;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-
-
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.concurrent.ExecutionException;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
-    Button next;
     ImageView review;
     ImageView done;
     int day,month,yearv;
@@ -165,11 +156,11 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                 startActivity(intenth);
 
                 break;
-            case R.id.done:
-
-                finish();
-                overridePendingTransition(R.transition.left, R.transition.right);
-                break;
+//            case R.id.done:
+//
+//                finish();
+//                overridePendingTransition(R.transition.left, R.transition.right);
+//                break;
             case R.id.next:
                 if(!Dob.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setDob(Dob.getText().toString());

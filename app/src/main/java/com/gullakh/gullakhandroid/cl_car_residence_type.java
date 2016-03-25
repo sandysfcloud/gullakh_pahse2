@@ -22,8 +22,7 @@ import java.util.List;
 
 public class cl_car_residence_type extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText currentCity;
-    private EditText currentResidence;
+    private EditText currentCityyr,currentCitymn,currentResidenceyr,currentResidencemn;
     private TextView heading1,heading2,heading3;
     private Button back,next;
     private ContentValues contentValues;
@@ -44,8 +43,10 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
-        currentCity = (EditText) findViewById(R.id.currentCityyr);
-        currentResidence = (EditText) findViewById(R.id.currentResidenceyr);
+        currentCityyr = (EditText) findViewById(R.id.currentCityyr);
+        currentResidenceyr = (EditText) findViewById(R.id.currentResidenceyr);
+        currentCitymn = (EditText) findViewById(R.id.currentCitymn);
+        currentResidencemn = (EditText) findViewById(R.id.currentResidencemn);
         spinner = (Spinner) findViewById(R.id.spinnerloc);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -83,8 +84,8 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         }
     }
     private void getDataFromHashMap() {
-        currentCity.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city"));
-        currentResidence.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res"));
+        currentCityyr.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city"));
+        currentResidenceyr.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res"));
         if(cl_car_global_data.dataWithAns.get("current_res").equals("Self/Spouse owned")) {
             spinner.setSelection(1);
         }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Owned by parents/sibling")) {
@@ -111,18 +112,18 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
             case R.id.next:
                 if(!spinner.getSelectedItem().toString().matches("Select"))
                 {
-                    if(currentCity.getText().toString().matches(""))
+                    if(currentCityyr.getText().toString().matches(""))
                     {
                         RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in current city ", "failed");
                     }else {
-                        if(currentResidence.getText().toString().matches(""))
+                        if(currentResidenceyr.getText().toString().matches(""))
                         {
                             RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence", "failed");
                         }else
                         {
                             setDataToHashMap("current_res", spinner.getSelectedItem().toString());
-                            setDataToHashMap("period_of_stay_in_cur_city",currentCity.getText().toString());
-                            setDataToHashMap("period_of_stay_in_cur_res", currentResidence.getText().toString());
+                            setDataToHashMap("period_of_stay_in_cur_city",currentCityyr.getText().toString()+" Year "+currentCityyr.getText().toString()+" Month");
+                            setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString()+" Year "+currentResidencemn.getText().toString()+" Month");
                             goToDatabase();
 
                             Intent intent = new Intent(this, cl_car_salaried.class);
@@ -173,11 +174,11 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
         try {
             JSONObject reader = new JSONObject(cr.getString(3));
-            currentCity.setText(reader.getString("period_of_stay_in_cur_city"));
+            currentCityyr.setText(reader.getString("period_of_stay_in_cur_city"));
             if(reader.getString("current_res").equals("")) {
                // spinner.setSelected(1);
             }
-            currentResidence.setText(reader.getString("period_of_stay_in_cur_res"));
+            currentResidenceyr.setText(reader.getString("period_of_stay_in_cur_res"));
             setCar();
         } catch (JSONException e) {
             e.printStackTrace();

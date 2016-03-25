@@ -25,7 +25,7 @@
     <ImageButton
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/imageButtonfg"
+        android:id="@+id/imageButtonfb"
         android:background="@drawable/fb"
         android:layout_alignTop="@+id/imageButtongp"
         android:layout_toRightOf="@+id/imageButtongp"

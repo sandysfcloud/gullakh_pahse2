@@ -12,7 +12,7 @@
         android:layout_height="30dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Dear &lt; FristName>,"
-        android:id="@+id/textView14"
+        android:id="@+id/name"
         android:textSize="22dp"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/ImageGullakh"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your application # is &lt;from CRM No>."
-        android:id="@+id/textView16"
+        android:id="@+id/applno"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:layout_marginBottom="20dp" />
