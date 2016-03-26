@@ -276,7 +276,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
 
+                        else if(args[1].equals("otherbank")){
 
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from OtherBank;")).toString());
+
+                        }
 
 
 

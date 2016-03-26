@@ -23,14 +23,15 @@
             app:mtf_image="@drawable/bdy"
             >
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="When is your BirthDay"
                 android:id="@+id/birthdate"
                 android:textColorHint="#000"
                 android:textColor="#000"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>
     </LinearLayout>
@@ -43,7 +44,7 @@
         android:layout_width="match_parent"
         android:background="#b8546e7a">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -55,9 +56,10 @@
             android:textColor="#ffffff"
             android:textSize="22dp"
             android:paddingLeft="15dp"
-            android:gravity="fill" />
+            android:gravity="fill"
+            app:typeface="robotoLight"/>
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"
@@ -70,7 +72,8 @@
             android:textSize="22dp"
             android:singleLine="false"
             android:paddingRight="15dp"
-            android:paddingLeft="95dp" />
+            android:paddingLeft="95dp"
+            app:typeface="robotoLight"/>
     </LinearLayout>
 
 

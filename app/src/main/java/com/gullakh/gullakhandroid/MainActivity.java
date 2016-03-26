@@ -113,16 +113,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
         signinbutton= (Button) findViewById(R.id.buttonSignin);
-        signinbutton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         signinbutton.setOnClickListener(this);
         registerbutton= (Button) findViewById(R.id.buttonReg);
-        registerbutton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         registerbutton.setOnClickListener(this);
         myapplbutton = (Button) findViewById(R.id.buttonMyappl);
-        registerbutton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         myapplbutton.setOnClickListener(this);
         mysearchbutton = (Button) findViewById(R.id.buttonMysearch);
-        registerbutton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         mysearchbutton.setOnClickListener(this);
 
         // check for Internet status

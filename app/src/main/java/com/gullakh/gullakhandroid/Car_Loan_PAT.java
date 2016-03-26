@@ -227,9 +227,8 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
 
             case R.id.edit:
                 if(data.equals("data"))
-                RegisterPageActivity.showAlertreview(Car_Loan_PAT.this,4);
-                if(data.equals("pat2"))
-                    RegisterPageActivity.showAlertreview(Car_Loan_PAT.this,6);
+                RegisterPageActivity.showAlertreview(Car_Loan_PAT.this,5);
+
                 break;
 
             case R.id.close:

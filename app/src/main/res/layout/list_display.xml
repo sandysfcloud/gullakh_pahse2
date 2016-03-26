@@ -63,36 +63,10 @@
                 android:id="@+id/edit"
                 android:textSize="16sp"
 
-                android:text="Edit Your Details"
+                android:text="Edit Details"
                 app:typeface="robotoLight"/>
         </LinearLayout>
-      <!--  <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:id="@+id/filter"
-           android:layout_marginTop="15dp"
-           android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:background="@drawable/rectbutton_red"
-            android:orientation="horizontal"
-            >
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
 
-        android:layout_marginTop="8dp"
-
-        android:src="@drawable/filter"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:id="@+id/tfilter"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:text="Filter "/>
-    </LinearLayout>-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,7 +95,7 @@
             android:text="data"
             app:typeface="robotoLight"/>
     </LinearLayout>
-    </LinearLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -131,30 +105,6 @@
     android:layout_marginRight="5dp"
     android:background="#ffffff"
     android:orientation="horizontal">
-    <!--<LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-android:layout_weight="1"
-        android:id="@+id/linedit"
-
-        android:orientation="horizontal"
-
-      >
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/editnew"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       android:layout_marginTop="5dp"
-        android:textColor="#616161"
-        android:id="@+id/edit"
-        android:textSize="16sp"
-
-        android:text="Edit Your Details"/>
-    </LinearLayout>-->
 
 
     <LinearLayout
@@ -197,6 +147,7 @@ android:layout_weight="1"
         android:textColor="#616161"
         android:textSize="12sp"
         android:text="Sort By"
+      android:paddingLeft="5dp"
         app:typeface="robotoLight"/>
         <Spinner android:id="@+id/spinner1"
             android:layout_width="107dp"
@@ -213,6 +164,7 @@ android:layout_weight="1"
 
     </LinearLayout>
 </LinearLayout>
+    </LinearLayout>
     <!--<ListView
         android:id="@+id/list_view"
         style="@style/ListViewStyle"

@@ -2,13 +2,17 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,7 +29,7 @@ import java.util.ArrayList;
 
 public class cl_car_residence extends AppCompatActivity implements View.OnClickListener{
     Button next,back;
-    ImageView place1,place2,place3,place4,place5,place6;
+    ImageView place1,place2,place3,place4,place5,place6,review;
     TextView heading,option1,option2,option3,option4,option5,option6;
     static String dataLocation="";
     private ContentValues contentValues;
@@ -45,19 +49,15 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         option2= (TextView) findViewById(R.id.TextViewOption2);
         option3= (TextView) findViewById(R.id.TextViewOption3);
         option4= (TextView) findViewById(R.id.TextViewOption4);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
+
         place1 = (ImageView) findViewById(R.id.ImageViewPlace1);
         place2 = (ImageView) findViewById(R.id.ImageViewPlace2);
         place3 = (ImageView) findViewById(R.id.ImageViewPlace3);
         place4 = (ImageView) findViewById(R.id.ImageViewPlace4);
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
-        next.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        back.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         place1.setOnClickListener(this);
         place2.setOnClickListener(this);
         place3.setOnClickListener(this);
@@ -66,8 +66,53 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         next.setOnClickListener(this);
 
         citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
-        citynam.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         citynam.setOnClickListener(this);
+
+
+
+
+        //********************changing actionbar
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  title = (TextView) v.findViewById(R.id.title);
+        review = (ImageView) v.findViewById(R.id.edit);
+        review.setVisibility(View.INVISIBLE);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        close.setOnClickListener(this);
+
+        //  title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        title.setText("Residence");
+        actionBar.setCustomView(v);
+
+        /*getSupportActionBar().setDisplayShowCustomEnabled(true);
+        Toolbar parent =(Toolbar) v.getParent();//first get parent toolbar of current action bar
+        parent.setContentInsetsAbsolute(0,0);*/
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
+        if(((GlobalData) getApplication()).getcarres()!=null) {
+            Log.d("residence review not null", ((GlobalData) getApplication()).getcarres());
+            if (((GlobalData) getApplication()).getcarres().equals("Bengaluru"))
+                place1.setImageResource(R.drawable.buttonselecteffect);
+            else if(((GlobalData) getApplication()).getcarres().equals("Chennai"))
+                place2.setImageResource(R.drawable.buttonselecteffect);
+            else if(((GlobalData) getApplication()).getcarres().equals("Kolkata"))
+                place3.setImageResource(R.drawable.buttonselecteffect);
+
+            else if(((GlobalData) getApplication()).getcarres().equals("Mumbai"))
+                place4.setImageResource(R.drawable.buttonselecteffect);
+
+        }
+
+
+
     }
     public void getcitynam()
     {
@@ -131,6 +176,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                     goToIntent();
                 }
                 break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
+                break;
+
             case R.id.ImageViewPlace1:
                 place1.setImageResource(R.drawable.buttonselecteffect);
                 place2.setImageResource(R.drawable.locchn);

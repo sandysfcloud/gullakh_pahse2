@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,8 +14,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickListener {
     Button next,back;
@@ -24,7 +32,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     private Intent intent;
     private ContentValues contentValues;
     private AutoCompleteTextView other;
-
+    JSONServerGet requestgetserver;
+    String sessionid;
+    ArrayList<String> liste;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +62,57 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         bank3.setOnClickListener(this);
         bank4.setOnClickListener(this);
         next.setOnClickListener(this);
+        other.setOnClickListener(this);
         back.setOnClickListener(this);
         getDataFromHashMap();
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();
         }
-    }
 
+        getbanknam();
+    }
+    public void getbanknam()
+    {
+        Log.d("getbanknam called ","1");
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                OtherBank[] enums = gson.fromJson(jsonObject.get("result"), OtherBank[].class);
+
+                int size=enums.length;
+                Log.e("emplist frm server ", String.valueOf(size));
+                liste =new ArrayList<String>();
+                for(int i=0;i<size;i++) {
+                    liste.add(enums[i].getbank_name());
+                }
+
+                final ShowSuggtn fAdapter = new ShowSuggtn(cl_salary_mode2.this, android.R.layout.simple_dropdown_item_1line, liste);
+                other.setAdapter(fAdapter);
+
+
+            }
+        }, cl_salary_mode2.this, "2");
+        DataHandler dbobject = new DataHandler(cl_salary_mode2.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("token", "otherbank", sessionid);
+    }
     private void getInfo() {
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
@@ -101,7 +155,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.next:
-                if(dataBankType.equals(""))
+                if(dataBankType.equals("")&&other.getText().toString()!=null)
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
@@ -164,6 +218,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
+
+
         }
     }
     public void setDataToHashMap(String Key,String data)

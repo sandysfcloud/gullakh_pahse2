@@ -231,7 +231,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
             case R.id.edit:
 
-                RegisterPageActivity.showAlertreview(Loan_amt_questn.this,3);
+                RegisterPageActivity.showAlertreview(Loan_amt_questn.this,4);
                 break;
 
             case R.id.close:

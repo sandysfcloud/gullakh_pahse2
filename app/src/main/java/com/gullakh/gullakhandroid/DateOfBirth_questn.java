@@ -145,9 +145,9 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
             case R.id.edit:
                 String emptyp=((GlobalData) getApplication()).getemptype();
                 if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
-                    RegisterPageActivity.showAlertreview(this,9);
+                    RegisterPageActivity.showAlertreview(this,8);
                 else
-                RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,6);
+                RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,7);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

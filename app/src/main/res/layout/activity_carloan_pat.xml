@@ -43,16 +43,17 @@
                     seekarc:thumb="@drawable/custom_seek_arc_control_selector"
                     seekarc:touchInside="true" />
 
-                <TextView
+                <com.gullakh.gullakhandroid.font.RobotoTextView
                     android:id="@+id/seekArcProgress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="50,000"
                     android:textColor="@color/main_color_500"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    app:typeface="robotoLight"/>
 
-                <TextView
+                <com.gullakh.gullakhandroid.font.RobotoTextView
                     android:id="@+id/onetext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,11 +61,12 @@
                     android:text="PAT Amount"
                     android:layout_marginTop="75dp"
                     android:textColor="@color/main_color_500"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    app:typeface="robotoLight"/>
             </FrameLayout>
         </LinearLayout>
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +75,8 @@
             android:layout_marginBottom="5dp"
             android:text="50,000"
             android:textColor="@color/main_color_500"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:typeface="robotoLight"/>
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
@@ -87,7 +90,7 @@
             app:mtf_image="@drawable/loan_amt"
             >
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
@@ -97,7 +100,8 @@
                 android:text=""
                 android:textColorHint="#000"
                 android:textColor="#000"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>
     </LinearLayout>
@@ -111,7 +115,7 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -123,9 +127,10 @@
             android:textColor="#ffffff"
             android:textSize="22dp"
             android:paddingLeft="15dp"
-            android:gravity="fill" />
+            android:gravity="fill"
+            app:typeface="robotoLight"/>
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"
@@ -138,7 +143,8 @@
             android:textSize="22dp"
             android:singleLine="false"
             android:paddingRight="15dp"
-            android:paddingLeft="95dp" />
+            android:paddingLeft="95dp"
+            app:typeface="robotoLight"/>
     </LinearLayout>
 
 </LinearLayout>

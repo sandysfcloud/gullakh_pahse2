@@ -155,7 +155,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.edit:
-                dg=RegisterPageActivity.showAlertreview(Car_type_questn.this, 2);
+                dg=RegisterPageActivity.showAlertreview(Car_type_questn.this, 3);
                 break;
            /* case R.id.review:
                 dg=RegisterPageActivity.showAlertreview(Car_type_questn.this, 2);
@@ -208,18 +208,29 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
+                else if(data.equals("review"))
+                {
+                    finish();
+
+                }
 
                 break;
             case R.id.img2:
                 sal.setImageResource(R.drawable.newcar);
                 self.setImageResource(R.drawable.buttonselecteffect);
                 ((GlobalData) getApplication()).setcartype("Used Car Loan");
-            {
+                if(data==null) {
                 CarType=true;
                 intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
 
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
+            }
+
+                else if(data.equals("review"))
+            {
+                finish();
+
             }
                 break;
             case R.id.locatn:

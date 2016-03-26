@@ -225,9 +225,8 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
             case R.id.edit:
                 if(data.equals("data"))
-                    RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this,5);
-                if(data.equals("dep2"))
-                    RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this,7);
+                    RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this,6);
+
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

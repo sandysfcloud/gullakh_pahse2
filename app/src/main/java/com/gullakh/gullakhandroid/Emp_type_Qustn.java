@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     ImageView sal,self,review,business;
     String data;
     Button next,back,done;
+    Dialog dg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,10 +94,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView  title = (TextView) v.findViewById(R.id.title);
-        ImageView  edit = (ImageView) v.findViewById(R.id.edit);
+        review = (ImageView) v.findViewById(R.id.edit);
+        review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        edit.setVisibility(View.INVISIBLE);
+
       //  title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         title.setText("Employee Type");
         actionBar.setCustomView(v);
@@ -136,12 +139,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         Intent intent;
         switch (v.getId()) {
 
-            case R.id.review:
-
-                    //RegisterPageActivity.showAlertreview(Emp_type_Qustn.this,2);
-
-
-
+            case R.id.edit:
+                dg=RegisterPageActivity.showAlertreview(Emp_type_Qustn.this, 2);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -194,6 +193,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
+                else if(data.equals("review"))
+                {
+                    finish();
+
+                }
 
                 break;
             case R.id.img2:
@@ -208,6 +212,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
+                else if(data.equals("review"))
+                {
+                    finish();
+
+                }
                 break;
             case R.id.business:
 
@@ -219,6 +228,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
+                }
+                else if(data.equals("review"))
+                {
+                    finish();
+
                 }
                 break;
 

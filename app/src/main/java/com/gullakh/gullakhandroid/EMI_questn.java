@@ -215,9 +215,9 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
             case R.id.edit:
                 String emptyp=((GlobalData) getApplication()).getemptype();
                 if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
-                    RegisterPageActivity.showAlertreview(EMI_questn.this,8);
+                    RegisterPageActivity.showAlertreview(EMI_questn.this,7);
                 else
-                RegisterPageActivity.showAlertreview(EMI_questn.this,5);
+                RegisterPageActivity.showAlertreview(EMI_questn.this,6);
                 break;
 
             case R.id.close:

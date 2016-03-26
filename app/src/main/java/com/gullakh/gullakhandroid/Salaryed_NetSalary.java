@@ -202,7 +202,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
 
             case R.id.edit:
-                RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,4);
+                RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,5);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
