@@ -103,8 +103,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     protected ArrayList<CharSequence> selectedBanks2 = new ArrayList<CharSequence>();
     protected Button selectColoursButton;
     CharSequence[] bankfilter = null;
-    String prev_selectbank = null,listidglobal;
-    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4,requestgetserver5;
+    String prev_selectbank = null,listidglobal, tierid;;
+    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7;
     String globalidentity,loantype;
     Dialog dgthis;
     EditText editloan;
@@ -298,7 +298,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 String loanpid = LoanP_cobj[0].getid();
                 String loan_amt = ((GlobalData) getApplication()).getloanamt();
                 Log.e("loanpid", loanpid);
-                requestgetserver2.execute("token", "RuleDetails", sessionid, loanpid, loan_amt);
+                //requestgetserver2.execute("token", "RuleDetails", sessionid, loanpid, loan_amt);
+                String emptype=((GlobalData) getApplication()).getemptype();
+                requestgetserver3.execute("token", "RuleMaster", sessionid, listidglobal,loantype,emptype,tierid);
 
 
             }
@@ -343,7 +345,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-        requestgetserver5 = new JSONServerGet(new AsyncResponse() {
+        requestgetserver6 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
 
@@ -357,6 +359,81 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 dgthis = dg;
+
+                City[] CITY_cobj = gson.fromJson(jsonObject.get("result"), City[].class);
+
+                Map<String, String> arrayLoantype = new HashMap<>();
+
+                String cityid=null;
+                for (int i = 0; i < CITY_cobj.length; i++) {
+                    cityid=CITY_cobj[0].getId();
+                }
+
+
+                requestgetserver7.execute("token", "CityTier", sessionid,cityid);
+
+                //
+
+
+            }
+        }, GoogleCardsMediaActivity.this, "1");
+
+
+
+
+
+        requestgetserver7 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+
+
+                CityTier[] CITYTier_cobj = gson.fromJson(jsonObject.get("result"), CityTier[].class);
+
+                Map<String, String> arrayLoantype = new HashMap<>();
+
+
+                for (int i = 0; i < CITYTier_cobj.length; i++) {
+                    tierid=CITYTier_cobj[0].getcity_tier();
+                }
+
+
+                requestgetserver5.execute("token", "LoanType", sessionid);
+
+                //
+
+
+            }
+        }, GoogleCardsMediaActivity.this, "10");
+
+
+
+
+
+
+        requestgetserver5 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+
 
                 LoanType[] LT_cobj = gson.fromJson(jsonObject.get("result"), LoanType[].class);
 
@@ -375,7 +452,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             }
-        }, GoogleCardsMediaActivity.this, "1");
+        }, GoogleCardsMediaActivity.this, "9");
 
 
 
@@ -489,7 +566,17 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
-        requestgetserver5.execute("token", "LoanType", sessionid);
+
+        Log.d("checking city name here",((GlobalData) getApplication()).getcarres());
+
+        requestgetserver6.execute("token", "City", sessionid,((GlobalData) getApplication()).getcarres());
+
+
+
+
+
+
+       // requestgetserver5.execute("token", "LoanType", sessionid);
 
         Log.e("flow test", String.valueOf(3));
         prgmImages = new int[]{R.drawable.icici_bank_logo2, R.drawable.axisbank_logo, R.drawable.bankofindia_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo, R.drawable.hdfcbank_logo};

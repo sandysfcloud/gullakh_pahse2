@@ -219,9 +219,9 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             listid = listid.toString().replace("[", "").replace("]", "");
 */
                             Log.e("Check query", "select * from  RuleMaster where id IN " + args[3] + " and loan_type=" + args[4] + ";");
-                            Log.e("Check query","select * from  RuleMaster where loan_type="+args[4]+" and employment_type=\'"+args[5]+"\' and id IN "+args[3]+";");
+                            Log.e("Check query Rule Master","select * from  RuleMaster where loan_type="+args[4]+" and employment_type='"+args[5]+"' and city_tier = '"+args[6]+"';");
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from  RuleMaster where loan_type="+args[4]+" and employment_type='"+args[5]+"' and id IN "+args[3]+";")).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from  RuleMaster where loan_type="+args[4]+" and employment_type='"+args[5]+"' and tier = '"+args[6]+"';")).toString());
 
                         }
 
@@ -229,6 +229,20 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City ;")).toString());
+
+                        }
+
+                        else if(args[1].equals("City")){
+
+                            client = new DefaultHttpClient();
+                            Log.d("Check city name","select * from City where city_name='"+args[3]+"';");
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City where city_name='"+args[3]+"';")).toString());
+
+                        }
+                        else if(args[1].equals("CityTier")){
+
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from CityTier where city_name='"+args[3]+"' ;")).toString());
 
                         }
 

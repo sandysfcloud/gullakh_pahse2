@@ -22,7 +22,7 @@ public class GlobalData extends Application {
     private int sizefiltermusthave;
     private ArrayList<Double> foir,accid;
 
-    private String session;
+    private String session,carres;
     private String tenure;
     private CharSequence[] banklist;
     private Double pat;
@@ -95,6 +95,13 @@ public class GlobalData extends Application {
 
     public void setEmi(Double someVariable) {
         this.someVariable = someVariable;
+    }
+
+    public void setcarres(String someVariable) {
+        this.carres = someVariable;
+    }
+    public String getcarres() {
+        return carres;
     }
 
     public void settenure(String someVariable) {

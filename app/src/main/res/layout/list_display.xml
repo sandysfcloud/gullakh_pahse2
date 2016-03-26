@@ -185,12 +185,25 @@ android:layout_weight="1"
             android:text="Filter "
             app:typeface="robotoLight"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+    <com.gullakh.gullakhandroid.font.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#616161"
+        android:textSize="12sp"
+        android:text="Sort By"
+        app:typeface="robotoLight"/>
         <Spinner android:id="@+id/spinner1"
             android:layout_width="107dp"
             android:layout_height="match_parent"
             android:padding="5dp"
             android:textColor="#616161"
-            android:layout_weight="1"
+
             android:drawSelectorOnTop="true"
             android:entries="@array/sortby"
 
@@ -199,6 +212,7 @@ android:layout_weight="1"
             />
 
     </LinearLayout>
+</LinearLayout>
     <!--<ListView
         android:id="@+id/list_view"
         style="@style/ListViewStyle"

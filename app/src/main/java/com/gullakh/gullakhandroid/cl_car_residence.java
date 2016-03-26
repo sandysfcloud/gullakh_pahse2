@@ -121,11 +121,14 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
 
             case R.id.next:
+
+
                 dataLocation=citynam.getText().toString();
                 if(dataLocation.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
                 }else {
+
                     goToIntent();
                 }
                 break;
@@ -175,6 +178,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
     }
     public void goToIntent(){
+        ((GlobalData) getApplication()).setcarres(dataLocation);
+
         System.gc();
         Intent intent = new Intent(this, Emp_type_Qustn.class);
         startActivity(intent);

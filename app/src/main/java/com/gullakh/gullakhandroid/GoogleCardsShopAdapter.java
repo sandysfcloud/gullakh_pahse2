@@ -68,6 +68,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
+
 		return data.size();
 	}
 
@@ -134,6 +135,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.apply= (Button) convertView
 					.findViewById(R.id.apply);
 			holder.apply.setTag(position);
+			Log.d("check this data count in google", String.valueOf(position));
 
 			//holder.apply.setOnClickListener(GoogleCardsShopAdapter.this);
 
