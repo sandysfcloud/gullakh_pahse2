@@ -1,19 +1,14 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,13 +45,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     private String borrowercaseno="";
     private ContentValues contentValues;
     private Spinner spinner;
+    private EditText add1,add2,city,pin,state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_gender);
         contentValues=new ContentValues();
-        //onShakeImage();
         heading= (TextView) findViewById(R.id.TextViewHeading1);
         option1= (TextView) findViewById(R.id.TextViewOption1);
         option2= (TextView) findViewById(R.id.TextViewOption2);
@@ -65,11 +60,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         spinner = (Spinner) findViewById(R.id.spinner1);
         firstName= (EditText)findViewById(R.id.FirstName);
+        firstName.requestFocus();
         lastName=(EditText)findViewById(R.id.LastName);
         gen1 = (ImageView) findViewById(R.id.usermale);
         gen2 = (ImageView) findViewById(R.id.userfemale);
         submit = (Button) findViewById(R.id.Submit);
         back = (Button) findViewById(R.id.back);
+        add1=(EditText)findViewById(R.id.addr1);
+        add2=(EditText)findViewById(R.id.addr2);
+        city=(EditText)findViewById(R.id.city);
+        pin=(EditText)findViewById(R.id.pin);
+        state=(EditText)findViewById(R.id.state);
         gen1.setOnClickListener(this);
         gen2.setOnClickListener(this);
         back.setOnClickListener(this);
@@ -123,12 +124,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             gen2.setImageResource(R.drawable.buttonselecteffect);
         }
     }
-
-    public void onShakeImage() {
-        Animation shake;
-        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        submit.setAnimation(shake);
-    }
     private void getDataFromHashMap() {
         if(cl_car_global_data.dataWithAns.get("firstname")!=null &&
                 cl_car_global_data.dataWithAns.get("lastname")!=null &&
@@ -160,10 +155,12 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                             if (dataGender.equals("")) {
                                 RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
                             } else {
-
-                                goToDatabase();
-                                savetoserver();
-
+                                if (add1.equals("")||add2.equals("")||pin.equals("")||city.equals("")||state.equals("")) {
+                                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
+                                } else {
+                                    goToDatabase();
+                                    savetoserver();
+                                }
                             }
                         }
 
@@ -193,28 +190,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void showdialog() {
-        AlertDialog.Builder alertadd = new AlertDialog.Builder(cl_car_gender.this);
-        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
-        final View view = factory.inflate(R.layout.thankyou, null);
-        TextView caseno = (TextView) view.findViewById(R.id.appno);
-        ((TextView) view.findViewById(R.id.appno)).setTextColor(getResources().getColor(R.color.red));
-        ((TextView) view.findViewById(R.id.textView1)).setTextColor(getResources().getColor(R.color.red));
-        ((TextView) view.findViewById(R.id.textView2)).setTextColor(getResources().getColor(R.color.red));
-        caseno.setText(borrowercaseno);
-        alertadd.setView(view);
 
-        alertadd.setCancelable(false);
-        alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(cl_car_gender.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-            }
-        });
-        alertadd.show();
-    }
 
     public void setDataToHashMap(String Key,String data)
     {
@@ -314,7 +290,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     borrowercontactid = Borrower_contact[0].getId();
                     requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
                 }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,firstName.getText().toString(),lastName.getText().toString());
+                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile
+                            ,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString()
+                            ,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
+                            ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
                 }
             }
         }, cl_car_gender.this, "wait");
@@ -454,6 +433,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
     private void goToIntent() {
         Intent intent = new Intent(this, UploadDocument1.class);
+        intent.putExtra("name",firstName.getText().toString());
+        intent.putExtra("applno",borrowercaseno);
         startActivity(intent);
     }
 

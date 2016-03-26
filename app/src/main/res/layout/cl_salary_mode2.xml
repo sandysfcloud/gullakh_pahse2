@@ -150,7 +150,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             android:focusable="false"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/home"
+            app:mtf_image="@drawable/loan_amt"
             android:layout_marginTop="10dp"
             android:layout_weight="1">
 

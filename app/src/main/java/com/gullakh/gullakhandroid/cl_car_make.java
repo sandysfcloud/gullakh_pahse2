@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -41,7 +39,6 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_make);
         contentValues = new ContentValues();
-        //onShakeImage();
         heading = (TextView) findViewById(R.id.TextViewHeading2);
         heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         option1 = (TextView) findViewById(R.id.TextViewOption1);
@@ -123,15 +120,6 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
 
 
     }
-
-
-
-    public void onShakeImage() {
-        Animation shake;
-        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
-    }
-
     @Override
     public void onClick(View v) {
 

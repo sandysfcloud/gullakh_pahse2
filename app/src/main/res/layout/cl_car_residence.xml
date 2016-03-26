@@ -163,8 +163,9 @@
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/home"
             android:layout_weight="1">
-
             <AutoCompleteTextView
+                android:imeActionLabel="Done"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Others"

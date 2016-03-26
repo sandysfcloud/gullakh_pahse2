@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,12 +60,12 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         //Emp = (EditText) findViewById(R.id.salEmpname);
         Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
+        Emp.requestFocus();
         Emp.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
         Emp.setOnClickListener(this);
         getemplist();
         Expyr = (EditText) findViewById(R.id.totalexpyr);
         Expmn = (EditText) findViewById(R.id.totalexpmn);
-        onShakeImage();
         getDataFromHashMap();
     }
 
@@ -82,14 +80,6 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
             Expyr.setText(cl_car_global_data.dataWithAns.get("total_exp"));
         }
     }
-
-    public void onShakeImage() {
-        Animation shake;
-        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
-    }
-
-
     public void getemplist()
     {
 

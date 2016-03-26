@@ -16,8 +16,6 @@ import android.widget.PopupWindow;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import java.math.BigDecimal;
 import java.text.Format;
 import java.text.NumberFormat;
@@ -137,7 +135,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         t_other= (TextView) findViewById(R.id.tothr);
         t_other.setText(othrdata);
 
-        /*t8= (TextView) findViewById(R.id.d2);
+        t8= (TextView) findViewById(R.id.d2);
        // t8.setTypeface(myfontlight);
         t9= (TextView) findViewById(R.id.d3);
         //t9.setTypeface(myfontlight);
@@ -151,32 +149,17 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         //apply.setTypeface(myfontlight);
         apply.setOnClickListener(this);
         mainLayout= (LinearLayout) findViewById(R.id.main);
-        fee= (Button) findViewById(R.id.Buttonfee);
-        fee.setOnClickListener(this);
+        //fee= (Button) findViewById(R.id.Buttonfee);
+        //fee.setOnClickListener(this);
         //fee.setTypeface(myfontlight);
-        othr= (Button) findViewById(R.id.Buttonothr);
-        othr.setOnClickListener(this);
+        //othr= (Button) findViewById(R.id.Buttonothr);
+        //othr.setOnClickListener(this);
         //othr.setTypeface(myfontlight);
         mainLayout= (LinearLayout) findViewById(R.id.popup);
-        fee.setBackgroundResource(R.drawable.roundbutton_blue);
+        //fee.setBackgroundResource(R.drawable.roundbutton_blue);
        // tv = new TextView(this);
        // tv.setText("Hi this is a sample text for popup window");
        // mainLayout.addView(tv);*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

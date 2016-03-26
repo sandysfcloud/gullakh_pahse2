@@ -39,7 +39,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_residence);
         contentValues=new ContentValues();
-        //onShakeImage();
 
         heading= (TextView) findViewById(R.id.TextViewHeading1);
         option1= (TextView) findViewById(R.id.TextViewOption1);
