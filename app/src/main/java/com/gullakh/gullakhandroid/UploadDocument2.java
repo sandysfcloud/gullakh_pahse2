@@ -36,7 +36,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     String temp5 = "";
     String temp6 = "";
     String temp7 = "";
-    Button buttonUpoadFile1, buttonUpoadFile2, buttonUpoadFile3, buttonUpoadFile4, buttonUpoadFile5, buttonUpoadFile6, buttonUpoadFile7;
+    Button done,buttonUpoadFile1, buttonUpoadFile2, buttonUpoadFile3, buttonUpoadFile4, buttonUpoadFile5, buttonUpoadFile6, buttonUpoadFile7;
     TextView pathfromuser1, pathfromuser2, pathfromuser3, pathfromuser4, pathfromuser5, pathfromuser6, pathfromuser7;
     private String sessionid;
     private JSONServerGet requestgetserver;
@@ -56,6 +56,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         buttonUpoadFile5 = (Button) findViewById(R.id.buttonUpload5);
         buttonUpoadFile6 = (Button) findViewById(R.id.buttonUpload6);
         buttonUpoadFile7 = (Button) findViewById(R.id.buttonUpload7);
+        done = (Button) findViewById(R.id.done);
         del1 = (ImageView) findViewById(R.id.del1);
         del2 = (ImageView) findViewById(R.id.del2);
         del3 = (ImageView) findViewById(R.id.del3);
@@ -77,6 +78,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         buttonUpoadFile5.setOnClickListener(this);
         buttonUpoadFile6.setOnClickListener(this);
         buttonUpoadFile7.setOnClickListener(this);
+        done.setOnClickListener(this);
         del1.setOnClickListener(this);
         del2.setOnClickListener(this);
         del3.setOnClickListener(this);
@@ -123,6 +125,10 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 Intent i7 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i7.setType("image/*");
                 startActivityForResult(Intent.createChooser(i7, "Select file to upload document"), 7);
+                break;
+            case R.id.done:
+                Intent i8 = new Intent(this,MainActivity.class);
+                startActivity(i8);
                 break;
         }
     }

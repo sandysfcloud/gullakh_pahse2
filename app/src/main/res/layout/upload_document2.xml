@@ -13,17 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="75dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Upload Documents"
             android:id="@+id/textView26"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:layout_marginBottom="40dp" />
+            android:layout_marginBottom="20dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -327,6 +327,30 @@
                 android:layout_alignParentEnd="true" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout12"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#b8546e7a"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp" >
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Done"
+            android:id="@+id/done"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="25dp"
+            android:singleLine="false"
+            android:gravity="center" />
     </LinearLayout>
 
 </LinearLayout>

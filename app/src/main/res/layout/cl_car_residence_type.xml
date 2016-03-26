@@ -43,10 +43,12 @@
                 android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/companyname"
+                app:mtf_image="@drawable/home"
                 android:layout_weight="1">
 
                 <AutoCompleteTextView
+                    android:focusable="true"
+                    android:nextFocusForward="@+id/currentCitymn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Ex:5 years"
@@ -64,10 +66,11 @@
                 android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/companyname"
+                app:mtf_image="@drawable/home"
                 android:layout_weight="1">
 
                 <AutoCompleteTextView
+                    android:nextFocusDown="@+id/currentResidenceyr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Ex:5 months"
@@ -131,10 +134,11 @@
                 android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/companyname"
+                app:mtf_image="@drawable/home"
                 android:layout_weight="1">
 
                 <AutoCompleteTextView
+                    android:nextFocusDown="@+id/currentResidencemn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Ex:5 years"
@@ -153,7 +157,7 @@
                 android:focusable="false"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/companyname"
+                app:mtf_image="@drawable/home"
                 android:layout_weight="1">
 
                 <AutoCompleteTextView

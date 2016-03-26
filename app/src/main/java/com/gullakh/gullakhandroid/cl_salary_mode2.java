@@ -30,7 +30,6 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_salary_mode2);
         contentValues=new ContentValues();
-        //onShakeImage();
         heading= (TextView) findViewById(R.id.TextViewHeading);
         option1= (TextView) findViewById(R.id.TextViewOption1);
         option2= (TextView) findViewById(R.id.TextViewOption2);

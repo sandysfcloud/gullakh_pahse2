@@ -39,7 +39,7 @@
             android:layout_marginRight="4dp"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/home">
+            app:mtf_image="@drawable/companyname">
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
@@ -74,7 +74,7 @@
             android:layout_marginRight="4dp"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/home">
+            app:mtf_image="@drawable/companyname">
 
             <EditText
                 android:layout_width="match_parent"

@@ -44,6 +44,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         back.setOnClickListener(this);
         next.setOnClickListener(this);
         currentCityyr = (EditText) findViewById(R.id.currentCityyr);
+        currentCityyr.requestFocus();
         currentResidenceyr = (EditText) findViewById(R.id.currentResidenceyr);
         currentCitymn = (EditText) findViewById(R.id.currentCitymn);
         currentResidencemn = (EditText) findViewById(R.id.currentResidencemn);
