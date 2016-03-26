@@ -42,7 +42,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Sign In");
         Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
         TextView signUptext= (TextView) findViewById(R.id.signupheading);
         signUptext.setTypeface(myfont);
 

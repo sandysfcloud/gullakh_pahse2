@@ -35,11 +35,11 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         option2= (TextView) findViewById(R.id.TextViewOption2);
         option3= (TextView) findViewById(R.id.TextViewOption3);
         option4= (TextView) findViewById(R.id.TextViewOption4);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         bank1 = (ImageView) findViewById(R.id.ImageViewBank1);
         bank2 = (ImageView) findViewById(R.id.ImageViewBank2);
         bank3 = (ImageView) findViewById(R.id.ImageViewBank3);

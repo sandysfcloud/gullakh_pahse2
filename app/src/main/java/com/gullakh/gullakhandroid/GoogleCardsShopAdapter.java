@@ -187,22 +187,22 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 //			holder.image.setImageResource(imageId[position]);
 		//	holder.name.setText(result.get(position));
-			/*holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			/*holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
 			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
 			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
-			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
+			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
 			//holder.description.setText("Monthly for "+tenure+ " Years");
-			holder.t1.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.t1.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
 			//holder.t2.setText(String.valueOf(rfixed_fee.get(position)));
-			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
+			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
 			holder.t4= (TextView) convertView
 					.findViewById(R.id.t4);
 			//holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
-			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));*/
+			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
+			holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
+			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));*/
 
 
 

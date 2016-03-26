@@ -17,7 +17,7 @@ public class Questionier1 extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionier1);
         Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
         TextView title = (TextView) findViewById(R.id.title);
         TextView text1 = (TextView) findViewById(R.id.t1);
         TextView text2 = (TextView) findViewById(R.id.t2);

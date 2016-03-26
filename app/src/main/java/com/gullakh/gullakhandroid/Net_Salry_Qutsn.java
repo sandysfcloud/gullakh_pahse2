@@ -21,7 +21,7 @@ public class Net_Salry_Qutsn extends AppCompatActivity implements View.OnClickLi
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         EditText email = (EditText) findViewById(R.id.company);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
     }
 
     @Override

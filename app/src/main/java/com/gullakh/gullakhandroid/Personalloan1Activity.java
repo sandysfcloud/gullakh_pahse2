@@ -20,7 +20,7 @@ public class Personalloan1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_personalloan1);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
         TextView companyname= (TextView) findViewById(R.id.textComapnyname);
         companyname.setTypeface(myfontlight);
         TextView income= (TextView) findViewById(R.id.textIncome);

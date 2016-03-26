@@ -1,6 +1,5 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -35,7 +26,7 @@ public class Your_Comp_Questn extends AppCompatActivity  implements View.OnClick
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         email = (AutoCompleteTextView) findViewById(R.id.locatn);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         email.setOnClickListener(this);
     }
 

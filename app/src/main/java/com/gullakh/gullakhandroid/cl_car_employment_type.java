@@ -28,10 +28,10 @@ public class cl_car_employment_type extends AppCompatActivity implements View.On
         option1= (TextView) findViewById(R.id.TextViewOption1);
         option2= (TextView) findViewById(R.id.TextViewOption2);
         option3= (TextView) findViewById(R.id.TextViewOption3);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(),"fonts/RalewayLight.ttf"));
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         sal1 = (ImageButton) findViewById(R.id.ImageButtonSal1);
         sal2 = (ImageButton) findViewById(R.id.ImageButtonSal2);

@@ -21,7 +21,7 @@ public class EmployerNam_Qustn extends AppCompatActivity  implements View.OnClic
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         EditText email = (EditText) findViewById(R.id.email);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
     }
 
     @Override

@@ -16,9 +16,9 @@ public class Your_InfoFinal_Questn extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your__info_final__questn);
         EditText email = (EditText) findViewById(R.id.email);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         EditText mobile = (EditText) findViewById(R.id.mobile);
-        mobile.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        mobile.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
     }
 
     @Override

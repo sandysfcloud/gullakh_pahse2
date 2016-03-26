@@ -36,7 +36,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.cl_car_yearofmft);
         contentValues=new ContentValues();
         heading = (TextView) findViewById(R.id.textView);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);

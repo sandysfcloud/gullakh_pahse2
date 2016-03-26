@@ -2,7 +2,6 @@ package com.gullakh.gullakhandroid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,17 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class Filter extends AppCompatActivity implements View.OnClickListener,OnDismissCallback {
@@ -64,8 +60,8 @@ public class Filter extends AppCompatActivity implements View.OnClickListener,On
         SeekBar tenure = (SeekBar) findViewById(R.id.tenure);
 
 
-        selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        t1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        t1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         selectColoursButton.setOnClickListener(this);
 

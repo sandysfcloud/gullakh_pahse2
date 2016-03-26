@@ -36,9 +36,9 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         heading1= (TextView) findViewById(R.id.heading1);
         heading2= (TextView) findViewById(R.id.heading2);
         heading3= (TextView) findViewById(R.id.heading3);
-        heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);

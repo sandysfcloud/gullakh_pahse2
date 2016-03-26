@@ -4,13 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,11 +16,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
-import java.text.Format;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class SearchAdapter extends BaseAdapter
 {
@@ -207,8 +198,8 @@ public class SearchAdapter extends BaseAdapter
 
            // Log.d("value from model", tempValues.getemi_value());
             holder.day.setText(""+tempValues.getsearchdate());
-            holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-            holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+            holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
+            holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
             /*Log.d("emi value is test", String.format("%.0f", Double.parseDouble(tempValues.getemi_value())));
 
 
@@ -238,18 +229,18 @@ public class SearchAdapter extends BaseAdapter
             //holder.day.setText(String.valueOf(rmonth_fee.get(position)));
 
             //holder.description.setText("Monthly for "+tenure+ " Years");
-            holder.t1.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+            holder.t1.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
             //holder.t2.setText(String.valueOf(rfixed_fee.get(position)));
-            holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-            holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+            holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
+            holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
             holder.t4= (TextView) convertView
                     .findViewById(R.id.t4);
             //holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
-            holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
-            holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));*/
-            holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+            holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
+            holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));*/
+            holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
 
-           // holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/RalewayLight.ttf"));
+           // holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
 
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override

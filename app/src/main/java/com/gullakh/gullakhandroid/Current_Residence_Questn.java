@@ -8,11 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,7 @@ public class Current_Residence_Questn extends AppCompatActivity  implements Adap
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         TextView email = (TextView) findViewById(R.id.textLoc);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerloc);
         // Spinner click listener

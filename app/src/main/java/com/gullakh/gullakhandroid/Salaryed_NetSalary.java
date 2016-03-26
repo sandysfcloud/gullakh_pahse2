@@ -57,7 +57,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Net Salary");
         actionBar.setCustomView(v);
 
@@ -73,14 +73,14 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         //review.setOnClickListener(this);
 
         sal = (EditText) findViewById(R.id.netsalary);
-       // sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         sal.addTextChangedListener(new NumberTextWatcher(sal));
 
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         if(((GlobalData) getApplication()).getnetsalary()!=null) {
 
@@ -97,7 +97,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         }
 
         onetext = (TextView) findViewById(R.id.onetext);
-     //   onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+     //   onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
      //   done = (ImageView) findViewById(R.id.done);
       //  done.setOnClickListener(this);
         sal.addTextChangedListener(new TextWatcher() {

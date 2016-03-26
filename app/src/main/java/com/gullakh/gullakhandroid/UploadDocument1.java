@@ -1,8 +1,10 @@
 package com.gullakh.gullakhandroid;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -14,17 +16,29 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
 
     private ImageView upload,team;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_document1);
         Intent intent = getIntent();
         upload= (ImageView) findViewById(R.id.ImageUpload);
-        upload.setOnClickListener(this);
         team= (ImageView) findViewById(R.id.ImageGullakh);
-        team.setOnClickListener(this);
         TextView name= (TextView) findViewById(R.id.name);
         TextView applno= (TextView) findViewById(R.id.applno);
+        TextView up1= (TextView) findViewById(R.id.textViewupload1);
+        TextView up2= (TextView) findViewById(R.id.textViewupload2);
+        TextView up3= (TextView) findViewById(R.id.textViewupload3);
+
+        upload.setOnClickListener(this);
+        team.setOnClickListener(this);
+
+        name.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        applno.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        up1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        up2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        up3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         name.setText("Dear "+intent.getStringExtra("name")+",");
         applno.setText("Your application # is "+intent.getStringExtra("applno")+".");
     }
@@ -48,6 +62,7 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
         final View view = factory.inflate(R.layout.thankyoudoc, null);
         TextView tydoc = (TextView) view.findViewById(R.id.textdoc);
+        tydoc.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         alertadd.setView(view);
 
         alertadd.setCancelable(false);

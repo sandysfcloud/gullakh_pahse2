@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -48,7 +49,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_document2);
-
+        TextView heading = (TextView) findViewById(R.id.heading);
         buttonUpoadFile1 = (Button) findViewById(R.id.buttonUpload1);
         buttonUpoadFile2 = (Button) findViewById(R.id.buttonUpload2);
         buttonUpoadFile3 = (Button) findViewById(R.id.buttonUpload3);
@@ -57,6 +58,15 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         buttonUpoadFile6 = (Button) findViewById(R.id.buttonUpload6);
         buttonUpoadFile7 = (Button) findViewById(R.id.buttonUpload7);
         done = (Button) findViewById(R.id.done);
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        buttonUpoadFile1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        buttonUpoadFile2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        buttonUpoadFile3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        buttonUpoadFile4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        buttonUpoadFile5.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        buttonUpoadFile6.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        buttonUpoadFile7.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        done.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         del1 = (ImageView) findViewById(R.id.del1);
         del2 = (ImageView) findViewById(R.id.del2);
         del3 = (ImageView) findViewById(R.id.del3);

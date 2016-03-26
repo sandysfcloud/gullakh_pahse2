@@ -56,7 +56,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Your EMI");
         actionBar.setCustomView(v);
 
@@ -77,8 +77,8 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
         emipaying = (EditText) findViewById(R.id.emipaying);
         onetext = (TextView) findViewById(R.id.onetext);
-        //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        //emipaying.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        //emipaying.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         emipaying.addTextChangedListener(new NumberTextWatcher(emipaying));
 
@@ -88,7 +88,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
 

@@ -45,19 +45,19 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         option2= (TextView) findViewById(R.id.TextViewOption2);
         option3= (TextView) findViewById(R.id.TextViewOption3);
         option4= (TextView) findViewById(R.id.TextViewOption4);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         place1 = (ImageView) findViewById(R.id.ImageViewPlace1);
         place2 = (ImageView) findViewById(R.id.ImageViewPlace2);
         place3 = (ImageView) findViewById(R.id.ImageViewPlace3);
         place4 = (ImageView) findViewById(R.id.ImageViewPlace4);
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
-        next.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        back.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        next.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        back.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         place1.setOnClickListener(this);
         place2.setOnClickListener(this);
         place3.setOnClickListener(this);
@@ -66,7 +66,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         next.setOnClickListener(this);
 
         citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
-        citynam.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        citynam.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         citynam.setOnClickListener(this);
     }
     public void getcitynam()

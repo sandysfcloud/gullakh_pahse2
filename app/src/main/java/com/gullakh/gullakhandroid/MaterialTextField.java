@@ -111,7 +111,7 @@ public class MaterialTextField extends FrameLayout {
         editTextLayout.addView(editText);
 
         label = (TextView) findViewById(R.id.mtf_label);
-        label.setTypeface(Typeface.createFromAsset(LayoutInflater.from(getContext()).inflate(R.layout.mtf_layoutnew, this, false).getContext().getApplicationContext().getAssets(), "fonts/RalewayLight.ttf"));
+        label.setTypeface(Typeface.createFromAsset(LayoutInflater.from(getContext()).inflate(R.layout.mtf_layoutnew, this, false).getContext().getApplicationContext().getAssets(), "fonts/OpenSans-Light.ttf"));
         ViewHelper.setPivotX(label, 0);
         ViewHelper.setPivotY(label, 0);
 

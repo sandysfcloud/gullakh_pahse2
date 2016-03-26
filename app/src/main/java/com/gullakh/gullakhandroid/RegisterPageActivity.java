@@ -75,7 +75,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		myfont = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-		Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+		Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
 		TextView signUptext= (TextView) findViewById(R.id.signupheading);
 		signUptext.setTypeface(myfont);
 		Button register = (Button) findViewById(R.id.Registerbutton);

@@ -49,7 +49,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         back= (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
 
@@ -58,14 +58,14 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
        // onShakeImage();
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
 
         amt.addTextChangedListener(new NumberTextWatcher(amt));
 
         onetext = (TextView) findViewById(R.id.onetext);
-        //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
 
@@ -81,7 +81,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-       // titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Loan Amount");
         actionBar.setCustomView(v);
 

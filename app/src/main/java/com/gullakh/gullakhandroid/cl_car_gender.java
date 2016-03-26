@@ -55,9 +55,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         heading= (TextView) findViewById(R.id.TextViewHeading1);
         option1= (TextView) findViewById(R.id.TextViewOption1);
         option2= (TextView) findViewById(R.id.TextViewOption2);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         spinner = (Spinner) findViewById(R.id.spinner1);
         firstName= (EditText)findViewById(R.id.FirstName);
         firstName.requestFocus();

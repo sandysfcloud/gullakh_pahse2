@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -45,9 +44,9 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         heading1 = (TextView) findViewById(R.id.heading1);
         heading2 = (TextView) findViewById(R.id.heading2);
         heading3 = (TextView) findViewById(R.id.heading3);
-        heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        heading2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        heading3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
         // Spinner click listener
@@ -111,7 +110,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
 
         Doj = (EditText) findViewById(R.id.joindateofempyr);
         Doj.setOnClickListener(this);
-        Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        Doj.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         getDataFromHashMap();
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();

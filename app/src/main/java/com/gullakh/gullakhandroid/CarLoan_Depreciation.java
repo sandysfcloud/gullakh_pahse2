@@ -41,24 +41,24 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Button back = (Button) findViewById(R.id.back);
         title = (TextView) findViewById(R.id.title);
-     //   title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+     //   title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         onetext = (TextView) findViewById(R.id.onetext);
-     //  onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+     //  onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         // MaterialTextField obj=new MaterialTextField(this);
         // obj.expand();
         back.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         amt.addTextChangedListener(new NumberTextWatcher(amt));
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setHomeButtonEnabled(true);
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
         //********************changing actionbar
@@ -71,7 +71,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         TextView  titl = (TextView) v.findViewById(R.id.title);
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
-      //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("DEP Amount");
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);

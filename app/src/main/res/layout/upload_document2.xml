@@ -20,7 +20,7 @@
             android:layout_height="75dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Upload Documents"
-            android:id="@+id/textView26"
+            android:id="@+id/heading"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:layout_marginBottom="20dp" />

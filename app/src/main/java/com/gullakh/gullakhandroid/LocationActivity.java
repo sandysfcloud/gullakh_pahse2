@@ -88,11 +88,11 @@ public class LocationActivity extends AppCompatActivity  implements AdapterView.
         TextView ed3= (TextView)findViewById(R.id.locationText);
         TextView seekbartext= (TextView)findViewById(R.id.seekbartext);
 
-        textView.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        ed1.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        ed2.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        ed3.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-        seekbartext.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        textView.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        ed1.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        ed2.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        ed3.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        seekbartext.setTypeface( Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         seekBar = (SeekBar) findViewById(R.id.seekBar);
 
         seekBar.setProgress(0);

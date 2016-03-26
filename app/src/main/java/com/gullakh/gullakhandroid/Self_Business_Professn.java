@@ -21,7 +21,7 @@ public class Self_Business_Professn extends AppCompatActivity  implements View.O
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         EditText email = (EditText) findViewById(R.id.company);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
     }
 
     @Override

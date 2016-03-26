@@ -134,11 +134,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             tten = (TextView) findViewById(R.id.tenure);
             TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
             TextView tfilter = (TextView) findViewById(R.id.tfilter);
-            /*loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-            tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-            tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-            tenr_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
-            tten.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));*/
+            /*loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+            tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+            tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+            tenr_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+            tten.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));*/
 
             linedit.setOnClickListener(this);
             filter.setOnClickListener(this);
@@ -907,7 +907,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     }
                 });
                 selectColoursButton = (Button) dialog.findViewById(R.id.select_colours);
-               // selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+               // selectColoursButton.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
                 if (prev_selectbank != null)
                     selectColoursButton.setText(prev_selectbank);
                 else

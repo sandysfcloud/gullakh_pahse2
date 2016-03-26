@@ -40,15 +40,15 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.cl_car_make);
         contentValues = new ContentValues();
         heading = (TextView) findViewById(R.id.TextViewHeading2);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         option1 = (TextView) findViewById(R.id.TextViewOption1);
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         option2 = (TextView) findViewById(R.id.TextViewOption2);
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         option3 = (TextView) findViewById(R.id.TextViewOption3);
-        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         option4 = (TextView) findViewById(R.id.TextViewOption4);
-        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         car1 = (ImageView) findViewById(R.id.ImageViewCar1);
         car1.setOnClickListener(this);
         car2 = (ImageView) findViewById(R.id.ImageViewCar2);
@@ -65,7 +65,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         }
 
         carmak = (AutoCompleteTextView) findViewById(R.id.OtherCar);
-        carmak.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        carmak.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         carmak.setOnClickListener(this);
        // getcarmake();
 

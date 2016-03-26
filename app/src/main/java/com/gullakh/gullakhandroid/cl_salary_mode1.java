@@ -29,11 +29,11 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.cl_salary_mode1);
         contentValues=new ContentValues();
         heading= (TextView) findViewById(R.id.heading);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         option1= (TextView) findViewById(R.id.TextViewOption1);
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         option2= (TextView) findViewById(R.id.TextViewOption2);
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         pay1 = (ImageView) findViewById(R.id.imageViewpay1);
         pay1.setOnClickListener(this);
         pay2 = (ImageView) findViewById(R.id.imageViewpay2);

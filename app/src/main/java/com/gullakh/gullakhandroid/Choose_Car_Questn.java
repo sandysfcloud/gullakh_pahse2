@@ -21,7 +21,7 @@ public class Choose_Car_Questn extends AppCompatActivity implements View.OnClick
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         TextView email = (TextView) findViewById(R.id.title);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
     }
 
     @Override

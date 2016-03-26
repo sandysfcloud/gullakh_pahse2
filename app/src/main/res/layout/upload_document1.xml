@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="You are just one step away from loan processing."
-        android:id="@+id/textView17"
+        android:id="@+id/textViewupload1"
         android:layout_gravity="right"
         android:gravity="center"
         android:layout_marginBottom="15dp" />
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Submit documents online"
-        android:id="@+id/textView18"
+        android:id="@+id/textViewupload2"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:layout_margin="5dp" />
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Let Gullakh collect documents"
-        android:id="@+id/textView19"
+        android:id="@+id/textViewupload3"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:layout_margin="5dp"

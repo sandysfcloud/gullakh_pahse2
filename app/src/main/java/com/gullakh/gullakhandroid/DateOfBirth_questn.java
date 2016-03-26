@@ -61,7 +61,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Your DOB");
         actionBar.setCustomView(v);
 
@@ -82,7 +82,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
             Dob.setText(((GlobalData) getApplication()).getDob().toString());
 
         Dob.setOnClickListener(this);
-      //  Dob.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+      //  Dob.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setHomeButtonEnabled(true);
         Intent intent = getIntent();

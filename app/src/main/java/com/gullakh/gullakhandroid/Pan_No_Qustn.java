@@ -7,14 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class Pan_No_Qustn extends AppCompatActivity implements View.OnClickListener {
     AutoCompleteTextView email;
@@ -29,11 +24,11 @@ public class Pan_No_Qustn extends AppCompatActivity implements View.OnClickListe
         ImageView next = (ImageView) findViewById(R.id.next);
         next.setOnClickListener(this);
         EditText email = (EditText) findViewById(R.id.email);
-        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
       //  TextView typ = (TextView) findViewById(R.id.empt);
-        //typ.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/RalewayLight.ttf"));
+        //typ.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
 

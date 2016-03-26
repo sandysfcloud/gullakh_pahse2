@@ -27,7 +27,7 @@ public class Personalloan extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_personalloan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/RalewayLight.ttf");
+        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
         TextView borrow= (TextView) findViewById(R.id.textBorrow);
         borrow.setTypeface(myfontlight);
         TextView loc= (TextView) findViewById(R.id.textLoc);
