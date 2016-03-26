@@ -45,7 +45,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -235,11 +239,7 @@
         <activity android:name=".cl_car_yearofmft" />
         <activity android:name=".signinPrepage" />
         <activity android:name=".UploadDocument1" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".UploadDocument2"

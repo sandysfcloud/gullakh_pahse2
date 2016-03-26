@@ -6,7 +6,7 @@ package com.gullakh.gullakhandroid;
 public class LoanReq
 {
     String id="";
-    String case_number;
+    String case_loan_number;
     public void setId(String id) {
         this.id = id;
     }
@@ -15,10 +15,10 @@ public class LoanReq
     }
 
     public void setCase_number(String case_number) {
-        this.case_number = case_number;
+        this.case_loan_number = case_number;
     }
 
     public String getCase_number() {
-        return case_number;
+        return case_loan_number;
     }
 }

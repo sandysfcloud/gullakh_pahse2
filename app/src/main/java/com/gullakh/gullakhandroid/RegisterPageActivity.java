@@ -239,6 +239,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 				if(urlchange=="setpassword"){
 					storedatatoDatabase();
+					MainActivity.signinstate=true;
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,"Registered Successfully","success");
 					Intent intent = new Intent(this, cl_car_residence.class);
 					startActivity(intent);
@@ -258,7 +259,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		ContentValues values = new ContentValues();
 		values.put("email", useremail);
 		values.put("mobno", usermobno);
-		dbobject.insertdata(values, "signindetails");
+		dbobject.insertdata(values, "userlogin");
 	}
 
 

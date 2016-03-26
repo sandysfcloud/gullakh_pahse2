@@ -45,7 +45,7 @@ public class DataHandler extends SQLiteOpenHelper {
 
             db.execSQL(android_metadata );
 
-            android_metadata= "CREATE TABLE IF NOT EXISTS userlogin (id INTEGER PRIMARY KEY AUTOINCREMENT,useremail VARCHAR,usermobile VARCHAR,usersession VARCHAR );";
+            android_metadata= "CREATE TABLE IF NOT EXISTS userlogin (id INTEGER PRIMARY KEY AUTOINCREMENT,user_id VARCHAR,contact_id VARCHAR,useremail VARCHAR,usermobile VARCHAR,usersession VARCHAR );";
 
             db.execSQL(android_metadata );
             android_metadata= "CREATE TABLE IF NOT EXISTS mysearch (id INTEGER PRIMARY KEY AUTOINCREMENT,loantype VARCHAR,questans VARCHAR,data VARCHAR,created_date DATETIME );";
