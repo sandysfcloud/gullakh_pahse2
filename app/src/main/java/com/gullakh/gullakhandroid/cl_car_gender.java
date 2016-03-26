@@ -37,7 +37,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     String dataGender="";
     private EditText firstName,lastName;
     private Button submit;
-    JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
+    JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,requestgetserver9;
     String sessionid;
     Dialog dgthis;
     String borrowercityid,useremail,usermobile,borrowercaseid;
@@ -46,6 +46,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     private ContentValues contentValues;
     private Spinner spinner;
     private EditText add1,add2,city,pin,state;
+    private String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +156,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                             if (dataGender.equals("")) {
                                 RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
                             } else {
-                                if (add1.equals("")||add2.equals("")||pin.equals("")||city.equals("")||state.equals("")) {
+                                if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
                                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                                 } else {
                                     goToDatabase();
@@ -206,19 +207,18 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }
         //sessionid="327531cb56effa5f2f67f";
         Cursor cre = dbobject.displayData("select * from userlogin");
-        Cursor mobfromdb = dbobject.displayData("select * from signindetails");
         if(cre!=null) {
             if (cre.moveToFirst()) {
-                useremail = cre.getString(1);
-                if (mobfromdb.moveToFirst()) {
-                    usermobile = mobfromdb.getString(2);
-                    cre.close();
-                    dbobject.close();
+                userid=cre.getString(1);
+                useremail = cre.getString(3);
+                usermobile = cre.getString(4);
 
+                   // cre.close();
+                   // dbobject.close();
                 }
 
             }
-        }
+        Log.d("mobile,email",useremail+" "+usermobile);
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -290,8 +290,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     borrowercontactid = Borrower_contact[0].getId();
                     requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
                 }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile
-                            ,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString()
+                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString()
                             ,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
                             ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
                 }
@@ -355,12 +354,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 //Log.d("Application values jsonobj", String.valueOf(jsonObject));
-                dgthis.dismiss();
-                goToIntent();
-                //showdialog();
+
+                requestgetserver9.execute("token", "contactupdate",userid, borrowercontactid);
 
             }
         }, cl_car_gender.this, "wait");
+
+
 
 
         requestgetserver7 = new JSONServerGet(new AsyncResponse() {
@@ -407,7 +407,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 Map<String, String> arrayLoanParameter = new HashMap<>();
                 for (int i = 0; i < LoanP.length; i++) {
                     arrayLoanParameter.put(LoanP[i].getWebreference(),LoanP[i].getid());
-                    Log.d("webref",LoanP[i].getWebreference()+" value :"+LoanP[i].getid());
+                    Log.d("webref", LoanP[i].getWebreference() + " value :" + LoanP[i].getid());
                 }
 
                 JSONArray jsonArray = new JSONArray();
@@ -426,6 +426,25 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 }
                 Log.d("finally got", jsonArray.toString());
                 requestgetserver6.execute("token", "createloanvalue", sessionid,jsonArray.toString());
+
+            }
+        }, cl_car_gender.this, "wait");
+        requestgetserver9 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("contactupdate jsonobj", String.valueOf(jsonObject));
+
+                dgthis.dismiss();
+                goToIntent();
+                //showdialog();
 
             }
         }, cl_car_gender.this, "wait");

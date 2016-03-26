@@ -243,7 +243,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        String date = year+"-"+(++monthOfYear)+"-"+dayOfMonth;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

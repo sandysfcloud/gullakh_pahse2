@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
     static String m_Text;
     static String urlchange;
     public static Context baseContext;
+    private String userid,contactid;
 
 
     @Override
@@ -133,11 +135,16 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
                     }
                 }
-
+                usermobno=str_result.getString("phone");
+                userid=str_result.getString("user_id");
+                contactid=str_result.getString("contact_id");
+                Log.d("signindetails",usermobno+" : "+userid+" : "+contactid);
                 ContentValues values = new ContentValues();
                 values.put("usersession", str_result.get("session_id").toString());
                 values.put("useremail", useremail);
                 values.put("usermobile", usermobno);
+                values.put("user_id", userid);
+                values.put("contact_id", contactid);
                 dbobject.insertdata(values, "userlogin");
                 if(ListView_Click.applyFlag.equals("Car Loan")){
                     MainActivity.signinstate=true;
