@@ -16,6 +16,7 @@ import android.widget.AbsListView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -36,7 +37,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     private String city="";
     AutoCompleteTextView citynam;
     JSONServerGet requestgetserver;
-    String sessionid;
+    String sessionid,data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +90,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         title.setText("Residence");
         actionBar.setCustomView(v);
 
-        /*getSupportActionBar().setDisplayShowCustomEnabled(true);
-        Toolbar parent =(Toolbar) v.getParent();//first get parent toolbar of current action bar
-        parent.setContentInsetsAbsolute(0,0);*/
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
+
+
+
 
         if(((GlobalData) getApplication()).getcarres()!=null) {
             Log.d("residence review not null", ((GlobalData) getApplication()).getcarres());
@@ -109,6 +110,23 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             else if(((GlobalData) getApplication()).getcarres().equals("Mumbai"))
                 place4.setImageResource(R.drawable.buttonselecteffect);
 
+        }
+
+
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+
+        Intent intent = getIntent();
+        data = intent.getStringExtra("review");
+        if (data != null) {
+            if (data.equals("review")) {
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
+
+            }
         }
 
 
@@ -165,16 +183,19 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
 
             case R.id.next:
-
-
-                dataLocation=citynam.getText().toString();
-                if(dataLocation.equals(""))
-                {
-                    RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
-                }else {
-
+                if(((GlobalData) getApplication()).getcarres()!=null)
                     goToIntent();
-                }
+                else
+                    RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
+
+
+
+
+                break;
+
+            case R.id.done:
+                finish();
+
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -232,9 +253,16 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         ((GlobalData) getApplication()).setcarres(dataLocation);
 
         System.gc();
-        Intent intent = new Intent(this, Emp_type_Qustn.class);
-        startActivity(intent);
-        overridePendingTransition(R.transition.left, R.transition.right);
+        if (data != null) {
+            if (data.equals("review")) {
+             finish();
+            }
+        }
+        else {
+            Intent intent = new Intent(this, Emp_type_Qustn.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
     }
 }
 

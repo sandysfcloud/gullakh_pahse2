@@ -241,7 +241,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					storedatatoDatabase();
 					MainActivity.signinstate=true;
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,"Registered Successfully","success");
-					Intent intent = new Intent(this, cl_car_residence.class);
+					Intent intent = new Intent(this, cl_car_make.class);
 					startActivity(intent);
 				}
 
@@ -372,9 +372,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				carloan_que_salary_new.add("Dep. for Last FY: ");
 				carloan_que_salary_new.add("PAT for Prev. to Last FY: ");
 				carloan_que_salary_new.add("Dep. for Prev. to Last FY: ");
-			} }else
+			 }else
 				carloan_que_salary_new.add("Net Monthly Salary: ");
-
+		}
 
 		carloan_que_salary_new.add("Total EMI's you pay: ");
 
@@ -389,6 +389,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
 		if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
+				Log.d("employee type is", emptyp);
 				if (((GlobalData) act.getApplication()).getPat() != null)
 					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getPat().toString());
 				if (((GlobalData) act.getApplication()).getdepreciation() != null)
@@ -398,14 +399,21 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				if (((GlobalData) act.getApplication()).getdepreciation2() != null)
 					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getdepreciation2().toString());
 			}
-		}
+
         else {
-			if (((GlobalData) act.getApplication()).getnetsalary() != null)
-				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getnetsalary().toString());
+
+				if (((GlobalData) act.getApplication()).getnetsalary() != null) {
+					Log.d("net sal not null", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getnetsalary().toString());
+				}
+			}
 		}
 		if(((GlobalData) act.getApplication()).getEmi()!=null)
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getEmi().toString());
 
+
+		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new));
+Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));
 
 
 		TextView tv;
@@ -467,11 +475,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					if(v.getTag().toString().equals("5")&&flag==1) {
 						dialog.dismiss();
 						Intent intclick = new Intent(CurrentAct, Car_Loan_PAT.class);
+						intclick.putExtra("review", "review");
 						CurrentAct.startActivity(intclick);
 					}
 					if(v.getTag().toString().equals("6")&&flag==1) {
 						dialog.dismiss();
 						Intent intclick = new Intent(CurrentAct, CarLoan_Depreciation.class);
+						intclick.putExtra("review", "review");
 						CurrentAct.startActivity(intclick);
 					}
 					/*if(v.getTag().toString().equals("6")&&flag==1) {

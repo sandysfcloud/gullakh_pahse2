@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -194,6 +195,20 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         );
 
 
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("review");
+        if (data != null) {
+            if (data.equals("review")) {
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
+
+            }
+        }
 
 
     }
@@ -222,7 +237,10 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.done:
+                finish();
 
+                break;
             case R.id.edit:
                 if(data.equals("data"))
                     RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this,6);

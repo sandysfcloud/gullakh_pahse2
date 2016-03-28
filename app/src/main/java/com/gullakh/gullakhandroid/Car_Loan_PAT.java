@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -192,8 +193,20 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         );
 
 
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("review");
+        if (data != null) {
+            if (data.equals("review")) {
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
 
-
+            }
+        }
 
 
 
@@ -224,7 +237,10 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.done:
+                finish();
 
+                break;
             case R.id.edit:
                 if(data.equals("data"))
                 RegisterPageActivity.showAlertreview(Car_Loan_PAT.this,5);

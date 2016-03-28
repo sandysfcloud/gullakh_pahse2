@@ -6,7 +6,9 @@
     android:background="@drawable/bgque"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gullakh.gullakhandroid.Questionier1">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -105,10 +107,34 @@
 
         </com.gullakh.gullakhandroid.MaterialTextField>
     </LinearLayout>
-
     <LinearLayout
         android:orientation="horizontal"
-        android:id="@+id/linearLayout9"
+        android:id="@+id/ldone"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#b8546e7a"
+        android:visibility="gone"
+        android:layout_weight="1">
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Done"
+            android:gravity="center"
+
+            android:id="@+id/done"
+            android:layout_weight="1"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+
+            app:typeface="robotoLight"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/footer"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -146,5 +172,5 @@
             android:paddingLeft="95dp"
             app:typeface="robotoLight"/>
     </LinearLayout>
-
+</ScrollView>
 </LinearLayout>

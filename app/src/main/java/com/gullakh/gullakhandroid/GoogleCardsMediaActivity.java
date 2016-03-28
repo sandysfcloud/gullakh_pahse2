@@ -1017,7 +1017,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 break;
             case R.id.linedit:
 
-                Intent edit = new Intent(this, Emp_type_Qustn.class);
+                Intent edit = new Intent(this, cl_car_residence.class);
                 edit.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                  startActivity(edit);
 

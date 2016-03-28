@@ -17,6 +17,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -69,26 +70,14 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 //**********
 
 
-
-        //review = (ImageView) findViewById(R.id.review);
-        //review.setOnClickListener(this);
-        //done = (ImageView) findViewById(R.id.done);
-        //done.setOnClickListener(this);
-
         emipaying = (EditText) findViewById(R.id.emipaying);
         onetext = (TextView) findViewById(R.id.onetext);
-        //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        //emipaying.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         emipaying.addTextChangedListener(new NumberTextWatcher(emipaying));
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
-        //onShakeImage();
-
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
 
 
 
@@ -127,7 +116,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
                         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                         if (!emipaying.getText().toString().equals("")) {
-                            String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(emipaying.getText()))));
+                            String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(emipaying.getText()).replaceAll(",", ""))));
 
                             strtemp = strtemp.substring(0, strtemp.length() - 3);
 
@@ -171,19 +160,21 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
             }
         });
-        Intent intent = getIntent();
-        data = intent.getStringExtra("review");
-        if(data!=null) {
+
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("review");
+        if (data != null) {
             if (data.equals("review")) {
-                next.setVisibility(View.INVISIBLE);
-                back.setVisibility(View.INVISIBLE);
-                review.setVisibility(View.INVISIBLE);
-                //done.setVisibility(View.VISIBLE);
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
 
             }
         }
-        else
-            onShakeImage();
 
     }
 
@@ -211,7 +202,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
 
         switch (v.getId()) {
+            case R.id.done:
+                finish();
 
+                break;
             case R.id.edit:
                 String emptyp=((GlobalData) getApplication()).getemptype();
                 if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))

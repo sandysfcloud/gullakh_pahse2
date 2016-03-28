@@ -16,6 +16,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -38,28 +39,26 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loan_amt);
-      //  getSupportActionBar().setTitle("Car Loan - Loan Amount");
+        //  getSupportActionBar().setTitle("Car Loan - Loan Amount");
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-       // MaterialTextField obj=new MaterialTextField(this);
-       // obj.expand();
-        next= (Button) findViewById(R.id.next);
+        // MaterialTextField obj=new MaterialTextField(this);
+        // obj.expand();
+        next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
-        back= (Button) findViewById(R.id.back);
+        back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
+        // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
-       // onShakeImage();
+        // getSupportActionBar().setHomeButtonEnabled(true);
+        // onShakeImage();
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
+        // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
         amt.addTextChangedListener(new NumberTextWatcher(amt));
@@ -68,20 +67,19 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         //onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
 
-
         //********************changing actionbar
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
-        TextView  titl = (TextView) v.findViewById(R.id.title);
+        TextView titl = (TextView) v.findViewById(R.id.title);
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
-        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        ImageView close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-       // titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        // titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Loan Amount");
         actionBar.setCustomView(v);
 
@@ -94,14 +92,13 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 //**********
 
 
+        //  done = (ImageView) findViewById(R.id.done);
+        // done.setOnClickListener(this);
 
-      //  done = (ImageView) findViewById(R.id.done);
-       // done.setOnClickListener(this);
-
-        if(((GlobalData) getApplication()).getloanamt()!=null) {
+        if (((GlobalData) getApplication()).getloanamt() != null) {
             Log.d("loan amt not null value:", ((GlobalData) getApplication()).getloanamt());
-            String loanamt=((GlobalData) getApplication()).getloanamt();
-            int loanamtint=(int)Double.parseDouble(((GlobalData) getApplication()).getloanamt());
+            String loanamt = ((GlobalData) getApplication()).getloanamt();
+            int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
 
 
@@ -143,54 +140,54 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             }
         });*/
 
-            mSeekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener()
+        mSeekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener()
 
-                                                {
+                                            {
 
-                                                    @Override
-                                                    public void onStopTrackingTouch(SeekArc seekArc) {
-                                                    }
-
-                                                    @Override
-                                                    public void onStartTrackingTouch(SeekArc seekArc) {
-                                                    }
-
-                                                    @Override
-                                                    public void onProgressChanged(SeekArc seekArc, int progress,
-                                                                                  boolean fromUser) {
-
-                                                        progress = (progress + 1) * 50000;
-                                                        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                                                        String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
-
-                                                        strtemp = strtemp.substring(0, strtemp.length() - 3);
-
-
-                                                        mSeekArcProgress.setText(strtemp);
-                                                        amt.setText(String.valueOf(progress));
-
-
-                                                    }
+                                                @Override
+                                                public void onStopTrackingTouch(SeekArc seekArc) {
                                                 }
 
-            );
+                                                @Override
+                                                public void onStartTrackingTouch(SeekArc seekArc) {
+                                                }
+
+                                                @Override
+                                                public void onProgressChanged(SeekArc seekArc, int progress,
+                                                                              boolean fromUser) {
+
+                                                    progress = (progress + 1) * 50000;
+                                                    Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+                                                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
+
+                                                    strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
-        Intent intent = getIntent();
-        data = intent.getStringExtra("review");
-        if(data!=null) {
+                                                    mSeekArcProgress.setText(strtemp);
+                                                    amt.setText(String.valueOf(progress));
+
+
+                                                }
+                                            }
+
+        );
+
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("review");
+        if (data != null) {
             if (data.equals("review")) {
-                //next.setVisibility(View.INVISIBLE);
-                //back.setVisibility(View.INVISIBLE);
-               // done.setVisibility(View.VISIBLE);
-               // review.setVisibility(View.INVISIBLE);
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
 
             }
         }
-        else
-            onShakeImage();
-        }
 
+    }
 
 
 
@@ -228,7 +225,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
 
         switch (v.getId()) {
+            case R.id.done:
+                finish();
 
+                break;
             case R.id.edit:
 
                 RegisterPageActivity.showAlertreview(Loan_amt_questn.this,4);

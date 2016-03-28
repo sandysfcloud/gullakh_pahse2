@@ -16,6 +16,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
@@ -71,19 +72,20 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 business.setImageResource(R.drawable.buttonselecteffect);
         }
 
-
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
         Intent intent = getIntent();
         data = intent.getStringExtra("review");
-        if(data!=null) {
+        if (data != null) {
             if (data.equals("review")) {
-                next.setVisibility(View.INVISIBLE);
-                back.setVisibility(View.INVISIBLE);
-                //done.setVisibility(View.VISIBLE);
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
 
             }
         }
-      //  else
-           // onShakeImage();
 
 
         //********************changing actionbar
@@ -138,7 +140,10 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
+            case R.id.done:
+                finish();
 
+                break;
             case R.id.edit:
                 dg=RegisterPageActivity.showAlertreview(Emp_type_Qustn.this, 2);
                 break;
@@ -188,16 +193,18 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 Log.e("getting set data", emptype);
 
-                if(data==null) {
+                if (data != null) {
+                    if (data.equals("review")) {
+                        finish();
+                    }
+                }
+                else {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
-                else if(data.equals("review"))
-                {
-                    finish();
 
-                }
+
 
                 break;
             case R.id.img2:
@@ -207,16 +214,17 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 business.setImageResource(R.drawable.selfempprof);
 
                 ((GlobalData) getApplication()).setemptype("Self Employed Business");
-                if(data==null) {
+                if (data != null) {
+                    if (data.equals("review")) {
+                        finish();
+                    }
+                }
+                else {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
-                else if(data.equals("review"))
-                {
-                    finish();
 
-                }
                 break;
             case R.id.business:
 
@@ -224,16 +232,17 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
                 ((GlobalData) getApplication()).setemptype("Self Employed Professional");
-                if(data==null) {
+                if (data != null) {
+                    if (data.equals("review")) {
+                        finish();
+                    }
+                }
+                else {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
-                else if(data.equals("review"))
-                {
-                    finish();
 
-                }
                 break;
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -118,7 +120,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 if (!sal.getText().toString().equals("")) {
-                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(sal.getText()))));
+                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(sal.getText()).replaceAll(",", ""))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
@@ -160,19 +162,24 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
             }
         });
-        Intent intent = getIntent();
-        data = intent.getStringExtra("review");
-        if(data!=null) {
+
+
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("review");
+        if (data != null) {
             if (data.equals("review")) {
-                next.setVisibility(View.INVISIBLE);
-                back.setVisibility(View.INVISIBLE);
-                //review.setVisibility(View.INVISIBLE);
-                //done.setVisibility(View.VISIBLE);
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
 
             }
         }
-        else
-            onShakeImage();
+
+
 
     }
     public void onShakeImage() {
@@ -200,7 +207,10 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
 
         switch (v.getId()) {
+            case R.id.done:
+                finish();
 
+                break;
             case R.id.edit:
                 RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,5);
                 break;
@@ -224,6 +234,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             case R.id.next:
                 if(!sal.getText().toString().matches("")) {
                     if(Float.parseFloat(sal.getText().toString().replaceAll(",", "")) > 3000) {
+                        Log.d("net sal",sal.getText().toString().replaceAll(",", ""));
                         ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString().replaceAll(",", "")));
                         Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
                         startActivity(intent);
