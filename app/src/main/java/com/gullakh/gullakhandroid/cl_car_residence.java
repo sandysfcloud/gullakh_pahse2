@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -111,8 +110,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place4.setImageResource(R.drawable.buttonselecteffect);
 
         }
-
-
         Button bdone = (Button) findViewById(R.id.done);
         bdone.setOnClickListener(this);
         LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
@@ -183,13 +180,11 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
 
             case R.id.next:
+                dataLocation=citynam.getText().toString();
                 if(((GlobalData) getApplication()).getcarres()!=null)
                     goToIntent();
                 else
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
-
-
-
 
                 break;
 
@@ -265,7 +260,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
     }
 }
-
 /*
 public void onShakeImage() {
         Animation shake;

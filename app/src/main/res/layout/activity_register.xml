@@ -3,6 +3,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:weightSum="1"
@@ -16,6 +17,7 @@
         android:gravity="center">
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:id="@+id/signupheading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,6 +113,7 @@
         android:layout_gravity="center_horizontal">
 
         <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Register"

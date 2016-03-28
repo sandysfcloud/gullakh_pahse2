@@ -29,14 +29,14 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
-                android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/path1"
                 android:layout_alignBottom="@+id/buttonUpload1"
@@ -45,9 +45,27 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/buttonUpload1"
                 android:gravity="center"
+                android:visibility="visible"
                 android:background="@drawable/edittextsimple"
-                android:hint="ID Proof &amp; DOB Proof" />
-
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/UploadSuccess1"
+                android:layout_alignBottom="@+id/buttonUpload1"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1"
+                android:background="#ff6d9b00"
+                android:text="Uploaded Successfully"
+                android:textColor="#ffffff" />
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="fill_parent"
@@ -58,22 +76,25 @@
 
             <com.gullakh.gullakhandroid.font.RobotoButton
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
                 android:id="@+id/buttonUpload1"
                 android:textAllCaps="false"
+                android:visibility="visible"
                 android:background="#515151"
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:text="Choose File" />
+                android:text="Choose File"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="center_horizontal"
@@ -82,7 +103,7 @@
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/path2"
                 android:layout_alignBottom="@+id/buttonUpload2"
@@ -92,7 +113,26 @@
                 android:layout_alignTop="@+id/buttonUpload2"
                 android:gravity="center"
                 android:background="@drawable/edittextsimple"
-                android:hint="Address Proof" />
+                android:hint="Address Proof"
+                android:layout_weight="1"
+                android:visibility="visible" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/UploadSuccess2"
+                android:layout_alignBottom="@+id/buttonUpload1"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1"
+                android:background="#ff6d9b00"
+                android:text="Uploaded Successfully"
+                android:textColor="#ffffff" />
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="fill_parent"
@@ -102,7 +142,7 @@
                 android:layout_marginLeft="10dp" />
             <com.gullakh.gullakhandroid.font.RobotoButton
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="Choose File"
                 android:id="@+id/buttonUpload2"
@@ -111,7 +151,10 @@
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,7 +169,7 @@
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/path3"
                 android:layout_alignBottom="@+id/buttonUpload3"
@@ -136,7 +179,26 @@
                 android:layout_alignTop="@+id/buttonUpload3"
                 android:gravity="center"
                 android:background="@drawable/edittextsimple"
-                android:hint="Signature Proof" />
+                android:hint="Signature Proof"
+                android:layout_weight="1"
+                android:visibility="visible" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/UploadSuccess3"
+                android:layout_alignBottom="@+id/buttonUpload1"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1"
+                android:background="#ff6d9b00"
+                android:text="Uploaded Successfully"
+                android:textColor="#ffffff" />
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="fill_parent"
@@ -146,7 +208,7 @@
                 android:layout_marginLeft="10dp" />
             <com.gullakh.gullakhandroid.font.RobotoButton
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="Choose File"
                 android:id="@+id/buttonUpload3"
@@ -155,7 +217,10 @@
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -170,7 +235,7 @@
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/path4"
                 android:layout_alignBottom="@+id/buttonUpload4"
@@ -180,7 +245,26 @@
                 android:layout_alignTop="@+id/buttonUpload4"
                 android:gravity="center"
                 android:background="@drawable/edittextsimple"
-                android:hint="Payslips" />
+                android:hint="Payslips"
+                android:layout_weight="1"
+                android:visibility="visible" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/UploadSuccess4"
+                android:layout_alignBottom="@+id/buttonUpload1"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1"
+                android:background="#ff6d9b00"
+                android:text="Uploaded Successfully"
+                android:textColor="#ffffff" />
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="fill_parent"
@@ -190,7 +274,7 @@
                 android:layout_marginLeft="10dp" />
             <com.gullakh.gullakhandroid.font.RobotoButton
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="Choose File"
                 android:id="@+id/buttonUpload4"
@@ -199,7 +283,10 @@
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -214,7 +301,7 @@
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/path5"
                 android:layout_alignBottom="@+id/buttonUpload5"
@@ -224,7 +311,26 @@
                 android:layout_alignTop="@+id/buttonUpload5"
                 android:gravity="center"
                 android:background="@drawable/edittextsimple"
-                android:hint="Bank Statement/Passbook of Salary account" />
+                android:hint="Bank Statement/Passbook of Salary account"
+                android:layout_weight="1"
+                android:visibility="visible" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/UploadSuccess5"
+                android:layout_alignBottom="@+id/buttonUpload1"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1"
+                android:background="#ff6d9b00"
+                android:text="Uploaded Successfully"
+                android:textColor="#ffffff" />
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="fill_parent"
@@ -234,7 +340,7 @@
                 android:layout_marginLeft="10dp" />
             <com.gullakh.gullakhandroid.font.RobotoButton
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="Choose File"
                 android:id="@+id/buttonUpload5"
@@ -243,7 +349,10 @@
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -258,7 +367,7 @@
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/path6"
                 android:layout_alignBottom="@+id/buttonUpload6"
@@ -268,7 +377,26 @@
                 android:layout_alignTop="@+id/buttonUpload6"
                 android:gravity="center"
                 android:background="@drawable/edittextsimple"
-                android:hint="FORM-16/ ITR" />
+                android:hint="FORM-16/ ITR"
+                android:layout_weight="1"
+                android:visibility="visible" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/UploadSuccess6"
+                android:layout_alignBottom="@+id/buttonUpload1"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1"
+                android:background="#ff6d9b00"
+                android:text="Uploaded Successfully"
+                android:textColor="#ffffff" />
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="fill_parent"
@@ -278,7 +406,7 @@
                 android:layout_marginLeft="10dp" />
             <com.gullakh.gullakhandroid.font.RobotoButton
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="Choose File"
                 android:id="@+id/buttonUpload6"
@@ -287,7 +415,10 @@
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -302,7 +433,7 @@
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/path7"
                 android:layout_alignBottom="@+id/buttonUpload7"
@@ -312,8 +443,26 @@
                 android:layout_alignTop="@+id/buttonUpload7"
                 android:gravity="center"
                 android:background="@drawable/edittextsimple"
-                android:hint="Passport Size Photograph" />
-
+                android:hint="Passport Size Photograph"
+                android:layout_weight="1"
+                android:visibility="visible" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/UploadSuccess7"
+                android:layout_alignBottom="@+id/buttonUpload"
+                android:layout_toRightOf="@+id/buttonUpload1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/buttonUpload1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="ID Proof &amp; DOB Proof"
+                android:layout_weight="1"
+                android:background="#ff6d9b00"
+                android:text="Uploaded Successfully"
+                android:textColor="#ffffff" />
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="fill_parent"
@@ -323,7 +472,7 @@
                 android:layout_marginLeft="10dp" />
             <com.gullakh.gullakhandroid.font.RobotoButton
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:text="Choose File"
                 android:id="@+id/buttonUpload7"
@@ -332,7 +481,10 @@
                 android:textColor="#ffffff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
         </LinearLayout>
 
     </LinearLayout>

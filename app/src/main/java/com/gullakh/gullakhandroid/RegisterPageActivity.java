@@ -22,8 +22,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -72,8 +74,21 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
+		android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowCustomEnabled(true);
+		LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+		TextView title = (TextView) v.findViewById(R.id.title);
+		ImageView close = (ImageView) v.findViewById(R.id.close);
+		ImageView review = (ImageView) v.findViewById(R.id.edit);
+		close.setVisibility(View.INVISIBLE);
+		review.setVisibility(View.INVISIBLE);
+		title.setText("Create account");
+		actionBar.setCustomView(v);
+		View v2 = getSupportActionBar().getCustomView();
+		ViewGroup.LayoutParams lp = v2.getLayoutParams();
+		lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+		v2.setLayoutParams(lp);
 		Button register = (Button) findViewById(R.id.Registerbutton);
 
 		baseContext = getBaseContext();
@@ -670,26 +685,6 @@ Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));
 		return dialog;
 	}
 
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			finish();
-			return true;
-		}
-		int id = item.getItemId();
-
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_name) {
-			Intent intcall=new Intent(this, signinPrepage.class);
-			startActivity(intcall);
-			finish();
-			return true;
-		}
-
-		return super.onOptionsItemSelected(item);
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -806,6 +801,24 @@ Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));
 		}
 
 
+@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			finish();
+			return true;
+		}
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_name) {
+			Intent intcall=new Intent(this, signinPrepage.class);
+			startActivity(intcall);
+			finish();
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
 
 
 */

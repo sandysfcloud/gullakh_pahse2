@@ -110,6 +110,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
 
                 final ShowSuggtn fAdapter = new ShowSuggtn(cl_salary_mode2.this, android.R.layout.simple_dropdown_item_1line, liste);
                 other.setAdapter(fAdapter);
+                dataBankType=other.getText().toString();
 
 
             }
@@ -165,7 +166,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.next:
-                if(dataBankType.equals("")&&other.getText().toString()!=null)
+                if(dataBankType.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
@@ -224,11 +225,16 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
+            case R.id.bank:
+                bank1.setImageResource(R.drawable.bankaxis);
+                bank2.setImageResource(R.drawable.bankicici);
+                bank3.setImageResource(R.drawable.bankhdfc);
+                bank4.setImageResource(R.drawable.bankother);
+                break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
-
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);

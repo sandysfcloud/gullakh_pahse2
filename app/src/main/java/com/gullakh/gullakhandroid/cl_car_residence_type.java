@@ -100,8 +100,14 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         }
     }
     private void getDataFromHashMap() {
-        currentCityyr.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city"));
-        currentResidenceyr.setText(cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res"));
+        String temp=cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city");
+        String[] yearandmonth=temp.split(" ");
+        currentCityyr.setText(yearandmonth[0]);
+        currentCitymn.setText(yearandmonth[2]);
+        String temp1=cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res");
+        String[] yearandmonth1=temp.split(" ");
+        currentResidenceyr.setText(yearandmonth1[0]);
+        currentResidencemn.setText(yearandmonth1[2]);
         if(cl_car_global_data.dataWithAns.get("current_res").equals("Self/Spouse owned")) {
             spinner.setSelection(1);
         }else if(cl_car_global_data.dataWithAns.get("current_res").equals("Owned by parents/sibling")) {
@@ -142,10 +148,11 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString()+" Year "+currentResidencemn.getText().toString()+" Month");
                             goToDatabase();
 
-                            Intent intent = new Intent(this, cl_car_salaried.class);
-                            startActivity(intent);
+                            //Intent intent = new Intent(this, cl_car_salaried.class);
+                           // startActivity(intent);
 
-                            /*String LoanType=cl_car_global_data.dataWithAns.get("type_employment");
+                            String LoanType=cl_car_global_data.dataWithAns.get("type_employment");
+                            Intent intent;
                             if(LoanType.equals("Salaried"))
                             {
                                     intent = new Intent(this, cl_car_salaried.class);
@@ -158,7 +165,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             {
                                     intent = new Intent(this, cl_car_selfempbusinesprofs.class);
                                     startActivity(intent);
-                            }*/
+                            }
                         }
                     }
                 }else {
