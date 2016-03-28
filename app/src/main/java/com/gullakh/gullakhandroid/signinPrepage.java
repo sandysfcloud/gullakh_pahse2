@@ -1,10 +1,16 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class signinPrepage extends AppCompatActivity implements View.OnClickListener {
 
@@ -12,6 +18,22 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_prepage);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView title = (TextView) v.findViewById(R.id.title);
+        ImageView close = (ImageView) v.findViewById(R.id.close);
+        ImageView review = (ImageView) v.findViewById(R.id.edit);
+        close.setVisibility(View.INVISIBLE);
+        review.setVisibility(View.INVISIBLE);
+        title.setText("Choose Account");
+        actionBar.setCustomView(v);
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
 
         ImageButton fb= (ImageButton) findViewById(R.id.imageButtonfb);
         ImageButton gp= (ImageButton) findViewById(R.id.imageButtongp);

@@ -73,10 +73,19 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         {
             getCar();
         }
-
+        getDataFromHashMap();
         carmak = (AutoCompleteTextView) findViewById(R.id.OtherCar);
         carmak.setOnClickListener(this);
        // getcarmake();
+    }
+
+    private void getDataFromHashMap()
+    {
+        if(cl_car_global_data.dataWithAns.get("interested_car")!=null)
+        {
+            dataCar=cl_car_global_data.dataWithAns.get("interested_car");
+            setCar(dataCar);
+        }
     }
 
     public void getcarmake()
@@ -107,7 +116,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 }
                 final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_make.this, android.R.layout.simple_dropdown_item_1line, liste);
                 carmak.setAdapter(fAdapter);
-
+                dataCar=carmak.getText().toString();
 
                 Log.e("emplist frm server ", String.valueOf(liste));
 
@@ -134,7 +143,6 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.next:
-                dataCar=carmak.getText().toString();
                 if (dataCar.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
@@ -242,13 +250,13 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
             JSONObject reader = new JSONObject(cr.getString(3));
             car=reader.getString("interested_car");
             setDataToHashMap("currently_living_in",reader.getString("currently_living_in"));
-            setCar();
+            setCar(car);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void setCar() {
+    private void setCar(String car) {
         if(car.equals("Maruti Alto")){
             car1.setImageResource(R.drawable.buttonselecteffect);
             dataCar = "Maruti Alto";
@@ -261,6 +269,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         }else if(car.equals("Maruti swift")){
             car4.setImageResource(R.drawable.buttonselecteffect);
             dataCar = "Maruti swift";
+        }else{
+            carmak.setText(car);
         }
     }
 }

@@ -112,8 +112,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             citynam.setText(((GlobalData) getApplication()).getcarres());
 
         }
-
-
         Button bdone = (Button) findViewById(R.id.done);
         bdone.setOnClickListener(this);
         LinearLayout done = (LinearLayout) findViewById(R.id.ldone);

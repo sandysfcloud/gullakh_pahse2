@@ -87,9 +87,12 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                     cl_car_global_data.dataWithAns.get("total_exp")!=null
                 )
         {
+            String temp=cl_car_global_data.dataWithAns.get("total_exp");
+            String[] yearandmonth=temp.split(" ");
+            Expyr.setText(yearandmonth[0]);
+            Expmn.setText(yearandmonth[2]);
             Emp.setText(cl_car_global_data.dataWithAns.get("name_of_current_emp"));
             Doj.setText(cl_car_global_data.dataWithAns.get("year_you_joined_current_comp"));
-            Expyr.setText(cl_car_global_data.dataWithAns.get("total_exp"));
         }
     }
     public void getemplist()
