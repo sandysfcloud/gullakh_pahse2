@@ -2,13 +2,16 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,13 +55,24 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_gender);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  title = (TextView) v.findViewById(R.id.title);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        ImageView review = (ImageView) v.findViewById(R.id.edit);
+        review.setVisibility(View.INVISIBLE);
+        close.setOnClickListener(this);
+        title.setText("Personal info");
+        actionBar.setCustomView(v);
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
         contentValues=new ContentValues();
-        heading= (TextView) findViewById(R.id.TextViewHeading1);
-        option1= (TextView) findViewById(R.id.TextViewOption1);
-        option2= (TextView) findViewById(R.id.TextViewOption2);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         spinner = (Spinner) findViewById(R.id.spinner1);
         firstName= (EditText)findViewById(R.id.FirstName);
         firstName.requestFocus();
@@ -184,6 +198,12 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 setDataToHashMap("lastname", lastName.getText().toString());
                 setDataToHashMap("gender", dataGender);
                 goToDatabase();
+                break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
                 break;
             case R.id.back:
                 finish();

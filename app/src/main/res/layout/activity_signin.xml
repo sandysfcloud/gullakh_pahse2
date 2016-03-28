@@ -3,6 +3,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="1"
     android:background="@drawable/bgque">
@@ -15,6 +16,7 @@
         android:gravity="center">
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:id="@+id/signupheading"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -62,7 +64,8 @@
             android:gravity="right"
             android:layout_marginBottom="10dp">
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Forgot password?" />
@@ -79,7 +82,8 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Login"
@@ -89,8 +93,14 @@
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textSize="22dp" />
-
-        <Button
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="New User"

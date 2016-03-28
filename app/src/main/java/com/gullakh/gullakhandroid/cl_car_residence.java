@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 public class cl_car_residence extends AppCompatActivity implements View.OnClickListener{
     Button next,back;
     ImageView place1,place2,place3,place4,place5,place6,review;
-    TextView heading,option1,option2,option3,option4,option5,option6;
     static String dataLocation="";
     private ContentValues contentValues;
     private String city="";
@@ -43,14 +41,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_residence);
         contentValues=new ContentValues();
-
-        heading= (TextView) findViewById(R.id.TextViewHeading1);
-        option1= (TextView) findViewById(R.id.TextViewOption1);
-        option2= (TextView) findViewById(R.id.TextViewOption2);
-        option3= (TextView) findViewById(R.id.TextViewOption3);
-        option4= (TextView) findViewById(R.id.TextViewOption4);
-
-
         place1 = (ImageView) findViewById(R.id.ImageViewPlace1);
         place2 = (ImageView) findViewById(R.id.ImageViewPlace2);
         place3 = (ImageView) findViewById(R.id.ImageViewPlace3);
@@ -84,14 +74,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         review.setVisibility(View.INVISIBLE);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-
-        //  title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         title.setText("Residence");
         actionBar.setCustomView(v);
-
-        /*getSupportActionBar().setDisplayShowCustomEnabled(true);
-        Toolbar parent =(Toolbar) v.getParent();//first get parent toolbar of current action bar
-        parent.setContentInsetsAbsolute(0,0);*/
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;

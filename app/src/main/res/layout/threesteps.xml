@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/bgque">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Now Loan processing literally at your fingertips!!! "
+        android:id="@+id/textView7"
+        android:layout_gravity="center_horizontal"
+        android:textSize="22dp"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" Get your Loan processed in just 3 simple steps."
+        android:id="@+id/textView14"
+        android:layout_gravity="center_horizontal"
+        android:textSize="22dp"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" Step 1 > Check Your Eligibility "
+        android:id="@+id/textView16"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Step 2 > Create Loan Application "
+        android:id="@+id/textView17"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Step 3 > Upload Documents "
+        android:id="@+id/textView18"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=" Leave rest of the work on Us!!!"
+        android:id="@+id/textView19"
+        android:layout_gravity="center_horizontal"
+        android:textSize="22dp"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+</LinearLayout>

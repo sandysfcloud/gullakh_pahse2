@@ -2,7 +2,6 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,28 +12,18 @@ import android.widget.TextView;
 
 public class MyProfileActivity extends AppCompatActivity {
 
+    private TextView email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("My Profile");
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
-        TextView prof= (TextView) findViewById(R.id.myprohead);
-        prof.setTypeface(myfontlight);
-        //TextView name= (TextView) findViewById(R.id.textView6);
-        //name.setTypeface(myfontlight);
-        TextView email= (TextView) findViewById(R.id.textViewEmail);
-        email.setTypeface(myfontlight);
-        TextView ph= (TextView) findViewById(R.id.textViewMobNo);
-        ph.setTypeface(myfontlight);
-        Button signout = (Button) findViewById(R.id.signout);
-        signout.setTypeface(myfontlight);
-        //TextView gen= (TextView) findViewById(R.id.textView12);
-        //gen.setTypeface(myfontlight);
-        //TextView loc= (TextView) findViewById(R.id.textView13);
-        //loc.setTypeface(myfontlight);
 
+        TextView ph= (TextView) findViewById(R.id.textViewMobNo);
+        TextView email= (TextView) findViewById(R.id.textViewEmail);
+        Button signout = (Button) findViewById(R.id.signout);
         signout.setOnClickListener(new View.OnClickListener() {
 
             @Override

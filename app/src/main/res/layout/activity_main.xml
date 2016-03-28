@@ -135,6 +135,7 @@
         android:background="#b8546e7a" >
 
         <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="My search"
@@ -152,6 +153,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
         <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="My application"

@@ -2,13 +2,16 @@ package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +29,6 @@ import java.util.ArrayList;
 
 public class cl_car_make extends AppCompatActivity implements View.OnClickListener {
     Button next;
-    TextView heading, option1, option2, option3, option4;
     ImageView car1, car2, car3, car4;
     String dataCar = "";
     private ContentValues contentValues;
@@ -38,17 +40,23 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_car_make);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  title = (TextView) v.findViewById(R.id.title);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        close.setOnClickListener(this);
+        title.setText("Choose car");
+        actionBar.setCustomView(v);
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
         contentValues = new ContentValues();
-        heading = (TextView) findViewById(R.id.TextViewHeading2);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option1 = (TextView) findViewById(R.id.TextViewOption1);
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option2 = (TextView) findViewById(R.id.TextViewOption2);
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option3 = (TextView) findViewById(R.id.TextViewOption3);
-        option3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option4 = (TextView) findViewById(R.id.TextViewOption4);
-        option4.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         car1 = (ImageView) findViewById(R.id.ImageViewCar1);
         car1.setOnClickListener(this);
         car2 = (ImageView) findViewById(R.id.ImageViewCar2);
@@ -65,10 +73,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         }
 
         carmak = (AutoCompleteTextView) findViewById(R.id.OtherCar);
-        carmak.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         carmak.setOnClickListener(this);
        // getcarmake();
-
     }
 
     public void getcarmake()
@@ -182,6 +188,12 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car3.setImageResource(R.drawable.careon);
                 car4.setImageResource(R.drawable.newcar);
                 getcarmake();
+                break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);

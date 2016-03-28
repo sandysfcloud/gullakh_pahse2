@@ -14,26 +14,24 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_weight="1">
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Period of stay in current city?"
             android:id="@+id/heading1"
             android:layout_gravity="center"
             android:textColor="#707070"
             android:gravity="center"
-            android:textSize="20dp"
-            android:background="#67d1d1d1"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp" />
+            android:textSize="22dp"
+            android:background="#67d1d1d1" />
 
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"
@@ -82,19 +80,19 @@
         </LinearLayout>
 
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/heading2"
             android:textColor="#707070"
             android:text="Residence type?"
             android:layout_gravity="center_vertical"
-            android:textSize="20dp"
+            android:textSize="22dp"
             android:gravity="center"
             android:background="#67d1d1d1"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="20dp" />
 
         <Spinner
             android:layout_width="300dp"
@@ -106,25 +104,24 @@
             android:dropDownWidth="match_parent"
             android:background="@drawable/edittextsimple" />
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Period of stay in current residence?"
             android:id="@+id/heading3"
             android:layout_gravity="center"
             android:textColor="#707070"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="22dp"
             android:background="#67d1d1d1"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="20dp" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"
@@ -179,7 +176,8 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -192,8 +190,14 @@
             android:textSize="22dp"
             android:paddingLeft="15dp"
             android:gravity="fill" />
-
-        <Button
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"

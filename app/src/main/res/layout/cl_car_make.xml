@@ -23,15 +23,14 @@
         android:weightSum="2"
         android:layout_weight="1">
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="Which car are you interested in?"
             android:id="@+id/TextViewHeading2"
             android:textColor="#4b4b4b"
-            android:layout_marginTop="20dp"
             android:textSize="22dp"
-            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:layout_weight="1" />
 
@@ -74,7 +73,8 @@
             android:gravity="center"
             android:layout_marginBottom="5dp"
             android:layout_weight="1">
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -84,7 +84,8 @@
 
                 android:id="@+id/TextViewOption1"
                 android:layout_weight="1" />
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -132,7 +133,8 @@
             android:gravity="center"
             android:layout_marginTop="5dp"
             android:layout_weight="1">
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -142,7 +144,8 @@
                 android:text="Hyundai Eon"
 
                 android:layout_weight="1" />
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -195,7 +198,8 @@
         android:layout_weight="1"
         android:layout_marginTop="10dp">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next "
@@ -205,7 +209,7 @@
             android:textAllCaps="false"
             android:background="#00ffffff"
             android:textColor="#ffffff"
-            android:textSize="25dp"
+            android:textSize="22dp"
             android:singleLine="false"
             android:paddingRight="25dp"
             android:gravity="center|right"

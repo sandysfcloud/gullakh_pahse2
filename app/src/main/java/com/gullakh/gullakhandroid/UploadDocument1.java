@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,24 +24,30 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_document1);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  title = (TextView) v.findViewById(R.id.title);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        ImageView review = (ImageView) v.findViewById(R.id.edit);
+        review.setVisibility(View.INVISIBLE);
+        close.setOnClickListener(this);
+        title.setText("Document");
+        actionBar.setCustomView(v);
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
         Intent intent = getIntent();
         upload= (ImageView) findViewById(R.id.ImageUpload);
         team= (ImageView) findViewById(R.id.ImageGullakh);
         TextView name= (TextView) findViewById(R.id.name);
         TextView applno= (TextView) findViewById(R.id.applno);
-        TextView up1= (TextView) findViewById(R.id.textViewupload1);
-        TextView up2= (TextView) findViewById(R.id.textViewupload2);
-        TextView up3= (TextView) findViewById(R.id.textViewupload3);
-
         upload.setOnClickListener(this);
         team.setOnClickListener(this);
-
-        name.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        applno.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        up1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        up2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        up3.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
         name.setText("Dear "+intent.getStringExtra("name")+",");
         applno.setText("Your application # is "+intent.getStringExtra("applno")+".");
     }
@@ -54,6 +63,12 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.ImageGullakh:
                 showdialog();
+                break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
                 break;
         }
     }
