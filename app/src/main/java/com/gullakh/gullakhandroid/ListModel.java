@@ -110,7 +110,7 @@ public class ListModel implements Serializable{
         this.hoteml = hoteml;
     }
 
-    public void setOthernam(String other_nam)
+    public void setcardocu(String other_nam)
     {
         this.other_nam= other_nam;
     }
@@ -239,7 +239,7 @@ public class ListModel implements Serializable{
         return this.hoteml;
     }
 
-    public String getOthernam()
+    public String getcardocu()
     {
         return this.other_nam;
     }

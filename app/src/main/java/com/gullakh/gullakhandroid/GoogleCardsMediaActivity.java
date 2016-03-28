@@ -17,6 +17,7 @@ package com.gullakh.gullakhandroid;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -27,14 +28,18 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -52,9 +57,11 @@ import java.math.BigDecimal;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -108,7 +115,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     String globalidentity,loantype;
     Dialog dgthis;
     EditText editloan;
-    TextView loan_amt,tenr_amt;
+    TextView loan_amt,tenr_amt,title;
+    ArrayAdapter<String> adapter;
+    private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee" };
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +125,29 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         Intent intent = getIntent();
         String data = intent.getStringExtra("data");
+
+
+        //********************changing actionbar
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        title = (TextView) v.findViewById(R.id.title);
+        ImageView review = (ImageView) v.findViewById(R.id.edit);
+        review.setVisibility(View.INVISIBLE);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        close.setOnClickListener(this);
+
+
+        actionBar.setCustomView(v);
+
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+//******************************************
 
         if (data.equals("carloan")) {
             Log.e("flow test carloan", String.valueOf(0));
@@ -168,6 +200,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             Spinner s1 = (Spinner) findViewById(R.id.spinner1);
+
+
+            MyArrayAdapter ma = new MyArrayAdapter(this);
+            s1.setAdapter(ma);
+
 
             s1.setPrompt("Sorted By");
 
@@ -274,6 +311,87 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     }
 //*************************************************************************************End of Oncreate
+
+
+
+
+
+
+
+    //**************spinner
+
+
+    private class MyArrayAdapter extends BaseAdapter {
+
+        private LayoutInflater mInflater;
+
+        public MyArrayAdapter(GoogleCardsMediaActivity con) {
+            // TODO Auto-generated constructor stub
+            mInflater = LayoutInflater.from(con);
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return COUNTRIES.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            final ListContent holder;
+            View v = convertView;
+            if (v == null) {
+                v = mInflater.inflate(R.layout.spinner_item, null);
+                holder = new ListContent();
+
+                holder.name = (TextView) v.findViewById(R.id.textView1);
+
+                v.setTag(holder);
+            } else {
+
+                holder = (ListContent) v.getTag();
+            }
+
+
+            holder.name.setText("" + COUNTRIES[position]);
+
+            return v;
+        }
+
+    }
+
+    static class ListContent {
+
+        TextView name;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //********************************************************************
 
 
     public void loan_amtcalcutn(final String param) {
@@ -566,10 +684,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
+if(((GlobalData) getApplication()).getcarres()!=null) {
+    Log.d("checking city name here", ((GlobalData) getApplication()).getcarres());
 
-        Log.d("checking city name here",((GlobalData) getApplication()).getcarres());
-
-        requestgetserver6.execute("token", "City", sessionid,((GlobalData) getApplication()).getcarres());
+    requestgetserver6.execute("token", "City", sessionid, ((GlobalData) getApplication()).getcarres());
+}
 
 
 
@@ -653,6 +772,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 sched.setfee_charges(cobj_RM[i].getfee_charges_details());
                 Log.d("check fee here", cobj_RM[i].getfee_charges_details());
                 sched.setother_details(cobj_RM[i].getother_details());
+                sched.setcardocu(cobj_RM[i].getdocu_details());
+
+                Log.d("activity docum ", cobj_RM[i].getdocu_details());
                 CustomListViewValuesArr.add(sched);
                 disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 
@@ -719,7 +841,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
         });
 
-        getSupportActionBar().setTitle("Search Result");
+        //getSupportActionBar().setTitle("Search Result");
+        title.setText("Search Result");
     }
 
 
@@ -749,13 +872,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 Intent intent = new Intent(GoogleCardsMediaActivity.this, Myapplication.class);
                 intent.putExtra("data", "carloan");
-                 startActivity(intent);
+                startActivity(intent);
                 (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
 
             }
         });
 
-        getSupportActionBar().setTitle("My Application");
+        //getSupportActionBar().setTitle("My Application");
+        title.setText("My Application");
     }
 
 
@@ -795,7 +919,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
         });
 
-        getSupportActionBar().setTitle("Result");
+        //getSupportActionBar().setTitle("Result");
+        title.setText("Result");
     }
 
 
@@ -819,7 +944,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 r.getDisplayMetrics());
         listView.setPadding(px, px, px, px);
         listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         layout.addView(listView);
 
 
@@ -850,6 +975,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
+                break;
             case R.id.filter:
 
                 bankfilter = disbank.toArray(new CharSequence[disbank.size()]);
@@ -1176,49 +1308,3 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 }
 
-//tenure.setMax(Max_tenure / 12);
-//tenure.setProgress(seektenure);
-                /*tenure.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        seektenure = progress;
-                        tenur.setText(String.valueOf(progress));
-
-
-                        // value now holds the decimal value between 0.0 and 10.0 of the progress
-                        // Example:
-                        // If the progress changed to 45, value would now hold 4.5
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                    }
-                });*/
-
-//*********
-	/*seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-					@Override
-					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-						Double value = (progress / 10.0);
-						seek_loanamt = progress;
-						loand.setText(String.valueOf(progress) + " Lakh");
-						// value now holds the decimal value between 0.0 and 10.0 of the progress
-						// Example:
-						// If the progress changed to 45, value would now hold 4.5
-					}
-
-
-					@Override
-					public void onStartTrackingTouch(SeekBar seekBar) {
-
-					}
-
-					@Override
-					public void onStopTrackingTouch(SeekBar seekBar) {
-
-					}
-				});*/

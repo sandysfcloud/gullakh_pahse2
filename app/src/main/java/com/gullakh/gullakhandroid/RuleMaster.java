@@ -12,6 +12,7 @@ public class RuleMaster {
     public String processing_fee;
     public String fee_char_detail;
     public String other_details;
+    public String document_details;
 
     public String getaccount_lender(){
         return account_lender;
@@ -69,5 +70,12 @@ public class RuleMaster {
 
     public void setother_details(String token){
         other_details=token;
+    }
+
+    public void setdocu_details(String token){
+        document_details=token;
+    }
+    public String getdocu_details(){
+        return document_details;
     }
 }

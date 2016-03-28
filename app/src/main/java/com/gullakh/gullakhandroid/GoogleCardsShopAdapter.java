@@ -165,6 +165,12 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			Log.d("emi value is test", String.format("%.0f", Double.parseDouble(tempValues.getemi_value())));
 
 
+			//************
+
+
+
+			//*************
+
 
 			Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 			String emi=String.valueOf(format.format(new BigDecimal(tempValues.getemi_value())));
@@ -220,6 +226,8 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 					Log.d("check fee here2", data.get(pos).getfee_charges());
 					intent.putExtra("fee", data.get(pos).getfee_charges());
 					intent.putExtra("other", data.get(pos).getother_details());
+					intent.putExtra("docum", data.get(pos).getcardocu());
+					Log.d("adapter docum ",data.get(pos).getcardocu());
 					cont.startActivity(intent);
 					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
 				}

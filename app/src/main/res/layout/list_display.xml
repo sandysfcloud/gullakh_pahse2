@@ -83,7 +83,7 @@
 
             android:textSize="15sp"
             android:layout_marginLeft="5dp"
-            android:text="Tenure Value: "
+            android:text="Tenure: "
             app:typeface="robotoLight"/>
         <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
@@ -159,12 +159,13 @@
         android:textSize="12sp"
         android:text="Sort By"
       android:layout_marginLeft="25dp"
+        android:layout_marginBottom="-10dp"
         android:layout_marginRight="-10dp"
         app:typeface="robotoLight"/>
         <Spinner android:id="@+id/spinner1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="5dp"
+
             android:textColor="#616161"
             android:textSize="15sp"
             android:drawSelectorOnTop="true"

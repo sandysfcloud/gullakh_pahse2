@@ -109,6 +109,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
             else if(((GlobalData) getApplication()).getcarres().equals("Mumbai"))
                 place4.setImageResource(R.drawable.buttonselecteffect);
+            citynam.setText(((GlobalData) getApplication()).getcarres());
 
         }
 
@@ -183,6 +184,11 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
 
             case R.id.next:
+
+                if(citynam.getText().toString()!=null) {
+                    Log.d("edit text",citynam.getText().toString());
+                    ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+                }
                 if(((GlobalData) getApplication()).getcarres()!=null)
                     goToIntent();
                 else
@@ -209,7 +215,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
-                dataLocation="Bengaluru";
+
+                ((GlobalData) getApplication()).setcarres("Bengaluru");
                 goToIntent();
                 break;
             case R.id.ImageViewPlace2:
@@ -217,7 +224,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.buttonselecteffect);
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
-                dataLocation="Chennai";
+
+                ((GlobalData) getApplication()).setcarres("Chennai");
                 goToIntent();
                 break;
             case R.id.ImageViewPlace3:
@@ -225,7 +233,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
-                dataLocation="Kolkata";
+
+                ((GlobalData) getApplication()).setcarres("Kolkata");
                 goToIntent();
                 break;
             case R.id.ImageViewPlace4:
@@ -233,7 +242,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.buttonselecteffect);
-                dataLocation="Mumbai";
+                ((GlobalData) getApplication()).setcarres("Mumbai");
+
                 goToIntent();
                 break;
             case R.id.locatn:
@@ -242,6 +252,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 getcitynam();
+
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -250,7 +261,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
     }
     public void goToIntent(){
-        ((GlobalData) getApplication()).setcarres(dataLocation);
+
 
         System.gc();
         if (data != null) {

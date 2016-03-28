@@ -51,8 +51,9 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         String emi = intent.getStringExtra("emi");
         String fee = intent.getStringExtra("fee");
         String other = intent.getStringExtra("other");
+        String docum = intent.getStringExtra("docum");
 
-
+        Log.d("click docum ",docum);
 
         Log.d("all fee data before" , fee);
         String[] sepfee = fee.split(";");
@@ -64,6 +65,10 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         String[] sepother = other.split(";");
         Log.d("all other data after" , String.valueOf(sepother[0]));
 
+
+        Log.d("all docum data before" , docum);
+        String[] sdocum = docum.split(";");
+        Log.d("all docum data after" , String.valueOf(sdocum[0]));
 
 
 
@@ -81,7 +86,14 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
             Log.d("sepother info", +i + " " + sepother[i]);
         }
 
-        Log.d("final sepother info",othrdata);
+        String cardocu="";
+        for (int i=0;i<sdocum.length;i++)
+        {
+            cardocu=cardocu+sdocum[i]+"\n";
+            Log.d("documen info", +i + " " + sdocum[i]);
+        }
+        Log.d("final cardocu info",cardocu);
+
 
         TextView name= (TextView) findViewById(R.id.bankname);
 
@@ -132,8 +144,13 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
         tfee= (TextView) findViewById(R.id.tfee);
         tfee.setText(feedata);
+
         t_other= (TextView) findViewById(R.id.tothr);
         t_other.setText(othrdata);
+
+        TextView t_docum= (TextView) findViewById(R.id.tdocum);
+        t_docum.setText(cardocu);
+        Log.d("cardocu set here", cardocu);
 
         t8= (TextView) findViewById(R.id.d2);
        // t8.setTypeface(myfontlight);
