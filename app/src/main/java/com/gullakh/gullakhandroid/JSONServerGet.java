@@ -308,7 +308,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("operation", "create"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "Contacts"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            Log.d("arguments","{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"salutationtype\":\""+args[6]+"\",\"firstname\":\""+args[7]+"\",\"lastname\":\""+args[8]+"\",\"birthday\":\""+args[9]+"\",\"mailingstreet\":\""+args[10]+"\",\"mailingcity:\""+args[11]+"\",\"mailingzip:\""+args[12]+"\",\"mailingstate:\""+args[13]+"\",\"assigned_user_id\":\"admin\"}");
+                            Log.d("arguments", "{\"account_id\":\"" + args[3] + "\",\"email\":\"" + args[4] + "\",\"mobile\":\"" + args[5] + "\",\"salutationtype\":\"" + args[6] + "\",\"firstname\":\"" + args[7] + "\",\"lastname\":\"" + args[8] + "\",\"birthday\":\"" + args[9] + "\",\"mailingstreet\":\"" + args[10] + "\",\"mailingcity:\"" + args[11] + "\",\"mailingzip:\"" + args[12] + "\",\"mailingstate:\"" + args[13] + "\",\"assigned_user_id\":\"admin\"}");
                             nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"salutationtype\":\""+args[6]+"\",\"firstname\":\""+args[7]+"\",\"lastname\":\""+args[8]+"\",\"birthday\":\""+args[9]+"\",\"mailingstreet\":\""+args[10]+"\",\"mailingcity\":\""+args[11]+"\",\"mailingzip\":\""+args[12]+"\",\"mailingstate\":\""+args[13]+"\",\"assigned_user_id\":\"admin\"}"));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
@@ -318,7 +318,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         else if(args[1].equals("contactupdate")){
 
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                            nameValuePairs.add(new BasicNameValuePair("user_id",args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("user_id", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("contact_id",args[3]));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL_web).toString());
@@ -379,6 +379,18 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("recordid",args[3]));
                             nameValuePairs.add(new BasicNameValuePair("title",args[4]));
+                            Log.d("argsumentsfromdoc",args.toString());
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                        }else if(args[1].equals("getloandetails"))
+                        {
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "getloandetails"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("recordid",args[3]));
+
                             Log.d("argsumentsfromdoc",args.toString());
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());

@@ -111,7 +111,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     protected Button selectColoursButton;
     CharSequence[] bankfilter = null;
     String prev_selectbank = null,listidglobal, tierid;;
-    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7;
+    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
     String globalidentity,loantype;
     Dialog dgthis;
     EditText editloan;
@@ -288,22 +288,70 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-                setContentView(R.layout.seach_display);
-                layout = (LinearLayout) findViewById(R.id.linear);
-
-
-                            ListModel sched = new ListModel();
-                            sched = new ListModel();
-                            sched.setapplno("124561");//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                            sched.setappldate("4-march-2016");
-                            sched.setstatus("active");
-
-                            searchlistviewArry.add(sched);
 
 
 
-                createListView();
-                setapplicatnadapter(searchlistviewArry);
+          requestgetserver8 = new JSONServerGet(new AsyncResponse() {
+              @Override
+              public void processFinish(JSONObject output) {
+
+              }
+
+              public void processFinishString(String str_result, Dialog dg) {
+                  GsonBuilder gsonBuilder = new GsonBuilder();
+                  gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                  Gson gson = gsonBuilder.create();
+
+                  JsonParser parser = new JsonParser();
+                  JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                  dgthis = dg;
+
+                  //LoanDetails[] loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails[].class);
+
+
+
+
+
+
+
+
+              }
+          }, GoogleCardsMediaActivity.this, "1");
+
+          DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
+          Cursor cre = dbobject.displayData("select * from userlogin");
+          String userid,contactid="";
+          if(cre!=null) {
+              if (cre.moveToFirst()) {
+                  userid=cre.getString(1);
+                  contactid = cre.getString(2);
+
+
+                  // cre.close();
+                  // dbobject.close();
+              }
+
+          }
+
+          //requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
+
+          setContentView(R.layout.seach_display);
+          layout = (LinearLayout) findViewById(R.id.linear);
+
+
+          ListModel sched = new ListModel();
+          sched = new ListModel();
+          sched.setapplno("124561");//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+          sched.setappldate("4-march-2016");
+          sched.setstatus("active");
+
+          searchlistviewArry.add(sched);
+
+
+
+          createListView();
+          setapplicatnadapter(searchlistviewArry);
+
 
 
             }
