@@ -175,8 +175,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             llsignin.setVisibility(View.VISIBLE);
             llsignout.setVisibility(View.GONE);
         }
-        Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
         //coin=(ImageView)findViewById(R.id.imageViewCoin);
        // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
       //  Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");

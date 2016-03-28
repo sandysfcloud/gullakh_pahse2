@@ -14,19 +14,21 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:gravity="center">
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Salary deposited to?"
             android:id="@+id/TextViewHeading"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1" />
+            android:textSize="22dp"
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -34,8 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/TextViewHeading"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="29dp"
-            android:layout_weight="1">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="100dp"
@@ -62,9 +63,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
+            android:layout_marginTop="10dp">
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -72,9 +74,10 @@
                 android:id="@+id/TextViewOption1"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="16dp" />
+                android:textSize="18dp" />
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -82,7 +85,7 @@
                 android:id="@+id/TextViewOption2"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="16dp" />
+                android:textSize="18dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +95,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/LinearLayout"
-            android:layout_weight="1">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="100dp"
@@ -118,9 +121,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
+            android:layout_marginTop="10dp">
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -128,9 +132,10 @@
                 android:id="@+id/TextViewOption3"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="16dp" />
+                android:textSize="18dp" />
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -138,7 +143,7 @@
                 android:id="@+id/TextViewOption4"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="16dp" />
+                android:textSize="18dp" />
         </LinearLayout>
 
         <com.gullakh.gullakhandroid.MaterialTextField
@@ -151,8 +156,7 @@
             android:focusable="false"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/loan_amt"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1">
+            android:layout_marginTop="10dp">
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
@@ -173,7 +177,8 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -186,8 +191,14 @@
             android:textSize="22dp"
             android:paddingLeft="15dp"
             android:gravity="fill" />
-
-        <Button
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"

@@ -1,13 +1,16 @@
 package com.gullakh.gullakhandroid;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,13 +30,25 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cl_salary_mode1);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView  title = (TextView) v.findViewById(R.id.title);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        ImageView review = (ImageView) v.findViewById(R.id.edit);
+        review.setVisibility(View.INVISIBLE);
+        close.setOnClickListener(this);
+        title.setText("Salaried");
+        actionBar.setCustomView(v);
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
         contentValues=new ContentValues();
-        heading= (TextView) findViewById(R.id.heading);
-        heading.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option1= (TextView) findViewById(R.id.TextViewOption1);
-        option1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        option2= (TextView) findViewById(R.id.TextViewOption2);
-        option2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         pay1 = (ImageView) findViewById(R.id.imageViewpay1);
         pay1.setOnClickListener(this);
         pay2 = (ImageView) findViewById(R.id.imageViewpay2);
@@ -120,6 +135,12 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                 startActivity(intent2);
                 overridePendingTransition(R.transition.left, R.transition.right);
+                break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
                 break;
             case R.id.back:
                 finish();

@@ -45,7 +45,8 @@
                     android:gravity="center"
                     android:layout_weight="2"
                     android:layout_marginRight="10dp"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -65,7 +66,8 @@
                     android:hint="Middle Name"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:singleLine="true" />
 
                 <EditText
                     android:layout_width="fill_parent"
@@ -78,7 +80,8 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -90,7 +93,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp">
 
-                <TextView
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
@@ -124,7 +128,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp" />
 
-                <TextView
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
@@ -144,7 +149,8 @@
 
             </LinearLayout>
 
-            <TextView
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Residential Address"
@@ -157,47 +163,51 @@
 
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:id="@+id/addr1"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
                 android:hint="Address  line 1"
                 android:gravity="center"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:singleLine="true" />
 
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:id="@+id/addr2"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
                 android:hint="Address  line 2"
                 android:gravity="center"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:singleLine="true" />
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:id="@+id/pin"
                 android:inputType="number"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
                 android:hint="PIN code"
                 android:gravity="center"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:singleLine="true" />
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:id="@+id/city"
                 android:background="@drawable/edittextsimple"
                 android:hint="City"
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true" />
 
             <EditText
                 android:layout_width="300dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:id="@+id/state"
                 android:background="@drawable/edittextsimple"
                 android:hint="State"
@@ -220,7 +230,8 @@
         android:layout_alignParentStart="true"
         android:gravity="center">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -230,14 +241,15 @@
             android:background="#b8546e7a"
             android:textAllCaps="false"
             android:textColor="#ffffff"
-            android:textSize="18dp"
+            android:textSize="22dp"
             android:paddingLeft="15dp"
             android:gravity="fill" />
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="Create Application"
+            android:text="Submit"
             android:id="@+id/Submit"
             android:background="#b8546e7a"
             android:textColor="#ffffff"
@@ -247,8 +259,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_weight="1"
-            android:textSize="18dp"
-            android:paddingRight="15dp" />
+            android:textSize="22dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="60dp" />
     </LinearLayout>
 
 </LinearLayout>

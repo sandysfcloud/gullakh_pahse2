@@ -90,13 +90,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         title.setText("Residence");
         actionBar.setCustomView(v);
 
+        /*getSupportActionBar().setDisplayShowCustomEnabled(true);
+        Toolbar parent =(Toolbar) v.getParent();//first get parent toolbar of current action bar
+        parent.setContentInsetsAbsolute(0,0);*/
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
-
-
-
 
         if(((GlobalData) getApplication()).getcarres()!=null) {
             Log.d("residence review not null", ((GlobalData) getApplication()).getcarres());

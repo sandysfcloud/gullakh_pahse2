@@ -31,7 +31,7 @@
             android:background="@drawable/edit"
             android:layout_marginTop="25dp"
             android:layout_marginRight="15dp" />
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             style="?android:attr/buttonStyleSmall"
             android:layout_width="120dp"
             android:layout_height="40dp"
@@ -66,14 +66,13 @@
                 android:layout_margin="10dp" />-->
 
             <TextView
-                android:layout_width="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="abc@gmail.com"
                 android:drawableLeft="@drawable/email"
                 android:id="@+id/textViewEmail"
                 android:layout_margin="10dp"
-                android:gravity="center_horizontal"
                 android:padding="10dp" />
 
             <TextView

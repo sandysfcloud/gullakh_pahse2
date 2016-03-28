@@ -110,7 +110,7 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Register"

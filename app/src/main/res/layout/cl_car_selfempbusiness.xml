@@ -14,43 +14,44 @@
         android:layout_gravity="center"
         android:layout_weight="1">
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/heading1"
-            android:textColor="#000"
+            android:textColor="#000000"
             android:text="Industry type?"
             android:layout_gravity="center_vertical"
-            android:textSize="18dp"
+            android:textSize="22dp"
             android:gravity="center"
-            android:background="#67d1d1d1"
-            android:layout_marginTop="20dp" />
+            android:background="#2cababab" />
 
         <Spinner
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:id="@+id/spinner1"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:spinnerMode="dropdown"
             android:layout_gravity="center_horizontal"
             android:dropDownSelector="#c2c2c2"
             android:dropDownWidth="match_parent"
-            android:background="@drawable/edittextsimple"
-            android:layout_marginTop="10dp" />
+            android:background="@drawable/edittextsimple" />
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Start date of current business?"
             android:id="@+id/heading2"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#000000"
-            android:background="#67d1d1d1" />
+            android:background="#2cababab"
+            android:textSize="22dp"
+            android:layout_marginTop="20dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -81,18 +82,19 @@
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Type of firm?"
             android:id="@+id/heading3"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:textColor="#000000"
-            android:background="#67d1d1d1"
-            android:layout_marginTop="10dp" />
+            android:background="#2cababab"
+            android:layout_marginTop="20dp"
+            android:textSize="22dp" />
 
         <Spinner
             android:layout_width="300dp"
@@ -117,7 +119,8 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal|bottom">
 
-        <Button
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -130,8 +133,14 @@
             android:textSize="22dp"
             android:paddingLeft="15dp"
             android:gravity="fill" />
-
-        <Button
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"

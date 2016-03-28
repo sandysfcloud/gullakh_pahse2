@@ -74,10 +74,6 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		setContentView(R.layout.activity_register);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		myfont = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-		Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
-		TextView signUptext= (TextView) findViewById(R.id.signupheading);
-		signUptext.setTypeface(myfont);
 		Button register = (Button) findViewById(R.id.Registerbutton);
 
 		baseContext = getBaseContext();
@@ -87,10 +83,6 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		 mobilenumber=(EditText) findViewById(R.id.mobilenumber);
 		 password=(EditText) findViewById(R.id.password);
 		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
-
-
-		register.setTypeface(myfontlight);
-
 
 		if (checkPlayServices()) {
 			gcm = GoogleCloudMessaging.getInstance(getApplicationContext());

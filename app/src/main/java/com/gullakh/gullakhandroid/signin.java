@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,23 +41,11 @@ public class signin extends AppCompatActivity implements AsyncResponse {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Sign In");
-        Typeface myfont = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
-        Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
-        TextView signUptext= (TextView) findViewById(R.id.signupheading);
-        signUptext.setTypeface(myfont);
-
         Button signin = (Button) findViewById(R.id.signinbutton);
         baseContext = getBaseContext();
 
-
         emailadress=(EditText) findViewById(R.id.emailaddress);
         password=(EditText) findViewById(R.id.password);
-
-
-
-
-        signin.setTypeface(myfontlight);
-
 
         signin.setOnClickListener(new View.OnClickListener() {
 
