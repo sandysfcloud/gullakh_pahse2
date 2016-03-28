@@ -84,6 +84,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         add1=(EditText)findViewById(R.id.addr1);
         add2=(EditText)findViewById(R.id.addr2);
         city=(EditText)findViewById(R.id.city);
+        city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
         pin=(EditText)findViewById(R.id.pin);
         state=(EditText)findViewById(R.id.state);
         gen1.setOnClickListener(this);
@@ -331,8 +332,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
 
-                ContactBR Borrower_city = gson.fromJson(jsonObject.get("result"), ContactBR.class);
-                borrowercontactid = Borrower_city.getId();
+                ContactBR Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR.class);
+                borrowercontactid = Borrower_contact.getId();
                 Log.d("Borrower contact id", borrowercontactid);
                 requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
             }

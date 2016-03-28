@@ -371,6 +371,19 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }
+                        else if(args[1].equals("deletedocument"))
+                        {
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "documentdelete"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("recordid",args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("title",args[4]));
+                            Log.d("argsumentsfromdoc",args.toString());
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                        }
 
 
                         //Perform the request and check the status code

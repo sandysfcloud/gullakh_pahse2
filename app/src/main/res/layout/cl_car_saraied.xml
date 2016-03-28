@@ -49,7 +49,8 @@
                 android:inputType="text"
                 android:id="@+id/salEmpname"
                 android:textColor="#000000"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:singleLine="true" />
         </com.gullakh.gullakhandroid.MaterialTextField>
 
 
@@ -87,7 +88,8 @@
                 android:focusableInTouchMode="false"
                 android:id="@+id/saljoindateofempyr"
                 android:textColor="#000000"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:singleLine="true" />
         </com.gullakh.gullakhandroid.MaterialTextField>
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -130,7 +132,8 @@
                     android:inputType="number"
                     android:id="@+id/totalexpyr"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:singleLine="true" />
             </com.gullakh.gullakhandroid.MaterialTextField>
 
             <com.gullakh.gullakhandroid.MaterialTextField
@@ -152,7 +155,8 @@
                     android:inputType="number"
                     android:id="@+id/totalexpmn"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:singleLine="true" />
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
 

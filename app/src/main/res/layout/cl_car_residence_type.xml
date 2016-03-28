@@ -75,7 +75,8 @@
                     android:inputType="number"
                     android:id="@+id/currentCitymn"
                     android:textColor="#3f3f3f"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:singleLine="true" />
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
 
@@ -142,7 +143,8 @@
                     android:inputType="number"
                     android:id="@+id/currentResidenceyr"
                     android:textColor="#3f3f3f"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:singleLine="true" />
             </com.gullakh.gullakhandroid.MaterialTextField>
 
             <com.gullakh.gullakhandroid.MaterialTextField
@@ -164,7 +166,8 @@
                     android:inputType="number"
                     android:id="@+id/currentResidencemn"
                     android:textColor="#000"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:singleLine="true" />
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
     </LinearLayout>

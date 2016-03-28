@@ -48,6 +48,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView  title = (TextView) v.findViewById(R.id.title);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
+        ImageView review = (ImageView) v.findViewById(R.id.edit);
+        review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
         title.setText("Choose car");
         actionBar.setCustomView(v);

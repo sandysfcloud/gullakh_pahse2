@@ -43,8 +43,8 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     Button done,buttonUpoadFile1, buttonUpoadFile2, buttonUpoadFile3, buttonUpoadFile4, buttonUpoadFile5, buttonUpoadFile6, buttonUpoadFile7;
     TextView pathfromuser1, pathfromuser2, pathfromuser3, pathfromuser4, pathfromuser5, pathfromuser6, pathfromuser7;
     private String sessionid;
-    private JSONServerGet requestgetserver;
-    private Dialog dgthis;
+    private JSONServerGet requestgetserver,requestgetserver2;
+    private Dialog dgthis,dgthis1;
     private boolean uploadStatus=false;
     private ImageView del1,del2,del3,del4,del5,del6,del7;
 
@@ -155,11 +155,38 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
-
                 break;
+            case R.id.del1:
+                deleteFileFromServer("ID Proof & DOB Proof");
+
         }
     }
 
+    private void deleteFileFromServer(String title) {
+        requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+                dgthis1 = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("deletedocjson",String.valueOf(jsonObject.get("result")));
+                if (String.valueOf(jsonObject.get("result")).equals("\"true\"")) {
+                    pathfromuser1.setBackgroundResource(R.drawable.edittextsimple);
+                    buttonUpoadFile1.setVisibility(View.VISIBLE);
+                    del1.setVisibility(View.GONE);
+                }
+                dgthis1.dismiss();
+            }
+        }, UploadDocument2.this, "wait");
+        requestgetserver2.execute("token", "deletedocument", sessionid, cl_car_gender.borrowercontactid,title);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -248,7 +275,6 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
 
 
     public boolean savetoserver(String Data, String exe,String title, final int rc) {
-
         DataHandler dbobject = new DataHandler(UploadDocument2.this);
         Cursor cr = dbobject.displayData("select * from session");
         if (cr.moveToFirst()) {
@@ -322,7 +348,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 dgthis.dismiss();
             }
         }, UploadDocument2.this, "wait");
-            requestgetserver.execute("token", "document", sessionid, "2297", Data, exe, title);
+            requestgetserver.execute("token", "document", sessionid,cl_car_gender.borrowercontactid, Data, exe, title);
         return uploadStatus;
     }
 }
