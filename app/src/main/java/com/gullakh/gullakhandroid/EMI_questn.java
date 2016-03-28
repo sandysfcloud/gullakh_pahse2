@@ -246,6 +246,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 }*/
                 break;
             case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
 

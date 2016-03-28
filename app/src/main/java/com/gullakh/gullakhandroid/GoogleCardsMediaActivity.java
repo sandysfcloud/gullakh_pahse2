@@ -169,7 +169,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             Spinner s1 = (Spinner) findViewById(R.id.spinner1);
 
-            s1.setPrompt("Sort By");
+            s1.setPrompt("Sorted By");
 
 
             s1.setOnItemSelectedListener(
@@ -247,7 +247,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         }
 
-      if (data.equals("mysearch")) {
+      if (data.equals("myapplicatn")) {
 
 
 

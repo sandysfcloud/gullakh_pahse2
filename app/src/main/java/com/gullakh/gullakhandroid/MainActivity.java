@@ -457,7 +457,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             case R.id.buttonMyappl:
                 intent = new Intent(MainActivity.this,GoogleCardsMediaActivity.class);
-                intent.putExtra("data", "search");
+                intent.putExtra("data", "myapplicatn");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
@@ -691,7 +691,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
             if (position == 6) {
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                intent.putExtra("data", "mysearch");
+                intent.putExtra("data", "myapplicatn");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
 

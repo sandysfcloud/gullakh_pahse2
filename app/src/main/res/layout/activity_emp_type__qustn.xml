@@ -15,7 +15,7 @@
     [24/03/16 7:32:49 pm] Chetan Nandre: <com.gullakh.gullakhandroid.font.RobotoTextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Employee Type"
+    android:text="Employment Type"
     android:id="@+id/empt"
     android:gravity="center_horizontal"
     android:textColor="#000"

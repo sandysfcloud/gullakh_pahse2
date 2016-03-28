@@ -102,7 +102,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         close.setOnClickListener(this);
 
       //  title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        title.setText("Employee Type");
+        title.setText("Employment");
         actionBar.setCustomView(v);
 
         /*getSupportActionBar().setDisplayShowCustomEnabled(true);

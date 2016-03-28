@@ -26,7 +26,7 @@
             android:id="@+id/tloan_amt"
             android:textColor="#616161"
             android:layout_marginTop="16dp"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:text="Loan Amount: "
             app:typeface="robotoLight"/>
         <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/loan_amt"
             android:layout_weight="2"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="#616161"
             android:layout_marginTop="16dp"
             android:text="data"
@@ -61,7 +61,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="#616161"
                 android:id="@+id/edit"
-                android:textSize="16sp"
+                android:textSize="15sp"
 
 
                 android:text="Edit Details"
@@ -81,7 +81,7 @@
             android:id="@+id/tenure"
             android:textColor="#616161"
 
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:layout_marginLeft="5dp"
             android:text="Tenure Value: "
             app:typeface="robotoLight"/>
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tenr_amt"
             android:layout_weight="2"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="#616161"
 
             android:text="data"
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:textColor="#616161"
             android:id="@+id/tfilter"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
             android:text="Filter "
@@ -166,7 +166,7 @@
             android:layout_height="match_parent"
             android:padding="5dp"
             android:textColor="#616161"
-
+            android:textSize="15sp"
             android:drawSelectorOnTop="true"
             android:entries="@array/sortby"
 

@@ -270,6 +270,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
 
