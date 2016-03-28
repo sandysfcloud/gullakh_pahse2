@@ -252,6 +252,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                 break;
             case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
 

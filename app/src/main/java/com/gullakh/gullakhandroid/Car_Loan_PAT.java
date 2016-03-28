@@ -238,8 +238,16 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.done:
-                finish();
+                if(amt.getText().toString().matches("")) {
 
+                    RegisterPageActivity.showErroralert(Car_Loan_PAT.this, "Please enter PAT amount!", "failed");
+                }
+                else {
+                    Log.d("intent next loanamt", "check");
+
+                    ((GlobalData) getApplication()).setpat(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
+                    finish();
+                }
                 break;
             case R.id.edit:
                 if(data.equals("data"))
@@ -270,21 +278,13 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         else
         {
             Log.d("intent next loanamt", "check");
-            /*if(data.equals("pat2")) {
-                ((GlobalData) getApplication()).setpat2(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
-                Intent intent = new Intent(Car_Loan_PAT.this, CarLoan_Depreciation.class);
-                intent.putExtra("data","again");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-            }*/
-            //else {
                 ((GlobalData) getApplication()).setpat(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
                 Intent intent = new Intent(Car_Loan_PAT.this, CarLoan_Depreciation.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
-            //}
+
 
 
 
@@ -292,6 +292,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         }
         break;
         case R.id.back:
+            overridePendingTransition(R.transition.left, R.transition.right);
         finish();
         break;
 

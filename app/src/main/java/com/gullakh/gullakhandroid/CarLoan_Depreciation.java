@@ -28,7 +28,7 @@ import java.util.Locale;
 public class CarLoan_Depreciation extends AppCompatActivity implements View.OnClickListener{
     ImageView sal,self,review,done,back,business;
     EditText amt;
-    String data="data";
+    String data="data",rev;
     TextView title;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
@@ -199,9 +199,9 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         bdone.setOnClickListener(this);
         LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
         Intent intent2 = getIntent();
-        String data = intent2.getStringExtra("review");
-        if (data != null) {
-            if (data.equals("review")) {
+        rev = intent2.getStringExtra("review");
+        if (rev != null) {
+            if (rev.equals("review")) {
                 LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
                 footer.setVisibility(View.GONE);
                 done.setVisibility(View.VISIBLE);
@@ -238,6 +238,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.done:
+                calculatn("finish");
                 finish();
 
                 break;
@@ -260,64 +261,69 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 //                overridePendingTransition(R.transition.left, R.transition.right);
 //                break;
             case R.id.next:
-                if(amt.getText().toString().matches("")) {
-
-                    RegisterPageActivity.showErroralert(CarLoan_Depreciation.this, "Please enter Depreciation amount!", "failed");
-                }
-                else
-                {
-                    ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
-                   // Log.d("data is", data);
-                   // if(data.equals("dep2"))
-                   // {
-                        Log.d("check calculatn", "check");
-                        //((GlobalData) getApplication()).setdepreciation2(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
-
-
-                        Double cpat1,cpat2,cdep1,cdep2,resultsal;
-                        cpat1= ((GlobalData) getApplication()).getPat();
-                       //  cpat2= ((GlobalData) getApplication()).getPat2();
-                        cdep1= ((GlobalData) getApplication()).getdepreciation();
-                         //cdep2= ((GlobalData) getApplication()).getdepreciation2();
-
-                        Log.d("cpat1 ", String.valueOf(cpat1));
-                       // Log.d("cpat2 ", String.valueOf(cpat2));
-                        Log.d("cdep1 ", String.valueOf(cpat1));
-                        //Log.d("cdep2 ", String.valueOf(cpat2));
-
-                        resultsal=((cpat1+cdep1)/12);
-                       // Toast.makeText(CarLoan_Depreciation.this, "Salary is: "+resultsal.toString(), Toast.LENGTH_SHORT).show();
-                        if(resultsal > 3000) {
-                            ((GlobalData) getApplication()).setnetsalary(resultsal);
-                            Log.d("salary of self emp", String.valueOf(resultsal));
-                            Intent intent = new Intent(CarLoan_Depreciation.this, EMI_questn.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                        }
-                        else
-                        {
-                            RegisterPageActivity.showErroralert(CarLoan_Depreciation.this, "Sorry!!! You are not Eligible to take Loan", "failed");
-                        }
-
-                    }
-                  /*  else
-                    {
-                        Log.d("continue", "check");
-                        ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
-
-
-
-                        Intent intent = new Intent(CarLoan_Depreciation.this, Car_Loan_PAT.class);
-                        intent.putExtra("data", "again");
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }*/
-
-
+                calculatn("next");
                 break;
             case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
 
         } }
+
+
+
+
+    public void calculatn(String flag)
+    {
+        if(amt.getText().toString().matches("")) {
+
+            RegisterPageActivity.showErroralert(CarLoan_Depreciation.this, "Please enter Depreciation amount!", "failed");
+        }
+        else
+        {
+            ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
+
+            Log.d("check calculatn", "check");
+
+
+            Double cpat1,cpat2,cdep1,cdep2,resultsal;
+            cpat1= ((GlobalData) getApplication()).getPat();
+
+            cdep1= ((GlobalData) getApplication()).getdepreciation();
+
+
+            Log.d("cpat1 ", String.valueOf(cpat1));
+
+            Log.d("cdep1 ", String.valueOf(cpat1));
+
+
+            resultsal=((cpat1+cdep1)/12);
+
+            if(resultsal > 3000) {
+                ((GlobalData) getApplication()).setnetsalary(resultsal);
+                Log.d("salary of self emp", String.valueOf(resultsal));
+                if(flag.equals("next")) {
+                    Intent intent = new Intent(CarLoan_Depreciation.this, EMI_questn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+                else
+                    finish();
+
+
+            }
+            else
+            {
+                RegisterPageActivity.showErroralert(CarLoan_Depreciation.this, "Sorry!!! You are not Eligible to take Loan", "failed");
+            }
+
+        }
+
+
+    }
+
+
+
+
+
 }

@@ -211,6 +211,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                 }
                 break;
             case R.id.back:
+                overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
             case R.id.birthdate:

@@ -107,7 +107,7 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a"
         android:visibility="gone"
-        android:layout_weight="1">
+       >
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"

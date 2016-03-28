@@ -377,8 +377,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				flag = 1;
 				carloan_que_salary_new.add("PAT for Last FY: ");
 				carloan_que_salary_new.add("Dep. for Last FY: ");
-				carloan_que_salary_new.add("PAT for Prev. to Last FY: ");
-				carloan_que_salary_new.add("Dep. for Prev. to Last FY: ");
+				//carloan_que_salary_new.add("PAT for Prev. to Last FY: ");
+				//carloan_que_salary_new.add("Dep. for Prev. to Last FY: ");
 			 }else
 				carloan_que_salary_new.add("Net Monthly Salary: ");
 		}
