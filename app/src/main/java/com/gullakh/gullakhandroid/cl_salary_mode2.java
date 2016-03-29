@@ -78,8 +78,6 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();
         }
-
-        getbanknam();
     }
     public void getbanknam()
     {
@@ -230,6 +228,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank2.setImageResource(R.drawable.bankicici);
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
+                dataBankType=other.getText().toString();
+                getbanknam();
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

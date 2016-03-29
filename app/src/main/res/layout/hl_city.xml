@@ -1,0 +1,250 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgque"
+    android:weightSum="1">
+
+    <!--<Spinner
+        android:layout_margin="20dp"
+        android:id="@+id/spinner"
+        android:padding="8dp"
+        android:background="@drawable/imageview_stroke"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+    />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="City in which property is located?"
+            android:id="@+id/TextViewHeading1"
+            android:textColor="#4b4b4b"
+            android:layout_marginTop="20dp"
+            android:textSize="22dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            app:typeface="robotoLight"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewPlace1"
+
+                android:focusable="false"
+                android:clickable="false"
+                style='"?android:selectableItemBackgroundBorderless"'
+                android:background="@drawable/locbang"
+                android:layout_weight="1"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewPlace2"
+
+                android:background="@drawable/locchn"
+                android:layout_weight="1"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_marginBottom="10dp">
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption1"
+                android:textColor="#3f3f3f"
+                android:text="Bengaluru"
+                app:typeface="robotoLight"
+                android:layout_weight="1" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption2"
+                android:textColor="#3f3f3f"
+                android:text="Chennai"
+                android:layout_weight="1"
+                app:typeface="robotoLight"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewPlace3"
+
+                android:background="@drawable/lockol"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
+
+                android:id="@+id/ImageViewPlace4"
+
+                android:background="@drawable/locmum"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="2"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp">
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption3"
+                android:textColor="#3f3f3f"
+                android:text="Kolkata"
+                app:typeface="robotoLight"
+                android:layout_weight="1" />
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption4"
+                android:textColor="#3f3f3f"
+                android:text="Mumbai"
+                app:typeface="robotoLight"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="#fff"
+            app:mtf_image="@drawable/home"
+            android:layout_weight="1">
+            <AutoCompleteTextView
+                android:imeActionLabel="Done"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Others"
+                android:inputType="text"
+                android:id="@+id/locatn"
+                android:textColor="#3f3f3f"
+                android:textSize="15sp" />
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/ldone"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#b8546e7a"
+        android:visibility="gone"
+        android:layout_weight="1">
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Done"
+            android:gravity="center"
+
+            android:id="@+id/done"
+            android:layout_weight="1"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+
+            app:typeface="robotoLight"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#b8546e7a"
+        android:layout_weight="1">
+
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Previous"
+            android:id="@+id/back"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/arrowleft"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+            android:gravity="fill"
+            app:typeface="robotoLight"/>
+
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Next"
+            android:drawableRight="@drawable/arrowright"
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:paddingRight="15dp"
+            android:paddingLeft="95dp"
+            app:typeface="robotoLight"/>
+    </LinearLayout>
+</LinearLayout>

@@ -241,9 +241,29 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
             applyFlag=MainActivity.loanType;
                 if(MainActivity.signinstate){
-                    Intent intent = new Intent(this, cl_car_make.class);
-                    startActivity(intent);
-                    this.overridePendingTransition(R.transition.left, R.transition.right);
+                    if(applyFlag.equals("Car Loan")){
+                        MainActivity.signinstate=true;
+                        Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else if(applyFlag.equals("Home Loan")){
+                        Intent intent = new Intent(ListView_Click.this,hl_city.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else if(applyFlag.equals("Loan against Property")){
+                        Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else if(applyFlag.equals("Personal Loan")){
+                        Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else if(applyFlag.equals("none")) {
+                        Intent intent = new Intent(ListView_Click.this, MainActivity.class);
+                        MainActivity.signinstate = true;
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
                 }else {
                     Intent intent = new Intent(this, signinPrepage.class);
                     startActivity(intent);
