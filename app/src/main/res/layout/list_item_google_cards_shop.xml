@@ -48,6 +48,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="128dp"
+
             android:contentDescription="cd_main_image"
             android:scaleType="centerCrop" />
 
@@ -99,6 +100,7 @@
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="-10dp"
+
                 android:background="@android:color/transparent"
                 />
 

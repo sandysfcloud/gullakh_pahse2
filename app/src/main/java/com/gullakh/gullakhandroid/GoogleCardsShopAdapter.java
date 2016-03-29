@@ -3,6 +3,8 @@ package com.gullakh.gullakhandroid;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -166,8 +171,9 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 
 			//************
-
-
+Log.d("setting image", tempValues.getcarimgurl());
+			if(tempValues.getcarimgurl()!=null)
+			ImageUtil.displayImage(holder.image, GlobalData.SERVER_GET_URLIMage+tempValues.getcarimgurl(), null);
 
 			//*************
 
@@ -191,24 +197,8 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
 			holder.t4.setText(""+profee);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
-//			holder.image.setImageResource(imageId[position]);
-		//	holder.name.setText(result.get(position));
-			/*holder.name.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
-			//holder.day.setText(String.valueOf(rmonth_fee.get(position)));
-			holder.day.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			holder.description.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			//holder.description.setText("Monthly for "+tenure+ " Years");
-			holder.t1.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			//holder.t2.setText(String.valueOf(rfixed_fee.get(position)));
-			holder.t2.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			holder.t3.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			holder.t4= (TextView) convertView
-					.findViewById(R.id.t4);
-			//holder.t4.setText(String.valueOf(ronetime_fee.get(position)));
-			holder.t4.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			holder.bp.setTypeface(Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));
-			holder.apply.setTypeface( Typeface.createFromAsset(cont.getAssets(), "fonts/OpenSans-Light.ttf"));*/
+
+
 
 
 
@@ -272,6 +262,9 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 		notifyDataSetChanged();
 	}
+
+
+
 
 
 

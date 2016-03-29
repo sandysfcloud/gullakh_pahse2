@@ -395,6 +395,19 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                        }else if(args[1].equals("accountimg")){
+
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "getbanklogo"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("element", args[3]));
+                            client = new DefaultHttpClient();
+                            Log.e("Checking logo: token ", args[3]);
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
                         }
 
 

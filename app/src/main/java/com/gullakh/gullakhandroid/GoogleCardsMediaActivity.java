@@ -51,6 +51,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -95,6 +97,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     ListView listView;
     LinearLayout layout,linedit,filter;
     ArrayList<String> disbank=new ArrayList<String>();
+
     Dialog dialog;
     Button apply,reset;
     int Max_tenure, filter_tenure, seektenure =0,prevloan=0;
@@ -111,13 +114,18 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     protected Button selectColoursButton;
     CharSequence[] bankfilter = null;
     String prev_selectbank = null,listidglobal, tierid;;
-    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
+    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3,requestgetserver3img, requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
     String globalidentity,loantype;
     Dialog dgthis;
     EditText editloan;
     TextView loan_amt,tenr_amt,title;
     ArrayAdapter<String> adapter;
     private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee" };
+    Map<String, String> Arry_bankimg=null;
+    String listidmaster;
+
+
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -428,17 +436,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     //********************************************************************
 
 
@@ -628,7 +625,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             }
 
-            public void processFinishString(String str_result, Dialog dg) {
+            public void processFinishString(String str_result, Dialog dg)  {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -640,22 +637,101 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
                 ArrayList Arr_RMid = new ArrayList<String>();
 
-                   // Log.e("lenth is",   String.valueOf(RM_cobj.length));
+
+                JSONArray jsonArray = new JSONArray();
                     for (int i = 0; i < RM_cobj.length; i++) {
+
+                        JSONObject imgob = new JSONObject();
+                        Log.e("json Sizeee", String.valueOf(RM_cobj.length));
                         Arr_RMid.add(RM_cobj[i].getaccount_lender());
+
+                        try {
+                            imgob.put("recordid", RM_cobj[i].getaccount_lender());
+                            imgob.put("title", "logo");
+                            jsonArray.put(imgob);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        Log.e("json Checkkk", String.valueOf(jsonArray));
                     }
 
-                    cobj_RM = RM_cobj;
-                    String listid = Arr_RMid.toString();
-                    Log.e("listid2", listid);
-                    listid = listid.toString().replace("[", "").replace("]", "");
 
-                    requestgetserver4.execute("token", "accountname", sessionid, listid);
+
+
+                Log.e("json object value KK", String.valueOf(jsonArray));
+
+
+                    cobj_RM = RM_cobj;
+                    listidmaster = Arr_RMid.toString();
+                    //Log.e("listid2", listid);
+                    listidmaster = listidmaster.toString().replace("[", "").replace("]", "");
+
+
+
+
+                   requestgetserver3img.execute("token", "accountimg", sessionid, jsonArray.toString());
+
+
+
+
+                //******************kk
+
+
                 }
 
 
 
         }, GoogleCardsMediaActivity.this, "4");
+
+
+
+        requestgetserver3img = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                try {
+
+                    Log.e("processFinishString in image", String.valueOf(0));
+
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                    Gson gson = gsonBuilder.create();
+
+                    JsonParser parser = new JsonParser();
+                    JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                    Log.e("Check result in image", str_result);
+
+                    BankImg[] BL_cobj = gson.fromJson(jsonObject.get("result"), BankImg[].class);
+                    Arry_bankimg = new HashMap<>();
+
+                    for (int i = 0; i < BL_cobj.length; i++) {
+                        Arry_bankimg.put(BL_cobj[i].getaccountid(), BL_cobj[i].geturl());
+                    }
+
+                    Log.e("Check final Arry_bankimg", String.valueOf(Arry_bankimg));
+                    requestgetserver4.execute("token", "accountname", sessionid, listidmaster);
+
+
+                } catch (Throwable t) {
+                    Log.e("My App", "Could not parse malformed JSON: ");
+                }
+
+
+            }
+        }, GoogleCardsMediaActivity.this, "5");
+
+
+
+
+
 
 
         requestgetserver4 = new JSONServerGet(new AsyncResponse() {
@@ -680,6 +756,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 for (int i = 0; i < BL_cobj.length; i++) {
                     Arry_banknamtemp.put(BL_cobj[i].getid(), BL_cobj[i].getaccountname());
                 }
+
 
 
                 Arry_banknam = Arry_banknamtemp;
@@ -821,6 +898,8 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 Log.d("check fee here", cobj_RM[i].getfee_charges_details());
                 sched.setother_details(cobj_RM[i].getother_details());
                 sched.setcardocu(cobj_RM[i].getdocu_details());
+                if(Arry_bankimg.get(cobj_RM[i].getaccount_lender())!=null)
+                sched.setcarimgurl(Arry_bankimg.get(cobj_RM[i].getaccount_lender()));
 
                 Log.d("activity docum ", cobj_RM[i].getdocu_details());
                 CustomListViewValuesArr.add(sched);

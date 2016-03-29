@@ -114,7 +114,7 @@ public class ListModel implements Serializable{
     {
         this.other_nam= other_nam;
     }
-    public void setOtherdes(String other_des)
+    public void setcarimgurl(String other_des)
     {
         this.other_des = other_des;
     }
@@ -243,7 +243,7 @@ public class ListModel implements Serializable{
     {
         return this.other_nam;
     }
-    public String getOtherdes()
+    public String getcarimgurl()
     {
         return this.other_des;
     }
