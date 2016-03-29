@@ -148,7 +148,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }else if(ListView_Click.applyFlag.equals("Home Loan")){
-                    Intent intent = new Intent(signin.this, cl_car_make.class);
+                    Intent intent = new Intent(signin.this,hl_city.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }else if(ListView_Click.applyFlag.equals("Loan against Property")){
