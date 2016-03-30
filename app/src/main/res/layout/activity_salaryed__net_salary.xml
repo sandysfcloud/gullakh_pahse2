@@ -15,7 +15,7 @@
         android:gravity="center">
         <FrameLayout
             android:id="@+id/seekArcContainer"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal"
             >
@@ -28,7 +28,7 @@
                 android:padding="30dp"
                 seekarc:arcColor="@color/main_color_500"
                 seekarc:clockwise="true"
-                seekarc:max="199"
+                seekarc:max="40"
                 
 
                 seekarc:progressColor="@color/main_color_500"
@@ -86,7 +86,7 @@
             android:textColorHint="#000"
             android:textColor="#000"
             android:text="20000"
-            android:textSize="15sp"
+            android:textSize="18sp"
             app:typeface="robotoLight"/>
 
     </com.gullakh.gullakhandroid.MaterialTextField>

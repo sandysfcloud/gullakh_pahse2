@@ -34,7 +34,7 @@
                     android:padding="30dp"
                     seekarc:arcColor="@color/main_color_500"
                     seekarc:clockwise="true"
-                    seekarc:max="25"
+                    seekarc:max="150"
 
                     seekarc:progressColor="@color/main_color_500"
                     seekarc:rotation="180"
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="PAT Amount"
+                    android:text="Net Profit Amount"
                     android:layout_marginTop="75dp"
                     android:textColor="@color/main_color_500"
                     android:textSize="20sp"
@@ -73,8 +73,8 @@
             android:layout_marginLeft="10dp"
 
 
-            android:text="50,000"
-            android:textColor="@color/main_color_500"
+
+            android:textColor="#000"
             android:textSize="18sp"
             app:typeface="robotoLight"/>
 
@@ -96,11 +96,11 @@
                 android:hint=""
                 android:id="@+id/loanamountid"
                 android:ems="10"
+                android:text="50,000"
                 android:inputType="phone"
-                android:text=""
                 android:textColorHint="#000"
                 android:textColor="#000"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>

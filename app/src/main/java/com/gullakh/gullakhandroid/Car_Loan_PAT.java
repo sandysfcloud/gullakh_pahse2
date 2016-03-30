@@ -69,7 +69,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("PAT Amount");
+        titl.setText("Net Profit Amount");
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
@@ -86,34 +86,13 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
-
-        /*Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            if (extras.containsKey("data")) {
-              Double patv2  =((GlobalData) getApplication()).getPat2();
-                if(patv2!=null) {
-                    Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(patv2))));
-
-                    strtemp = strtemp.substring(0, strtemp.length() - 3);
-
-                    mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(patv2.intValue()) / 50000)));
-                    mSeekArcProgress.setText(strtemp);
-                    amt.setText(patv2.toString());
-                }
-
-                data="pat2";
-                title.setText("PAT for Previous to Last FY ");
-            }
-        }
-        else
-        {*/
             Double patv  =((GlobalData) getApplication()).getPat();
             if(patv!=null) {
-                amt.setText(patv.toString());
+
+                String spatv=String.valueOf(((GlobalData) getApplication()).getPat().intValue());
+                Log.d("sdepv already set", spatv);
+                amt.setText(spatv);
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(patv))));
@@ -149,7 +128,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 if (!amt.getText().toString().equals("")) {
-                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()))));
+                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()).replaceAll(",", ""))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 

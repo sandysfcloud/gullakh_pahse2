@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:maxLines="2"
-                android:text="ROI"
+                android:text="Interest Rate"
                 android:textColor="#ff00719b"
                 android:textSize="14sp"
                 app:typeface="robotoLight"

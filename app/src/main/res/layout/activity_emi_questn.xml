@@ -89,7 +89,7 @@
                     android:inputType="phone"
                     android:textColorHint="#000"
                     android:textColor="#000"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:text="0"
                     app:typeface="robotoLight"/>
 

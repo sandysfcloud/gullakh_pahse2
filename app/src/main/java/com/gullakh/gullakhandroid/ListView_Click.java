@@ -100,7 +100,8 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         name.setText(bankname);
         TextView t1= (TextView) findViewById(R.id.mt1);
 
-        t1.setText("EMI for " + tenure + " years");
+        //t1.setText("EMI for " + tenure + " years");
+        t1.setText("EMI");
         TextView temi= (TextView) findViewById(R.id.tmr);
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String emival=String.valueOf(format.format(new BigDecimal(emi)));

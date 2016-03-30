@@ -214,7 +214,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             s1.setAdapter(ma);
 
 
-            s1.setPrompt("Sorted By");
+            s1.setPrompt("Sort By");
 
 
             s1.setOnItemSelectedListener(
@@ -314,13 +314,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                   JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                   dgthis = dg;
 
-                  //LoanDetails[] loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails[].class);
-
-
-
-
-
-
+                  LoanDetails[] loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails[].class);
 
 
               }
@@ -328,20 +322,22 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
           DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
           Cursor cre = dbobject.displayData("select * from userlogin");
-          String userid,contactid="";
+          String userid = null,contactid="";
           if(cre!=null) {
               if (cre.moveToFirst()) {
                   userid=cre.getString(1);
                   contactid = cre.getString(2);
 
 
-                  // cre.close();
-                  // dbobject.close();
+                   cre.close();
+                   dbobject.close();
               }
 
           }
+          Log.d("userid myapp",userid);
+          Log.d("contactid myapp",contactid);
 
-          //requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
+          requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
 
           setContentView(R.layout.seach_display);
           layout = (LinearLayout) findViewById(R.id.linear);
@@ -783,7 +779,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     }
                 }
 
-                tenr_amt.setText(String.valueOf(Max_tenure / 12));
+                tenr_amt.setText(String.valueOf(Max_tenure / 12)+" Year(s)");
                 //Max_tenure = Max_tenure / 12;
                 Log.d("Max_tenure value is", String.valueOf(Max_tenure));
                 ((GlobalData) getApplication()).settenure(String.valueOf(Max_tenure / 12));

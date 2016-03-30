@@ -7,16 +7,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class cl_car_residence extends AppCompatActivity implements View.OnClickListener{
+public class cl_car_residence extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
     Button next,back;
     ImageView place1,place2,place3,place4,place5,place6,review;
     TextView heading,option1,option2,option3,option4,option5,option6;
@@ -64,7 +68,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
 
 
-
         //********************changing actionbar
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -91,6 +94,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         v2.setLayoutParams(lp);
 
         if(((GlobalData) getApplication()).getcarres()!=null) {
+            String resval=((GlobalData) getApplication()).getcarres();
             Log.d("residence review not null", ((GlobalData) getApplication()).getcarres());
             if (((GlobalData) getApplication()).getcarres().equals("Bengaluru"))
                 place1.setImageResource(R.drawable.buttonselecteffect);
@@ -100,7 +104,10 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.buttonselecteffect);
             else if(((GlobalData) getApplication()).getcarres().equals("Mumbai"))
                 place4.setImageResource(R.drawable.buttonselecteffect);
-            citynam.setText(((GlobalData) getApplication()).getcarres());
+            if(!(resval.equals("Bengaluru")||resval.equals("Chennai")||resval.equals("Kolkata")||resval.equals("Mumbai"))) {
+                Log.d("residence review other", "0");
+                citynam.setText(((GlobalData) getApplication()).getcarres());
+            }
 
         }
         Button bdone = (Button) findViewById(R.id.done);
@@ -120,7 +127,27 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
 
 
+        getcitynam();
+        citynam.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+
+                if (data != null) {
+                    if (data.equals("review")) {
+                        finish();
+                    }
+                }
+                else {
+                    Log.d("item selected ", String.valueOf(position));
+                    Intent intent = new Intent(cl_car_residence.this, Emp_type_Qustn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            }
+        });
     }
     public void getcitynam()
     {
@@ -149,6 +176,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 }
                 final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_residence.this, android.R.layout.simple_dropdown_item_1line, liste);
                 citynam.setAdapter(fAdapter);
+
+
 
 
                 Log.e("emplist frm server ", String.valueOf(liste));
@@ -232,7 +261,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 ((GlobalData) getApplication()).setcarres("Mumbai");
-
                 goToIntent();
                 break;
             case R.id.locatn:
@@ -240,7 +268,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
-                getcitynam();
+
 
                 break;
             case R.id.back:
@@ -263,6 +291,21 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        Log.d("item selected ", String.valueOf(position));
+        Intent intent = new Intent(this, Emp_type_Qustn.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,7 +85,8 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         if(((GlobalData) getApplication()).getEmi()!=null)
         {
             String emi=String.valueOf(((GlobalData) getApplication()).getEmi().intValue());
-            emipaying.setText(((GlobalData) getApplication()).getEmi().toString());
+            Log.d("emi already set", emi);
+            emipaying.setText(emi);
 
 
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getEmi().intValue()) / 1000)));

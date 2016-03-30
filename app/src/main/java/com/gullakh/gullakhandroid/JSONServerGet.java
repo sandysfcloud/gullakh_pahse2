@@ -391,7 +391,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("recordid",args[3]));
 
-                            Log.d("argsumentsfromdoc",args.toString());
+                            Log.d("argsumentsfromdoc",args[2]+"and"+args[3]);
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));

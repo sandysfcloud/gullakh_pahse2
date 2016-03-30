@@ -24,8 +24,12 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
@@ -63,7 +67,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Your DOB");
+        titl.setText("Date Of Birth");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();
@@ -207,7 +211,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                // startActivity(intent);
                 else
                 {
-                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter DOB", "failed");
+                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter Date Of Birth", "failed");
                 }
                 break;
             case R.id.back:
@@ -252,10 +256,16 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = year+"-"+(++monthOfYear)+"-"+dayOfMonth;
-        day=dayOfMonth;
-        month=++monthOfYear;
-        yearv=year;
-        Dob.setText(date);
+     //   String date = year+"-"+(++monthOfYear)+"-"+dayOfMonth;
+       // day=dayOfMonth;
+        //month=++monthOfYear;
+       // yearv=year;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, monthOfYear, dayOfMonth);
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+        String formatdate = format.format(calendar.getTime());
+       // Dob.setText(date);
+        Dob.setText(formatdate);
     }
 }

@@ -73,7 +73,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
       //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("DEP Amount");
+        titl.setText("Depreciation");
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
@@ -115,7 +115,10 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         {*/
             Double depv  =((GlobalData) getApplication()).getdepreciation();
             if(depv!=null) {
-                amt.setText(depv.toString());
+
+                String sdepv=String.valueOf(((GlobalData) getApplication()).getdepreciation().intValue());
+                Log.d("sdepv already set", sdepv);
+                amt.setText(sdepv);
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(depv))));
 
@@ -151,7 +154,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 if (!amt.getText().toString().equals("")) {
-                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()))));
+                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()).replaceAll(",", ""))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
@@ -177,7 +180,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                                                 @Override
                                                 public void onProgressChanged(SeekArc seekArc, int progress,
                                                                               boolean fromUser) {
-
+                                                    if (progress != 0)
                                                     progress = (progress + 1) * 50000;
                                                     Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                                                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));

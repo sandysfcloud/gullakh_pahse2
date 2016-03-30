@@ -154,6 +154,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder = (ViewHolder) convertView.getTag();
 		}
 		if (data.size() <= 0) {
+			Log.d("No Data here in adapter", String.valueOf(data.size()));
 			holder.name.setText("No Data");
 
 		} else {
@@ -193,7 +194,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 
 
 			holder.day.setText(""+emi);
-			holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
+			//holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
 			holder.t4.setText(""+profee);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));

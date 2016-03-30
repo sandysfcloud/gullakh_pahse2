@@ -87,9 +87,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         if(((GlobalData) getApplication()).getnetsalary()!=null) {
 
             String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
-            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 5000)));
-
-
+            //mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 5000)));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             String strtemp = String.valueOf(format.format(new BigDecimal(netsalary)));
             strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -147,7 +146,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             public void onProgressChanged(SeekArc seekArc, int progress,
                                           boolean fromUser) {
 
-                progress = (progress + 4) * 5000;
+              //  progress = (progress + 4) * 5000;
+                progress = (progress + 1) * 50000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 
 

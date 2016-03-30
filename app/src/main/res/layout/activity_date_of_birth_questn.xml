@@ -9,15 +9,28 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1">
+
+
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:id="@+id/TextViewOption4"
+            android:textColor="#3f3f3f"
+            android:text="When is your BirthDay?"
+            app:typeface="robotoLight"
+             />
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="50dp"
+
+
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/bdy"
@@ -26,11 +39,11 @@
             <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="When is your BirthDay"
+                android:hint=""
                 android:id="@+id/birthdate"
                 android:textColorHint="#000"
                 android:textColor="#000"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>

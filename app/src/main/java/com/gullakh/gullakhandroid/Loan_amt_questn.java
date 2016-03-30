@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -111,7 +113,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             amt.setText(String.valueOf(loanamtint));
         }
 
-      /*  amt.addTextChangedListener(new TextWatcher() {
+        amt.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -129,7 +131,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 if (!amt.getText().toString().equals("")) {
-                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()))));
+                    String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(amt.getText()).replaceAll(",", ""))));
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
@@ -138,7 +140,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 }
 
             }
-        });*/
+        });
 
         mSeekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener()
 
