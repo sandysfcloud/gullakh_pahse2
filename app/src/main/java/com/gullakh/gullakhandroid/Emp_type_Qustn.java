@@ -157,9 +157,17 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             case R.id.next:
                 if(((GlobalData) getApplication()).getemptype()!=null)
                    {
-                intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                       if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                       {
+                           Intent intent2 = new Intent(this, Loan_amt_questn.class);
+                           startActivity(intent2);
+                           overridePendingTransition(R.transition.left, R.transition.right);
+                       }
+                       else {
+                           intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                           startActivity(intent);
+                           overridePendingTransition(R.transition.left, R.transition.right);
+                       }
                     }
                 else
                 {
@@ -199,9 +207,16 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
+                    if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                    {
+                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                    else {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    overridePendingTransition(R.transition.left, R.transition.right);}
                 }
 
 
@@ -220,9 +235,17 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                    {
+                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                    else {
+                        intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
                 }
 
                 break;
@@ -238,9 +261,17 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                    {
+                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                    else {
+                        intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
                 }
 
                 break;

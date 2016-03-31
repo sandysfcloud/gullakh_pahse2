@@ -139,16 +139,8 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.apply= (Button) convertView
 					.findViewById(R.id.apply);
-			holder.apply.setTag(position);
-			Log.d("check this data count in google", String.valueOf(position));
-
-			//holder.apply.setOnClickListener(GoogleCardsShopAdapter.this);
 
 
-
-
-
-			//holder.buy.setOnClickListener(this);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -227,10 +219,8 @@ Log.d("setting image", tempValues.getcarimgurl());
 		}
 
 
-
-//		holder.buy.setTag(position);
-		//DummyModel item = getItem(position);
-		//ImageUtil.displayImage(holder.image, item.getImageURL(), null);
+		holder.apply.setTag(position);
+		Log.d("check this data count in google", String.valueOf(position));
 
 		return convertView;
 	}

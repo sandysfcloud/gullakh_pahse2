@@ -119,6 +119,9 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
         String one_time_fee_temp=String.valueOf(format.format(new BigDecimal(one_time_fee)));
         one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
+        tprofee.setText(one_time_fee_temp);
+
+
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
         tabHost.setup();                                   //creates the tabhost
 

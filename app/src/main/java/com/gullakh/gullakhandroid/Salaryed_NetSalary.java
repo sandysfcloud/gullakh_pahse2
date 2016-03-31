@@ -75,7 +75,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         //review.setOnClickListener(this);
 
         sal = (EditText) findViewById(R.id.netsalary);
-       // sal.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        sal.setSelection(sal.getText().length());
 
         sal.addTextChangedListener(new NumberTextWatcher(sal));
 
@@ -95,6 +95,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
             mSeekArcProgress.setText(strtemp);
             sal.setText(netsalary);
+            sal.setSelection(sal.getText().length());
         }
 
         onetext = (TextView) findViewById(R.id.onetext);

@@ -52,10 +52,8 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-      //  amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        amt.setSelection(amt.getText().length());
         amt.addTextChangedListener(new NumberTextWatcher(amt));
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
 
 
         //********************changing actionbar
@@ -93,6 +91,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 String spatv=String.valueOf(((GlobalData) getApplication()).getPat().intValue());
                 Log.d("sdepv already set", spatv);
                 amt.setText(spatv);
+                amt.setSelection(amt.getText().length());
 
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(patv))));
@@ -101,7 +100,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(patv.intValue()) / 50000)));
                 mSeekArcProgress.setText(strtemp);
             }
-            title.setText("PAT for Last FY");
+            title.setText("Net Profit for Last FY");
        // }
 
 

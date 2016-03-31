@@ -52,7 +52,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-       // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        amt.setSelection(amt.getText().length());
 
         amt.addTextChangedListener(new NumberTextWatcher(amt));
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -119,6 +119,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                 String sdepv=String.valueOf(((GlobalData) getApplication()).getdepreciation().intValue());
                 Log.d("sdepv already set", sdepv);
                 amt.setText(sdepv);
+                amt.setSelection(amt.getText().length());
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(depv))));
 

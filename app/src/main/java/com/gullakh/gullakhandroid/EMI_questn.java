@@ -72,6 +72,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
 
         emipaying = (EditText) findViewById(R.id.emipaying);
+        emipaying.setSelection(emipaying.getText().length());
         onetext = (TextView) findViewById(R.id.onetext);
 
         emipaying.addTextChangedListener(new NumberTextWatcher(emipaying));
@@ -87,7 +88,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
             String emi=String.valueOf(((GlobalData) getApplication()).getEmi().intValue());
             Log.d("emi already set", emi);
             emipaying.setText(emi);
-
+            emipaying.setSelection(emipaying.getText().length());
 
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getEmi().intValue()) / 1000)));
 

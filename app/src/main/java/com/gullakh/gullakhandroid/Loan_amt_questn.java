@@ -52,12 +52,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
-        // amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        amt.setSelection(amt.getText().length());
 
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setHomeButtonEnabled(true);
-        // onShakeImage();
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
         // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
@@ -111,6 +108,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
             mSeekArcProgress.setText(strtemp);
             amt.setText(String.valueOf(loanamtint));
+            amt.setSelection(amt.getText().length());
         }
 
         amt.addTextChangedListener(new TextWatcher() {

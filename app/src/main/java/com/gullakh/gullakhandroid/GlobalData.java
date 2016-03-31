@@ -22,7 +22,7 @@ public class GlobalData extends Application {
     private int sizefiltermusthave;
     private ArrayList<Double> foir,accid;
 
-    private String session,carres;
+    private String session,carres,loantyp;
     private String tenure;
     private CharSequence[] banklist;
     private Double pat;
@@ -66,6 +66,10 @@ public class GlobalData extends Application {
 
     public String getloanamt() {
         return cmobileVariable;
+    }
+
+    public String getloantyp() {
+        return loantyp;
     }
 
     public Double getnetsalary() {
@@ -164,5 +168,9 @@ public class GlobalData extends Application {
     }
     public void setdepreciation2(Double value) {
         depreciation2 = value;
+    }
+
+    public void setloantyp(String cemailVariable) {
+        this.loantyp = cemailVariable;
     }
 }

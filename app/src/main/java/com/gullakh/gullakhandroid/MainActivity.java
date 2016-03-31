@@ -451,6 +451,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             case R.id.home:
                 loanType="Home Loan";
+                ((GlobalData) getApplication()).setloantyp("home_loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
