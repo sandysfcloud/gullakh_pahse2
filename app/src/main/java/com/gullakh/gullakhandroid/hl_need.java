@@ -22,7 +22,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
 
     private Spinner spinner;
     private RadioGroup radioCityLimitGroup;
-    View ll1,ll2,ll3,ll4,ll5,ll6,ll7;
+    View ll1,ll2,ll3,ll4,ll5,ll6,ll7,ll8,ll9;
     Button next,back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +49,14 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
-         ll1=findViewById(R.id.ll1);
-         ll2=findViewById(R.id.ll2);
-         ll3=findViewById(R.id.ll3);
-         ll4=findViewById(R.id.ll4);
-         ll5=findViewById(R.id.ll5);
-         ll6=findViewById(R.id.ll6);
-         ll7=findViewById(R.id.ll7);
+        ll1=findViewById(R.id.ll1);
+        ll2=findViewById(R.id.ll2);
+        ll3=findViewById(R.id.ll3);
+        ll4=findViewById(R.id.ll4);
+        ll5=findViewById(R.id.ll5);
+        ll7=findViewById(R.id.ll7);
+        ll8=findViewById(R.id.ll8);
+        ll9=findViewById(R.id.ll9);
         spinner = (Spinner) findViewById(R.id.spinner1);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -70,8 +71,9 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
-                        ll6.setVisibility(View.GONE);
                         ll7.setVisibility(View.GONE);
+                        ll8.setVisibility(View.GONE);
+                        ll9.setVisibility(View.GONE);
                     }else if(position==2){
                         ll1.setVisibility(View.GONE);
                         ll2.setVisibility(View.VISIBLE);
@@ -88,8 +90,9 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
-                        ll6.setVisibility(View.GONE);
                         ll7.setVisibility(View.GONE);
+                        ll8.setVisibility(View.GONE);
+                        ll9.setVisibility(View.GONE);
                     }else if(position==4){
                         ll1.setVisibility(View.GONE);
                         ll2.setVisibility(View.GONE);
@@ -97,8 +100,9 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.VISIBLE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
-                        ll6.setVisibility(View.GONE);
                         ll7.setVisibility(View.GONE);
+                        ll8.setVisibility(View.GONE);
+                        ll9.setVisibility(View.GONE);
                     }else if(position==5){
                         ll1.setVisibility(View.GONE);
                         ll2.setVisibility(View.GONE);
@@ -106,8 +110,9 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.VISIBLE);
-                        ll6.setVisibility(View.GONE);
                         ll7.setVisibility(View.GONE);
+                        ll8.setVisibility(View.GONE);
+                        ll9.setVisibility(View.GONE);
                     }else if(position==7){
                         ll1.setVisibility(View.GONE);
                         ll2.setVisibility(View.GONE);
@@ -115,8 +120,9 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
-                        ll6.setVisibility(View.VISIBLE);
-                        ll7.setVisibility(View.GONE);
+                        ll7.setVisibility(View.VISIBLE);
+                        ll8.setVisibility(View.GONE);
+                        ll9.setVisibility(View.GONE);
                     }else if(position==8){
                         ll1.setVisibility(View.GONE);
                         ll2.setVisibility(View.GONE);
@@ -124,8 +130,19 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
-                        ll6.setVisibility(View.GONE);
-                        ll7.setVisibility(View.VISIBLE);
+                        ll7.setVisibility(View.GONE);
+                        ll8.setVisibility(View.VISIBLE);
+                        ll9.setVisibility(View.GONE);
+                    }else if(position==9){
+                        ll1.setVisibility(View.GONE);
+                        ll2.setVisibility(View.GONE);
+                        ll3.setVisibility(View.GONE);
+                        ll4.setVisibility(View.GONE);
+                        ll5.setVisibility(View.GONE);
+                        ll5.setVisibility(View.GONE);
+                        ll7.setVisibility(View.GONE);
+                        ll8.setVisibility(View.GONE);
+                        ll9.setVisibility(View.VISIBLE);
                     }else {
                         ll1.setVisibility(View.GONE);
                         ll2.setVisibility(View.GONE);
@@ -133,8 +150,9 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
-                        ll6.setVisibility(View.GONE);
                         ll7.setVisibility(View.GONE);
+                        ll8.setVisibility(View.GONE);
+                        ll9.setVisibility(View.GONE);
                     }
                 }
             }
@@ -175,7 +193,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
                 else {
-                RegisterPageActivity.showErroralert(hl_need.this, "Select Loan for options", "failed");
+                    RegisterPageActivity.showErroralert(hl_need.this, "Select Loan for options", "failed");
                 }
                 break;
             case R.id.close:

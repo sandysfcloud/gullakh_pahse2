@@ -82,7 +82,6 @@ public class GcmIntentService extends IntentService {
                 new NotificationCompat.Builder(this)
                          .setSmallIcon(R.drawable.logosmall)
                         .setContentTitle("Gullakh")
-                        .setSmallIcon(R.drawable.logosmall)
                         .setStyle(new NotificationCompat.BigTextStyle()
                                 .bigText(msg))
                         .setContentText(msg);
