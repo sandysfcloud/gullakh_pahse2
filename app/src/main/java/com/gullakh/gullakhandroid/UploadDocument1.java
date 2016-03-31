@@ -58,6 +58,7 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
 
             case R.id.ImageUpload:
                 Intent intent = new Intent(this, UploadDocument2.class);
+
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;

@@ -72,4 +72,5 @@ dependencies {
     compile "com.google.android.gms:play-services:8.4.0"
     compile 'com.github.glomadrian:loadingballs:1.1@aar'
     compile 'com.github.natasam:DemoProgressViewsLibApp:fa2f8f01e0'
+    compile 'com.android.support:multidex:1.0.1'
 }

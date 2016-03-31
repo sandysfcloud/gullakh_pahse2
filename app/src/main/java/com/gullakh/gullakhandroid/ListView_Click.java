@@ -272,9 +272,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 }
 
                 break;
-
         }
-
     }
 
     private void storeData() {

@@ -31,6 +31,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
     private Button back,next;
     private ContentValues contentValues;
     private Spinner spinner;
+    private String CompLoanType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,18 +151,26 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
 
                             //Intent intent = new Intent(this, cl_car_salaried.class);
                            // startActivity(intent);
-
-                            String LoanType=cl_car_global_data.dataWithAns.get("type_employment");
+                                DataHandler dbobject = new DataHandler(this);
+                                Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+                                cr.moveToFirst();
+                                Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+                                try {
+                                    JSONObject reader = new JSONObject(cr.getString(3));
+                                    CompLoanType=reader.getString("type_employment");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             Intent intent;
-                            if(LoanType.equals("Salaried"))
+                            if(CompLoanType.equals("Salaried"))
                             {
                                     intent = new Intent(this, cl_car_salaried.class);
                                     startActivity(intent);
-                            }else if(LoanType.equals("Self Employed Business"))
+                            }else if(CompLoanType.equals("Self Employed Business"))
                             {
                                     intent = new Intent(this, cl_car_selfempbusiness.class);
                                     startActivity(intent);
-                            }else if(LoanType.equals("Self Employed Professional"))
+                            }else if(CompLoanType.equals("Self Employed Professional"))
                             {
                                     intent = new Intent(this, cl_car_selfempbusinesprofs.class);
                                     startActivity(intent);
@@ -185,7 +194,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
     }
     public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.dataWithAns.put(Key,data);
+        cl_car_global_data.dataWithAns.put(Key, data);
 
     }
     private void goToDatabase()
@@ -208,13 +217,10 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                // spinner.setSelected(1);
             }
             currentResidenceyr.setText(reader.getString("period_of_stay_in_cur_res"));
-            setCar();
+            //setCar();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void setCar() {
-
-    }
 }

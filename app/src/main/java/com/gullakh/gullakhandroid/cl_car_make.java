@@ -244,15 +244,20 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
     private void getCar() {
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
-        cr.moveToFirst();
-        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
-        try {
-            JSONObject reader = new JSONObject(cr.getString(3));
-            car=reader.getString("interested_car");
-            setDataToHashMap("currently_living_in",reader.getString("currently_living_in"));
-            setCar(car);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if(cr!=null) {
+            cr.moveToFirst();
+            Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+            try {
+                JSONObject reader = new JSONObject(cr.getString(3));
+                car = reader.getString("interested_car");
+                setDataToHashMap("currently_living_in", reader.getString("currently_living_in"));
+                setCar(car);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Log.d("DataNotFound","Please check database...it is empty");
         }
     }
 

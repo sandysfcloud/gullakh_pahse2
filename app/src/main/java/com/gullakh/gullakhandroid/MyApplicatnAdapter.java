@@ -3,7 +3,6 @@ package com.gullakh.gullakhandroid;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -128,13 +124,16 @@ public class MyApplicatnAdapter extends BaseAdapter {
 
             holder.applno.setText(""+tempValues.getapplno());
             holder.date.setText(""+tempValues.getappldate());
-            holder.status.setText(""+tempValues.getstatus());
-
+            holder.status.setText("" + tempValues.getstatus());
+        if(tempValues.getstatus().equals("submitted"))
+        {
+            holder.apply.setVisibility(View.GONE);
+        }
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos= (int) v.getTag();
-                    Intent intent = new Intent(cont, Myapplication.class);
+                    Intent intent = new Intent(cont, UploadDocument2.class);
                     intent.putExtra("data", "carloan");
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);

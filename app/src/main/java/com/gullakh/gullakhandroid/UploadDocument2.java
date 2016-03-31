@@ -47,7 +47,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     private JSONServerGet requestgetserver,requestgetserver2;
     private Dialog dgthis,dgthis1;
     private ImageView del1,del2,del3,del4,del5,del6,del7;
-
+    int count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,6 +155,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 startActivityForResult(Intent.createChooser(i7, "Select file to upload document"), 7);
                 break;
             case R.id.done:
+                goToServer();
                 Intent i8 = new Intent(this,MainActivity.class);
                 startActivity(i8);
                 break;
@@ -164,7 +165,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 startActivity(intenth);
                 break;
             case R.id.del1:
-                deleteFileFromServer("ID Proof & DOB Proof",1);
+                deleteFileFromServer("ID Proof & DOB Proof", 1);
                 break;
             case R.id.del2:
                 deleteFileFromServer("Address Proof",2);
@@ -187,6 +188,10 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void goToServer() {
+
+    }
+
     private void deleteFileFromServer(String title, final int reqcode) {
         requestgetserver2 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -203,6 +208,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("deletedocjson",String.valueOf(jsonObject.get("result")));
                 if (String.valueOf(jsonObject.get("success")).equals("true")) {
+                    count--;
                     setAttributes(reqcode);
                 }
                 dgthis1.dismiss();
@@ -323,6 +329,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("uploadresult", String.valueOf(jsonObject.get("result")));
                 if (String.valueOf(jsonObject.get("result")).equals("\"true\"")) {
+                    count++;
                 if(rc==1) {
                     Log.d("changinAttributehere", "check");
                     pathfromuser1.setVisibility(View.GONE);
