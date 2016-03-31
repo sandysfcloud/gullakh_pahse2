@@ -41,13 +41,13 @@ public class MyProfileActivity extends AppCompatActivity {
         Cursor cr = dbobject.displayData("select * from userlogin");
         if(cr!=null) {
             if (cr.moveToFirst()) {
-                email.setText(cr.getString(1));
+                email.setText(cr.getString(3));
                 Cursor crmob = dbobject.displayData("select * from signindetails where email='" + cr.getString(1) + "'");
                 try {
                     if (crmob != null) {
                         if (crmob.moveToFirst()) {
                             Log.d("mobno", crmob.getString(1) + " email no :" + cr.getString(1));
-                            ph.setText(crmob.getString(2));
+                            ph.setText(crmob.getString(4));
                         }
                     }
                 }catch(Exception e)

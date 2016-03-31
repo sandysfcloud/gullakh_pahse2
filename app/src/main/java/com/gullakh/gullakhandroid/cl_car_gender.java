@@ -45,13 +45,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     Dialog dgthis;
     String borrowercityid,useremail,usermobile;
     static  String borrowercaseid;
-    static String borrowercontactid;
+    static String borrowercontactid="";
     private String borrowercaseno="";
     private ContentValues contentValues;
     private Spinner spinner;
     private EditText add1,add2,city,pin,state;
     private String userid;
-
+    DataHandler dbobject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +118,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         spinner.setAdapter(dataAdapter);
     }
     private void getInfo() {
-        DataHandler dbobject = new DataHandler(this);
+        dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
         cr.moveToFirst();
         Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
@@ -175,7 +175,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                                 if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
                                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                                 } else {
-                                    goToDatabase();
+                                    goToDatabase("mysearch");
                                     savetoserver();
                                 }
                             }
@@ -187,7 +187,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 gen1.setImageResource(R.drawable.buttonselecteffect);
                 gen2.setImageResource(R.drawable.userfemale);
                 dataGender="male";
-                goToDatabase();
+                goToDatabase("mysearch");
                 setDataToHashMap("firstname", firstName.getText().toString());
                 setDataToHashMap("lastname",lastName.getText().toString());
                 setDataToHashMap("gender", dataGender);
@@ -199,7 +199,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 setDataToHashMap("firstname", firstName.getText().toString());
                 setDataToHashMap("lastname", lastName.getText().toString());
                 setDataToHashMap("gender", dataGender);
-                goToDatabase();
+                goToDatabase("mysearch");
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -310,7 +310,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 {
                     ContactBR[] Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR[].class);
                     borrowercontactid = Borrower_contact[0].getId();
-                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
+                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"created");
                 }else{
                     requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString()
                             ,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
@@ -336,7 +336,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 ContactBR Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR.class);
                 borrowercontactid = Borrower_contact.getId();
                 Log.d("Borrower contact id", borrowercontactid);
-                requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Login");
+                requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created");
             }
         }, cl_car_gender.this, "wait");
 
@@ -463,7 +463,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("contactupdate jsonobj", String.valueOf(jsonObject));
-
+                goToDatabase("userlogin");
                 dgthis.dismiss();
                 goToIntent();
                 //showdialog();
@@ -479,11 +479,20 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
     }
 
-    private void goToDatabase()
+    private void goToDatabase(String table)
     {
-        contentValues.put("loantype", "Car Loan");
-        contentValues.put("questans", "cl_car_residence_type");
-        contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+        if(table.equals("mysearch")) {
+            contentValues.put("loantype", "Car Loan");
+            contentValues.put("questans", "cl_car_residence_type");
+            contentValues.put("data", cl_car_global_data.getHashMapInString());
+            cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+        }else if(table.equals("userlogin")){
+
+            ContentValues contentValues1=new ContentValues();
+            contentValues1.put("contact_id",borrowercontactid);
+            Log.d("seeupdateofuserlogin", "userlogin" + contentValues1 + userid);
+            DataHandler dbobject1=new DataHandler(this);
+            dbobject1.updateDatatouserlogin("userlogin",contentValues1,userid);
+        }
     }
 }

@@ -226,14 +226,24 @@ public class DataHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
-    public void updateDatatoDB(String tablenam,ContentValues values,String loantype)
+    public void updateDatatoDB(String tablenam, ContentValues values, String loantype)
+    {
+            try {
+                db = this.getReadableDatabase();
+                db.update(tablenam, values, "loantype='"+loantype+"';",null);
+                Log.d("mysearch updated successfully",loantype);
+            }catch(Exception e)
+            {
+                System.out.println("error " + e.toString());
+            }
+    }
+    public void updateDatatouserlogin(String tablenam, ContentValues values, String userid)
     {
         try {
             db = this.getReadableDatabase();
-            db.update(tablenam, values, "loantype='"+loantype+"';",null);
-            Log.d("updated successfully",loantype);
+            db.update(tablenam, values, "user_id='"+userid+"';",null);
+            Log.d("userlogin updated successfully",String.valueOf(values)+" userid"+userid);
         }catch(Exception e)
         {
             System.out.println("error " + e.toString());

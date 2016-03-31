@@ -113,7 +113,7 @@
                     android:padding="8dp"
                     android:textColor="#ffffff"
                     android:background="@drawable/rectbutton_org"
-                    android:text="View"
+                    android:text="Upload"
                     app:typeface="robotoLight"/>
             </LinearLayout>
             <View

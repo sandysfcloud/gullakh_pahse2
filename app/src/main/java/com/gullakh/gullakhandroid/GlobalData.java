@@ -1,13 +1,13 @@
 package com.gullakh.gullakhandroid;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import java.util.ArrayList;
 
 /**
  * Created by njfernandis on 05/02/16.
  */
-public class GlobalData extends Application {
+public class GlobalData extends MultiDexApplication {
     private Double someVariable;
     private String locationVariable;
 

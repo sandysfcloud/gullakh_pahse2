@@ -22,7 +22,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
@@ -59,11 +58,9 @@ import java.math.BigDecimal;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -123,7 +120,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee" };
     Map<String, String> Arry_bankimg=null;
     String listidmaster;
-
+    private LoanDetails loandetailsobj;
 
 
     @Override
@@ -156,7 +153,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 //******************************************
-
+        DataHandler dbobjectsess = new DataHandler(GoogleCardsMediaActivity.this);
+        Cursor crsess = dbobjectsess.displayData("select * from session");
+        if (crsess.moveToFirst()) {
+            sessionid = crsess.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
         if (data.equals("carloan")) {
             Log.e("flow test carloan", String.valueOf(0));
             loan_amtcalcutn("oncreate");
@@ -312,9 +314,19 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                   JsonParser parser = new JsonParser();
                   JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                  Log.d("checkloandetailsinmyappl", String.valueOf(jsonObject.get("result")));
                   dgthis = dg;
 
-                  LoanDetails[] loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails[].class);
+                  loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails.class);
+                  ListModel sched = new ListModel();
+                  sched = new ListModel();
+                  sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                  sched.setappldate(loandetailsobj.getCreatedtime());
+                  sched.setstatus(loandetailsobj.getStage());
+
+                  searchlistviewArry.add(sched);
+                  createListView();
+                  setapplicatnadapter(searchlistviewArry);
 
 
               }
@@ -334,8 +346,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
               }
 
           }
-          Log.d("userid myapp",userid);
-          Log.d("contactid myapp",contactid);
+          Log.d("userid myapp", userid);
+          Log.d("contactid myapp", contactid);
 
           requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
 
@@ -343,24 +355,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
           layout = (LinearLayout) findViewById(R.id.linear);
 
 
-          ListModel sched = new ListModel();
-          sched = new ListModel();
-          sched.setapplno("124561");//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-          sched.setappldate("4-march-2016");
-          sched.setstatus("active");
-
-          searchlistviewArry.add(sched);
-
-
-
-          createListView();
-          setapplicatnadapter(searchlistviewArry);
-
-
 
             }
-
-
     }
 //*************************************************************************************End of Oncreate
 
@@ -799,12 +795,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
         ServerConnect cls2 = new ServerConnect();
-        DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
-        Cursor cr = dbobject.displayData("select * from session");
-        if (cr.moveToFirst()) {
-            sessionid = cr.getString(1);
-            Log.e("sessionid-cartypes", sessionid);
-        }
+
 if(((GlobalData) getApplication()).getcarres()!=null) {
     Log.d("checking city name here", ((GlobalData) getApplication()).getcarres());
 
