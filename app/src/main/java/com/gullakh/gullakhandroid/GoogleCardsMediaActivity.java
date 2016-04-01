@@ -43,6 +43,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -320,14 +321,18 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                   loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails.class);
                   ListModel sched = new ListModel();
                   sched = new ListModel();
-                  sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                  sched.setappldate(loandetailsobj.getCreatedtime());
-                  sched.setstatus(loandetailsobj.getStage());
+                  if(jsonObject.get("result")!=null) {
+                      sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                      sched.setappldate(loandetailsobj.getCreatedtime());
+                      sched.setstatus(loandetailsobj.getStage());
 
-                  searchlistviewArry.add(sched);
-                  createListView();
-                  setapplicatnadapter(searchlistviewArry);
-
+                      searchlistviewArry.add(sched);
+                      createListView();
+                      setapplicatnadapter(searchlistviewArry);
+                  }
+                  else
+                      Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Applications Found", Toast.LENGTH_LONG).show();
+                              dgthis.dismiss();
 
               }
           }, GoogleCardsMediaActivity.this, "1");
