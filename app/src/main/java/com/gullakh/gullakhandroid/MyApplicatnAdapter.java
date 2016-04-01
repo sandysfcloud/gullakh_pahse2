@@ -14,9 +14,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by njfernandis on 25/03/16.
- */
 public class MyApplicatnAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
@@ -106,6 +103,8 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     .findViewById(R.id.status);
             holder.apply= (Button) convertView
                     .findViewById(R.id.apply);
+            holder.viewbutton= (Button) convertView
+                    .findViewById(R.id.view);
             holder.apply.setTag(position);
 
             convertView.setTag(holder);
@@ -116,9 +115,6 @@ public class MyApplicatnAdapter extends BaseAdapter {
             holder.applno.setText("No Data");
 
         } else {
-
-
-
             tempValues = null;
             tempValues = (ListModel) data.get(position);
 
@@ -128,7 +124,22 @@ public class MyApplicatnAdapter extends BaseAdapter {
         if(tempValues.getstatus().equals("submitted"))
         {
             holder.apply.setVisibility(View.GONE);
+            holder.viewbutton.setVisibility(View.VISIBLE);
+            holder.viewbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(cont, Myapplication.class);
+                    intent.putExtra("data", "carloan");
+                    cont.startActivity(intent);
+                    ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
+                }
+        });
         }
+        else
+        {
+            holder.apply.setVisibility(View.VISIBLE);
+            holder.viewbutton.setVisibility(View.GONE);
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -139,7 +150,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
             });
-
+        }
         }
 
 
@@ -154,7 +165,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
         public TextView price;
         public TextView applno;
         public TextView date,status;
-        public Button apply;
+        public Button apply,viewbutton;
 
     }
 
