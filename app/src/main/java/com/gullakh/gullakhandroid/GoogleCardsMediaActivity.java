@@ -325,17 +325,26 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                       sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
                       sched.setappldate(loandetailsobj.getCreatedtime());
                       sched.setstatus(loandetailsobj.getStage());
-
+                      sched.setLoancaseid(loandetailsobj.getLoanrequestcaseid());
+                      sched.setContactid(loandetailsobj.getContactid());
+                      sched.setD0(loandetailsobj.getD0());
+                      sched.setD1(loandetailsobj.getD1());
+                      sched.setD2(loandetailsobj.getD2());
+                      sched.setD3(loandetailsobj.getD3());
+                      sched.setD4(loandetailsobj.getD4());
+                      sched.setD5(loandetailsobj.getD5());
+                      sched.setD6(loandetailsobj.getD6());
+                      sched.setCompletedpercentage(loandetailsobj.getsetCompletedpercentage());
                       searchlistviewArry.add(sched);
                       createListView();
                       setapplicatnadapter(searchlistviewArry);
                   }
                   else
                       Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Applications Found", Toast.LENGTH_LONG).show();
-                              dgthis.dismiss();
+                  dgthis.dismiss();
 
               }
-          }, GoogleCardsMediaActivity.this, "1");
+          }, GoogleCardsMediaActivity.this, "wait");
 
           DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
           Cursor cre = dbobject.displayData("select * from userlogin");

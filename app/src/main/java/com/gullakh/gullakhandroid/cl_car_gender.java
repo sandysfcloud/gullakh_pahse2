@@ -163,23 +163,28 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.Submit:
-                    if (firstName.getText().toString().equals("")) {
-                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
+                if (firstName.getText().toString().equals("")) {
+                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
+                } else {
+                    if (lastName.getText().toString().equals("")) {
+                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter Last Name", "failed");
                     } else {
-                        if (lastName.getText().toString().equals("")) {
-                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter Last Name", "failed");
+                        if (dataGender.equals("")) {
+                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
                         } else {
-                            if (dataGender.equals("")) {
-                                RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
+                            if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
+                                RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                             } else {
-                                if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
-                                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
-                                } else {
+                                if(pin.getText().toString().length()==6){
                                     goToDatabase("mysearch");
                                     savetoserver();
+                                }else{
+                                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
                                 }
+
                             }
                         }
+                    }
 
                 }
                 break;

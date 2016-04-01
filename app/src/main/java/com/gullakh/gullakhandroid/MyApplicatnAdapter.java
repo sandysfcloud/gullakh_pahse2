@@ -121,7 +121,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
             holder.applno.setText(""+tempValues.getapplno());
             holder.date.setText(""+tempValues.getappldate());
             holder.status.setText("" + tempValues.getstatus());
-        if(tempValues.getstatus().equals("submitted"))
+        if(tempValues.getstatus().equals("Submitted"))
         {
             holder.apply.setVisibility(View.GONE);
             holder.viewbutton.setVisibility(View.VISIBLE);
@@ -131,6 +131,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
                 {
                     Intent intent = new Intent(cont, Myapplication.class);
                     intent.putExtra("data", "carloan");
+                    intent.putExtra("progress",tempValues.getCompletedpercentage());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
@@ -138,23 +139,30 @@ public class MyApplicatnAdapter extends BaseAdapter {
         }
         else
         {
-            holder.apply.setVisibility(View.VISIBLE);
             holder.viewbutton.setVisibility(View.GONE);
+            holder.apply.setVisibility(View.VISIBLE);
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos= (int) v.getTag();
                     Intent intent = new Intent(cont, UploadDocument2.class);
-                    intent.putExtra("data", "carloan");
+                    intent.putExtra("data", "myapplication");
+                    intent.putExtra("loanreqcaseid",tempValues.getLoancaseid());
+                    intent.putExtra("contactid",tempValues.getContactid());
+                    intent.putExtra("d0",tempValues.getD0());
+                    intent.putExtra("d1",tempValues.getD1());
+                    intent.putExtra("d2",tempValues.getD2());
+                    intent.putExtra("d3",tempValues.getD3());
+                    intent.putExtra("d4",tempValues.getD4());
+                    intent.putExtra("d5",tempValues.getD5());
+                    intent.putExtra("d6",tempValues.getD6());
+
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
             });
         }
         }
-
-
-
         return convertView;
     }
 

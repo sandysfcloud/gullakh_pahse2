@@ -51,14 +51,13 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
         name.setText("Dear "+intent.getStringExtra("name")+",");
         applno.setText("Your application # is "+intent.getStringExtra("applno")+".");
     }
-
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId()) {
-
             case R.id.ImageUpload:
                 Intent intent = new Intent(this, UploadDocument2.class);
-
+                intent.putExtra("data", "newappl");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
@@ -69,7 +68,6 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
-
                 break;
         }
     }

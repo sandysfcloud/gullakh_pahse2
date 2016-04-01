@@ -395,6 +395,18 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                        }else if(args[1].equals("updatestatus"))
+                        {
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "updatestatus"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("recordid",args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("stage",args[4]));
+                            Log.d("argsument update",args[2]+"and"+args[3]);
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }else if(args[1].equals("accountimg")){
 
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
