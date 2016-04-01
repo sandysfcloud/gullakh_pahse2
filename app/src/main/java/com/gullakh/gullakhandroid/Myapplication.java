@@ -1,9 +1,10 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,10 +16,14 @@ public class Myapplication extends AppCompatActivity {
     private Runnable mTimer;
     protected int progress;
     private Handler mHandler;
+    private int progpercent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myapplication);
+        Intent i=getIntent();
+        progpercent= Integer.parseInt(i.getStringExtra("progress"));
         mHandler = new Handler();
         initSegmentProgressBar();
     }
@@ -75,7 +80,7 @@ public class Myapplication extends AppCompatActivity {
             @Override
             public void run() {
                 progress += 1;
-                if (progress <= 100)
+                if (progress <= progpercent)
                     runOnUiThread(new Runnable() {
 
                         @Override

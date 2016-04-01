@@ -64,7 +64,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="@color/main_color_500"
+                app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/business"
                 android:layout_below="@+id/heading2"
                 android:layout_alignLeft="@+id/view"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:id="@+id/joindateofempyr"
-                    android:textColor="#fff"
+                    android:textColor="#000"
                     android:textSize="15sp"
                     android:hint="Ex:2001" />
 

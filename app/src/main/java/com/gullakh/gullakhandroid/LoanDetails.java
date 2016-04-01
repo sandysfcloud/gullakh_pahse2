@@ -17,6 +17,9 @@ public class LoanDetails {
     public String stage;
     public String loanrequestcaseid;
     public String createdtime;
+    public String contactid;
+    private String setCompletedpercentage;
+    private String completedpercentage;
 
     public String getD0() {
         return d0;
@@ -60,6 +63,10 @@ public class LoanDetails {
 
     public String getLoanrequestcaseid() {
         return loanrequestcaseid;
+    }
+
+    public String getContactid() {
+        return contactid;
     }
 
     public String gettypeid(){
@@ -118,5 +125,9 @@ public class LoanDetails {
 
     public void setLoanrequestcaseid(String loanrequestcaseid) {
         this.loanrequestcaseid = loanrequestcaseid;
+    }
+
+    public String getsetCompletedpercentage() {
+        return completedpercentage;
     }
 }

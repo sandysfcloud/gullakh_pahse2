@@ -155,7 +155,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             android:focusable="false"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/loan_amt"
+            app:mtf_image="@drawable/piggymoney"
             android:layout_marginTop="10dp">
 
             <AutoCompleteTextView

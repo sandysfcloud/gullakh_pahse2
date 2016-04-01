@@ -279,7 +279,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     }
 
     private void storeData() {
-        setDataToHashMap("currently_living_in", cl_car_residence.dataLocation);
+        setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
         setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
         setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getcartype());
         setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());

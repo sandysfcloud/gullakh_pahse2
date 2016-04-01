@@ -114,7 +114,24 @@
                     android:textColor="#ffffff"
                     android:background="@drawable/rectbutton_org"
                     android:text="Upload"
-                    app:typeface="robotoLight"/>
+                    app:typeface="robotoLight"
+                    android:visibility="gone" />
+                <com.gullakh.gullakhandroid.font.RobotoButton
+                    android:id="@+id/view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="8dp"
+
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="8dp"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/rectbutton_org"
+                    android:text="VIEW"
+                    app:typeface="robotoLight"
+                    android:visibility="gone" />
             </LinearLayout>
             <View
                 android:layout_width="fill_parent"

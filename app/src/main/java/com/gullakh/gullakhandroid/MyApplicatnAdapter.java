@@ -14,9 +14,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by njfernandis on 25/03/16.
- */
 public class MyApplicatnAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
@@ -106,6 +103,8 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     .findViewById(R.id.status);
             holder.apply= (Button) convertView
                     .findViewById(R.id.apply);
+            holder.viewbutton= (Button) convertView
+                    .findViewById(R.id.view);
             holder.apply.setTag(position);
 
             convertView.setTag(holder);
@@ -116,34 +115,54 @@ public class MyApplicatnAdapter extends BaseAdapter {
             holder.applno.setText("No Data");
 
         } else {
-
-
-
             tempValues = null;
             tempValues = (ListModel) data.get(position);
 
             holder.applno.setText(""+tempValues.getapplno());
             holder.date.setText(""+tempValues.getappldate());
             holder.status.setText("" + tempValues.getstatus());
-        if(tempValues.getstatus().equals("submitted"))
+        if(tempValues.getstatus().equals("Submitted"))
         {
             holder.apply.setVisibility(View.GONE);
+            holder.viewbutton.setVisibility(View.VISIBLE);
+            holder.viewbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(cont, Myapplication.class);
+                    intent.putExtra("data", "carloan");
+                    intent.putExtra("progress",tempValues.getCompletedpercentage());
+                    cont.startActivity(intent);
+                    ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
+                }
+        });
         }
+        else
+        {
+            holder.viewbutton.setVisibility(View.GONE);
+            holder.apply.setVisibility(View.VISIBLE);
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos= (int) v.getTag();
                     Intent intent = new Intent(cont, UploadDocument2.class);
-                    intent.putExtra("data", "carloan");
+                    intent.putExtra("data", "myapplication");
+                    intent.putExtra("loanreqcaseid",tempValues.getLoancaseid());
+                    intent.putExtra("contactid",tempValues.getContactid());
+                    intent.putExtra("d0",tempValues.getD0());
+                    intent.putExtra("d1",tempValues.getD1());
+                    intent.putExtra("d2",tempValues.getD2());
+                    intent.putExtra("d3",tempValues.getD3());
+                    intent.putExtra("d4",tempValues.getD4());
+                    intent.putExtra("d5",tempValues.getD5());
+                    intent.putExtra("d6",tempValues.getD6());
+
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
             });
-
         }
-
-
-
+        }
         return convertView;
     }
 
@@ -154,7 +173,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
         public TextView price;
         public TextView applno;
         public TextView date,status;
-        public Button apply;
+        public Button apply,viewbutton;
 
     }
 
