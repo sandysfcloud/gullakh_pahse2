@@ -445,16 +445,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.carln:
                 loanType="Car Loan";
+                ((GlobalData) getApplication()).setloantyp("car_loan");
                 Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.home:
-                loanType="Home Loan";
+               /* loanType="Home Loan";
                 ((GlobalData) getApplication()).setloantyp("home_loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                overridePendingTransition(R.transition.left, R.transition.right);*/
                 break;
             case R.id.buttonSignin:
                 intent = new Intent(MainActivity.this, signinPrepage.class);
@@ -607,12 +608,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(2, -1),
                 R.string.drawer_title_left_menus,
                 DrawerItem.DRAWER_ITEM_TAG_LEFT_MENUS));
-        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(3, -1),
+       /* mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(3, -1),
                 R.string.drawer_title_login_page,
                 DrawerItem.DRAWER_ITEM_TAG_LOGIN_PAGE_AND_LOADERS));
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(4, -1),
                 R.string.drawer_title_image_gallery,
-                DrawerItem.DRAWER_ITEM_TAG_IMAGE_GALLERY));
+                DrawerItem.DRAWER_ITEM_TAG_IMAGE_GALLERY));*/
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(5, -1),
                 R.string.drawer_title_my_application,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
