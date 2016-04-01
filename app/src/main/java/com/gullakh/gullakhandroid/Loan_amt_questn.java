@@ -133,6 +133,14 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
+                   /* String loan = strtemp;
+                    Log.d("loan KK",loan);
+                    loan = loan.replaceAll("\\.00", "");
+                     loan = loan.replaceAll("Rs.", "");
+                    loan = loan.replaceAll(",", "");
+                    loan = loan.replaceAll("\\s+","");
+                    Log.d("loan KK2",loan);
+                    mSeekArc.setProgress(Integer.valueOf(loan) / 50000);*/
 
                     mSeekArcProgress.setText(strtemp);
                 }

@@ -204,8 +204,10 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             case R.id.next:
 
                 if(citynam.getText().toString()!=null) {
-                    Log.d("edit text",citynam.getText().toString());
-                    ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+                    if( citynam.getText().toString().length()>0) {
+                        Log.d("edit text", citynam.getText().toString());
+                        ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+                    }
                 }
                 if(((GlobalData) getApplication()).getcarres()!=null)
                     goToIntent();
@@ -287,6 +289,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             }
         }
         else {
+            Log.d("selected current city is ", ((GlobalData) getApplication()).getcarres());
+
             Intent intent = new Intent(this, Emp_type_Qustn.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);

@@ -68,6 +68,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		this.original.addAll(data);
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 	}
 
 	@Override
@@ -174,15 +175,15 @@ Log.d("setting image", tempValues.getcarimgurl());
 			Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
 			String emi=String.valueOf(format.format(new BigDecimal(tempValues.getemi_value())));
 			emi = emi.replaceAll("\\.00", "");
-			emi = emi.replaceAll("Rs.", "");
+		//	emi = emi.replaceAll("Rs.", "");
 
 			String profee=String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
 			profee = profee.replaceAll("\\.00", "");
-			profee = profee.replaceAll("Rs.", "");
+			//profee = profee.replaceAll("Rs.", "");
 
 			String bp=String.valueOf(format.format(new BigDecimal(tempValues.getbp().toString())));
 			bp = bp.replaceAll("\\.00", "");
-			bp = bp.replaceAll("Rs.", "");
+			//bp = bp.replaceAll("Rs.", "");
 
 
 			holder.day.setText(""+emi);

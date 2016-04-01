@@ -191,24 +191,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             //nullpointer
             String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
             loan = loan.replaceAll("\\.00", "");
-            loan = loan.replaceAll("Rs.", "");
+           // loan = loan.replaceAll("Rs.", "");
 
             loan_amt.setText("" + loan);
 
             filter.setOnClickListener(this);
             createListView();
-		/*intent = getIntent();
-		data = intent.getStringExtra("data");
-        createListView();
-
-        if (data.equals("carloan")) {
-
-            Log.e("flow test carloan", String.valueOf(0));
-            loan_amtcalcutn("oncreate");
-            Log.e("flow test loan cal done", String.valueOf(CustomListViewValuesArr.size()));
-           // setadapter(CustomListViewValuesArr);
-        }*/
-
 
             Spinner s1 = (Spinner) findViewById(R.id.spinner1);
 
@@ -282,12 +270,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             }else {
-                Log.e("You are not logged in", String.valueOf(0));
+                /*Log.e("You are not logged in", String.valueOf(0));
                 Intent intentsignin=new Intent(this,signinPrepage.class);
                 startActivity(intentsignin);
-                finish();
+                finish();*/
+                    Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
 
-
+                    title.setText("Search Result");
             }
 
 
@@ -791,6 +780,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 calculate();
 
                 Log.e("flow test", String.valueOf(CustomListViewValuesArr.size()));
+
+
+
+
+
                 if(param.equals("oncreate"))
                     setadapter(CustomListViewValuesArr);
                 Log.e("flow test", String.valueOf(1));
@@ -897,6 +891,23 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 CustomListViewValuesArr.add(sched);
                 disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 
+
+            }
+            if(CustomListViewValuesArr.size()==0)
+            {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intenth);
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
 
             }
 
@@ -1009,34 +1020,37 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         Log.d("setadapter param", String.valueOf(arraylist));
         CustomListViewValuesArr2.clear();
         CustomListViewValuesArr2.addAll(arraylist);
-        Log.d("CustomListViewValuesArr value check", String.valueOf(CustomListViewValuesArr2.size()));
-        mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
-
-        SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-                new SwipeDismissAdapter(mGoogleCardsAdapter, this));
-        swingBottomInAnimationAdapter.setAbsListView(listView);
+        Log.d("CustomListViewValuesArr value check MAIN", String.valueOf(CustomListViewValuesArr2.size()));
 
 
-        assert swingBottomInAnimationAdapter.getViewAnimator() != null;
-        swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
-                INITIAL_DELAY_MILLIS);
 
-        //listView.setAdapter(null);
-        //swingBottomInAnimationAdapter.notifyDataSetChanged();
-        listView.setAdapter(swingBottomInAnimationAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
-                Bundle bundleObject = new Bundle();
-                bundleObject.putSerializable("key", CustomListViewValuesArr);
-                intent.putExtras(bundleObject);
-                intent.putExtra("position", Integer.toString(position));
-                startActivity(intent);
-                (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
-            }
-        });
+          mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
+
+          SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+                  new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+          swingBottomInAnimationAdapter.setAbsListView(listView);
+
+
+          assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+          swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+                  INITIAL_DELAY_MILLIS);
+
+          //listView.setAdapter(null);
+          //swingBottomInAnimationAdapter.notifyDataSetChanged();
+          listView.setAdapter(swingBottomInAnimationAdapter);
+          listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+              @Override
+              public void onItemClick(AdapterView<?> parent, View view, int position,
+                                      long id) {
+                  Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
+                  Bundle bundleObject = new Bundle();
+                  bundleObject.putSerializable("key", CustomListViewValuesArr);
+                  intent.putExtras(bundleObject);
+                  intent.putExtra("position", Integer.toString(position));
+                  startActivity(intent);
+                  (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+              }
+          });
 
         //getSupportActionBar().setTitle("Result");
         title.setText("Result");
@@ -1064,6 +1078,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         listView.setPadding(px, px, px, px);
         listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         layout.addView(listView);
 
 

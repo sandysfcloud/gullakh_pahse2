@@ -23,7 +23,7 @@ public class GlobalData extends MultiDexApplication {
     private ArrayList<Double> foir,accid;
 
     private String session,carres,loantyp;
-    private String tenure;
+    private String tenure,propcity;
     private CharSequence[] banklist;
     private Double pat;
     private Double pat2;
@@ -34,7 +34,7 @@ public class GlobalData extends MultiDexApplication {
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice_new.php";
     static final String SERVER_GET_URL_web ="http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_contact_id";
 
-
+//*****************CarLoan********************//
 
     public Double getEmi() {
         return someVariable;
@@ -173,4 +173,19 @@ public class GlobalData extends MultiDexApplication {
     public void setloantyp(String cemailVariable) {
         this.loantyp = cemailVariable;
     }
+
+
+
+    //***************HomeLoan***********************//
+
+    public void setpropcity(String cemailVariable) {
+        this.propcity = cemailVariable;
+    }
+
+    public String getpropcity() {
+        return propcity;
+    }
+
+
+
 }

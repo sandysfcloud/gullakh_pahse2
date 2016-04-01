@@ -653,11 +653,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 long id) {
             //selectItem(position, mDrawerItems.get(position).getTag());
             if (position == 1) {
-                //Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                // startActivity(intent);
+             Log.d("home drawer item","1");
                 mDrawerLayout.closeDrawers();
             }
             if (position == 2) {
+                Log.d("profile drawer item","2");
                 DataHandler dbobject = new DataHandler(MainActivity.this);
                 dbobject.addTable();
 
@@ -681,11 +681,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 overridePendingTransition(R.transition.left, R.transition.right);
             }
             if (position == 3) {
-                //Intent intent = new Intent(MainActivity.this, LogInPageActivity.class);
-                //startActivity(intent);
-//                Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-//                intent.putExtra("data", "search");
-//                startActivity(intent);
+                Log.d("my search drawer item","3");
                 MyRecentSearchClicked=true;
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 intent.putExtra("data", "search");
@@ -693,13 +689,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 overridePendingTransition(R.transition.left, R.transition.right);
 
             }
-            if (position == 5) {
+           /* if (position == 5) {
+                Log.d("my search drawer item","3");
                 Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
 
-            }
+            }*/
             if (position == 6) {
+                Log.d("myapplication drawer item","3");
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 intent.putExtra("data", "myapplicatn");
                 startActivity(intent);

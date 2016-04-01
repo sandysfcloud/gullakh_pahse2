@@ -11,6 +11,8 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
     private RadioGroup radioCityLimitGroup;
     View ll1,ll2,ll3,ll4,ll5,ll6,ll7,ll8,ll9;
     Button next,back;
+    LinearLayout owners,cons,pop1,pop2,pop3,pop4,pop5,pop6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,20 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         v2.setLayoutParams(lp);
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
+        RadioButton single = (RadioButton) findViewById(R.id.radioButton3);
+        RadioButton joint = (RadioButton) findViewById(R.id.radioButton4);
+        single.setOnClickListener(this);
+        joint.setOnClickListener(this);
+
+        owners = (LinearLayout) findViewById(R.id.owershp);
+        cons = (LinearLayout) findViewById(R.id.cons);
+        pop1 = (LinearLayout) findViewById(R.id.pop1);
+        pop2 = (LinearLayout) findViewById(R.id.pop2);
+        pop3 = (LinearLayout) findViewById(R.id.pop3);
+        pop4 = (LinearLayout) findViewById(R.id.pop4);
+        pop5 = (LinearLayout) findViewById(R.id.pop5);
+        pop6 = (LinearLayout) findViewById(R.id.pop6);
+
         back.setOnClickListener(this);
         next.setOnClickListener(this);
         ll1=findViewById(R.id.ll1);
@@ -81,7 +98,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         ll4.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
                         ll5.setVisibility(View.GONE);
-                        ll6.setVisibility(View.GONE);
+                       // ll6.setVisibility(View.GONE);
                         ll7.setVisibility(View.GONE);
                     }else if(position==3){
                         ll1.setVisibility(View.GONE);
@@ -196,12 +213,77 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                     RegisterPageActivity.showErroralert(hl_need.this, "Select Loan for options", "failed");
                 }
                 break;
-            case R.id.close:
-                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intenth);
+            case R.id.radioButton3:
+                owners.setVisibility(View.VISIBLE);
 
                 break;
+
+            case R.id.radioButton4:
+                owners.setVisibility(View.VISIBLE);
+
+                break;
+
+
+            case R.id.radioButton7:
+                cons.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.radioButton8:
+                cons.setVisibility(View.VISIBLE);
+
+            case R.id.radioButton11:
+                pop1.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.radioButton12:
+                pop1.setVisibility(View.VISIBLE);
+
+
+            case R.id.radioButton15:
+                pop2.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.radioButton16:
+                pop2.setVisibility(View.VISIBLE);
+
+            case R.id.radioButton19:
+                pop3.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.radioButton20:
+                pop3.setVisibility(View.VISIBLE);
+
+
+            case R.id.radioButton21:
+                pop4.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.radioButton22:
+                pop4.setVisibility(View.VISIBLE);
+            case R.id.radioButton13:
+                pop5.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.radioButton14:
+                pop5.setVisibility(View.VISIBLE);
+
+            case R.id.radioButton17:
+                pop6.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.radioButton18:
+                pop6.setVisibility(View.VISIBLE);
+
+                break;
+
+
             case R.id.back:
                 finish();
                 break;

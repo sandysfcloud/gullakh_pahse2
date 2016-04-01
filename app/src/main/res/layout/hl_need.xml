@@ -225,6 +225,66 @@
                     </RadioGroup>
                 </LinearLayout>
 
+                <!--Added-->
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/owershp"
+
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="self"
+                            android:id="@+id/self"
+                           android:layout_marginRight="10dp"
+                            android:checked="false"
+                            android:textSize="16dp" />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Spouse"
+                            android:id="@+id/spouse"
+                            android:checked="false"
+                            android:textSize="16dp"
+                            android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/fathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/mothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/bro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
+                </LinearLayout>
+
+                <!--Added-->
             </LinearLayout>
 
             <LinearLayout
@@ -327,6 +387,50 @@
                         android:gravity="center"
                         android:layout_marginRight="10dp" />
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="1">
+
+                    <com.gullakh.gullakhandroid.font.RobotoTextView
+                        app:typeface="robotoLight"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Is the building map approved by development authority?"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                    <RadioGroup
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1"
+                        android:id="@+id/apprval"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:id="@+id/yes"
+                            android:checked="false"
+                            android:textSize="16dp" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:id="@+id/no"
+                            android:checked="false"
+                            android:textSize="16dp"
+                            android:layout_weight="0.13" />
+                    </RadioGroup>
+                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -419,6 +523,64 @@
                             android:layout_weight="0.13" />
                     </RadioGroup>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/cons"
+
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="self"
+                        android:id="@+id/cself"
+                        android:layout_marginRight="10dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse"
+                        android:id="@+id/cspouse"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/cfathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/cmothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/cbro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -619,6 +781,63 @@
                             android:layout_weight="0.13" />
                     </RadioGroup>
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/pop1"
+
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="self"
+                        android:id="@+id/p1self"
+                        android:layout_marginRight="10dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse"
+                        android:id="@+id/p1pouse"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/p1fathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/p1mothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/p1bro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -709,6 +928,64 @@
                             android:textSize="18dp"
                             android:layout_weight="0.13" />
                     </RadioGroup>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/pop2"
+
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="self"
+                        android:id="@+id/p2self"
+                        android:layout_marginRight="10dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse"
+                        android:id="@+id/p2pouse"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/p2fathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/p2mothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/p2bro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -868,6 +1145,64 @@
                             android:textSize="18dp"
                             android:layout_weight="0.13" />
                     </RadioGroup>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/pop3"
+
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="self"
+                        android:id="@+id/p3self"
+                        android:layout_marginRight="10dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse"
+                        android:id="@+id/p3pouse"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/p3fathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/p3mothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/p3bro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -1029,7 +1364,62 @@
                             android:layout_weight="0.13" />
                     </RadioGroup>
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/pop4"
 
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="self"
+                        android:id="@+id/p4self"
+                        android:layout_marginRight="10dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse"
+                        android:id="@+id/p4pouse"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/p4fathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/p4mothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/p4bro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -1117,6 +1507,62 @@
                             android:textSize="18dp"
                             android:layout_weight="0.13" />
                     </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/pop5"
+
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="self"
+                        android:id="@+id/p5self"
+                        android:layout_marginRight="10dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse"
+                        android:id="@+id/p5pouse"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/p5fathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/p5mothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/p5bro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -1279,7 +1725,62 @@
                             android:layout_weight="0.13" />
                     </RadioGroup>
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/pop6"
 
+                    android:background="#2cababab"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="self"
+                        android:id="@+id/p6self"
+                        android:layout_marginRight="10dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spouse"
+                        android:id="@+id/p6pouse"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Father"
+                        android:id="@+id/p6fathr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mother"
+                        android:id="@+id/p6mothr"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Brother"
+                        android:id="@+id/p6bro"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
