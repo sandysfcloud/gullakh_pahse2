@@ -18,8 +18,9 @@ public class LoanDetails {
     public String loanrequestcaseid;
     public String createdtime;
     public String contactid;
-    private String setCompletedpercentage;
-    private String completedpercentage;
+    public String completedpercentage;
+    public String parameter_value;
+    public String loantype;
 
     public String getD0() {
         return d0;
@@ -129,5 +130,13 @@ public class LoanDetails {
 
     public String getsetCompletedpercentage() {
         return completedpercentage;
+    }
+
+    public String getParameter_value() {
+        return parameter_value;
+    }
+
+    public String getLoantype() {
+        return loantype;
     }
 }

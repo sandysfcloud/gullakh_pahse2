@@ -324,6 +324,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                       sched.setD5(loandetailsobj.getD5());
                       sched.setD6(loandetailsobj.getD6());
                       sched.setCompletedpercentage(loandetailsobj.getsetCompletedpercentage());
+                      sched.setParameter_value(loandetailsobj.getParameter_value());
                       searchlistviewArry.add(sched);
                       createListView();
                       setapplicatnadapter(searchlistviewArry);

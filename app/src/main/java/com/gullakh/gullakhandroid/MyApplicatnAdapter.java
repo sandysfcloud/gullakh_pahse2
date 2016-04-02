@@ -121,6 +121,12 @@ public class MyApplicatnAdapter extends BaseAdapter {
             holder.applno.setText(""+tempValues.getapplno());
             holder.date.setText(""+tempValues.getappldate());
             holder.status.setText("" + tempValues.getstatus());
+//            boolean uploaded=false;
+//            final LoanDetails loanParameters=new LoanDetails();
+//            if(loanParameters.getD0().equals("1")&&loanParameters.getD1().equals("1")&&loanParameters.getD2().equals("1")&&loanParameters.getD3().equals("1")&&
+//                    loanParameters.getD4().equals("1")&&loanParameters.getD5().equals("1")&&loanParameters.getD6().equals("1")){
+//                uploaded = true;
+//            }
         if(tempValues.getstatus().equals("Submitted"))
         {
             holder.apply.setVisibility(View.GONE);
@@ -130,8 +136,9 @@ public class MyApplicatnAdapter extends BaseAdapter {
                 public void onClick(View v)
                 {
                     Intent intent = new Intent(cont, Myapplication.class);
-                    intent.putExtra("data", "carloan");
-                    intent.putExtra("progress",tempValues.getCompletedpercentage());
+                    intent.putExtra("data1", "Car loan");//loanParameters.getLoantype()
+                    intent.putExtra("data2", tempValues.getParameter_value());
+                    intent.putExtra("progress", tempValues.getCompletedpercentage());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }

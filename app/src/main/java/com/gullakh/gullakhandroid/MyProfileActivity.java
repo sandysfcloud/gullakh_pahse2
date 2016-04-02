@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,14 +20,14 @@ public class MyProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("My Profile");
 
-        TextView ph= (TextView) findViewById(R.id.textViewMobNo);
-        TextView email= (TextView) findViewById(R.id.textViewEmail);
+        TextView ph = (TextView) findViewById(R.id.textViewMobNo);
+        TextView email = (TextView) findViewById(R.id.textViewEmail);
         Button signout = (Button) findViewById(R.id.signout);
         signout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                MainActivity.signinstate=false;
+                MainActivity.signinstate = false;
                 DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
                 dbobjectnew.query("DELETE FROM userlogin");
                 Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
@@ -39,26 +38,16 @@ public class MyProfileActivity extends AppCompatActivity {
 
         DataHandler dbobject = new DataHandler(MyProfileActivity.this);
         Cursor cr = dbobject.displayData("select * from userlogin");
-        if(cr!=null) {
+        if (cr != null) {
             if (cr.moveToFirst()) {
                 email.setText(cr.getString(3));
-                Cursor crmob = dbobject.displayData("select * from signindetails where email='" + cr.getString(1) + "'");
-                try {
-                    if (crmob != null) {
-                        if (crmob.moveToFirst()) {
-                            Log.d("mobno", crmob.getString(1) + " email no :" + cr.getString(1));
-                            ph.setText(crmob.getString(4));
-                        }
-                    }
-                }catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }else{
-            Intent intentsignin=new Intent(this,signinPrepage.class);
-            startActivity(intentsignin);
+                ph.setText(cr.getString(4));
+
+            } else {
+                Intent intentsignin = new Intent(this, signinPrepage.class);
+                startActivity(intentsignin);
                 finish();
+            }
         }
     }
     @Override

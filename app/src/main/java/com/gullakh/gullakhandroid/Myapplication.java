@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.natasa.progressviews.CircleSegmentBar;
 import com.natasa.progressviews.utils.ProgressStartPoint;
@@ -22,10 +23,16 @@ public class Myapplication extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myapplication);
+
+        TextView loantype= (TextView) findViewById(R.id.tf2);
+        TextView loanamt= (TextView) findViewById(R.id.loan_amt);
         Intent i=getIntent();
 
         String data=i.getStringExtra("progress").replaceAll("\\.00", "");
         progpercent= Integer.parseInt(data);
+        progpercent= 20;//Integer.parseInt(i.getStringExtra("progress"));
+        loantype.setText(i.getStringExtra("data1"));
+        loanamt.setText(i.getStringExtra("data2"));
         mHandler = new Handler();
         initSegmentProgressBar();
     }

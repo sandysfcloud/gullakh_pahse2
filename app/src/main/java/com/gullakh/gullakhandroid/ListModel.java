@@ -47,6 +47,8 @@ public class ListModel implements Serializable{
     private String loancaseid="";
     private String contactid,d0,d1,d2,d3,d4,d5,d6;
     private String completedpercentage;
+    private String parameter_value;
+    private String setCompletedpercentage;
 
     /*********** Set Methods ******************/
 
@@ -385,6 +387,14 @@ public class ListModel implements Serializable{
 
     public String getCompletedpercentage() {
         return completedpercentage;
+    }
+
+    public String getParameter_value() {
+        return parameter_value;
+    }
+
+    public void setParameter_value(String parameter_value) {
+        this.parameter_value = parameter_value;
     }
 }
 

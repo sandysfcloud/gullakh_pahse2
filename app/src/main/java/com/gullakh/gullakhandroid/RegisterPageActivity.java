@@ -95,7 +95,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		 emailadress=(EditText) findViewById(R.id.emailaddress);
 		 mobilenumber=(EditText) findViewById(R.id.mobilenumber);
-		 password=(EditText) findViewById(R.id.password);
+		// password=(EditText) findViewById(R.id.password);
 		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
 
 		if (checkPlayServices()) {
@@ -281,11 +281,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	}
 
 	private void storedatatoDatabase() {
-		DataHandler dbobject = new DataHandler(RegisterPageActivity.this);
+		DataHandler dbobject = new DataHandler(this);
 		dbobject.addTable();
 		ContentValues values = new ContentValues();
-		values.put("email", useremail);
-		values.put("mobno", usermobno);
+		values.put("useremail", useremail);
+		values.put("usermobile", usermobno);
+		Log.d("mobileandemailinRP",useremail+" "+usermobno);
 		dbobject.insertdata(values, "userlogin");
 	}
 
