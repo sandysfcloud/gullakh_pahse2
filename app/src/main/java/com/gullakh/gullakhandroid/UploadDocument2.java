@@ -223,6 +223,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     }
 
     private void goToServer() {
+       // count++;
         if(count==7){
             Log.d("Uploaded all", String.valueOf(count));
             requestgetserver3 = new JSONServerGet(new AsyncResponse() {

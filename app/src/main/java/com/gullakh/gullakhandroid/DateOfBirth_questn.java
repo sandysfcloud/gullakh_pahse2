@@ -195,20 +195,20 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 
                     if(age>18) {
                         ((GlobalData) getApplication()).setage(age);
-                        if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                       /* if(((GlobalData) getApplication()).getloantyp().equals("Home Loan"))
                         {
                             Intent intent2 = new Intent(this, hl_city.class);
                             startActivity(intent2);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         }
-                        else {
+                        else {*/
 
                             Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
                             intent.putExtra("data", "carloan");
 
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
-                        }
+                      //  }
                     }else{
                         RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
                     }

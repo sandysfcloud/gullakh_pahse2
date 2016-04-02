@@ -23,7 +23,9 @@ public class Myapplication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myapplication);
         Intent i=getIntent();
-        progpercent= Integer.parseInt(i.getStringExtra("progress"));
+
+        String data=i.getStringExtra("progress").replaceAll("\\.00", "");
+        progpercent= Integer.parseInt(data);
         mHandler = new Handler();
         initSegmentProgressBar();
     }

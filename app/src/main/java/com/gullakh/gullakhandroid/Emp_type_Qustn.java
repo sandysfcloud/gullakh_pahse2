@@ -157,8 +157,9 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             case R.id.next:
                 if(((GlobalData) getApplication()).getemptype()!=null)
                    {
-                       if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                       if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
                        {
+                           Log.d("type of loan is",((GlobalData) getApplication()).getcartype());
                            Intent intent2 = new Intent(this, Loan_amt_questn.class);
                            startActivity(intent2);
                            overridePendingTransition(R.transition.left, R.transition.right);
@@ -207,7 +208,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                    if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
                     {
                         Intent intent2 = new Intent(this, Loan_amt_questn.class);
                         startActivity(intent2);
@@ -235,7 +236,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                    if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
                     {
                         Intent intent2 = new Intent(this, Loan_amt_questn.class);
                         startActivity(intent2);
@@ -261,7 +262,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    if(((GlobalData) getApplication()).getloantyp().equals("home_loan"))
+                    if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
                     {
                         Intent intent2 = new Intent(this, Loan_amt_questn.class);
                         startActivity(intent2);

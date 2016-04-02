@@ -445,17 +445,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.carln:
                 loanType="Car Loan";
-                ((GlobalData) getApplication()).setloantyp("car_loan");
+                ((GlobalData) getApplication()).setcartype("Car Loan");
                 Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.home:
-               /* loanType="Home Loan";
-                ((GlobalData) getApplication()).setloantyp("home_loan");
+                loanType="Home Loan";
+                ((GlobalData) getApplication()).setcartype("Home Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);*/
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.buttonSignin:
                 intent = new Intent(MainActivity.this, signinPrepage.class);

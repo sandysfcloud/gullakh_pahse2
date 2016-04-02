@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -123,6 +124,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             case R.id.next:
 
                 if(!propertyLocated.equals("")){
+                    setDataToHashMap("property_city", propertyLocated);
                     goToIntent();
                 }
                 else
@@ -142,6 +144,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 propertyLocated="Bengaluru";
+                setDataToHashMap("property_city", propertyLocated);
                 goToIntent();
                 break;
             case R.id.ImageViewPlace2:
@@ -150,6 +153,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
                 propertyLocated="Chennai";
+                setDataToHashMap("property_city", propertyLocated);
                 goToIntent();
                 break;
             case R.id.ImageViewPlace3:
@@ -166,6 +170,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 propertyLocated="Mumbai";
+                setDataToHashMap("property_city", propertyLocated);
                 goToIntent();
                 break;
             case R.id.locatn:
@@ -173,6 +178,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.lockol);
                 place4.setImageResource(R.drawable.locmum);
+                setDataToHashMap("property_city", propertyLocated);
                 getcitynam();
                 break;
             case R.id.back:
@@ -183,8 +189,22 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
     }
     public void goToIntent(){
             System.gc();
+            Log.d("property city is", propertyLocated);
             Intent intent = new Intent(this, hl_need.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
     }
+
+
+
+
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
+
+
+
+
+
+
 }
