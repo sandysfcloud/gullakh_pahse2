@@ -47,8 +47,10 @@ public class ListModel implements Serializable{
     private String loancaseid="";
     private String contactid,d0,d1,d2,d3,d4,d5,d6;
     private String completedpercentage;
-    private String parameter_value;
+    private String loan_amount;
     private String setCompletedpercentage;
+    public String bank_name;
+    public String loan_type;
 
     /*********** Set Methods ******************/
 
@@ -389,12 +391,28 @@ public class ListModel implements Serializable{
         return completedpercentage;
     }
 
-    public String getParameter_value() {
-        return parameter_value;
+    public String getLoan_amount() {
+        return loan_amount;
     }
 
-    public void setParameter_value(String parameter_value) {
-        this.parameter_value = parameter_value;
+    public void setLoan_amount(String loan_amount) {
+        this.loan_amount = loan_amount;
+    }
+
+    public void setBank_name(String bank_name) {
+        this.bank_name = bank_name;
+    }
+
+    public String getBank_name() {
+        return bank_name;
+    }
+
+    public void setLoan_type(String loan_type) {
+        this.loan_type = loan_type;
+    }
+
+    public String getLoan_type() {
+        return loan_type;
     }
 }
 

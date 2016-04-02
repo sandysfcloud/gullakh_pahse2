@@ -136,8 +136,9 @@ public class MyApplicatnAdapter extends BaseAdapter {
                 public void onClick(View v)
                 {
                     Intent intent = new Intent(cont, Myapplication.class);
-                    intent.putExtra("data1", "Car loan");//loanParameters.getLoantype()
-                    intent.putExtra("data2", tempValues.getParameter_value());
+                    intent.putExtra("data1", tempValues.getLoan_type());//loanParameters.getLoantype()
+                    intent.putExtra("data2", tempValues.getLoan_amount());
+                    intent.putExtra("data3", tempValues.getBank_name());
                     intent.putExtra("progress", tempValues.getCompletedpercentage());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
