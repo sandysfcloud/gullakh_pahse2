@@ -98,9 +98,11 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         //onShakeImage();
 
         if(((GlobalData) getApplication()).getcartype()!=null) {
+
             if (((GlobalData) getApplication()).getcartype().equals("New Car Loan"))
                 sal.setImageResource(R.drawable.buttonselecteffect);
             else
+            if (((GlobalData) getApplication()).getcartype().equals("Used Car Loan"))
                 self.setImageResource(R.drawable.buttonselecteffect);
 
         }
