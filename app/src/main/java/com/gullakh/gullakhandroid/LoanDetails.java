@@ -19,8 +19,9 @@ public class LoanDetails {
     public String createdtime;
     public String contactid;
     public String completedpercentage;
-    public String parameter_value;
-    public String loantype;
+    public String loan_amount;
+    public String loan_type;
+    public String bank_name;
 
     public String getD0() {
         return d0;
@@ -132,11 +133,15 @@ public class LoanDetails {
         return completedpercentage;
     }
 
-    public String getParameter_value() {
-        return parameter_value;
+    public String getLoan_amount() {
+        return loan_amount;
     }
 
     public String getLoantype() {
-        return loantype;
+        return loan_type;
+    }
+
+    public String getBank_name() {
+        return bank_name;
     }
 }

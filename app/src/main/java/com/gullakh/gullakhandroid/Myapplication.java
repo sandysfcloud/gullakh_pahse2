@@ -26,10 +26,12 @@ public class Myapplication extends AppCompatActivity {
 
         TextView loantype= (TextView) findViewById(R.id.tf2);
         TextView loanamt= (TextView) findViewById(R.id.loan_amt);
+        TextView bnkname= (TextView) findViewById(R.id.banknam);
         Intent i=getIntent();
         progpercent= 20;//Integer.parseInt(i.getStringExtra("progress"));
         loantype.setText(i.getStringExtra("data1"));
         loanamt.setText(i.getStringExtra("data2"));
+        bnkname.setText(i.getStringExtra("data3"));
         mHandler = new Handler();
         initSegmentProgressBar();
     }
