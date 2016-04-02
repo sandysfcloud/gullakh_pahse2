@@ -245,7 +245,9 @@
             android:name=".Myapplication"
             android:label="@string/title_activity_myapplication" />
         <activity android:name=".hl_city" />
-        <activity android:name=".hl_need"></activity>
+        <activity android:name=".hl_need" />
+        <activity android:name=".hl_salaried2" />
+        <activity android:name=".hl_coappldetails"></activity>
     </application>
 
 </manifest>

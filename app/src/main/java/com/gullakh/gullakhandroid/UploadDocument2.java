@@ -136,7 +136,6 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             Log.d("d values",d[0]+d[1]+d[2]+d[3]+d[4]+d[5]+d[6]);
             for(int i=1;i<=7;i++){
                 if(d[i].equals("1")){
-                    count++;
                     Log.d("set Attribute ", String.valueOf(i));
                     uploadedsuccessfully(i);
                 }
@@ -407,7 +406,9 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             requestgetserver.execute("token", "document", sessionid,contactid, Data, exe, title);
     }
 
-    private void uploadedsuccessfully(int rc) {
+    private void uploadedsuccessfully(int rc)
+    {
+        count++;
         if(rc==1) {
             Log.d("changinAttributehere", "check");
             pathfromuser1.setVisibility(View.GONE);
@@ -449,6 +450,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
 
     private void setAttributes(int reqcode)
     {
+        count--;
         if(reqcode==1){
             pathfromuser1.setVisibility(View.VISIBLE);
             pathfromuser1.setText("");

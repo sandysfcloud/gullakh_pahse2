@@ -52,7 +52,7 @@ public class DataHandler extends SQLiteOpenHelper {
 
             db.execSQL(android_metadata );
 
-            android_metadata= "CREATE TABLE IF NOT EXISTS signindetails (id INTEGER PRIMARY KEY AUTOINCREMENT,email VARCHAR,mobno VARCHAR );";
+           // android_metadata= "CREATE TABLE IF NOT EXISTS signindetails (id INTEGER PRIMARY KEY AUTOINCREMENT,email VARCHAR,mobno VARCHAR );";
 
             db.execSQL(android_metadata );
 

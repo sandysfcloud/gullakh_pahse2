@@ -696,7 +696,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 overridePendingTransition(R.transition.left, R.transition.right);
 
             }*/
-            if (position == 6) {
+            if (position == 4) {
                 Log.d("myapplication drawer item","3");
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 intent.putExtra("data", "myapplicatn");

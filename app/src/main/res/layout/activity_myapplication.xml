@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:maxLines="2"
-            android:text="Car Loan Type: "
+            android:text="Loan Type: "
             android:textColor="#616161"
             android:textSize="16sp"
             app:typeface="robotoLight"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:maxLines="1"
-            android:text="data"
+            android:text="Recieving Data from server"
             android:textColor="#616161"
             android:textSize="16sp"
             app:typeface="robotoLight"
@@ -95,6 +95,7 @@
                 />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:id="@+id/loan_amt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,9 +103,7 @@
                 android:maxLines="1"
                 android:text="data"
                 android:textColor="#616161"
-                android:textSize="16sp"
-                app:typeface="robotoLight"
-                />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
