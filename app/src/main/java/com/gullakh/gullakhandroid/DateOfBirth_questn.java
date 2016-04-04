@@ -11,8 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,18 +22,14 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
-public class DateOfBirth_questn extends AppCompatActivity  implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
+public class DateOfBirth_questn extends AppCompatActivity implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
     EditText Dob;
     ImageView review;
     ImageView done;
-    int day,month,yearv;
+    int day, month, yearv;
     String data;
     Button next;
 
@@ -45,13 +39,13 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_of_birth_questn);
-       // getSupportActionBar().setTitle("Car Loan - Date of birth");
+        // getSupportActionBar().setTitle("Car Loan - Date of birth");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);
         //done = (ImageView) findViewById(R.id.done);
-       // done.setOnClickListener(this);
+        // done.setOnClickListener(this);
 
 
         //********************changing actionbar
@@ -79,8 +73,8 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 //**********
 
 
-       // review = (ImageView) findViewById(R.id.review);
-       // review.setOnClickListener(this);
+        // review = (ImageView) findViewById(R.id.review);
+        // review.setOnClickListener(this);
         next.setOnClickListener(this);
         Dob = (EditText) findViewById(R.id.birthdate);
         if(((GlobalData) getApplication()).getDob()!=null)
@@ -103,19 +97,9 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 
             }
         }
-           // onShakeImage();
-    }
-
-
-    public void onShakeImage() {
-        Animation shake;
-        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
         int id = item.getItemId();
         finish();
         //noinspection SimplifiableIfStatement
@@ -159,7 +143,7 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                 if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
                     RegisterPageActivity.showAlertreview(this,8);
                 else
-                RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,7);
+                    RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,7);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -176,22 +160,14 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                 if(!Dob.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setDob(Dob.getText().toString());
 
-
-                   /* String dob = ((GlobalData) getApplication()).getDob();
-                    String emi = ((GlobalData) getApplication()).getEmi();
-                    String emptyp = ((GlobalData) getApplication()).getemptype();
-                    String laonamt = ((GlobalData) getApplication()).getloanamt();
-                    String netsal = ((GlobalData) getApplication()).getnetsalary();
-                    String cartype = ((GlobalData) getApplication()).getcartype();
-
-                   /* Toast.makeText(this, "Date of Birth: " + dob, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "total emi paid: " + emi, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "employee type: " + emptyp, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "loan amount: " + laonamt, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "net salary: " + netsal, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(this, "cartype: " + cartype, Toast.LENGTH_SHORT).show();*/
-
-                    int age=getAge(yearv,month,day);
+                    int age = 0;
+                    if(((GlobalData) getApplication()).getDob()!=null){
+                        String[] temp=Dob.getText().toString().split("-");
+                        //int year= Integer.parseInt(temp[2]);
+                        age=getAge(Integer.parseInt(temp[2]),Integer.parseInt(temp[1]),Integer.parseInt(temp[0]));
+                    }else{
+                        age=getAge(yearv,month,day);
+                    }
 
                     if(age>18) {
                         ((GlobalData) getApplication()).setage(age);
@@ -203,19 +179,16 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
                         }
                         else {*/
 
-                            Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                            intent.putExtra("data", "carloan");
+                        Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                        intent.putExtra("data", "carloan");
 
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                      //  }
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                        //  }
                     }else{
                         RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
                     }
                 }
-               // ((GlobalData) getApplication()).getEmi()-(Dob.getText().toString());
-                //Intent intent = new Intent(DateOfBirth_questn.this, EmployerNam_Qustn.class);
-               // startActivity(intent);
                 else
                 {
                     RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter Date Of Birth", "failed");
@@ -263,16 +236,16 @@ public class DateOfBirth_questn extends AppCompatActivity  implements View.OnCli
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-     //   String date = year+"-"+(++monthOfYear)+"-"+dayOfMonth;
-       // day=dayOfMonth;
-        //month=++monthOfYear;
-       // yearv=year;
+           String date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
+        day=dayOfMonth;
+        month=++monthOfYear;
+        yearv=year;
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, monthOfYear, dayOfMonth);
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
-        String formatdate = format.format(calendar.getTime());
-       // Dob.setText(date);
-        Dob.setText(formatdate);
+        //SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+        //String formatdate = format.format(calendar.getTime());
+         Dob.setText(date);
+        //Dob.setText(formatdate);
     }
 }

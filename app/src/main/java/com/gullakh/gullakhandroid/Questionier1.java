@@ -1,9 +1,8 @@
 package com.gullakh.gullakhandroid;
 
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,8 +61,8 @@ public class Questionier1 extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.next:
-                Intent intent = new Intent(Questionier1.this, Your_Info_City.class);
-                startActivity(intent);
+               // Intent intent = new Intent(Questionier1.this, Your_Info_City.class);
+               // startActivity(intent);
 
                 break;
             case R.id.back:

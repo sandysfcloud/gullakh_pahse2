@@ -169,9 +169,9 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
 
         switch (v.getId()) {
             case R.id.next:
-                if(!spinner1.getSelectedItem().toString().equals("select")) {
+                if(!spinner1.getSelectedItem().toString().matches("Select")) {
                     if (!Doj.getText().toString().matches("")) {
-                        if (!spinner2.getSelectedItem().toString().equals("select"))
+                        if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
                                 String jdate = getDate();
                                 setDataToHashMap("ind_type",spinner1.getSelectedItem().toString());

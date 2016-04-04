@@ -55,7 +55,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
         RadioButton single1 = (RadioButton) findViewById(R.id.radioButton);
-        RadioButton joint1 = (RadioButton) findViewById(R.id.radioButton);
+        RadioButton joint1 = (RadioButton) findViewById(R.id.radioButton2);
         RadioButton single2 = (RadioButton) findViewById(R.id.radioButton3);
         RadioButton joint2 = (RadioButton) findViewById(R.id.radioButton4);
 

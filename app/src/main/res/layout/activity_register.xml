@@ -81,6 +81,7 @@
             android:inputType="phone"
             android:hint="Mobile number"
             android:ems="10"
+            android:maxLength="10"
             android:id="@+id/mobilenumber"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/edittextsimple"

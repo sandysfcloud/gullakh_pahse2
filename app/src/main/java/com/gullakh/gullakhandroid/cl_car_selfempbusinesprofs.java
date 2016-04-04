@@ -58,6 +58,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         back.setOnClickListener(this);
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
 
         // Spinner click listener
@@ -162,7 +163,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                 {
                     if (!Doj.getText().toString().matches(""))
                     {
-                        if (!spinner2.getSelectedItem().toString().equals("select"))
+                        if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
                                 setDataToHashMap("profession",spinner1.getSelectedItem().toString());
                                 setDataToHashMap("start_date_of_current_business_prof",getDate());

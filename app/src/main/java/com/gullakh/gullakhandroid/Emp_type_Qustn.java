@@ -173,7 +173,6 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 else
                 {
                     RegisterPageActivity.showErroralert(Emp_type_Qustn.this, "Please choose employee type!", "failed");
-
                 }
 
                 break;
@@ -208,17 +207,19 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    /*if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                    if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
                     {
                         Intent intent2 = new Intent(this, Loan_amt_questn.class);
                         startActivity(intent2);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
-                    else {*/
+                    else
+                    {
                     intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
                     startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);}
-               // }
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                }
 
 
 

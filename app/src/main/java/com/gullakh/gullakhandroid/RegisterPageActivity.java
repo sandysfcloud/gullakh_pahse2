@@ -40,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class RegisterPageActivity extends AppCompatActivity  implements AsyncResponse
@@ -73,6 +74,17 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		if (checkPlayServices()) {
+			gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+			regid = getRegistrationId(getApplicationContext());
+			try {
+				new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext())).execute().get();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
+		}
 		android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowCustomEnabled(true);
 		LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -98,10 +110,6 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		// password=(EditText) findViewById(R.id.password);
 		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
 
-		if (checkPlayServices()) {
-			gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-			regid = getRegistrationId(getApplicationContext());
-		}
 
 
 
@@ -118,10 +126,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						useremail = emailadress.getText().toString();
 						usermobno = mobilenumber.getText().toString();
 						// Check device for Play Services APK.
-						if (checkPlayServices()) {
-							gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-							regid = getRegistrationId(getApplicationContext());
-							new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext())).execute();
+						//if (checkPlayServices()) {
+						//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+						//	regid = getRegistrationId(getApplicationContext());
 
 							String[] arraydata = new String[5];
 							arraydata[0] = "registration";
@@ -134,9 +141,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							asyncTask.delegate = RegisterPageActivity.this;
 							asyncTask.execute();
 
-						} else {
-							Log.i(TAG, "No valid Google Play Services APK found.");
-						}
+						//} else {
+						//	Log.i(TAG, "No valid Google Play Services APK found.");
+						//}
 					} else {
 						RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
 					}
