@@ -3,6 +3,8 @@ package com.gullakh.gullakhandroid;
 /**
  * Created by excellasoftware on 25/2/16.
  */
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -29,21 +31,26 @@ import java.util.ArrayList;
 public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
 
     private static final String TAG = "GCMRelated";
+    private final Activity act;
     Context ctx;
     GoogleCloudMessaging gcm;
     String SENDER_ID = "415128481397";
     static String regid = null;
     private int appVersion;
-    public RegisterAppToServer(Context ctx, GoogleCloudMessaging gcm, int appVersion){
+    private Dialog dialogalert;
+
+    public RegisterAppToServer(Context ctx, GoogleCloudMessaging gcm, int appVersion,Activity act){
         this.ctx = ctx;
         this.gcm = gcm;
         this.appVersion = appVersion;
+        this.act=act;
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        dialogalert = RegisterPageActivity.showWaitdialog(act);
     }
 
 
@@ -132,6 +139,7 @@ public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
+        dialogalert.dismiss();
         Log.v(TAG, result);
     }
 }

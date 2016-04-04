@@ -77,13 +77,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		if (checkPlayServices()) {
 			gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 			regid = getRegistrationId(getApplicationContext());
-			try {
-				new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext())).execute().get();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				e.printStackTrace();
-			}
+			new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext()),this).execute();
 		}
 		android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowCustomEnabled(true);
