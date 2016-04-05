@@ -114,9 +114,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         if (checkPlayServices()) {
+            Log.d("GCM Checked","Now reg");
             gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
             regid = getRegistrationId(getApplicationContext());
-                new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext()),this).execute();
+            new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext()),this).execute();
+            Log.d("GCM Checked", "Now finish");
         }
 
         DataHandler dbobject = new DataHandler(this);

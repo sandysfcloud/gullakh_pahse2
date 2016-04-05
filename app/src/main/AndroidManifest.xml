@@ -70,14 +70,6 @@
             android:label="Login Page"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Personalloan"
-            android:label="Personal Loan"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Personalloan1Activity"
-            android:label="Personal Loan"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".MyProfileActivity"
             android:label="My Profile "
             android:screenOrientation="portrait" />
@@ -86,9 +78,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ListView_Click"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".LocationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Car_type_questn"
@@ -100,14 +89,8 @@
             android:name=".PersonalLoanMenuActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Questionier1"
-            android:label="@string/title_activity_questionier1" />
-        <activity
             android:name=".Your_Info_Questn"
             android:label="@string/title_activity_questionier2" />
-        <activity
-            android:name=".Pan_No_Qustn"
-            android:label="@string/title_activity_questionier3" />
         <activity
             android:name=".Loan_amt_questn"
             android:label="@string/title_activity_cartypes__questn" />
@@ -117,12 +100,6 @@
         <activity
             android:name=".Salaryed_NetSalary"
             android:label="@string/title_activity_salaryed__net_salary" />
-        <activity
-            android:name=".Salaried_Credited_Bank"
-            android:label="@string/title_activity_salaried__credited__bank" />
-        <activity
-            android:name=".Salaried_EMI_Paid"
-            android:label="@string/title_activity_salaried__emi__paid" />
         <activity
             android:name=".EMI_questn"
             android:label="@string/title_activity_emi_questn" />
