@@ -188,7 +188,15 @@
         <activity android:name=".hl_city" />
         <activity android:name=".hl_need" />
         <activity android:name=".hl_salaried2" />
-        <activity android:name=".hl_coappldetails"></activity>
+        <activity android:name=".hl_coappldetails" />
+        <activity android:name=".hl_need1" />
+        <activity android:name=".hl_need2" />
+        <activity android:name=".hl_need3" />
+        <activity android:name=".hl_need4" />
+        <activity android:name=".hl_need5" />
+        <activity android:name=".hl_need6" />
+        <activity android:name=".hl_need8" />
+        <activity android:name=".hl_need7"></activity>
     </application>
 
 </manifest>

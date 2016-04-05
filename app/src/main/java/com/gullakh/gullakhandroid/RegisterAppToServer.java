@@ -12,20 +12,7 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 
 public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
@@ -52,8 +39,6 @@ public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
         super.onPreExecute();
         dialogalert = RegisterPageActivity.showWaitdialog(act);
     }
-
-
     @Override
     protected String doInBackground(Void... arg0) {
         String msg = "";
@@ -63,24 +48,9 @@ public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
             }
             regid = gcm.register(SENDER_ID);
             msg = "Device registered, registration ID=" + regid;
-
-            // You should send the registration ID to your server over HTTP,
-            // so it can use GCM/HTTP or CCS to send messages to your app.
-            // The request to your server should be authenticated if your app
-            // is using accounts.
-            //sendRegistrationIdToBackend();
-
-            // For this demo: we don't need to send it because the device
-            // will send upstream messages to a server that echo back the
-            // message using the 'from' address in the message.
-
-            // Persist the regID - no need to register again.
             storeRegistrationId(ctx, regid);
         } catch (IOException ex) {
             msg = "Error :" + ex.getMessage();
-            // If there is an error, don't just keep trying to register.
-            // Require the user to click a button again, or perform
-            // exponential back-off.
         }
         return msg;
     }
@@ -95,9 +65,15 @@ public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
         editor.commit();
 
     }
-
-
-    private static void sendRegistrationIdToBackend() {
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        dialogalert.dismiss();
+        Log.v(TAG, result);
+    }
+}
+/*
+private static void sendRegistrationIdToBackend() {
         URI url = null;
         try
         {
@@ -135,11 +111,4 @@ public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
     }
     }
 
-
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        dialogalert.dismiss();
-        Log.v(TAG, result);
-    }
-}
+ */
