@@ -109,12 +109,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						//if (checkPlayServices()) {
 						//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 						//	regid = getRegistrationId(getApplicationContext());
-
+						Log.d("GCM Regid is",RegisterAppToServer.regid);
 							String[] arraydata = new String[5];
 							arraydata[0] = "registration";
 							arraydata[1] = useremail;
 							arraydata[2] = usermobno;
-							arraydata[3] = MainActivity.regid;
+							arraydata[3] = RegisterAppToServer.regid;
 
 							urlchange = "registration";
 							JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
@@ -163,7 +163,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							arraydata[0] = "otpcheck";
 							arraydata[1] = useremail;
 							arraydata[2] = usermobno;
-							arraydata[3] = MainActivity.regid;
+							arraydata[3] = RegisterAppToServer.regid;
 							arraydata[4] = input.getText().toString();
 							inpuotp=input;
 							urlchange = "otpregistration";
@@ -213,7 +213,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							arraydata[0]="password";
 							arraydata[1]=useremail;
 							arraydata[2]=usermobno;
-							arraydata[3]=MainActivity.regid;
+							arraydata[3]=RegisterAppToServer.regid;
 							arraydata[4]=inputpassword.getText().toString();
 							urlchange = "setpassword";
 							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
