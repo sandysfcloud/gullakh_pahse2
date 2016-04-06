@@ -180,7 +180,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                         else {*/
 
                         Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                        intent.putExtra("data", "carloan");
+                        intent.putExtra("data", "searchgo");
 
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
