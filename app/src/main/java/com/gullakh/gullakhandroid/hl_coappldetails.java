@@ -23,6 +23,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     private boolean coapp=false;
     private RadioGroup radioGroup1,radioGroup2;
     private View view;
+    private boolean working;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +77,19 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                     RegisterPageActivity.showErroralert(this, "Select atleat one option ", "failed");
                 }else {
                     if(coapp){
-                        Intent i=new Intent(this,hl_empType.class);
-                        startActivity(i);
+                        if(working){
+                            Intent i=new Intent(this,hl_empType.class);
+                            startActivity(i);
+                        }else{
+                            Intent i=new Intent(this,cl_car_gender.class);
+                            startActivity(i);
+                        }
                     }else{
                         Intent i=new Intent(this,cl_car_gender.class);
                         startActivity(i);
                     }
+
+
                 }
                 break;
             case R.id.usermale:
@@ -98,20 +106,19 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 coapp=true;
                 view.setVisibility(View.VISIBLE);
                 break;
-            case R.id.radioButton1:
-                Intent i=new Intent(this,hl_empType.class);
-                startActivity(i);
-                break;
-            case R.id.radioButton2:
-                i=new Intent(this,cl_car_gender.class);
-                startActivity(i);
-                break;
             case R.id.no:
                 coapp=false;
                 view.setVisibility(View.GONE);
                 break;
+            case R.id.radioButton1:
+                working=true;
+                break;
+            case R.id.radioButton2:
+                working=false;
+                break;
+
             case R.id.close:
-                 i = new Intent(getApplicationContext(), MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 break;

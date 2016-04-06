@@ -29,7 +29,6 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         if(i.getStringExtra("singleCoappl")!=null){
             singleCoappl =i.getStringExtra("singleCoappl");
         }
-        singleCoappl=i.getStringExtra("singleCoappl");
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView title = (TextView) v.findViewById(R.id.title);
