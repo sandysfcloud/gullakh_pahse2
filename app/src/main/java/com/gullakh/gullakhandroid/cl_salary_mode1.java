@@ -160,6 +160,6 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_salary_mode1");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
 }

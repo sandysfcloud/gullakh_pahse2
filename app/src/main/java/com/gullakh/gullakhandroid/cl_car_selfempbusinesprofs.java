@@ -248,6 +248,6 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_car_selfempbusiness");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
 }

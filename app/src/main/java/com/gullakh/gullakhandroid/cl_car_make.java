@@ -231,7 +231,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         contentValues.put("loantype", loanType);
         contentValues.put("questans", "cl_car_make");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
+        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
         cr.moveToFirst();

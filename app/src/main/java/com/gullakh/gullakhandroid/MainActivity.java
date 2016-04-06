@@ -417,11 +417,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        DataHandler db = new DataHandler(MainActivity.this);
+        db.addTable();
+        Cursor cr = dbobject.displayData("select * from userlogin");
+        String emailfromul="";
+        if(cr!=null) {
+            if (cr.moveToFirst()) {
+                emailfromul = cr.getString(3);
+            }
+            }
         View headerView = null;
-        headerView = prepareHeaderView(R.layout.header_navigation_drawer,
-                "http://pengaja.com/uiapptemplate/newphotos/profileimages/0.jpg",
-                "dev@csform.com");
+        headerView = prepareHeaderView(R.layout.header_navigation_drawer,"",emailfromul);
 
 
          mDrawerList.addHeaderView(headerView);
@@ -557,7 +563,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         ImageView iv = (ImageView) headerView.findViewById(R.id.image);
 
 
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.prof_draw);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.user);
         RoundImage roundedImage = new RoundImage(bm);
         iv.setImageDrawable(roundedImage);
 

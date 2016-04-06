@@ -234,7 +234,6 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					storedatatoDatabase();
 					MainActivity.signinstate=true;
 					if(ListView_Click.applyFlag.equals("Car Loan")){
-						MainActivity.signinstate=true;
 						Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
@@ -252,7 +251,6 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						overridePendingTransition(R.transition.left, R.transition.right);
 					}else if(ListView_Click.applyFlag.equals("none")) {
 						Intent intent = new Intent(RegisterPageActivity.this, MainActivity.class);
-						MainActivity.signinstate = true;
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
 					}

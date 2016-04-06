@@ -240,17 +240,17 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.Buttonapply:
-
+Log.d("check loan type",((GlobalData)getApplication()).getcartype());
             applyFlag=MainActivity.loanType;
                 if(MainActivity.signinstate){
-                    if(applyFlag.equals("Car Loan")){
-
+                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
+                            ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
                         storeData();
                         goToDatabase("Car Loan");
                         Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(applyFlag.equals("Home Loan")){
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
                         storeData();
                         goToDatabase("Home Loan");
                         Intent intent = new Intent(ListView_Click.this,hl_city.class);
@@ -303,7 +303,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         contentValues.put("loantype", loanType);
         contentValues.put("questans","cl_car_make");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);

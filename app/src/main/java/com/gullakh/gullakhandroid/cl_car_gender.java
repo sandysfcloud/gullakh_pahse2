@@ -409,11 +409,20 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 for (int i = 0; i < LT.length; i++) {
                     arrayLoantype.put(LT[i].gettypename(),LT[i].gettypeid());
                 }
-                String loantype = arrayLoantype.get("New Car Loan");
+                String carloantype = arrayLoantype.get("New Car Loan");
+                String homeloantype = arrayLoantype.get("Home Loan");
                 // String emptype=((GlobalData) getApplication()).getemptype();
-
-                // Log.e("Check final data her", emptype);
-                requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loantype);
+                Log.d("carloantype homeloantype",carloantype+"  "+homeloantype);
+                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
+                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")  )
+                {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, carloantype);
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan"))
+                {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, homeloantype);
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                    //requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loantype);
+                }
             }
         },cl_car_gender.this, "wait7");
 
@@ -490,7 +499,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             contentValues.put("loantype", loanType);
             contentValues.put("questans", "cl_car_residence_type");
             contentValues.put("data", cl_car_global_data.getHashMapInString());
-            cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
+            cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
         }else if(table.equals("userlogin")){
 
             ContentValues contentValues1=new ContentValues();

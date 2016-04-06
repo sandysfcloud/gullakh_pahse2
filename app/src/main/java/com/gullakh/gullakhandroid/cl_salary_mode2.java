@@ -208,7 +208,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.buttonselecteffect);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="HDFC Bank";
-                setDataToHashMap("sal_dep_to",dataBankType);
+                setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
 
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
@@ -257,6 +257,6 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_salary_mode2");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
 }

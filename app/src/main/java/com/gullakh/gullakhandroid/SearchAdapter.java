@@ -94,7 +94,7 @@ public class SearchAdapter extends BaseAdapter
 
 
             globalstore = null;
-            globalstore = (ListModel) data.get(position);
+
             Log.d("all search data Kavya", globalstore.getserchcartyp());
 
             try {
@@ -253,8 +253,43 @@ public class SearchAdapter extends BaseAdapter
                 @Override
                 public void onClick(View v) {
                     int pos= (int) v.getTag();
+
+                    //*****************
+                    try {
+                        globalstore = (ListModel) data.get(pos);
+                        JSONObject obj = new JSONObject(globalstore.getserchcartyp());
+                        Log.d("JSON OBj Kavya", String.valueOf(obj));
+                        ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("cl_loanamount"));
+                        ((GlobalData) cont.getApplicationContext()).setemptype(obj.getString("type_employment"));
+                        if(!(obj.getString("type_employment").equals("Salaried"))) {
+                            ((GlobalData) cont.getApplicationContext()).setpat(Double.parseDouble(obj.getString("pat_amount")));
+                            //((GlobalData) cont.getApplicationContext()).setpat2(Double.parseDouble(obj.getString("pat_amount_last")));
+                            ((GlobalData) cont.getApplicationContext()).setdepreciation(Double.parseDouble(obj.getString("dep_amount")));
+                            // ((GlobalData) cont.getApplicationContext()).setdepreciation2(Double.parseDouble(obj.getString("dep_amount_last")));
+                        }
+                        ((GlobalData) cont.getApplicationContext()).setnetsalary(Double.parseDouble(obj.getString("net_mon_salary")));
+                        ((GlobalData) cont.getApplicationContext()).setEmi(Double.parseDouble(obj.getString("total_emi")));
+                        ((GlobalData) cont.getApplicationContext()).setcartype(obj.getString("car_loan_type"));
+
+
+                        ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
+
+                        ((GlobalData) cont.getApplicationContext()).settenure(obj.getString("loan_tenure"));
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
+
+
+                    //***************************
                     Intent intent = new Intent(cont, GoogleCardsMediaActivity.class);
-                    intent.putExtra("data", "carloan");
+                    intent.putExtra("data", "searchgo");
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
