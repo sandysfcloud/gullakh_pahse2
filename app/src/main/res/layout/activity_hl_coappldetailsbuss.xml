@@ -1,0 +1,158 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_width="match_parent"
+    android:background="@drawable/bgque"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/heading1"
+            android:textColor="#000000"
+            android:text="Industry type?"
+            android:layout_gravity="center_vertical"
+            android:textSize="22dp"
+            android:gravity="center"
+            android:background="#2cababab" />
+
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/spinner1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="center_horizontal"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple" />
+
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Start date of current business?"
+            android:id="@+id/heading2"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:background="#2cababab"
+            android:textSize="22dp"
+            android:layout_marginTop="20dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center">
+
+            <com.gullakh.gullakhandroid.MaterialTextField
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_cardColor="#fff"
+                app:mtf_image="@drawable/business"
+                android:layout_below="@+id/heading2"
+                android:layout_alignLeft="@+id/view"
+                android:layout_alignStart="@+id/view">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:id="@+id/joindateofempyr"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:hint="Ex:2001" />
+
+            </com.gullakh.gullakhandroid.MaterialTextField>
+        </LinearLayout>
+
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Type of firm?"
+            android:id="@+id/heading3"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:background="#2cababab"
+            android:layout_marginTop="20dp"
+            android:textSize="22dp" />
+
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/spinner2"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="center_horizontal"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout3"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="#b8546e7a"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Previous"
+            android:id="@+id/back"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/arrowleft"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+            android:gravity="fill" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Next"
+            android:drawableRight="@drawable/arrowright"
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:paddingRight="15dp"
+            android:paddingLeft="95dp" />
+    </LinearLayout>
+</LinearLayout>

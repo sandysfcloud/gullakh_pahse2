@@ -45,13 +45,14 @@
             android:layout_height="50dp"
             android:inputType="text"
             android:ems="10"
-            android:id="@+id/editText17"
+            android:id="@+id/editText1"
             android:background="@drawable/edittextsimple"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="Ex:abc"
             android:paddingLeft="20dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:singleLine="true" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -78,11 +79,12 @@
                 android:layout_height="50dp"
                 android:inputType="text"
                 android:ems="10"
-                android:id="@+id/editText18"
+                android:id="@+id/editText2"
                 android:background="@drawable/edittextsimple"
                 android:layout_marginRight="10dp"
                 android:hint="May-16"
-                android:paddingLeft="20dp" />
+                android:paddingLeft="20dp"
+                android:singleLine="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,12 +114,13 @@
             android:layout_height="50dp"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText19"
+            android:id="@+id/editText3"
             android:background="@drawable/edittextsimple"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="Rs.1,00,000"
-            android:paddingLeft="20dp" />
+            android:paddingLeft="20dp"
+            android:singleLine="true" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -170,7 +173,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:id="@+id/joint">
 
         <LinearLayout
             android:orientation="horizontal"

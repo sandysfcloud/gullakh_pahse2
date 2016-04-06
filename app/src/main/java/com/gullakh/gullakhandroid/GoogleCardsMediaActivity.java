@@ -345,15 +345,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
               if (cre.moveToFirst()) {
                   userid=cre.getString(1);
                   contactid = cre.getString(2);
-
-
-                   cre.close();
-                   dbobject.close();
+                  Log.d("userid myapp", userid);
+                  Log.d("contactid myapp", contactid);
+                  cre.close();
+                  dbobject.close();
               }
 
           }
-         // Log.d("userid myapp", userid);
-         // Log.d("contactid myapp", contactid);
+
 
           requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
 

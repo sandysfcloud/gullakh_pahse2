@@ -177,11 +177,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 break;
             case R.id.back:
-
                 finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
-
-
                 break;
 //            case R.id.done:
 //

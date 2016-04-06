@@ -43,7 +43,7 @@
                 android:layout_height="50dp"
                 android:inputType="text"
                 android:ems="10"
-                android:id="@+id/editText20"
+                android:id="@+id/editText1"
                 android:layout_weight="1"
                 android:background="@drawable/edittextsimple"
                 android:layout_marginLeft="10dp"
@@ -78,7 +78,7 @@
                 android:layout_height="50dp"
                 android:inputType="text"
                 android:ems="10"
-                android:id="@+id/editText21"
+                android:id="@+id/editText2"
                 android:layout_weight="1"
                 android:background="@drawable/edittextsimple"
                 android:layout_marginLeft="10dp"
@@ -115,7 +115,7 @@
             android:layout_height="50dp"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText22"
+            android:id="@+id/editText3"
             android:background="@drawable/edittextsimple"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:weightSum="1"
-                android:id="@+id/radioGroup11"
+                android:id="@+id/radioGroup"
                 android:orientation="horizontal" >
 
                 <RadioButton
@@ -172,7 +172,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:id="@+id/joint">
 
         <LinearLayout
             android:orientation="horizontal"
