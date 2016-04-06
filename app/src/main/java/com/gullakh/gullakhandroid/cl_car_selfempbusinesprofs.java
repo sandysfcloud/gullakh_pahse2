@@ -165,13 +165,27 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                     {
                         if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
-                                setDataToHashMap("profession",spinner1.getSelectedItem().toString());
-                                setDataToHashMap("start_date_of_current_business_prof",getDate());
-                                setDataToHashMap("firm_type_prof",spinner2.getSelectedItem().toString());
-                                goToDatabase();
+                            setDataToHashMap("profession",spinner1.getSelectedItem().toString());
+                            setDataToHashMap("start_date_of_current_business_prof",getDate());
+                            setDataToHashMap("firm_type_prof",spinner2.getSelectedItem().toString());
+                            if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                            {
+                                goToDatabase("Home Loan");
+                                if(cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("Single")){
+                                    Intent intent = new Intent(this, hl_coappldetails.class);
+                                    startActivity(intent);
+                                }else{
+                                    Intent i=new Intent(this,hl_empType.class);
+                                    startActivity(i);
+                                }
+                            }
+                            else {
+                                goToDatabase("Car Loan");
+
                                 Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_gender.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
+                            }
                         } else {
                         RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your firm", "failed");
                         }
@@ -229,11 +243,11 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         cl_car_global_data.dataWithAns.put(Key,data);
         Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
     }
-    private void goToDatabase()
+    private void goToDatabase(String loanType)
     {
-        contentValues.put("loantype", "Car Loan");
+        contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_car_selfempbusiness");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
 }

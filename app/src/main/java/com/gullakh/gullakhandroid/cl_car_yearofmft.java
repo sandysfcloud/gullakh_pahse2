@@ -98,7 +98,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
                 if(!yom.getText().toString().matches(""))
                 {
                         setDataToHashMap("yom", date);
-                        goToDatabase();
+                        goToDatabase("Car Loan");
                         Intent intent = new Intent(cl_car_yearofmft.this, cl_car_residence_type.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
@@ -138,12 +138,12 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void goToDatabase()
+    private void goToDatabase(String loanType)
     {
-        contentValues.put("loantype", "Car Loan");
+        contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_car_yearofmft");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this));
+        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
     @Override
     public void onResume()

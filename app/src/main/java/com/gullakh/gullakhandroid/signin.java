@@ -142,8 +142,8 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 values.put("user_id", userid);
                 values.put("contact_id", contactid);
                 dbobject.insertdata(values, "userlogin");
+                MainActivity.signinstate=true;
                 if(ListView_Click.applyFlag.equals("Car Loan")){
-                    MainActivity.signinstate=true;
                     Intent intent = new Intent(signin.this, cl_car_make.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
@@ -161,7 +161,6 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }else if(ListView_Click.applyFlag.equals("none")) {
                     Intent intent = new Intent(signin.this, MainActivity.class);
-                    MainActivity.signinstate = true;
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }

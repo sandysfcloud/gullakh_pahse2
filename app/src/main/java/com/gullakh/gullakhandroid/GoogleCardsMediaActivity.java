@@ -160,7 +160,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             sessionid = crsess.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
-        if (data.equals("carloan")) {
+        if (data.equals("searchgo")) {
             Log.e("flow test carloan", String.valueOf(0));
             loan_amtcalcutn("oncreate");
             Log.e("flow test loan cal done", String.valueOf(CustomListViewValuesArr.size()));
@@ -310,7 +310,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                   loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails.class);
                   ListModel sched = new ListModel();
                   sched = new ListModel();
-                  if(jsonObject.get("result")!=null) {
+                  if(!jsonObject.get("result").equals("null")) {
                       sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
                       sched.setappldate(loandetailsobj.getCreatedtime());
                       sched.setstatus(loandetailsobj.getStage());

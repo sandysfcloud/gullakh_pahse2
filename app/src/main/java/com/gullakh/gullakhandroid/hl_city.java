@@ -5,8 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -128,7 +127,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                     goToIntent();
                 }
                 else
-                    RegisterPageActivity.showErroralert(hl_city.this, "Select any one Location where property is located", "failed");
+                    RegisterPageActivity.showErroralert(hl_city.this, "Select any one location where property is located", "failed");
                 break;
             case R.id.done:
                 finish();

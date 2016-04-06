@@ -144,40 +144,5 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             overridePendingTransition(R.transition.left, R.transition.right);
         }
 
-
     }
 }
-/*
-
-if (position == 1) {
-                        catergory = "Purchase a plot";
-                        Log.d("position is", String.valueOf(position));
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else if (position == 2) {
-                        Log.d("position is", String.valueOf(position));
-                        catergory = "Construction of house on a plot";
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else if (position == 3) {
-                        catergory = "Purchase of plot & construction there on";
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else if (position == 4) {
-                        catergory = "Home Renovation";
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else if (position == 5) {
-                        catergory = "Balance Transfer of existing home loan";
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else if (position == 7) {
-                        catergory = "Property is not yet identified";
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else if (position == 8) {
-                        catergory = "Purchase of a under construction builder flat";
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else if (position == 9) {
-                        catergory = "Refinance a property already purchased from own sources";
-                        setDataToHashMap("need_loan_for", catergory);
-                    } else {
-                        catergory = "Purchase a house/flat which is ready to move-in";
-                        setDataToHashMap("need_loan_for", catergory);
-                    }
-
- */
