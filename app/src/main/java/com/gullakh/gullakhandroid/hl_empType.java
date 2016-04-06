@@ -51,20 +51,23 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
                 sal.setImageResource(R.drawable.buttonselecteffect);
                 self.setImageResource(R.drawable.selfempbus);
                 business.setImageResource(R.drawable.selfempprof);
-                Intent i=new Intent(this,cl_car_residence_type.class);
+                Intent i=new Intent(this,hl_coappldetailsSal.class);
+                //i.putExtra("coapplicant","yes");
                 startActivity(i);
                 break;
             case R.id.img2:
                 self.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 business.setImageResource(R.drawable.selfempprof);
-                i=new Intent(this,cl_car_residence_type.class);
+                i=new Intent(this,hl_coappldetailsProff.class);
+                //i.putExtra("coapplicant","yes");
                 startActivity(i);
             case R.id.business:
                 business.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
-                i=new Intent(this,cl_car_residence_type.class);
+                i=new Intent(this,hl_coappldetailsbuss.class);
+                //i.putExtra("coapplicant","yes");
                 startActivity(i);
         }
     }
