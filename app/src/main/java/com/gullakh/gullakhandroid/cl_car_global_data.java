@@ -89,10 +89,10 @@ public class cl_car_global_data
         }
         return cr;
     }
-    static boolean checkDataToDataBase(Context c)
+    static boolean checkDataToDataBase(Context c,String loanType)
     {DataHandler dbobject = new DataHandler(c);
         boolean dataPresent = false;
-        Cursor cursor = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        Cursor cursor = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='"+loanType+"';");
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 dataPresent = true;

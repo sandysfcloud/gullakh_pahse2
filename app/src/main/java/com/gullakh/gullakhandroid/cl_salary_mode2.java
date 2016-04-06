@@ -168,8 +168,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
-                    setDataToHashMap("sal_dep_to",dataBankType);
-                    goToDatabase();
+                    setDataToHashMap("sal_dep_to", dataBankType);
+                    goToDatabase("Car Loan");
+
                     intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
@@ -181,8 +182,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="Axis Bank";
-                setDataToHashMap("sal_dep_to",dataBankType);
-                goToDatabase();
+                setDataToHashMap("sal_dep_to", dataBankType);
+                goToDatabase("Car Loan");
+
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -193,8 +195,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="ICICI Bank";
-                setDataToHashMap("sal_dep_to",dataBankType);
-                goToDatabase();
+                setDataToHashMap("sal_dep_to", dataBankType);
+                goToDatabase("Car Loan");
+
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -206,7 +209,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType="HDFC Bank";
                 setDataToHashMap("sal_dep_to",dataBankType);
-                goToDatabase();
+                goToDatabase("Car Loan");
+
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -217,8 +221,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.buttonselecteffect);
                 dataBankType="IDBI Bank";
-                setDataToHashMap("sal_dep_to",dataBankType);
-                goToDatabase();
+                setDataToHashMap("sal_dep_to", dataBankType);
+                goToDatabase("Car Loan");
                 intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -248,11 +252,11 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     {
         cl_car_global_data.dataWithAns.put(Key, data);
     }
-    private void goToDatabase()
+    private void goToDatabase(String loanType)
     {
-        contentValues.put("loantype", "Car Loan");
+        contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_salary_mode2");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
     }
 }

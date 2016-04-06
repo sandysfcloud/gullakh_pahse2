@@ -130,7 +130,6 @@ public class SearchAdapter extends BaseAdapter
             holder.image = (ImageView) convertView
                     .findViewById(R.id.bankimg);
 
-
           /*  holder.name = (TextView) convertView
                     .findViewById(R.id.pbanknam);*/
 
@@ -194,7 +193,15 @@ public class SearchAdapter extends BaseAdapter
 
             //holder.name.setText(tempValues.getsearchtnam());
 
-
+            if(tempValues.getsearchtnam().equalsIgnoreCase("car loan")){
+                holder.image.setImageResource(R.drawable.carloan);
+            }else if(tempValues.getsearchtnam().equalsIgnoreCase("home loan")){
+                holder.image.setImageResource(R.drawable.homeloan);
+            }else if(tempValues.getsearchtnam().equalsIgnoreCase("personal loan")){
+                holder.image.setImageResource(R.drawable.personalloannew);
+            }else if(tempValues.getsearchtnam().equalsIgnoreCase("Loan against property")){
+                holder.image.setImageResource(R.drawable.busineeloan);
+            }
 
            // Log.d("value from model", tempValues.getemi_value());
             holder.day.setText(""+tempValues.getsearchdate());

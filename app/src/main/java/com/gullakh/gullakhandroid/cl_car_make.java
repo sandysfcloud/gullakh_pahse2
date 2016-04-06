@@ -148,7 +148,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 } else {
                     setDataToHashMap("interested_car", dataCar);
-                    goToDatabase();
+                    goToDatabase("Car Loan");
                     goToIntent();
                 }
                 break;
@@ -159,7 +159,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car4.setImageResource(R.drawable.newcar);
                 dataCar = "Maruti Alto";
                 setDataToHashMap("interested_car", dataCar);
-                goToDatabase();
+                goToDatabase("Car Loan");
                 goToIntent();
                 break;
             case R.id.ImageViewCar2:
@@ -169,7 +169,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car4.setImageResource(R.drawable.newcar);
                 dataCar = "Honda amaze";
                 setDataToHashMap("interested_car", dataCar);
-                goToDatabase();
+                goToDatabase("Car Loan");
                 goToIntent();
                 break;
             case R.id.ImageViewCar3:
@@ -179,7 +179,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car4.setImageResource(R.drawable.newcar);
                 dataCar = "Hundai eon";
                 setDataToHashMap("interested_car", dataCar);
-                goToDatabase();
+                goToDatabase("Car Loan");
                 goToIntent();
                 break;
             case R.id.ImageViewCar4:
@@ -189,7 +189,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car4.setImageResource(R.drawable.buttonselecteffect);
                 dataCar = "Maruti swift";
                 setDataToHashMap("interested_car", dataCar);
-                goToDatabase();
+                goToDatabase("Car Loan");
                 goToIntent();
                 break;
             case R.id.OtherCar:
@@ -226,12 +226,12 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         overridePendingTransition(R.transition.left, R.transition.right);
     }
 
-    private void goToDatabase()
+    private void goToDatabase(String loanType)
     {
-        contentValues.put("loantype", "Car Loan");
+        contentValues.put("loantype", loanType);
         contentValues.put("questans", "cl_car_make");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this));
+        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
         cr.moveToFirst();

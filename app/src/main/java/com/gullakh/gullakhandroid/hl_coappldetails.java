@@ -60,6 +60,8 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         lastName=(EditText)findViewById(R.id.LastName);
         gen1 = (ImageView) findViewById(R.id.usermale);
         gen2 = (ImageView) findViewById(R.id.userfemale);
+        gen1.setOnClickListener(this);
+        gen2.setOnClickListener(this);
         RadioButton yesw = (RadioButton) findViewById(R.id.radioButton1);
         RadioButton now = (RadioButton) findViewById(R.id.radioButton2);
         yesw.setOnClickListener(this);

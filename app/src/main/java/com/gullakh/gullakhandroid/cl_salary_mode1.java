@@ -105,12 +105,14 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 }else{
                     setDataToHashMap("sal_pay_option", dataSalDeposite);
                     if(dataSalDeposite.equals("Bank")) {
-                        goToDatabase();
+                        goToDatabase("Car Loan");
+
                         Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else{
-                        goToDatabase();
+                        goToDatabase("Car Loan");
+
                         Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
@@ -121,7 +123,8 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay2.setImageResource(R.drawable.bankcheque);
                 dataSalDeposite="Bank";
                 setDataToHashMap("sal_pay_option", dataSalDeposite);
-                goToDatabase();
+                goToDatabase("Car Loan");
+
                 Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -131,7 +134,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay2.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cheque";
                 setDataToHashMap("sal_pay_option", dataSalDeposite);
-                goToDatabase();
+                goToDatabase("Car Loan");
                 Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                 startActivity(intent2);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -152,11 +155,11 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     {
         cl_car_global_data.dataWithAns.put(key,data);
     }
-    private void goToDatabase()
+    private void goToDatabase(String loanType)
     {
-        contentValues.put("loantype", "Car Loan");
+        contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_salary_mode1");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
     }
 }

@@ -147,7 +147,7 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             setDataToHashMap("current_res", spinner.getSelectedItem().toString());
                             setDataToHashMap("period_of_stay_in_cur_city",currentCityyr.getText().toString()+" Year "+currentCityyr.getText().toString()+" Month");
                             setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString()+" Year "+currentResidencemn.getText().toString()+" Month");
-                            goToDatabase();
+                            goToDatabase("Car Loan");
 
                             //Intent intent = new Intent(this, cl_car_salaried.class);
                            // startActivity(intent);
@@ -197,12 +197,12 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
         cl_car_global_data.dataWithAns.put(Key, data);
 
     }
-    private void goToDatabase()
+    private void goToDatabase(String loanType)
     {
-        contentValues.put("loantype", "Car Loan");
+        contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_car_residence_type");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
     }
     private void getCity()
     {

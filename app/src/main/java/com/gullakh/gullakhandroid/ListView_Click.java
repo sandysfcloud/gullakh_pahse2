@@ -240,31 +240,36 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.Buttonapply:
-                storeData();
-                goToDatabase();
 
             applyFlag=MainActivity.loanType;
                 if(MainActivity.signinstate){
                     if(applyFlag.equals("Car Loan")){
-                        MainActivity.signinstate=true;
+
+                        storeData();
+                        goToDatabase("Car Loan");
                         Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(applyFlag.equals("Home Loan")){
+                        storeData();
+                        goToDatabase("Home Loan");
                         Intent intent = new Intent(ListView_Click.this,hl_city.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(applyFlag.equals("Loan against Property")){
+                        storeData();
+                        goToDatabase("Loan against Property");
                         Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(applyFlag.equals("Personal Loan")){
+                        storeData();
+                        goToDatabase("Personal Loan");
                         Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(applyFlag.equals("none")) {
                         Intent intent = new Intent(ListView_Click.this, MainActivity.class);
-                        MainActivity.signinstate = true;
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
@@ -293,12 +298,12 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         setDataToHashMap("dep_amount_last", String.valueOf(((GlobalData) getApplication()).getdepreciation2()));
     }
 
-    private void goToDatabase()
+    private void goToDatabase(String loanType)
     {
-        contentValues.put("loantype", "Car Loan");
+        contentValues.put("loantype", loanType);
         contentValues.put("questans","cl_car_make");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this));
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType));
     }
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
