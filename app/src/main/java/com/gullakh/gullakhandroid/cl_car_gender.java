@@ -309,6 +309,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
+                Log.d("result is KK",str_result);
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
 
                 if(!jsonObject.get("result").toString().equals("[]"))

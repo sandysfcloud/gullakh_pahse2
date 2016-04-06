@@ -352,8 +352,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
               }
 
           }
-          Log.d("userid myapp", userid);
-          Log.d("contactid myapp", contactid);
+         // Log.d("userid myapp", userid);
+         // Log.d("contactid myapp", contactid);
 
           requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
 

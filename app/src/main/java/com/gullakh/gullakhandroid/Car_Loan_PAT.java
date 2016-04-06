@@ -132,7 +132,21 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
-                    mSeekArcProgress.setText(strtemp);
+
+                    String data = amt.getText().toString();
+                    Log.d("loan KK",data);
+                    data = data.replaceAll("\\.00", "");
+                    data = data.replaceAll("Rs.", "");
+                    data = data.replaceAll(",", "");
+                    data = data.replaceAll("\\s+","");
+                    Log.d("loan KK2", data);
+                    try {
+                        mSeekArc.setProgress(Integer.valueOf(data) / 50000);
+
+                        mSeekArcProgress.setText(strtemp);
+                    }catch(Exception e){
+
+                    }
                 }
 
             }
@@ -162,6 +176,8 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
 
 
                                                     mSeekArcProgress.setText(strtemp);
+
+                                                    if(fromUser)
                                                     amt.setText(String.valueOf(progress));
 
 

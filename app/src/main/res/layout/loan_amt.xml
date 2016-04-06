@@ -90,7 +90,7 @@
         android:id="@+id/loanamountid"
 
         android:inputType="numberDecimal"
-        android:digits="0123456789.,"
+        android:digits="0123456789"
         android:text="50000"
         android:textColorHint="#000"
         android:textColor="#000"

@@ -124,7 +124,20 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                             strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
-                            mSeekArcProgress.setText(strtemp);
+                            String data = emipaying.getText().toString();
+                            Log.d("loan KK",data);
+                            data = data.replaceAll("\\.00", "");
+                            data = data.replaceAll("Rs.", "");
+                            data = data.replaceAll(",", "");
+                            data = data.replaceAll("\\s+","");
+                            Log.d("loan KK2", data);
+                            try {
+                                mSeekArc.setProgress(Integer.valueOf(data) / 1000);
+
+                                mSeekArcProgress.setText(strtemp);
+                            }catch(Exception e){
+
+                            }
                         }
 
                     }
@@ -158,6 +171,8 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
 
                 mSeekArcProgress.setText(strtemp);
+
+                if(fromUser)
                 emipaying.setText(String.valueOf(progress));
 
 

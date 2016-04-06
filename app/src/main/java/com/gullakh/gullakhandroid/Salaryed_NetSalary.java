@@ -124,8 +124,20 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
+                    String sald = sal.getText().toString();
+                    Log.d("loan KK",sald);
+                    sald = sald.replaceAll("\\.00", "");
+                    sald = sald.replaceAll("Rs.", "");
+                    sald = sald.replaceAll(",", "");
+                    sald = sald.replaceAll("\\s+","");
+                    Log.d("loan KK2", sald);
+                    try {
+                        mSeekArc.setProgress(Integer.valueOf(sald) / 50000);
 
-                    mSeekArcProgress.setText(strtemp);
+                        mSeekArcProgress.setText(strtemp);
+                    }catch(Exception e){
+
+                    }
                 }
 
             }
@@ -158,6 +170,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
 
                 mSeekArcProgress.setText(strtemp);
+
+                if(fromUser)
                 sal.setText(String.valueOf(progress));
 
 

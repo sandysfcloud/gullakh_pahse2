@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -91,6 +93,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 //**********
 
 
+
         //  done = (ImageView) findViewById(R.id.done);
         // done.setOnClickListener(this);
 
@@ -140,9 +143,13 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                     loan = loan.replaceAll(",", "");
                     loan = loan.replaceAll("\\s+","");
                     Log.d("loan KK2", loan);
-                    mSeekArc.setProgress(Integer.valueOf(loan) / 50000);
+                    try {
+                        mSeekArc.setProgress(Integer.valueOf(loan) / 50000);
 
-                    mSeekArcProgress.setText(strtemp);
+                        mSeekArcProgress.setText(strtemp);
+                    }catch(Exception e){
+
+                    }
                 }
 
             }
@@ -169,6 +176,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                                                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 
                                                     strtemp = strtemp.substring(0, strtemp.length() - 3);
+
 
 
                                                     mSeekArcProgress.setText(strtemp);
