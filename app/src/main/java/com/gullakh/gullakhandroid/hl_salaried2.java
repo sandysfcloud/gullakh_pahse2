@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,23 +59,40 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
             case R.id.next:
                 if(!grossSal.getText().toString().equals(""))
                 {
-                    if (!annualBonus.getText().toString().equals(""))
-                    {
+                    if (!annualBonus.getText().toString().equals("")) {
                         if (!avgmninc.getText().toString().equals("")) {
-                            setDataToHashMap("net_mon_salary",grossSal.getText().toString());
-                            setDataToHashMap("annual_bonus",annualBonus.getText().toString());
+                            setDataToHashMap("net_mon_salary", grossSal.getText().toString());
+                            setDataToHashMap("annual_bonus", annualBonus.getText().toString());
                             setDataToHashMap("avg_monthly_incentives", grossSal.getText().toString());
 
-                            if(singleCoappl.equals("yes")){
-                                Intent intent = new Intent(this, cl_car_gender.class);
-                                startActivity(intent);
-                            }else{
-                                if(cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("Single")){
-                                    Intent intent = new Intent(this, hl_coappldetails.class);
+
+                            if(cl_car_global_data.numOfApp>0&&hl_coappldetails.joint==1)
+                            {
+                                Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
+                                Intent i = new Intent(this, hl_coappldetails.class);
+                                i.putExtra("data", "joint");
+                                startActivity(i);
+                                //cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
+                                Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
+                            }
+                            else {
+                                if (singleCoappl.equals("yes")) {
+                                    Intent intent = new Intent(this, cl_car_gender.class);
                                     startActivity(intent);
-                                }else{
-                                    Intent i=new Intent(this,hl_empType.class);
-                                    startActivity(i);
+                                } else {
+                                    if (cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("Single")) {
+                                        Intent intent = new Intent(this, hl_coappldetails.class);
+                                        startActivity(intent);
+                                    }
+                                    else if (cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("Joint")) {
+                                        Intent intent = new Intent(this, hl_coappldetails.class);
+                                        intent.putExtra("data", "joint");
+                                        startActivity(intent);
+                                    }
+                                    else {
+                                        Intent i = new Intent(this, hl_empType.class);
+                                        startActivity(i);
+                                    }
                                 }
                             }
                         }

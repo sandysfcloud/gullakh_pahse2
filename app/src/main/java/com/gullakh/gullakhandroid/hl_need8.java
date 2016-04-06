@@ -86,7 +86,10 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
                                 setDataToHashMap("builder_name", Text1.getText().toString());
                                 setDataToHashMap("project_name", Text2.getText().toString());
                                 setDataToHashMap("cost_of_flat_as_allotment_letter_to_sell", Text3.getText().toString());
-                                cl_car_global_data.numOfApp=getApplicants();
+                                if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
+                                    cl_car_global_data.numOfApp = getApplicants();
+                                    Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
+                                }
                                 Intent intent = new Intent(this, cl_car_residence_type.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);

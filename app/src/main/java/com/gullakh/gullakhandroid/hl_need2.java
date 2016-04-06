@@ -101,7 +101,11 @@ public class hl_need2 extends AppCompatActivity implements View.OnClickListener 
                                         setDataToHashMap("cost_of_plot_reg",Text1.getText().toString());
                                         setDataToHashMap("current_market_value_plot",Text2.getText().toString());
                                         setDataToHashMap("construction_cost_by_architecture",Text3.getText().toString());
-                                        cl_car_global_data.numOfApp=getApplicants();
+
+                                        if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
+                                            cl_car_global_data.numOfApp = getApplicants();
+                                            Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
+                                        }
                                         Intent intent = new Intent(hl_need2.this, cl_car_residence_type.class);
                                         startActivity(intent);
                                         overridePendingTransition(R.transition.left, R.transition.right);

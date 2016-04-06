@@ -133,9 +133,21 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
                             setDataToHashMap("",spinner1.getSelectedItem().toString());
                             setDataToHashMap("",getDate());
                             setDataToHashMap("", spinner2.getSelectedItem().toString());
-                            Intent intent = new Intent(hl_coappldetailsProff.this, cl_car_gender.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
+
+                            if(cl_car_global_data.numOfApp>0)
+                            {
+                                Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
+                                Intent i = new Intent(this, hl_coappldetails.class);
+                                i.putExtra("data", "joint");
+                                startActivity(i);
+                                cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
+                                Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
+                            }
+                            else {
+                                Intent intent = new Intent(hl_coappldetailsProff.this, cl_car_gender.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            }
                         } else {
                             RegisterPageActivity.showErroralert(hl_coappldetailsProff.this, "Please select your firm", "failed");
                         }
@@ -190,8 +202,8 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
     }
     public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.dataWithAns.put(Key,data);
-        Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
+        cl_car_global_data.dataWithAnscoapp.put(Key,data);
+       // Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
     }
 
 }

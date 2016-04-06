@@ -13,7 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="386dp"
         android:layout_weight="1"
+
         android:gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="386dp"
+            android:id="@+id/questn"
+            android:layout_weight="1"
+            android:gravity="center">
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -50,6 +59,7 @@
                 android:checked="false"
                 android:textSize="20dp" />
         </RadioGroup>
+            </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -57,6 +67,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/yesll"
             android:visibility="gone">
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:id="@+id/joint_title"
+                android:visibility="gone"
+                android:textColor="#4b4b4b"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                />
 
             <EditText
                 android:layout_width="fill_parent"

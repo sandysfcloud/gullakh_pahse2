@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,12 +136,23 @@ public class hl_coappldetailsbuss extends AppCompatActivity implements View.OnCl
                         if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
                             String jdate = getDate();
-                            setDataToHashMap("ind_type",spinner1.getSelectedItem().toString());
-                            setDataToHashMap("start_date_of_cur_business",jdate);
-                            setDataToHashMap("firm_type",spinner2.getSelectedItem().toString());
-                            Intent intent = new Intent(hl_coappldetailsbuss.this, cl_car_gender.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
+                            setDataToHashMap("ind_type"+cl_car_global_data.numOfApp,spinner1.getSelectedItem().toString());
+                            setDataToHashMap("start_date_of_cur_business"+cl_car_global_data.numOfApp,jdate);
+                            setDataToHashMap("firm_type"+cl_car_global_data.numOfApp,spinner2.getSelectedItem().toString());
+                            if(cl_car_global_data.numOfApp>0)
+                            {
+                                Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
+                                Intent i = new Intent(this, hl_coappldetails.class);
+                                i.putExtra("data", "joint");
+                                startActivity(i);
+                                cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
+                                Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
+                            }
+                            else {
+                                Intent intent = new Intent(hl_coappldetailsbuss.this, cl_car_gender.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            }
                         }else {
                             RegisterPageActivity.showErroralert(hl_coappldetailsbuss.this, "Please select type of firm", "failed");
                         }
@@ -198,6 +210,6 @@ public class hl_coappldetailsbuss extends AppCompatActivity implements View.OnCl
 
     public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.dataWithAns.put(Key, data);
+        cl_car_global_data.dataWithAnscoapp.put(Key, data);
     }
 }

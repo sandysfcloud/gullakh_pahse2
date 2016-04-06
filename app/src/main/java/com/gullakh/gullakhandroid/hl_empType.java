@@ -12,7 +12,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
     ImageView sal, self, business;
     String data;
     Button next, back;
-
+    String co_emp = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +30,12 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
         business = (ImageView) findViewById(R.id.business);
         business.setOnClickListener(this);
     }
-
+    public void setDataToHashMap(String Key, String data) {
+        cl_car_global_data.dataWithAnscoapp.put(Key, data);
+    }
     @Override
     public void onClick(View v) {
-        Intent intent;
+
         switch (v.getId()) {
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -41,6 +43,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
                 startActivity(intenth);
                 break;
             case R.id.next:
+                intentcall();
                 break;
             case R.id.back:
                 finish();
@@ -51,24 +54,61 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
                 sal.setImageResource(R.drawable.buttonselecteffect);
                 self.setImageResource(R.drawable.selfempbus);
                 business.setImageResource(R.drawable.selfempprof);
-                Intent i=new Intent(this,hl_coappldetailsSal.class);
-                //i.putExtra("coapplicant","yes");
-                startActivity(i);
+                co_emp = "salaried";
+                Intent intent=new Intent(this,hl_coappldetailsSal.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.img2:
                 self.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 business.setImageResource(R.drawable.selfempprof);
-                i=new Intent(this,hl_coappldetailsProff.class);
-                //i.putExtra("coapplicant","yes");
-                startActivity(i);
+                co_emp = "self employed professional";
+                Intent intent2=new Intent(this,hl_coappldetailsProff.class);
+                startActivity(intent2);
+                overridePendingTransition(R.transition.left, R.transition.right);
+                break;
             case R.id.business:
                 business.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
-                i=new Intent(this,hl_coappldetailsbuss.class);
-                //i.putExtra("coapplicant","yes");
-                startActivity(i);
+                co_emp = "self employed business";
+                Intent intent3=new Intent(this,hl_coappldetailsbuss.class);
+                startActivity(intent3);
+                overridePendingTransition(R.transition.left, R.transition.right);
+                break;
         }
+    }
+
+
+    public void intentcall()
+    {
+        if(co_emp!=null) {
+            setDataToHashMap("co_employment_type" + cl_car_global_data.numOfApp, co_emp);
+            Intent intent;
+            if(co_emp.equals("salaried"))
+            {
+                intent=new Intent(this,hl_coappldetailsSal.class);
+                startActivity(intent);
+
+            }
+
+            if(co_emp.equals("self employed professional"))
+            {
+                intent=new Intent(this,hl_coappldetailsProff.class);
+                startActivity(intent);
+
+            }
+            if(co_emp.equals("self employed business"))
+            {
+                intent=new Intent(this,hl_coappldetailsbuss.class);
+                startActivity(intent);
+
+            }
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+        else
+            RegisterPageActivity.showErroralert(hl_empType.this, "Please choose employee type!", "failed");
+
     }
 }
