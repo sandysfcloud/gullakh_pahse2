@@ -5,7 +5,7 @@
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
-    [24/03/16 7:32:42 pm] Chetan Nandre: <LinearLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"

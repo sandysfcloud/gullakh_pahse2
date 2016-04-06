@@ -11,6 +11,8 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class hl_coappldetails extends AppCompatActivity implements View.OnClickListener {
@@ -18,6 +20,10 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     ImageView gen1,gen2;
     Button next,back;
     String dataGender="";
+    private boolean coapp=false;
+    private RadioGroup radioGroup1,radioGroup2;
+    private View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,14 +43,26 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
+        radioGroup1=(RadioGroup)findViewById(R.id.radioGroup);
+        RadioButton yesb = (RadioButton) findViewById(R.id.yes);
+        RadioButton nob = (RadioButton) findViewById(R.id.no);
+        yesb.setOnClickListener(this);
+        nob.setOnClickListener(this);
+        next = (Button) findViewById(R.id.next);
+        back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(this);
+        next.setOnClickListener(this);
+        view=findViewById(R.id.yesll);
 
+        radioGroup2=(RadioGroup)findViewById(R.id.radioGroup2);
         firstName= (EditText)findViewById(R.id.FirstName);
-        firstName.requestFocus();
         lastName=(EditText)findViewById(R.id.LastName);
         gen1 = (ImageView) findViewById(R.id.usermale);
         gen2 = (ImageView) findViewById(R.id.userfemale);
-        next = (Button) findViewById(R.id.next);
-        back = (Button) findViewById(R.id.back);
+        RadioButton yesw = (RadioButton) findViewById(R.id.radioButton1);
+        RadioButton now = (RadioButton) findViewById(R.id.radioButton2);
+        yesw.setOnClickListener(this);
+        now.setOnClickListener(this);
     }
 
     @Override
@@ -52,21 +70,19 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
 
         switch (v.getId())
         {
-            case R.id.Submit:
-                if (firstName.getText().toString().equals("")) {
-                    RegisterPageActivity.showErroralert(hl_coappldetails.this, "Enter First Name", "failed");
-                } else {
-                    if (lastName.getText().toString().equals("")) {
-                        RegisterPageActivity.showErroralert(hl_coappldetails.this, "Enter Last Name", "failed");
-                    } else {
-                        if (dataGender.equals("")) {
-                            RegisterPageActivity.showErroralert(hl_coappldetails.this, "Select your Gender", "failed");
-                        } else {
+            case R.id.next:
 
-
-                            }
-                        }
+                if (radioGroup1.getCheckedRadioButtonId() == -1){
+                    RegisterPageActivity.showErroralert(this, "Select atleat one option ", "failed");
+                }else {
+                    if(coapp){
+                        Intent i=new Intent(this,hl_empType.class);
+                        startActivity(i);
+                    }else{
+                        Intent i=new Intent(this,cl_car_gender.class);
+                        startActivity(i);
                     }
+                }
                 break;
             case R.id.usermale:
                 gen1.setImageResource(R.drawable.buttonselecteffect);
@@ -79,15 +95,25 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 dataGender="female";
                 break;
             case R.id.yes:
-                Intent i=new Intent(this,Emp_type_Qustn.class);
+                coapp=true;
+                view.setVisibility(View.VISIBLE);
+                break;
+            case R.id.radioButton1:
+                Intent i=new Intent(this,hl_empType.class);
+                startActivity(i);
+                break;
+            case R.id.radioButton2:
+                i=new Intent(this,cl_car_gender.class);
                 startActivity(i);
                 break;
             case R.id.no:
+                coapp=false;
+                view.setVisibility(View.GONE);
                 break;
             case R.id.close:
-                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intenth);
+                 i = new Intent(getApplicationContext(), MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
                 break;
             case R.id.back:
                 finish();

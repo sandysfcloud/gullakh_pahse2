@@ -173,7 +173,8 @@
         <activity android:name=".hl_need5" />
         <activity android:name=".hl_need6" />
         <activity android:name=".hl_need8" />
-        <activity android:name=".hl_need7"></activity>
+        <activity android:name=".hl_need7" />
+        <activity android:name=".hl_empType"></activity>
     </application>
 
 </manifest>

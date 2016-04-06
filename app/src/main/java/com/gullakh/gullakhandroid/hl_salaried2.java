@@ -52,14 +52,22 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.next:
-                if(!grossSal.getText().toString().matches(""))
+                if(!grossSal.getText().toString().equals(""))
                 {
-                    if (!annualBonus.getText().toString().matches(""))
+                    if (!annualBonus.getText().toString().equals(""))
                     {
-                        if (!avgmninc.getText().toString().matches("")) {
+                        if (!avgmninc.getText().toString().equals("")) {
                             setDataToHashMap("net_mon_salary",grossSal.getText().toString());
                             setDataToHashMap("annual_bonus",annualBonus.getText().toString());
                             setDataToHashMap("avg_monthly_incentives", grossSal.getText().toString());
+                            if(cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("Single")){
+                                Intent intent = new Intent(this, hl_coappldetails.class);
+                                startActivity(intent);
+                            }else{
+                                Intent i=new Intent(this,hl_empType.class);
+                                startActivity(i);
+                            }
+
                         }
                     }
                 }

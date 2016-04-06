@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,25 +52,104 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
-        RadioButton single1 = (RadioButton) findViewById(R.id.radioButton1);
-        RadioButton joint1 = (RadioButton) findViewById(R.id.radioButton2);
-        RadioButton single2 = (RadioButton) findViewById(R.id.radioButton3);
-        RadioButton joint2 = (RadioButton) findViewById(R.id.radioButton4);
-
-        cost = (EditText) findViewById(R.id.editText10);
-        cost.addTextChangedListener(new NumberTextWatcher(cost));
-
-        single1.setOnClickListener(this);
-        joint1.setOnClickListener(this);
-        single2.setOnClickListener(this);
-        joint2.setOnClickListener(this);
 
         spinner = (Spinner) findViewById(R.id.spinner1);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 {
-                    if (position == 1) {
+                    goToIntent();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        List<String> categories = new ArrayList<String>();
+        categories.add("Select");
+        categories.add("Purchase a plot");
+        categories.add("Construction of house on a plot");
+        categories.add("Purchase of plot & construction there on");
+        categories.add("Home Renovation");
+        categories.add("Balance Transfer of existing home loan");
+        categories.add("Property is not yet identified");
+        categories.add("Purchase of a under construction builder flat");
+        categories.add("Refinance a property already purchased from own sources");
+        categories.add("Purchase a house/flat which is ready to move-in");
+
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter1);
+    }
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId()) {
+            case R.id.next:
+                if(!spinner.getSelectedItem().toString().equals("select"))
+                {
+                    goToIntent();
+                }
+                else {
+                    RegisterPageActivity.showErroralert(hl_need.this, "Select Loan for options", "failed");
+                }
+                break;
+            case R.id.back:
+                finish();
+                break;
+
+        }
+    }
+
+    private void goToIntent()
+    {
+        Intent intent;
+        setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
+        if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
+            intent = new Intent(hl_need.this, hl_need1.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else if(spinner.getSelectedItem().toString().equals("Construction of house on a plot")){
+            intent = new Intent(hl_need.this, hl_need2.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else if(spinner.getSelectedItem().toString().equals("Purchase of plot & construction there on")){
+            intent = new Intent(hl_need.this, hl_need3.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else if(spinner.getSelectedItem().toString().equals("Home Renovation")){
+            intent = new Intent(hl_need.this, hl_need4.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else if(spinner.getSelectedItem().toString().equals("Balance Transfer of existing home loan")){
+            intent = new Intent(hl_need.this, hl_need5.class);
+            startActivity(intent);
+        }else if(spinner.getSelectedItem().toString().equals("Purchase of a under construction builder flat")){
+            intent = new Intent(hl_need.this, hl_need6.class);
+            startActivity(intent);
+        }else if(spinner.getSelectedItem().toString().equals("Refinance a property already purchased from own sources")){
+            intent = new Intent(hl_need.this, hl_need7.class);
+            startActivity(intent);
+        }else if(spinner.getSelectedItem().toString().equals("Purchase a house/flat which is ready to move-in")){
+            intent = new Intent(hl_need.this, hl_need8.class);
+            startActivity(intent);
+        }else if(spinner.getSelectedItem().toString().equals("Property is not yet identified")){
+            intent = new Intent(hl_need.this, cl_car_residence_type.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+
+
+    }
+}
+/*
+
+if (position == 1) {
                         catergory = "Purchase a plot";
                         Log.d("position is", String.valueOf(position));
                         setDataToHashMap("need_loan_for", catergory);
@@ -102,66 +179,5 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                         catergory = "Purchase a house/flat which is ready to move-in";
                         setDataToHashMap("need_loan_for", catergory);
                     }
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        List<String> categories = new ArrayList<String>();
-        categories.add("Select");
-        categories.add("Purchase a plot");
-        categories.add("Construction of house on a plot");
-        categories.add("Purchase of plot & construction there on");
-        categories.add("Home Renovation");
-        categories.add("Balance Transfer of existing home loan");
-        categories.add("Property is not yet identified");
-        categories.add("Purchase of a under construction builder flat");
-        categories.add("Refinance a property already purchased from own sources");
-        categories.add("Purchase a house/flat which is ready to move-in");
-
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter1);
-
-        radioCityLimitGroup=(RadioGroup)findViewById(R.id.radioGroup);
-    }
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId()) {
-            case R.id.next:
-                if(!spinner.getSelectedItem().toString().equals("select"))
-                {
-                    setDataToHashMap("need_loan_for", cost.getText().toString());
-                    Intent intent = new Intent(hl_need.this, hl_need1.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
-                else {
-                    RegisterPageActivity.showErroralert(hl_need.this, "Select Loan for options", "failed");
-                }
-                break;
-            case R.id.radioButton3:
-                owners.setVisibility(View.VISIBLE);
-
-                break;
-
-            case R.id.radioButton4:
-                owners.setVisibility(View.VISIBLE);
-
-                break;
-
-
-            case R.id.back:
-                finish();
-                break;
-
-        }
-    }
-}
+ */

@@ -43,9 +43,10 @@
                 android:layout_height="50dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText5"
+                android:id="@+id/editText1"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_marginRight="10dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +76,7 @@
                 android:layout_height="50dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText8"
+                android:id="@+id/editText2"
                 android:background="@drawable/edittextsimple"
                 android:gravity="center"
                 android:layout_marginRight="10dp" />
@@ -108,7 +109,7 @@
                 android:layout_height="50dp"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText9"
+                android:id="@+id/editText3"
                 android:background="@drawable/edittextsimple"
                 android:gravity="center"
                 android:layout_marginRight="10dp" />
@@ -137,9 +138,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="1"
-                android:id="@+id/apprval"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:id="@+id/radioGroup1"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -185,7 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:weightSum="1"
-                android:id="@+id/radioGroup3"
+                android:id="@+id/radioGroup2"
                 android:orientation="horizontal">
 
                 <RadioButton
@@ -228,13 +228,14 @@
                 android:textSize="16dp"
                 android:gravity="left"
                 android:layout_weight="1"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:layout_marginRight="5dp" />
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:weightSum="1"
-                android:id="@+id/radioGroup4"
+                android:id="@+id/radioGroup3"
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
@@ -262,7 +263,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:id="@+id/joint">
 
         <LinearLayout
             android:orientation="horizontal"

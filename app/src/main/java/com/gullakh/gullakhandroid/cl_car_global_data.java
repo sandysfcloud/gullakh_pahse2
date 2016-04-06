@@ -22,6 +22,8 @@ import java.util.Map;
  */
 public class cl_car_global_data
 {
+    static int numOfApp;
+
     static ArrayList<String> data = new ArrayList<String>();
     static HashMap<String,String> dataWithAns=new HashMap<String,String>();
 

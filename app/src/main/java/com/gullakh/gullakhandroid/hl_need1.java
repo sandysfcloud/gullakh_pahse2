@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,10 +25,13 @@ import java.util.List;
 public class hl_need1 extends AppCompatActivity implements View.OnClickListener {
 
     Button next, back;
-    private RadioGroup radioCityLimitGroup;
-    private RadioGroup radioOwnership;
-    private View joint;
+    private RadioGroup radioGroup1;
+    private RadioGroup radioGroup2;
+    private View jointopt;
     private Spinner allotment;
+    EditText Text1;
+    public static int numOfAppl;
+    private CheckBox c1,c2,c3,c4,c5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,33 +56,30 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
-        radioCityLimitGroup = (RadioGroup) findViewById(R.id.radioGroup1);
-        radioOwnership = (RadioGroup) findViewById(R.id.radioGroup2);
+        radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
+        radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
         RadioButton inside = (RadioButton) findViewById(R.id.radioButton1);
         RadioButton outside = (RadioButton) findViewById(R.id.radioButton2);
-        RadioButton single1 = (RadioButton) findViewById(R.id.radioButton3);
-        RadioButton joint1 = (RadioButton) findViewById(R.id.radioButton4);
-        joint=findViewById(R.id.joint);
-
+        RadioButton single = (RadioButton) findViewById(R.id.radioButton3);
+        RadioButton joint = (RadioButton) findViewById(R.id.radioButton4);
+        c1= (CheckBox) findViewById(R.id.cself);
+        c2= (CheckBox) findViewById(R.id.cspouse);
+        c3= (CheckBox) findViewById(R.id.cbro);
+        c4= (CheckBox) findViewById(R.id.cfathr);
+        c5= (CheckBox) findViewById(R.id.cmothr);
+        inside.setOnClickListener(this);
+        outside.setOnClickListener(this);
+        single.setOnClickListener(this);
+        joint.setOnClickListener(this);
+        jointopt=findViewById(R.id.joint);
+        Text1= (EditText) findViewById(R.id.editText1);
         allotment = (Spinner) findViewById(R.id.spinner);
 
         allotment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 {
-                    if (position == 0) {
 
-                        setDataToHashMap("allotment_by", "Development Authority");
-                    }
-
-                    if (position == 1) {
-
-                        setDataToHashMap("allotment_by","Builder");
-                    }
-                    if (position == 2) {
-
-                        setDataToHashMap("allotment_by","Resale");
-                    }
                 }
             }
             @Override
@@ -86,6 +89,7 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         });
 
         List<String> allot = new ArrayList<String>();
+        allot.add("Select");
         allot.add("Development Authority");
         allot.add("Builder");
         allot.add("Resale");
@@ -99,22 +103,42 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                setDataToHashMap("need_loan_for","");
-                Intent intent = new Intent(hl_need1.this, cl_car_residence_type.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if (radioGroup1.getCheckedRadioButtonId() == -1){
+                    RegisterPageActivity.showErroralert(this, "Select city limit", "failed");
+                }else {
+                    if (allotment.getSelectedItem().toString().equals("Select")){
+                        RegisterPageActivity.showErroralert(this, "Select allotment by", "failed");
+                    }else {
+                        if (Text1.getText().toString().equals("")){
+                            RegisterPageActivity.showErroralert(this, "Select cost of plot", "failed");
+                        }else {
+                            if (radioGroup2.getCheckedRadioButtonId() == -1){
+                                RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
+                            }else {
+                                setDataToHashMap("cost_of_property",Text1.getText().toString());
+                                setDataToHashMap("allotment_by",allotment.getSelectedItem().toString());
+                                cl_car_global_data.numOfApp=getApplicants();
+                                Intent intent = new Intent(hl_need1.this, cl_car_residence_type.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            }
+                        }
+                    }
+                }
                 break;
             case R.id.radioButton1:
-                setDataToHashMap("city_limits", "inside");
+                setDataToHashMap("city_limits", "Inside");
                 break;
             case R.id.radioButton2:
-                setDataToHashMap("city_limits", "outside");
+                setDataToHashMap("city_limits", "Outside");
                 break;
             case R.id.radioButton3:
-                joint.setVisibility(View.GONE);
+                setDataToHashMap("proposed_ownership", "Single");
+                jointopt.setVisibility(View.GONE);
                 break;
             case R.id.radioButton4:
-                joint.setVisibility(View.VISIBLE);
+                setDataToHashMap("proposed_ownership", "Joint");
+                jointopt.setVisibility(View.VISIBLE);
                 break;
             case R.id.back:
                 finish();
@@ -122,7 +146,24 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
+    private int getApplicants() {
+        int count1=0,count2=0,count3=0,count4=0,count5=0;
+        if(c1.isChecked()){
+            count1=1;
+        } if(c2.isChecked()){
+            count2=1;
+        } if(c3.isChecked()){
+            count3=1;
+        } if(c4.isChecked()){
+            count4=1;
+        } if(c5.isChecked()){
+            count5=1;
+        }
+        return count1+count2+count3+count4+count5;
+    }
+
     public void setDataToHashMap(String key, String data) {
+        Log.d(key, data);
         cl_car_global_data.dataWithAns.put(key, data);
     }
 }
