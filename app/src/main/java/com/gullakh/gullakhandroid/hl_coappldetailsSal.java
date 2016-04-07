@@ -42,7 +42,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
     String sessionid;
     private ContentValues contentValues;
     private EditText Doj;
-
+    String no=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +77,25 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         Emp.setOnClickListener(this);
         Expyr = (EditText) findViewById(R.id.totalexpyr);
         Expmn = (EditText) findViewById(R.id.totalexpmn);
+
+
+        Intent intent = getIntent();
+        no = intent.getStringExtra("no");
+        if (no != null) {
+
+            String co_empnam= cl_car_global_data.dataWithAnscoapp.get("co_employeenam"+no);
+            String co_empdate= cl_car_global_data.dataWithAnscoapp.get("co_employeedate"+no);
+            String co_empexpyr= cl_car_global_data.dataWithAnscoapp.get("co_employeedexpyear"+no);
+            String co_empexpmon= cl_car_global_data.dataWithAnscoapp.get("co_employeedexpmon"+no);
+
+            Emp.setText(co_empnam);
+            Doj.setText(co_empdate);
+            Expyr.setText(co_empexpyr);
+            Expmn.setText(co_empexpmon);
+
+        }
+
+
 
     }
 
@@ -136,13 +155,22 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                     if (!Expyr.getText().toString().matches("")) {
                         String jdate = getDate();
                         String EmpName = Emp.getText().toString();
-                        setDataToHashMap("", EmpName);
-                        setDataToHashMap("", jdate);
-                        setDataToHashMap("", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
-                        Intent intent = new Intent(hl_coappldetailsSal.this, hl_salaried2.class);
-                        intent.putExtra("singleCoappl","yes");
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
+                        setDataToHashMap("co_employeenam"+cl_car_global_data.numOfApp, EmpName);
+                        setDataToHashMap("co_employeedate"+cl_car_global_data.numOfApp, jdate);
+                        setDataToHashMap("co_employeedexpyear"+cl_car_global_data.numOfApp, Expyr.getText().toString());
+                        setDataToHashMap("co_employeedexpmon"+cl_car_global_data.numOfApp,Expmn.getText().toString());
+                        if (no != null) {
+                            Intent intent = new Intent(hl_coappldetailsSal.this, hl_salaried2.class);
+                            intent.putExtra("no", no);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        }
+                        else {
+                            Intent intent = new Intent(hl_coappldetailsSal.this, hl_salaried2.class);
+                            intent.putExtra("singleCoappl", "yes");
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        }
                     } else {
                         RegisterPageActivity.showErroralert(hl_coappldetailsSal.this, "Please enter total work experience", "failed");
                     }
@@ -205,6 +233,6 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
     public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.dataWithAns.put(Key, data);
+        cl_car_global_data.dataWithAnscoapp.put(Key, data);
     }
 }

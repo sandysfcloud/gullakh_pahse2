@@ -580,6 +580,211 @@ Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));
 	}
 
 
+
+	public static Dialog showAlertquestn(Activity act)
+	{
+
+		CurrentAct=act;
+		flag=0;
+		final Dialog dialog = new Dialog(act, R.style.PauseDialog2);
+
+// 		Setting the title and layout for the dialog
+		dialog.setTitle("");
+		dialog.setContentView(R.layout.questionreview);
+
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+
+
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.dimAmount=0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+
+
+
+		LinearLayout linrlyt = (LinearLayout) dialog.findViewById(R.id.linearmain);
+
+		ImageView close = (ImageView) dialog.findViewById(R.id.close);
+
+
+		close.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Log.d("close clicked", String.valueOf(1));
+				dialog.dismiss();
+			}
+		});
+
+
+
+
+		LayoutInflater inflater = (LayoutInflater)act .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+		/*String emptyp=((GlobalData) CurrentAct.getApplication()).getemptype();
+		//Log.d("emptyp value is", emptyp);
+		carloan_que_salary_new=new ArrayList<String>();
+		carloan_que_salary_new.add("Current Residence: ");
+		carloan_que_salary_new.add("Employee Type: ");
+		carloan_que_salary_new.add("Car Loan Type: ");
+		carloan_que_salary_new.add("Loan Amount: ");
+		if(emptyp!=null) {
+			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
+				flag = 1;
+				carloan_que_salary_new.add("PAT for Last FY: ");
+				carloan_que_salary_new.add("Dep. for Last FY: ");
+				//carloan_que_salary_new.add("PAT for Prev. to Last FY: ");
+				//carloan_que_salary_new.add("Dep. for Prev. to Last FY: ");
+			}else
+				carloan_que_salary_new.add("Net Monthly Salary: ");
+		}
+
+		carloan_que_salary_new.add("Total EMI's you pay: ");*/
+
+		Log.d("co_app_name hashmap check", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+		ArrayList<String>co_app_name=new ArrayList<String>();
+		for(int i=1;i<=cl_car_global_data.totalno_coapp;i++) {
+			Log.d("co_app_name inside loop", String.valueOf(cl_car_global_data.dataWithAnscoapp.get("co-applicant firstname"+i)));
+			co_app_name.add(cl_car_global_data.dataWithAnscoapp.get("co-applicant firstname"+i));
+		}
+
+		Log.d("co_app_name detail check", String.valueOf(co_app_name));
+		Log.d("co appl no KK", String.valueOf(cl_car_global_data.totalno_coapp));
+
+	/*	if(((GlobalData) act.getApplication()).getcarres()!=null)
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcartype());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
+		if(emptyp!=null) {
+			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
+				Log.d("employee type is", emptyp);
+				if (((GlobalData) act.getApplication()).getPat() != null)
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getPat().toString());
+				if (((GlobalData) act.getApplication()).getdepreciation() != null)
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getdepreciation().toString());
+				if (((GlobalData) act.getApplication()).getPat2() != null)
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getPat2().toString());
+				if (((GlobalData) act.getApplication()).getdepreciation2() != null)
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getdepreciation2().toString());
+			}
+
+			else {
+
+				if (((GlobalData) act.getApplication()).getnetsalary() != null) {
+					Log.d("net sal not null", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getnetsalary().toString());
+				}
+			}
+		}
+		if(((GlobalData) act.getApplication()).getEmi()!=null)
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getEmi().toString());
+
+
+		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new));
+		Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));*/
+
+
+		TextView tv;
+
+		for(int i=1;i<=cl_car_global_data.totalno_coapp;i++){
+
+			Log.d("total no of co applicants", String.valueOf(cl_car_global_data.totalno_coapp));
+
+			View view = inflater.inflate(R.layout.linearreviewquestions, null);
+			tv=(TextView) view.findViewById(R.id.headertype);
+			//LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.linerlytclick);
+			LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.vlinemp);
+
+			LinearLayout LL = new LinearLayout(CurrentAct);
+			//LL.setBackgroundColor(Color.CYAN);
+			LL.setOrientation(LinearLayout.VERTICAL);
+
+			LL.setTag(i);
+
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+			layoutParams.setMargins(0, 0, 0, 15);
+
+			LL.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					Log.d("check number",v.getTag().toString() );
+
+					if(v.getTag().toString().equals("1")) {
+
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, hl_coappldetails.class);
+						intclick.putExtra("no", "1");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("2")) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, hl_coappldetails.class);
+						intclick.putExtra("no", "2");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("3")) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, hl_coappldetails.class);
+						intclick.putExtra("no", "3");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("4")) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, hl_coappldetails.class);
+						intclick.putExtra("no", "4");
+						CurrentAct.startActivity(intclick);
+					}
+					if(v.getTag().toString().equals("5")&&flag==0) {
+						dialog.dismiss();
+						Intent intclick = new Intent(CurrentAct, hl_coappldetails.class);
+						intclick.putExtra("no", "5");
+						CurrentAct.startActivity(intclick);
+					}
+
+
+					// Perform action on click
+				}
+			});
+
+			TextView tvans=(TextView) view.findViewById(R.id.selectedanswer);
+			tv.setText("      ");
+			//textdata=carloan_que_salary_new.get(i - 1);
+			tv.setTypeface(Typeface.createFromAsset(CurrentAct.getAssets(), "fonts/OpenSans-Light.ttf"));
+			tvans.setTypeface(Typeface.createFromAsset(CurrentAct.getAssets(), "fonts/OpenSans-Light.ttf"));
+			tvans.setText(co_app_name.get(i-1));
+			LL.addView(view,layoutParams);
+			linrlyt.addView(LL);
+
+
+			final TextView finalTv = tv;
+//			tv.setOnClickListener(new View.OnClickListener() {
+//
+//
+//				public void onClick(View v) {
+//					textdata= finalTv.getText().toString();
+//
+//				}
+//			});
+//			tvans.setOnClickListener(new View.OnClickListener() {
+//
+//
+//				public void onClick(View v) {
+//
+//				}
+//			});
+
+
+		}
+		dialog.show();
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
+	}
+
+
+
+
+
 	public static String insertcomma(Editable view)
 {
 	double doubleValue = 0;

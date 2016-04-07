@@ -119,6 +119,7 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
                                 setDataToHashMap("allotment_by",allotment.getSelectedItem().toString());
                                 if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
+                                    cl_car_global_data.totalno_coapp = getApplicants();
                                     Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
                                 }
                                 Intent intent = new Intent(hl_need1.this, cl_car_residence_type.class);

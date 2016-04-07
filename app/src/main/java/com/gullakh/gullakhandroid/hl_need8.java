@@ -88,6 +88,7 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
                                 setDataToHashMap("cost_of_flat_as_allotment_letter_to_sell", Text3.getText().toString());
                                 if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
+                                    cl_car_global_data.totalno_coapp = getApplicants();
                                     Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
                                 }
                                 Intent intent = new Intent(this, cl_car_residence_type.class);

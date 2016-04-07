@@ -35,7 +35,7 @@ public class hl_coappldetailsbuss extends AppCompatActivity implements View.OnCl
     private String data1 ="";
     private String data2;
     private ContentValues contentValues;
-
+String no;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +124,22 @@ public class hl_coappldetailsbuss extends AppCompatActivity implements View.OnCl
 
         Doj = (EditText) findViewById(R.id.joindateofempyr);
         Doj.setOnClickListener(this);
+
+
+
+        Intent intent = getIntent();
+        no = intent.getStringExtra("no");
+        if (no != null) {
+
+            String profession= cl_car_global_data.dataWithAnscoapp.get("profession"+no);
+            String date= cl_car_global_data.dataWithAnscoapp.get("date"+no);
+            String category= cl_car_global_data.dataWithAnscoapp.get("category"+no);
+
+            spinner1.setSelection (Integer.parseInt(profession));
+            Doj.setText(date);
+            spinner2.setSelection(Integer.parseInt(category));
+        }
+
     }
 
     @Override
@@ -136,9 +152,9 @@ public class hl_coappldetailsbuss extends AppCompatActivity implements View.OnCl
                         if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
                             String jdate = getDate();
-                            setDataToHashMap("ind_type"+cl_car_global_data.numOfApp,spinner1.getSelectedItem().toString());
+                            setDataToHashMap("ind_type"+cl_car_global_data.numOfApp, String.valueOf(spinner1.getSelectedItemPosition()));
                             setDataToHashMap("start_date_of_cur_business"+cl_car_global_data.numOfApp,jdate);
-                            setDataToHashMap("firm_type"+cl_car_global_data.numOfApp,spinner2.getSelectedItem().toString());
+                            setDataToHashMap("firm_type"+cl_car_global_data.numOfApp,String.valueOf(spinner2.getSelectedItemPosition()));
                             if(cl_car_global_data.numOfApp>0)
                             {
                                 Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));

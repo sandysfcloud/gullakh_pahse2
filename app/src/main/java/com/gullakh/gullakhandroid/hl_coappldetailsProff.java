@@ -31,6 +31,7 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
     private Spinner spinner1,spinner2;
     private EditText netProfit;
     private ContentValues contentValues;
+    String no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,23 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
 
         Doj = (EditText) findViewById(R.id.joindateofempyr);
         Doj.setOnClickListener(this);
+
+
+        Intent intent = getIntent();
+        no = intent.getStringExtra("no");
+        if (no != null) {
+
+            String profession= cl_car_global_data.dataWithAnscoapp.get("profession"+no);
+            String date= cl_car_global_data.dataWithAnscoapp.get("date"+no);
+            String category= cl_car_global_data.dataWithAnscoapp.get("category"+no);
+
+            spinner1.setSelection (Integer.parseInt(profession));
+            Doj.setText(date);
+            spinner2.setSelection(Integer.parseInt(category));
+        }
+
+
+
     }
     @Override
     public void onClick(View v) {
@@ -130,9 +148,9 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
                     {
                         if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
-                            setDataToHashMap("",spinner1.getSelectedItem().toString());
-                            setDataToHashMap("",getDate());
-                            setDataToHashMap("", spinner2.getSelectedItem().toString());
+                            setDataToHashMap("profession" + cl_car_global_data.numOfApp, String.valueOf(spinner1.getSelectedItemPosition()));
+                            setDataToHashMap("date"+cl_car_global_data.numOfApp,getDate());
+                            setDataToHashMap("category"+cl_car_global_data.numOfApp, String.valueOf(spinner2.getSelectedItemPosition()));
 
                             if(cl_car_global_data.numOfApp>0)
                             {

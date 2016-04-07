@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +118,24 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+// do something
+            RegisterPageActivity.showAlertquestn(this);
+            return false;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
+
     private void getInfo() {
         dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
@@ -213,7 +232,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
                 break;
             case R.id.back:
-                finish();
+                RegisterPageActivity.showAlertquestn(this);
+                //finish();
                 break;
         }
     }

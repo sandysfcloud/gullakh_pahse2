@@ -23,7 +23,7 @@ import java.util.Map;
 public class cl_car_global_data
 {
     static int numOfApp=0;
-
+    static int totalno_coapp=0;
     static ArrayList<String> data = new ArrayList<String>();
     static HashMap<String,String> dataWithAns=new HashMap<String,String>();
     static HashMap<String,String> dataWithAnscoapp=new HashMap<String,String>();

@@ -19,6 +19,7 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
     Button next,back;
     private EditText avgmninc,grossSal,annualBonus;
     private String singleCoappl="no";
+    String no=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,22 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
+
+
+
+        Intent intent = getIntent();
+        no = intent.getStringExtra("no");
+        if (no != null) {
+            Log.d("salaried2 is executed no is", no);
+            String net_mon_salary= cl_car_global_data.dataWithAnscoapp.get("net_mon_salary"+no);
+            String annual_bonus= cl_car_global_data.dataWithAnscoapp.get("annual_bonus"+no);
+            String avg_monthly_incentives= cl_car_global_data.dataWithAnscoapp.get("avg_monthly_incentives"+no);
+
+            grossSal.setText(net_mon_salary);
+            annualBonus.setText(annual_bonus);
+            avgmninc.setText(avg_monthly_incentives);
+        }
+
     }
     @Override
     public void onClick(View v) {
@@ -61,18 +78,18 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                 {
                     if (!annualBonus.getText().toString().equals("")) {
                         if (!avgmninc.getText().toString().equals("")) {
-                            setDataToHashMap("net_mon_salary", grossSal.getText().toString());
-                            setDataToHashMap("annual_bonus", annualBonus.getText().toString());
-                            setDataToHashMap("avg_monthly_incentives", grossSal.getText().toString());
+                            setDataToHashMap("net_mon_salary"+cl_car_global_data.numOfApp, grossSal.getText().toString());
+                            setDataToHashMap("annual_bonus"+cl_car_global_data.numOfApp, annualBonus.getText().toString());
+                            setDataToHashMap("avg_monthly_incentives"+cl_car_global_data.numOfApp, grossSal.getText().toString());
 
 
                             if(cl_car_global_data.numOfApp>0&&hl_coappldetails.joint==1)
-                            {
+                            {Log.d("salaried2 is executed", "");
                                 Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
                                 Intent i = new Intent(this, hl_coappldetails.class);
                                 i.putExtra("data", "joint");
                                 startActivity(i);
-                                //cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
+                                cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
                                 Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
                             }
                             else {
@@ -122,6 +139,6 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
 
     public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.dataWithAns.put(Key, data);
+        cl_car_global_data.dataWithAnscoapp.put(Key, data);
     }
 }
