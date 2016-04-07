@@ -127,7 +127,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 // do something
             if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                RegisterPageActivity.showAlertquestn(this);
+               if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
+                    RegisterPageActivity.showAlertquestn(this);
+                else
+                   finish();
             }else{
                 finish();
             }
@@ -238,7 +241,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.back:
                 if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                    RegisterPageActivity.showAlertquestn(this);
+                    if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
+                        RegisterPageActivity.showAlertquestn(this);
+                    else
+                        finish();
                 }else{
                     finish();
                 }
