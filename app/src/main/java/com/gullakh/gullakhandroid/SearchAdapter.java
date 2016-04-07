@@ -94,13 +94,13 @@ public class SearchAdapter extends BaseAdapter
 
 
             globalstore = (ListModel) data.get(listpos);
-
-            if (globalstore != null) {
+            try {
+                JSONObject obj = null;
+                if (globalstore != null) {
                 Log.d("all search data Kavya", globalstore.getserchcartyp());
+                obj = new JSONObject(globalstore.getserchcartyp());
             }
 
-            try {
-                JSONObject obj = new JSONObject(globalstore.getserchcartyp());
                 Log.d("JSON OBj Kavya", String.valueOf(obj));
                 ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("cl_loanamount"));
                 ((GlobalData) cont.getApplicationContext()).setemptype(obj.getString("type_employment"));

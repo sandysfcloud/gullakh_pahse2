@@ -48,7 +48,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="Rs.1,00,000"
-            android:paddingLeft="20dp" />
+            android:drawableLeft="@drawable/loan_amt"/>
 
         <LinearLayout
             android:orientation="horizontal"

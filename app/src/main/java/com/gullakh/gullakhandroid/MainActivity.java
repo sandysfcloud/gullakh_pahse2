@@ -22,6 +22,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -60,6 +61,8 @@ import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+    SharedPreferences mPrefs;
+    final String welcomeScreenShownPref = "welcomeScreenShown";
     Typeface myfontlight;
     private ListView mDrawerList;
     //private AnimatedExpandableListView  mDrawerList;
@@ -112,6 +115,50 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
        // getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.my_custom_title);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//--------------------------Checking internet connection-------------------------------------------
+        cd = new ConnectionDetector(getApplicationContext());
+        isInternetPresent = cd.isConnectingToInternet();
+        if (!isInternetPresent) {
+            AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
+            LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+            final View view = factory.inflate(R.layout.nointernetconn, null);
+            alertadd.setView(view);
+            alertadd.setCancelable(false);
+            alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //
+                }
+            });
+            alertadd.show();
+        }else {
+
+            //new JSONParse().execute();
+            ServerConnect  cls2= new ServerConnect();
+            //check wether session-id is valid or not
+            String flag= null;
+            try {
+                cls2.checkAPI(MainActivity.this);
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+//--------------------------Three step pop up window-------------------------------------------
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
+        if (!welcomeScreenShown) {
+            // the code below will display a popup
+            showContextHelp();
+            SharedPreferences.Editor editor = mPrefs.edit();
+            editor.putBoolean(welcomeScreenShownPref, true);
+            editor.commit(); // Very important to save the preference
+        }
+//--------------------------GCM Register-------------------------------------------
 
         if (checkPlayServices()) {
             Log.d("GCM Checked","Now reg");
@@ -121,11 +168,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             Log.d("GCM Checked", "Now finish");
         }
 
-        DataHandler dbobject = new DataHandler(this);
-        dbobject.addTable();
-        //**************************internet connection check
-        cd = new ConnectionDetector(getApplicationContext());
-        isInternetPresent = cd.isConnectingToInternet();
 
         carloan = (ImageView) findViewById(R.id.carln);
         carloan.setOnClickListener(this);
@@ -146,36 +188,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         mysearchbutton.setOnClickListener(this);
 
-        // check for Internet status
-        if (!isInternetPresent) {
-            AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
-            LayoutInflater factory = LayoutInflater.from(getApplicationContext());
-            final View view = factory.inflate(R.layout.nointernetconn, null);
-            alertadd.setView(view);
-            alertadd.setCancelable(false);
-            alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                   //
-                }
-            });
-            alertadd.show();
-        }else {
-
-            //new JSONParse().execute();
-            ServerConnect  cls2= new ServerConnect();
-            //check wether session-id is valid or not
-            String flag= null;
-            try {
-                cls2.checkAPI(MainActivity.this);
-
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
+        DataHandler dbobject = new DataHandler(this);
+        dbobject.addTable();
         Cursor checkSignInState = dbobject.displayData("select * from userlogin");
         if(checkSignInState!=null) {
             if (checkSignInState.moveToFirst()) {
@@ -457,6 +471,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //********************End of Oncreate
     }
 
+    private void showContextHelp() {
+
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+        final View view = factory.inflate(R.layout.threesteps, null);
+        alertadd.setView(view);
+        alertadd.setCancelable(true);
+        alertadd.show();
+    }
 
 
     private int getContrastColor(Map.Entry<String, Integer> entry) {

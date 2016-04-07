@@ -40,7 +40,7 @@
         </LinearLayout>
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:inputType="number"
             android:ems="10"
@@ -50,7 +50,8 @@
             android:layout_marginRight="10dp"
             android:layout_gravity="center_horizontal"
             android:hint="Rs.1,00,000"
-            android:paddingLeft="20dp" />
+            android:paddingLeft="10dp"
+            android:drawableLeft="@drawable/loan_amt"/>
 
         <LinearLayout
             android:orientation="horizontal"

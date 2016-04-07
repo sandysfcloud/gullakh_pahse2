@@ -50,7 +50,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="Ex:abc"
-            android:paddingLeft="20dp"
+            android:paddingLeft="10dp"
             android:layout_gravity="center_horizontal"
             android:singleLine="true" />
 
@@ -83,7 +83,7 @@
                 android:background="@drawable/edittextsimple"
                 android:layout_marginRight="10dp"
                 android:hint="May-16"
-                android:paddingLeft="20dp"
+                android:paddingLeft="10dp"
                 android:singleLine="true" />
         </LinearLayout>
 
@@ -119,8 +119,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="Rs.1,00,000"
-            android:paddingLeft="20dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:drawableLeft="@drawable/loan_amt"/>
 
         <LinearLayout
             android:orientation="horizontal"

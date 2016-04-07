@@ -128,12 +128,12 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/editText1"
+                android:drawableLeft="@drawable/loan_amt"
                 android:layout_weight="1"
                 android:background="@drawable/edittextsimple"
                 android:layout_marginRight="10dp"
                 android:gravity="center_vertical"
-                android:hint="Rs.1,00,000"
-                android:paddingLeft="10dp" />
+                android:hint="Rs.1,00,000" />
         </LinearLayout>
 
         <LinearLayout

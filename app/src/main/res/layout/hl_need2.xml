@@ -45,8 +45,10 @@
                 android:ems="10"
                 android:id="@+id/editText1"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:hint="Rs.1,00,000"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/loan_amt"/>
         </LinearLayout>
 
         <LinearLayout
@@ -78,8 +80,10 @@
                 android:ems="10"
                 android:id="@+id/editText2"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:hint="Rs.1,00,000"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/loan_amt"/>
         </LinearLayout>
 
         <LinearLayout
@@ -111,8 +115,10 @@
                 android:ems="10"
                 android:id="@+id/editText3"
                 android:background="@drawable/edittextsimple"
-                android:gravity="center"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:hint="Rs.1,00,000"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/loan_amt"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
