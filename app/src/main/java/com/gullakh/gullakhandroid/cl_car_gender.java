@@ -126,9 +126,14 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 // do something
-            RegisterPageActivity.showAlertquestn(this);
+            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                RegisterPageActivity.showAlertquestn(this);
+            }else{
+                finish();
+            }
             return false;
         }
+
 
         return super.onKeyDown(keyCode, event);
     }
