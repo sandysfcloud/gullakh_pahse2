@@ -59,7 +59,9 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
         Text1 = (EditText) findViewById(R.id.editText1);
         Text2 = (EditText) findViewById(R.id.editText2);
         Text3 = (EditText) findViewById(R.id.editText3);
-
+        Text1.addTextChangedListener(new NumberTextWatcher(Text1));
+        Text2.addTextChangedListener(new NumberTextWatcher(Text2));
+        Text3.addTextChangedListener(new NumberTextWatcher(Text3));
         c1= (CheckBox) findViewById(R.id.cself);
         c2= (CheckBox) findViewById(R.id.cspouse);
         c3= (CheckBox) findViewById(R.id.cbro);

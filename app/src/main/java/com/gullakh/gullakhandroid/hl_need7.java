@@ -61,6 +61,7 @@ public class hl_need7 extends AppCompatActivity implements View.OnClickListener 
         c5= (CheckBox) findViewById(R.id.cmothr);
 
         Text1 = (EditText) findViewById(R.id.editText);
+        Text1.addTextChangedListener(new NumberTextWatcher(Text1));
         jointopt=findViewById(R.id.joint);
         single.setOnClickListener(this);
         joint.setOnClickListener(this);

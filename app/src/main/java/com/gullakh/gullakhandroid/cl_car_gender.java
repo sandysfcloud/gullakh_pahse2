@@ -232,7 +232,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
                 break;
             case R.id.back:
-                RegisterPageActivity.showAlertquestn(this);
+                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                    RegisterPageActivity.showAlertquestn(this);
+                }else{
+                    finish();
+                }
                 //finish();
                 break;
         }

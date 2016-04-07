@@ -47,7 +47,9 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         grossSal = (EditText) findViewById(R.id.grossSal);
         annualBonus = (EditText) findViewById(R.id.annualBonus);
         avgmninc = (EditText) findViewById(R.id.avgmninc);
-
+        grossSal.addTextChangedListener(new NumberTextWatcher(grossSal));
+        annualBonus.addTextChangedListener(new NumberTextWatcher(annualBonus));
+        avgmninc.addTextChangedListener(new NumberTextWatcher(avgmninc));
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -66,6 +68,16 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
             grossSal.setText(net_mon_salary);
             annualBonus.setText(annual_bonus);
             avgmninc.setText(avg_monthly_incentives);
+        }else if(hl_city.user) {
+            if (cl_car_global_data.dataWithAns.get("net_mon_salary") != null) {
+                String net_mon_salary = cl_car_global_data.dataWithAns.get("net_mon_salary");
+                String annual_bonus = cl_car_global_data.dataWithAns.get("annual_bonus");
+                String avg_monthly_incentives = cl_car_global_data.dataWithAns.get("avg_monthly_incentives");
+
+                grossSal.setText(net_mon_salary);
+                annualBonus.setText(annual_bonus);
+                avgmninc.setText(avg_monthly_incentives);
+            }
         }
 
     }
@@ -78,11 +90,16 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                 {
                     if (!annualBonus.getText().toString().equals("")) {
                         if (!avgmninc.getText().toString().equals("")) {
-                            setDataToHashMap("net_mon_salary"+cl_car_global_data.numOfApp, grossSal.getText().toString());
-                            setDataToHashMap("annual_bonus"+cl_car_global_data.numOfApp, annualBonus.getText().toString());
-                            setDataToHashMap("avg_monthly_incentives"+cl_car_global_data.numOfApp, grossSal.getText().toString());
-
-
+                            if(hl_city.user){
+                                hl_city.user=false;
+                                setDataToHashMap("net_mon_salary",grossSal.getText().toString());
+                                setDataToHashMap("annual_bonus" ,annualBonus.getText().toString());
+                                setDataToHashMap("avg_monthly_incentives", grossSal.getText().toString());
+                            }else {
+                                setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());
+                                setDataToHashMap("annual_bonus" + cl_car_global_data.numOfApp, annualBonus.getText().toString());
+                                setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, grossSal.getText().toString());
+                            }
                             if(cl_car_global_data.numOfApp>0&&hl_coappldetails.joint==1)
                             {Log.d("salaried2 is executed", "");
                                 Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
@@ -140,5 +157,8 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
     public void setDataToHashMap(String Key,String data)
     {
         cl_car_global_data.dataWithAnscoapp.put(Key, data);
+        if(hl_city.user){
+            cl_car_global_data.dataWithAns.put(Key, data);
+        }
     }
 }
