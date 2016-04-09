@@ -76,6 +76,8 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
         joint.setOnClickListener(this);
         Text1= (EditText) findViewById(R.id.editText1);
         Text2= (EditText) findViewById(R.id.editText2);
+        Text1.addTextChangedListener(new NumberTextWatcher(Text1));
+        Text2.addTextChangedListener(new NumberTextWatcher(Text2));
         jointopt=findViewById(R.id.joint);
         allotment = (Spinner) findViewById(R.id.spinner);
         allotment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

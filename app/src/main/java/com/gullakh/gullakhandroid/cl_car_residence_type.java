@@ -152,7 +152,13 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             //Intent intent = new Intent(this, cl_car_salaried.class);
                            // startActivity(intent);
                                 DataHandler dbobject = new DataHandler(this);
-                                Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+                            Cursor cr;
+                            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
+                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Home Loan';");
+                            }else{
+                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+                            }
+
                                 cr.moveToFirst();
                                 Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
                                 try {

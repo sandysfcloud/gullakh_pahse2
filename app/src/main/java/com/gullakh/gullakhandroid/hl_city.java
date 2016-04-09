@@ -37,7 +37,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
     JSONServerGet requestgetserver;
     String sessionid,data;
     private String propertyLocated="";
-
+static boolean user=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

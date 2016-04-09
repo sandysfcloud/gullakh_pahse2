@@ -126,9 +126,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 // do something
-            RegisterPageActivity.showAlertquestn(this);
+            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+               if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
+                    RegisterPageActivity.showAlertquestn(this);
+                else
+                   finish();
+            }else{
+                finish();
+            }
             return false;
         }
+
 
         return super.onKeyDown(keyCode, event);
     }
@@ -232,7 +240,14 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
                 break;
             case R.id.back:
-                RegisterPageActivity.showAlertquestn(this);
+                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                    if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
+                        RegisterPageActivity.showAlertquestn(this);
+                    else
+                        finish();
+                }else{
+                    finish();
+                }
                 //finish();
                 break;
         }

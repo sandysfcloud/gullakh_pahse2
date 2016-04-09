@@ -191,54 +191,49 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                if(checkbox()==0){
                     RegisterPageActivity.showErroralert(this, "Select atleat one option ", "failed");
                 }else {*/
-                if(firstName.getText().toString().length()>0) {
+
                     if (coapp) {
+                        if(firstName.getText().toString().length()>0) {
+                            Log.d("coapp true", "");
+                            if (working) {
 
-                        Log.d("coapp true", "");
-                        if (working) {
 
-
-                            if(no!=null) {
-                                setData("working_edit");
-                                Log.d("working true if edit", no);
-                            }
-                            else
-                            {
-                                setData("co-applicant");
-                            }
-                            Intent i = new Intent(this, hl_empType.class);
-                            i.putExtra("no", no);
-                            startActivity(i);
-                        } else {
-                            Log.d("working false", "");
-                            if (joint == 1 && cl_car_global_data.numOfApp > 0) {
-                                setData("co-applicant");
-                                Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
-                                Log.d("check data here", String.valueOf( cl_car_global_data.dataWithAnscoapp.get("co-applicant firstname")));
-                                Intent i = new Intent(this, hl_coappldetails.class);
-                                i.putExtra("data", "joint");
+                                if (no != null) {
+                                    setData("working_edit");
+                                    Log.d("working true if edit", no);
+                                } else {
+                                    setData("co-applicant");
+                                }
+                                Intent i = new Intent(this, hl_empType.class);
+                                i.putExtra("no", no);
                                 startActivity(i);
-                                cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
-                                Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
-
-
-                                Log.d("check hashmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                             } else {
-                                setData("co-applicant");
-                                Intent i = new Intent(this, cl_car_gender.class);
-                                startActivity(i);
-                            }
+                                Log.d("working false", "");
+                                if (joint == 1 && cl_car_global_data.numOfApp > 0) {
+                                    setData("co-applicant");
+                                    Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
+                                    Log.d("check data here", String.valueOf(cl_car_global_data.dataWithAnscoapp.get("co-applicant firstname")));
+                                    Intent i = new Intent(this, hl_coappldetails.class);
+                                    i.putExtra("data", "joint");
+                                    startActivity(i);
+                                    cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
+                                    Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
 
+
+                                    Log.d("check hashmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+                                } else {
+                                    setData("co-applicant");
+                                    Intent i = new Intent(this, cl_car_gender.class);
+                                    startActivity(i);
+                                }
+
+                            }
                         }
-                    }
-                }else {
+                    } else {
                         setData("single");
                         Intent i = new Intent(this, cl_car_gender.class);
                         startActivity(i);
                     }
-
-
-                // }
                 break;
             case R.id.usermale:
                 gen1.setImageResource(R.drawable.buttonselecteffect);
