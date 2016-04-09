@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     ConnectionDetector cd;
     private int touchPositionX;
     private int touchPositionY;
-    private ImageView coin,carloan,homeloan;
+    private ImageView coin,carloan,homeloan,persol;
     private TranslateAnimation animationvu;
     private TranslateAnimation animationvd;
     private int duration=750;
@@ -174,6 +174,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         homeloan = (ImageView) findViewById(R.id.home);
         homeloan.setOnClickListener(this);
+
+
+        persol = (ImageView) findViewById(R.id.persol);
+        persol.setOnClickListener(this);
 
         signinbutton= (Button) findViewById(R.id.buttonSignin);
 
@@ -499,6 +503,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.home:
+                loanType="Home Loan";
+                ((GlobalData) getApplication()).setcartype("Home Loan");
+                intent = new Intent(MainActivity.this, cl_car_residence.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+                break;
+            case R.id.persol:
                 loanType="Home Loan";
                 ((GlobalData) getApplication()).setcartype("Home Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);

@@ -82,7 +82,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
-
+            Log.d("no got frm intent T",no);
             String co_empnam= cl_car_global_data.dataWithAnscoapp.get("co_employeenam"+no);
             String co_empdate= cl_car_global_data.dataWithAnscoapp.get("co_employeedate"+no);
             String co_empexpyr= cl_car_global_data.dataWithAnscoapp.get("co_employeedexpyear"+no);

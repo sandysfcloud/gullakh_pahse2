@@ -125,7 +125,9 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
-
+            Log.d("no",no);
+            Log.d("all data", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+           Log.d("professn", cl_car_global_data.dataWithAnscoapp.get("profession"+no));
             String profession= cl_car_global_data.dataWithAnscoapp.get("profession"+no);
             String date= cl_car_global_data.dataWithAnscoapp.get("date"+no);
             String category= cl_car_global_data.dataWithAnscoapp.get("category"+no);
@@ -221,7 +223,7 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
     public void setDataToHashMap(String Key,String data)
     {
         cl_car_global_data.dataWithAnscoapp.put(Key,data);
-       // Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
+        Log.d("HashMap in professn check", cl_car_global_data.dataWithAns.get("profession"));
     }
 
 }

@@ -115,6 +115,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
     {
         if(co_emp!=null) {
             if (no != null) {
+                Log.d("no is  feom edit is",no);
                 setDataToHashMap("co_employment_type" +no, co_emp);
             }
             setDataToHashMap("co_employment_type" + cl_car_global_data.numOfApp, co_emp);
@@ -122,6 +123,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
             Intent intent;
             if(co_emp.equals("salaried"))
             {
+
                 intent=new Intent(this,hl_coappldetailsSal.class);
                 intent.putExtra("no", no);
                 startActivity(intent);
