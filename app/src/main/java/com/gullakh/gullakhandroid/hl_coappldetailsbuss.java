@@ -130,14 +130,19 @@ String no;
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
+            Log.d("no in bussiness class", no);
+            if(cl_car_global_data.dataWithAnscoapp.get("profession"+no)!=null) {
 
-            String profession= cl_car_global_data.dataWithAnscoapp.get("profession"+no);
-            String date= cl_car_global_data.dataWithAnscoapp.get("date"+no);
-            String category= cl_car_global_data.dataWithAnscoapp.get("category"+no);
+                Log.d("all data bussiness", String.valueOf(cl_car_global_data.dataWithAnscoapp.get("profession" + no)));
 
-            spinner1.setSelection (Integer.parseInt(profession));
-            Doj.setText(date);
-            spinner2.setSelection(Integer.parseInt(category));
+                String profession = cl_car_global_data.dataWithAnscoapp.get("ind_type" + no);
+                String date = cl_car_global_data.dataWithAnscoapp.get("start_date_of_cur_business" + no);
+                String category = cl_car_global_data.dataWithAnscoapp.get("firm_type" + no);
+
+                spinner1.setSelection(Integer.parseInt(profession));
+                Doj.setText(date);
+                spinner2.setSelection(Integer.parseInt(category));
+            }
         }
 
     }
@@ -151,11 +156,21 @@ String no;
                     if (!Doj.getText().toString().matches("")) {
                         if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
-                            String jdate = getDate();
-                            setDataToHashMap("ind_type"+cl_car_global_data.numOfApp, String.valueOf(spinner1.getSelectedItemPosition()));
-                            setDataToHashMap("start_date_of_cur_business"+cl_car_global_data.numOfApp,jdate);
-                            setDataToHashMap("firm_type"+cl_car_global_data.numOfApp,String.valueOf(spinner2.getSelectedItemPosition()));
-                            if(cl_car_global_data.numOfApp>0)
+
+                            if (no != null) {
+                                setDataToHashMap("ind_type" + no, String.valueOf(spinner1.getSelectedItemPosition()));
+                                Log.d("selected position", String.valueOf(spinner1.getSelectedItemPosition()));
+                                setDataToHashMap("start_date_of_cur_business" + no, getDate());
+                                setDataToHashMap("firm_type" + no, String.valueOf(spinner2.getSelectedItemPosition()));
+                                Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+                            }
+                            else {
+                                String jdate = getDate();
+                                setDataToHashMap("ind_type" + cl_car_global_data.numOfApp, String.valueOf(spinner1.getSelectedItemPosition()));
+                                setDataToHashMap("start_date_of_cur_business" + cl_car_global_data.numOfApp, jdate);
+                                setDataToHashMap("firm_type" + cl_car_global_data.numOfApp, String.valueOf(spinner2.getSelectedItemPosition()));
+
+                            }if(cl_car_global_data.numOfApp>0)
                             {
                                 Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
                                 Intent i = new Intent(this, hl_coappldetails.class);

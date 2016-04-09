@@ -82,19 +82,21 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
-            Log.d("no got frm intent T",no);
-            String co_empnam= cl_car_global_data.dataWithAnscoapp.get("co_employeenam"+no);
-            String co_empdate= cl_car_global_data.dataWithAnscoapp.get("co_employeedate"+no);
-            String co_empexpyr= cl_car_global_data.dataWithAnscoapp.get("co_employeedexpyear"+no);
-            String co_empexpmon= cl_car_global_data.dataWithAnscoapp.get("co_employeedexpmon"+no);
+            Log.d("no got frm intent T", no);
+            if (cl_car_global_data.dataWithAnscoapp.get("co_employeenam" + no) != null) {
+                String co_empnam = cl_car_global_data.dataWithAnscoapp.get("co_employeenam" + no);
+                String co_empdate = cl_car_global_data.dataWithAnscoapp.get("co_employeedate" + no);
+                String co_empexpyr = cl_car_global_data.dataWithAnscoapp.get("co_employeedexpyear" + no);
+                String co_empexpmon = cl_car_global_data.dataWithAnscoapp.get("co_employeedexpmon" + no);
 
-            Emp.setText(co_empnam);
-            Doj.setText(co_empdate);
-            Expyr.setText(co_empexpyr);
-            Expmn.setText(co_empexpmon);
 
+                Emp.setText(co_empnam);
+                Doj.setText(co_empdate);
+                Expyr.setText(co_empexpyr);
+                Expmn.setText(co_empexpmon);
+
+            }
         }
-
 
 
     }
@@ -153,10 +155,20 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                 if(!Emp.getText().toString().matches("")) {
                     if (!Doj.getText().toString().matches("")) {
                     if (!Expyr.getText().toString().matches("")) {
-                        String jdate = getDate();
-                        String EmpName = Emp.getText().toString();
-                        setDataToHashMap("co_employeenam"+cl_car_global_data.numOfApp, EmpName);
-                        setDataToHashMap("co_employeedate"+cl_car_global_data.numOfApp, jdate);
+
+
+                        if (no != null) {
+                            setDataToHashMap("co_employeenam" + no,  Emp.getText().toString());
+                            setDataToHashMap("co_employeedate" + no, getDate());
+                            setDataToHashMap("co_employeedexpyear" + no, Expyr.getText().toString());
+                            setDataToHashMap("co_employeedexpmon" + no,Expmn.getText().toString());
+                            Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+                        }
+
+
+
+                        setDataToHashMap("co_employeenam"+cl_car_global_data.numOfApp,  Emp.getText().toString());
+                        setDataToHashMap("co_employeedate"+cl_car_global_data.numOfApp, getDate());
                         setDataToHashMap("co_employeedexpyear"+cl_car_global_data.numOfApp, Expyr.getText().toString());
                         setDataToHashMap("co_employeedexpmon"+cl_car_global_data.numOfApp,Expmn.getText().toString());
                         if (no != null) {

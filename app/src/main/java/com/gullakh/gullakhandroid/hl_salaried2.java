@@ -96,9 +96,18 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                 setDataToHashMap("annual_bonus" ,annualBonus.getText().toString());
                                 setDataToHashMap("avg_monthly_incentives", grossSal.getText().toString());
                             }else {
-                                setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());
-                                setDataToHashMap("annual_bonus" + cl_car_global_data.numOfApp, annualBonus.getText().toString());
-                                setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, grossSal.getText().toString());
+                                if (no != null) {
+                                    setDataToHashMap("net_mon_salary" + no, grossSal.getText().toString());
+                                    setDataToHashMap("annual_bonus" + no, annualBonus.getText().toString());
+                                    setDataToHashMap("avg_monthly_incentives" + no, grossSal.getText().toString());
+
+                                } else {
+
+
+                                    setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());
+                                    setDataToHashMap("annual_bonus" + cl_car_global_data.numOfApp, annualBonus.getText().toString());
+                                    setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, grossSal.getText().toString());
+                                }
                             }
                             if(cl_car_global_data.numOfApp>0&&hl_coappldetails.joint==1)
                             {Log.d("salaried2 is executed", "");

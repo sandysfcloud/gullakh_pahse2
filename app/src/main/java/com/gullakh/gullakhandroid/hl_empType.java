@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 public class hl_empType extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView sal, self, business;
+    ImageView sal, self, business,prof;
     String data;
     Button next, back;
     String co_emp = null;
@@ -29,8 +29,8 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
         sal.setOnClickListener(this);
         self = (ImageView) findViewById(R.id.img2);
         self.setOnClickListener(this);
-        business = (ImageView) findViewById(R.id.business);
-        business.setOnClickListener(this);
+        prof = (ImageView) findViewById(R.id.prof);
+        prof.setOnClickListener(this);
 
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
@@ -39,19 +39,16 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
            String emptyp= cl_car_global_data.dataWithAnscoapp.get("co_employment_type"+no);
             Log.d("EDITED check emp data", String.valueOf(cl_car_global_data.dataWithAnscoapp));
             co_emp=emptyp;
-            if(emptyp.equals("salaried"))
-            {
-                sal.setImageResource(R.drawable.buttonselecteffect);
+           // Log.d("employee typ is KK",emptyp);
+            if(emptyp!=null) {
+                if (emptyp.equals("salaried")) {
+                    sal.setImageResource(R.drawable.buttonselecteffect);
+                } else if (emptyp.equals("self employed professional")) {
+                    prof.setImageResource(R.drawable.buttonselecteffect);
+                } else if (emptyp.equals("self employed business")) {
+                    self.setImageResource(R.drawable.buttonselecteffect);
+                }
             }
-            else if(emptyp.equals("self employed professional"))
-            {
-                self.setImageResource(R.drawable.buttonselecteffect);
-            }
-            else if(emptyp.equals("self employed business"))
-            {
-                business.setImageResource(R.drawable.buttonselecteffect);
-            }
-
         }
 
 
@@ -80,7 +77,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
             case R.id.img:
                 sal.setImageResource(R.drawable.buttonselecteffect);
                 self.setImageResource(R.drawable.selfempbus);
-                business.setImageResource(R.drawable.selfempprof);
+                prof.setImageResource(R.drawable.selfempprof);
                 co_emp = "salaried";
                 intentcall();
                 /*Intent intent=new Intent(this,hl_coappldetailsSal.class);
@@ -90,18 +87,19 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
             case R.id.img2:
                 self.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
-                business.setImageResource(R.drawable.selfempprof);
-                co_emp = "self employed professional";
+                prof.setImageResource(R.drawable.selfempprof);
+                co_emp = "self employed business";
                 intentcall();
                 /*Intent intent2=new Intent(this,hl_coappldetailsProff.class);
                 startActivity(intent2);
                 overridePendingTransition(R.transition.left, R.transition.right);*/
                 break;
-            case R.id.business:
-                business.setImageResource(R.drawable.buttonselecteffect);
+            case R.id.prof:
+                prof.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
-                co_emp = "self employed business";
+
+                co_emp = "self employed professional";
                 intentcall();
                 /*Intent intent3=new Intent(this,hl_coappldetailsbuss.class);
                 startActivity(intent3);
@@ -116,14 +114,18 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
         if(co_emp!=null) {
             if (no != null) {
                 Log.d("no is  feom edit is",no);
+                Log.d("emp typ in click",co_emp);
                 setDataToHashMap("co_employment_type" +no, co_emp);
+
+
             }
+            else
             setDataToHashMap("co_employment_type" + cl_car_global_data.numOfApp, co_emp);
             Log.d("check here KK", String.valueOf(cl_car_global_data.dataWithAnscoapp));
             Intent intent;
             if(co_emp.equals("salaried"))
             {
-
+                Log.d("salaried class T", "");
                 intent=new Intent(this,hl_coappldetailsSal.class);
                 intent.putExtra("no", no);
                 startActivity(intent);
@@ -132,6 +134,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
 
             if(co_emp.equals("self employed professional"))
             {
+                Log.d("self employed professional class T", "");
                 intent=new Intent(this,hl_coappldetailsProff.class);
                 intent.putExtra("no", no);
                 startActivity(intent);
@@ -139,6 +142,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
             }
             if(co_emp.equals("self employed business"))
             {
+                Log.d("self employed business class T", "");
                 intent=new Intent(this,hl_coappldetailsbuss.class);
                 intent.putExtra("no", no);
                 startActivity(intent);

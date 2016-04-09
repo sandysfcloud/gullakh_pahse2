@@ -510,7 +510,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.persol:
-                loanType="Home Loan";
+                loanType="Personal Loan";
                 ((GlobalData) getApplication()).setcartype("Home Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);

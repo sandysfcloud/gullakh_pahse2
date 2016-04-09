@@ -70,7 +70,7 @@
             android:layout_height="100dp"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:id="@+id/business"
+            android:id="@+id/prof"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/selfempprof" />
         <com.gullakh.gullakhandroid.font.RobotoTextView
