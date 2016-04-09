@@ -98,7 +98,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private View viewwheel;
     private int wheelwidth;
     private ObjectAnimator anim1;
-    static String loanType="";
     static boolean MyRecentSearchClicked=false;
     static boolean signinstate=false;
     private Button signinbutton,registerbutton,myapplbutton,mysearchbutton;
@@ -496,22 +495,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.carln:
-                loanType="Car Loan";
                 ((GlobalData) getApplication()).setcartype("Car Loan");
                 Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.home:
-                loanType="Home Loan";
                 ((GlobalData) getApplication()).setcartype("Home Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.persol:
-                loanType="Home Loan";
-                ((GlobalData) getApplication()).setcartype("Home Loan");
+                ((GlobalData) getApplication()).setcartype("Personal Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);

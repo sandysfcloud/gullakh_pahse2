@@ -33,7 +33,6 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     TextView tfee,t8,t9,t10,t11,title,t_other;
     Button fee,othr;
     public ArrayList<ListModel> data;
-    static String applyFlag="none";
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     @Override
@@ -241,8 +240,6 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 break;
             case  R.id.Buttonapply:
             Log.d("check loan type",((GlobalData)getApplication()).getcartype());
-            applyFlag=MainActivity.loanType;
-
                     if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
                             ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
                         storeData();
@@ -267,15 +264,15 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                         Intent intent = new Intent(ListView_Click.this,hl_city.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(applyFlag.equals("Personal Loan")){
-                        Intent intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){
+                        Intent intent = new Intent(ListView_Click.this, pl_need.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(applyFlag.equals("Loan against Property")){
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")){
                         Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(applyFlag.equals("none")) {
+                    }else {
                         Intent intent = new Intent(ListView_Click.this, MainActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);

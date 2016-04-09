@@ -99,9 +99,13 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                         if (!avgmninc.getText().toString().equals("")) {
                             Log.d("City user2", String.valueOf(cl_car_salaried.user));
                             if(cl_car_salaried.user){
-                                setDataToHashMap("net_mon_salary",grossSal.getText().toString());
-                                setDataToHashMap("annual_bonus" ,annualBonus.getText().toString());
-                                setDataToHashMap("avg_monthly_incentives", avgmninc.getText().toString());
+                                String sal = grossSal.getText().toString().replaceAll(",", "");
+                                String sal1 = annualBonus.getText().toString().replaceAll(",", "");
+                                String sal2 = avgmninc.getText().toString().replaceAll(",", "");
+
+                                setDataToHashMap("net_mon_salary",sal);
+                                setDataToHashMap("annual_bonus" ,sal1);
+                                setDataToHashMap("avg_monthly_incentives", sal2);
                                 goToDatabase("Home Loan");
                                 cl_car_salaried.user=false;
                             }else {

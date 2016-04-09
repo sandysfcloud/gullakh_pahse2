@@ -233,23 +233,24 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				if(urlchange=="setpassword"){
 					storedatatoDatabase();
 					MainActivity.signinstate=true;
-					if(ListView_Click.applyFlag.equals("Car Loan")){
+					if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
+							((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
 						Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
-					}else if(ListView_Click.applyFlag.equals("Home Loan")){
+					}else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
 						Intent intent = new Intent(RegisterPageActivity.this,hl_city.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
-					}else if(ListView_Click.applyFlag.equals("Loan against Property")){
+					}else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){
+						Intent intent = new Intent(RegisterPageActivity.this, pl_need.class);
+						startActivity(intent);
+						overridePendingTransition(R.transition.left, R.transition.right);
+					}else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")){
 						Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
-					}else if(ListView_Click.applyFlag.equals("Personal Loan")){
-						Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
-						startActivity(intent);
-						overridePendingTransition(R.transition.left, R.transition.right);
-					}else if(ListView_Click.applyFlag.equals("none")) {
+					}else {
 						Intent intent = new Intent(RegisterPageActivity.this, MainActivity.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);

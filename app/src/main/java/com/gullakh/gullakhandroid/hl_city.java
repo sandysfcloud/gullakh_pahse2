@@ -42,7 +42,6 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hl_city);
         contentValues=new ContentValues();
-        ListView_Click.applyFlag="none";
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 

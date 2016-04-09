@@ -68,12 +68,15 @@ public class cl_car_global_data
             String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
             dbobject.addTable();
             cv.put("created_date", date);
-            dbobject.updateDatatoDB("mysearch",cv,loanType);
+            dbobject.updateDatatoDB("mysearch", cv, loanType);
+            Log.d("Data updated successfully", loanType);
         }else{
             dbobject.addTable();
             String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
             cv.put("created_date", date);
             dbobject.insertdata(cv, "mysearch");
+            Log.d("Data inserted successfully",loanType);
+
         }
     }
 
