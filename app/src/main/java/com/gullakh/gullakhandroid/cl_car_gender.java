@@ -203,12 +203,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                                 RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                             } else {
                                 if(pin.getText().toString().length()==6){
-                                    goToDatabase("mysearch","Car Loan");
+                                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                        goToDatabase("mysearch","Home Loan");
+                                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                        goToDatabase("mysearch","Personal Loan");
+                                    }else{
+                                        goToDatabase("mysearch","Car Loan");
+                                    }
                                     savetoserver();
                                 }else{
                                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
                                 }
-
                             }
                         }
                     }

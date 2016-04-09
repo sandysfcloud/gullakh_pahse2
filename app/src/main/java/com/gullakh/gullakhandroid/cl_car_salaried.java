@@ -42,7 +42,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     String sessionid;
     private ContentValues contentValues;
     private EditText Doj;
-
+    static boolean user=true;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -79,6 +79,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Expyr = (EditText) findViewById(R.id.totalexpyr);
         Expmn = (EditText) findViewById(R.id.totalexpmn);
         getDataFromHashMap();
+        user=true;
     }
 
     private void getDataFromHashMap() {
@@ -158,12 +159,16 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                         String jdate = getDate();
                         setDataToHashMap("year_you_joined_current_comp", jdate);
                         setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
-                        goToDatabase("Car Loan");
+                        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                            goToDatabase("Home Loan");
+                        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                            goToDatabase("Personal Loan");
 
-
+                        }else{
+                            goToDatabase("Car Loan");
+                        }
                         if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
                         {
-                            goToDatabase("Home Loan");
                             Log.d("type of loan is",((GlobalData) getApplication()).getcartype());
                             Intent intent2 = new Intent(this, hl_salaried2.class);
                             startActivity(intent2);

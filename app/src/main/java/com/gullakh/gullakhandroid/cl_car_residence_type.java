@@ -147,18 +147,27 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             setDataToHashMap("current_res", spinner.getSelectedItem().toString());
                             setDataToHashMap("period_of_stay_in_cur_city",currentCityyr.getText().toString()+" Year "+currentCityyr.getText().toString()+" Month");
                             setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString()+" Year "+currentResidencemn.getText().toString()+" Month");
-                            goToDatabase("Car Loan");
-
+                            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                goToDatabase("Home Loan");
+                            }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                            goToDatabase("Personal Loan");
+                            }else{
+                                goToDatabase("Car Loan");
+                            }
                             //Intent intent = new Intent(this, cl_car_salaried.class);
                            // startActivity(intent);
                                 DataHandler dbobject = new DataHandler(this);
                             Cursor cr;
-                            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
+                            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan"))
+                            {
                                  cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Home Loan';");
-                            }else{
-                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
                             }
-
+                            else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan"))
+                            {
+                            cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Personal Loan';");
+                            }else{
+                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Personal Loan';");
+                            }
                                 cr.moveToFirst();
                                 Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
                                 try {

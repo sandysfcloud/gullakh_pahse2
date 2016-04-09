@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,11 +29,13 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
     LinearLayout owners,cons,pop1,pop2,pop3,pop4,pop5,pop6;
     private String catergory="";
     EditText cost;
+    private ContentValues contentValues;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hl_need);
-
+        contentValues=new ContentValues();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -111,6 +114,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         hl_coappldetails.joint=0;
         Intent intent;
         setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
+        goToDatabase("Home Loan");
         if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
             intent = new Intent(hl_need.this, hl_need1.class);
             startActivity(intent);
@@ -145,5 +149,12 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             overridePendingTransition(R.transition.left, R.transition.right);
         }
 
+    }
+    private void goToDatabase(String loanType)
+    {
+        contentValues.put("loantype",loanType);
+        contentValues.put("questans", "hl_city");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
     }
 }
