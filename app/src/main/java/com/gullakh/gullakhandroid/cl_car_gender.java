@@ -203,12 +203,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                                 RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                             } else {
                                 if(pin.getText().toString().length()==6){
-                                    goToDatabase("mysearch","Car Loan");
+                                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                        goToDatabase("mysearch","Home Loan");
+                                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                        goToDatabase("mysearch","Personal Loan");
+                                    }else{
+                                        goToDatabase("mysearch","Car Loan");
+                                    }
                                     savetoserver();
                                 }else{
                                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
                                 }
-
                             }
                         }
                     }
@@ -219,7 +224,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 gen1.setImageResource(R.drawable.buttonselecteffect);
                 gen2.setImageResource(R.drawable.userfemale);
                 dataGender="male";
-                goToDatabase("mysearch", "Car Loan");
                 setDataToHashMap("firstname", firstName.getText().toString());
                 setDataToHashMap("lastname",lastName.getText().toString());
                 setDataToHashMap("gender", dataGender);
@@ -231,7 +235,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 setDataToHashMap("firstname", firstName.getText().toString());
                 setDataToHashMap("lastname", lastName.getText().toString());
                 setDataToHashMap("gender", dataGender);
-                goToDatabase("mysearch", "Car Loan");
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -344,7 +347,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
-                Log.d("result is KK",str_result);
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
 
                 if(!jsonObject.get("result").toString().equals("[]"))
@@ -457,7 +459,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, homeloantype);
                 }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                    //requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loantype);
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, carloantype);
                 }
             }
         },cl_car_gender.this, "wait7");

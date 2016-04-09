@@ -143,23 +143,24 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 values.put("contact_id", contactid);
                 dbobject.insertdata(values, "userlogin");
                 MainActivity.signinstate=true;
-                if(ListView_Click.applyFlag.equals("Car Loan")){
+                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
+                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
                     Intent intent = new Intent(signin.this, cl_car_make.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
-                }else if(ListView_Click.applyFlag.equals("Home Loan")){
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
                     Intent intent = new Intent(signin.this,hl_city.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
-                }else if(ListView_Click.applyFlag.equals("Loan against Property")){
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")){
                     Intent intent = new Intent(signin.this, cl_car_make.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
-                }else if(ListView_Click.applyFlag.equals("Personal Loan")){
-                    Intent intent = new Intent(signin.this, cl_car_make.class);
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){
+                    Intent intent = new Intent(signin.this, pl_need.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
-                }else if(ListView_Click.applyFlag.equals("none")) {
+                }else{
                     Intent intent = new Intent(signin.this, MainActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

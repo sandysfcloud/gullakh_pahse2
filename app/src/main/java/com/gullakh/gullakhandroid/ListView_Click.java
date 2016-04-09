@@ -33,7 +33,6 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     TextView tfee,t8,t9,t10,t11,title,t_other;
     Button fee,othr;
     public ArrayList<ListModel> data;
-    static String applyFlag="none";
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     @Override
@@ -240,9 +239,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.Buttonapply:
-Log.d("check loan type",((GlobalData)getApplication()).getcartype());
-            applyFlag=MainActivity.loanType;
-
+            Log.d("check loan type",((GlobalData)getApplication()).getcartype());
                     if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
                             ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
                         storeData();
@@ -252,55 +249,39 @@ Log.d("check loan type",((GlobalData)getApplication()).getcartype());
                         storeData();
                         goToDatabase("Home Loan");
 
-                    }else if(applyFlag.equals("Loan against Property")){
-                        storeData();
-                        goToDatabase("Loan against Property");
-
-                    }else if(applyFlag.equals("Personal Loan")){
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                         storeData();
                         goToDatabase("Personal Loan");
-
-                    }else if(applyFlag.equals("none")) {
-
                     }
                 if(MainActivity.signinstate){
 
                     if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
                             ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
-
                         Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
-
                         Intent intent = new Intent(ListView_Click.this,hl_city.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(applyFlag.equals("Loan against Property")){
-
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){
+                        Intent intent = new Intent(ListView_Click.this, pl_need.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")){
                         Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(applyFlag.equals("Personal Loan")){
-
-                        Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(applyFlag.equals("none")) {
+                    }else {
                         Intent intent = new Intent(ListView_Click.this, MainActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
-
-
-
-
                 }else {
                     Intent intent = new Intent(this, signinPrepage.class);
                     startActivity(intent);
                     this.overridePendingTransition(R.transition.left, R.transition.right);
                 }
-
                 break;
         }
     }

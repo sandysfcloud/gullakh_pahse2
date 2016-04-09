@@ -11,30 +11,24 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class hl_need extends AppCompatActivity implements View.OnClickListener {
+public class pl_need extends AppCompatActivity implements View.OnClickListener {
 
-    private Spinner spinner,allotment;
-    private RadioGroup radioCityLimitGroup;
+    private Spinner spinner;
     Button next,back;
-    LinearLayout owners,cons,pop1,pop2,pop3,pop4,pop5,pop6;
-    private String catergory="";
-    EditText cost;
     private ContentValues contentValues;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hl_need);
+        setContentView(R.layout.activity_pl_need);
         contentValues=new ContentValues();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -60,6 +54,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                if(position!=0)
                 {
                     goToIntent();
                 }
@@ -72,15 +67,13 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         });
         List<String> categories = new ArrayList<String>();
         categories.add("Select");
-        categories.add("Purchase a plot");
-        categories.add("Construction of house on a plot");
-        categories.add("Purchase of plot & construction there on");
+        categories.add("Marriage");
+        categories.add("Vacations");
         categories.add("Home Renovation");
-        categories.add("Balance Transfer of existing home loan");
-        categories.add("Property is not yet identified");
-        categories.add("Purchase of a under construction builder flat");
-        categories.add("Refinance a property already purchased from own sources");
-        categories.add("Purchase a house/flat which is ready to move-in");
+        categories.add("Higher Education");
+        categories.add("Buying car/bike");
+        categories.add("Medical Emergency");
+        categories.add("Others");
 
         android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -99,7 +92,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                     goToIntent();
                 }
                 else {
-                    RegisterPageActivity.showErroralert(hl_need.this, "Select Loan for options", "failed");
+                    RegisterPageActivity.showErroralert(pl_need.this, "Select Loan for options", "failed");
                 }
                 break;
             case R.id.back:
@@ -109,46 +102,11 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void goToIntent()
-    {
-        hl_coappldetails.joint=0;
-        Intent intent;
-        setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
-        goToDatabase("Home Loan");
-        if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
-            intent = new Intent(hl_need.this, hl_need1.class);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(spinner.getSelectedItem().toString().equals("Construction of house on a plot")){
-            intent = new Intent(hl_need.this, hl_need2.class);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(spinner.getSelectedItem().toString().equals("Purchase of plot & construction there on")){
-            intent = new Intent(hl_need.this, hl_need3.class);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(spinner.getSelectedItem().toString().equals("Home Renovation")){
-            intent = new Intent(hl_need.this, hl_need4.class);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(spinner.getSelectedItem().toString().equals("Balance Transfer of existing home loan")){
-            intent = new Intent(hl_need.this, hl_need5.class);
-            startActivity(intent);
-        }else if(spinner.getSelectedItem().toString().equals("Purchase of a under construction builder flat")){
-            intent = new Intent(hl_need.this, hl_need6.class);
-            startActivity(intent);
-        }else if(spinner.getSelectedItem().toString().equals("Refinance a property already purchased from own sources")){
-            intent = new Intent(hl_need.this, hl_need7.class);
-            startActivity(intent);
-        }else if(spinner.getSelectedItem().toString().equals("Purchase a house/flat which is ready to move-in")){
-            intent = new Intent(hl_need.this, hl_need8.class);
-            startActivity(intent);
-        }else if(spinner.getSelectedItem().toString().equals("Property is not yet identified")){
-            intent = new Intent(hl_need.this, cl_car_residence_type.class);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
-        }
-
+    private void goToIntent() {
+        setDataToHashMap("you_need_loan_pl", spinner.getSelectedItem().toString());
+        goToDatabase("Personal Loan");
+        Intent intent =new Intent(this,cl_car_residence_type.class);
+        startActivity(intent);
     }
     private void goToDatabase(String loanType)
     {

@@ -169,7 +169,14 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
                     setDataToHashMap("sal_dep_to", dataBankType);
-                    goToDatabase("Car Loan");
+                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                        goToDatabase("Home Loan");
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                        goToDatabase("Personal Loan");
+
+                    }else{
+                        goToDatabase("Car Loan");
+                    }
 
                     intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                     startActivity(intent);

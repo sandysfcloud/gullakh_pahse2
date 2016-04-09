@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
     private EditText avgmninc,grossSal,annualBonus;
     private String singleCoappl="no";
     String no=null;
+    private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,18 +70,21 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
             grossSal.setText(net_mon_salary);
             annualBonus.setText(annual_bonus);
             avgmninc.setText(avg_monthly_incentives);
-        }else if(hl_city.user) {
+        }
+//        ------------------------------------------------------------------------
+        if(cl_car_salaried.user) {
+
             if (cl_car_global_data.dataWithAns.get("net_mon_salary") != null) {
                 String net_mon_salary = cl_car_global_data.dataWithAns.get("net_mon_salary");
                 String annual_bonus = cl_car_global_data.dataWithAns.get("annual_bonus");
                 String avg_monthly_incentives = cl_car_global_data.dataWithAns.get("avg_monthly_incentives");
-
+                Log.d("City user1", String.valueOf(cl_car_salaried.user));
                 grossSal.setText(net_mon_salary);
                 annualBonus.setText(annual_bonus);
                 avgmninc.setText(avg_monthly_incentives);
             }
         }
-
+//        --------------------------------------------------------------------------------
     }
     @Override
     public void onClick(View v) {
@@ -90,25 +95,23 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                 {
                     if (!annualBonus.getText().toString().equals("")) {
                         if (!avgmninc.getText().toString().equals("")) {
-                            if(hl_city.user){
-                                hl_city.user=false;
-                                setDataToHashMap("net_mon_salary",grossSal.getText().toString());
-                                setDataToHashMap("annual_bonus" ,annualBonus.getText().toString());
-                                setDataToHashMap("avg_monthly_incentives", grossSal.getText().toString());
+                            Log.d("City user2", String.valueOf(cl_car_salaried.user));
+                            if(cl_car_salaried.user){
+                                String sal = grossSal.getText().toString().replaceAll(",", "");
+                                String sal1 = annualBonus.getText().toString().replaceAll(",", "");
+                                String sal2 = avgmninc.getText().toString().replaceAll(",", "");
+
+                                setDataToHashMap("net_mon_salary",sal);
+                                setDataToHashMap("annual_bonus" ,sal1);
+                                setDataToHashMap("avg_monthly_incentives", sal2);
+                                goToDatabase("Home Loan");
+                                cl_car_salaried.user=false;
                             }else {
-                                if (no != null) {
-                                    setDataToHashMap("net_mon_salary" + no, grossSal.getText().toString());
-                                    setDataToHashMap("annual_bonus" + no, annualBonus.getText().toString());
-                                    setDataToHashMap("avg_monthly_incentives" + no, grossSal.getText().toString());
-
-                                } else {
-
-
-                                    setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());
-                                    setDataToHashMap("annual_bonus" + cl_car_global_data.numOfApp, annualBonus.getText().toString());
-                                    setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, grossSal.getText().toString());
-                                }
+                                setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());
+                                setDataToHashMap("annual_bonus" + cl_car_global_data.numOfApp, annualBonus.getText().toString());
+                                setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, grossSal.getText().toString());
                             }
+
                             if(cl_car_global_data.numOfApp>0&&hl_coappldetails.joint==1)
                             {Log.d("salaried2 is executed", "");
                                 Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
@@ -138,8 +141,14 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                     }
                                 }
                             }
+                        }else{
+                            RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter avg monthly incentives ", "failed");
                         }
+                    }else{
+                        RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter annual bonus?", "failed");
                     }
+                }else{
+                    RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter monthly gross salary?", "failed");
                 }
 
                 break;
@@ -166,8 +175,16 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
     public void setDataToHashMap(String Key,String data)
     {
         cl_car_global_data.dataWithAnscoapp.put(Key, data);
-        if(hl_city.user){
+        if(cl_car_salaried.user){
+            Log.d("Saving in old hash map", String.valueOf(cl_car_salaried.user));
             cl_car_global_data.dataWithAns.put(Key, data);
         }
+    }
+    private void goToDatabase(String loanType)
+    {
+        contentValues.put("loantype",loanType);
+        contentValues.put("questans", "hl_salaried2");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
     }
 }

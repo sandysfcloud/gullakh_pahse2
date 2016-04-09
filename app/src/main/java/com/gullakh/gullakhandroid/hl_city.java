@@ -37,12 +37,11 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
     JSONServerGet requestgetserver;
     String sessionid,data;
     private String propertyLocated="";
-static boolean user=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hl_city);
-        ListView_Click.applyFlag="none";
+        contentValues=new ContentValues();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
@@ -189,21 +188,21 @@ static boolean user=true;
     public void goToIntent(){
             System.gc();
             Log.d("property city is", propertyLocated);
+            goToDatabase("Home Loan");
             Intent intent = new Intent(this, hl_need.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
     }
 
-
-
-
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
     }
 
-
-
-
-
-
+    private void goToDatabase(String loanType)
+    {
+        contentValues.put("loantype",loanType);
+        contentValues.put("questans", "hl_city");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
+    }
 }

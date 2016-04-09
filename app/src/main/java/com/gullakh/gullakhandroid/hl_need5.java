@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,7 +18,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class hl_need5 extends AppCompatActivity implements View.OnClickListener {
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.util.Calendar;
+
+public class hl_need5 extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
 
     Button next,back;
     private RadioGroup radioGroup;
@@ -25,6 +30,9 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener 
     private EditText Text1,Text2,Text3;
     private CheckBox c1,c2,c3,c4,c5;
     public static int numOfAppl;
+    int day,month,yearv;
+    private String date="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +74,7 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener 
         Text2 = (EditText) findViewById(R.id.editText2);
         Text3 = (EditText) findViewById(R.id.editText3);
         Text1.addTextChangedListener(new NumberTextWatcher(Text1));
-        Text2.addTextChangedListener(new NumberTextWatcher(Text2));
+        Text2.setOnClickListener(this);
         Text3.addTextChangedListener(new NumberTextWatcher(Text3));
     }
 
@@ -111,7 +119,23 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener 
                 jointopt.setVisibility(View.VISIBLE);
                 break;
             case R.id.back:
+
                 finish();
+                break;
+            case R.id.editText2:
+                Calendar now = Calendar.getInstance();
+                now.set(now.get(Calendar.YEAR) - 18, now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH));
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                        hl_need5.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.setAccentColor(R.color.mdtp_background_color);
+                dpd.showYearPickerFirst(true);
+                dpd.setAccentColor(Color.parseColor("#FFE2041E"));
+                dpd.setTitle("DatePicker Title");
+                dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
         }
     }
@@ -136,6 +160,25 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener 
         }
         return count1+count2+count3+count4+count5;
     }
-
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+        if(dpd != null) dpd.setOnDateSetListener(this);
+    }
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        // date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        Log.d("Date",DateWithMMYY.formatMonth((monthOfYear))+"-"+year);
+        date = DateWithMMYY.formatMonth((monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        day=dayOfMonth;
+        month=++monthOfYear;
+        yearv=year;
+        Text2.setText(date);
+    }
+    public String getDate() {
+        return date;
+    }
 
 }

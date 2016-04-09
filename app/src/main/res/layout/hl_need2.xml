@@ -8,340 +8,348 @@
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
-<LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="visible"
-        android:id="@+id/ll2"
-    android:gravity="center"
-    android:layout_weight="1">
+        android:id="@+id/scrollView9"
+        android:layout_weight="1">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="#2cababab"
-            android:layout_marginTop="10dp"
-            android:weightSum="1">
+            android:layout_height="fill_parent"
+            android:visibility="visible"
+            android:id="@+id/ll2"
+        android:gravity="center"
+        android:layout_weight="1">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                app:typeface="robotoLight"
-                android:layout_width="200dp"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Cost of plot as per registry?"
-                android:id="@+id/textView26"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="10dp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/editText1"
-                android:background="@drawable/edittextsimple"
-                android:layout_marginRight="10dp"
-                android:hint="Rs.1,00,000"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/loan_amt"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="#2cababab"
-            android:layout_marginTop="10dp"
-            android:weightSum="1"
-            android:layout_gravity="center_horizontal">
-
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                app:typeface="robotoLight"
-                android:layout_width="200dp"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Current market value of plot (approx)?"
-                android:id="@+id/textView28"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="10dp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/editText2"
-                android:background="@drawable/edittextsimple"
-                android:layout_marginRight="10dp"
-                android:hint="Rs.1,00,000"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/loan_amt"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="#2cababab"
-            android:layout_marginTop="10dp"
-            android:weightSum="1"
-            android:layout_gravity="center_horizontal">
-
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                app:typeface="robotoLight"
-                android:layout_width="200dp"
-                android:layout_height="fill_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Cost of construction as per architect’s estimate?"
-                android:id="@+id/textView29"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/editText3"
-                android:background="@drawable/edittextsimple"
-                android:layout_marginRight="10dp"
-                android:hint="Rs.1,00,000"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/loan_amt"/>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="#2cababab"
-            android:layout_marginTop="10dp"
-            android:weightSum="1"
-            android:gravity="center">
-
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                app:typeface="robotoLight"
-                android:layout_width="204dp"
-                android:layout_height="60dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Is the building map approved by development authority?"
-                android:textColor="#000000"
-                android:textSize="16dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp" />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:id="@+id/radioGroup1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Yes"
-                    android:id="@+id/yes"
-                    android:checked="false"
-                    android:textSize="16dp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No"
-                    android:id="@+id/no"
-                    android:checked="false"
-                    android:textSize="16dp"
-                    android:layout_weight="0.13" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="#2cababab"
-            android:layout_marginTop="10dp"
-            android:weightSum="1">
-
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                app:typeface="robotoLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="City Limit"
-                android:id="@+id/textView24"
-                android:textColor="#000000"
-                android:textSize="16dp"
-                android:paddingLeft="10dp"
-                android:layout_weight="1" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:id="@+id/radioGroup2"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Inside"
-                    android:id="@+id/radioButton1"
-                    android:checked="false"
-                    android:textSize="16dp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Outside"
-                    android:id="@+id/radioButton2"
-                    android:checked="false"
-                    android:textSize="16dp"
-                    android:layout_weight="0.13"
-                    android:layout_marginRight="20dp" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="#2cababab"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal" >
-
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                app:typeface="robotoLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Proposed ownership?"
-                android:id="@+id/textView27"
-                android:textColor="#000000"
-                android:textSize="16dp"
-                android:gravity="left"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:layout_marginRight="5dp" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:weightSum="1"
-                android:id="@+id/radioGroup3"
+            <LinearLayout
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:background="#2cababab"
+                android:layout_marginTop="10dp"
+                android:weightSum="1">
 
-                <RadioButton
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
+                    android:layout_width="200dp"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Cost of plot as per registry?"
+                    android:id="@+id/textView26"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="10dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editText1"
+                    android:background="@drawable/edittextsimple"
+                    android:layout_marginRight="10dp"
+                    android:hint="Rs.1,00,000"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/loan_amt"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:background="#2cababab"
+                android:layout_marginTop="10dp"
+                android:weightSum="1"
+                android:layout_gravity="center_horizontal">
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
+                    android:layout_width="200dp"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Current market value of plot (approx)?"
+                    android:id="@+id/textView28"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="10dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editText2"
+                    android:background="@drawable/edittextsimple"
+                    android:layout_marginRight="10dp"
+                    android:hint="Rs.1,00,000"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/loan_amt"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:background="#2cababab"
+                android:layout_marginTop="10dp"
+                android:weightSum="1"
+                android:layout_gravity="center_horizontal">
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
+                    android:layout_width="200dp"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Cost of construction as per architect’s estimate?"
+                    android:id="@+id/textView29"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editText3"
+                    android:background="@drawable/edittextsimple"
+                    android:layout_marginRight="10dp"
+                    android:hint="Rs.1,00,000"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/loan_amt"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="#2cababab"
+                android:layout_marginTop="10dp"
+                android:weightSum="1"
+                android:gravity="center">
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
+                    android:layout_width="204dp"
+                    android:layout_height="60dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Is the building map approved by development authority?"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:id="@+id/radioGroup1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:id="@+id/yes"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:id="@+id/no"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:background="#2cababab"
+                android:layout_marginTop="10dp"
+                android:weightSum="1">
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Single"
-                    android:id="@+id/radioButton3"
-                    android:checked="false"
-                    android:textSize="18dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="City Limit"
+                    android:id="@+id/textView24"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    android:paddingLeft="10dp"
+                    android:layout_weight="1" />
 
-                <RadioButton
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Joint"
-                    android:id="@+id/radioButton4"
+                    android:weightSum="1"
+                    android:id="@+id/radioGroup2"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Inside"
+                        android:id="@+id/radioButton1"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outside"
+                        android:id="@+id/radioButton2"
+                        android:checked="false"
+                        android:textSize="16dp"
+                        android:layout_weight="0.13"
+                        android:layout_marginRight="20dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:background="#2cababab"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Proposed ownership?"
+                    android:id="@+id/textView27"
+                    android:textColor="#000000"
+                    android:textSize="16dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:layout_marginRight="5dp" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:id="@+id/radioGroup3"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Single"
+                        android:id="@+id/radioButton3"
+                        android:checked="false"
+                        android:textSize="18dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Joint"
+                        android:id="@+id/radioButton4"
+                        android:checked="false"
+                        android:textSize="18dp"
+                        android:layout_weight="0.13" />
+                </RadioGroup>
+            </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:id="@+id/joint">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:visibility="visible"
+                android:id="@+id/cons1"
+
+                android:background="#2cababab"
+                android:gravity="center_vertical">
+
+
+                <CheckBox
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Self"
+                    android:id="@+id/cself"
                     android:checked="false"
-                    android:textSize="18dp"
-                    android:layout_weight="0.13" />
-            </RadioGroup>
+                    android:textSize="16dp"
+                    android:gravity="center_vertical" />
+
+                <CheckBox
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Spouse"
+                    android:id="@+id/cspouse"
+                    android:checked="false"
+                    android:textSize="16dp"
+                    android:gravity="center_vertical" />
+                <CheckBox
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Father"
+                    android:id="@+id/cfathr"
+                    android:checked="false"
+                    android:textSize="16dp"
+                    android:gravity="center_vertical" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:visibility="visible"
+                android:id="@+id/cons2"
+
+                android:background="#2cababab"
+                android:gravity="center_vertical">
+
+
+                <CheckBox
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Mother"
+                    android:id="@+id/cmothr"
+                    android:checked="false"
+                    android:textSize="16dp"
+                    android:gravity="center_vertical" />
+                <CheckBox
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Brother"
+                    android:id="@+id/cbro"
+                    android:checked="false"
+                    android:textSize="16dp"
+                    android:gravity="center_vertical" />
+
+            </LinearLayout>
         </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:id="@+id/joint">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:visibility="visible"
-            android:id="@+id/cons1"
-
-            android:background="#2cababab"
-            android:gravity="center_vertical">
-
-
-            <CheckBox
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="self"
-                android:id="@+id/cself"
-                android:checked="false"
-                android:textSize="16dp"
-                android:gravity="center_vertical" />
-
-            <CheckBox
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Spouse"
-                android:id="@+id/cspouse"
-                android:checked="false"
-                android:textSize="16dp"
-                android:gravity="center_vertical" />
-            <CheckBox
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Father"
-                android:id="@+id/cfathr"
-                android:checked="false"
-                android:textSize="16dp"
-                android:gravity="center_vertical" />
-
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:visibility="visible"
-            android:id="@+id/cons2"
-
-            android:background="#2cababab"
-            android:gravity="center_vertical">
-
-
-            <CheckBox
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Mother"
-                android:id="@+id/cmothr"
-                android:checked="false"
-                android:textSize="16dp"
-                android:gravity="center_vertical" />
-            <CheckBox
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Brother"
-                android:id="@+id/cbro"
-                android:checked="false"
-                android:textSize="16dp"
-                android:gravity="center_vertical" />
-
-        </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/linearLayout3"

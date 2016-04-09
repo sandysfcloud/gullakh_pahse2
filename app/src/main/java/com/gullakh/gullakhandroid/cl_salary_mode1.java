@@ -104,15 +104,19 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                     RegisterPageActivity.showErroralert(cl_salary_mode1.this, "Select any one Options", "failed");
                 }else{
                     setDataToHashMap("sal_pay_option", dataSalDeposite);
-                    if(dataSalDeposite.equals("Bank")) {
-                        goToDatabase("Car Loan");
+                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                        goToDatabase("Home Loan");
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                        goToDatabase("Personal Loan");
 
+                    }else{
+                        goToDatabase("Car Loan");
+                    }
+                    if(dataSalDeposite.equals("Bank")) {
                         Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else{
-                        goToDatabase("Car Loan");
-
                         Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
