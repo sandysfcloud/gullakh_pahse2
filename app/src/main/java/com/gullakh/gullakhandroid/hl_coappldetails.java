@@ -230,13 +230,14 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                             }
 
                         }
-                    } else {
+                    }
+                }else {
                         setData("single");
                         Intent i = new Intent(this, cl_car_gender.class);
                         startActivity(i);
                     }
 
-                }
+
                 // }
                 break;
             case R.id.usermale:
