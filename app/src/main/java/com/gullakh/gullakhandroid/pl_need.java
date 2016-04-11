@@ -39,7 +39,7 @@ public class pl_need extends AppCompatActivity implements View.OnClickListener {
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Home Loan");
+        title.setText("Personal Loan");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -98,7 +98,11 @@ public class pl_need extends AppCompatActivity implements View.OnClickListener {
             case R.id.back:
                 finish();
                 break;
-
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+                break;
         }
     }
 

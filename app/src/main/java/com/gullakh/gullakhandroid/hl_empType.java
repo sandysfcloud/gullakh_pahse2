@@ -1,12 +1,17 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class hl_empType extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,7 +24,21 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hl_emp_type);
-
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView title = (TextView) v.findViewById(R.id.title);
+        ImageView close = (ImageView) v.findViewById(R.id.close);
+        ImageView review = (ImageView) v.findViewById(R.id.edit);
+        review.setVisibility(View.INVISIBLE);
+        close.setOnClickListener(this);
+        title.setText("Home Loan");
+        actionBar.setCustomView(v);
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);

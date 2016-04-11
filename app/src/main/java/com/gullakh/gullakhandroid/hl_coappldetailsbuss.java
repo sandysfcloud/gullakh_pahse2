@@ -49,7 +49,7 @@ String no;
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Self Employed Business");
+        title.setText("Home Loan");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -228,7 +228,7 @@ String no;
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

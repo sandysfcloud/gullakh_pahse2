@@ -59,7 +59,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Salaried");
+        title.setText("Home Loan");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -154,7 +154,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
             case R.id.next:
                 if(!Emp.getText().toString().matches("")) {
                     if (!Doj.getText().toString().matches("")) {
-                    if (!Expyr.getText().toString().matches("")) {
+                    if (!Expyr.getText().toString().matches("")||Expmn.getText().toString().matches("")) {
 
 
                         if (no != null) {

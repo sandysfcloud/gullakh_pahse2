@@ -49,7 +49,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#707070"
-            android:background="#2cababab"
+            android:background="#67d1d1d1"
             android:textSize="22dp"
             android:layout_marginTop="20dp" />
 
@@ -92,7 +92,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#707070"
-            android:background="#2cababab"
+            android:background="#67d1d1d1"
             android:layout_marginTop="20dp"
             android:textSize="22dp" />
 

@@ -34,7 +34,6 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
 
     Button next,back;
     int day,month,yearv;
-    private TextView heading1,heading2,heading3;
     private String date="";
     private EditText Expyr,Expmn;
     AutoCompleteTextView Emp;
@@ -152,35 +151,37 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
             case R.id.next:
                 if(!Emp.getText().toString().matches(""))
                 {
-                    if (!Doj.getText().toString().matches(""))
-                    {
-                        String EmpName = Emp.getText().toString();
-                        setDataToHashMap("name_of_current_emp", EmpName);
-                        String jdate = getDate();
-                        setDataToHashMap("year_you_joined_current_comp", jdate);
-                        setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
-                        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                            goToDatabase("Home Loan");
-                        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                            goToDatabase("Personal Loan");
+                    if (!Doj.getText().toString().matches("")) {
+                        if (!Expmn.getText().toString().matches("") || Expyr.getText().toString().matches("")) {
+                            String EmpName = Emp.getText().toString();
+                            setDataToHashMap("name_of_current_emp", EmpName);
+                            String jdate = getDate();
+                            setDataToHashMap("year_you_joined_current_comp", jdate);
+                            setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
+                            if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                goToDatabase("Home Loan");
+                            } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                goToDatabase("Personal Loan");
 
-                        }else{
-                            goToDatabase("Car Loan");
-                        }
-                        if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
-                        {
-                            Log.d("type of loan is",((GlobalData) getApplication()).getcartype());
-                            Intent intent2 = new Intent(this, hl_salaried2.class);
-                            startActivity(intent2);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                        }
-                        else {
-                            Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                        }
+                            } else {
+                                goToDatabase("Car Loan");
+                            }
+                            if (((GlobalData) getApplication()).getcartype().equals("Home Loan")) {
+                                Log.d("type of loan is", ((GlobalData) getApplication()).getcartype());
+                                Intent intent2 = new Intent(this, hl_salaried2.class);
+                                startActivity(intent2);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            } else {
+                                Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            }
 
-                    } else
+                        } else {
+                            RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");
+                        }
+                    }
+                        else
                     {
                         RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter date", "failed");
                     }

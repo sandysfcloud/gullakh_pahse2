@@ -75,7 +75,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         getDataFromHashMap();
         carmak = (AutoCompleteTextView) findViewById(R.id.OtherCar);
         carmak.setOnClickListener(this);
-       // getcarmake();
+        getcarmake();
     }
 
     private void getDataFromHashMap()
@@ -115,7 +115,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 }
                 final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_make.this, android.R.layout.simple_dropdown_item_1line, liste);
                 carmak.setAdapter(fAdapter);
-                dataCar=carmak.getText().toString();
+
 
                 Log.e("emplist frm server ", String.valueOf(liste));
 
@@ -142,7 +142,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.next:
-                if (dataCar.equals(""))
+                if (dataCar.equals("")&&carmak.getText().toString().equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
                 } else {
@@ -159,6 +159,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Maruti Alto";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase("Car Loan");
+                carmak.setText("");
                 goToIntent();
                 break;
             case R.id.ImageViewCar2:
@@ -169,6 +170,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Honda amaze";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase("Car Loan");
+                carmak.setText("");
                 goToIntent();
                 break;
             case R.id.ImageViewCar3:
@@ -179,6 +181,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Hundai eon";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase("Car Loan");
+                carmak.setText("");
                 goToIntent();
                 break;
             case R.id.ImageViewCar4:
@@ -189,6 +192,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 dataCar = "Maruti swift";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase("Car Loan");
+                carmak.setText("");
                 goToIntent();
                 break;
             case R.id.OtherCar:
@@ -196,7 +200,8 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car2.setImageResource(R.drawable.caramaze);
                 car3.setImageResource(R.drawable.careon);
                 car4.setImageResource(R.drawable.newcar);
-                getcarmake();
+
+                dataCar=carmak.getText().toString();
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

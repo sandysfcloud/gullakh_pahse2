@@ -119,8 +119,12 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
                 jointopt.setVisibility(View.VISIBLE);
                 break;
             case R.id.back:
-
                 finish();
+                break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
                 break;
             case R.id.editText2:
                 Calendar now = Calendar.getInstance();

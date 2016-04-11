@@ -54,7 +54,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         close.setOnClickListener(this);
 
         //  title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        title.setText("Residence");
+        title.setText("Property Location");
         actionBar.setCustomView(v);
 
         /*getSupportActionBar().setDisplayShowCustomEnabled(true);

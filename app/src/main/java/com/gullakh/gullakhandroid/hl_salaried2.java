@@ -27,6 +27,7 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hl_salaried2);
+        contentValues=new ContentValues();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         Intent i=getIntent();
@@ -109,7 +110,7 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                             }else {
                                 setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());
                                 setDataToHashMap("annual_bonus" + cl_car_global_data.numOfApp, annualBonus.getText().toString());
-                                setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, grossSal.getText().toString());
+                                setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, avgmninc.getText().toString());
                             }
 
                             if(cl_car_global_data.numOfApp>0&&hl_coappldetails.joint==1)
@@ -180,11 +181,11 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
             cl_car_global_data.dataWithAns.put(Key, data);
         }
     }
-    private void goToDatabase(String loanType)
+    private void goToDatabase(String loantype)
     {
-        contentValues.put("loantype",loanType);
+        contentValues.put("loantype",loantype);
         contentValues.put("questans", "hl_salaried2");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loantype), loantype);
     }
 }

@@ -48,7 +48,7 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Self Employed Professional ");
+        title.setText("Home Loan");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
