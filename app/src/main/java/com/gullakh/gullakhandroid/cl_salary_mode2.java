@@ -78,6 +78,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();
         }
+        getbanknam();
     }
     public void getbanknam()
     {
@@ -164,7 +165,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.next:
-                if(dataBankType.equals(""))
+                if(dataBankType.equals("")&&other.getText().toString().equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
@@ -184,6 +185,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             case R.id.ImageViewBank1:
+                other.setText("");
                 bank1.setImageResource(R.drawable.buttonselecteffect);
                 bank2.setImageResource(R.drawable.bankicici);
                 bank3.setImageResource(R.drawable.bankhdfc);
@@ -197,6 +199,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewBank2:
+                other.setText("");
                 bank1.setImageResource(R.drawable.bankaxis);
                 bank2.setImageResource(R.drawable.buttonselecteffect);
                 bank3.setImageResource(R.drawable.bankhdfc);
@@ -210,6 +213,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewBank3:
+                other.setText("");
                 bank1.setImageResource(R.drawable.bankaxis);
                 bank2.setImageResource(R.drawable.bankicici);
                 bank3.setImageResource(R.drawable.buttonselecteffect);
@@ -223,6 +227,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageViewBank4:
+                other.setText("");
                 bank1.setImageResource(R.drawable.bankaxis);
                 bank2.setImageResource(R.drawable.bankicici);
                 bank3.setImageResource(R.drawable.bankhdfc);
@@ -240,7 +245,6 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType=other.getText().toString();
-                getbanknam();
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

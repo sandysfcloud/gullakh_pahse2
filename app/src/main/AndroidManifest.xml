@@ -149,7 +149,6 @@
         <activity
             android:name=".cl_salary_mode1"
             android:label="Salary Deposited to" />
-        <activity android:name=".cl_car_recentsearch" />
         <activity
             android:name=".SearchAdapter"
             android:label="@string/title_activity_search_page" />

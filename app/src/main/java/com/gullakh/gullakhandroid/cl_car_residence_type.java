@@ -135,11 +135,11 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
             case R.id.next:
                 if(!spinner.getSelectedItem().toString().matches("Select"))
                 {
-                    if(currentCityyr.getText().toString().matches(""))
+                    if(currentCityyr.getText().toString().matches("")||currentCitymn.getText().toString().matches(""))
                     {
                         RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in current city ", "failed");
                     }else {
-                        if(currentResidenceyr.getText().toString().matches(""))
+                        if(currentResidenceyr.getText().toString().matches("")||currentResidencemn.getText().toString().matches(""))
                         {
                             RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence", "failed");
                         }else

@@ -240,7 +240,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

@@ -102,6 +102,11 @@ public class hl_need4 extends AppCompatActivity implements View.OnClickListener 
             case R.id.back:
                 finish();
                 break;
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+                break;
         }
     }
     public void setDataToHashMap(String key, String data) {

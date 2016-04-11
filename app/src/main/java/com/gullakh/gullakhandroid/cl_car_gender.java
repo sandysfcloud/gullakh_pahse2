@@ -449,6 +449,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 }
                 String carloantype = arrayLoantype.get("New Car Loan");
                 String homeloantype = arrayLoantype.get("Home Loan");
+                String personalloantype = arrayLoantype.get("Personal Loan");
                 // String emptype=((GlobalData) getApplication()).getemptype();
                 Log.d("carloantype homeloantype",carloantype+"  "+homeloantype);
                 if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
@@ -459,7 +460,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, homeloantype);
                 }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, carloantype);
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, personalloantype);
                 }
             }
         },cl_car_gender.this, "wait7");

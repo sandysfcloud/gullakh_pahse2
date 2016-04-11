@@ -90,6 +90,7 @@
                     android:layout_marginRight="10dp"
                     android:hint="May-16"
                     android:paddingLeft="10dp"
+                    android:focusableInTouchMode="false"
                     android:singleLine="true" />
             </LinearLayout>
 
