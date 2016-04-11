@@ -603,7 +603,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 }
                  loantype=arrayLoantype.get(((GlobalData) getApplication()).getcartype());
                // String emptype=((GlobalData) getApplication()).getemptype();
-                loantype="40x28";
+                //loantype="40x28";
                 requestgetserver.execute("token", "LoanParameterMaster", sessionid,loantype);
 
                 //
