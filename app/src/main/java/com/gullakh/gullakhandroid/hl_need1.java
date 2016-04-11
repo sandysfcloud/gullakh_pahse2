@@ -2,8 +2,8 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +32,7 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
     EditText Text1;
     public static int numOfAppl;
     private CheckBox c1,c2,c3,c4,c5;
+    String jointMembers="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +119,7 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
                             }else {
                                 setDataToHashMap("cost_of_property",Text1.getText().toString());
                                 setDataToHashMap("allotment_by",allotment.getSelectedItem().toString());
+                                setDataToHashMap("joint_acc",jointMembers);
                                 if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
                                     cl_car_global_data.totalno_coapp = getApplicants();
@@ -158,17 +160,25 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
 
     private int getApplicants() {
         int count1=0,count2=0,count3=0,count4=0,count5=0;
+        String jointMembers1="",jointMembers2="",jointMembers3="",jointMembers4="",jointMembers5="";
         if(c1.isChecked()){
             count1=1;
+            jointMembers1="Self;";
         } if(c2.isChecked()){
             count2=1;
+            jointMembers2="Spouse;";
         } if(c3.isChecked()){
             count3=1;
+            jointMembers3="Brother;";
         } if(c4.isChecked()){
             count4=1;
+            jointMembers4="Father;";
         } if(c5.isChecked()){
             count5=1;
+            jointMembers5="Mother;";
         }
+        jointMembers=jointMembers1+jointMembers2+jointMembers3+jointMembers4+jointMembers5;
+        Log.d("check data", "getApplicants() returned: " + jointMembers);
         return count1+count2+count3+count4+count5;
     }
 

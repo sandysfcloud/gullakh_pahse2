@@ -25,6 +25,7 @@ public class hl_need7 extends AppCompatActivity implements View.OnClickListener 
     private View jointopt;
     private int numOfAppl;
     private CheckBox c1,c2,c3,c4,c5;
+    private String jointMembers="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class hl_need7 extends AppCompatActivity implements View.OnClickListener 
                         RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
                     } else {
                         setDataToHashMap("cost_of_plot_reg", Text1.getText().toString());
+                        setDataToHashMap("joint_acc",jointMembers);
                         if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                             cl_car_global_data.numOfApp = getApplicants();
                             cl_car_global_data.totalno_coapp = getApplicants();
@@ -111,19 +113,27 @@ public class hl_need7 extends AppCompatActivity implements View.OnClickListener 
         Log.d(key, data);
         cl_car_global_data.dataWithAns.put(key, data);
     }
-    public int getApplicants() {
+    private int getApplicants() {
         int count1=0,count2=0,count3=0,count4=0,count5=0;
+        String jointMembers1="",jointMembers2="",jointMembers3="",jointMembers4="",jointMembers5="";
         if(c1.isChecked()){
             count1=1;
+            jointMembers1="Self;";
         } if(c2.isChecked()){
             count2=1;
+            jointMembers2="Spouse;";
         } if(c3.isChecked()){
             count3=1;
+            jointMembers3="Brother;";
         } if(c4.isChecked()){
             count4=1;
+            jointMembers4="Father;";
         } if(c5.isChecked()){
             count5=1;
+            jointMembers5="Mother;";
         }
+        jointMembers=jointMembers1+jointMembers2+jointMembers3+jointMembers4+jointMembers5;
+        Log.d("check data", "getApplicants() returned: " + jointMembers);
         return count1+count2+count3+count4+count5;
     }
 }

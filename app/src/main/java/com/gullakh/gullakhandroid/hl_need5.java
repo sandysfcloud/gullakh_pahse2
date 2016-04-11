@@ -32,6 +32,7 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
     public static int numOfAppl;
     int day,month,yearv;
     private String date="";
+    private String jointMembers="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,7 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
                                 setDataToHashMap("existing_home_loan_bank", Text1.getText().toString());
                                 setDataToHashMap("begin_of_existing_home_loan", Text2.getText().toString());
                                 setDataToHashMap("present_outstanding_bal_of_homeloan_you_wish_to_transfer", Text3.getText().toString());
+                                setDataToHashMap("joint_acc",jointMembers);
                                 if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
                                     cl_car_global_data.totalno_coapp = getApplicants();
@@ -149,19 +151,27 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
     }
 
 
-    public int getApplicants() {
+    private int getApplicants() {
         int count1=0,count2=0,count3=0,count4=0,count5=0;
+        String jointMembers1="",jointMembers2="",jointMembers3="",jointMembers4="",jointMembers5="";
         if(c1.isChecked()){
             count1=1;
+            jointMembers1="Self;";
         } if(c2.isChecked()){
             count2=1;
+            jointMembers2="Spouse;";
         } if(c3.isChecked()){
             count3=1;
+            jointMembers3="Brother;";
         } if(c4.isChecked()){
             count4=1;
+            jointMembers4="Father;";
         } if(c5.isChecked()){
             count5=1;
+            jointMembers5="Mother;";
         }
+        jointMembers=jointMembers1+jointMembers2+jointMembers3+jointMembers4+jointMembers5;
+        Log.d("check data", "getApplicants() returned: " + jointMembers);
         return count1+count2+count3+count4+count5;
     }
     @Override
