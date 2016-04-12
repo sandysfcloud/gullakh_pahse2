@@ -196,4 +196,8 @@
     <string name="title_activity_myapplication">Myapplication</string>
     <string name="thankyoufrongullakh">Thank You for your request ....\nWe shall be in touch with you soon to collect document...!!!</string>
     <string name="title_activity_edit_co_appli__home_loan">EditCoAppli_HomeLoan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_id">588436571304022</string>
 </resources>

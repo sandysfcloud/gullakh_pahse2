@@ -35,6 +35,8 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     public ArrayList<ListModel> data;
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
+    static boolean buttonApply=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -239,6 +241,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.Buttonapply:
+                buttonApply=true;
             Log.d("check loan type",((GlobalData)getApplication()).getcartype());
                     if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
                             ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
