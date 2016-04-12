@@ -87,7 +87,7 @@ public class pl_need extends AppCompatActivity implements View.OnClickListener {
     {
         switch (v.getId()) {
             case R.id.next:
-                if(!spinner.getSelectedItem().toString().equals("select"))
+                if(!spinner.getSelectedItem().toString().equals("Select"))
                 {
                     goToIntent();
                 }
