@@ -157,22 +157,17 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             case R.id.next:
                 if(((GlobalData) getApplication()).getemptype()!=null)
                    {
-                       if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                       Log.d("type of loan is",((GlobalData) getApplication()).getcartype());
+                       if(((GlobalData) getApplication()).getcartype().equals("Car Loan"))
                        {
-                           Log.d("type of loan is",((GlobalData) getApplication()).getcartype());
-                           Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                           startActivity(intent2);
-                           overridePendingTransition(R.transition.left, R.transition.right);
-                       }
-                       else if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
-                       {
-                           Log.d("type of loan is",((GlobalData) getApplication()).getcartype());
-                           Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                           startActivity(intent2);
-                           overridePendingTransition(R.transition.left, R.transition.right);
-                       }
-                       else {
                            intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                           startActivity(intent);
+                           overridePendingTransition(R.transition.left, R.transition.right);
+                       }
+
+                       else {
+
+                           intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
                            startActivity(intent);
                            overridePendingTransition(R.transition.left, R.transition.right);
                        }
@@ -212,22 +207,18 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                    if(((GlobalData) getApplication()).getcartype().equals("Car Loan"))
                     {
-                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                        startActivity(intent2);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
-                    {
-                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                        startActivity(intent2);
+                        intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                        startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
-                    else
-                    {
-                    intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                    else {
+
+                        intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
                     }
                 }
 
@@ -247,21 +238,16 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                    if(((GlobalData) getApplication()).getcartype().equals("Car Loan"))
                     {
-                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                        startActivity(intent2);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    else if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
-                    {
-                        ((GlobalData) getApplication()).setemptype("Salaried");
-                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                        startActivity(intent2);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    else {
                         intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+
+                    else {
+
+                        intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
@@ -280,21 +266,16 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 else {
-                    if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                    if(((GlobalData) getApplication()).getcartype().equals("Car Loan"))
                     {
-                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                        startActivity(intent2);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    else if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
-                    {
-                        ((GlobalData) getApplication()).setemptype("Salaried");
-                        Intent intent2 = new Intent(this, Loan_amt_questn.class);
-                        startActivity(intent2);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    else {
                         intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+
+                    else {
+
+                        intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TabHost;
@@ -53,6 +54,10 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         String fee = intent.getStringExtra("fee");
         String other = intent.getStringExtra("other");
         String docum = intent.getStringExtra("docum");
+
+
+
+
 
         Log.d("click docum ",docum);
 
@@ -121,6 +126,26 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         String one_time_fee_temp=String.valueOf(format.format(new BigDecimal(one_time_fee)));
         one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
         tprofee.setText(one_time_fee_temp);
+
+
+        ImageView mainimg= (ImageView) findViewById(R.id.searchimg);
+        if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
+        {
+            mainimg.setImageResource(R.drawable.personalloannew);
+        }
+
+
+        if(((GlobalData) getApplication()).getcartype().equals("Loan Against Property"))
+        {
+            mainimg.setImageResource(R.drawable.busineeloan);
+        }
+
+
+        if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+        {
+            mainimg.setImageResource(R.drawable.homeloan);
+        }
+
 
 
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);

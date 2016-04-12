@@ -138,12 +138,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         title = (TextView) v.findViewById(R.id.title);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
-        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        ImageView close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
 
 
@@ -191,7 +191,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             //nullpointer
             String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
             loan = loan.replaceAll("\\.00", "");
-           // loan = loan.replaceAll("Rs.", "");
+            // loan = loan.replaceAll("Rs.", "");
 
             loan_amt.setText("" + loan);
 
@@ -225,121 +225,130 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         }
                     });
 
-        }
+        } else if (data.equals("search")) {
 
-        else if (data.equals("search")) {
+
+           /* DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
+            Cursor crobj = dbobject.displayData("select * from userlogin");
+
+            if (crobj.moveToFirst()) {*/
+
+                setContentView(R.layout.seach_display);
+                layout = (LinearLayout) findViewById(R.id.linear);
+
+                DataHandler dh1 = new DataHandler(this);
+                Cursor cr = dh1.displayData("select * from mysearch");
+
+                try {
+                    if (cr.moveToFirst()) {
+                        Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2));
+                        while (cr.isAfterLast() == false) {
+                            ListModel sched = new ListModel();
+                            sched = new ListModel();
+                            sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                            sched.setsearchdate(cr.getString(4));
+                            sched.setserchcartyp(cr.getString(3));
+                            cr.moveToNext();
+                            searchlistviewArry.add(sched);
+
+
+                        }
+                    }
+                    else
+                        Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    System.out.println("error3 " + e.toString());
+                    dh1.cr.close();
+                    dh1.db.close();
+                } finally {
+
+                    dh1.cr.close();
+                    dh1.db.close();
+                }
+                createListView();
+                setsearchadapter(searchlistviewArry);
+
+
+            } /*else {
+
+                Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
+
+                title.setText("Search Result");
+            }*/
+
+         /*Log.e("You are not logged in", String.valueOf(0));
+                Intent intentsignin=new Intent(this,signinPrepage.class);
+                startActivity(intentsignin);
+                finish();*/
+
+
+
+
+        if (data.equals("myapplicatn")) {
 
 
             DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
             Cursor crobj = dbobject.displayData("select * from userlogin");
+            title.setText("My Application");
+            if (crobj.moveToFirst()) {
 
-                if (crobj.moveToFirst()) {
+                DataHandler dh1 = new DataHandler(this);
+                Cursor cr = dh1.displayData("select * from mysearch");
 
-                                setContentView(R.layout.seach_display);
-                                layout = (LinearLayout) findViewById(R.id.linear);
-
-                                DataHandler dh1 = new DataHandler(this);
-                                Cursor cr = dh1.displayData("select * from mysearch");
-
-                                try {
-                                    if (cr.moveToFirst()) {
-                                        Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2));
-                                        while (cr.isAfterLast() == false) {
-                                            ListModel sched = new ListModel();
-                                            sched = new ListModel();
-                                            sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                                            sched.setsearchdate(cr.getString(4));
-                                            sched.setserchcartyp(cr.getString(3));
-                                            cr.moveToNext();
-                                            searchlistviewArry.add(sched);
+                try {
+                    if (cr.moveToFirst()) {
 
 
-                                        }
+                        requestgetserver8 = new JSONServerGet(new AsyncResponse() {
+                            @Override
+                            public void processFinish(JSONObject output) {
+
+                            }
+
+                            public void processFinishString(String str_result, Dialog dg) {
+                                GsonBuilder gsonBuilder = new GsonBuilder();
+                                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                                Gson gson = gsonBuilder.create();
+
+                                JsonParser parser = new JsonParser();
+                                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                                Log.d("checkloandetailsinmyappl", String.valueOf(jsonObject.get("result")));
+                                dgthis = dg;
+
+                                loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails.class);
+                                ListModel sched = new ListModel();
+                                sched = new ListModel();
+                                if (!(jsonObject.get("result").toString() == null)) {
+                                    if (!jsonObject.get("result").toString().equals("null")) {
+                                        sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                                        sched.setappldate(loandetailsobj.getCreatedtime());
+                                        sched.setstatus(loandetailsobj.getStage());
+                                        sched.setLoancaseid(loandetailsobj.getLoanrequestcaseid());
+                                        sched.setContactid(loandetailsobj.getContactid());
+                                        sched.setD0(loandetailsobj.getD0());
+                                        sched.setD1(loandetailsobj.getD1());
+                                        sched.setD2(loandetailsobj.getD2());
+                                        sched.setD3(loandetailsobj.getD3());
+                                        sched.setD4(loandetailsobj.getD4());
+                                        sched.setD5(loandetailsobj.getD5());
+                                        sched.setD6(loandetailsobj.getD6());
+                                        sched.setCompletedpercentage(loandetailsobj.getsetCompletedpercentage());
+                                        sched.setLoan_amount(loandetailsobj.getLoan_amount());
+                                        sched.setBank_name(loandetailsobj.getBank_name());
+                                        sched.setLoan_type(loandetailsobj.getLoantype());
+                                        searchlistviewArry.add(sched);
+                                        createListView();
+                                        setapplicatnadapter(searchlistviewArry);
                                     }
-                                } catch (Exception e) {
-                                    System.out.println("error3 " + e.toString());
-                                    dh1.cr.close();
-                                    dh1.db.close();
-                                } finally {
+                                } else
+                                    Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Applications Found", Toast.LENGTH_LONG).show();
+                                dgthis.dismiss();
 
-                                    dh1.cr.close();
-                                    dh1.db.close();
-                                }
-                                createListView();
-                                setsearchadapter(searchlistviewArry);
+                            }
+                        }, GoogleCardsMediaActivity.this, "wait");
 
-
-            }else {
-                /*Log.e("You are not logged in", String.valueOf(0));
-                Intent intentsignin=new Intent(this,signinPrepage.class);
-                startActivity(intentsignin);
-                finish();*/
-                    Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
-
-                    title.setText("Search Result");
-            }
-
-
-
-
-        }
-
-      if (data.equals("myapplicatn")) {
-
-
-
-
-
-
-          requestgetserver8 = new JSONServerGet(new AsyncResponse() {
-              @Override
-              public void processFinish(JSONObject output) {
-
-              }
-
-              public void processFinishString(String str_result, Dialog dg) {
-                  GsonBuilder gsonBuilder = new GsonBuilder();
-                  gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-                  Gson gson = gsonBuilder.create();
-
-                  JsonParser parser = new JsonParser();
-                  JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                  Log.d("checkloandetailsinmyappl", String.valueOf(jsonObject.get("result")));
-                  dgthis = dg;
-
-                  loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails.class);
-                  ListModel sched = new ListModel();
-                  sched = new ListModel();
-                  if(!jsonObject.get("result").toString().equals("null")) {
-                      sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                      sched.setappldate(loandetailsobj.getCreatedtime());
-                      sched.setstatus(loandetailsobj.getStage());
-                      sched.setLoancaseid(loandetailsobj.getLoanrequestcaseid());
-                      sched.setContactid(loandetailsobj.getContactid());
-                      sched.setD0(loandetailsobj.getD0());
-                      sched.setD1(loandetailsobj.getD1());
-                      sched.setD2(loandetailsobj.getD2());
-                      sched.setD3(loandetailsobj.getD3());
-                      sched.setD4(loandetailsobj.getD4());
-                      sched.setD5(loandetailsobj.getD5());
-                      sched.setD6(loandetailsobj.getD6());
-                      sched.setCompletedpercentage(loandetailsobj.getsetCompletedpercentage());
-                      sched.setLoan_amount(loandetailsobj.getLoan_amount());
-                      sched.setBank_name(loandetailsobj.getBank_name());
-                      sched.setLoan_type(loandetailsobj.getLoantype());
-                      searchlistviewArry.add(sched);
-                      createListView();
-                      setapplicatnadapter(searchlistviewArry);
-                  }
-                  else
-                      Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Applications Found", Toast.LENGTH_LONG).show();
-                  dgthis.dismiss();
-
-              }
-          }, GoogleCardsMediaActivity.this, "wait");
-
-          DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
-          Cursor cre = dbobject.displayData("select * from userlogin");
+          DataHandler dbobj = new DataHandler(GoogleCardsMediaActivity.this);
+          Cursor cre = dbobj.displayData("select * from userlogin");
           String userid = null,contactid="";
           if(cre!=null) {
               if (cre.moveToFirst()) {
@@ -354,14 +363,32 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
           }
 
 
-          requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
+                        requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
 
-          setContentView(R.layout.seach_display);
-          layout = (LinearLayout) findViewById(R.id.linear);
+                        setContentView(R.layout.seach_display);
+                        layout = (LinearLayout) findViewById(R.id.linear);
 
+
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("error3 " + e.toString());
+                    dh1.cr.close();
+                    dh1.db.close();
+                } finally {
+
+                    dh1.cr.close();
+                    dh1.db.close();
+                }
 
 
             }
+            else
+            {
+                Toast.makeText(GoogleCardsMediaActivity.this, "Please login to view Application details!!!", Toast.LENGTH_LONG).show();
+            }
+
+        }
     }
 //*************************************************************************************End of Oncreate
 
@@ -862,6 +889,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
             }
             double bpd;
             if (seektenure != 0) {
+                Log.d("tenure value is changed", String.valueOf(seektenure));
                 tenr_amt.setText(String.valueOf(seektenure));
                 int seekmonth = seektenure * 12;
                 bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
@@ -1306,7 +1334,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 newCustomListViewValuesArr.clear();
                 //if(tenur.getText().toString()!)
                 if (tenur.getText() != null) {
-
+                    Log.d("tenur KK test!!!!!", String.valueOf(tenur.getText()));
                     if (seek_loanamt > 0 && seek_loanamt == prevloan) {
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
                     }
