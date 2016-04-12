@@ -188,10 +188,18 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
     public void goToIntent(){
             System.gc();
             Log.d("property city is", propertyLocated);
+        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+            goToDatabase("Loan against Property");
+            Intent intent = new Intent(this, pl_need.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else{
             goToDatabase("Home Loan");
             Intent intent = new Intent(this, hl_need.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
+        }
+
     }
 
     public void setDataToHashMap(String key, String data) {

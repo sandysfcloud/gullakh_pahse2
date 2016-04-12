@@ -163,10 +163,14 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                             } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                                 goToDatabase("Personal Loan");
 
-                            } else {
+                            } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                                goToDatabase("Loan Against Property");
+
+                            }else {
                                 goToDatabase("Car Loan");
                             }
-                            if (((GlobalData) getApplication()).getcartype().equals("Home Loan")) {
+                            if (((GlobalData) getApplication()).getcartype().equals("Home Loan") || ((GlobalData) getApplication()).getcartype().equals("Loan Against Property"))
+                            {
                                 Log.d("type of loan is", ((GlobalData) getApplication()).getcartype());
                                 Intent intent2 = new Intent(this, hl_salaried2.class);
                                 startActivity(intent2);

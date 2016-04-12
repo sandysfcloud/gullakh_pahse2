@@ -177,7 +177,7 @@
         <activity android:name=".hl_coappldetailsSal" />
         <activity android:name=".hl_coappldetailsbuss" />
         <activity android:name=".hl_coappldetailsProff" />
-        <activity android:name=".pl_need"></activity>
+        <activity android:name=".pl_need" />
         <!--
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -191,7 +191,8 @@
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider588436571304022"
             android:exported="true" />
-            -->
+        -->
+        <activity android:name=".lp_ownsh"></activity>
     </application>
 
 </manifest>

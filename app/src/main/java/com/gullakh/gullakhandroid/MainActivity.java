@@ -106,6 +106,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static GoogleCloudMessaging gcm;
     public static String regid;
+    private ImageView loanAgainstproperty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +181,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         persol = (ImageView) findViewById(R.id.persol);
         persol.setOnClickListener(this);
+
+        loanAgainstproperty = (ImageView) findViewById(R.id.busin);
+        loanAgainstproperty.setOnClickListener(this);
 
         signinbutton= (Button) findViewById(R.id.buttonSignin);
 
@@ -519,6 +523,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             case R.id.persol:
                 ((GlobalData) getApplication()).setcartype("Personal Loan");
+                intent = new Intent(MainActivity.this, cl_car_residence.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+                break;
+            case R.id.busin:
+                ((GlobalData) getApplication()).setcartype("Loan Against Property");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);

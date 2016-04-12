@@ -142,41 +142,54 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 values.put("contact_id", contactid);
                 dbobject.insertdata(values, "userlogin");
                 MainActivity.signinstate = true;
+                Intent intent;
                 if (((GlobalData) getApplication()).getcartype() != null) {
                     if (ListView_Click.buttonApply) {
-                        ListView_Click.buttonApply=false;
+                        ListView_Click.buttonApply = false;
+
                         if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan") ||
                                 ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")) {
-                            Intent intent = new Intent(signin.this, cl_car_make.class);
+                            intent = new Intent(signin.this, cl_car_make.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                            Intent intent = new Intent(signin.this, hl_city.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
-                            Intent intent = new Intent(signin.this, cl_car_make.class);
+                            intent = new Intent(signin.this, hl_city.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                            Intent intent = new Intent(signin.this, pl_need.class);
+                            intent = new Intent(signin.this, pl_need.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                            intent = new Intent(signin.this, hl_city.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        } else {
+                            intent = new Intent(signin.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         }
-                    }
-                    else {
-                        Intent intent = new Intent(signin.this, MainActivity.class);
+                    }else {
+                        intent = new Intent(signin.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
-                } else {
+                }
+                    else {
+                        intent = new Intent(signin.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+            }else {
                     RegisterPageActivity.showErroralert(signin.this, str_result.get("error_message").toString(), "error");
                 }
-            }else{
-                Intent intent = new Intent(signin.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

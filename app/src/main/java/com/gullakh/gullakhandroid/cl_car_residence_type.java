@@ -151,6 +151,8 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                                 goToDatabase("Home Loan");
                             }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                             goToDatabase("Personal Loan");
+                            }else  if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+                                goToDatabase("Loan against Property");
                             }else{
                                 goToDatabase("Car Loan");
                             }
@@ -165,8 +167,12 @@ public class cl_car_residence_type extends AppCompatActivity implements View.OnC
                             else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan"))
                             {
                             cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Personal Loan';");
+
+                            }else  if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property"))
+                            {
+                                cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Loan Against Property';");
                             }else{
-                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Personal Loan';");
+                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
                             }
                                 cr.moveToFirst();
                                 Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
