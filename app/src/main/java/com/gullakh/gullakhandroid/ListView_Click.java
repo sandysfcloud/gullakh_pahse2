@@ -255,28 +255,36 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                         storeData();
                         goToDatabase("Personal Loan");
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                        storeData();
+                        goToDatabase("Loan Against Property");
                     }
                 if(MainActivity.signinstate){
-
+                    Intent intent ;
                     if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
                             ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
-                        Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
+                        intent = new Intent(ListView_Click.this, cl_car_make.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
-                        Intent intent = new Intent(ListView_Click.this,hl_city.class);
+                        intent = new Intent(ListView_Click.this,hl_city.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){
-                        Intent intent = new Intent(ListView_Click.this, pl_need.class);
+                        intent = new Intent(ListView_Click.this, pl_need.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")){
-                        Intent intent = new Intent(ListView_Click.this, cl_car_make.class);
+                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")){
+                        intent = new Intent(ListView_Click.this, hl_city.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else {
-                        Intent intent = new Intent(ListView_Click.this, MainActivity.class);
+                        intent = new Intent(ListView_Click.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }

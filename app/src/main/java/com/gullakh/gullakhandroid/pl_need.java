@@ -108,9 +108,17 @@ public class pl_need extends AppCompatActivity implements View.OnClickListener {
 
     private void goToIntent() {
         setDataToHashMap("you_need_loan_pl", spinner.getSelectedItem().toString());
-        goToDatabase("Personal Loan");
-        Intent intent =new Intent(this,cl_car_residence_type.class);
-        startActivity(intent);
+        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+            goToDatabase("Loan Against Property");
+            Intent intent = new Intent(this, lp_ownsh.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else{
+            goToDatabase("Personal Loan");
+            Intent intent =new Intent(this,cl_car_residence_type.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
     }
     private void goToDatabase(String loanType)
     {

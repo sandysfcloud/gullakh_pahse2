@@ -105,7 +105,11 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                 setDataToHashMap("net_mon_salary",sal);
                                 setDataToHashMap("annual_bonus" ,sal1);
                                 setDataToHashMap("avg_monthly_incentives", sal2);
-                                goToDatabase("Home Loan");
+                                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                    goToDatabase("Home Loan");
+                                }else {
+                                    goToDatabase("Loan Against Property");
+                                }
                                 cl_car_salaried.user=false;
                             }else {
                                 setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());

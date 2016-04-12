@@ -207,6 +207,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                                         goToDatabase("mysearch","Home Loan");
                                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                                         goToDatabase("mysearch","Personal Loan");
+                                    } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+                                        goToDatabase("mysearch","Loan Against Property");
+
                                     }else{
                                         goToDatabase("mysearch","Car Loan");
                                     }
