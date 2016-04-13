@@ -190,7 +190,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.Submit:
-                if (firstName.getText().toString().equals("")) {
+
+                Intent intent = new Intent(cl_car_gender.this, coappldetail.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+               /* if (firstName.getText().toString().equals("")) {
                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
                 } else {
                     if (lastName.getText().toString().equals("")) {
@@ -221,7 +225,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         }
                     }
 
-                }
+                }*/
                 break;
             case R.id.usermale:
                 gen1.setImageResource(R.drawable.buttonselecteffect);

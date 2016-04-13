@@ -17,24 +17,24 @@ import android.widget.TextView;
 
 public class hl_salaried2 extends AppCompatActivity implements View.OnClickListener {
 
-    Button next,back;
-    private EditText avgmninc,grossSal,annualBonus;
-    private String singleCoappl="no";
-    String no=null;
+    Button next, back;
+    private EditText avgmninc, grossSal, annualBonus;
+    private String singleCoappl = "no";
+    String no = null;
     private ContentValues contentValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hl_salaried2);
-        contentValues=new ContentValues();
+        contentValues = new ContentValues();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
-        Intent i=getIntent();
-        if(i.getStringExtra("singleCoappl")!=null){
-            singleCoappl =i.getStringExtra("singleCoappl");
+        Intent i = getIntent();
+        if (i.getStringExtra("singleCoappl") != null) {
+            singleCoappl = i.getStringExtra("singleCoappl");
         }
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView title = (TextView) v.findViewById(R.id.title);
         ImageView close = (ImageView) v.findViewById(R.id.close);
@@ -59,21 +59,20 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         next.setOnClickListener(this);
 
 
-
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
             Log.d("salaried2 is executed no is", no);
-            String net_mon_salary= cl_car_global_data.dataWithAnscoapp.get("net_mon_salary"+no);
-            String annual_bonus= cl_car_global_data.dataWithAnscoapp.get("annual_bonus"+no);
-            String avg_monthly_incentives= cl_car_global_data.dataWithAnscoapp.get("avg_monthly_incentives"+no);
+            String net_mon_salary = cl_car_global_data.dataWithAnscoapp.get("net_mon_salary" );
+            String annual_bonus = cl_car_global_data.dataWithAnscoapp.get("annual_bonus" );
+            String avg_monthly_incentives = cl_car_global_data.dataWithAnscoapp.get("avg_monthly_incentives");
 
             grossSal.setText(net_mon_salary);
             annualBonus.setText(annual_bonus);
             avgmninc.setText(avg_monthly_incentives);
         }
 //        ------------------------------------------------------------------------
-        if(cl_car_salaried.user) {
+        if (cl_car_salaried.user) {
 
             if (cl_car_global_data.dataWithAns.get("net_mon_salary") != null) {
                 String net_mon_salary = cl_car_global_data.dataWithAns.get("net_mon_salary");
@@ -87,47 +86,54 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         }
 //        --------------------------------------------------------------------------------
     }
+
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.next:
-                if(!grossSal.getText().toString().equals(""))
-                {
+                if (!grossSal.getText().toString().equals("")) {
                     if (!annualBonus.getText().toString().equals("")) {
                         if (!avgmninc.getText().toString().equals("")) {
                             Log.d("City user2", String.valueOf(cl_car_salaried.user));
-                            if(cl_car_salaried.user){
+                            if (cl_car_salaried.user) {
                                 String sal = grossSal.getText().toString().replaceAll(",", "");
                                 String sal1 = annualBonus.getText().toString().replaceAll(",", "");
                                 String sal2 = avgmninc.getText().toString().replaceAll(",", "");
 
-                                setDataToHashMap("net_mon_salary",sal);
-                                setDataToHashMap("annual_bonus" ,sal1);
+                                setDataToHashMap("net_mon_salary", sal);
+                                setDataToHashMap("annual_bonus", sal1);
                                 setDataToHashMap("avg_monthly_incentives", sal2);
                                 if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
                                     goToDatabase("Home Loan");
-                                }else {
+                                } else {
                                     goToDatabase("Loan Against Property");
                                 }
-                                cl_car_salaried.user=false;
-                            }else {
+                                cl_car_salaried.user = false;
+                            } else {
                                 setDataToHashMap("net_mon_salary" + cl_car_global_data.numOfApp, grossSal.getText().toString());
                                 setDataToHashMap("annual_bonus" + cl_car_global_data.numOfApp, annualBonus.getText().toString());
                                 setDataToHashMap("avg_monthly_incentives" + cl_car_global_data.numOfApp, avgmninc.getText().toString());
                             }
 
-                            if(cl_car_global_data.numOfApp>0&&hl_coappldetails.joint==1)
-                            {Log.d("salaried2 is executed", "");
+                            if (cl_car_global_data.numOfApp > 0 && hl_coappldetails.joint == 1) {
+                                Log.d("salaried2 is executed", "");
                                 Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
-                                Intent i = new Intent(this, hl_coappldetails.class);
-                                i.putExtra("data", "joint");
-                                startActivity(i);
+                                // Intent i = new Intent(this, hl_coappldetails.class);
                                 cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
+                                Intent i = new Intent(this, coappldetail.class);
+                                i.putExtra("data", "joint");
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(i);
+
                                 Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
-                            }
-                            else {
-                                if (singleCoappl.equals("yes")) {
+                            } else {
+
+                                Intent intent = new Intent(this, cl_car_gender.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+
+                               /* if (singleCoappl.equals("yes")) {
                                     Intent intent = new Intent(this, cl_car_gender.class);
                                     startActivity(intent);
                                 } else {
@@ -141,18 +147,18 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                         startActivity(intent);
                                     }
                                     else {
-                                        Intent i = new Intent(this, hl_empType.class);
+                                      Intent i = new Intent(this, hl_empType.class);
                                         startActivity(i);
                                     }
-                                }
+                                }*/
                             }
-                        }else{
+                        } else {
                             RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter avg monthly incentives ", "failed");
                         }
-                    }else{
+                    } else {
                         RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter annual bonus?", "failed");
                     }
-                }else{
+                } else {
                     RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter monthly gross salary?", "failed");
                 }
 
@@ -177,17 +183,16 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void setDataToHashMap(String Key,String data)
-    {
+    public void setDataToHashMap(String Key, String data) {
         cl_car_global_data.dataWithAnscoapp.put(Key, data);
-        if(cl_car_salaried.user){
+        if (cl_car_salaried.user) {
             Log.d("Saving in old hash map", String.valueOf(cl_car_salaried.user));
             cl_car_global_data.dataWithAns.put(Key, data);
         }
     }
-    private void goToDatabase(String loantype)
-    {
-        contentValues.put("loantype",loantype);
+
+    private void goToDatabase(String loantype) {
+        contentValues.put("loantype", loantype);
         contentValues.put("questans", "hl_salaried2");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
         cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loantype), loantype);

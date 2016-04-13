@@ -1,0 +1,201 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgque"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.gullakh.gullakhandroid.coappldetail">
+    <com.gullakh.gullakhandroid.font.RobotoTextView
+        app:typeface="robotoLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="#4b4b4b"
+        android:text="Co Applicants"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+
+ />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-50dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/lfath"
+
+            android:layout_margin="10dp"
+            android:gravity="center"
+            >
+        <ImageView
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+
+        android:src="@drawable/coappimg"/>
+
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/fath"
+                android:textColor="#4b4b4b"
+                android:text="Father"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoButton
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/bfath"
+             android:padding="10dp"
+                android:background="#b8546e7a"
+                android:textColor="#ffffff"
+                android:drawableRight="@drawable/arrowright"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/lmoth"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+
+                android:src="@drawable/coappimg"/>
+
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/moth"
+                android:textColor="#4b4b4b"
+                android:text="Mother"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoButton
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/bmoth"
+                android:padding="10dp"
+                android:background="#b8546e7a"
+                android:textColor="#ffffff"
+                android:drawableRight="@drawable/arrowright"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:visibility="gone"
+            android:id="@+id/lbro"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+
+                android:src="@drawable/coappimg"/>
+
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/bro"
+                android:textColor="#4b4b4b"
+                android:text="Brother"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoButton
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/bbro"
+                android:padding="10dp"
+                android:background="#b8546e7a"
+                android:textColor="#ffffff"
+                android:drawableRight="@drawable/arrowright"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:id="@+id/lspou"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+
+                android:src="@drawable/coappimg"/>
+
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/spou"
+                android:textColor="#4b4b4b"
+                android:text="Spouse"
+                />
+
+            <com.gullakh.gullakhandroid.font.RobotoButton
+                app:typeface="robotoLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/bspous"
+                android:padding="10dp"
+                android:background="#b8546e7a"
+                android:textColor="#ffffff"
+                android:drawableRight="@drawable/arrowright"
+                android:textAllCaps="false"
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

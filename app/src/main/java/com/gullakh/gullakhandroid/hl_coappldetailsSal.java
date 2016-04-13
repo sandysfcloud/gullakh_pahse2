@@ -84,7 +84,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         if (no != null) {
             Log.d("no got frm intent T", no);
             if (cl_car_global_data.dataWithAnscoapp.get("co_employeenam" + no) != null) {
-                String co_empnam = cl_car_global_data.dataWithAnscoapp.get("co_employeenam" + no);
+                /*String co_empnam = cl_car_global_data.dataWithAnscoapp.get("co_employeenam" + no);
                 String co_empdate = cl_car_global_data.dataWithAnscoapp.get("co_employeedate" + no);
                 String co_empexpyr = cl_car_global_data.dataWithAnscoapp.get("co_employeedexpyear" + no);
                 String co_empexpmon = cl_car_global_data.dataWithAnscoapp.get("co_employeedexpmon" + no);
@@ -93,7 +93,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                 Emp.setText(co_empnam);
                 Doj.setText(co_empdate);
                 Expyr.setText(co_empexpyr);
-                Expmn.setText(co_empexpmon);
+                Expmn.setText(co_empexpmon);*/
 
             }
         }
@@ -158,10 +158,10 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
 
                         if (no != null) {
-                            setDataToHashMap("co_employeenam" + no,  Emp.getText().toString());
-                            setDataToHashMap("co_employeedate" + no, getDate());
-                            setDataToHashMap("co_employeedexpyear" + no, Expyr.getText().toString());
-                            setDataToHashMap("co_employeedexpmon" + no,Expmn.getText().toString());
+                            setDataToHashMap("co_employeenam" ,  Emp.getText().toString());
+                            setDataToHashMap("co_employeedate" , getDate());
+                            setDataToHashMap("co_employeedexpyear", Expyr.getText().toString());
+                            setDataToHashMap("co_employeedexpmon" ,Expmn.getText().toString());
                             Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                         }
 

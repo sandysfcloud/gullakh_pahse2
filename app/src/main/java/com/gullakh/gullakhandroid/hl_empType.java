@@ -19,7 +19,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
     String data;
     Button next, back;
     String co_emp = null;
-    String no=null;
+    String hashno=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +51,21 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
         prof = (ImageView) findViewById(R.id.prof);
         prof.setOnClickListener(this);
 
-        Intent intent = getIntent();
-        no = intent.getStringExtra("no");
-        if (no != null) {
 
-           String emptyp= cl_car_global_data.dataWithAnscoapp.get("co_employment_type"+no);
+
+
+        //coapplicant working details
+
+        Intent intent = getIntent();
+        hashno = intent.getStringExtra("hashno");
+        if (hashno != null) {
+
+
+
+
+
+
+           /*String emptyp= cl_car_global_data.dataWithAnscoapp.get("co_employment_type"+no);
             Log.d("EDITED check emp data", String.valueOf(cl_car_global_data.dataWithAnscoapp));
             co_emp=emptyp;
            // Log.d("employee typ is KK",emptyp);
@@ -67,7 +77,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
                 } else if (emptyp.equals("self employed business")) {
                     self.setImageResource(R.drawable.buttonselecteffect);
                 }
-            }
+            }*/
         }
 
 
@@ -131,22 +141,20 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
     public void intentcall()
     {
         if(co_emp!=null) {
-            if (no != null) {
-                Log.d("no is  feom edit is",no);
+
                 Log.d("emp typ in click",co_emp);
-                setDataToHashMap("co_employment_type" +no, co_emp);
+                setDataToHashMap("co_employment_type", co_emp);
 
 
-            }
-            else
-            setDataToHashMap("co_employment_type" + cl_car_global_data.numOfApp, co_emp);
+           // else
+            //setDataToHashMap("co_employment_type" + cl_car_global_data.numOfApp, co_emp);
             Log.d("check here KK", String.valueOf(cl_car_global_data.dataWithAnscoapp));
             Intent intent;
             if(co_emp.equals("salaried"))
             {
                 Log.d("salaried class T", "");
                 intent=new Intent(this,hl_coappldetailsSal.class);
-                intent.putExtra("no", no);
+                intent.putExtra("no", hashno);
                 startActivity(intent);
 
             }
@@ -155,7 +163,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
             {
                 Log.d("self employed professional class T", "");
                 intent=new Intent(this,hl_coappldetailsProff.class);
-                intent.putExtra("no", no);
+                intent.putExtra("no", hashno);
                 startActivity(intent);
 
             }
@@ -163,7 +171,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
             {
                 Log.d("self employed business class T", "");
                 intent=new Intent(this,hl_coappldetailsbuss.class);
-                intent.putExtra("no", no);
+                intent.putExtra("no", hashno);
                 startActivity(intent);
 
             }

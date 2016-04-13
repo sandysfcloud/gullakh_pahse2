@@ -27,6 +27,7 @@ public class cl_car_global_data
     static ArrayList<String> data = new ArrayList<String>();
     static HashMap<String,String> dataWithAns=new HashMap<String,String>();
     static HashMap<String,String> dataWithAnscoapp=new HashMap<String,String>();
+    static HashMap<String,String> allcoappdetail=new HashMap<String,String>();
 
     static String getAllValuePrintedHashMap()
     {
