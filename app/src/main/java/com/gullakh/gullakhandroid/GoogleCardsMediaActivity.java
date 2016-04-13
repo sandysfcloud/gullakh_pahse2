@@ -318,7 +318,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails.class);
                                 ListModel sched = new ListModel();
                                 sched = new ListModel();
-                                if (!(jsonObject.get("result").toString() == null)) {
+                                if ((jsonObject.get("result").toString() != null)) {
                                     if (!jsonObject.get("result").toString().equals("null")) {
                                         sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
                                         sched.setappldate(loandetailsobj.getCreatedtime());
@@ -339,7 +339,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                         searchlistviewArry.add(sched);
                                         createListView();
                                         setapplicatnadapter(searchlistviewArry);
-                                    }
+                                  }
                                 } else
                                     Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Applications Found", Toast.LENGTH_LONG).show();
                                 dgthis.dismiss();

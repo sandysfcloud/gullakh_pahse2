@@ -527,12 +527,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
-            case R.id.busin:
-                ((GlobalData) getApplication()).setcartype("Loan Against Property");
-                intent = new Intent(MainActivity.this, cl_car_residence.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-                break;
             case R.id.buttonSignin:
                 intent = new Intent(MainActivity.this, signinPrepage.class);
                 startActivity(intent);

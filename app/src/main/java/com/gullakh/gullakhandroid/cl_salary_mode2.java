@@ -174,7 +174,6 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                         goToDatabase("Home Loan");
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                         goToDatabase("Personal Loan");
-
                     }else{
                         goToDatabase("Car Loan");
                     }
