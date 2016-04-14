@@ -129,7 +129,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_residence_type"
-            android:label="Select Residence" />
+            android:label="Select Residence"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_salaried"
             android:label="Salaried" />
@@ -192,6 +193,11 @@
             android:exported="true" />
         -->
         <activity android:name=".lp_ownsh" />
+        <activity
+            android:name=".coappldetail"
+            android:label="@string/title_activity_coappldetail" >
+        </activity>
+        <!--<activity android:name=".lp_ownsh" />-->
         <activity android:name=".lp_bal_tranf" />
         <activity android:name=".lp_bal_tranf_yes"></activity>
     </application>

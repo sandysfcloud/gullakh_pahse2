@@ -33,7 +33,6 @@ public class GlobalData extends MultiDexApplication {
     static final String SERVER_GET_URLIMage ="http://54.200.200.39/gullakh_portal/";
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice_new.php";
     static final String SERVER_GET_URL_web ="http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_contact_id";
-    private String cartypeloan;
 
 //*****************CarLoan********************//
 
@@ -188,11 +187,7 @@ public class GlobalData extends MultiDexApplication {
     }
 
 
-    public void setCartypeloan(String cartypeloan) {
-        this.cartypeloan = cartypeloan;
-    }
 
-    public String getCartypeloan() {
-        return cartypeloan;
-    }
+
+
 }

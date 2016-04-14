@@ -181,7 +181,9 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
                             {
                                 goToDatabase("Home Loan");
                                 if(cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("Single")){
+                                   // Intent intent = new Intent(this, hl_coappldetails.class);
                                     Intent intent = new Intent(this, hl_coappldetails.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                 }else{
                                     Intent i=new Intent(this,hl_empType.class);

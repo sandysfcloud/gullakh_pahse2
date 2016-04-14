@@ -116,9 +116,9 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
                             if (radioGroup2.getCheckedRadioButtonId() == -1){
                                 RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
                             }else {
-                                setDataToHashMap("cost_of_property",Text1.getText().toString());
-                                setDataToHashMap("allotment_by",allotment.getSelectedItem().toString());
-                                setDataToHashMap("joint_acc",jointMembers);
+                                setDataToHashMap("cost_of_property", Text1.getText().toString());
+                                setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
+
                                 if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
                                     cl_car_global_data.totalno_coapp = getApplicants();
@@ -178,6 +178,7 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         }
         jointMembers=jointMembers1+jointMembers2+jointMembers3+jointMembers4+jointMembers5;
         Log.d("check data", "getApplicants() returned: " + jointMembers);
+        setDataToHashMap("joint_acc", jointMembers);
         return count1+count2+count3+count4+count5;
     }
 
