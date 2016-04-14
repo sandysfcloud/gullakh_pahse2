@@ -12,8 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,11 +42,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
 
-
-
-
         //********************changing actionbar
-
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
@@ -60,7 +54,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Net Salary");
+        titl.setText("My Net Monthly Salary Is");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();
@@ -68,17 +62,12 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
-
-//**********
-
        // review = (ImageView) findViewById(R.id.review);
         //review.setOnClickListener(this);
 
         sal = (EditText) findViewById(R.id.netsalary);
         sal.setSelection(sal.getText().length());
-
         sal.addTextChangedListener(new NumberTextWatcher(sal));
-
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
@@ -133,76 +122,49 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                     Log.d("loan KK2", sald);
                     try {
                         mSeekArc.setProgress(Integer.valueOf(sald) / 50000);
-
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
 
                     }
                 }
-
             }
         });
-
         mSeekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener()
 
         {
-
             @Override
             public void onStopTrackingTouch(SeekArc seekArc) {
             }
-
             @Override
             public void onStartTrackingTouch(SeekArc seekArc) {
             }
-
             @Override
             public void onProgressChanged(SeekArc seekArc, int progress,
                                           boolean fromUser) {
-
               //  progress = (progress + 4) * 5000;
                 progress = (progress + 1) * 50000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-
-
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
-
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
-
-
                 mSeekArcProgress.setText(strtemp);
-
                 if(fromUser)
                 sal.setText(String.valueOf(progress));
-
-
             }
         });
-
-
         Button bdone = (Button) findViewById(R.id.done);
         bdone.setOnClickListener(this);
         LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
         Intent intent2 = getIntent();
         String data = intent2.getStringExtra("review");
         if (data != null) {
             if (data.equals("review")) {
-                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
                 footer.setVisibility(View.GONE);
                 done.setVisibility(View.VISIBLE);
                 // review.setVisibility(View.INVISIBLE);
-
             }
         }
-
-
-
     }
-    public void onShakeImage() {
-        Animation shake;
-        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -224,7 +186,6 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.done:
                 finish();
-
                 break;
             case R.id.edit:
                 RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,5);
@@ -233,7 +194,6 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
-
                 break;
 //            case R.id.done:
 //                if(Float.parseFloat(sal.getText().toString()) > 3000) {
@@ -254,24 +214,17 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                         Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    else
-                    {
+                    }else {
                         RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
                     }
-                }
-                else
-                {
+                }else {
                     RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Please enter your manthly salary", "failed");
                 }
-
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
                 break;
-
-
         }
 
     }

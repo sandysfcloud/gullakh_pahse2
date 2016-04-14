@@ -82,7 +82,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         close.setOnClickListener(this);
 
         //  title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        title.setText("Residence");
+        title.setText("I Reside In");
         actionBar.setCustomView(v);
 
         /*getSupportActionBar().setDisplayShowCustomEnabled(true);

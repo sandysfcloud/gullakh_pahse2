@@ -8,21 +8,11 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    android:layout_weight="1">
-    [24/03/16 7:32:49 pm] Chetan Nandre: <com.gullakh.gullakhandroid.font.RobotoTextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Employment Type"
-    android:id="@+id/empt"
-    android:gravity="center_horizontal"
-    android:textColor="#000"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="15dp"
-    android:textSize="18dp"
-    app:typeface="robotoLight"/>
+    android:layout_weight="1"
+    android:gravity="center">
+    [24/03/16 7:32:49 pm] Chetan Nandre:
 
 
     <ImageView
@@ -35,12 +25,11 @@
     <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center"
         android:textSize="16dp"
         android:id="@+id/t1"
         android:textColor="#000"
-        android:text="Salaried"
+        android:text="Salaried Individual"
         android:layout_marginBottom="10dp"
         app:typeface="robotoLight"
         />
@@ -55,7 +44,6 @@
     <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center"
         android:textSize="16dp"
         android:id="@+id/t2"
@@ -125,7 +113,7 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="#b8546e7a" >
+        android:background="#b8546e7a">
 
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"

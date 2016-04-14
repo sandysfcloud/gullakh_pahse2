@@ -628,8 +628,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 for (int i = 0; i < LT_cobj.length; i++) {
                     arrayLoantype.put(LT_cobj[i].gettypename(),LT_cobj[i].gettypeid());
                 }
-                 loantype=arrayLoantype.get(((GlobalData) getApplication()).getcartype());
-               // String emptype=((GlobalData) getApplication()).getemptype();
+                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
+                    loantype = arrayLoantype.get(((GlobalData) getApplication()).getCartypeloan());
+                }else {
+                    loantype = arrayLoantype.get(((GlobalData) getApplication()).getcartype());
+                }
+                 // String emptype=((GlobalData) getApplication()).getemptype();
                 //loantype="40x28";
                 requestgetserver.execute("token", "LoanParameterMaster", sessionid,loantype);
 

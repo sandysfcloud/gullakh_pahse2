@@ -208,14 +208,14 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                 now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_salaried.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
+                        2000,
+                        00,
+                        01
                 );
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                dpd.setTitle("DatePicker Title");
+                //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
 
@@ -230,9 +230,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-       // date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        Log.d("Date",DateWithMMYY.formatMonth((monthOfYear))+"-"+year);
-        date = DateWithMMYY.formatMonth((monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        date = dayOfMonth+"-"+DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

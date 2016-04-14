@@ -2,8 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
@@ -31,53 +29,55 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp">
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/home"
-                android:layout_weight="1">
-
-                <AutoCompleteTextView
-                    android:focusable="true"
-                    android:nextFocusForward="@+id/currentCitymn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ex:5 years"
-                    android:inputType="number"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:id="@+id/currentCityyr"
-                    android:textColor="#3f3f3f"
-                    android:textSize="15sp" />
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Ex:5 months"
+                    android:imeOptions="actionNext"
+                    android:nextFocusRight="@+id/currentCitymn"
+                    android:singleLine="true"/>
             </com.gullakh.gullakhandroid.MaterialTextField>
-
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/home"
-                android:layout_weight="1">
-
-                <AutoCompleteTextView
-                    android:nextFocusDown="@+id/currentResidenceyr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ex:5 months"
-                    android:inputType="number"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:id="@+id/currentCitymn"
-                    android:textColor="#3f3f3f"
-                    android:textSize="15sp"
-                    android:singleLine="true" />
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:layout_gravity="center_horizontal"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@+id/currentResidencemn"
+                    android:hint="Ex:5 months"
+                    android:singleLine="true"/>
             </com.gullakh.gullakhandroid.MaterialTextField>
+
+
+
         </LinearLayout>
 
 
@@ -93,7 +93,8 @@
             android:textSize="22dp"
             android:gravity="center"
             android:background="#67d1d1d1"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
 
         <Spinner
             android:layout_width="300dp"
@@ -103,7 +104,8 @@
             android:layout_gravity="center_horizontal"
             android:dropDownSelector="#c2c2c2"
             android:dropDownWidth="match_parent"
-            android:background="@drawable/edittextsimple" />
+            android:background="@drawable/edittextsimple"
+            android:layout_marginBottom="10dp" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -117,58 +119,57 @@
             android:gravity="center"
             android:textSize="22dp"
             android:background="#67d1d1d1"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/home"
-                android:layout_weight="1">
-
-                <AutoCompleteTextView
-                    android:nextFocusDown="@+id/currentResidencemn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ex:5 years"
-                    android:inputType="number"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
                     android:id="@+id/currentResidenceyr"
-                    android:textColor="#3f3f3f"
-                    android:textSize="15sp"
-                    android:singleLine="true" />
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Ex:5 months"
+                    android:imeOptions="actionNext"
+                    android:nextFocusRight="@+id/currentResidencemn"
+                    android:singleLine="true"/>
             </com.gullakh.gullakhandroid.MaterialTextField>
-
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:focusable="false"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/home"
-                android:layout_weight="1">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ex:5 months"
-                    android:inputType="number"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
                     android:id="@+id/currentResidencemn"
-                    android:textColor="#000"
-                    android:textSize="15sp"
-                    android:singleLine="true" />
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Ex:5 months"
+                    android:singleLine="true"/>
             </com.gullakh.gullakhandroid.MaterialTextField>
+
         </LinearLayout>
     </LinearLayout>
     <LinearLayout

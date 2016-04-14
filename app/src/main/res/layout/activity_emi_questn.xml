@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
             <FrameLayout
                 android:id="@+id/seekArcContainer"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
                 >
@@ -29,7 +29,7 @@
                 <com.gullakh.gullakhandroid.SeekArc
                     android:id="@+id/seekArc"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="250dp"
                     android:layout_gravity="center"
                     android:padding="30dp"
                     seekarc:arcColor="@color/main_color_500"
@@ -58,7 +58,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Total EMIs you pay"
                     android:layout_marginTop="75dp"
                     android:textColor="@color/main_color_500"
                     android:textSize="20sp"
@@ -109,8 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:background="#b8546e7a"
-        android:visibility="gone"
-        android:layout_weight="1">
+        android:visibility="gone">
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -134,8 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="#b8546e7a"
-        android:layout_gravity="center_horizontal"
-        >
+        android:layout_gravity="center_horizontal">
 
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"

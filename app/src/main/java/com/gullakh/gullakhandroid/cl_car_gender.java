@@ -450,20 +450,27 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 for (int i = 0; i < LT.length; i++) {
                     arrayLoantype.put(LT[i].gettypename(),LT[i].gettypeid());
                 }
-                String carloantype = arrayLoantype.get("New Car Loan");
+
                 String homeloantype = arrayLoantype.get("Home Loan");
                 String personalloantype = arrayLoantype.get("Personal Loan");
+                String loanagainstpropertytype = arrayLoantype.get("Loan Against Property");
                 // String emptype=((GlobalData) getApplication()).getemptype();
-                Log.d("carloantype homeloantype",carloantype+"  "+homeloantype);
-                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
-                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")  )
-                {
+                Log.d("hol pl lap", homeloantype + personalloantype + loanagainstpropertytype);
+                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
+                    String carloantype;
+                    if (((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("New Car Loan")){
+                        carloantype = arrayLoantype.get("New Car Loan");
+                    }else{
+                        carloantype = arrayLoantype.get("Used Car Loan");
+                    }
+                    Log.d("car",carloantype);
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, carloantype);
-                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan"))
-                {
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, homeloantype);
                 }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, personalloantype);
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanagainstpropertytype);
                 }
             }
         },cl_car_gender.this, "wait7");

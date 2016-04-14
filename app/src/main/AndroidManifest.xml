@@ -129,8 +129,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_residence_type"
-            android:label="Select Residence"
-            android:windowSoftInputMode="stateHidden" />
+            android:label="Select Residence" />
         <activity
             android:name=".cl_car_salaried"
             android:label="Salaried" />
@@ -192,7 +191,9 @@
             android:authorities="com.facebook.app.FacebookContentProvider588436571304022"
             android:exported="true" />
         -->
-        <activity android:name=".lp_ownsh"></activity>
+        <activity android:name=".lp_ownsh" />
+        <activity android:name=".lp_bal_tranf" />
+        <activity android:name=".lp_bal_tranf_yes"></activity>
     </application>
 
 </manifest>

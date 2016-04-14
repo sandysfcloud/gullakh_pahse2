@@ -24,7 +24,8 @@
             android:layout_height="65dp"
             android:gravity="center"
             android:background="#2cababab"
-            android:layout_marginTop="20dp" >
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
@@ -51,7 +52,9 @@
             android:layout_gravity="center_horizontal"
             android:hint="Rs.1,00,000"
             android:paddingLeft="10dp"
-            android:drawableLeft="@drawable/loan_amt"/>
+            android:drawableLeft="@drawable/loan_amt"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -59,8 +62,9 @@
             android:layout_height="65dp"
             android:gravity="center"
             android:background="#2cababab"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal" >
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
@@ -105,8 +109,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:visibility="invisible"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:id="@+id/joint">
 
             <LinearLayout

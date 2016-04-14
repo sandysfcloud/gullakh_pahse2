@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".cl_car_salaried"
     android:background="@drawable/bgque"
@@ -16,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:gravity="center_horizontal">
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -31,29 +30,26 @@
             android:gravity="center"
             android:textColor="#707070"
             android:textSize="22dp" />
-
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:focusable="false"
-            android:layout_marginRight="4dp"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/companyname">
-
             <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="text"
                 android:id="@+id/salEmpname"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                android:singleLine="true" />
-        </com.gullakh.gullakhandroid.MaterialTextField>
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/saljoindateofempyr"
+                android:singleLine="true"
+                android:hint="Ex- SAP" />
 
-
+    </com.gullakh.gullakhandroid.MaterialTextField>
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
@@ -67,31 +63,29 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textColor="#707070"
-            android:layout_marginTop="10dp"
-            android:textSize="22dp" />
-
+            android:textSize="22dp"
+            android:layout_marginTop="10dp" />
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:focusable="false"
             android:layout_marginRight="4dp"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/companyname">
-
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:inputType="text"
-                android:focusableInTouchMode="false"
                 android:id="@+id/saljoindateofempyr"
                 android:textColor="#000000"
                 android:textSize="15sp"
-                android:singleLine="true" />
+                android:imeOptions="actionNext"
+                android:focusableInTouchMode="false"
+                android:nextFocusDown="@+id/totalexpyr"
+                android:singleLine="true"
+                android:hint="Ex- 01-01-2010"/>
         </com.gullakh.gullakhandroid.MaterialTextField>
-
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="match_parent"
@@ -99,7 +93,6 @@
             android:text="Total work experince?"
             android:id="@+id/heading3"
             android:textColor="#707070"
-            android:focusable="false"
             android:textSize="22dp"
             android:layout_below="@+id/textView15"
             android:layout_alignParentLeft="true"
@@ -112,53 +105,48 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_width="300dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:focusable="false"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/companyname"
-                android:layout_weight="1">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ex:5 years"
-                    android:maxLength="2"
-                    android:inputType="number"
-                    android:id="@+id/totalexpyr"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:singleLine="true" />
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp">
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/totalexpyr"
+                android:inputType="number"
+                android:maxLength="6"
+                android:layout_gravity="center_horizontal"
+                android:hint="Ex:5 months"
+                android:imeOptions="actionNext"
+                android:nextFocusRight="@+id/totalexpmn"
+                android:singleLine="true"/>
             </com.gullakh.gullakhandroid.MaterialTextField>
-
             <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#fff"
-                android:focusable="false"
-                app:mtf_image="@drawable/companyname"
-                android:layout_weight="1">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
+                app:mtf_cardCollapsedHeight="4dp"
+                    app:mtf_cardColor="#fff"
+                    app:mtf_image="@drawable/companyname"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:hint="Ex:5 months"
                     android:maxLength="2"
                     android:inputType="number"
                     android:id="@+id/totalexpmn"
                     android:textColor="#000000"
                     android:textSize="15sp"
-                    android:singleLine="true" />
+                    android:singleLine="true"/>
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
 

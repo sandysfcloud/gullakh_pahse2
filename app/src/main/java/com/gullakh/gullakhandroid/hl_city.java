@@ -190,7 +190,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             Log.d("property city is", propertyLocated);
         if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
             goToDatabase("Loan against Property");
-            Intent intent = new Intent(this, pl_need.class);
+            Intent intent = new Intent(this, lp_ownsh.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }else{

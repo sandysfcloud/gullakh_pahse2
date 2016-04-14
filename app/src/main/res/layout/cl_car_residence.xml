@@ -19,23 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Where do you live currently?"
-            android:id="@+id/TextViewHeading1"
-            android:textColor="#4b4b4b"
-            android:layout_marginTop="20dp"
-            android:textSize="22dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            app:typeface="robotoLight"/>
+        android:layout_weight="1"
+        android:gravity="center">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:weightSum="2"
             android:gravity="center">
             <ImageView
@@ -72,7 +61,8 @@
             android:layout_marginTop="10dp"
             android:weightSum="2"
             android:gravity="center"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0">
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +87,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:weightSum="2"
             android:gravity="center">
             <ImageView
@@ -131,7 +120,7 @@
             android:layout_marginTop="10dp"
             android:weightSum="2"
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:layout_marginBottom="10dp">
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="wrap_content"
@@ -164,18 +153,17 @@
             android:layout_marginRight="4dp"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/home"
-            android:layout_weight="1">
+            app:mtf_image="@drawable/home">
             <AutoCompleteTextView
-                android:imeActionLabel="Done"
-                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Others"
                 android:inputType="text"
                 android:id="@+id/locatn"
                 android:textColor="#3f3f3f"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:imeOptions="actionDone"
+                android:singleLine="true"/>
         </com.gullakh.gullakhandroid.MaterialTextField>
 
     </LinearLayout>
