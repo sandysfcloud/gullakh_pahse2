@@ -188,7 +188,12 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
-        }else{
+        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")){
+            intent = new Intent(Emp_type_Qustn.this, lp_bal_tranf.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+        else{
             intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
