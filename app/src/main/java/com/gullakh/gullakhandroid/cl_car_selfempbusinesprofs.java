@@ -211,14 +211,14 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                 now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_selfempbusinesprofs.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
+                        2000,
+                        00,
+                        01
                 );
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                dpd.setTitle("DatePicker Title");
+                //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
         }

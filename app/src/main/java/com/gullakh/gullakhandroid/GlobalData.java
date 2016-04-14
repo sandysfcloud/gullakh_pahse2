@@ -22,7 +22,7 @@ public class GlobalData extends MultiDexApplication {
     private int sizefiltermusthave;
     private ArrayList<Double> foir,accid;
 
-    private String session,carres,loantyp,hashno;
+    private String session,carres,loantyp;
     private String tenure,propcity;
     private CharSequence[] banklist;
     private Double pat;
@@ -175,9 +175,7 @@ public class GlobalData extends MultiDexApplication {
     }
 
 
-    public void sethashno(String cemailVariable) {
-        this.hashno = cemailVariable;
-    }
+
     //***************HomeLoan***********************//
 
     public void setpropcity(String cemailVariable) {
@@ -186,11 +184,6 @@ public class GlobalData extends MultiDexApplication {
 
     public String getpropcity() {
         return propcity;
-    }
-
-
-    public String gethashno() {
-        return hashno;
     }
 
 

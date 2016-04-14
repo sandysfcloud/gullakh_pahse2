@@ -176,27 +176,13 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.next:
                 //Intent intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
-
-                    if(!(((GlobalData) getApplication()).getcartype().equals("Car Loan"))) {
-                        intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    else
-                        RegisterPageActivity.showErroralert(Car_type_questn.this, "Please select type of car loan!", "failed");
-
-
-                    /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("Please choose the car!")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();*/
-
+                if(((GlobalData) getApplication()).getCartypeloan()!=null) {
+                    intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else {
+                    RegisterPageActivity.showErroralert(Car_type_questn.this, "Please select type of car loan!", "failed");
+                }
                 break;
             case R.id.back:
               finish();

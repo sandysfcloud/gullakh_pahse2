@@ -28,7 +28,7 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
     private View jointopt;
-    private Spinner allotment;
+    private Spinner spinner,allotment;
     EditText Text1;
     public static int numOfAppl;
     private CheckBox c1,c2,c3,c4,c5;
@@ -48,7 +48,7 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Loan against property");
+        title.setText("My Property Details");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -75,21 +75,22 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
         no.setOnClickListener(this);
         jointopt=findViewById(R.id.joint);
         yn=findViewById(R.id.llyn);
-        allotment = (Spinner) findViewById(R.id.spinner);
+
+        spinner = (Spinner) findViewById(R.id.spinner1);
+        allotment = (Spinner) findViewById(R.id.spinner2);
 
         allotment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 {
-if (position==3)
-{
-    yn.setVisibility(View.VISIBLE);
-
-}else{
-    yn.setVisibility(View.GONE);
-}
+                    if (position == 3) {
+                        yn.setVisibility(View.VISIBLE);
+                    } else {
+                        yn.setVisibility(View.GONE);
+                    }
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -102,41 +103,75 @@ if (position==3)
         allot.add("Builder");
         allot.add("Resale");
 
-        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allot);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allot);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        allotment.setAdapter(dataAdapter1);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                {
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        List<String> morgaged = new ArrayList<String>();
+        morgaged.add("Select");
+        morgaged.add("Self occupied");
+        morgaged.add("Rented out");
+        morgaged.add("Vacant");
+
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, morgaged);
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        allotment.setAdapter(dataAdapter2);
+        spinner.setAdapter(dataAdapter2);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
+                if (spinner.getSelectedItem().toString().equals("Select")){
+                    RegisterPageActivity.showErroralert(this, "Select Type of property proposed for mortgage", "failed");
+                }else {
                     if (allotment.getSelectedItem().toString().equals("Select")){
                         RegisterPageActivity.showErroralert(this, "Select allotment by", "failed");
                     }else {
-                            if (radioGroup2.getCheckedRadioButtonId() == -1){
-                                RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
-                            }else {
-                                setDataToHashMap("allotment_by",allotment.getSelectedItem().toString());
-                                setDataToHashMap("joint_acc",jointMembers);
-                                if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
-                                    cl_car_global_data.numOfApp = getApplicants();
-                                    cl_car_global_data.totalno_coapp = getApplicants();
-                                    Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
+                        if (radioGroup2.getCheckedRadioButtonId() == -1){
+                            RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
+                        }else {
+                            setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
+                            setDataToHashMap("joint_acc", jointMembers);
+                            if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
+                                cl_car_global_data.numOfApp = getApplicants();
+                                cl_car_global_data.totalno_coapp = getApplicants();
+                                Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
+                                if(getApplicants()>0) {
+                                    Intent intent = new Intent(lp_ownsh.this, cl_car_residence_type.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                }else{
+                                    RegisterPageActivity.showErroralert(this, "Select Co applicants ", "failed");
                                 }
-                                Intent intent = new Intent(lp_ownsh.this, cl_car_residence_type.class);
+                            }else{
+                                Intent intent = new Intent(lp_ownsh.this, pl_need.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }
                         }
+                    }
+                }
+
                 break;
             case R.id.radioButton1:
                 //setDataToHashMap("proposed_ownership", "Single");
-                jointopt.setVisibility(View.GONE);
                 break;
             case R.id.radioButton2:
                // setDataToHashMap("proposed_ownership", "Joint");
-                jointopt.setVisibility(View.VISIBLE);
                 break;
             case R.id.radioButton3:
                 setDataToHashMap("proposed_ownership", "Single");

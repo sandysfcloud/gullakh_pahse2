@@ -140,7 +140,7 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                dpd.setTitle("DatePicker Title");
+                //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
         }
@@ -183,9 +183,8 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        // date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        Log.d("Date",DateWithMMYY.formatMonth((monthOfYear))+"-"+year);
-        date = DateWithMMYY.formatMonth((monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        Log.d("Date",DateWithMMYY.formatMonth((++monthOfYear))+"-"+year);
+        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

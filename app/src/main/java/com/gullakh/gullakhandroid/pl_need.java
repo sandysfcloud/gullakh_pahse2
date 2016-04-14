@@ -39,7 +39,7 @@ public class pl_need extends AppCompatActivity implements View.OnClickListener {
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Personal Loan");
+        title.setText("I Need This Loan For?");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -110,7 +110,7 @@ public class pl_need extends AppCompatActivity implements View.OnClickListener {
         setDataToHashMap("you_need_loan_pl", spinner.getSelectedItem().toString());
         if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
             goToDatabase("Loan Against Property");
-            Intent intent = new Intent(this, lp_ownsh.class);
+            Intent intent = new Intent(this, cl_car_residence_type.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }else{

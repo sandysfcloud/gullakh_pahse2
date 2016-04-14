@@ -60,7 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Loan Amount"
             android:layout_marginTop="75dp"
             android:textColor="@color/main_color_500"
             android:textSize="20sp"
@@ -88,14 +87,15 @@
         android:layout_height="wrap_content"
         android:hint="Other"
         android:id="@+id/loanamountid"
-
+        android:imeOptions="actionDone"
         android:inputType="numberDecimal"
         android:digits="0123456789"
         android:text="50000"
         android:textColorHint="#000"
         android:textColor="#000"
         android:textSize="18sp"
-        app:typeface="robotoLight"/>
+        app:typeface="robotoLight"
+        android:singleLine="true" />
 
 </com.gullakh.gullakhandroid.MaterialTextField>
 

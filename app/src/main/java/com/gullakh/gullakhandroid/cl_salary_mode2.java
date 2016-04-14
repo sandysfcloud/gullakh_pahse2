@@ -125,7 +125,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     }
     private void getInfo() {
         DataHandler dbobject = new DataHandler(this);
-        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        String Loan=((GlobalData) getApplication()).getcartype();
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='"+Loan+"';");
         cr.moveToFirst();
         Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
         try {
@@ -174,11 +175,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                         goToDatabase("Home Loan");
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
                         goToDatabase("Personal Loan");
-
                     }else{
                         goToDatabase("Car Loan");
                     }
-
                     intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

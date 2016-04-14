@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".cl_car_salaried"
     android:background="@drawable/bgque"
@@ -42,12 +40,14 @@
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/loan_amt">
 
-            <AutoCompleteTextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/grossSal"
                 android:textColor="#000000"
                 android:textSize="15sp"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/annualBonus"
                 android:singleLine="true"
                 android:inputType="number" />
         </com.gullakh.gullakhandroid.MaterialTextField>
@@ -86,6 +86,8 @@
                 android:id="@+id/annualBonus"
                 android:textColor="#000000"
                 android:textSize="15sp"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/avgmninc"
                 android:singleLine="true" />
         </com.gullakh.gullakhandroid.MaterialTextField>
 
@@ -108,19 +110,17 @@
             android:layout_width="300dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:focusable="false"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/loan_amt">
-            android:layout_weight="1">
-
-            <AutoCompleteTextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:id="@+id/avgmninc"
                 android:textColor="#000000"
                 android:textSize="15sp"
+                android:imeOptions="actionDone"
                 android:singleLine="true" />
         </com.gullakh.gullakhandroid.MaterialTextField>
 

@@ -768,7 +768,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             }*/
             if (position == 4) {
-                Log.d("myapplication drawer item","3");
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 intent.putExtra("data", "myapplicatn");
                 startActivity(intent);

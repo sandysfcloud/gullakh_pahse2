@@ -39,20 +39,8 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:layout_weight="1">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Car loan type?"
-            android:textSize="20dp"
-            android:id="@+id/title"
-            app:typeface="robotoLight"
-            android:layout_marginBottom="20dp"
-            android:textColor="#000"
-
-            android:layout_marginTop="30dp" />
+        android:layout_weight="1"
+        android:gravity="center">
 
         <ImageView
             android:layout_width="120dp"

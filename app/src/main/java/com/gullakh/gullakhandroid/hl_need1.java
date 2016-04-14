@@ -100,7 +100,6 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         allotment.setAdapter(dataAdapter2);
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

@@ -132,7 +132,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
                 //dpd.vibrate(vibrateDate.isChecked());
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                dpd.setTitle("DatePicker Title");
+                //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
         }
@@ -154,7 +154,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
+        date = dayOfMonth+"-"+DateWithMMYY.formatMonth(++monthOfYear)+"-"+year;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

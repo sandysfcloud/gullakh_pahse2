@@ -268,8 +268,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
             case  R.id.Buttonapply:
                 buttonApply=true;
             Log.d("check loan type",((GlobalData)getApplication()).getcartype());
-                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
-                            ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
+                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
                         storeData();
                         goToDatabase("Car Loan");
 
@@ -286,8 +285,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                     }
                 if(MainActivity.signinstate){
                     Intent intent ;
-                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
-                            ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
+                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
                         intent = new Intent(ListView_Click.this, cl_car_make.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -325,7 +323,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private void storeData() {
         setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
         setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getcartype());
+        setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
         setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
         setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
         setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));

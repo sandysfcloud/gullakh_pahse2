@@ -258,7 +258,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                dpd.setTitle("DatePicker Title");
+               // dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
 

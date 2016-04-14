@@ -55,7 +55,6 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	EditText mobilenumber;
 	EditText password;
 	static EditText inpuotp;
-	static Typeface myfont;
 	static Activity CurrentAct;
 	public static Context baseContext;
 	static String classnam;
@@ -63,6 +62,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	static String textdata;
 	static  TextView temp,tcar,tloan,temi,tsal;
 	static int flag=0;
+	private Button register;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -82,11 +83,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		ViewGroup.LayoutParams lp = v2.getLayoutParams();
 		lp.width = AbsListView.LayoutParams.MATCH_PARENT;
 		v2.setLayoutParams(lp);
-		Button register = (Button) findViewById(R.id.Registerbutton);
-
-		baseContext = getBaseContext();
-
-
+		register = (Button) findViewById(R.id.Registerbutton);
+		 baseContext = getBaseContext();
 		 emailadress=(EditText) findViewById(R.id.emailaddress);
 		 mobilenumber=(EditText) findViewById(R.id.mobilenumber);
 		// password=(EditText) findViewById(R.id.password);
@@ -233,8 +231,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				if(urlchange=="setpassword"){
 					storedatatoDatabase();
 					MainActivity.signinstate=true;
-					if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan")||
-							((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")){
+					if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
 						Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
@@ -247,7 +244,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
 					}else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")){
-						Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
+						Intent intent = new Intent(RegisterPageActivity.this, hl_city.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
 					}else {
@@ -399,7 +396,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		if(((GlobalData) act.getApplication()).getcarres()!=null)
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
-		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcartype());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
 		if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
@@ -427,7 +424,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new));
-Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));
+Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new_ans));
 
 
 		TextView tv;
@@ -641,14 +638,14 @@ Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));
 
 		carloan_que_salary_new.add("Total EMI's you pay: ");*/
 
-		Log.d("co_app_name hashmap check", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+		Log.d("co_app_name ha", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 		ArrayList<String>co_app_name=new ArrayList<String>();
 		for(int i=1;i<=cl_car_global_data.totalno_coapp;i++) {
 			Log.d("co_app_name inside loop", String.valueOf(cl_car_global_data.dataWithAnscoapp.get("co-applicant firstname"+i)));
 			co_app_name.add(cl_car_global_data.dataWithAnscoapp.get("co-applicant firstname"+i));
 		}
 
-		Log.d("co_app_name detail check", String.valueOf(co_app_name));
+		Log.d("co_app_name", String.valueOf(co_app_name));
 		Log.d("co appl no KK", String.valueOf(cl_car_global_data.totalno_coapp));
 
 	/*	if(((GlobalData) act.getApplication()).getcarres()!=null)
@@ -689,7 +686,7 @@ Log.d("carloan_que_salary_new_ans", String.valueOf(carloan_que_salary_new_ans));
 
 		for(int i=1;i<=cl_car_global_data.totalno_coapp;i++){
 
-			Log.d("total no of co applicants", String.valueOf(cl_car_global_data.totalno_coapp));
+			Log.d("total no of co app", String.valueOf(cl_car_global_data.totalno_coapp));
 
 			View view = inflater.inflate(R.layout.linearreviewquestions, null);
 			tv=(TextView) view.findViewById(R.id.headertype);

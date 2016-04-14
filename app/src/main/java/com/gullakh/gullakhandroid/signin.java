@@ -147,8 +147,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     if (ListView_Click.buttonApply) {
                         ListView_Click.buttonApply = false;
 
-                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("New Car Loan") ||
-                                ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Used Car Loan")) {
+                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
                             intent = new Intent(signin.this, cl_car_make.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

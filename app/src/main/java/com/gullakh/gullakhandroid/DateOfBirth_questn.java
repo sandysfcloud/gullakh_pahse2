@@ -61,7 +61,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Date Of Birth");
+        titl.setText("My Birthday Is");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();
@@ -213,7 +213,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 //dpd.vibrate(vibrateDate.isChecked());
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                dpd.setTitle("DatePicker Title");
+                //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
 
