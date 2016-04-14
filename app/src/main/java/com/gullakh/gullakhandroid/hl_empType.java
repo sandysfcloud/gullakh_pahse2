@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 public class hl_empType extends AppCompatActivity implements View.OnClickListener {
 
     ImageView sal, self, business,prof;
@@ -61,31 +63,52 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
         if (hashno != null) {
 
 
+            Log.d("hashno data",hashno);
+            gethmp(hashno);
+
+        }
 
 
 
+}
 
-           /*String emptyp= cl_car_global_data.dataWithAnscoapp.get("co_employment_type"+no);
-            Log.d("EDITED check emp data", String.valueOf(cl_car_global_data.dataWithAnscoapp));
-            co_emp=emptyp;
-           // Log.d("employee typ is KK",emptyp);
-            if(emptyp!=null) {
-                if (emptyp.equals("salaried")) {
+
+    public void gethmp(String flag) {
+        if (cl_car_global_data.allcoappdetail.get(flag) != null) {
+
+            //get the perticular co-appc detail
+            HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
+
+
+            if(hdata.get("co_employment_type")!=null) {
+                Log.d("father co_employment_type", hdata.get("co_employment_type"));
+
+                if (hdata.get("co_employment_type").equals("salaried")) {
                     sal.setImageResource(R.drawable.buttonselecteffect);
-                } else if (emptyp.equals("self employed professional")) {
+                    co_emp="salaried";
+                } else if (hdata.get("co_employment_type").equals("self employed professional")) {
                     prof.setImageResource(R.drawable.buttonselecteffect);
-                } else if (emptyp.equals("self employed business")) {
+                    co_emp="self employed professional";
+                } else if (hdata.get("co_employment_type").equals("self employed business")) {
                     self.setImageResource(R.drawable.buttonselecteffect);
+                    co_emp="self employed business";
                 }
-            }*/
-        }
+            }
 
 
 
         }
+    }
+
+
+
+
     public void setDataToHashMap(String Key, String data) {
         cl_car_global_data.dataWithAnscoapp.put(Key, data);
     }
+
+
+
     @Override
     public void onClick(View v) {
 
@@ -143,12 +166,15 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
         if(co_emp!=null) {
 
                 Log.d("emp typ in click",co_emp);
+
+
                 setDataToHashMap("co_employment_type", co_emp);
 
 
            // else
             //setDataToHashMap("co_employment_type" + cl_car_global_data.numOfApp, co_emp);
             Log.d("check here KK", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+            Log.d("main hp in emptyp", String.valueOf(cl_car_global_data.allcoappdetail));
             Intent intent;
             if(co_emp.equals("salaried"))
             {

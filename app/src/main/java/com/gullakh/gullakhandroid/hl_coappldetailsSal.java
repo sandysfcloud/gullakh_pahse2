@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class hl_coappldetailsSal extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
 
@@ -83,23 +84,56 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         no = intent.getStringExtra("no");
         if (no != null) {
             Log.d("no got frm intent T", no);
-            if (cl_car_global_data.dataWithAnscoapp.get("co_employeenam" + no) != null) {
-                /*String co_empnam = cl_car_global_data.dataWithAnscoapp.get("co_employeenam" + no);
-                String co_empdate = cl_car_global_data.dataWithAnscoapp.get("co_employeedate" + no);
-                String co_empexpyr = cl_car_global_data.dataWithAnscoapp.get("co_employeedexpyear" + no);
-                String co_empexpmon = cl_car_global_data.dataWithAnscoapp.get("co_employeedexpmon" + no);
+            Log.d("small hp", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+            Log.d("main hp", String.valueOf(cl_car_global_data.allcoappdetail));
+            Log.d("no got frm intent T", no);
+
+                gethmp(no);
+
+
+        }
+
+
+    }
+
+
+    public void gethmp(String flag) {
+        if (cl_car_global_data.allcoappdetail.get(flag) != null) {
+
+
+            Log.d(" main hp", String.valueOf(cl_car_global_data.allcoappdetail.get(flag)));
+            //get the perticular co-appc detail
+            HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
+
+
+            if(hdata.get("co_employeenam")!=null) {
+
+
+                Log.d("check data first", String.valueOf(hdata));
+
+                Log.d(" co_employeenam", hdata.get("co_employeenam"));
+
+
+
+                String co_empnam = hdata.get("co_employeenam");
+                String co_empdate = hdata.get("co_employeedate");
+                String co_empexpyr = hdata.get("co_employeedexpyear");
+                String co_empexpmon = hdata.get("co_employeedexpmon");
 
 
                 Emp.setText(co_empnam);
                 Doj.setText(co_empdate);
                 Expyr.setText(co_empexpyr);
-                Expmn.setText(co_empexpmon);*/
-
+                Expmn.setText(co_empexpmon);
             }
+
+
+
         }
-
-
     }
+
+
+
 
     public void getemplist() {
 
@@ -167,22 +201,30 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
 
 
-                        setDataToHashMap("co_employeenam"+cl_car_global_data.numOfApp,  Emp.getText().toString());
+                        /*setDataToHashMap("co_employeenam"+cl_car_global_data.numOfApp,  Emp.getText().toString());
                         setDataToHashMap("co_employeedate"+cl_car_global_data.numOfApp, getDate());
                         setDataToHashMap("co_employeedexpyear"+cl_car_global_data.numOfApp, Expyr.getText().toString());
-                        setDataToHashMap("co_employeedexpmon"+cl_car_global_data.numOfApp,Expmn.getText().toString());
+                        setDataToHashMap("co_employeedexpmon"+cl_car_global_data.numOfApp,Expmn.getText().toString());*/
                         if (no != null) {
                             Intent intent = new Intent(hl_coappldetailsSal.this, hl_salaried2.class);
                             intent.putExtra("no", no);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         }
+
+
+
                         else {
                             Intent intent = new Intent(hl_coappldetailsSal.this, hl_salaried2.class);
                             intent.putExtra("singleCoappl", "yes");
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         }
+
+
+
+
+
                     } else {
                         RegisterPageActivity.showErroralert(hl_coappldetailsSal.this, "Please enter total work experience", "failed");
                     }

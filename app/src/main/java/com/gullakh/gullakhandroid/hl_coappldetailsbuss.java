@@ -22,6 +22,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class hl_coappldetailsbuss extends AppCompatActivity implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
@@ -130,22 +131,43 @@ String no;
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
-            Log.d("no in bussiness class", no);
-            if(cl_car_global_data.dataWithAnscoapp.get("profession"+no)!=null) {
+            Log.d("emp business", no);
+            gethmp(no);
+        }
 
-                Log.d("all data bussiness", String.valueOf(cl_car_global_data.dataWithAnscoapp.get("profession" + no)));
+    }
 
-                String profession = cl_car_global_data.dataWithAnscoapp.get("ind_type" + no);
-                String date = cl_car_global_data.dataWithAnscoapp.get("start_date_of_cur_business" + no);
-                String category = cl_car_global_data.dataWithAnscoapp.get("firm_type" + no);
+
+
+    public void gethmp(String flag) {
+        if (cl_car_global_data.allcoappdetail.get(flag) != null) {
+            Log.d("emp business flag not null", no);
+            //get the perticular co-appc detail
+            HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
+
+            if(hdata.get("ind_type")!=null) {
+                Log.d("check data", String.valueOf(hdata));
+
+                Log.d("no in bussiness class", no);
+
+
+                String profession = hdata.get("ind_type");
+                String date = hdata.get("start_date_of_cur_business");
+                String category = hdata.get("firm_type");
 
                 spinner1.setSelection(Integer.parseInt(profession));
                 Doj.setText(date);
                 spinner2.setSelection(Integer.parseInt(category));
             }
-        }
 
+
+
+        }
     }
+
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -158,27 +180,20 @@ String no;
                         {
 
                             if (no != null) {
-                                setDataToHashMap("ind_type" + no, String.valueOf(spinner1.getSelectedItemPosition()));
+                                setDataToHashMap("ind_type", String.valueOf(spinner1.getSelectedItemPosition()));
                                 Log.d("selected position", String.valueOf(spinner1.getSelectedItemPosition()));
-                                setDataToHashMap("start_date_of_cur_business" + no, getDate());
-                                setDataToHashMap("firm_type" + no, String.valueOf(spinner2.getSelectedItemPosition()));
+                                setDataToHashMap("start_date_of_cur_business" , getDate());
+                                setDataToHashMap("firm_type", String.valueOf(spinner2.getSelectedItemPosition()));
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
-                            }
-                            else {
-                                String jdate = getDate();
-                                setDataToHashMap("ind_type" + cl_car_global_data.numOfApp, String.valueOf(spinner1.getSelectedItemPosition()));
-                                setDataToHashMap("start_date_of_cur_business" + cl_car_global_data.numOfApp, jdate);
-                                setDataToHashMap("firm_type" + cl_car_global_data.numOfApp, String.valueOf(spinner2.getSelectedItemPosition()));
 
-                            }if(cl_car_global_data.numOfApp>0)
-                            {
-                                Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
-                                Intent i = new Intent(this, hl_coappldetails.class);
+
+
+                                Intent i = new Intent(this, coappldetail.class);
                                 i.putExtra("data", "joint");
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
-                                cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
-                                Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
                             }
+
                             else {
                                 Intent intent = new Intent(hl_coappldetailsbuss.this, cl_car_gender.class);
                                 startActivity(intent);

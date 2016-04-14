@@ -22,6 +22,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class hl_coappldetailsProff extends AppCompatActivity implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
@@ -125,24 +126,51 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
-            Log.d("no in proffesn class", no);
-            if(cl_car_global_data.dataWithAnscoapp.get("profession"+no)!=null) {
-
-                Log.d("all data proffesn c", String.valueOf(cl_car_global_data.dataWithAnscoapp));
-                Log.d("professn in proffesn", cl_car_global_data.dataWithAnscoapp.get("profession" + no));
-                String profession = cl_car_global_data.dataWithAnscoapp.get("profession" + no);
-                String date = cl_car_global_data.dataWithAnscoapp.get("date" + no);
-                String category = cl_car_global_data.dataWithAnscoapp.get("category" + no);
-
-                spinner1.setSelection(Integer.parseInt(profession));
-                Doj.setText(date);
-                spinner2.setSelection(Integer.parseInt(category));
-            }
+            gethmp(no);
         }
 
 
 
     }
+
+    public void gethmp(String flag) {
+        if (cl_car_global_data.allcoappdetail.get(flag) != null) {
+
+            //get the perticular co-appc detail(Ex mother,father etc)
+            HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
+
+
+            if(hdata.get("profession")!=null) {
+
+                Log.d("check profession", String.valueOf(hdata));
+
+                Log.d("profession", hdata.get("profession"));
+
+                Log.d("professn is", hdata.get("profession"));
+
+                String profession = hdata.get("profession");
+                String date = hdata.get("date");
+                String category = hdata.get("category");
+
+                spinner1.setSelection(Integer.parseInt(profession));
+                Doj.setText(date);
+                spinner2.setSelection(Integer.parseInt(category));
+            }
+
+
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -155,26 +183,18 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
                         {
 
                             if (no != null) {
-                                setDataToHashMap("profession" + no, String.valueOf(spinner1.getSelectedItemPosition()));
-                                setDataToHashMap("date" + no, getDate());
-                                setDataToHashMap("category" + no, String.valueOf(spinner2.getSelectedItemPosition()));
+                                setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItemPosition()));
+                                setDataToHashMap("date", getDate());
+                                setDataToHashMap("category", String.valueOf(spinner2.getSelectedItemPosition()));
+
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
-                            }
-                            else {
-                                setDataToHashMap("profession" + cl_car_global_data.numOfApp, String.valueOf(spinner1.getSelectedItemPosition()));
-                                setDataToHashMap("date" + cl_car_global_data.numOfApp, getDate());
-                                setDataToHashMap("category" + cl_car_global_data.numOfApp, String.valueOf(spinner2.getSelectedItemPosition()));
-                                Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
-                            }
-                            if(cl_car_global_data.numOfApp>0)
-                            {
-                                Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
-                                Intent i = new Intent(this, hl_coappldetails.class);
+
+                                Intent i = new Intent(this, coappldetail.class);
                                 i.putExtra("data", "joint");
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
-                                cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
-                                Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
                             }
+
                             else {
                                 Intent intent = new Intent(hl_coappldetailsProff.this, cl_car_gender.class);
                                 startActivity(intent);
@@ -237,5 +257,6 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
         cl_car_global_data.dataWithAnscoapp.put(Key,data);
       //  Log.d("HashMap in professn check", cl_car_global_data.dataWithAns.get("profession"));
     }
+
 
 }

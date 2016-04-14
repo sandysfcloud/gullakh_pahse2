@@ -17,6 +17,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class hl_coappldetails extends AppCompatActivity implements View.OnClickListener {
     public EditText firstName, lastName;
     ImageView gen1, gen2;
@@ -73,7 +76,11 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         now = (RadioButton) findViewById(R.id.radioButton2);
         yesw.setOnClickListener(this);
         now.setOnClickListener(this);
+
+        LinearLayout lgender = (LinearLayout) findViewById(R.id.lgender);
         Log.d("out side joint", "test");
+
+
 //*****joint selected
 
 
@@ -81,22 +88,56 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         String data = intent2.getStringExtra("data");
         titled = intent2.getStringExtra("title");
         if (data != null) {
+
+            Log.d("starting KK", String.valueOf(cl_car_global_data.allcoappdetail));
+
             if (data.equals("joint")) {
+                Log.d("joint acc", titled);
 
+                if (titled != null) {
 
-                TextView joint_title = (TextView) findViewById(R.id.joint_title);
-                joint_title.setVisibility(View.VISIBLE);
-                joint_title.setText("Enter Your " + titled + " Detail");
-                joint = 1;
-                coapp = true;
-                Log.d("joint", "is checked");
-                LinearLayout questn = (LinearLayout) findViewById(R.id.questn);
-                questn.setVisibility(View.GONE);
-                view.setVisibility(View.VISIBLE);
+                    if (titled.equals("Father's")) {
+                        Log.d("title", titled);
+                        hashno = "1";
+                        gethmp("1");
+                    }
 
-
+                    if (titled.equals("Mother's")) {
+                        Log.d("title", titled);
+                        hashno = "2";
+                        gethmp("2");
+                    }
+                    if (titled.equals("Brother's")) {
+                        Log.d("title", titled);
+                        hashno = "3";
+                        gethmp("3");
+                    }
+                    if (titled.equals("Spouse's")) {
+                        lgender.setVisibility(View.VISIBLE);
+                        Log.d("title", titled);
+                        hashno = "4";
+                        gethmp("4");
+                    }
+                }
             }
+
+
+        TextView joint_title = (TextView) findViewById(R.id.joint_title);
+        joint_title.setVisibility(View.VISIBLE);
+        joint_title.setText("Enter Your " + titled + " Detail");
+        joint = 1;
+        coapp = true;
+        Log.d("joint", "is checked");
+        LinearLayout questn = (LinearLayout) findViewById(R.id.questn);
+        questn.setVisibility(View.GONE);
+        view.setVisibility(View.VISIBLE);
+            Log.d("simply check here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+            Log.d("simply check here2", String.valueOf(cl_car_global_data.allcoappdetail));
+
         }
+
+
+
 
 //***********from edit
 
@@ -140,11 +181,45 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     }
 
 
+
+
+
+    public void gethmp(String flag) {
+
+
+        if (cl_car_global_data.allcoappdetail.get(flag) != null) {
+
+
+            Log.d("flag is", String.valueOf(flag));
+
+            Log.d("all the data", String.valueOf(cl_car_global_data.allcoappdetail));
+
+            HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
+            Log.d("check fathdata", String.valueOf(hdata));
+
+            Log.d("father fnam", hdata.get("firstname"));
+            firstName.setText(hdata.get("firstname"));
+            lastName.setText(hdata.get("Lastname"));
+            if (hdata.get("working").equals("false"))
+                now.setChecked(true);
+            else if(hdata.get("working").equals("true")) {
+                yesw.setChecked(true);
+                working = true;
+            }
+
+
+        }
+    }
+
+
+
+
+
     public void setDataToHashMap(String Key, String data) {
         cl_car_global_data.dataWithAnscoapp.put(Key, data);
     }
 
-    public void setmainhm(String Key, String data) {
+    public void setmainhm(String Key, HashMap<String, String> data) {
         cl_car_global_data.allcoappdetail.put(Key, data);
     }
 
@@ -155,39 +230,8 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         setDataToHashMap("gender", dataGender);
         setDataToHashMap("working", String.valueOf(working));
 
-        if (titled.equals("Father's")) {
-            hashno = "1";
-            if (flag.equals("co-applicant")) {
-                setmainhm("1", cl_car_global_data.dataWithAnscoapp.toString());
-            }
-        }
-        if (titled.equals("Mother's")) {
-            hashno = "2";
-            if (flag.equals("co-applicant")) {
-                setmainhm("2", cl_car_global_data.dataWithAnscoapp.toString());
-            }
-        }
-        if (titled.equals("Brother's")) {
-            hashno = "3";
-            if (flag.equals("co-applicant")) {
-                setmainhm("3", cl_car_global_data.dataWithAnscoapp.toString());
-            }
-        }
-        if (titled.equals("Spouse")) {
-            hashno = "4";
-            if (flag.equals("co-applicant")) {
-                setmainhm("4", cl_car_global_data.dataWithAnscoapp.toString());
-            }
-        }
+        Log.d("setdata hmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 
-
-        /*if (flag.equals("working_edit")) {
-            Log.d("edited working record", no);
-            setDataToHashMap("co-applicant firstname" + no, firstName.getText().toString());
-            setDataToHashMap("co-applicant Lastname" + no, lastName.getText().toString());
-            setDataToHashMap("co-applicant gender" + no, dataGender);
-            setDataToHashMap("co-applicant working" + no, String.valueOf(working));
-        }*/
     }
 
 
@@ -200,20 +244,13 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 if (coapp) {
                     //if co-applicant is present
                     if (firstName.getText().toString().length() > 0) {
-
+                        cl_car_global_data.dataWithAnscoapp=new HashMap<String,String>();
 
                         if (working) {
+                            Log.d("working true", "");
 
-                            /*if (no != null) {
-
-                                setData("working_edit");
-                                Log.d("working true if edit", no);
-
-
-                            } else {*/
                             setData("working");
 
-                            //  }
                             ((GlobalData) getApplication()).sethashno(hashno);
                             //if working enter working details
                             Intent i = new Intent(this, hl_empType.class);
@@ -224,10 +261,20 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
 
                             Log.d("working false", "");
 
-                            if (joint == 1 && cl_car_global_data.numOfApp > 0) {
 
-                                setData("co-applicant");
-                                Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
+                            setData("co-applicant");
+                            setmainhm(hashno, cl_car_global_data.dataWithAnscoapp);
+                            Log.d("after adding to hmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+                            Log.d("after adding to main hashmap coapde KK", String.valueOf(cl_car_global_data.allcoappdetail));
+                            finish();
+
+                           /*  if (joint == 1 && cl_car_global_data.numOfApp > 0) {
+
+
+
+
+
+                               Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
                                 Log.d("check data here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 
 
@@ -237,15 +284,18 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                                 Log.d("check hashmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 
 
-                                finish();
 
 
-                            }
+
+                            }*/
 
                         }
                     } else
                         RegisterPageActivity.showErroralert(hl_coappldetails.this, "Please enter all details", "failed");
                 } else {
+
+
+                    Log.d("single co appl", "1");
                     setData("single");
                     Intent i = new Intent(this, cl_car_gender.class);
                     startActivity(i);
