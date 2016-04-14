@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -24,28 +22,22 @@ import java.util.concurrent.ExecutionException;
 
 
 public class Car_type_questn extends AppCompatActivity implements View.OnClickListener {
-    ImageView sal,self,review;
+    ImageView newcar,oldcar,review;
     AutoCompleteTextView email;
     Dialog dg;
     String data;
     static boolean CarType;
-    Button next,done;
+    Button back,next,done;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_type_questn);
-       // getSupportActionBar().setTitle("Car Loan - Type of car");
 
-        sal = (ImageView) findViewById(R.id.img);
-        sal.setOnClickListener(this);
-        self = (ImageView) findViewById(R.id.img2);
-        self.setOnClickListener(this);
+        newcar = (ImageView) findViewById(R.id.img);
+        oldcar = (ImageView) findViewById(R.id.img2);
 
-        TextView  ts = (TextView) findViewById(R.id.t1);
-        TextView  ts2 = (TextView) findViewById(R.id.t2);
-      //  ts.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-      //  ts2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
+        newcar.setOnClickListener(this);
+        oldcar.setOnClickListener(this);
         //********************changing actionbar
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -58,8 +50,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
-      //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Car Type");
+        //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        titl.setText("I NEED A");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();
@@ -67,43 +59,20 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
-
-//**********
-
-        Button back = (Button) findViewById(R.id.back);
-        //review = (ImageView) findViewById(R.id.review);
-
-
-        back.setOnClickListener(this);
+        back = (Button) findViewById(R.id.back);
         next = (Button) findViewById(R.id.next);
+        back.setOnClickListener(this);
         next.setOnClickListener(this);
-
+        //review = (ImageView) findViewById(R.id.review);
         //done = (Button) findViewById(R.id.done);
         //done.setOnClickListener(this);
+        if(((GlobalData) getApplication()).getCartypeloan()!=null) {
 
-        TextView title = (TextView) findViewById(R.id.title);
-       // title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
-        TextView t1 = (TextView) findViewById(R.id.t1);
-       // t1.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
-        TextView t2 = (TextView) findViewById(R.id.t2);
-       // t2.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
-        //TextView email = (TextView) findViewById(R.id.email);
-        //email.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
-        //onShakeImage();
-
-        if(((GlobalData) getApplication()).getcartype()!=null) {
-
-            if (((GlobalData) getApplication()).getcartype().equals("New Car Loan"))
-                sal.setImageResource(R.drawable.buttonselecteffect);
+            if (((GlobalData) getApplication()).getCartypeloan().equals("New Car Loan"))
+                newcar.setImageResource(R.drawable.buttonselecteffect);
             else
-            if (((GlobalData) getApplication()).getcartype().equals("Used Car Loan"))
-                self.setImageResource(R.drawable.buttonselecteffect);
+            if (((GlobalData) getApplication()).getCartypeloan().equals("Used Car Loan"))
+                oldcar.setImageResource(R.drawable.buttonselecteffect);
 
         }
 
@@ -121,16 +90,6 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
             }
         }
-
-
-
-
-
-    }
-    public void onShakeImage() {
-        Animation shake;
-        shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-        next.setAnimation(shake);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -147,11 +106,6 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
         return super.onOptionsItemSelected(item);
     }
-  /*  @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.transition.left, R.transition.right);
-    }*/
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -166,7 +120,6 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 break;
            /* case R.id.review:
                 dg=RegisterPageActivity.showAlertreview(Car_type_questn.this, 2);
-
                 break;*/
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -185,7 +138,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             case R.id.back:
-              finish();
+                finish();
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
 //            case R.id.done:
@@ -193,11 +146,11 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 //                finish();
 //                overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.img:
-               // sal.setBackgroundColor(Color.parseColor("#D83C2F"));
+                // sal.setBackgroundColor(Color.parseColor("#D83C2F"));
                 //self.setBackgroundColor(Color.parseColor("#ffffff"));
-                sal.setImageResource(R.drawable.buttonselecteffect);
-                self.setImageResource(R.drawable.usedcar);
-                ((GlobalData) getApplication()).setcartype("New Car Loan");
+                newcar.setImageResource(R.drawable.buttonselecteffect);
+                oldcar.setImageResource(R.drawable.usedcar);
+                ((GlobalData) getApplication()).setCartypeloan("New Car Loan");
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
                     startActivity(intent);
@@ -206,32 +159,22 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 else if(data.equals("review"))
                 {
                     finish();
-
                 }
-
                 break;
             case R.id.img2:
-                sal.setImageResource(R.drawable.newcar);
-                self.setImageResource(R.drawable.buttonselecteffect);
-                ((GlobalData) getApplication()).setcartype("Used Car Loan");
+                newcar.setImageResource(R.drawable.newcar);
+                oldcar.setImageResource(R.drawable.buttonselecteffect);
+                ((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
                 if(data==null) {
-                CarType=true;
-                intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
-
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-            }
-
-                else if(data.equals("review"))
-            {
-                finish();
-
-            }
+                    CarType=true;
+                    intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }else if(data.equals("review")) {
+                    finish();
+                }
                 break;
             case R.id.locatn:
-
-
-
                 ArrayList<String> liste2=null;
                 String flag= null;
                 ServerConnect  cls2= new ServerConnect();
@@ -248,10 +191,21 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 Log.e("emplist frm server ", String.valueOf(liste2));
                 final ShowSuggtn fAdapter = new ShowSuggtn(this, android.R.layout.simple_dropdown_item_1line, liste2);
                 // AutoCompleteTextView textView = (AutoCompleteTextView)  v.findViewById(R.id.locatn);
-               // email.setAdapter(fAdapter);
+                // email.setAdapter(fAdapter);
                 break;
 
 
         }
     }
 }
+
+/*AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("Please choose the car!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    //do things
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();*/
