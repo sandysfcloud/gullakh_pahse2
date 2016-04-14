@@ -11,10 +11,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class coappldetail extends AppCompatActivity  implements View.OnClickListener{
+import java.util.HashMap;
 
+public class coappldetail extends AppCompatActivity  implements View.OnClickListener{
+    RadioButton yesb, nob;
+    LinearLayout main;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +40,19 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
         bspous.setOnClickListener(this);
 
 
+        main= (LinearLayout) findViewById(R.id.lmain);
+        yesb = (RadioButton) findViewById(R.id.yes);
+        nob = (RadioButton) findViewById(R.id.no);
+
+        yesb.setOnClickListener(this);
+        nob.setOnClickListener(this);
+
         Log.d("check all data here", String.valueOf(cl_car_global_data.dataWithAns));
         String coapp=cl_car_global_data.dataWithAns.get("joint_acc");
         Log.d("check coapp name here", coapp);
 
         String[] scoapp = coapp.split(";");
-        Log.d("all docum data after" , String.valueOf(scoapp[0]));
+      //  Log.d("all docum data after" , String.valueOf(scoapp[0]));
 
 
         for (int i=0;i<scoapp.length;i++)
@@ -68,7 +79,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
             if (data.equals("joint")) {
 //add even working details of coapplicant
                 String hasno=((GlobalData) getApplication()).gethashno();
-                setmainhm(hasno, cl_car_global_data.dataWithAnscoapp.toString());
+                setmainhm(hasno, cl_car_global_data.dataWithAnscoapp);
                 Log.d("check main hashmap data here", String.valueOf(cl_car_global_data.allcoappdetail));
             }
 
@@ -78,7 +89,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
     }
 
 
-    public void setmainhm(String Key, String data) {
+    public void setmainhm(String Key, HashMap<String, String> data) {
         cl_car_global_data.allcoappdetail.put(Key, data);
     }
 
@@ -120,6 +131,17 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
                 intent.putExtra("title", "Spouse");
                 startActivity(intent);
 
+                break;
+
+
+            case R.id.yes:
+
+                main.setVisibility(View.VISIBLE);
+                break;
+            case R.id.no:
+
+
+                main.setVisibility(View.GONE);
                 break;
         }
     }

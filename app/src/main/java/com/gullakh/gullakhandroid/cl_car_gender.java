@@ -94,6 +94,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
         getDataFromHashMap();
+
+
+
+
+
+
+
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();
         }
