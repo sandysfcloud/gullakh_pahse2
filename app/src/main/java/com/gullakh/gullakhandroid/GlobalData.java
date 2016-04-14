@@ -13,7 +13,7 @@ public class GlobalData extends MultiDexApplication {
 
     private String cnameVariable;
     private String cmobileVariable;
-    private String cemailVariable;
+    private String cemailVariable,hashno;
     private Double datetimevar;
 
     private String questionVariable;
@@ -33,6 +33,7 @@ public class GlobalData extends MultiDexApplication {
     static final String SERVER_GET_URLIMage ="http://54.200.200.39/gullakh_portal/";
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice_new.php";
     static final String SERVER_GET_URL_web ="http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_contact_id";
+    private String cartypeloan;
 
 //*****************CarLoan********************//
 
@@ -186,8 +187,19 @@ public class GlobalData extends MultiDexApplication {
         return propcity;
     }
 
+    public void sethashno(String cemailVariable) {
+        this.hashno = cemailVariable;
+    }
 
+    public String gethashno() {
+        return hashno;
+    }
 
+    public String getCartypeloan() {
+        return cartypeloan;
+    }
 
-
+    public void setCartypeloan(String cartypeloan) {
+        this.cartypeloan = cartypeloan;
+    }
 }
