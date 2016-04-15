@@ -170,12 +170,13 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                 i.putExtra("data", "joint");
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
-
+                                overridePendingTransition(R.transition.left, R.transition.right);
                             }
                             else
                             {
                                 Intent i = new Intent(this, cl_car_gender.class);
                                 startActivity(i);
+                                overridePendingTransition(R.transition.left, R.transition.right);
                             }
 
 

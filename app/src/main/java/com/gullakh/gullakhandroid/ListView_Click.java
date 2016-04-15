@@ -37,6 +37,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     static boolean buttonApply=false;
+    private String lenderid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,9 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         String fee = intent.getStringExtra("fee");
         String other = intent.getStringExtra("other");
         String docum = intent.getStringExtra("docum");
+        lenderid = intent.getStringExtra("lenderid");
+
+
 
 
 
@@ -267,7 +271,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                 break;
             case  R.id.Buttonapply:
                 buttonApply=true;
-            Log.d("check loan type",((GlobalData)getApplication()).getcartype());
+            Log.d("check loan type", ((GlobalData) getApplication()).getcartype());
                     if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
                         storeData();
                         goToDatabase("Car Loan");
@@ -283,6 +287,19 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                         storeData();
                         goToDatabase("Loan Against Property");
                     }
+
+
+                if (lenderid.equalsIgnoreCase(((GlobalData) getApplication()).getLenders().get(0))){
+                    //same lender
+                }else{
+                    //different lender
+                    ((GlobalData) getApplication()).getLenders().add(0,lenderid);
+                    ((GlobalData) getApplication()).getLenders().add(1, "");
+                }
+
+                Log.d("Result of lender1",((GlobalData) getApplication()).getLenders().get(0));
+                Log.d("Result of lender2",((GlobalData) getApplication()).getLenders().get(1));
+
                 if(MainActivity.signinstate){
                     Intent intent ;
                     if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){

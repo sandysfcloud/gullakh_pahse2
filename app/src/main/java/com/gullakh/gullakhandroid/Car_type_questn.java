@@ -51,7 +51,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("I NEED A");
+        titl.setText("I Need A");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();

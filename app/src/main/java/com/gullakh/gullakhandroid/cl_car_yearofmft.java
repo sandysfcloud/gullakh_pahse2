@@ -122,9 +122,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
                 now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_yearofmft.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
+                        2000,00,01
                 );
                 //now.add(Calendar.YEAR, -16);
                 //dpd.setMinDate(now);

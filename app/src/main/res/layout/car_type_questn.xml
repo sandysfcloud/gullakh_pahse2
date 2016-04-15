@@ -186,7 +186,12 @@
             android:paddingLeft="15dp"
             android:gravity="fill"
             app:typeface="robotoLight"/>
-
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
