@@ -404,7 +404,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 dgthis.dismiss();
             }
         }, UploadDocument2.this, "wait");
-            requestgetserver.execute("token", "document", sessionid,contactid, Data, exe, title);
+            requestgetserver.execute("token", "document", sessionid,caseid, Data, exe, title);
     }
 
     private void uploadedsuccessfully(int rc)

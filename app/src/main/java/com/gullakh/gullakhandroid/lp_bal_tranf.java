@@ -55,7 +55,7 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.next:
                 if (radioGroup1.getCheckedRadioButtonId() == -1){
-                    RegisterPageActivity.showErroralert(this, "Select the building map approved by development authority ", "failed");
+                    RegisterPageActivity.showErroralert(this, "Select any one from above options ", "failed");
                 }else {
                     if (buttonYes){
                         Intent intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);

@@ -197,11 +197,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.Submit:
-
-                Intent intent = new Intent(cl_car_gender.this, coappldetail.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
-               /* if (firstName.getText().toString().equals("")) {
+                if (firstName.getText().toString().equals("")) {
                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
                 } else {
                     if (lastName.getText().toString().equals("")) {
@@ -232,7 +228,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         }
                     }
 
-                }*/
+                }
                 break;
             case R.id.usermale:
                 gen1.setImageResource(R.drawable.buttonselecteffect);
@@ -367,7 +363,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 {
                     ContactBR[] Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR[].class);
                     borrowercontactid = Borrower_contact[0].getId();
-                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"created");
+                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",((GlobalData) getApplication()).getLenders().get(0),((GlobalData) getApplication()).getLenders().get(1));
                 }else{
                     requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString()
                             ,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
@@ -393,7 +389,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 ContactBR Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR.class);
                 borrowercontactid = Borrower_contact.getId();
                 Log.d("Borrower contact id", borrowercontactid);
-                requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created");
+                requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",((GlobalData) getApplication()).getLenders().get(0),((GlobalData) getApplication()).getLenders().get(1));
+
             }
         }, cl_car_gender.this, "wait4");
 
@@ -547,10 +544,19 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     }
 
     private void goToIntent() {
-        Intent intent = new Intent(this, UploadDocument1.class);
-        intent.putExtra("name",firstName.getText().toString());
-        intent.putExtra("applno",borrowercaseno);
-        startActivity(intent);
+
+        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property") ||
+                (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan"))) {
+            Intent intent = new Intent(cl_car_gender.this, coappldetail.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else{
+            Intent intent = new Intent(this, UploadDocument1.class);
+            intent.putExtra("name",firstName.getText().toString());
+            intent.putExtra("applno",borrowercaseno);
+            startActivity(intent);
+        }
+
     }
 
     private void goToDatabase(String table, String loanType)

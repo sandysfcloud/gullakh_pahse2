@@ -239,7 +239,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 					intent.putExtra("roi", data.get(pos).getfloating_interest_rate());
 					intent.putExtra("one_time_fee", data.get(pos).getprocessing_fee());
 					intent.putExtra("emi", data.get(pos).getemi_value());
-
+					intent.putExtra("lenderid", data.get(pos).getaccount_lender());
 					Log.d("check fee here2", data.get(pos).getfee_charges());
 					intent.putExtra("fee", data.get(pos).getfee_charges());
 					intent.putExtra("other", data.get(pos).getother_details());

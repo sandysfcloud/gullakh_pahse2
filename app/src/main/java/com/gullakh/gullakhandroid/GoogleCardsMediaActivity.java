@@ -96,7 +96,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     ListView listView;
     LinearLayout layout,linedit,filter,lcomp;
     ArrayList<String> disbank=new ArrayList<String>();
-
+    ArrayList<String> arrcombank=new ArrayList<String>();
     Dialog dialog;
     Button apply,reset;
     int Max_tenure, filter_tenure, seektenure =0,prevloan=0;
@@ -104,7 +104,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> searchlistviewArry = new ArrayList<ListModel>();
-    int seek_loanamt=1,sortbyposition;
+    int seek_loanamt=1,sortbyposition,combank=1;
     Float roi_min=4.0f, roi_max = 8.0f ;
     Map<String, String> Arry_banknam = new HashMap<>();
     ;
@@ -112,7 +112,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     protected ArrayList<CharSequence> selectedBanks2 = new ArrayList<CharSequence>();
     protected Button selectColoursButton;
     CharSequence[] bankfilter = null;
-    String prev_selectbank = null,listidglobal, tierid;;
+    String prev_selectbank = null,listidglobal, tierid;
     JSONServerGet requestgetserver, requestgetserver2, requestgetserver3,requestgetserver3img, requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
     String globalidentity,loantype;
     Dialog dgthis;
@@ -123,6 +123,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     Map<String, String> Arry_bankimg=null;
     String listidmaster;
     private LoanDetails loandetailsobj;
+    private int firsttimeflage=0;
 
 
     @Override
@@ -824,10 +825,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 Log.e("flow test", String.valueOf(CustomListViewValuesArr.size()));
 
-
-
-
-
                 if(param.equals("oncreate"))
                     setadapter(CustomListViewValuesArr);
                 Log.e("flow test", String.valueOf(1));
@@ -864,113 +861,123 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         CustomListViewValuesArr.clear();
         if(!disbank.equals(null))
         disbank.clear();
-        if(!cobj_RM.equals(null))
-        {
-        for (int i = 0; i < cobj_RM.length; i++) {
+        if(!cobj_RM.equals(null)) {
+            for (int i = 0; i < cobj_RM.length; i++) {
 
-            Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
+                Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
-            if (seektenure != 0) {
+                if (seektenure != 0) {
 
-                int seekmonth = seektenure * 12;
-                ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
-                Log.d("seektenure value", String.valueOf(seektenure));
-                //this emi is used for display purpose only not calclation
-                emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -loan_amt, 0, false);
-                // emi_valu = FinanceLib.pmt((75 / 100) / 12, seekmonth, -loan_amt, 0, false);
-                Log.d("emi_valu", String.valueOf(emi_valu));
-                Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-                Log.d("seektenure", String.valueOf(seekmonth));
-                Log.d("-loan_amt", String.valueOf(-loan_amt));
-                emi_value = Math.ceil(emi_valu);
-                //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
+                    int seekmonth = seektenure * 12;
+                    ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
+                    Log.d("seektenure value", String.valueOf(seektenure));
+                    //this emi is used for display purpose only not calclation
+                    emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -loan_amt, 0, false);
+                    // emi_valu = FinanceLib.pmt((75 / 100) / 12, seekmonth, -loan_amt, 0, false);
+                    Log.d("emi_valu", String.valueOf(emi_valu));
+                    Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                    Log.d("seektenure", String.valueOf(seekmonth));
+                    Log.d("-loan_amt", String.valueOf(-loan_amt));
+                    emi_value = Math.ceil(emi_valu);
+                    //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
 
-            } else {
+                } else {
 
 
-                emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
+                    emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 
-                Log.d("checking emisandeep", String.valueOf(emi_valu) + " " + Max_tenure);
+                    Log.d("checking emisandeep", String.valueOf(emi_valu) + " " + Max_tenure);
 
+
+                }
+                double bpd;
+                if (seektenure != 0) {
+                    Log.d("tenure value is changed", String.valueOf(seektenure));
+                    tenr_amt.setText(String.valueOf(seektenure));
+                    int seekmonth = seektenure * 12;
+                    bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
+                } else {
+                    bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+                }
+                bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
+                final_bp = Math.ceil(bp);
+                Log.d("finalValue bp", String.valueOf(final_bp));
+                Log.d("loan_amt", String.valueOf(loan_amt));
+
+                emi_valu = Math.ceil(emi_valu);
+
+                if (loan_amt <= final_bp) {
+
+
+                    //****************getting 2 best rate bank
+
+
+                    //********
+
+                    double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
+
+                    ListModel sched = new ListModel();
+                    sched = new ListModel();
+                    sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                    sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                    sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                    sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
+                    sched.setemi_value(String.valueOf(emi_valu));
+                    sched.setbp(String.valueOf(final_bp));
+                    sched.setfee_charges(cobj_RM[i].getfee_charges_details());
+                    Log.d("check fee here", cobj_RM[i].getfee_charges_details());
+                    sched.setother_details(cobj_RM[i].getother_details());
+                    sched.setcardocu(cobj_RM[i].getdocu_details());
+                    if (Arry_bankimg.get(cobj_RM[i].getaccount_lender()) != null)
+                        sched.setcarimgurl(Arry_bankimg.get(cobj_RM[i].getaccount_lender()));
+
+                    Log.d("activity docum ", cobj_RM[i].getdocu_details());
+
+                    CustomListViewValuesArr.add(sched);
+                    disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                    Log.d("activity docum ", cobj_RM[i].getaccount_lender());
+//----------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+                }
+                if (CustomListViewValuesArr.size() == 0) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                                    intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intenth);
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+                // Log.d("disbank", String.valueOf(disbank));
 
             }
-            double bpd;
-            if (seektenure != 0) {
-                Log.d("tenure value is changed", String.valueOf(seektenure));
-                tenr_amt.setText(String.valueOf(seektenure));
-                int seekmonth = seektenure * 12;
-                bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
-            } else {
-                bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
-            }
-            bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
-            final_bp = Math.ceil(bp);
-            Log.d("finalValue bp", String.valueOf(final_bp));
-            Log.d("loan_amt", String.valueOf(loan_amt));
-
-            emi_valu = Math.ceil(emi_valu);
-
-            if (loan_amt <= final_bp) {
-
-                //********
-
-                double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
-
-                ListModel sched = new ListModel();
-                sched = new ListModel();
-                sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-                sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-                sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
-                sched.setemi_value(String.valueOf(emi_valu));
-                sched.setbp(String.valueOf(final_bp));
-                sched.setfee_charges(cobj_RM[i].getfee_charges_details());
-                Log.d("check fee here", cobj_RM[i].getfee_charges_details());
-                sched.setother_details(cobj_RM[i].getother_details());
-                sched.setcardocu(cobj_RM[i].getdocu_details());
-                if(Arry_bankimg.get(cobj_RM[i].getaccount_lender())!=null)
-                sched.setcarimgurl(Arry_bankimg.get(cobj_RM[i].getaccount_lender()));
-
-                Log.d("activity docum ", cobj_RM[i].getdocu_details());
-                CustomListViewValuesArr.add(sched);
-                disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
 
 
-            }
-            if(CustomListViewValuesArr.size()==0)
-            {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intenth);
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-
-            }
 
 
-           // Log.d("disbank", String.valueOf(disbank));
 
         }
            // double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
             //Log.d("checking PMT", String.valueOf(Emi));
 
-        }
 
 
         Collections.sort(CustomListViewValuesArr, new Comparator<ListModel>() {
             public int compare(ListModel obj1, ListModel obj2) {
                 // TODO Auto-generated method stub
                 if (sortbyposition == 0) {
+                    combank=1;
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
                 } else if (sortbyposition == 1) {
+                    combank=2;
                     return (Float.valueOf(obj1.getprocessing_fee()) < Float.valueOf(obj2.getprocessing_fee())) ? -1 : (Float.valueOf(obj1.getprocessing_fee()) > Float.valueOf(obj2.getprocessing_fee())) ? 1 : 0;
                 } else
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
@@ -1065,7 +1072,20 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         CustomListViewValuesArr2.clear();
         CustomListViewValuesArr2.addAll(arraylist);
         Log.d("CustomListViewValuesArr value check MAIN", String.valueOf(CustomListViewValuesArr2.size()));
+//------------------------------------------------------------------------------------------------------------------------------------------
+        if (firsttimeflage == 0) {
+             if(CustomListViewValuesArr2.size()>0)
+             {
+                 for (int i = 0; i < 2; i++) {
+                    arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                    }
+                 ((GlobalData) this.getApplication()).setLenders(arrcombank);
+                 firsttimeflage = 1;
+            Log.d("check compbanl arrylist", String.valueOf(arrcombank));
+            }
 
+//------------------------------------------------------------------------------------------------------------------------------------------
+    }
 
 
           mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);

@@ -165,7 +165,9 @@
                 android:inputType="text"
                 android:id="@+id/bank"
                 android:textColor="#000"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:imeOptions="actionDone"
+                android:singleLine="true"/>
         </com.gullakh.gullakhandroid.MaterialTextField>
 
     </LinearLayout>

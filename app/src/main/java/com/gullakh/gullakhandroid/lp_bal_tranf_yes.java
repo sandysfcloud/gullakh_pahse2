@@ -64,7 +64,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         Text3 = (EditText) findViewById(R.id.editText3);
         Text4 = (EditText) findViewById(R.id.editText4);
         Text3.addTextChangedListener(new NumberTextWatcher(Text3));
-        Text4.addTextChangedListener(new NumberTextWatcher(Text3));
+        Text4.addTextChangedListener(new NumberTextWatcher(Text4));
         Text2.setOnClickListener(this);
         getbanknam();
     }
@@ -131,6 +131,12 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                                     setDataToHashMap("", getDate());
                                     setDataToHashMap("", Text3.getText().toString());
                                     setDataToHashMap("", Text4.getText().toString());
+                                    String loanamt1= Text3.getText().toString();
+                                    String loanamt2= Text4.getText().toString();
+                                    loanamt1 = loanamt1.replaceAll(",", "");
+                                    loanamt2 = loanamt2.replaceAll(",", "");
+                                    int loanamt = Integer.parseInt(loanamt1)+Integer.parseInt(loanamt2);
+                                            ((GlobalData) getApplication()).setloanamt(String.valueOf(loanamt));
                                     Intent intent;
                                     String emptype=((GlobalData) getApplication()).getemptype();
                                     if(emptype.equals("Self Employed Business")||emptype.equals("Self Employed Professional"))

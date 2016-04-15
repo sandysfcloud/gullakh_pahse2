@@ -180,6 +180,7 @@
                 android:inputType="text"
                 android:textColor="#3f3f3f"
                 android:textSize="15sp"
+                android:imeOptions="actionDone"
                 android:singleLine="true" />
 
         </com.gullakh.gullakhandroid.MaterialTextField>
