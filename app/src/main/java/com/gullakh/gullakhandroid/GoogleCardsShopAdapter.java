@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +49,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 	public ArrayList<ListModel> passarraydata;
 
-
+		static ArrayList<String> compbank=new ArrayList<String>();
 	ListModel tempValues = null;
 	//public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
 		//super(context, 0, items);
@@ -95,6 +97,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		final ViewHolder holder;
 		listpos=position;
 
+		final ListModel season = (ListModel) data.get(position);
 		if (convertView == null) {
 			convertView = mInflater.inflate(
 					R.layout.list_item_google_cards_shop, parent, false);
@@ -140,6 +143,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.apply= (Button) convertView
 					.findViewById(R.id.apply);
+			holder.comp= (CheckBox) convertView.findViewById(R.id.cself);
 
 
 			convertView.setTag(holder);
@@ -193,7 +197,36 @@ Log.d("setting image", tempValues.getcarimgurl());
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 
 
+			holder.comp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					season.setcheked(isChecked);
 
+					notifyDataSetChanged();
+				}
+			});
+
+
+			holder.comp.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int pos = (int) v.getTag();
+					if (holder.comp.isChecked()) {
+
+						if (compbank.size() <= 2) {
+							compbank.add(data.get(pos).getbanknam());
+							Log.d("compare bank data", String.valueOf(compbank));
+						} else
+							Toast.makeText(cont, "Sorry!! you can compare only two banks at a time", Toast.LENGTH_LONG).show();
+
+
+					}
+					else {
+						compbank.remove(data.get(pos).getbanknam());
+					}
+					Log.d("comp bank data outside", String.valueOf(compbank));
+				}
+			});
 
 
 			holder.apply.setOnClickListener(new OnClickListener() {
@@ -217,11 +250,20 @@ Log.d("setting image", tempValues.getcarimgurl());
 				}
 			});
 
+
+
+
+
+
+
+
 		}
 
 
 		holder.apply.setTag(position);
-		Log.d("check this data count in google", String.valueOf(position));
+		holder.comp.setTag(position);
+		holder.comp.setChecked(season.getchecked());
+		Log.d("check this data count", String.valueOf(position));
 
 		return convertView;
 	}
@@ -234,6 +276,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 		public TextView description;
 		public TextView day;
 		public Button apply;
+		public CheckBox comp;
 
 	}
 

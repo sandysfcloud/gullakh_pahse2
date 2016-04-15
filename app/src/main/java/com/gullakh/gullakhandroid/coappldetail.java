@@ -1,15 +1,20 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -19,6 +24,7 @@ import java.util.HashMap;
 public class coappldetail extends AppCompatActivity  implements View.OnClickListener{
     RadioButton yesb, nob;
     LinearLayout main;
+    ImageView review;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +35,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
         LinearLayout lmoth= (LinearLayout) findViewById(R.id.lmoth);
         LinearLayout lbro= (LinearLayout) findViewById(R.id.lbro);
         LinearLayout lspou= (LinearLayout) findViewById(R.id.lspou);
+        LinearLayout ltitle= (LinearLayout) findViewById(R.id.title);
 
         Button bfath= (Button) findViewById(R.id.bfath);
         Button bmoth= (Button) findViewById(R.id.bmoth);
@@ -46,6 +53,37 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 
         yesb.setOnClickListener(this);
         nob.setOnClickListener(this);
+
+
+
+        //********************changing actionbar
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
+        TextView titl = (TextView) v.findViewById(R.id.title);
+        review = (ImageView) v.findViewById(R.id.edit);
+        review.setOnClickListener(this);
+        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        close.setOnClickListener(this);
+        //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        titl.setText("Co Applicant");
+        actionBar.setCustomView(v);
+
+        View v2 = getSupportActionBar().getCustomView();
+        ViewGroup.LayoutParams lp = v2.getLayoutParams();
+        lp.width = AbsListView.LayoutParams.MATCH_PARENT;
+        v2.setLayoutParams(lp);
+
+
+//**********
+
+
+
+
+
 
         Log.d("check all data here", String.valueOf(cl_car_global_data.dataWithAns));
         String coapp=cl_car_global_data.dataWithAns.get("joint_acc");
@@ -70,17 +108,24 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
         }
 
 
-
+if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint"))
+{
+    main.setVisibility(View.VISIBLE);
+    ltitle.setVisibility(View.INVISIBLE);
+}
 
 //after adding working details
         Intent intent2 = getIntent();
         String data = intent2.getStringExtra("data");
         if (data != null) {
             if (data.equals("joint")) {
+
+                main.setVisibility(View.VISIBLE);
+                ltitle.setVisibility(View.INVISIBLE);
 //add even working details of coapplicant
                 String hasno=((GlobalData) getApplication()).gethashno();
                 setmainhm(hasno, cl_car_global_data.dataWithAnscoapp);
-                Log.d("check main hashmap data here", String.valueOf(cl_car_global_data.allcoappdetail));
+                Log.d("check main hashmap data", String.valueOf(cl_car_global_data.allcoappdetail));
             }
 
         }
@@ -142,6 +187,14 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 
 
                 main.setVisibility(View.GONE);
+                break;
+
+
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
                 break;
         }
     }

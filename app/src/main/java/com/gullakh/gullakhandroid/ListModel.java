@@ -51,6 +51,7 @@ public class ListModel implements Serializable{
     private String setCompletedpercentage;
     public String bank_name;
     public String loan_type;
+    public boolean checkeddata;
 
     /*********** Set Methods ******************/
 
@@ -315,6 +316,9 @@ public class ListModel implements Serializable{
     public void setLoancaseid(String loancaseid) {
         this.loancaseid = loancaseid;
     }
+    public void setcheked(Boolean checkeddata) {
+        this.checkeddata = checkeddata;
+    }
 
     public String getLoancaseid() {
         return loancaseid;
@@ -413,6 +417,9 @@ public class ListModel implements Serializable{
 
     public String getLoan_type() {
         return loan_type;
+    }
+    public boolean getchecked() {
+        return checkeddata;
     }
 }
 

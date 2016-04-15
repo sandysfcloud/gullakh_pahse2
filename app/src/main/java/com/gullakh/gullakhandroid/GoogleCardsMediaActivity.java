@@ -37,6 +37,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,7 +94,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public String[] searchdate = {"30-1-2016", "1-02-2016"};
     public String[] searchtime = {"05:50pm", "10:15am"};
     ListView listView;
-    LinearLayout layout,linedit,filter;
+    LinearLayout layout,linedit,filter,lcomp;
     ArrayList<String> disbank=new ArrayList<String>();
 
     Dialog dialog;
@@ -172,11 +173,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             layout = (LinearLayout) findViewById(R.id.linear);
             linedit = (LinearLayout) findViewById(R.id.linedit);
             filter = (LinearLayout) findViewById(R.id.filter);
+            lcomp = (LinearLayout) findViewById(R.id.lcomp);
             loan_amt = (TextView) findViewById(R.id.loan_amt);
             tenr_amt = (TextView) findViewById(R.id.tenr_amt);
             tten = (TextView) findViewById(R.id.tenure);
             TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
             TextView tfilter = (TextView) findViewById(R.id.tfilter);
+
             /*loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
             tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
             tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
@@ -185,7 +188,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             linedit.setOnClickListener(this);
             filter.setOnClickListener(this);
-
+            lcomp.setOnClickListener(this);
             // createListView();
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             //nullpointer
@@ -1021,7 +1024,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
     public void setapplicatnadapter(ArrayList<ListModel> arraylist) {
 
-        Log.d("CustomListViewValuesArr value check", String.valueOf(arraylist.size()));
+        Log.d("CustomListViewValuesArr v", String.valueOf(arraylist.size()));
         ApplctnAdapterobj = new MyApplicatnAdapter(this, arraylist, prgmImages);
 
         SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
@@ -1155,6 +1158,12 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
+
+                break;
+            case R.id.lcomp:
+                Intent icom= new Intent(getApplicationContext(), CarCompare.class);
+
+                startActivity(icom);
 
                 break;
             case R.id.filter:

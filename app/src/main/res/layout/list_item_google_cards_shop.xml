@@ -97,12 +97,26 @@
                 android:layout_weight="1"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="-10dp"
+                android:src="@drawable/carloan"
 
                 android:background="@android:color/transparent"
                 />
+
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Compare"
+                android:layout_marginRight="10dp"
+                android:textColor="#616161"
+                android:id="@+id/cself"
+                android:checked="false"
+                android:textSize="14dp"
+               />
 
            <com.gullakh.gullakhandroid.font.RobotoButton
                 android:id="@+id/apply"

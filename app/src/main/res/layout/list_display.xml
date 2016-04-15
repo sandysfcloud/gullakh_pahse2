@@ -100,7 +100,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="3"
+    android:weightSum="4"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
@@ -137,19 +137,47 @@
             app:typeface="robotoLight"/>
     </LinearLayout>
 
-    <ImageView
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/lcomp"
+        android:padding="5dp"
+        android:layout_weight="1"
+
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+
+            android:layout_marginTop="8dp"
+            android:src="@drawable/compare"
+           />
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#616161"
+            android:id="@+id/tcomp"
+            android:textSize="15sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:text="Compare "
+            app:typeface="robotoLight"/>
+    </LinearLayout>
+    <!--<ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
         android:paddingRight="20dp"
         android:layout_weight="1"
-        />
+        />-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp"
+
         android:layout_weight="1"
         >
     <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -158,9 +186,9 @@
         android:textColor="#616161"
         android:textSize="12sp"
         android:text="Sorted By"
-      android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="-10dp"
-        android:layout_marginRight="-10dp"
+        android:layout_marginRight="-80dp"
         app:typeface="robotoLight"/>
         <Spinner android:id="@+id/spinner1"
             android:layout_width="wrap_content"
