@@ -32,9 +32,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     int day, month, yearv;
     String data;
     Button next;
+    ImageView gen1,gen2;
 
-
-
+    String dataGender=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,12 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);
+
+
+        gen1 = (ImageView) findViewById(R.id.usermale);
+        gen2 = (ImageView) findViewById(R.id.userfemale);
+        gen2.setOnClickListener(this);
+        gen1.setOnClickListener(this);
         //done = (ImageView) findViewById(R.id.done);
         // done.setOnClickListener(this);
 
@@ -80,6 +86,26 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         if(((GlobalData) getApplication()).getDob()!=null)
             Dob.setText(((GlobalData) getApplication()).getDob().toString());
 
+
+        if(((GlobalData) getApplication()).getgender()!=null)
+        {
+            String gender=((GlobalData) getApplication()).getgender();
+            if(gender.equals("male"))
+            {
+                gen1.setImageResource(R.drawable.buttonselecteffect);
+                gen2.setImageResource(R.drawable.userfemale);
+                dataGender="male";
+            }
+            else if(gender.equals("female"))
+            {
+                gen1.setImageResource(R.drawable.usermale);
+                gen2.setImageResource(R.drawable.buttonselecteffect);
+                dataGender="female";
+            }
+
+        }
+
+
         Dob.setOnClickListener(this);
 
 
@@ -98,6 +124,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             }
         }
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -134,6 +163,19 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
         switch (v.getId()) {
 
+
+            case R.id.usermale:
+                gen1.setImageResource(R.drawable.buttonselecteffect);
+                gen2.setImageResource(R.drawable.userfemale);
+                dataGender="male";
+
+                break;
+            case R.id.userfemale:
+                gen1.setImageResource(R.drawable.usermale);
+                gen2.setImageResource(R.drawable.buttonselecteffect);
+                dataGender="female";
+
+                break;
             case R.id.done:
                 finish();
 
@@ -157,37 +199,47 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;*/
             case R.id.next:
+
+
+
                 if(!Dob.getText().toString().matches("")) {
-                    ((GlobalData) getApplication()).setDob(Dob.getText().toString());
 
-                    int age = 0;
-                    if(((GlobalData) getApplication()).getDob()!=null){
-                        String[] temp=Dob.getText().toString().split("-");
-                        //int year= Integer.parseInt(temp[2]);
-                        age=getAge(Integer.parseInt(temp[2]),Integer.parseInt(temp[1]),Integer.parseInt(temp[0]));
-                    }else{
-                        age=getAge(yearv,month,day);
-                    }
+                    if (dataGender != null) {
 
-                    if(age>18) {
-                        ((GlobalData) getApplication()).setage(age);
-                       /* if(((GlobalData) getApplication()).getloantyp().equals("Home Loan"))
-                        {
-                            Intent intent2 = new Intent(this, hl_city.class);
-                            startActivity(intent2);
-                            overridePendingTransition(R.transition.left, R.transition.right);
+                        ((GlobalData) getApplication()).setgender(dataGender);
+
+                        ((GlobalData) getApplication()).setDob(Dob.getText().toString());
+
+
+                        int age = 0;
+                        if (((GlobalData) getApplication()).getDob() != null) {
+                            String[] temp = Dob.getText().toString().split("-");
+                            //int year= Integer.parseInt(temp[2]);
+                            age = getAge(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0]));
+                        } else {
+                            age = getAge(yearv, month, day);
                         }
-                        else {*/
 
-                        Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                        intent.putExtra("data", "searchgo");
+                        if (age > 18) {
+                            ((GlobalData) getApplication()).setage(age);
 
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                        //  }
-                    }else{
-                        RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
+
+
+
+
+
+                            Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                            intent.putExtra("data", "searchgo");
+
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                            //  }
+                        } else {
+                            RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
+                        }
                     }
+                    else
+                        RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please select your Gender", "failed");
                 }
                 else
                 {

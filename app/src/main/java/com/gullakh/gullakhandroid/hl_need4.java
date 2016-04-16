@@ -87,6 +87,12 @@ public class hl_need4 extends AppCompatActivity implements View.OnClickListener 
                             cl_car_global_data.totalno_coapp = getApplicants();
                             Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
                         }
+                        else
+                        if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
+                            jointMembers="Spouse;Brother;Father;Mother;";
+                            setDataToHashMap("joint_acc", jointMembers);
+                            Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
+                        }
                         Intent intent = new Intent(this, cl_car_residence_type.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
@@ -137,6 +143,7 @@ public class hl_need4 extends AppCompatActivity implements View.OnClickListener 
         }
         jointMembers=jointMembers1+jointMembers2+jointMembers3+jointMembers4+jointMembers5;
         Log.d("check data", "getApplicants() returned: " + jointMembers);
+        setDataToHashMap("joint_acc", jointMembers);
         return count1+count2+count3+count4+count5;
     }
 }

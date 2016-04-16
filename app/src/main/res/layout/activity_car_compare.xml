@@ -13,7 +13,7 @@
 
         android:orientation="vertical">
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -56,55 +56,58 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="4dp"
-        android:background="#80616161"/>
+        android:background="#80616161"/>-->
+
+
+
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:id="@+id/combmain"
 
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/bankimg2"
-                android:layout_weight="1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-
-                android:src="@drawable/carloan"
-                android:background="@android:color/transparent"
-                />
-
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                android:id="@+id/pbanknam2"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="8dp"
-                android:background="@android:color/transparent"
-                android:text="ICICI BANK"
-
-                android:textColor="#177bbd"
-                android:textSize="18sp"
-                app:typeface="robotoLight"
-                />
-
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@drawable/card_background_white"
             android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+
+                android:gravity="center_vertical"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/comb1"
+                    android:layout_weight="1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+
+                    android:src="@drawable/carloan"
+                    android:background="@android:color/transparent"
+                    />
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:background="#80616161"/>
+                <ImageView
+                    android:id="@+id/comb2"
+                    android:layout_weight="1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+
+                    android:src="@drawable/carloan"
+                    android:background="@android:color/transparent"
+                    />
+
+
+            </LinearLayout>
+
 
 
         <LinearLayout
@@ -120,7 +123,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:id="@+id/combn1"
                 android:layout_margin="8dp"
                 android:background="@android:color/transparent"
                 android:text="BANK1"
@@ -141,6 +144,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/combn2"
                 android:layout_margin="8dp"
                 android:background="@android:color/transparent"
                 android:text="BANK2"

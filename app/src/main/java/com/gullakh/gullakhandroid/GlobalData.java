@@ -22,7 +22,7 @@ public class GlobalData extends MultiDexApplication {
     private int sizefiltermusthave;
     private ArrayList<Double> foir,accid;
 
-    private String session,carres,loantyp;
+    private String session,carres,loantyp,gender;
     private String tenure,propcity;
     private CharSequence[] banklist;
     private Double pat;
@@ -211,4 +211,13 @@ public class GlobalData extends MultiDexApplication {
     public ArrayList<String> getLenders() {
             return lenders;
     }
+
+
+    public String getgender() {
+        return gender;
+    }
+    public void setgender(String cemailVariable) {
+        this.gender = cemailVariable;
+    }
+
 }
