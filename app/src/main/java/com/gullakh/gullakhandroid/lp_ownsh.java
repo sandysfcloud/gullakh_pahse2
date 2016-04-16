@@ -146,22 +146,35 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
                         }else {
                             setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
                             setDataToHashMap("joint_acc", jointMembers);
+
+
+
                             if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                 cl_car_global_data.numOfApp = getApplicants();
                                 cl_car_global_data.totalno_coapp = getApplicants();
                                 Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
                                 if(getApplicants()>0) {
-                                    Intent intent = new Intent(lp_ownsh.this, cl_car_residence_type.class);
+                                    Intent intent = new Intent(lp_ownsh.this, pl_need.class);
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);
                                 }else{
                                     RegisterPageActivity.showErroralert(this, "Select Co applicants ", "failed");
                                 }
-                            }else{
+                            }
+                            else
+                            if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
+                                jointMembers="Spouse;Brother;Father;Mother;";
+                                setDataToHashMap("joint_acc", jointMembers);
+                                Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
+
                                 Intent intent = new Intent(lp_ownsh.this, pl_need.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }
+
+
+
+
                         }
                     }
                 }
@@ -213,6 +226,7 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
         }
         jointMembers=jointMembers1+jointMembers2+jointMembers3+jointMembers4+jointMembers5;
         Log.d("check data", "getApplicants() returned: " + jointMembers);
+        setDataToHashMap("joint_acc", jointMembers);
         return count1+count2+count3+count4+count5;
     }
 

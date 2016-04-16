@@ -491,7 +491,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.e("loanpid", loanpid);
                 //requestgetserver2.execute("token", "RuleDetails", sessionid, loanpid, loan_amt);
                 String emptype=((GlobalData) getApplication()).getemptype();
-                requestgetserver3.execute("token", "RuleMaster", sessionid, listidglobal,loantype,emptype,tierid);
+                String gender=((GlobalData) getApplication()).getgender();
+                requestgetserver3.execute("token", "RuleMaster", sessionid, listidglobal,loantype,emptype,tierid,gender);
 
 
             }

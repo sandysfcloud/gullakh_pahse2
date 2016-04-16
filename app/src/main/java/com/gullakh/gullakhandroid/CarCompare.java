@@ -4,6 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class CarCompare extends AppCompatActivity {
 
@@ -11,6 +16,34 @@ public class CarCompare extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_compare);
+
+
+        TextView bank1 = (TextView) findViewById(R.id.combn1);
+        TextView bank2 = (TextView) findViewById(R.id.combn2);
+        ImageView comb1 = (ImageView) findViewById(R.id.comb1);
+        ImageView comb2 = (ImageView) findViewById(R.id.comb2);
+        LinearLayout combmain = (LinearLayout) findViewById(R.id.combmain);
+
+
+        if(GoogleCardsShopAdapter.compbank.size()>0) {
+            bank1.setText(GoogleCardsShopAdapter.compbank.get(0));
+            bank2.setText(GoogleCardsShopAdapter.compbank.get(1));
+            ImageUtil.displayImage(comb1, GlobalData.SERVER_GET_URLIMage + GoogleCardsShopAdapter.compbankimg.get(0), null);
+            ImageUtil.displayImage(comb2, GlobalData.SERVER_GET_URLIMage+GoogleCardsShopAdapter.compbankimg.get(1), null);
+
+        }
+
+        else
+        {
+            combmain.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, "No Banks Selected To Compare!!", Toast.LENGTH_LONG).show();
+
+        }
+
+
+
+
+
     }
 
     @Override

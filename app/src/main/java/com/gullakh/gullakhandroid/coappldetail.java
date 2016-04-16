@@ -65,7 +65,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView titl = (TextView) v.findViewById(R.id.title);
         review = (ImageView) v.findViewById(R.id.edit);
-        review.setOnClickListener(this);
+        review.setVisibility(View.INVISIBLE);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
@@ -87,7 +87,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 
         Log.d("check all data here", String.valueOf(cl_car_global_data.dataWithAns));
         String coapp=cl_car_global_data.dataWithAns.get("joint_acc");
-        Log.d("check coapp name here", coapp);
+       // Log.d("check coapp name here", coapp);
 
         String[] scoapp = coapp.split(";");
       //  Log.d("all docum data after" , String.valueOf(scoapp[0]));
@@ -181,10 +181,12 @@ if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint"))
 
             case R.id.yes:
 
+                Log.d("yes is clicked","0");
+
                 main.setVisibility(View.VISIBLE);
                 break;
             case R.id.no:
-
+                Log.d("no is clicked","1");
 
                 main.setVisibility(View.GONE);
                 break;

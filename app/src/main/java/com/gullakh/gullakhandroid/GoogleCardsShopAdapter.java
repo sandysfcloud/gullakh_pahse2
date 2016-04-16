@@ -50,6 +50,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	public ArrayList<ListModel> passarraydata;
 
 		static ArrayList<String> compbank=new ArrayList<String>();
+		static ArrayList<String> compbankimg=new ArrayList<String>();
 	ListModel tempValues = null;
 	//public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
 		//super(context, 0, items);
@@ -212,13 +213,15 @@ Log.d("setting image", tempValues.getcarimgurl());
 				public void onClick(View v) {
 					int pos = (int) v.getTag();
 					if (holder.comp.isChecked()) {
-
-						if (compbank.size() <= 2) {
+						Log.d("compare bank data SIZE", String.valueOf(compbank.size()));
+						if (compbank.size() < 2) {
 							compbank.add(data.get(pos).getbanknam());
+							compbankimg.add(data.get(pos).getcarimgurl());
 							Log.d("compare bank data", String.valueOf(compbank));
-						} else
+						} else {
+							holder.comp.setChecked(false);
 							Toast.makeText(cont, "Sorry!! you can compare only two banks at a time", Toast.LENGTH_LONG).show();
-
+						}
 
 					}
 					else {

@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cl_car_residence_type extends AppCompatActivity implements View.OnClickListener{
+public class  cl_car_residence_type extends AppCompatActivity implements View.OnClickListener{
 
     private EditText currentCityyr,currentCitymn,currentResidenceyr,currentResidencemn;
     private TextView heading1,heading2,heading3;
