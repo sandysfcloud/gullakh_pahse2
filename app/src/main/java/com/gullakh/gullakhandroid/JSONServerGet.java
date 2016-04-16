@@ -369,7 +369,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("filedata",args[4]));
                             nameValuePairs.add(new BasicNameValuePair("fileextension",args[5]));
                             nameValuePairs.add(new BasicNameValuePair("title",args[6]));
-                            Log.d("argsumentsfromdoc",args.toString());
+                            Log.d("argsumentsfromdoc",args[1]+","+args[2]+","+args[3]+","+args[4]+","+args[5]+","+args[6]);
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));

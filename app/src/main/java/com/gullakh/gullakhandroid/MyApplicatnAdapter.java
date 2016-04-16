@@ -127,6 +127,16 @@ public class MyApplicatnAdapter extends BaseAdapter {
 //                    loanParameters.getD4().equals("1")&&loanParameters.getD5().equals("1")&&loanParameters.getD6().equals("1")){
 //                uploaded = true;
 //            }
+
+           if(tempValues.getLoan_type().equalsIgnoreCase("home loan")){
+                holder.image.setImageResource(R.drawable.homeloan);
+            }else if(tempValues.getLoan_type().equalsIgnoreCase("personal loan")){
+                holder.image.setImageResource(R.drawable.personalloannew);
+            }else if(tempValues.getLoan_type().equalsIgnoreCase("Loan against property")){
+                holder.image.setImageResource(R.drawable.busineeloan);
+            }else {
+            holder.image.setImageResource(R.drawable.carloan);
+            }
         if(tempValues.getstatus().equals("Submitted"))
         {
             holder.apply.setVisibility(View.GONE);
@@ -135,11 +145,12 @@ public class MyApplicatnAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v)
                 {
+                    int pos= (int) v.getTag();
                     Intent intent = new Intent(cont, Myapplication.class);
-                    intent.putExtra("data1", tempValues.getLoan_type());//loanParameters.getLoantype()
-                    intent.putExtra("data2", tempValues.getLoan_amount());
-                    intent.putExtra("data3", tempValues.getBank_name());
-                    intent.putExtra("progress", tempValues.getCompletedpercentage());
+                    intent.putExtra("data1", data.get(pos).getLoan_type());//loanParameters.getLoantype()
+                    intent.putExtra("data2", data.get(pos).getLoan_amount());
+                    intent.putExtra("data3", data.get(pos).getBank_name());
+                    intent.putExtra("progress", data.get(pos).getCompletedpercentage());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
@@ -155,15 +166,15 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     int pos= (int) v.getTag();
                     Intent intent = new Intent(cont, UploadDocument2.class);
                     intent.putExtra("data", "myapplication");
-                    intent.putExtra("loanreqcaseid",tempValues.getLoancaseid());
-                    intent.putExtra("contactid",tempValues.getContactid());
-                    intent.putExtra("d0",tempValues.getD0());
-                    intent.putExtra("d1",tempValues.getD1());
-                    intent.putExtra("d2",tempValues.getD2());
-                    intent.putExtra("d3",tempValues.getD3());
-                    intent.putExtra("d4",tempValues.getD4());
-                    intent.putExtra("d5",tempValues.getD5());
-                    intent.putExtra("d6",tempValues.getD6());
+                    intent.putExtra("loanreqcaseid",data.get(pos).getLoancaseid());
+                    intent.putExtra("contactid",data.get(pos).getContactid());
+                    intent.putExtra("d0",data.get(pos).getD0());
+                    intent.putExtra("d1",data.get(pos).getD1());
+                    intent.putExtra("d2",data.get(pos).getD2());
+                    intent.putExtra("d3",data.get(pos).getD3());
+                    intent.putExtra("d4",data.get(pos).getD4());
+                    intent.putExtra("d5",data.get(pos).getD5());
+                    intent.putExtra("d6",data.get(pos).getD6());
 
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
@@ -171,6 +182,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
             });
         }
         }
+        holder.apply.setTag(position);
         return convertView;
     }
 
