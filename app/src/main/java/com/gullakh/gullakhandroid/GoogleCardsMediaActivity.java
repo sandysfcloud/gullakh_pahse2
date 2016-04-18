@@ -37,7 +37,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,6 +47,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
@@ -122,7 +122,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee" };
     Map<String, String> Arry_bankimg=null;
     String listidmaster;
-    private LoanDetails loandetailsobj;
+    private LoanDetails loandetailsobj1;
     private int firsttimeflage=0;
 
 
@@ -313,44 +313,44 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 GsonBuilder gsonBuilder = new GsonBuilder();
                                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                                 Gson gson = gsonBuilder.create();
-
+                                dgthis = dg;
                                 JsonParser parser = new JsonParser();
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                                Log.d("checkloandetailsinmyappl", String.valueOf(jsonObject.get("result")));
-                                dgthis = dg;
+                                Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
+                                JsonObject jsonObject1 = parser.parse(String.valueOf(jsonObject.get("result"))).getAsJsonObject();
+                                JsonArray jsonArr = jsonObject1.getAsJsonArray("loanrequest");
+                                for (int i = 0; i < jsonArr.size(); i++) {
+                                    if (jsonArr.get(i).toString().equalsIgnoreCase("null")){
 
-                                loandetailsobj = gson.fromJson(jsonObject.get("result"), LoanDetails.class);
-                                ListModel sched = new ListModel();
-                                sched = new ListModel();
-                                if ((jsonObject.get("result").toString() != null)) {
-                                    if (!jsonObject.get("result").toString().equals("null")) {
-                                        sched.setapplno(loandetailsobj.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                                        sched.setappldate(loandetailsobj.getCreatedtime());
-                                        sched.setstatus(loandetailsobj.getStage());
-                                        sched.setLoancaseid(loandetailsobj.getLoanrequestcaseid());
-                                        sched.setContactid(loandetailsobj.getContactid());
-                                        sched.setD0(loandetailsobj.getD0());
-                                        sched.setD1(loandetailsobj.getD1());
-                                        sched.setD2(loandetailsobj.getD2());
-                                        sched.setD3(loandetailsobj.getD3());
-                                        sched.setD4(loandetailsobj.getD4());
-                                        sched.setD5(loandetailsobj.getD5());
-                                        sched.setD6(loandetailsobj.getD6());
-                                        sched.setCompletedpercentage(loandetailsobj.getsetCompletedpercentage());
-                                        sched.setLoan_amount(loandetailsobj.getLoan_amount());
-                                        sched.setBank_name(loandetailsobj.getBank_name());
-                                        sched.setLoan_type(loandetailsobj.getLoantype());
+                                    }else {
+                                        JsonObject jsonObject2 = jsonArr.get(i).getAsJsonObject();
+                                        LoanReqForMyapp loanDeatils = gson.fromJson(jsonObject2, LoanReqForMyapp.class);// LoanReqForMyapp[] loandetailsobj = gson.fromJson(jsonObject2, LoanReqForMyapp[].class);
+                                        Log.d("here is data", loanDeatils.getLoan_amount());
+                                        ListModel sched = new ListModel();
+                                        sched.setapplno(loanDeatils.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                                        sched.setappldate(loanDeatils.getCreatedtime());
+                                        sched.setstatus(loanDeatils.getStage());
+                                        sched.setLoancaseid(loanDeatils.getLoanrequestcaseid());
+                                        sched.setContactid(String.valueOf(jsonObject1.get("contactid")));
+                                        sched.setD0(loanDeatils.getD0());
+                                        sched.setD1(loanDeatils.getD1());
+                                        sched.setD2(loanDeatils.getD2());
+                                        sched.setD3(loanDeatils.getD3());
+                                        sched.setD4(loanDeatils.getD4());
+                                        sched.setD5(loanDeatils.getD5());
+                                        sched.setD6(loanDeatils.getD6());
+                                        sched.setCompletedpercentage(loanDeatils.getCompletedpercentage());
+                                        sched.setLoan_amount(loanDeatils.getLoan_amount());
+                                        sched.setBank_name(loanDeatils.getPrimary_lender());
+                                        sched.setLoan_type(loanDeatils.getLoantype());
                                         searchlistviewArry.add(sched);
                                         createListView();
                                         setapplicatnadapter(searchlistviewArry);
-                                  }
-                                } else
-                                    Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Applications Found", Toast.LENGTH_LONG).show();
+                                    }
+                                    }
                                 dgthis.dismiss();
-
-                            }
+                                }
                         }, GoogleCardsMediaActivity.this, "wait");
-
           DataHandler dbobj = new DataHandler(GoogleCardsMediaActivity.this);
           Cursor cre = dbobj.displayData("select * from userlogin");
           String userid = null,contactid="";

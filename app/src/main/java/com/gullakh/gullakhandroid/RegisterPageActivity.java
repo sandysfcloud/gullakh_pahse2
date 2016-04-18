@@ -22,11 +22,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -35,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class RegisterPageActivity extends AppCompatActivity  implements AsyncResponse
@@ -63,7 +66,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	static  TextView temp,tcar,tloan,temi,tsal;
 	static int flag=0;
 	private Button register;
-
+	private EditText firstName,middlename,lastName;
+	private Spinner spinner;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,6 +87,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		ViewGroup.LayoutParams lp = v2.getLayoutParams();
 		lp.width = AbsListView.LayoutParams.MATCH_PARENT;
 		v2.setLayoutParams(lp);
+
+		spinner = (Spinner) findViewById(R.id.spinner);
+		firstName= (EditText)findViewById(R.id.FirstName);
+		middlename= (EditText)findViewById(R.id.middlename);
+		middlename.setError("This field is optional");
+		firstName.requestFocus();
+		lastName=(EditText)findViewById(R.id.LastName);
+
+
 		register = (Button) findViewById(R.id.Registerbutton);
 		 baseContext = getBaseContext();
 		 emailadress=(EditText) findViewById(R.id.emailaddress);
@@ -90,24 +103,46 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		// password=(EditText) findViewById(R.id.password);
 		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
 
+		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View view,
+									   int position, long id) {
 
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+		List<String> categories = new ArrayList<String>();
+		categories.add("Title");
+		categories.add("Mr.");
+		categories.add("Ms.");
+		categories.add("Mrs.");
+		categories.add("Dr.");
+		android.widget.ArrayAdapter<String> dataAdapter = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(dataAdapter);
 		register.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-				if (mobilenumber.getText().equals("")||mobilenumber.length()<10)
-				{
-					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
+				if (firstName.getText().toString().equals("") || lastName.getText().toString().equals("")){
+					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter Full Name", "error");
 				}else{
-					if (checkBox.isChecked())
-					{
-						useremail = emailadress.getText().toString();
-						usermobno = mobilenumber.getText().toString();
-						// Check device for Play Services APK.
-						//if (checkPlayServices()) {
-						//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-						//	regid = getRegistrationId(getApplicationContext());
-						Log.d("GCM Regid is",RegisterAppToServer.regid);
+					if (mobilenumber.getText().toString().equals("")||mobilenumber.length()<10){
+					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
+					}else{
+
+						if (checkBox.isChecked())
+						{
+							useremail = emailadress.getText().toString();
+							usermobno = mobilenumber.getText().toString();
+							// Check device for Play Services APK.
+							//if (checkPlayServices()) {
+							//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+							//	regid = getRegistrationId(getApplicationContext());
+							Log.d("GCM Regid is",RegisterAppToServer.regid);
 							String[] arraydata = new String[5];
 							arraydata[0] = "registration";
 							arraydata[1] = useremail;
@@ -119,12 +154,14 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							asyncTask.delegate = RegisterPageActivity.this;
 							asyncTask.execute();
 
-						//} else {
-						//	Log.i(TAG, "No valid Google Play Services APK found.");
-						//}
-					} else {
-						RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+							//} else {
+							//	Log.i(TAG, "No valid Google Play Services APK found.");
+							//}
+						} else {
+							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+						}
 					}
+
 				}
 			}
 		});

@@ -153,34 +153,37 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                 {
                     if (!Doj.getText().toString().matches("")) {
                         if (!Expmn.getText().toString().matches("") || Expyr.getText().toString().matches("")) {
-                            String EmpName = Emp.getText().toString();
-                            setDataToHashMap("name_of_current_emp", EmpName);
-                            String jdate = getDate();
-                            setDataToHashMap("year_you_joined_current_comp", jdate);
-                            setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
-                            if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                                goToDatabase("Home Loan");
-                            } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                                goToDatabase("Personal Loan");
-
-                            } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
-                                goToDatabase("Loan Against Property");
-
+                            int temp= Integer.parseInt(Expmn.getText().toString());
+                            if (temp>11){
+                                RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct month field", "failed");
                             }else {
-                                goToDatabase("Car Loan");
-                            }
-                            if (((GlobalData) getApplication()).getcartype().equals("Home Loan") || ((GlobalData) getApplication()).getcartype().equals("Loan Against Property"))
-                            {
-                                Log.d("type of loan is", ((GlobalData) getApplication()).getcartype());
-                                Intent intent2 = new Intent(this, hl_salaried2.class);
-                                startActivity(intent2);
-                                overridePendingTransition(R.transition.left, R.transition.right);
-                            } else {
-                                Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.transition.left, R.transition.right);
-                            }
+                                String EmpName = Emp.getText().toString();
+                                setDataToHashMap("name_of_current_emp", EmpName);
+                                String jdate = getDate();
+                                setDataToHashMap("year_you_joined_current_comp", jdate);
+                                setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
+                                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                    goToDatabase("Home Loan");
+                                } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                    goToDatabase("Personal Loan");
 
+                                } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                                    goToDatabase("Loan Against Property");
+
+                                } else {
+                                    goToDatabase("Car Loan");
+                                }
+                                if (((GlobalData) getApplication()).getcartype().equals("Home Loan") || ((GlobalData) getApplication()).getcartype().equals("Loan Against Property")) {
+                                    Log.d("type of loan is", ((GlobalData) getApplication()).getcartype());
+                                    Intent intent2 = new Intent(this, hl_salaried2.class);
+                                    startActivity(intent2);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                } else {
+                                    Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                }
+                            }
                         } else {
                             RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");
                         }

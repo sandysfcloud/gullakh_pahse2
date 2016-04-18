@@ -35,7 +35,6 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
     Button next, back;
     int day, month, yearv;
-    private TextView heading1, heading2, heading3;
     private String date = "";
     private EditText Expyr, Expmn;
     AutoCompleteTextView Emp;
@@ -87,15 +86,9 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
             Log.d("small hp", String.valueOf(cl_car_global_data.dataWithAnscoapp));
             Log.d("main hp", String.valueOf(cl_car_global_data.allcoappdetail));
             Log.d("no got frm intent T", no);
-
                 gethmp(no);
-
-
         }
-
-
     }
-
 
     public void gethmp(String flag) {
         if (cl_car_global_data.allcoappdetail.get(flag) != null) {
@@ -192,10 +185,9 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
 
                         if (no != null) {
-                            setDataToHashMap("co_employeenam" ,  Emp.getText().toString());
-                            setDataToHashMap("co_employeedate" , getDate());
-                            setDataToHashMap("co_employeedexpyear", Expyr.getText().toString());
-                            setDataToHashMap("co_employeedexpmon" ,Expmn.getText().toString());
+                            setDataToHashMap("co_employeename" ,  Emp.getText().toString());
+                            setDataToHashMap("year_you_joined_current_comp" , getDate());
+                            setDataToHashMap("total_exp", Expyr.getText().toString()+" "+Expmn.getText().toString());
                             Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                         }
 

@@ -104,7 +104,7 @@
                     android:layout_height="50dp"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editText7"
+                    android:id="@+id/MiddleName"
                     android:background="@drawable/edittextsimple"
                     android:hint="Middle Name"
                     android:gravity="center"

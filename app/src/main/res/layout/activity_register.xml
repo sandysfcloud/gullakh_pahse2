@@ -44,22 +44,7 @@
             android:paddingLeft="10dp"
             android:textColorHint="#b2b2b2" />-->
 
-        <EditText
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:inputType="textEmailAddress"
-            android:hint="Email"
-            android:ems="10"
-            android:id="@+id/emailaddress"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:layout_marginTop="30dp"
-            android:typeface="sans"
-            android:paddingLeft="10dp"
-            android:textColorHint="#b2b2b2"
-            android:layout_marginBottom="15dp" />
-
-      <!--  <EditText
+        <!--  <EditText
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:inputType="textPassword"
@@ -75,33 +60,122 @@
             android:paddingLeft="10dp"
             android:textColorHint="#b2b2b2" />-->
 
-        <EditText
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:inputType="phone"
-            android:hint="Mobile number"
-            android:ems="10"
-            android:maxLength="10"
-            android:id="@+id/mobilenumber"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:typeface="sans"
-            android:paddingLeft="10dp"
-            android:textColorHint="#b2b2b2"
-            android:layout_marginBottom="15dp" />
 
-
-
-        <CheckBox
-            android:layout_width="250dp"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="I agree to the Terms and Conditions"
-            android:id="@+id/checkBox"
-            android:layout_gravity="center_horizontal"
-            android:textSize="13dp"
-            android:textColor="#747373">
-        </CheckBox>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="5dp" >
+
+                <Spinner
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/spinner"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittextsimple"
+                    android:layout_marginLeft="10dp" />
+
+                <EditText
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/FirstName"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="First Name"
+                    android:layout_weight="2"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:singleLine="true"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" >
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/middlename"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="Middle Name"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:singleLine="true"
+                    android:paddingLeft="10dp" />
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/LastName"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="Last Name"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:singleLine="true"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:ems="10"
+                android:id="@+id/emailaddress"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:typeface="sans"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:inputType="phone"
+                android:hint="Mobile number"
+                android:ems="10"
+                android:maxLength="10"
+                android:id="@+id/mobilenumber"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:typeface="sans"
+                android:paddingLeft="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <CheckBox
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="I agree to the Terms and Conditions"
+                android:id="@+id/checkBox"
+                android:layout_gravity="center_horizontal"
+                android:textSize="13dp"
+                android:textColor="#747373">
+            </CheckBox>
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

@@ -133,68 +133,71 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                if(!spinner.getSelectedItem().toString().matches("Select"))
-                {
-                    if(currentCityyr.getText().toString().matches("")||currentCitymn.getText().toString().matches(""))
-                    {
+                if(!spinner.getSelectedItem().toString().matches("Select")) {
+                    if (currentCityyr.getText().toString().matches("") || currentCitymn.getText().toString().matches("")) {
                         RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in current city ", "failed");
-                    }else {
-                        if(currentResidenceyr.getText().toString().matches("")||currentResidencemn.getText().toString().matches(""))
-                        {
-                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence", "failed");
-                        }else
-                        {
-                            setDataToHashMap("current_res", spinner.getSelectedItem().toString());
-                            setDataToHashMap("period_of_stay_in_cur_city",currentCityyr.getText().toString()+" Year "+currentCityyr.getText().toString()+" Month");
-                            setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString()+" Year "+currentResidencemn.getText().toString()+" Month");
-                            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                                goToDatabase("Home Loan");
-                            }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                            goToDatabase("Personal Loan");
-                            }else  if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
-                                goToDatabase("Loan against Property");
-                            }else{
-                                goToDatabase("Car Loan");
-                            }
-                            //Intent intent = new Intent(this, cl_car_salaried.class);
-                           // startActivity(intent);
-                                DataHandler dbobject = new DataHandler(this);
-                            Cursor cr;
-                            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan"))
-                            {
-                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Home Loan';");
-                            }
-                            else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan"))
-                            {
-                            cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Personal Loan';");
+                    } else {
+                        int temp = Integer.parseInt(currentCitymn.getText().toString());
+                        if (temp > 11) {
+                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please enter correct month field", "failed");
+                        } else {
+                            if (currentResidenceyr.getText().toString().matches("") || currentResidencemn.getText().toString().matches("")) {
+                                RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence correctly", "failed");
+                            } else {
+                                int temp1 = Integer.parseInt(currentResidencemn.getText().toString());
+                                if (temp1 > 11) {
+                                    RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please enter correct month field", "failed");
+                                } else {
+                                    if ( Integer.parseInt(currentCityyr.getText().toString()) <  Integer.parseInt(currentResidenceyr.getText().toString())) {
+                                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence should be smaller than Period of stay in current city", "failed");
+                                    } else {
+                                        setDataToHashMap("current_res", spinner.getSelectedItem().toString());
+                                        setDataToHashMap("period_of_stay_in_cur_city", currentCityyr.getText().toString() + " Year " + currentCityyr.getText().toString() + " Month");
+                                        setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString() + " Year " + currentResidencemn.getText().toString() + " Month");
+                                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                            goToDatabase("Home Loan");
+                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                            goToDatabase("Personal Loan");
+                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+                                            goToDatabase("Loan against Property");
+                                        } else {
+                                            goToDatabase("Car Loan");
+                                        }
+                                        //Intent intent = new Intent(this, cl_car_salaried.class);
+                                        // startActivity(intent);
+                                        DataHandler dbobject = new DataHandler(this);
+                                        Cursor cr;
+                                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                            cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Home Loan';");
+                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                            cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Personal Loan';");
 
-                            }else  if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property"))
-                            {
-                                cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Loan Against Property';");
-                            }else{
-                                 cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
-                            }
-                                cr.moveToFirst();
-                                Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
-                                try {
-                                    JSONObject reader = new JSONObject(cr.getString(3));
-                                    CompLoanType=reader.getString("type_employment");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                                            cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Loan Against Property';");
+                                        } else {
+                                            cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+                                        }
+                                        cr.moveToFirst();
+                                        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+                                        try {
+                                            JSONObject reader = new JSONObject(cr.getString(3));
+                                            CompLoanType = reader.getString("type_employment");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Intent intent;
+                                        if (CompLoanType.equals("Salaried")) {
+                                            intent = new Intent(this, cl_car_salaried.class);
+                                            startActivity(intent);
+                                        } else if (CompLoanType.equals("Self Employed Business")) {
+                                            intent = new Intent(this, cl_car_selfempbusiness.class);
+                                            startActivity(intent);
+                                        } else if (CompLoanType.equals("Self Employed Professional")) {
+                                            intent = new Intent(this, cl_car_selfempbusinesprofs.class);
+                                            startActivity(intent);
+                                        }
+                                    }
                                 }
-                            Intent intent;
-                            if(CompLoanType.equals("Salaried"))
-                            {
-                                    intent = new Intent(this, cl_car_salaried.class);
-                                    startActivity(intent);
-                            }else if(CompLoanType.equals("Self Employed Business"))
-                            {
-                                    intent = new Intent(this, cl_car_selfempbusiness.class);
-                                    startActivity(intent);
-                            }else if(CompLoanType.equals("Self Employed Professional"))
-                            {
-                                    intent = new Intent(this, cl_car_selfempbusinesprofs.class);
-                                    startActivity(intent);
                             }
                         }
                     }

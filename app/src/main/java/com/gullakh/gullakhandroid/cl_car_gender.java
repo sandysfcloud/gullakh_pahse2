@@ -13,11 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -26,20 +24,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class cl_car_gender extends AppCompatActivity implements View.OnClickListener{
     Button back;
-    TextView heading,option1,option2;
-    ImageView gen1,gen2;
-    String dataGender="";
-    private EditText firstName,lastName;
     private Button submit;
     JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,requestgetserver9;
     String sessionid;
@@ -49,7 +40,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     static String borrowercontactid="";
     private String borrowercaseno="";
     private ContentValues contentValues;
-    private Spinner spinner;
+
     private EditText add1,add2,city,pin,state;
     private String userid;
     DataHandler dbobject;
@@ -67,7 +58,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Personal info");
+        title.setText("Residential Address");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -75,12 +66,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         v2.setLayoutParams(lp);
 
         contentValues=new ContentValues();
-        spinner = (Spinner) findViewById(R.id.spinner1);
-        firstName= (EditText)findViewById(R.id.FirstName);
-        firstName.requestFocus();
-        lastName=(EditText)findViewById(R.id.LastName);
-        gen1 = (ImageView) findViewById(R.id.usermale);
-        gen2 = (ImageView) findViewById(R.id.userfemale);
+
         submit = (Button) findViewById(R.id.Submit);
         back = (Button) findViewById(R.id.back);
         add1=(EditText)findViewById(R.id.addr1);
@@ -89,45 +75,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
         pin=(EditText)findViewById(R.id.pin);
         state=(EditText)findViewById(R.id.state);
-        gen1.setOnClickListener(this);
-        gen2.setOnClickListener(this);
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
-        getDataFromHashMap();
 
-
-
-
-
-
-
-        if(MainActivity.MyRecentSearchClicked) {
-            getInfo();
-        }
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        List<String> categories = new ArrayList<String>();
-        categories.add("Title");
-        categories.add("Mr.");
-        categories.add("Ms.");
-        categories.add("Mrs.");
-        categories.add("Dr.");
-        android.widget.ArrayAdapter<String> dataAdapter = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
     }
-
-
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -147,110 +98,35 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
         return super.onKeyDown(keyCode, event);
     }
-
-
-
-
-    private void getInfo() {
-        dbobject = new DataHandler(this);
-        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
-        cr.moveToFirst();
-        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
-        try {
-            JSONObject reader = new JSONObject(cr.getString(3));
-            String gen = reader.getString("gender");
-            firstName.setText(reader.getString("firstname"));
-            lastName.setText(reader.getString("lastName"));
-            setInfo(gen);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setInfo(String gen) {
-        dataGender = gen;
-        if (gen.equals("male")) {
-            gen1.setImageResource(R.drawable.buttonselecteffect);
-        } else if (gen.equals("female")) {
-            gen2.setImageResource(R.drawable.buttonselecteffect);
-        }
-    }
-    private void getDataFromHashMap() {
-        if(cl_car_global_data.dataWithAns.get("firstname")!=null &&
-                cl_car_global_data.dataWithAns.get("lastname")!=null &&
-                cl_car_global_data.dataWithAns.get("gender")!=null)
-        {
-
-            firstName.setText(cl_car_global_data.dataWithAns.get("firstname"));
-            lastName.setText(cl_car_global_data.dataWithAns.get("lastname"));
-            if(cl_car_global_data.dataWithAns.get("gender").equals("male")){
-                gen1.setImageResource(R.drawable.buttonselecteffect);
-            }else if(cl_car_global_data.dataWithAns.get("gender").equals("female")){
-                gen2.setImageResource(R.drawable.buttonselecteffect);
-            }
-            dataGender=cl_car_global_data.dataWithAns.get("gender");
-        }
-    }
     @Override
     public void onClick(View v) {
 
         switch (v.getId())
         {
             case R.id.Submit:
-                if (firstName.getText().toString().equals("")) {
-                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter First Name", "failed");
+                if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
+                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                 } else {
-                    if (lastName.getText().toString().equals("")) {
-                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter Last Name", "failed");
-                    } else {
-                        if (dataGender.equals("")) {
-                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Select your Gender", "failed");
-                        } else {
-                            if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
-                                RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
-                            } else {
-                                if(pin.getText().toString().length()==6){
-                                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                                        goToDatabase("mysearch","Home Loan");
-                                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                                        goToDatabase("mysearch","Personal Loan");
-                                    } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
-                                        goToDatabase("mysearch","Loan Against Property");
-
-                                    }else{
-                                        goToDatabase("mysearch","Car Loan");
-                                    }
-                                    savetoserver();
-                                }else{
-                                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
-                                }
-                            }
+                    if(pin.getText().toString().length()==6){
+                        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                            goToDatabase("mysearch","Home Loan");
+                        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                            goToDatabase("mysearch","Personal Loan");
+                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+                            goToDatabase("mysearch","Loan Against Property");
+                        }else{
+                            goToDatabase("mysearch","Car Loan");
                         }
+                        savetoserver();
+                    }else{
+                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
                     }
-
                 }
-                break;
-            case R.id.usermale:
-                gen1.setImageResource(R.drawable.buttonselecteffect);
-                gen2.setImageResource(R.drawable.userfemale);
-                dataGender="male";
-                setDataToHashMap("firstname", firstName.getText().toString());
-                setDataToHashMap("lastname",lastName.getText().toString());
-                setDataToHashMap("gender", dataGender);
-                break;
-            case R.id.userfemale:
-                gen1.setImageResource(R.drawable.usermale);
-                gen2.setImageResource(R.drawable.buttonselecteffect);
-                dataGender="female";
-                setDataToHashMap("firstname", firstName.getText().toString());
-                setDataToHashMap("lastname", lastName.getText().toString());
-                setDataToHashMap("gender", dataGender);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
-
                 break;
             case R.id.back:
                 if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
@@ -265,9 +141,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
-
-
     public void setDataToHashMap(String Key,String data)
     {
         cl_car_global_data.dataWithAns.put(Key, data);
@@ -365,8 +238,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     borrowercontactid = Borrower_contact[0].getId();
                     requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",((GlobalData) getApplication()).getLenders().get(0),((GlobalData) getApplication()).getLenders().get(1));
                 }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,spinner.getSelectedItem().toString(),firstName.getText().toString(),lastName.getText().toString()
-                            ,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
+                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
                             ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
                 }
             }
@@ -552,7 +424,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             overridePendingTransition(R.transition.left, R.transition.right);
         }else{
             Intent intent = new Intent(this, UploadDocument1.class);
-            intent.putExtra("name",firstName.getText().toString());
+            intent.putExtra("name","Guest");
             intent.putExtra("applno",borrowercaseno);
             startActivity(intent);
         }

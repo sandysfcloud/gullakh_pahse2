@@ -127,9 +127,10 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         if(intent1.getStringExtra("data").equals("myapplication")){
             frommyappl=true;
 
-            caseid=intent1.getStringExtra("loanreqcaseid");
-            int temp= Integer.parseInt(intent1.getStringExtra("contactid"));
-            contactid= "x"+String.valueOf(temp);
+            caseid="x"+intent1.getStringExtra("loanreqcaseid");
+            String temp=intent1.getStringExtra("contactid");
+            temp=temp.replaceAll(",\"","");
+            contactid= "x"+temp;
             Log.d("my appl page caseid",caseid);
             Log.d("my appl page contactid",contactid);
             String[] d= {"0",intent1.getStringExtra("d0"),intent1.getStringExtra("d1"),intent1.getStringExtra("d2"),intent1.getStringExtra("d3"),intent1.getStringExtra("d4"),intent1.getStringExtra("d5"),intent1.getStringExtra("d6")};
@@ -287,7 +288,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 dgthis1.dismiss();
             }
         }, UploadDocument2.this, "wait");
-        requestgetserver2.execute("token", "deletedocument", sessionid, contactid,title);
+        requestgetserver2.execute("token", "deletedocument", sessionid, caseid,title);
     }
 
 

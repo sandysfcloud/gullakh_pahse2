@@ -168,7 +168,7 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
                 Log.d("emp typ in click",co_emp);
 
 
-                setDataToHashMap("co_employment_type", co_emp);
+                setDataToHashMap("type_employment", co_emp);
 
 
            // else

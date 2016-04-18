@@ -48,7 +48,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:layout_gravity="center_horizontal"
-                    android:hint="Ex:5 months"
+                    android:hint="Ex:5 years"
                     android:imeOptions="actionNext"
                     android:nextFocusRight="@+id/currentCitymn"
                     android:singleLine="true"/>
@@ -144,7 +144,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:layout_gravity="center_horizontal"
-                    android:hint="Ex:5 months"
+                    android:hint="Ex:5 years"
                     android:imeOptions="actionNext"
                     android:nextFocusRight="@+id/currentResidencemn"
                     android:singleLine="true"/>
