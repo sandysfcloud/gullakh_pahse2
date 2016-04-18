@@ -138,6 +138,11 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.t4 = (TextView) convertView
 					.findViewById(R.id.t4);
+
+
+			holder.tprea = (TextView) convertView
+					.findViewById(R.id.tprea);
+
 			holder.bp = (TextView) convertView
 					.findViewById(R.id.bp);
 
@@ -184,7 +189,9 @@ Log.d("setting image", tempValues.getcarimgurl());
 
 			String profee=String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
 			profee = profee.replaceAll("\\.00", "");
-			//profee = profee.replaceAll("Rs.", "");
+
+			String propreclo=String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
+			propreclo = propreclo.replaceAll("\\.00", "");
 
 			String bp=String.valueOf(format.format(new BigDecimal(tempValues.getbp().toString())));
 			bp = bp.replaceAll("\\.00", "");
@@ -195,6 +202,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 			//holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
 			holder.t4.setText(""+profee);
+			holder.tprea.setText(""+propreclo);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 
 
@@ -274,7 +282,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 	private static class ViewHolder {
 		public ImageView image;
 		public TextView promo,name,t1,t2,t3,t4;
-		public TextView bp;
+		public TextView bp,tprea;
 		public TextView price;
 		public TextView description;
 		public TextView day;

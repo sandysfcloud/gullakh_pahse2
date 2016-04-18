@@ -111,7 +111,7 @@
                 android:id="@+id/birthdate"
                 android:textColorHint="#000"
                 android:textColor="#000"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>

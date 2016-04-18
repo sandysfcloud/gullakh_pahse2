@@ -27,7 +27,7 @@
                 android:layout_gravity="center"
                 seekarc:arcColor="@color/main_color_500"
                 seekarc:clockwise="true"
-                seekarc:max="40"
+                seekarc:max="9"
                 
 
                 seekarc:progressColor="@color/main_color_500"
@@ -83,7 +83,7 @@
             android:textColorHint="#000"
             android:textColor="#000"
             android:text="20000"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:typeface="robotoLight"/>
 
     </com.gullakh.gullakhandroid.MaterialTextField>

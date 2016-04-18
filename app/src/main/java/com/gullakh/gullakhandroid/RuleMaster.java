@@ -13,6 +13,9 @@ public class RuleMaster {
     public String fee_char_detail;
     public String other_details;
     public String document_details;
+    public String pre_closure_fee;
+
+
 
     public String getaccount_lender(){
         return account_lender;
@@ -78,4 +81,14 @@ public class RuleMaster {
     public String getdocu_details(){
         return document_details;
     }
+
+
+
+    public void setpre_closure_fee(String token){
+        pre_closure_fee=token;
+    }
+    public String getpre_closure_fee(){
+        return pre_closure_fee;
+    }
+
 }

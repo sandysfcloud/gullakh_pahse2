@@ -100,7 +100,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(patv.intValue()) / 50000)));
                 mSeekArcProgress.setText(strtemp);
             }
-            title.setText("Net Profit for Last FY");
+            title.setText("Net Profit for Last Financial Year");
        // }
 
 

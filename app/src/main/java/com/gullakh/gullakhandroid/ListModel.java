@@ -52,7 +52,7 @@ public class ListModel implements Serializable{
     public String bank_name;
     public String loan_type;
     public boolean checkeddata;
-
+    public String pre_closure_fee;
     /*********** Set Methods ******************/
 
    public void setserchcartyp( String agenda_date)
@@ -182,6 +182,11 @@ public class ListModel implements Serializable{
     public void setsdate(String sdate)
     {
         this.sdate= sdate;
+    }
+
+    public void setpre_closure_fee(String sdate)
+    {
+        this.pre_closure_fee= sdate;
     }
 
     /*********** Get Methods ****************/
@@ -420,6 +425,9 @@ public class ListModel implements Serializable{
     }
     public boolean getchecked() {
         return checkeddata;
+    }
+    public String getpre_closure_fee() {
+        return pre_closure_fee;
     }
 }
 

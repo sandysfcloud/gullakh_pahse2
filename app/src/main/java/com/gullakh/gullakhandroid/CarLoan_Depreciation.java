@@ -128,7 +128,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                 mSeekArcProgress.setText(strtemp);
 
             }
-            title.setText("Depreciation for Last FY");
+            title.setText("Depreciation for Last Financial Year");
        // }
 
 
