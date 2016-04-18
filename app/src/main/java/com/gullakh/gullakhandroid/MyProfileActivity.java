@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,12 +12,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
+
 public class MyProfileActivity extends AppCompatActivity implements  View.OnClickListener {
 
-    private TextView email;
+    private Button signout;
+    private ImageButton edit;
+    private Button Done;
+    private EditText ph,email,add1,add2,add3,add4,add5;
+    private JSONServerGet requestgetserver1;
+    private String userid;
+    private String contactid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +54,81 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
-        TextView ph = (TextView) findViewById(R.id.textViewMobNo);
-        TextView email = (TextView) findViewById(R.id.textViewEmail);
-        Button signout = (Button) findViewById(R.id.signout);
+        ph = (EditText) findViewById(R.id.textViewMobNo);
+        email = (EditText) findViewById(R.id.textViewEmail);
+
+        DataHandler dbobject = new DataHandler(MyProfileActivity.this);
+        Cursor cr = dbobject.displayData("select * from userlogin");
+        if (cr != null) {
+            if (cr.moveToFirst()) {
+                userid=cr.getString(1);
+                contactid=cr.getString(2);
+                email.setText(cr.getString(3));
+                ph.setText(cr.getString(4));
+
+            } else {
+                Intent intentsignin = new Intent(this, signinPrepage.class);
+                startActivity(intentsignin);
+                finish();
+            }
+        }
+
+
+        add1 = (EditText) findViewById(R.id.editText1);
+        add2= (EditText) findViewById(R.id.editText2);
+        add3 = (EditText) findViewById(R.id.editText3);
+        add4 = (EditText) findViewById(R.id.editText4);
+        add5 = (EditText) findViewById(R.id.editText5);
+
+        ph.setEnabled(false);
+        email.setEnabled(false);
+        edit = (ImageButton) findViewById(R.id.imageButtonEdit);
+        Done = (Button) findViewById(R.id.done);
+        signout = (Button) findViewById(R.id.signout);
+        edit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                signout.setVisibility(View.GONE);
+                edit.setVisibility(View.INVISIBLE);
+                Done.setVisibility(View.VISIBLE);
+                ph.setBackgroundResource(R.drawable.edittextsimple);
+                add1.setBackgroundResource(R.drawable.edittextsimple);
+                add2.setBackgroundResource(R.drawable.edittextsimple);
+                add3.setBackgroundResource(R.drawable.edittextsimple);
+                add4.setBackgroundResource(R.drawable.edittextsimple);
+                add5.setBackgroundResource(R.drawable.edittextsimple);
+                ph.setEnabled(true);
+                add1.setEnabled(true);
+                add2.setEnabled(true);
+                add3.setEnabled(true);
+                add4.setEnabled(true);
+                add5.setEnabled(true);
+            }
+        });
+        Done.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Done.setVisibility(View.GONE);
+                edit.setVisibility(View.VISIBLE);
+                signout.setVisibility(View.VISIBLE);
+                ph.setBackgroundResource(R.color.white_transparent);
+                add1.setBackgroundResource(R.color.white_transparent);
+                add2.setBackgroundResource(R.color.white_transparent);
+                add3.setBackgroundResource(R.color.white_transparent);
+                add4.setBackgroundResource(R.color.white_transparent);
+                add5.setBackgroundResource(R.color.white_transparent);
+                ph.setEnabled(false);
+                add1.setEnabled(false);
+                add2.setEnabled(false);
+                add3.setEnabled(false);
+                add4.setEnabled(false);
+                add5.setEnabled(false);
+                goToServer(ph.getText().toString(),add1.getText().toString(),add2.getText().toString(),add3.getText().toString(),add4.getText().toString(),add5.getText().toString());
+            }
+        });
+
         signout.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -54,19 +142,28 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
             }
         });
 
-        DataHandler dbobject = new DataHandler(MyProfileActivity.this);
-        Cursor cr = dbobject.displayData("select * from userlogin");
-        if (cr != null) {
-            if (cr.moveToFirst()) {
-                email.setText(cr.getString(3));
-                ph.setText(cr.getString(4));
+    }
 
-            } else {
-                Intent intentsignin = new Intent(this, signinPrepage.class);
-                startActivity(intentsignin);
-                finish();
+    private void goToServer(String ph, String add1, String add2, String add3, String add4, String add5) {
+        requestgetserver1 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
             }
-        }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                Dialog dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                //Log.d("Application values jsonobj", String.valueOf(jsonObject));
+
+                dgthis.dismiss();
+
+            }
+        }, MyProfileActivity.this, "wait");
+        requestgetserver1.execute("token", "contactupdate",userid,contactid,ph,add1,add2,add3,add4,add5);
     }
 
     @Override

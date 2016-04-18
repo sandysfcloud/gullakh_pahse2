@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/color_backg3" />
+        android:src="@drawable/headerbg" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,7 +23,8 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@drawable/user"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/email"

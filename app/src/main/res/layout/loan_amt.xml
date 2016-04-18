@@ -24,7 +24,8 @@
         android:layout_height="300dp"
 
         android:layout_gravity="center_horizontal"
-        >
+        android:layout_weight="1"
+        android:padding="25dp">
 
         <com.gullakh.gullakhandroid.SeekArc
             android:id="@+id/seekArc"

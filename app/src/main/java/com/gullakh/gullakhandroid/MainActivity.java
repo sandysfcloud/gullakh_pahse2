@@ -115,6 +115,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
        // getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.my_custom_title);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        callGarbageCollector();
 //--------------------------Checking internet connection-------------------------------------------
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
@@ -124,12 +125,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             final View view = factory.inflate(R.layout.nointernetconn, null);
             alertadd.setView(view);
             alertadd.setCancelable(false);
-            alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    //
-                }
-            });
             alertadd.show();
         }else {
 
@@ -479,6 +474,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 
         //********************End of Oncreate
+    }
+
+    private void callGarbageCollector() {
+        System.gc();
     }
 
     private void showContextHelp() {

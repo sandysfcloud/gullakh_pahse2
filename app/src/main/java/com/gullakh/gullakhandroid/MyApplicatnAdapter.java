@@ -145,12 +145,12 @@ public class MyApplicatnAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v)
                 {
-                    int pos= (int) v.getTag();
+                    //int pos= (int) v.getTag();
                     Intent intent = new Intent(cont, Myapplication.class);
-                    intent.putExtra("data1", data.get(pos).getLoan_type());//loanParameters.getLoantype()
-                    intent.putExtra("data2", data.get(pos).getLoan_amount());
-                    intent.putExtra("data3", data.get(pos).getBank_name());
-                    intent.putExtra("progress", data.get(pos).getCompletedpercentage());
+                    intent.putExtra("data1", tempValues.getLoan_type());//loanParameters.getLoantype()
+                    intent.putExtra("data2", tempValues.getLoan_amount());
+                    intent.putExtra("data3", tempValues.getBank_name());
+                    intent.putExtra("progress", tempValues.getCompletedpercentage());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }

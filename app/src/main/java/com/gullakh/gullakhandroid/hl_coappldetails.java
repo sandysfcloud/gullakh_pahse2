@@ -226,7 +226,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     public void setData(String flag) {
 
         setDataToHashMap("firstname", firstName.getText().toString());
-        setDataToHashMap("Lastname", lastName.getText().toString());
+        setDataToHashMap("lastname", lastName.getText().toString());
         setDataToHashMap("gender", dataGender);
         setDataToHashMap("working", String.valueOf(working));
 

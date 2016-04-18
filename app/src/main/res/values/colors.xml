@@ -75,4 +75,5 @@
 
  <color name="colorPrimaryDark">#ed1c24</color>
     <color name="red">#ed1c24</color>
+    <color name="white_transparent">#00ffffff</color>
 </resources>

@@ -180,10 +180,10 @@ String no;
                         {
 
                             if (no != null) {
-                                setDataToHashMap("ind_type", String.valueOf(spinner1.getSelectedItemPosition()));
+                                setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItemPosition()));
                                 Log.d("selected position", String.valueOf(spinner1.getSelectedItemPosition()));
-                                setDataToHashMap("start_date_of_cur_business" , getDate());
-                                setDataToHashMap("firm_type", String.valueOf(spinner2.getSelectedItemPosition()));
+                                setDataToHashMap("start_date_of_current_business_prof" , getDate());
+                                setDataToHashMap("firm_type_prof", String.valueOf(spinner2.getSelectedItemPosition()));
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 
 
