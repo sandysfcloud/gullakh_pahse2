@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -213,20 +215,14 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                         int age = 0;
                         if (((GlobalData) getApplication()).getDob() != null) {
-                            String[] temp = Dob.getText().toString().split("-");
-                            //int year= Integer.parseInt(temp[2]);
-                            age = getAge(Integer.parseInt(temp[2]), Integer.parseInt(temp[1]), Integer.parseInt(temp[0]));
-                        } else {
+
                             age = getAge(yearv, month, day);
+                            Log.d("your age is", String.valueOf(age));
                         }
 
                         if (age > 18) {
+
                             ((GlobalData) getApplication()).setage(age);
-
-
-
-
-
 
                             Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
                             intent.putExtra("data", "searchgo");
@@ -288,16 +284,19 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-           String date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
+         //  String date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
         day=dayOfMonth;
-        month=++monthOfYear;
+        month=monthOfYear;
+        month=month+1;
         yearv=year;
+        Log.d("day is "+day+"month is "+month+"year is "+yearv,"0");
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, monthOfYear, dayOfMonth);
 
-        //SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
-        //String formatdate = format.format(calendar.getTime());
-         Dob.setText(date);
-        //Dob.setText(formatdate);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+        String formatdate = format.format(calendar.getTime());
+        Log.d("date is KK",formatdate);
+         //Dob.setText(date);
+        Dob.setText(formatdate);
     }
 }

@@ -144,24 +144,186 @@
                 android:layout_marginBottom="8dp"
                 android:background="#80616161"/>
         </LinearLayout>
-        <!--<com.gullakh.gullakhandroid.font.RobotoTextView
-            android:id="@+id/list_item_google_cards_shop_buy"
-            android:layout_width="wrap_content"
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_weight="0"
-            android:background="#4cae4c"
-            android:gravity="center"
-            android:minHeight="36dp"
-            android:minWidth="64dp"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            android:text="BUY"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            />-->
+            android:weightSum="2"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:text="Processing Fee"
+                    android:textColor="#616161"
+                    android:textSize="14sp"
+                    app:typeface="robotoLight"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="1500"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    app:typeface="robotoLight"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+              android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="40dp"
+                android:background="#80616161" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:orientation="vertical" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/tpre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:text="PreClosure Fee"
+                    android:textColor="#616161"
+                    android:textSize="14sp"
+                    app:typeface="robotoLight"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/tprea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="1500"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    app:typeface="robotoLight"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:background="#80616161" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:orientation="vertical" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/list_item_google_cards_shop_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:text="EMI"
+
+                    android:textColor="#616161"
+                    android:textSize="14sp"
+                    app:typeface="robotoLight"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/list_item_google_cards_shop_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="2,300"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    app:typeface="robotoLight"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="40dp"
+                android:background="#80616161" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+
+                android:orientation="vertical" >
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="2"
+                    android:text="Interest Rate"
+                    android:textColor="#616161"
+                    android:textSize="14sp"
+                    app:typeface="robotoLight"
+                    />
+
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/t2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="20%"
+                    android:textColor="#616161"
+                    android:textSize="16sp"
+                    app:typeface="robotoLight"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+            </LinearLayout>
+
+
+
+
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -270,15 +432,13 @@
 
             android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-            android:layout_weight="1"
-            android:layout_alignParentLeft="true"
+                android:layout_weight="1"
 
-            android:orientation="vertical" >
-
+                android:orientation="vertical" >
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:id="@+id/list_item_google_cards_shop_description"
@@ -287,7 +447,7 @@
                 android:background="@android:color/transparent"
                 android:maxLines="2"
                 android:text="EMI"
-                android:layout_marginLeft="5dp"
+
                 android:textColor="#616161"
                 android:textSize="14sp"
                 app:typeface="robotoLight"
@@ -310,7 +470,7 @@
                 android:layout_width="1px"
                 android:layout_height="40dp"
 
-                android:layout_marginLeft="42dp"
+
                 android:background="#80616161" />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -348,7 +508,7 @@
 
 
         </LinearLayout>
-        </LinearLayout>
+        </LinearLayout>-->
     </RelativeLayout>
     <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="match_parent"

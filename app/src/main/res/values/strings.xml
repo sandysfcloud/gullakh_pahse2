@@ -187,6 +187,7 @@
         <!--<item>Sort By</item>-->
         <item>Best Rate</item>
         <item>Processing Fee</item>
+        <item>Preclosure Fee</item>
 
     </string-array>
     <string name="sortybylabel">Sort By</string>

@@ -119,7 +119,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     EditText editloan;
     TextView loan_amt,tenr_amt,title;
     ArrayAdapter<String> adapter;
-    private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee" };
+    private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee","Prclosure fee" };
     Map<String, String> Arry_bankimg=null;
     String listidmaster;
     private LoanDetails loandetailsobj1;
@@ -450,7 +450,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
 
 
-            holder.name.setText("" + COUNTRIES[position]);
+            holder.name.setText( COUNTRIES[position]);
 
             return v;
         }
@@ -983,7 +983,13 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 } else if (sortbyposition == 1) {
                     combank=2;
                     return (Float.valueOf(obj1.getprocessing_fee()) < Float.valueOf(obj2.getprocessing_fee())) ? -1 : (Float.valueOf(obj1.getprocessing_fee()) > Float.valueOf(obj2.getprocessing_fee())) ? 1 : 0;
-                } else
+                }
+                else if (sortbyposition == 2) {
+                    combank=3;
+                    return (Float.valueOf(obj1.getpre_closure_fee()) < Float.valueOf(obj2.getpre_closure_fee())) ? -1 : (Float.valueOf(obj1.getpre_closure_fee()) > Float.valueOf(obj2.getpre_closure_fee())) ? 1 : 0;
+                }
+
+                else
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
             }
         });
