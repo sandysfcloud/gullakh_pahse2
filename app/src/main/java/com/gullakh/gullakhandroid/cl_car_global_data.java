@@ -48,6 +48,34 @@ public class cl_car_global_data
         String json = gson.toJson(dataWithAns);
         return json;
     }
+//    static JSONArray getCoapplHashMapInString(){
+//        JSONArray jsonArray = new JSONArray();
+//            JSONObject LoanData = new JSONObject();
+//            try {
+//                for (int i = 0; i < 4; i++) {
+//                    if (allcoappdetail.get("" + (i + 1) + "")!=null) {
+//                        LoanData.put(allcoappdetail.get("" + (i + 1) + ""));
+//                    }
+//                }
+//
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            jsonArray.put(LoanData);
+//        return jsonArray;
+//    }
+//    static JSONArray getCoapplHashMapInString()
+//    {
+//        Gson gson = new Gson();
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (Map.Entry<String, HashMap<String, String>> entry : cl_car_global_data.allcoappdetail.entrySet()){
+//            JSONObject json = new JSONObject(entry.getValue());
+//            jsonArray.put(json);
+//        }
+//        return jsonArray;
+//    }
 
     static String getArraylistInString()
     {

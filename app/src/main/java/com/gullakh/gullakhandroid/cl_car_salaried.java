@@ -75,7 +75,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Emp.requestFocus();
         Emp.setOnClickListener(this);
         getemplist();
-        Expyr = (EditText) findViewById(R.id.totalexpyr);
+        Expyr = (EditText) findViewById(R.id.emi);
         Expmn = (EditText) findViewById(R.id.totalexpmn);
         getDataFromHashMap();
         user=true;

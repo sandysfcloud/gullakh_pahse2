@@ -148,6 +148,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							arraydata[1] = useremail;
 							arraydata[2] = usermobno;
 							arraydata[3] = RegisterAppToServer.regid;
+							arraydata[4] = firstName.getText().toString();
+							arraydata[5] = middlename.getText().toString();
+							arraydata[5] = lastName.getText().toString();
 
 							urlchange = "registration";
 							JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);

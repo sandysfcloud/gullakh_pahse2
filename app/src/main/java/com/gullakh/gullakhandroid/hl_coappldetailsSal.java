@@ -75,7 +75,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         getemplist();
         Emp.requestFocus();
         Emp.setOnClickListener(this);
-        Expyr = (EditText) findViewById(R.id.totalexpyr);
+        Expyr = (EditText) findViewById(R.id.emi);
         Expmn = (EditText) findViewById(R.id.totalexpmn);
 
 
@@ -240,12 +240,12 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.saljoindateofempyr:
                 Calendar now = Calendar.getInstance();
-                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
+                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         hl_coappldetailsSal.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
+                        2010,
+                        00,
+                        01
                 );
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);
@@ -266,8 +266,8 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         // date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        Log.d("Date",DateWithMMYY.formatMonth((monthOfYear))+"-"+year);
-        date = DateWithMMYY.formatMonth((monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        Log.d("Date",DateWithMMYY.formatMonth((++monthOfYear))+"-"+year);
+        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

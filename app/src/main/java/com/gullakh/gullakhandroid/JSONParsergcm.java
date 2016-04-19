@@ -1,7 +1,6 @@
 package com.gullakh.gullakhandroid;
 
 
-import android.app.Activity;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -9,7 +8,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -53,6 +51,12 @@ public class JSONParsergcm {
                 nameValuePairs.add(new BasicNameValuePair("userpassword", arraydata[4]));
             else if(arraydata[0]=="password")
                 nameValuePairs.add(new BasicNameValuePair("userpassword", md5(arraydata[4])));
+            else if(arraydata[0]=="registration"){
+                nameValuePairs.add(new BasicNameValuePair("firstname",arraydata[4]));
+                nameValuePairs.add(new BasicNameValuePair("middlename",arraydata[5]));
+                nameValuePairs.add(new BasicNameValuePair("lastname",arraydata[6]));
+
+            }
 
             //httpPost.setHeader("Content-Type", "application/json");
             httpPost.setHeader("Accept", "JSON");

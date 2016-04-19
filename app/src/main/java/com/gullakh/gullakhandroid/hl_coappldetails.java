@@ -2,8 +2,9 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +18,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-public class hl_coappldetails extends AppCompatActivity implements View.OnClickListener {
-    public EditText firstName, lastName;
+import java.util.Calendar;
+import java.util.HashMap;
+
+public class hl_coappldetails extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
+    public EditText firstName,Dob,lastName;
     ImageView gen1, gen2;
     Button next, back;
-    String dataGender = "";
+    String dataGender;
     private boolean coapp = false;
     private RadioGroup radioGroup1, radioGroup2;
     private View view;
@@ -34,6 +37,9 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     String no = null;
     String titled;
     String hashno = null;
+    int day, month, yearv;
+    private String date = "";
+    private EditText emi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +82,8 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         now = (RadioButton) findViewById(R.id.radioButton2);
         yesw.setOnClickListener(this);
         now.setOnClickListener(this);
-
+        Dob = (EditText) findViewById(R.id.dob);
+        Dob.setOnClickListener(this);
         LinearLayout lgender = (LinearLayout) findViewById(R.id.lgender);
         Log.d("out side joint", "test");
 
@@ -224,10 +231,12 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     }
 
     public void setData(String flag) {
-
+       // loanrequestcaseid
         setDataToHashMap("firstname", firstName.getText().toString());
         setDataToHashMap("lastname", lastName.getText().toString());
+        setDataToHashMap("relation", titled);
         setDataToHashMap("gender", dataGender);
+        setDataToHashMap("co_ap_dob", getDate());
         setDataToHashMap("working", String.valueOf(working));
 
         Log.d("setdata hmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
@@ -312,24 +321,38 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 dataGender = "female";
                 break;
             case R.id.yes:
-
                 coapp = true;
                 view.setVisibility(View.VISIBLE);
                 break;
             case R.id.no:
-
                 coapp = false;
                 view.setVisibility(View.GONE);
                 break;
             case R.id.radioButton1:
+                emi.setVisibility(View.VISIBLE);
                 Log.d("yes clicked", "");
                 working = true;
                 break;
             case R.id.radioButton2:
+                emi.setVisibility(View.INVISIBLE);
                 Log.d("no clicked", "");
                 working = false;
                 break;
-
+            case R.id.dob:
+                Calendar now = Calendar.getInstance();
+                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                        hl_coappldetails.this,
+                        1990,
+                        00,
+                        01
+                );
+                dpd.setAccentColor(R.color.mdtp_background_color);
+                dpd.showYearPickerFirst(true);
+                dpd.setAccentColor(Color.parseColor("#FFE2041E"));
+                // dpd.setTitle("DatePicker Title");
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+                break;
             case R.id.close:
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -340,5 +363,19 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        // date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        Log.d("Date", DateWithMMYY.formatMonth((++monthOfYear)) + "-" + year);
+        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        day=dayOfMonth;
+        month=++monthOfYear;
+        yearv=year;
+        Dob.setText(date);
+    }
+    public String getDate() {
+        return date;
+    }
+
 
 }

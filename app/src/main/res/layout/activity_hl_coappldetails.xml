@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/questn"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -127,7 +128,21 @@
                     android:singleLine="true" />
 
             </LinearLayout>
-
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:inputType="number"
+                android:focusableInTouchMode="false"
+                android:ems="10"
+                android:id="@+id/dob"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="Date Of Birth"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true"
+                android:layout_marginTop="5dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -233,6 +248,21 @@
                         android:layout_marginRight="20dp" />
                 </RadioGroup>
             </LinearLayout>
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/emi"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="EMI You Pay"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true"
+                android:layout_marginTop="5dp"
+                android:visibility="gone" />
         </LinearLayout>
 
     </LinearLayout>

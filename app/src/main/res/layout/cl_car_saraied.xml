@@ -82,7 +82,7 @@
                 android:textSize="15sp"
                 android:imeOptions="actionNext"
                 android:focusableInTouchMode="false"
-                android:nextFocusDown="@+id/totalexpyr"
+                android:nextFocusDown="@+id/emi"
                 android:singleLine="true"
                 android:hint="Ex- 01-01-2010"/>
         </com.gullakh.gullakhandroid.MaterialTextField>
@@ -118,7 +118,7 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/totalexpyr"
+                android:id="@+id/emi"
                 android:inputType="number"
                 android:maxLength="6"
                 android:layout_gravity="center_horizontal"

@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Ex:5 years"
                     android:inputType="number"
-                    android:id="@+id/totalexpyr"
+                    android:id="@+id/emi"
                     android:textColor="#000000"
                     android:textSize="15sp"
                     android:singleLine="true" />

@@ -14,7 +14,63 @@
         android:layout_weight="1"
         android:gravity="center">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/title"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="fill_parent"
+                android:layout_height="65dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Would you like to add co-applicant?"
+                android:id="@+id/textView36"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:gravity="center" />
 
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="65dp"
+                android:weightSum="1"
+                android:id="@+id/radioGroup"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RadioButton
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:id="@+id/yes"
+                    android:checked="false"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:id="@+id/no"
+                    android:checked="false"
+                    android:textSize="20dp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            app:typeface="robotoLight"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Coapplicants"
+            android:textAllCaps="false"
+            android:id="@+id/addcoappl"
+            android:background="@drawable/mainbutton"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:layout_margin="20dp"
+            android:visibility="gone" />
         <EditText
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -23,7 +79,6 @@
             android:background="@drawable/edittextsimple"
             android:hint="Address  line 1"
             android:gravity="center"
-            android:layout_marginTop="5dp"
             android:singleLine="true" />
 
         <EditText

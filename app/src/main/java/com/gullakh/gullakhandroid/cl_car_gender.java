@@ -16,6 +16,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -31,8 +33,8 @@ import java.util.Map;
 
 public class cl_car_gender extends AppCompatActivity implements View.OnClickListener{
     Button back;
-    private Button submit;
-    JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,requestgetserver9;
+    private Button submit,coappl;
+    JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,requestgetserver9,requestgetserver10;
     String sessionid;
     Dialog dgthis;
     String borrowercityid,useremail,usermobile;
@@ -44,6 +46,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     private EditText add1,add2,city,pin,state;
     private String userid;
     DataHandler dbobject;
+    private RadioButton yesb;
+    private RadioButton nob;
+    private View main;
+    boolean coapllflag=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +74,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         contentValues=new ContentValues();
 
         submit = (Button) findViewById(R.id.Submit);
+
         back = (Button) findViewById(R.id.back);
         add1=(EditText)findViewById(R.id.addr1);
         add2=(EditText)findViewById(R.id.addr2);
@@ -78,6 +85,21 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
 
+        main = findViewById(R.id.title);
+        coappl = (Button) findViewById(R.id.addcoappl);
+        yesb = (RadioButton) findViewById(R.id.yes);
+        nob = (RadioButton) findViewById(R.id.no);
+
+        yesb.setOnClickListener(this);
+        nob.setOnClickListener(this);
+        coappl.setOnClickListener(this);
+        if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
+            main.setVisibility(View.VISIBLE);
+            coappl.setVisibility(View.GONE);
+        }else{
+            coappl.setVisibility(View.VISIBLE);
+            main.setVisibility(View.GONE);
+        }
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -117,14 +139,26 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         }else{
                             goToDatabase("mysearch","Car Loan");
                         }
+
                         savetoserver();
                     }else{
                         RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
                     }
                 }
                 break;
+            case R.id.yes:
+                Intent intenth = new Intent(getApplicationContext(), coappldetail.class);
+                startActivity(intenth);
+                break;
+            case R.id.no:
+                coapllflag=false;
+                break;
+            case R.id.addcoappl:
+                intenth = new Intent(getApplicationContext(), coappldetail.class);
+                startActivity(intenth);
+                break;
             case R.id.close:
-                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
                 break;
@@ -390,7 +424,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     jsonArray.put(LoanData);
                 }
                 Log.d("finally got", jsonArray.toString());
-                requestgetserver6.execute("token", "createloanvalue", sessionid,jsonArray.toString());
+                requestgetserver6.execute("token", "createloanvalue", sessionid, jsonArray.toString());
 
             }
         }, cl_car_gender.this, "wait8");
@@ -407,28 +441,54 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("contactupdate jsonobj", String.valueOf(jsonObject));
                 goToDatabase("userlogin", "Car Loan");
-                dgthis.dismiss();
-                goToIntent();
+                if (coapllflag) {
+                    gson = new Gson();
+                    JSONArray CojsonArray = new JSONArray();
+                    for (Map.Entry<String, HashMap<String, String>> entry : cl_car_global_data.allcoappdetail.entrySet()) {
+                        JSONObject json = new JSONObject(entry.getValue());
+                        try {
+                            json.put("loanrequestcaseid", borrowercaseid);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        CojsonArray.put(json);
+                    }
+                    Log.d("coapp json", CojsonArray.toString());
+                    requestgetserver10.execute("token", "coappldetails", sessionid, CojsonArray.toString());
+                }else{
+                    dgthis.dismiss();
+                    goToIntent();
+                }
+                //dgthis.dismiss();
+                //goToIntent();
                 //showdialog();
 
             }
         }, cl_car_gender.this, "wait9");
+        requestgetserver10 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("coapp json", jsonObject.toString());
+                dgthis.dismiss();
+                goToIntent();
+            }
+        }, cl_car_gender.this, "wait6");
+
     }
 
     private void goToIntent() {
-
-        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property") ||
-                (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan"))) {
-            Intent intent = new Intent(cl_car_gender.this, coappldetail.class);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
-        }else{
             Intent intent = new Intent(this, UploadDocument1.class);
             intent.putExtra("name","Guest");
             intent.putExtra("applno",borrowercaseno);
             startActivity(intent);
-        }
-
     }
 
     private void goToDatabase(String table, String loanType)
