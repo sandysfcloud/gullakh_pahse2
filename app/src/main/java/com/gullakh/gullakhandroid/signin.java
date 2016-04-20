@@ -47,6 +47,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView title = (TextView) v.findViewById(R.id.title);
+
         ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         close.setVisibility(View.INVISIBLE);
@@ -63,7 +64,13 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
         emailadress=(EditText) findViewById(R.id.emailaddress);
         password=(EditText) findViewById(R.id.password);
-
+        TextView forgpassword = (TextView)findViewById(R.id.forgetpass);
+        forgpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToForgetPasssword();
+            }
+        });
         signin.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -95,6 +102,12 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                goToNewUser();
             }
         });
+    }
+
+    private void goToForgetPasssword() {
+        Intent intent = new Intent(this, ForgetPassword.class);
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
     }
 
     private void goToNewUser() {

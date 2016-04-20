@@ -35,6 +35,7 @@ public class GlobalData extends MultiDexApplication {
     static final String SERVER_GET_URL_web ="http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_contact_id";
     private String cartypeloan;
     private ArrayList<String> lenders;
+    private String statename;
 
 //*****************CarLoan********************//
 
@@ -220,4 +221,11 @@ public class GlobalData extends MultiDexApplication {
         this.gender = cemailVariable;
     }
 
+    public void setStatename(String statename) {
+        this.statename = statename;
+    }
+
+    public String getStatename() {
+        return statename;
+    }
 }

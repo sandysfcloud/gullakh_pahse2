@@ -82,6 +82,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
         pin = (EditText) findViewById(R.id.pin);
         state = (EditText) findViewById(R.id.state);
+        state.setText(((GlobalData) getApplication()).getStatename());
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
 

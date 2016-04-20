@@ -195,14 +195,15 @@
         <activity android:name=".lp_ownsh" />
         <activity
             android:name=".coappldetail"
-            android:label="@string/title_activity_coappldetail"></activity>
+            android:label="@string/title_activity_coappldetail" />
         <!-- <activity android:name=".lp_ownsh" /> -->
         <activity android:name=".lp_bal_tranf" />
         <activity android:name=".lp_bal_tranf_yes" />
         <activity
             android:name=".CarCompare"
-            android:label="@string/title_activity_car_compare"></activity>
-        <activity android:name=".hl_coappl_EMI"></activity>
+            android:label="@string/title_activity_car_compare" />
+        <activity android:name=".hl_coappl_EMI" />
+        <activity android:name=".ForgetPassword"></activity>
     </application>
 
 </manifest>

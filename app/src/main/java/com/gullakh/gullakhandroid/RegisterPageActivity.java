@@ -68,6 +68,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	private Button register;
 	private EditText firstName,middlename,lastName;
 	private Spinner spinner;
+	private String userid;
+	private String contactid;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -143,14 +146,14 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
 							//	regid = getRegistrationId(getApplicationContext());
 							Log.d("GCM Regid is",RegisterAppToServer.regid);
-							String[] arraydata = new String[5];
+							String[] arraydata = new String[10];
 							arraydata[0] = "registration";
 							arraydata[1] = useremail;
 							arraydata[2] = usermobno;
 							arraydata[3] = RegisterAppToServer.regid;
 							arraydata[4] = firstName.getText().toString();
 							arraydata[5] = middlename.getText().toString();
-							arraydata[5] = lastName.getText().toString();
+							arraydata[6] = lastName.getText().toString();
 
 							urlchange = "registration";
 							JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
@@ -267,6 +270,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					});
 					builder2.show();
 				}
+				userid=str_result.getString("user_id");
+				contactid=str_result.getString("contact_id");
 
 				if(urlchange=="setpassword"){
 					storedatatoDatabase();
@@ -302,18 +307,17 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			e.printStackTrace();
 		}
 	}
-
 	private void storedatatoDatabase() {
 		DataHandler dbobject = new DataHandler(this);
 		dbobject.addTable();
 		ContentValues values = new ContentValues();
 		values.put("useremail", useremail);
 		values.put("usermobile", usermobno);
+		values.put("user_id", userid);
+		values.put("contact_id", contactid);
 		Log.d("mobileandemailinRP",useremail+" "+usermobno);
 		dbobject.insertdata(values, "userlogin");
 	}
-
-
 	public static Dialog showAlertinit(Activity act)
 	{
 		CurrentAct=act;

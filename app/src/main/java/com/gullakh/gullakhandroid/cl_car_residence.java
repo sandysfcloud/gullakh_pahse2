@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,7 +36,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     private ContentValues contentValues;
     private String city="";
     AutoCompleteTextView citynam;
-    JSONServerGet requestgetserver;
+    JSONServerGet requestgetserver,requestgetserver1;
     String sessionid,data;
 
     @Override
@@ -290,12 +287,38 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
         else {
             Log.d("selected current city is ", ((GlobalData) getApplication()).getcarres());
-
+            getStateName(((GlobalData) getApplication()).getcarres());
             Intent intent = new Intent(this, Emp_type_Qustn.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }
     }
+
+    private void getStateName(String city_name) {
+        requestgetserver1 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Statename[] enums = gson.fromJson(jsonObject.get("result"), Statename[].class);
+                for(int i=0;i<enums.length;i++) {
+                    ((GlobalData) getApplication()).setStatename(enums[i].getStatename());
+                }
+                Log.d("check state name json", jsonObject.get("result").toString());
+            }
+        }, cl_car_residence.this, "2");
+        requestgetserver1.execute("token", "statename", sessionid,city_name);
+    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

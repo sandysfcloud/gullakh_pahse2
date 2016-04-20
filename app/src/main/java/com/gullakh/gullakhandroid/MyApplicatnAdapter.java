@@ -127,7 +127,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
 //                    loanParameters.getD4().equals("1")&&loanParameters.getD5().equals("1")&&loanParameters.getD6().equals("1")){
 //                uploaded = true;
 //            }
-
+            Log.d("check loan type",tempValues.getLoan_type());
            if(tempValues.getLoan_type().equalsIgnoreCase("home loan")){
                 holder.image.setImageResource(R.drawable.homeloan);
             }else if(tempValues.getLoan_type().equalsIgnoreCase("personal loan")){
