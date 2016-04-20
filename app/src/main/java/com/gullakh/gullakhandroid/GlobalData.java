@@ -30,8 +30,8 @@ public class GlobalData extends MultiDexApplication {
     private Double depreciation;
     private Double depreciation2;
     //static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php?operation=create";
-    static final String SERVER_GET_URLIMage ="http://54.200.200.39/gullakh_portal/";
-    static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice_new.php";
+    static final String SERVER_GET_URLIMage ="http://54.200.200.39/gullakh_portal_dev/";
+    static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal_dev/webservice_new.php";
     static final String SERVER_GET_URL_web ="http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_contact_id";
     private String cartypeloan;
     private ArrayList<String> lenders;

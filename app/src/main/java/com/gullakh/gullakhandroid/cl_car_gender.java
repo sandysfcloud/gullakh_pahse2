@@ -57,10 +57,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
-        TextView  title = (TextView) v.findViewById(R.id.title);
-        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        TextView title = (TextView) v.findViewById(R.id.title);
+        ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
@@ -71,17 +71,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
-        contentValues=new ContentValues();
+        contentValues = new ContentValues();
 
         submit = (Button) findViewById(R.id.Submit);
 
         back = (Button) findViewById(R.id.back);
-        add1=(EditText)findViewById(R.id.addr1);
-        add2=(EditText)findViewById(R.id.addr2);
-        city=(EditText)findViewById(R.id.city);
+        add1 = (EditText) findViewById(R.id.addr1);
+        add2 = (EditText) findViewById(R.id.addr2);
+        city = (EditText) findViewById(R.id.city);
         city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
-        pin=(EditText)findViewById(R.id.pin);
-        state=(EditText)findViewById(R.id.state);
+        pin = (EditText) findViewById(R.id.pin);
+        state = (EditText) findViewById(R.id.state);
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
 
@@ -93,12 +93,20 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         yesb.setOnClickListener(this);
         nob.setOnClickListener(this);
         coappl.setOnClickListener(this);
-        if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
-            main.setVisibility(View.VISIBLE);
-            coappl.setVisibility(View.GONE);
-        }else{
-            coappl.setVisibility(View.VISIBLE);
-            main.setVisibility(View.GONE);
+        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan") ||
+        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+            if (cl_car_global_data.dataWithAns.get("proposed_ownership") != null) {
+                if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
+                    main.setVisibility(View.VISIBLE);
+                    coappl.setVisibility(View.GONE);
+                } else {
+                    coappl.setVisibility(View.VISIBLE);
+                    main.setVisibility(View.GONE);
+                }
+            } else {
+                main.setVisibility(View.VISIBLE);
+                coappl.setVisibility(View.GONE);
+            }
         }
     }
     @Override
@@ -337,7 +345,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 //Log.d("Application values jsonobj", String.valueOf(jsonObject));
 
-                requestgetserver9.execute("token", "contactupdate",userid, borrowercontactid);
+                requestgetserver9.execute("token", "contactupdate", userid, borrowercontactid);
 
             }
         }, cl_car_gender.this, "wait6");
@@ -362,7 +370,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
                 Map<String, String> arrayLoantype = new HashMap<>();
                 for (int i = 0; i < LT.length; i++) {
-                    arrayLoantype.put(LT[i].gettypename(),LT[i].gettypeid());
+                    arrayLoantype.put(LT[i].gettypename(), LT[i].gettypeid());
                 }
 
                 String homeloantype = arrayLoantype.get("Home Loan");
@@ -441,21 +449,27 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("contactupdate jsonobj", String.valueOf(jsonObject));
                 goToDatabase("userlogin", "Car Loan");
-                if (coapllflag) {
-                    gson = new Gson();
-                    JSONArray CojsonArray = new JSONArray();
-                    for (Map.Entry<String, HashMap<String, String>> entry : cl_car_global_data.allcoappdetail.entrySet()) {
-                        JSONObject json = new JSONObject(entry.getValue());
-                        try {
-                            json.put("loanrequestcaseid", borrowercaseid);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan") ||
+                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                    if (coapllflag) {
+                        gson = new Gson();
+                        JSONArray CojsonArray = new JSONArray();
+                        for (Map.Entry<String, HashMap<String, String>> entry : cl_car_global_data.allcoappdetail.entrySet()) {
+                            JSONObject json = new JSONObject(entry.getValue());
+                            try {
+                                json.put("loanrequestcaseid", borrowercaseid);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            CojsonArray.put(json);
                         }
-                        CojsonArray.put(json);
+                        Log.d("coapp json", CojsonArray.toString());
+                        requestgetserver10.execute("token", "coappldetails", sessionid, CojsonArray.toString());
+                    } else {
+                        dgthis.dismiss();
+                        goToIntent();
                     }
-                    Log.d("coapp json", CojsonArray.toString());
-                    requestgetserver10.execute("token", "coappldetails", sessionid, CojsonArray.toString());
-                }else{
+                }else {
                     dgthis.dismiss();
                     goToIntent();
                 }
