@@ -235,7 +235,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         setDataToHashMap("firstname", firstName.getText().toString());
         setDataToHashMap("lastname", lastName.getText().toString());
         setDataToHashMap("relation", titled);
-        //setDataToHashMap("gender", dataGender);
+        setDataToHashMap("gender", dataGender);
         setDataToHashMap("co_ap_dob", getDate());
         setDataToHashMap("working", String.valueOf(working));
 
@@ -329,10 +329,12 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 view.setVisibility(View.GONE);
                 break;
             case R.id.radioButton1:
+
                 Log.d("yes clicked", "");
                 working = true;
                 break;
             case R.id.radioButton2:
+
                 Log.d("no clicked", "");
                 working = false;
                 break;
