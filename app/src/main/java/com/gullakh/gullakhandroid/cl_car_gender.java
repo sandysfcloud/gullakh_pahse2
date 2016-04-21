@@ -110,7 +110,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-    @Override
+  /*  @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -128,7 +128,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
 
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
     @Override
     public void onClick(View v) {
 
@@ -173,15 +173,15 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 startActivity(intenth);
                 break;
             case R.id.back:
-                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+               /* if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
                     if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
                         RegisterPageActivity.showAlertquestn(this);
-                    else
-                        finish();
-                }else{
-                    finish();
-                }
-                //finish();
+                    else*/
+
+                overridePendingTransition(R.transition.left, R.transition.right);
+                finish();
+
+
                 break;
         }
     }

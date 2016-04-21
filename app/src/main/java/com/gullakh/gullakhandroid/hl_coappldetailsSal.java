@@ -99,17 +99,17 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
             HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
 
 
-            if(hdata.get("co_employeenam")!=null) {
+            if(hdata.get("co_employeename")!=null) {
 
 
                 Log.d("check data first", String.valueOf(hdata));
 
-                Log.d(" co_employeenam", hdata.get("co_employeenam"));
+                Log.d(" co_employeenam", hdata.get("co_employeename"));
 
 
 
-                String co_empnam = hdata.get("co_employeenam");
-                String co_empdate = hdata.get("co_employeedate");
+                String co_empnam = hdata.get("co_employeename");
+                String co_empdate = hdata.get("year_you_joined_current_comp");
                 String co_empexpyr = hdata.get("co_employeedexpyear");
                 String co_empexpmon = hdata.get("co_employeedexpmon");
 
@@ -187,6 +187,8 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                         if (no != null) {
                             setDataToHashMap("co_employeename" ,  Emp.getText().toString());
                             setDataToHashMap("year_you_joined_current_comp" , getDate());
+                            setDataToHashMap("co_employeedexpyear" , Expyr.getText().toString());
+                            setDataToHashMap("co_employeedexpmon" , Expmn.getText().toString());
                             setDataToHashMap("total_exp", Expyr.getText().toString()+" "+Expmn.getText().toString());
                             Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                         }

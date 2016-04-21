@@ -80,16 +80,16 @@ public class hl_empType extends AppCompatActivity implements View.OnClickListene
             HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
 
 
-            if(hdata.get("co_employment_type")!=null) {
-                Log.d("father co_employment_type", hdata.get("co_employment_type"));
+            if(hdata.get("type_employment")!=null) {
+                Log.d("type_employment", hdata.get("type_employment"));
 
-                if (hdata.get("co_employment_type").equals("salaried")) {
+                if (hdata.get("type_employment").equals("salaried")) {
                     sal.setImageResource(R.drawable.buttonselecteffect);
                     co_emp="salaried";
-                } else if (hdata.get("co_employment_type").equals("self employed professional")) {
+                } else if (hdata.get("type_employment").equals("self employed professional")) {
                     prof.setImageResource(R.drawable.buttonselecteffect);
                     co_emp="self employed professional";
-                } else if (hdata.get("co_employment_type").equals("self employed business")) {
+                } else if (hdata.get("type_employment").equals("self employed business")) {
                     self.setImageResource(R.drawable.buttonselecteffect);
                     co_emp="self employed business";
                 }
