@@ -26,7 +26,6 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
     AutoCompleteTextView email;
     Dialog dg;
     String data;
-    static boolean CarType;
     Button back,next,done;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +165,6 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
                 ((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
                 if(data==null) {
-                    CarType=true;
                     intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

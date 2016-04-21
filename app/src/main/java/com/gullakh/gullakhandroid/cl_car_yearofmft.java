@@ -48,7 +48,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Car");
+        title.setText("Year of Car Manufacture");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

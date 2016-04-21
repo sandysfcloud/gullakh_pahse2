@@ -95,7 +95,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         nob.setOnClickListener(this);
         coappl.setOnClickListener(this);
         if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan") ||
-        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
             if (cl_car_global_data.dataWithAns.get("proposed_ownership") != null) {
                 if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
                     main.setVisibility(View.VISIBLE);
@@ -156,6 +156,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.yes:
+
                 Intent intenth = new Intent(getApplicationContext(), coappldetail.class);
                 startActivity(intenth);
                 break;

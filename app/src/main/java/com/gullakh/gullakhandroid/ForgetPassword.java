@@ -172,8 +172,9 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
-
-                }
+                }else{
+                RegisterPageActivity.showErroralert(ForgetPassword.this,str_result.getString("error_message"), "failed");
+            }
 
             } catch (JSONException e1) {
             e1.printStackTrace();

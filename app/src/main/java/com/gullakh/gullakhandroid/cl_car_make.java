@@ -50,7 +50,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Choose car");
+        title.setText("Choose Car");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -218,18 +218,16 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
     }
     private void goToIntent()
     {
-        Intent intent;
-        if(Car_type_questn.CarType)
-        {
-             intent = new Intent(this, cl_car_yearofmft.class);
-        }else
-        {
-             intent = new Intent(this, cl_car_residence_type.class);
+        Intent intent = null;
+        if (((GlobalData) getApplication()).getCartypeloan().equals("New Car Loan")) {
+            intent = new Intent(this, cl_car_residence_type.class);
+        }
+        else{
+            intent = new Intent(this, cl_car_yearofmft.class);
         }
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);
     }
-
     private void goToDatabase(String loanType)
     {
         contentValues.put("loantype", loanType);

@@ -75,6 +75,8 @@
                     android:focusable="false"
                     android:id="@+id/joindateofempyr"
                     android:textColor="#000000"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:textSize="15sp" />
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>

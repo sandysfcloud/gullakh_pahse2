@@ -50,6 +50,7 @@
                 android:id="@+id/salEmpname"
                 android:textColor="#000000"
                 android:textSize="15sp"
+                android:imeOptions="actionNext"
                 android:singleLine="true" />
         </com.gullakh.gullakhandroid.MaterialTextField>
 
@@ -133,6 +134,7 @@
                     android:id="@+id/emi"
                     android:textColor="#000000"
                     android:textSize="15sp"
+                    android:imeOptions="actionNext"
                     android:singleLine="true" />
             </com.gullakh.gullakhandroid.MaterialTextField>
 
@@ -156,6 +158,7 @@
                     android:id="@+id/totalexpmn"
                     android:textColor="#000000"
                     android:textSize="15sp"
+                    android:imeOptions="actionDone"
                     android:singleLine="true" />
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>

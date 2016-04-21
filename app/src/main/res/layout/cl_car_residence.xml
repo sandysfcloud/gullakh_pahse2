@@ -97,7 +97,7 @@
 
                 android:id="@+id/ImageViewPlace3"
 
-                android:background="@drawable/lockol"
+                android:background="@drawable/locdelhi"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1" />
@@ -129,7 +129,7 @@
                 android:textSize="18dp"
                 android:id="@+id/TextViewOption3"
                 android:textColor="#3f3f3f"
-                android:text="Kolkata"
+                android:text="Delhi"
                 app:typeface="robotoLight"
                 android:layout_weight="1" />
             <com.gullakh.gullakhandroid.font.RobotoTextView

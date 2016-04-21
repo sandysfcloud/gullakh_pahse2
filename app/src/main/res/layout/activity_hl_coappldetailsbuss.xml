@@ -76,6 +76,8 @@
                     android:inputType="number"
                     android:id="@+id/joindateofempyr"
                     android:textColor="#000"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:textSize="15sp"
                     android:hint="Ex:2001" />
 

@@ -162,15 +162,6 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
         }
     }
 
-
-
-
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

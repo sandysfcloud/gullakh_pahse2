@@ -78,26 +78,33 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 //**********
 
         Log.d("check all data here", String.valueOf(cl_car_global_data.dataWithAns));
-        if (cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("joint")) {
-            String coapp = cl_car_global_data.dataWithAns.get("joint_acc");
-            // Log.d("check coapp name here", coapp);
+        if (cl_car_global_data.dataWithAns.get("proposed_ownership")!=null) {
+            if (cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("joint")) {
+                String coapp = cl_car_global_data.dataWithAns.get("joint_acc");
+                // Log.d("check coapp name here", coapp);
 
-            String[] scoapp = coapp.split(";");
-            //  Log.d("all docum data after" , String.valueOf(scoapp[0]));
+                String[] scoapp = coapp.split(";");
+                //  Log.d("all docum data after" , String.valueOf(scoapp[0]));
 
-            for (int i = 0; i < scoapp.length; i++) {
-                if (scoapp[i].equals("Mother"))
-                    lmoth.setVisibility(View.VISIBLE);
-                if (scoapp[i].equals("Father"))
-                    lfath.setVisibility(View.VISIBLE);
-                if (scoapp[i].equals("Brother"))
-                    lbro.setVisibility(View.VISIBLE);
-                if (scoapp[i].equals("Spouse"))
-                    lspou.setVisibility(View.VISIBLE);
+                for (int i = 0; i < scoapp.length; i++) {
+                    if (scoapp[i].equals("Mother"))
+                        lmoth.setVisibility(View.VISIBLE);
+                    if (scoapp[i].equals("Father"))
+                        lfath.setVisibility(View.VISIBLE);
+                    if (scoapp[i].equals("Brother"))
+                        lbro.setVisibility(View.VISIBLE);
+                    if (scoapp[i].equals("Spouse"))
+                        lspou.setVisibility(View.VISIBLE);
 
-                Log.d("documen info", +i + " " + scoapp[i]);
+                    Log.d("documen info", +i + " " + scoapp[i]);
+                }
+            } else {
+                lmoth.setVisibility(View.VISIBLE);
+                lfath.setVisibility(View.VISIBLE);
+                lbro.setVisibility(View.VISIBLE);
+                lspou.setVisibility(View.VISIBLE);
             }
-        }else{
+        }else {
             lmoth.setVisibility(View.VISIBLE);
             lfath.setVisibility(View.VISIBLE);
             lbro.setVisibility(View.VISIBLE);
