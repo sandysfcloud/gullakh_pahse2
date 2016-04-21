@@ -140,7 +140,7 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
             HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
 
 
-            if(hdata.get("profession")!=null) {
+            if(hdata.get("category")!=null) {
 
                 Log.d("check profession", String.valueOf(hdata));
 
@@ -184,7 +184,7 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
 
                             if (no != null) {
                                 setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItemPosition()));
-                                setDataToHashMap("date", getDate());
+                                setDataToHashMap("date", Doj.getText().toString());
                                 setDataToHashMap("category", String.valueOf(spinner2.getSelectedItemPosition()));
 
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));

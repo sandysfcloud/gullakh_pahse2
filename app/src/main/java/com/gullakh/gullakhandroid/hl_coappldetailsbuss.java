@@ -145,15 +145,15 @@ String no;
             //get the perticular co-appc detail
             HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
 
-            if(hdata.get("ind_type")!=null) {
+            if(hdata.get("firm_type_prof")!=null) {
                 Log.d("check data", String.valueOf(hdata));
 
                 Log.d("no in bussiness class", no);
 
 
-                String profession = hdata.get("ind_type");
-                String date = hdata.get("start_date_of_cur_business");
-                String category = hdata.get("firm_type");
+                String profession = hdata.get("profession");
+                String date = hdata.get("start_date_of_current_business_prof");
+                String category = hdata.get("firm_type_prof");
 
                 spinner1.setSelection(Integer.parseInt(profession));
                 Doj.setText(date);
@@ -182,7 +182,7 @@ String no;
                             if (no != null) {
                                 setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItemPosition()));
                                 Log.d("selected position", String.valueOf(spinner1.getSelectedItemPosition()));
-                                setDataToHashMap("start_date_of_current_business_prof" , getDate());
+                                setDataToHashMap("start_date_of_current_business_prof" ,  Doj.getText().toString());
                                 setDataToHashMap("firm_type_prof", String.valueOf(spinner2.getSelectedItemPosition()));
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 

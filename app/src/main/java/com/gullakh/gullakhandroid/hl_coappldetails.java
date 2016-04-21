@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -120,8 +121,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                         hashno = "3";
                         gethmp("3");
                     }
-                    if (titled.equals("Spouse's")) {
-                        lgender.setVisibility(View.VISIBLE);
+                    if (titled.equals("Spouse")) {
                         Log.d("title", titled);
                         hashno = "4";
                         gethmp("4");
@@ -240,7 +240,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         setDataToHashMap("middleName", MiddleName.getText().toString());
         setDataToHashMap("relation", titled);
         setDataToHashMap("gender", dataGender);
-        setDataToHashMap("co_ap_dob", getDate());
+        setDataToHashMap("co_ap_dob", Dob.getText().toString());
         setDataToHashMap("working", String.valueOf(working));
 
         Log.d("setdata hmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
@@ -352,13 +352,19 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        // date = "Date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        Log.d("Date", DateWithMMYY.formatMonth((++monthOfYear)) + "-" + year);
-        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
         day=dayOfMonth;
-        month=++monthOfYear;
+        month=monthOfYear;
+        month=month+1;
         yearv=year;
-        Dob.setText(date);
+        Log.d("day is "+day+"month is "+month+"year is "+yearv,"0");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, monthOfYear, dayOfMonth);
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+        String formatdate = format.format(calendar.getTime());
+        Log.d("date is KK",formatdate);
+        //Dob.setText(date);
+        Dob.setText(formatdate);
     }
     public String getDate() {
         return date;

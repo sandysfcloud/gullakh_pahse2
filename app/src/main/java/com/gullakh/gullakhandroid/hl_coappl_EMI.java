@@ -84,10 +84,10 @@ public class hl_coappl_EMI extends AppCompatActivity implements View.OnClickList
 
             HashMap<String, String> hdata = cl_car_global_data.allcoappdetail.get(flag);
             Log.d("check fathdata", String.valueOf(hdata));
-
-            Log.d("check value here kbk", hdata.get("total_emi"));
-            emi.setText(hdata.get("total_emi"));
-
+           if( hdata.get("total_emi")!=null) {
+               Log.d("check value here kbk", hdata.get("total_emi"));
+               emi.setText(hdata.get("total_emi"));
+           }
 
         }
     }
@@ -105,6 +105,13 @@ public class hl_coappl_EMI extends AppCompatActivity implements View.OnClickList
 
                     finish();
                 }
+
+                break;
+            case R.id.back:
+                finish();
+                break;
+
+
         }
     }
     public void setDataToHashMap(String Key, String data) {
