@@ -231,7 +231,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City ;")).toString());
 
                         }
+                        else if(args[1].equals("statename")){
 
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select statename  from City where city_name='"+args[3]+"';")).toString());
+
+                        }
                         else if(args[1].equals("City")){
 
                             client = new DefaultHttpClient();

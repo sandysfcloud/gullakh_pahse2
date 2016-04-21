@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class hl_coappldetails extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
-    public EditText firstName,Dob,lastName,MiddleName;
+    public EditText firstName,Dob,lastName;
     ImageView gen1, gen2;
     Button next, back;
     String dataGender;
@@ -40,7 +40,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     String hashno = null;
     int day, month, yearv;
     private String date = "";
-
+    private EditText emi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,6 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
         firstName = (EditText) findViewById(R.id.FirstName);
         lastName = (EditText) findViewById(R.id.LastName);
-        MiddleName = (EditText) findViewById(R.id.MiddleName);
         gen1 = (ImageView) findViewById(R.id.usermale);
         gen2 = (ImageView) findViewById(R.id.userfemale);
         gen1.setOnClickListener(this);
@@ -149,7 +148,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
 
 //***********from edit
 
-        /*Intent intent = getIntent();
+        Intent intent = getIntent();
         no = intent.getStringExtra("no");
         if (no != null) {
 
@@ -183,7 +182,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 now.setChecked(true);
             }
 
-        }*/
+        }
 
 
     }
@@ -207,9 +206,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
 
             Log.d("father fnam", hdata.get("firstname"));
             firstName.setText(hdata.get("firstname"));
-            lastName.setText(hdata.get("lastname"));
-            MiddleName.setText(hdata.get("middleName"));
-            Dob.setText(hdata.get("co_ap_dob"));
+            lastName.setText(hdata.get("Lastname"));
             if (hdata.get("working").equals("false"))
                 now.setChecked(true);
             else if(hdata.get("working").equals("true")) {
@@ -237,7 +234,6 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
        // loanrequestcaseid
         setDataToHashMap("firstname", firstName.getText().toString());
         setDataToHashMap("lastname", lastName.getText().toString());
-        setDataToHashMap("middleName", MiddleName.getText().toString());
         setDataToHashMap("relation", titled);
         setDataToHashMap("gender", dataGender);
         setDataToHashMap("co_ap_dob", Dob.getText().toString());
@@ -276,14 +272,31 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
 
 
                             setData("co-applicant");
-                           // setmainhm(hashno, cl_car_global_data.dataWithAnscoapp);
+                            setmainhm(hashno, cl_car_global_data.dataWithAnscoapp);
                             Log.d("after adding to hmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                             Log.d("after adding to main hashmap coapde KK", String.valueOf(cl_car_global_data.allcoappdetail));
                             finish();
 
-                            Intent i = new Intent(this, hl_coappl_EMI.class);
-                            i.putExtra("hashno", hashno);
-                            startActivity(i);
+                           /*  if (joint == 1 && cl_car_global_data.numOfApp > 0) {
+
+
+
+
+
+                               Log.d("no of co applicants before", String.valueOf(cl_car_global_data.numOfApp));
+                                Log.d("check data here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+
+
+                                cl_car_global_data.numOfApp = cl_car_global_data.numOfApp - 1;
+                                Log.d("no of co applicants after", String.valueOf(cl_car_global_data.numOfApp));
+
+                                Log.d("check hashmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+
+
+
+
+
+                            }*/
 
                         }
                     } else

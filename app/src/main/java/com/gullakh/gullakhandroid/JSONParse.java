@@ -56,9 +56,9 @@ Dialog dialogalert;
             urlnew=urlnew+"/user_login_process";
         else if(arraydata[0]=="registration")
             urlnew=urlnew+"/Send_Notification";
+        else if(arraydata[0]=="forgetpassword")
+            urlnew=urlnew+"/Password_Reset";
             else
-
-
             urlnew=urlnew+"/update_password";
 
          json = jParser.getJSONFromUrl(urlnew,arraydata);
