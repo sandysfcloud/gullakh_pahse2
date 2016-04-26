@@ -139,7 +139,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             case R.id.ImageViewPlace1:
                 place1.setImageResource(R.drawable.buttonselecteffect);
                 place2.setImageResource(R.drawable.locchn);
-                place3.setImageResource(R.drawable.lockol);
+                place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
                 propertyLocated="Bengaluru";
                 setDataToHashMap("property_city", propertyLocated);
@@ -148,7 +148,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             case R.id.ImageViewPlace2:
                 place1.setImageResource(R.drawable.locbang);
                 place2.setImageResource(R.drawable.buttonselecteffect);
-                place3.setImageResource(R.drawable.lockol);
+                place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
                 propertyLocated="Chennai";
                 setDataToHashMap("property_city", propertyLocated);
@@ -165,7 +165,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             case R.id.ImageViewPlace4:
                 place1.setImageResource(R.drawable.locbang);
                 place2.setImageResource(R.drawable.locchn);
-                place3.setImageResource(R.drawable.lockol);
+                place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 propertyLocated="Mumbai";
                 setDataToHashMap("property_city", propertyLocated);
@@ -174,7 +174,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             case R.id.locatn:
                 place1.setImageResource(R.drawable.locbang);
                 place2.setImageResource(R.drawable.locchn);
-                place3.setImageResource(R.drawable.lockol);
+                place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
                 setDataToHashMap("property_city", propertyLocated);
                 getcitynam();

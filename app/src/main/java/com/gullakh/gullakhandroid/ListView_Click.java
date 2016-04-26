@@ -308,7 +308,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
-                        intent = new Intent(ListView_Click.this,hl_city.class);
+                        intent = new Intent(ListView_Click.this,cl_car_residence_type.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);

@@ -205,9 +205,6 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         }
-
-
-
                         else {
                             Intent intent = new Intent(hl_coappldetailsSal.this, hl_salaried2.class);
                             intent.putExtra("singleCoappl", "yes");

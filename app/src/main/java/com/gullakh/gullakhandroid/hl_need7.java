@@ -80,20 +80,41 @@ public class hl_need7 extends AppCompatActivity implements View.OnClickListener 
                     } else {
                         setDataToHashMap("cost_of_plot_reg", Text1.getText().toString());
                         setDataToHashMap("joint_acc",jointMembers);
-                        if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
+                        if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                             cl_car_global_data.numOfApp = getApplicants();
                             cl_car_global_data.totalno_coapp = getApplicants();
                             Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
-                        }
-                        else
-                        if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
-                            jointMembers="Spouse;Brother;Father;Mother;";
+
+                            if (getApplicants() > 0) {
+                                if (getApplicants() == 1 && jointMembers.equals("Self;")) {
+                                    RegisterPageActivity.showErroralert(this, "Select joint members", "failed");
+                                } else {
+                                    Intent intent;
+                                    if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                        intent = new Intent(this, DateOfBirth_questn.class);
+                                    } else {
+                                        intent = new Intent(this, cl_car_residence_type.class);
+                                    }
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                }
+                            }else{
+                                RegisterPageActivity.showErroralert(this, "Select joint members", "failed");
+                            }
+                        } else if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
+                            jointMembers = "Spouse;Brother;Father;Mother;";
                             setDataToHashMap("joint_acc", jointMembers);
                             Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
+
+                            Intent intent;
+                            if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                intent = new Intent(this, DateOfBirth_questn.class);
+                            } else {
+                                intent = new Intent(this, cl_car_residence_type.class);
+                            }
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
                         }
-                        Intent intent = new Intent(this, cl_car_residence_type.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
                     }
                 }
                 break;
