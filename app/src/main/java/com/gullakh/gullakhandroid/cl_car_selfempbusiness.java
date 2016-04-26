@@ -180,15 +180,9 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
                             if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
                             {
                                 goToDatabase("Home Loan");
-                                if(cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("Single")){
-                                   // Intent intent = new Intent(this, hl_coappldetails.class);
-                                    Intent intent = new Intent(this, hl_coappldetails.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                }else{
-                                    Intent i=new Intent(this,hl_empType.class);
-                                    startActivity(i);
-                                }
+                                Intent intent = new Intent(cl_car_selfempbusiness.this, cl_car_gender.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
                             }
                             else {
                                 goToDatabase("Car Loan");

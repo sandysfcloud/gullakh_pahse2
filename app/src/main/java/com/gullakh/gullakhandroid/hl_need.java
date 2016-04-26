@@ -76,7 +76,9 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         categories.add("Construction of house on a plot");
         categories.add("Purchase of plot & construction there on");
         categories.add("Home Renovation");
-        categories.add("Balance Transfer of existing home loan");
+        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+            categories.add("Balance Transfer of existing home loan");
+        }
         categories.add("Property is not yet identified");
         categories.add("Purchase of a under construction builder flat");
         categories.add("Refinance a property already purchased from own sources");

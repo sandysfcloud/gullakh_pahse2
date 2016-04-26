@@ -281,7 +281,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
 					}else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
-						Intent intent = new Intent(RegisterPageActivity.this,hl_city.class);
+						Intent intent = new Intent(RegisterPageActivity.this,cl_car_residence_type.class);
 						startActivity(intent);
 						overridePendingTransition(R.transition.left, R.transition.right);
 					}else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){

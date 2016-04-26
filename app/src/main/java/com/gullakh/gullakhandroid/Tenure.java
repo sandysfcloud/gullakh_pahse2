@@ -204,8 +204,11 @@ public void onClick(View v) {
         case R.id.next:
         ((GlobalData) getApplication()).seTenure(tenure.getText().toString());
                 String emptype=((GlobalData) getApplication()).getemptype();
+                        Intent intent = null;
+                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan") ||
+                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
                 Log.d("checking employee type",emptype);
-                Intent intent;
+
                 if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
                         if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
                                 intent = new Intent(Tenure.this, Car_Loan_PAT.class);
@@ -213,12 +216,16 @@ public void onClick(View v) {
                                 intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                }else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
                         if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                                 intent = new Intent(Tenure.this, lp_ownsh.class);
-                        }else{
+                        } else {
                                 intent = new Intent(Tenure.this, hl_city.class);
                         }
+                }
+//                else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+//                                intent = new Intent(Tenure.this, hl_city.class);
+//                }
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                 }
@@ -230,10 +237,11 @@ public void onClick(View v) {
                     {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);
                    }
-                    else
-                   intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
-                   startActivity(intent);
-                   overridePendingTransition(R.transition.left, R.transition.right);
+                    else {
+                            intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                    }
 
 
                 }
