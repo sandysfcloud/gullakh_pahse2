@@ -38,6 +38,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     JSONServerGet requestgetserver;
     String sessionid;
     ArrayList<String> liste;
+    int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +80,21 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
             getInfo();
         }
         getbanknam();
+
+
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("employer");
+        if (data != null) {
+            if (data.equals("employer")) {
+                flag=1;
+
+            }
+        }
+
+
+
+
+
     }
     public void getbanknam()
     {

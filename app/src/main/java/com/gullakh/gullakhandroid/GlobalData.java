@@ -13,7 +13,7 @@ public class GlobalData extends MultiDexApplication {
 
     private String cnameVariable;
     private String cmobileVariable;
-    private String cemailVariable,hashno;
+    private String cemailVariable,hashno,incent;
     private Double datetimevar;
 
     private String questionVariable;
@@ -22,7 +22,7 @@ public class GlobalData extends MultiDexApplication {
     private int sizefiltermusthave;
     private ArrayList<Double> foir,accid;
 
-    private String session,carres,loantyp,gender;
+    private String session,carres,loantyp,gender,employer;
     private String tenure,propcity;
     private CharSequence[] banklist;
     private Double pat;
@@ -75,6 +75,10 @@ public class GlobalData extends MultiDexApplication {
 
     public String getloantyp() {
         return loantyp;
+    }
+
+    public String getavgince() {
+        return incent;
     }
 
     public Double getnetsalary() {
@@ -175,12 +179,16 @@ public class GlobalData extends MultiDexApplication {
         depreciation2 = value;
     }
 
+    public void setemployer(String cemailVariable) {
+        this.employer = cemailVariable;
+    }
+
     public void setloantyp(String cemailVariable) {
         this.loantyp = cemailVariable;
     }
-
-
-
+    public void setavgince(String someVariable) {
+        this.incent = someVariable;
+    }
     //***************HomeLoan***********************//
 
     public void setpropcity(String cemailVariable) {
@@ -189,6 +197,9 @@ public class GlobalData extends MultiDexApplication {
 
     public String getpropcity() {
         return propcity;
+    }
+    public String getemployer() {
+        return employer;
     }
 
     public void sethashno(String cemailVariable) {

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -24,6 +25,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     private String dataSalDeposite="";
     private ImageView pay1,pay2;
     private ContentValues contentValues;
+    int flag=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,6 +63,21 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();
         }
+
+
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("employer");
+        if (data != null) {
+            if (data.equals("employer")) {
+               flag=1;
+
+            }
+        }
+
+
+
+
+
     }
     private void getInfo() {
         DataHandler dbobject = new DataHandler(this);
@@ -102,46 +119,70 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 if(dataSalDeposite.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode1.this, "Select any one Options", "failed");
-                }else{
-                    setDataToHashMap("sal_pay_option", dataSalDeposite);
-                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                        goToDatabase("Home Loan");
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                        goToDatabase("Personal Loan");
+                }else {
 
-                    }else{
-                        goToDatabase("Car Loan");
-                    }
-                    if(dataSalDeposite.equals("Bank")) {
+                    setdata();
+
+
+                    if (flag == 1) {
+
                         Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                        intent.putExtra("employer", "employer");
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else{
-                        Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
+
+                    } else {
+
+                        if (dataSalDeposite.equals("Bank")) {
+                            Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        } else {
+                            Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        }
                     }
                 }break;
             case R.id.imageViewpay1:
                 pay1.setImageResource(R.drawable.buttonselecteffect);
                 pay2.setImageResource(R.drawable.bankcheque);
                 dataSalDeposite="Bank";
-                setDataToHashMap("sal_pay_option", dataSalDeposite);
-                goToDatabase("Car Loan");
+                setdata();
 
-                Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if (flag == 1) {
+
+                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                    intent2.putExtra("employer", "employer");
+                    startActivity(intent2);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                }
+             else {
+                    Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.imageViewpay2:
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cheque";
-                setDataToHashMap("sal_pay_option", dataSalDeposite);
-                goToDatabase("Car Loan");
-                Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
-                startActivity(intent2);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                setdata();
+
+                if (flag == 1) {
+
+                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                    intent2.putExtra("employer", "employer");
+                    startActivity(intent2);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                } else {
+
+                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                    startActivity(intent2);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -154,6 +195,18 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 break;
         }
 
+    }
+    public void setdata()
+    {
+        setDataToHashMap("sal_pay_option", dataSalDeposite);
+        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+            goToDatabase("Home Loan");
+        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+            goToDatabase("Personal Loan");
+
+        }else{
+            goToDatabase("Car Loan");
+        }
     }
     public void setDataToHashMap(String key,String data)
     {

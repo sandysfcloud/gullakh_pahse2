@@ -25,7 +25,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClickListener {
-    EditText sal;
+    EditText sal,incent;
     Button next;
     ImageView review;//,done;
     private SeekArc mSeekArc;
@@ -68,6 +68,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         sal = (EditText) findViewById(R.id.netsalary);
         sal.setSelection(sal.getText().length());
         sal.addTextChangedListener(new NumberTextWatcher(sal));
+
+        incent = (EditText) findViewById(R.id.incent);
+        incent.addTextChangedListener(new NumberTextWatcher(incent));
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
@@ -208,16 +211,22 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 //                break;
             case R.id.next:
                 if(!sal.getText().toString().matches("")) {
+                    if(!incent.getText().toString().matches("")) {
                     if(Float.parseFloat(sal.getText().toString().replaceAll(",", "")) > 3000) {
                         Log.d("net sal",sal.getText().toString().replaceAll(",", ""));
                         ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString().replaceAll(",", "")));
+                        ((GlobalData) getApplication()).setavgince(incent.getText().toString());
                         Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else {
                         RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
                     }
-                }else {
+                }
+                    else {
+                    RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Please enter your Average Monthly Incentives", "failed");
+                } }
+                    else {
                     RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Please enter your manthly salary", "failed");
                 }
                 break;

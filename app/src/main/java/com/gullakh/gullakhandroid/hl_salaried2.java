@@ -13,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -63,13 +64,8 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
 
 
 
+        //****from prequestion from personal loan
 
-//intent from coapplicant
-//        Intent intent = getIntent();
-//        no = intent.getStringExtra("no");
-//        if (no != null) {
-//            gethmp(no);
-//        }
 
 
 

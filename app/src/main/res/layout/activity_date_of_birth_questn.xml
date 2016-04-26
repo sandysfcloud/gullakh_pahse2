@@ -6,7 +6,12 @@
     android:layout_height="match_parent">
 
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
+    android:id="@+id/ldateofb"
+    android:orientation="vertical">
     <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
+                android:focusableInTouchMode="false"
                 android:id="@+id/birthdate"
                 android:textColorHint="#000"
                 android:textColor="#000"
@@ -184,8 +190,111 @@
             android:paddingLeft="95dp"
             app:typeface="robotoLight"/>
     </LinearLayout>
+</LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/lempl"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
+        >
 
 
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+
+            android:text="Name Of Current Employer"
+            android:layout_marginBottom="10dp"
+            android:textColor="#3f3f3f"
+            app:typeface="robotoLight"
+            />
+
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+
+
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="#fff"
+            app:mtf_image="@drawable/companyname"
+            >
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint=""
+
+                android:id="@+id/salEmpname"
+                android:textColorHint="#000"
+                android:textColor="#000"
+                android:textSize="20sp"
+                app:typeface="robotoLight"/>
+
+        </com.gullakh.gullakhandroid.MaterialTextField>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+
+            android:gravity="bottom"
+
+            >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/footer2"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+
+            android:background="#b8546e7a">
+
+            <com.gullakh.gullakhandroid.font.RobotoButton
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Previous"
+                android:id="@+id/back2"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/arrowleft"
+                android:background="#00ffffff"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="22dp"
+                android:paddingLeft="15dp"
+                android:gravity="fill"
+                app:typeface="robotoLight"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="#ed1c24"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
+            <com.gullakh.gullakhandroid.font.RobotoButton
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Next"
+                android:drawableRight="@drawable/arrowright"
+                android:id="@+id/next2"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:background="#00ffffff"
+                android:textColor="#ffffff"
+                android:textSize="22dp"
+                android:singleLine="false"
+                android:paddingRight="15dp"
+                android:paddingLeft="95dp"
+                app:typeface="robotoLight"/>
+        </LinearLayout> </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
 
 <!--

@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -79,6 +80,10 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Expmn = (EditText) findViewById(R.id.totalexpmn);
         getDataFromHashMap();
         user=true;
+
+
+
+
     }
 
     private void getDataFromHashMap() {

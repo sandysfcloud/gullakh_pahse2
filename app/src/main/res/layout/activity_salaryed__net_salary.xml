@@ -16,7 +16,7 @@
         <FrameLayout
             android:id="@+id/seekArcContainer"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:padding="25dp">
@@ -24,7 +24,7 @@
             <com.gullakh.gullakhandroid.SeekArc
                 android:id="@+id/seekArc"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_gravity="center"
                 seekarc:arcColor="@color/main_color_500"
                 seekarc:clockwise="true"
@@ -89,7 +89,48 @@
 
     </com.gullakh.gullakhandroid.MaterialTextField>
     </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+           >
+
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:id="@+id/TextViewOption4"
+                android:text="Average Monthly Incentives"
+                android:textColor="#3f3f3f"
+                app:typeface="robotoLight"
+                />
+
+            <com.gullakh.gullakhandroid.MaterialTextField
+                android:layout_width="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+
+
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_cardColor="#fff"
+                app:mtf_image="@drawable/loan_amt"
+                >
+
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:inputType="number"
+                    android:id="@+id/incent"
+                    android:textColorHint="#000"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    app:typeface="robotoLight"/>
+
+            </com.gullakh.gullakhandroid.MaterialTextField>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -114,10 +155,12 @@
 
             app:typeface="robotoLight"/>
     </LinearLayout>
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/footer"
-        android:layout_alignParentBottom="true"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="#b8546e7a"

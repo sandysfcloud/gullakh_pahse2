@@ -1,8 +1,10 @@
 package com.gullakh.gullakhandroid;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,17 +15,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AbsListView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -35,8 +45,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     String data;
     Button next;
     ImageView gen1,gen2;
-
-    String dataGender=null;
+    AutoCompleteTextView Emp;
+    String dataGender=null,sessionid;;
+    JSONServerGet requestgetserver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +96,8 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         // review.setOnClickListener(this);
         next.setOnClickListener(this);
         Dob = (EditText) findViewById(R.id.birthdate);
+        Dob.setOnClickListener(this);
+
         if(((GlobalData) getApplication()).getDob()!=null)
             Dob.setText(((GlobalData) getApplication()).getDob().toString());
 
@@ -108,7 +121,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         }
 
 
-        Dob.setOnClickListener(this);
+
 
 
         Button bdone = (Button) findViewById(R.id.done);
@@ -121,13 +134,94 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
                 footer.setVisibility(View.GONE);
                 done.setVisibility(View.VISIBLE);
+
                 // review.setVisibility(View.INVISIBLE);
 
             }
         }
+
+        //employer question
+
+
+        Intent intent3 = getIntent();
+        String data2 = intent3.getStringExtra("employer");
+        if (data2 != null) {
+            if (data2.equals("employer")) {
+                Log.d("employer question DOB","0");
+                LinearLayout ldateofb = (LinearLayout) findViewById(R.id.ldateofb);
+                LinearLayout lempl = (LinearLayout) findViewById(R.id.lempl);
+
+                Button back2 = (Button) findViewById(R.id.back2);
+                back2.setOnClickListener(this);
+                Button next2 = (Button) findViewById(R.id.next2);
+                next2.setOnClickListener(this);
+
+                ldateofb.setVisibility(View.GONE);
+                lempl.setVisibility(View.VISIBLE);
+                Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
+                Emp.requestFocus();
+                Emp.setOnClickListener(this);
+
+                getemplist();
+
+
+
+            }
+        }
+
+
+
     }
 
+    public void getemplist()
+    {
 
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Employer[] enums = gson.fromJson(jsonObject.get("result"), Employer[].class);
+
+                int size=enums.length;
+                Log.e("emplist frm server ", String.valueOf(size));
+                ArrayList<String> liste =new ArrayList<String>();
+                for(int i=0;i<size;i++) {
+                    liste.add(enums[i].getemployername());
+                }
+                final ShowSuggtn fAdapter = new ShowSuggtn(DateOfBirth_questn.this, android.R.layout.simple_dropdown_item_1line, liste);
+                Emp.setAdapter(fAdapter);
+
+
+                Log.e("emplist frm server ", String.valueOf(liste));
+
+
+
+            }
+        }, DateOfBirth_questn.this, "2");
+        DataHandler dbobject = new DataHandler(DateOfBirth_questn.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("token", "employerlist", sessionid);
+
+
+
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -224,12 +318,18 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                             ((GlobalData) getApplication()).setage(age);
 
-                            Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                            /*Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
                             intent.putExtra("data", "searchgo");
 
                             startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);*/
+
+
+                            Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
+                            intent.putExtra("employer", "employer");
+                            startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
-                            //  }
+
                         } else {
                             RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
                         }
@@ -245,6 +345,40 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);
                 finish();
+                break;
+            case R.id.back2:
+                overridePendingTransition(R.transition.left, R.transition.right);
+                finish();
+                break;
+            case R.id.next2:
+                if(!Emp.getText().toString().matches("")) {
+
+                    ((GlobalData) getApplication()).setemployer(Emp.getText().toString());
+                    String empt=((GlobalData) getApplication()).getemptype();
+                    if(empt.equals("Salaried"))
+                    {
+                        Intent intent = new Intent(DateOfBirth_questn.this, cl_salary_mode1.class);
+                        intent.putExtra("employer", "employer");
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                    else {
+
+                        Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                        intent.putExtra("data", "searchgo");
+
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+
+                    }
+
+
+                }
+                else
+                {
+                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter Name Of Your Current Employer", "failed");
+                }
+
                 break;
             case R.id.birthdate:
                 Calendar now = Calendar.getInstance();
