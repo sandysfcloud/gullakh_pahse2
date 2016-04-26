@@ -36,6 +36,8 @@ public class GlobalData extends MultiDexApplication {
     private String cartypeloan;
     private ArrayList<String> lenders;
     private String statename;
+    private String Tenure;
+    private String baltrans;
 
 //*****************CarLoan********************//
 
@@ -227,5 +229,21 @@ public class GlobalData extends MultiDexApplication {
 
     public String getStatename() {
         return statename;
+    }
+
+    public void seTenure(String s) {
+        this.Tenure = s;
+    }
+
+    public String getTenure() {
+        return tenure;
+    }
+
+    public void setBaltrans(String baltrans) {
+        this.baltrans = baltrans;
+    }
+
+    public String getBaltrans() {
+        return baltrans;
     }
 }

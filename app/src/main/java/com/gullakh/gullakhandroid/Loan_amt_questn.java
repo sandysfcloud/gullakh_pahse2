@@ -273,16 +273,19 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
 
-                    Intent intent;
-                    String emptype=((GlobalData) getApplication()).getemptype();
-                    if(emptype.equals("Self Employed Business")||emptype.equals("Self Employed Professional"))
-                    {
-                        intent = new Intent(Loan_amt_questn.this, Car_Loan_PAT.class);
-                    }
-                    else
-                    intent = new Intent(Loan_amt_questn.this, Salaryed_NetSalary.class);
+                    Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
+
+//                    String emptype=((GlobalData) getApplication()).getemptype();
+//                    if(emptype.equals("Self Employed Business")||emptype.equals("Self Employed Professional"))
+//                    {
+//                        intent = new Intent(Loan_amt_questn.this, Car_Loan_PAT.class);
+//                    }
+//                    else
+//                    intent = new Intent(Loan_amt_questn.this, Salaryed_NetSalary.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.transition.left, R.transition.right);
 
                 }
                 break;

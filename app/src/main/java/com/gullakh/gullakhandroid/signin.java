@@ -176,7 +176,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
-                            intent = new Intent(signin.this, hl_city.class);
+                            intent = new Intent(signin.this, cl_car_residence_type.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);

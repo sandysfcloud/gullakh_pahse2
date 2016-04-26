@@ -203,7 +203,8 @@
             android:name=".CarCompare"
             android:label="@string/title_activity_car_compare" />
         <activity android:name=".hl_coappl_EMI" />
-        <activity android:name=".ForgetPassword"></activity>
+        <activity android:name=".ForgetPassword" />
+        <activity android:name=".Tenure"></activity>
     </application>
 
 </manifest>

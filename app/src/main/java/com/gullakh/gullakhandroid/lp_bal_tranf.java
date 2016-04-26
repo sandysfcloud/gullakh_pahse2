@@ -54,35 +54,44 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
+                Intent intent;
                 if (radioGroup1.getCheckedRadioButtonId() == -1){
                     RegisterPageActivity.showErroralert(this, "Select any one from above options ", "failed");
                 }else {
                     if (buttonYes){
-                        Intent intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
+                        ((GlobalData) getApplication()).setBaltrans("Yes");
+                        intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);
                     }else {
-                        Intent intent = new Intent(lp_bal_tranf.this, Loan_amt_questn.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
+                        ((GlobalData) getApplication()).setBaltrans("No");
+                        intent = new Intent(lp_bal_tranf.this, Loan_amt_questn.class);
                     }
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
                 }
                 break;
             case R.id.radioButton1:
+                ((GlobalData) getApplication()).setBaltrans("Yes");
                 setDataToHashMap("", "Yes");
                 buttonYes=true;
+                intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.radioButton2:
+                ((GlobalData) getApplication()).setBaltrans("No");
                 setDataToHashMap("", "No");
                 buttonYes=false;
+                intent = new Intent(lp_bal_tranf.this, Loan_amt_questn.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.back:
                 finish();
                 break;
             case R.id.close:
-                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intenth);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
         }
     }

@@ -214,32 +214,19 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 finish();
                 break;
         }
-
     }
     private void goToIntent()
     {
-        Intent intent = null;
-        if (((GlobalData) getApplication()).getCartypeloan().equals("New Car Loan")) {
-            intent = new Intent(this, cl_car_residence_type.class);
-        }
-        else{
-            intent = new Intent(this, cl_car_yearofmft.class);
-        }
+        Intent intent = new Intent(this, cl_car_residence_type.class);
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);
     }
     private void goToDatabase(String loanType)
     {
         contentValues.put("loantype", loanType);
-        contentValues.put("questans", "cl_car_make");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
         cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
-        DataHandler dbobject = new DataHandler(this);
-        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
-        cr.moveToFirst();
-        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
     }
-
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
     }
@@ -282,3 +269,17 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
     }
 }
 
+/*
+ private void goToIntent()
+    {
+        Intent intent = null;
+        if (((GlobalData) getApplication()).getCartypeloan().equals("New Car Loan")) {
+            intent = new Intent(this, cl_car_residence_type.class);
+        }
+        else{
+            intent = new Intent(this, cl_car_yearofmft.class);
+        }
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+    }
+ */

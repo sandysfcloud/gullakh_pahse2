@@ -65,11 +65,11 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
 
 
 //intent from coapplicant
-        Intent intent = getIntent();
-        no = intent.getStringExtra("no");
-        if (no != null) {
-            gethmp(no);
-        }
+//        Intent intent = getIntent();
+//        no = intent.getStringExtra("no");
+//        if (no != null) {
+//            gethmp(no);
+//        }
 
 
 
@@ -174,7 +174,8 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                             }
                             else
                             {
-                                Intent i = new Intent(this, cl_car_gender.class);
+                                ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(grossSal.getText().toString().replaceAll(",", "")));
+                                Intent i = new Intent(this, EMI_questn.class);
                                 startActivity(i);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }

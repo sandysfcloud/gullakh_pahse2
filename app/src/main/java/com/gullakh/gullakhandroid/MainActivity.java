@@ -162,7 +162,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             new RegisterAppToServer(getApplicationContext(), gcm, getAppVersion(getApplicationContext()),this).execute();
             Log.d("GCM Checked", "Now finish");
         }
-
+//------------------------------------------------------------------------------------
 
         carloan = (ImageView) findViewById(R.id.carln);
         carloan.setOnClickListener(this);
@@ -204,10 +204,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         View llsignin=findViewById(R.id.llsignin);
         View llsignout=findViewById(R.id.llsignout);
         if(signinstate){
-//            myapplbutton.setVisibility(View.VISIBLE);
-//            mysearchbutton.setVisibility(View.VISIBLE);
-//            signinbutton.setVisibility(View.GONE);
-//            registerbutton.setVisibility(View.GONE);
+//
             llsignin.setVisibility(View.GONE);
             llsignout.setVisibility(View.VISIBLE);
 

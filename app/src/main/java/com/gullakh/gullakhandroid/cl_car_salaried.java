@@ -173,16 +173,14 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                                 } else {
                                     goToDatabase("Car Loan");
                                 }
-                                if (((GlobalData) getApplication()).getcartype().equals("Home Loan") || ((GlobalData) getApplication()).getcartype().equals("Loan Against Property")) {
-                                    Log.d("type of loan is", ((GlobalData) getApplication()).getcartype());
-                                    Intent intent2 = new Intent(this, hl_salaried2.class);
-                                    startActivity(intent2);
-                                    overridePendingTransition(R.transition.left, R.transition.right);
-                                } else {
-                                    Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                Intent intent;
+                                if (((GlobalData) getApplication()).getcartype().equals("Home Loan")){
+                                    intent = new Intent(this, hl_salaried2.class);
+                                }else {
+                                    intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
                                 }
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
                             }
                         } else {
                             RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");

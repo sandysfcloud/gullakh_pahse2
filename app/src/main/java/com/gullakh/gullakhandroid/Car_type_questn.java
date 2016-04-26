@@ -127,11 +127,16 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.next:
-                //Intent intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
                 if(((GlobalData) getApplication()).getCartypeloan()!=null) {
-                    intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    if(((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("used car loan")) {
+                        intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }else {
+                        intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
                 }else {
                     RegisterPageActivity.showErroralert(Car_type_questn.this, "Please select type of car loan!", "failed");
                 }
@@ -165,7 +170,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
                 ((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
                 if(data==null) {
-                    intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
+                    intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }else if(data.equals("review")) {
