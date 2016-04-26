@@ -940,9 +940,6 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     CustomListViewValuesArr.add(sched);
                     disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
                     Log.d("activity docum ", cobj_RM[i].getaccount_lender());
-//----------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------
                 }
                 if (CustomListViewValuesArr.size() == 0) {
 

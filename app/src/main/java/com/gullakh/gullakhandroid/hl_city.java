@@ -159,7 +159,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
-                propertyLocated="Kolkata";
+                propertyLocated="Delhi";
                 goToIntent();
                 break;
             case R.id.ImageViewPlace4:

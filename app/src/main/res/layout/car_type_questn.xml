@@ -86,7 +86,7 @@
             android:id="@+id/t2"
             android:textColor="#000"
             app:typeface="robotoLight"
-            android:text="Used Car Loan"></com.gullakh.gullakhandroid.font.RobotoTextView>
+            android:text="Used Car Loan"/>
 
 
 
