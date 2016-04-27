@@ -43,6 +43,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     private ContentValues contentValues;
     private EditText Doj;
     static boolean user=true;
+    int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -82,6 +83,16 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         user=true;
 
 
+//****personal loan
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("personal");
+        if (data != null) {
+            if (data.equals("personal")) {
+
+                LinearLayout lpers = (LinearLayout) findViewById(R.id.lpers);
+                lpers.setVisibility(View.GONE);
+            }
+        }
 
 
     }
@@ -178,9 +189,19 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                                 } else {
                                     goToDatabase("Car Loan");
                                 }
-                                Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.transition.left, R.transition.right);
+
+
+                                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan"))
+                                {
+                                    Intent intent = new Intent(this, cl_car_gender.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                }
+                                else {
+                                    Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                }
                             }
                         } else {
                             RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");

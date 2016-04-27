@@ -302,27 +302,31 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
                 if(MainActivity.signinstate){
                     Intent intent ;
-                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
+                    String emtyp=((GlobalData) getApplication()).getcartype();
+                    Log.d("employee typ in listviewclick",emtyp);
+                    if(emtyp.equalsIgnoreCase("Car Loan")){
                         intent = new Intent(ListView_Click.this, cl_car_make.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
+                    }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
                         intent = new Intent(ListView_Click.this,cl_car_residence_type.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){
-                        intent = new Intent(ListView_Click.this, pl_need.class);
+
+                        intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
+                        intent.putExtra("personal", "personal");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")){
+                    }/*else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")){
                         intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else {
+                    }*/else {
                         intent = new Intent(ListView_Click.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
