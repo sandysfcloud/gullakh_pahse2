@@ -236,14 +236,15 @@ public void onClick(View v) {
                     if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
                     {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);
+
                    }
                     else {
                             intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
+
                     }
 
-
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
                 }
 
 
