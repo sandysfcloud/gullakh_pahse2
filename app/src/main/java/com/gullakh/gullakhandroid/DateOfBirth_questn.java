@@ -323,12 +323,23 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);*/
+                            String empt=((GlobalData) getApplication()).getemptype();
+                            if(empt.equals("Salaried")) {
+                                Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
+                                intent.putExtra("employer", "employer");
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            }
 
+                            else {
 
-                            Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
-                            intent.putExtra("employer", "employer");
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
+                                Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                                intent.putExtra("data", "searchgo");
+
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+
+                            }
 
                         } else {
                             RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
@@ -354,23 +365,11 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 if(!Emp.getText().toString().matches("")) {
 
                     ((GlobalData) getApplication()).setemployer(Emp.getText().toString());
-                    String empt=((GlobalData) getApplication()).getemptype();
-                    if(empt.equals("Salaried"))
-                    {
+
                         Intent intent = new Intent(DateOfBirth_questn.this, cl_salary_mode1.class);
                         intent.putExtra("employer", "employer");
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    else {
-
-                        Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                        intent.putExtra("data", "searchgo");
-
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-
-                    }
 
 
                 }

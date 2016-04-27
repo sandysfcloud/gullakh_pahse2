@@ -205,6 +205,9 @@ public void onClick(View v) {
         ((GlobalData) getApplication()).seTenure(tenure.getText().toString());
                 String emptype=((GlobalData) getApplication()).getemptype();
                         Intent intent = null;
+                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan") ||
+                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                Log.d("checking employee type",emptype);
 
                 if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
                         if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
@@ -219,26 +222,29 @@ public void onClick(View v) {
                         } else {
                                 intent = new Intent(Tenure.this, hl_city.class);
                         }
-                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                        intent = new Intent(Tenure.this, hl_city.class);
-                }else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                }
+//                else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+//                                intent = new Intent(Tenure.this, hl_city.class);
+//                }
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                }
+                else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
 
 
                         String emptyp=((GlobalData) getApplication()).getemptype();
-                        if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
-                        {
-                                intent = new Intent(Tenure.this, Car_Loan_PAT.class);
-                        }
-                        else {
-                                intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.transition.left, R.transition.right);
-                        }
+                    if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
+                    {
+                        intent = new Intent(Tenure.this, Car_Loan_PAT.class);
+                   }
+                    else {
+                            intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+
+
                 }
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-
-
 
 
         break;

@@ -194,9 +194,19 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                     }else{
                         goToDatabase("Car Loan");
                     }
-                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    if (flag == 1) {
+
+                        Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+                        intent.putExtra("data", "searchgo");
+
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+
+                    } else {
+                        intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
                 }
                 break;
             case R.id.ImageViewBank1:
@@ -209,9 +219,22 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
 
-                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+
+                if (flag == 1) {
+
+                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "searchgo");
+
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                } else {
+
+
+                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.ImageViewBank2:
                 other.setText("");
@@ -222,10 +245,19 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 dataBankType="ICICI Bank";
                 setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
+                if (flag == 1) {
 
-                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "searchgo");
+
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                } else {
+                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.ImageViewBank3:
                 other.setText("");
@@ -236,10 +268,19 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 dataBankType="HDFC Bank";
                 setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
+                if (flag == 1) {
 
-                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "searchgo");
+
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                } else {
+                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.ImageViewBank4:
                 other.setText("");
@@ -250,9 +291,19 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 dataBankType="IDBI Bank";
                 setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
-                intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if (flag == 1) {
+
+                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "searchgo");
+
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                } else {
+                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.bank:
                 bank1.setImageResource(R.drawable.bankaxis);
