@@ -154,7 +154,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/home">
-            <AutoCompleteTextView
+            <com.gullakh.gullakhandroid.font.RobotoAutoText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Others"
@@ -163,6 +163,7 @@
                 android:textColor="#3f3f3f"
                 android:textSize="15sp"
                 android:imeOptions="actionDone"
+                app:typeface="robotoLight"
                 android:singleLine="true"/>
         </com.gullakh.gullakhandroid.MaterialTextField>
 
