@@ -11,10 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,12 +20,8 @@ import java.util.List;
 
 public class hl_need extends AppCompatActivity implements View.OnClickListener {
 
-    private Spinner spinner,allotment;
-    private RadioGroup radioCityLimitGroup;
+    private Spinner spinner;
     Button next,back;
-    LinearLayout owners,cons,pop1,pop2,pop3,pop4,pop5,pop6;
-    private String catergory="";
-    EditText cost;
     private ContentValues contentValues;
 
     @Override
@@ -150,7 +143,11 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             intent = new Intent(hl_need.this, hl_need8.class);
             startActivity(intent);
         }else if(spinner.getSelectedItem().toString().equals("Property is not yet identified")){
-            intent = new Intent(hl_need.this, cl_car_residence_type.class);
+            if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                intent = new Intent(this, DateOfBirth_questn.class);
+            } else {
+                intent = new Intent(this, cl_car_residence_type.class);
+            }
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }
