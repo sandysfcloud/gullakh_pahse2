@@ -225,7 +225,7 @@
             app:mtf_image="@drawable/companyname"
             >
 
-            <AutoCompleteTextView
+            <com.gullakh.gullakhandroid.font.RobotoAutoText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
@@ -233,7 +233,7 @@
                 android:id="@+id/salEmpname"
                 android:textColorHint="#000"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>

@@ -84,12 +84,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
+           android:layout_marginLeft="8dp"
+           android:layout_marginBottom="8dp"
             android:background="@android:color/transparent"
             android:text="ICICI BANK"
 
             android:textColor="#177bbd"
-            android:textSize="18sp"
+            android:textSize="16sp"
            app:typeface="robotoLight"
             />
             <ImageView
@@ -129,6 +131,7 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:padding="8dp"
+               android:textSize="12dp"
                 android:textColor="#ffffff"
                 android:background="@drawable/rectbutton_org"
                 android:text="Details"
