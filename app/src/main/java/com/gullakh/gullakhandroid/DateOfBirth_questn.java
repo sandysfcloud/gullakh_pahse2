@@ -317,29 +317,33 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                         if (age > 18) {
 
                             ((GlobalData) getApplication()).setage(age);
-
-                            /*Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                            intent.putExtra("data", "searchgo");
-
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);*/
-                            String empt=((GlobalData) getApplication()).getemptype();
-                            if(empt.equals("Salaried")) {
-                                Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
-                                intent.putExtra("employer", "employer");
-                                startActivity(intent);
-                                overridePendingTransition(R.transition.left, R.transition.right);
-                            }
-
-                            else {
-
+                            String loantype=((GlobalData) getApplication()).getcartype();
+                            if (loantype.equalsIgnoreCase("Car Loan") ||loantype.equalsIgnoreCase("Home Loan") ||loantype.equalsIgnoreCase("Loan Against Property"))
+                            {
                                 Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
                                 intent.putExtra("data", "searchgo");
-
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
+                            }else{
+                                String empt=((GlobalData) getApplication()).getemptype();
+                                if(empt.equals("Salaried")) {
+                                    Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
+                                    intent.putExtra("employer", "employer");
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                }
 
+                                else {
+
+                                    Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                                    intent.putExtra("data", "searchgo");
+
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                                }
                             }
+
 
                         } else {
                             RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");

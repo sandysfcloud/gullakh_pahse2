@@ -41,7 +41,7 @@
                 app:mtf_image="@drawable/home"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp">
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/currentCityyr"
@@ -63,7 +63,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp">
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/currentCitymn"
@@ -137,7 +137,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp">
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:id="@+id/currentResidenceyr"
@@ -159,7 +159,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp">
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:id="@+id/currentResidencemn"

@@ -28,7 +28,7 @@
 
             android:gravity="center" />
 
-        <EditText
+        <com.gullakh.gullakhandroid.font.RobotoEditText
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:inputType="textEmailAddress"
@@ -43,7 +43,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp" />
 
-        <EditText
+        <com.gullakh.gullakhandroid.font.RobotoEditText
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:inputType="textPassword"

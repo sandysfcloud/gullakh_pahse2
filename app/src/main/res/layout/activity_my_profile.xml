@@ -78,7 +78,7 @@
                 android:background="#00ffffff"
                 android:singleLine="true" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText1"
@@ -89,7 +89,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText2"
@@ -100,7 +100,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText3"
@@ -113,7 +113,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText4"
@@ -124,7 +124,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText5"

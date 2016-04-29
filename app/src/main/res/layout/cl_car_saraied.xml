@@ -37,7 +37,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/companyname">
-            <AutoCompleteTextView
+            <com.gullakh.gullakhandroid.font.RobotoAutoText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -73,7 +73,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/companyname">
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
@@ -115,7 +115,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp">
-            <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/emi"
@@ -137,7 +137,7 @@
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="5dp">
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:hint="Ex:5 months"

@@ -39,7 +39,7 @@
                 android:layout_marginLeft="10dp" />
         </LinearLayout>
 
-        <EditText
+        <com.gullakh.gullakhandroid.font.RobotoEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:inputType="number"

@@ -158,7 +158,7 @@
             app:mtf_image="@drawable/piggymoney"
             android:layout_marginTop="10dp">
 
-            <AutoCompleteTextView
+            <com.gullakh.gullakhandroid.font.RobotoAutoText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Others"

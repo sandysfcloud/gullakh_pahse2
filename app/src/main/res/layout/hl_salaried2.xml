@@ -40,7 +40,7 @@
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/loan_amt">
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/grossSal"
@@ -83,7 +83,7 @@
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/loan_amt">
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -117,7 +117,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/loan_amt">
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"

@@ -68,7 +68,7 @@
                 android:layout_alignLeft="@+id/view"
                 android:layout_alignStart="@+id/view">
 
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
