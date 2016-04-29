@@ -32,7 +32,7 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
     private ContentValues contentValues;
     private Spinner spinner;
     private String CompLoanType;
-
+    int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +99,21 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         {
             getDataFromHashMap();
         }
+
+
+//****personal loan
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("personal");
+        if (data != null) {
+            if (data.equals("personal")) {
+                flag=1;
+
+            }
+        }
+
+
+
+
     }
     private void getDataFromHashMap() {
         String temp=cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city");
@@ -187,6 +202,12 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                                         }
                                         Intent intent;
                                         if (CompLoanType.equals("Salaried")) {
+                                            if(flag==1)
+                                            {
+                                                intent = new Intent(this, cl_car_salaried.class);
+                                                intent.putExtra("personal", "personal");
+                                                startActivity(intent);
+                                            }
                                             intent = new Intent(this, cl_car_salaried.class);
                                             startActivity(intent);
                                         } else if (CompLoanType.equals("Self Employed Business")) {
