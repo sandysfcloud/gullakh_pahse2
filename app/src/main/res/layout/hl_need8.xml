@@ -45,6 +45,7 @@
                     android:layout_weight="1" />
 
                 <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:inputType="text"
@@ -80,6 +81,7 @@
                     android:layout_weight="1" />
 
                 <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:inputType="text"
@@ -118,6 +120,7 @@
             </LinearLayout>
 
             <com.gullakh.gullakhandroid.font.RobotoEditText
+                app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:inputType="number"

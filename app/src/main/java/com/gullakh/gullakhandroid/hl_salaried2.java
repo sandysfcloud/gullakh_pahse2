@@ -120,13 +120,6 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
 
@@ -153,10 +146,12 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                     goToDatabase("Loan Against Property");
                                 }
                                 cl_car_salaried.user = false;
+
+                                ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(grossSal.getText().toString().replaceAll(",", "")));
+                                Intent i = new Intent(this, EMI_questn.class);
+                                startActivity(i);
+                                overridePendingTransition(R.transition.left, R.transition.right);
                             }
-
-
-
                             else if(no!=null) {
                                 setDataToHashMap("net_mon_salary", grossSal.getText().toString());
                                 setDataToHashMap("annual_bonus", annualBonus.getText().toString());
@@ -165,13 +160,6 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                 Intent i = new Intent(this, coappldetail.class);
                                 i.putExtra("data", "joint");
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
-                                overridePendingTransition(R.transition.left, R.transition.right);
-                            }
-                            else
-                            {
-                                ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(grossSal.getText().toString().replaceAll(",", "")));
-                                Intent i = new Intent(this, EMI_questn.class);
                                 startActivity(i);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }
