@@ -275,7 +275,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 else
                 {
                     Log.d("intent next loanamt", "check");
-                  //  ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
+                    ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
                     setDataToHashMap("cl_loanamount",amt.getText().toString().replaceAll(",", ""));
                     Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
                     startActivity(intent);

@@ -220,8 +220,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                         Double netsal=Double.parseDouble(sal.getText().toString().replaceAll(",", ""))+Double.parseDouble(incent.getText().toString().replaceAll(",", ""));
                         Log.d("check net sal KK", String.valueOf(netsal));
-                        //((GlobalData) getApplication()).setnetsalary(netsal);
-                        //((GlobalData) getApplication()).setavgince(incent.getText().toString());
+                        ((GlobalData) getApplication()).setnetsalary(netsal);
+                        ((GlobalData) getApplication()).setavgince(incent.getText().toString());
                         setDataToHashMap("net_mon_salary", String.valueOf(netsal));
                         Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
                         startActivity(intent);

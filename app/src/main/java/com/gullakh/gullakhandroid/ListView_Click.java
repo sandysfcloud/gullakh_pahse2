@@ -339,13 +339,13 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     }
 
     private void storeData() {
-       // setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
-       // setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-       // setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
-       // setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
-      //  setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
-      //  setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
-      //  setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).gettenure()));
+        setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
+       setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
+        setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
+        setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
+        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+        setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
+        setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).gettenure()));
         setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
         setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
         setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
