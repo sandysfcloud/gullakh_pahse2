@@ -167,6 +167,7 @@
             app:mtf_image="@drawable/home"
             android:layout_weight="1">
             <com.gullakh.gullakhandroid.font.RobotoAutoText
+                app:typeface="robotoLight"
                 android:imeActionLabel="Done"
                 android:singleLine="true"
                 android:layout_width="match_parent"

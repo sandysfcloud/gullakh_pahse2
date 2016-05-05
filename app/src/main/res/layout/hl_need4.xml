@@ -41,6 +41,7 @@
         </LinearLayout>
 
         <com.gullakh.gullakhandroid.font.RobotoEditText
+            app:typeface="robotoLight"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:inputType="number"

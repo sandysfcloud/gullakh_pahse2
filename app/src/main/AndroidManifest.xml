@@ -66,10 +66,6 @@
             android:name=".StickyListHeadersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LogInPageActivity"
-            android:label="Login Page"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".MyProfileActivity"
             android:label="My Profile "
             android:screenOrientation="portrait" />

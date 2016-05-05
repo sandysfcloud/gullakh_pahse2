@@ -34,7 +34,9 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp">
 
+
             <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -50,6 +52,7 @@
                 android:hint="ID Proof &amp; DOB Proof"
                 android:layout_weight="1" />
             <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textAppearance="?android:attr/textAppearanceSmall"

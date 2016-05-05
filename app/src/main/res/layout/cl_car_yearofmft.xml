@@ -83,6 +83,7 @@
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/car">
             <com.gullakh.gullakhandroid.font.RobotoEditText
+                app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/yom"
