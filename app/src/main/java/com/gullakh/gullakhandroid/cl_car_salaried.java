@@ -88,7 +88,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         String data = intent2.getStringExtra("personal");
         if (data != null) {
             if (data.equals("personal")) {
-
+                Log.d("salaried in personal loan","1");
+                flag=1;
                 LinearLayout lpers = (LinearLayout) findViewById(R.id.lpers);
                 lpers.setVisibility(View.GONE);
             }
@@ -165,56 +166,23 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
 
         switch (v.getId()) {
             case R.id.next:
-                if(!Emp.getText().toString().matches(""))
+
+                if(flag==1)
                 {
-                    if (!Doj.getText().toString().matches("")) {
-                        if (!Expmn.getText().toString().matches("") || Expyr.getText().toString().matches("")) {
-                            int temp= Integer.parseInt(Expmn.getText().toString());
-                            if (temp>11){
-                                RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct month field", "failed");
-                            }else {
-                                String EmpName = Emp.getText().toString();
-                                setDataToHashMap("name_of_current_emp", EmpName);
-                                String jdate = getDate();
-                                setDataToHashMap("year_you_joined_current_comp", jdate);
-                                setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
-                                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-                                    goToDatabase("Home Loan");
-                                } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                                    goToDatabase("Personal Loan");
-
-                                } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
-                                    goToDatabase("Loan Against Property");
-
-                                } else {
-                                    goToDatabase("Car Loan");
-                                }
-
-
-                                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan"))
-                                {
-                                    Intent intent = new Intent(this, cl_car_gender.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.transition.left, R.transition.right);
-                                }
-                                else {
-                                    Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.transition.left, R.transition.right);
-                                }
-                            }
-                        } else {
-                            RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");
-                        }
-                    }
-                        else
-                    {
-                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter date", "failed");
-                    }
-                }else {
-                    RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter Company Name", "failed");
+                    nextfun();
                 }
-                break;
+                else {
+
+                    if (!Emp.getText().toString().matches("")) {
+
+                        nextfun();
+
+                    } else {
+                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter Company Name", "failed");
+                    }
+                }
+
+        break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -242,6 +210,56 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                 break;
 
         }
+    }
+
+    public void nextfun()
+    {
+
+            if (!Doj.getText().toString().matches("")) {
+                if (!Expmn.getText().toString().matches("") || Expyr.getText().toString().matches("")) {
+                    int temp= Integer.parseInt(Expmn.getText().toString());
+                    if (temp>11){
+                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct month field", "failed");
+                    }else {
+                        String EmpName = Emp.getText().toString();
+                        setDataToHashMap("name_of_current_emp", EmpName);
+                        String jdate = getDate();
+                        setDataToHashMap("year_you_joined_current_comp", jdate);
+                        setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
+                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                            goToDatabase("Home Loan");
+                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                            goToDatabase("Personal Loan");
+
+                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                            goToDatabase("Loan Against Property");
+
+                        } else {
+                            goToDatabase("Car Loan");
+                        }
+
+
+                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan"))
+                        {
+                            Intent intent = new Intent(this, cl_car_gender.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        }
+                        else {
+                            Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        }
+                    }
+                } else {
+                    RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");
+                }
+            }
+            else
+            {
+                RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter date", "failed");
+            }
+
     }
     @Override
     public void onResume()

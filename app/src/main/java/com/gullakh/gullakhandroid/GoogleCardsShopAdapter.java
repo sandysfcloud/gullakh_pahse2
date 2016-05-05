@@ -187,11 +187,11 @@ Log.d("setting image", tempValues.getcarimgurl());
 			emi = emi.replaceAll("\\.00", "");
 		//	emi = emi.replaceAll("Rs.", "");
 
-			String profee=String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
+			/*String profee=String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
 			profee = profee.replaceAll("\\.00", "");
 
 			String propreclo=String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
-			propreclo = propreclo.replaceAll("\\.00", "");
+			propreclo = propreclo.replaceAll("\\.00", "");*/
 
 			String bp=String.valueOf(format.format(new BigDecimal(tempValues.getbp().toString())));
 			bp = bp.replaceAll("\\.00", "");
@@ -201,8 +201,8 @@ Log.d("setting image", tempValues.getcarimgurl());
 			holder.day.setText(""+emi);
 			//holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
-			holder.t4.setText(""+profee);
-			holder.tprea.setText(""+propreclo);
+			//holder.t4.setText(""+profee);
+			//holder.tprea.setText(""+propreclo);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 
 
@@ -251,11 +251,11 @@ Log.d("setting image", tempValues.getcarimgurl());
 					intent.putExtra("one_time_fee", data.get(pos).getprocessing_fee());
 					intent.putExtra("emi", data.get(pos).getemi_value());
 					intent.putExtra("lenderid", data.get(pos).getaccount_lender());
-					Log.d("check fee here2", data.get(pos).getfee_charges());
+					//Log.d("check fee here2", data.get(pos).getfee_charges());
 					intent.putExtra("fee", data.get(pos).getfee_charges());
 					intent.putExtra("other", data.get(pos).getother_details());
 					intent.putExtra("docum", data.get(pos).getcardocu());
-					Log.d("adapter docum ",data.get(pos).getcardocu());
+					//Log.d("adapter docum ",data.get(pos).getcardocu());
 					cont.startActivity(intent);
 					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
 				}

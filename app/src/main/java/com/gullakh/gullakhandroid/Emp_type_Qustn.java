@@ -41,11 +41,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         business.setOnClickListener(this);
 
 
-        if(((GlobalData) getApplication()).getemptype()!=null) {
-            Log.d("emp type not null", ((GlobalData) getApplication()).getemptype());
-            if (((GlobalData) getApplication()).getemptype().equals("Salaried"))
+        if(cl_car_global_data.dataWithAns.get("type_employment")!=null) {
+            Log.d("emp type not null", cl_car_global_data.dataWithAns.get("type_employment"));
+            if (cl_car_global_data.dataWithAns.get("type_employment").equals("Salaried"))
                 sal.setImageResource(R.drawable.buttonselecteffect);
-            else if(((GlobalData) getApplication()).getemptype().equals("Self Employed Business"))
+            else if(cl_car_global_data.dataWithAns.get("type_employment").equals("Self Employed Business"))
                 self.setImageResource(R.drawable.buttonselecteffect);
             else
                 business.setImageResource(R.drawable.buttonselecteffect);
@@ -104,6 +104,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
+
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -120,7 +125,9 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 startActivity(intenth);
                 break;
             case R.id.next:
-                if(((GlobalData) getApplication()).getemptype()!=null){
+
+
+                if(cl_car_global_data.dataWithAns.get("type_employment")!=null){
                     goToIntent();
                 }else {
                     RegisterPageActivity.showErroralert(Emp_type_Qustn.this, "Please choose Employment type!", "failed");
@@ -138,7 +145,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 sal.setImageResource(R.drawable.buttonselecteffect);
                 self.setImageResource(R.drawable.selfempbus);
                 business.setImageResource(R.drawable.selfempprof);
-                ((GlobalData) getApplication()).setemptype("Salaried");
+               // ((GlobalData) getApplication()).setemptype("Salaried");
+                setDataToHashMap("type_employment","Salaried");
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -152,7 +160,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 self.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 business.setImageResource(R.drawable.selfempprof);
-                ((GlobalData) getApplication()).setemptype("Self Employed Business");
+                setDataToHashMap("type_employment", "Self Employed Business");
+               // ((GlobalData) getApplication()).setemptype("Self Employed Business");
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -165,7 +174,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 business.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
-                ((GlobalData) getApplication()).setemptype("Self Employed Professional");
+                setDataToHashMap("type_employment", "Self Employed Professional");
+              //  ((GlobalData) getApplication()).setemptype("Self Employed Professional");
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -184,12 +194,13 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     }
     public void goToIntent(){
         Intent intent;
-        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
+       // if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
+        if((cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Car Loan"))){
             intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property") ||
-                ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
+        }else if(cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Loan Against Property") ||
+                (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Home Loan"))){
             intent = new Intent(Emp_type_Qustn.this, lp_bal_tranf.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);

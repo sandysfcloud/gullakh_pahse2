@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="1"
+                android:text="1 Year"
                 android:textColor="@color/main_color_500"
                 android:textSize="30sp"
                 app:typeface="robotoLight"/>
@@ -85,7 +85,7 @@
                     android:textColorHint="#000"
                     android:textColor="#000"
                     android:textSize="20sp"
-                    android:text="0"
+                    android:text="1"
                     app:typeface="robotoLight"/>
 
             </com.gullakh.gullakhandroid.MaterialTextField>

@@ -65,12 +65,12 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         //review = (ImageView) findViewById(R.id.review);
         //done = (Button) findViewById(R.id.done);
         //done.setOnClickListener(this);
-        if(((GlobalData) getApplication()).getCartypeloan()!=null) {
+        if(cl_car_global_data.dataWithAns.get("car_loan_type")!=null) {
 
-            if (((GlobalData) getApplication()).getCartypeloan().equals("New Car Loan"))
+            if (cl_car_global_data.dataWithAns.get("car_loan_type").equals("New"))
                 newcar.setImageResource(R.drawable.buttonselecteffect);
             else
-            if (((GlobalData) getApplication()).getCartypeloan().equals("Used Car Loan"))
+            if (cl_car_global_data.dataWithAns.get("car_loan_type").equals("Used"))
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
 
         }
@@ -105,6 +105,11 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -127,8 +132,9 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.next:
-                if(((GlobalData) getApplication()).getCartypeloan()!=null) {
-                    if(((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("used car loan")) {
+                if(cl_car_global_data.dataWithAns.get("car_loan_type")!=null) {
+                    Log.d("car_loan_typeK",cl_car_global_data.dataWithAns.get("car_loan_type"));
+                    if(cl_car_global_data.dataWithAns.get("car_loan_type").equalsIgnoreCase("used car loan")) {
                         intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
@@ -154,7 +160,9 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 //self.setBackgroundColor(Color.parseColor("#ffffff"));
                 newcar.setImageResource(R.drawable.buttonselecteffect);
                 oldcar.setImageResource(R.drawable.usedcar);
-                ((GlobalData) getApplication()).setCartypeloan("New Car Loan");
+               // ((GlobalData) getApplication()).setCartypeloan("New Car Loan");
+                setDataToHashMap("car_loan_type","New");
+                Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
                     startActivity(intent);
@@ -168,7 +176,9 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
             case R.id.img2:
                 newcar.setImageResource(R.drawable.newcar);
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
-                ((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
+                //((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
+                setDataToHashMap("car_loan_type","Used");
+                Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
                     startActivity(intent);

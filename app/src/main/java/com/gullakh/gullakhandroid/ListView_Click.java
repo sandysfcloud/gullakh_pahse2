@@ -61,77 +61,74 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
 
 
+        String[] sepfee=null;
+        if(sepfee!=null) {
+      //  Log.d("click docum ",docum);
+
+      // Log.d("all fee data before" , fee);
+        sepfee = fee.split(";");
+       // Log.d("all fee data after" , String.valueOf(sepfee));
 
 
-        Log.d("click docum ",docum);
 
-        Log.d("all fee data before" , fee);
-        String[] sepfee = fee.split(";");
-        Log.d("all fee data after" , String.valueOf(sepfee));
-
-
-
-        Log.d("all other data before" , other);
+       // Log.d("all other data before" , other);
         String[] sepother = other.split(";");
-        Log.d("all other data after" , String.valueOf(sepother[0]));
+        //Log.d("all other data after" , String.valueOf(sepother[0]));
 
 
-        Log.d("all docum data before" , docum);
+       // Log.d("all docum data before" , docum);
         String[] sdocum = docum.split(";");
-        Log.d("all docum data after" , String.valueOf(sdocum[0]));
+       // Log.d("all docum data after" , String.valueOf(sdocum[0]));
 
 
 
-        String feedata="";
-        for (int i=0;i<sepfee.length;i++)
-        {
-            feedata=feedata+sepfee[i]+"\n";
-            Log.d("fee info",+i+" "+sepfee[0]);
-        }
+    String feedata = "";
+    for (int i = 0; i < sepfee.length; i++) {
+        feedata = feedata + sepfee[i] + "\n";
+        Log.d("fee info", +i + " " + sepfee[0]);
+    }
 
-        String othrdata="";
-        for (int i=0;i<sepother.length;i++)
-        {
-            othrdata=othrdata+sepother[i]+"\n";
-            Log.d("sepother info", +i + " " + sepother[i]);
-        }
+    String othrdata = "";
+    for (int i = 0; i < sepother.length; i++) {
+        othrdata = othrdata + sepother[i] + "\n";
+        Log.d("sepother info", +i + " " + sepother[i]);
+    }
 
-        String cardocu="";
-        for (int i=0;i<sdocum.length;i++)
-        {
-            cardocu=cardocu+sdocum[i]+"\n";
-            Log.d("documen info", +i + " " + sdocum[i]);
-        }
-        Log.d("final cardocu info",cardocu);
+    String cardocu = "";
+    for (int i = 0; i < sdocum.length; i++) {
+        cardocu = cardocu + sdocum[i] + "\n";
+        Log.d("documen info", +i + " " + sdocum[i]);
+    }
+    //Log.d("final cardocu info",cardocu);
 
 
-        TextView name= (TextView) findViewById(R.id.bankname);
+    TextView name = (TextView) findViewById(R.id.bankname);
 
-        name.setText(bankname);
-        TextView t1= (TextView) findViewById(R.id.mt1);
+    name.setText(bankname);
+    TextView t1 = (TextView) findViewById(R.id.mt1);
 
-        //t1.setText("EMI for " + tenure + " years");
-        t1.setText("EMI");
-        TextView temi= (TextView) findViewById(R.id.tmr);
-        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
-        String emival=String.valueOf(format.format(new BigDecimal(emi)));
-        emival = emival.replaceAll("\\.00", "");
+    //t1.setText("EMI for " + tenure + " years");
+    t1.setText("EMI");
+    TextView temi = (TextView) findViewById(R.id.tmr);
+    Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+    String emival = String.valueOf(format.format(new BigDecimal(emi)));
+    emival = emival.replaceAll("\\.00", "");
 
-        temi.setText(emival);
-        TextView t3= (TextView) findViewById(R.id.tf1);
+    temi.setText(emival);
+    TextView t3 = (TextView) findViewById(R.id.tf1);
 
-        TextView troi= (TextView) findViewById(R.id.tf2);
+    TextView troi = (TextView) findViewById(R.id.tf2);
 
-        troi.setText(roi + "%");
-        TextView t5= (TextView) findViewById(R.id.t3);
+    troi.setText(roi + "%");
+    TextView t5 = (TextView) findViewById(R.id.t3);
 
-        TextView tprofee= (TextView) findViewById(R.id.t4);
+    TextView tprofee = (TextView) findViewById(R.id.t4);
 
-        String one_time_fee_temp=String.valueOf(format.format(new BigDecimal(one_time_fee)));
-        one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
-        tprofee.setText(one_time_fee_temp);
+    String one_time_fee_temp = String.valueOf(format.format(new BigDecimal(one_time_fee)));
+    one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
+    tprofee.setText(one_time_fee_temp);
 
-
+}
         ImageView mainimg= (ImageView) findViewById(R.id.searchimg);
         if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
         {
@@ -177,14 +174,14 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
 
         tfee= (TextView) findViewById(R.id.tfee);
-        tfee.setText(feedata);
+        //tfee.setText(feedata);
 
         t_other= (TextView) findViewById(R.id.tothr);
-        t_other.setText(othrdata);
+        //t_other.setText(othrdata);
 
         TextView t_docum= (TextView) findViewById(R.id.tdocum);
-        t_docum.setText(cardocu);
-        Log.d("cardocu set here", cardocu);
+       // t_docum.setText(cardocu);
+       // Log.d("cardocu set here", cardocu);
 
         t8= (TextView) findViewById(R.id.d2);
        // t8.setTypeface(myfontlight);
@@ -297,8 +294,8 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
                     ((GlobalData) getApplication()).getLenders().add(1, "");
                 }
 
-                Log.d("Result of lender1",((GlobalData) getApplication()).getLenders().get(0));
-                Log.d("Result of lender2",((GlobalData) getApplication()).getLenders().get(1));
+             //   Log.d("Result of lender1",((GlobalData) getApplication()).getLenders().get(0));
+            //    Log.d("Result of lender2",((GlobalData) getApplication()).getLenders().get(1));
 
                 if(MainActivity.signinstate){
                     Intent intent ;
@@ -342,18 +339,19 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     }
 
     private void storeData() {
-        setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
-        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
-        setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
-        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
-        setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
-        setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).gettenure()));
+       // setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
+       // setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
+       // setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
+       // setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
+      //  setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+      //  setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
+      //  setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).gettenure()));
         setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
         setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
         setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
         setDataToHashMap("dep_amount", String.valueOf(((GlobalData) getApplication()).getdepreciation()));
         setDataToHashMap("dep_amount_last", String.valueOf(((GlobalData) getApplication()).getdepreciation2()));
+
     }
 
     private void goToDatabase(String loanType)

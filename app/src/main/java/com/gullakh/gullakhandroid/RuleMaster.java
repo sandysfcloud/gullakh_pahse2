@@ -5,9 +5,9 @@ package com.gullakh.gullakhandroid;
  */
 public class RuleMaster {
 
-    public String account_lender;
+    public String bankid;
     public Double foir;
-    public Double floating_interest_rate;
+    public Double roi;
     public String tenure;
     public String processing_fee;
     public String fee_char_detail;
@@ -18,11 +18,11 @@ public class RuleMaster {
 
 
     public String getaccount_lender(){
-        return account_lender;
+        return bankid;
     }
 
     public void setaccount_lender(String token){
-        account_lender=token;
+        bankid=token;
     }
 
     public Double getfoir(){
@@ -33,11 +33,11 @@ public class RuleMaster {
         foir=token;
     }
     public Double getfloating_interest_rate(){
-        return floating_interest_rate;
+        return roi;
     }
 
     public void setfloating_interest_rate(Double token){
-        floating_interest_rate=token;
+        roi=token;
     }
 
 

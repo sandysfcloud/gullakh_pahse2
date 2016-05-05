@@ -102,9 +102,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             Dob.setText(((GlobalData) getApplication()).getDob().toString());
 
 
-        if(((GlobalData) getApplication()).getgender()!=null)
+        if(cl_car_global_data.dataWithAns.get("gender")!=null)
         {
-            String gender=((GlobalData) getApplication()).getgender();
+            String gender=cl_car_global_data.dataWithAns.get("gender");
             if(gender.equals("male"))
             {
                 gen1.setImageResource(R.drawable.buttonselecteffect);
@@ -253,7 +253,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             throw new IllegalArgumentException("Age < 0");
         return a;
     }
-
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
     @Override
     public void onClick(View v) {
 
@@ -302,11 +304,11 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                     if (dataGender != null) {
 
-                        ((GlobalData) getApplication()).setgender(dataGender);
+                       // ((GlobalData) getApplication()).setgender(dataGender);
 
                         ((GlobalData) getApplication()).setDob(Dob.getText().toString());
 
-
+                        setDataToHashMap("gender", dataGender);
                         int age = 0;
                         if (((GlobalData) getApplication()).getDob() != null) {
 
@@ -317,7 +319,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                         if (age > 18) {
 
                             ((GlobalData) getApplication()).setage(age);
-                            String loantype=((GlobalData) getApplication()).getcartype();
+                            String loantype=cl_car_global_data.dataWithAns.get("loan_type");
                             if (loantype.equalsIgnoreCase("Car Loan") ||loantype.equalsIgnoreCase("Home Loan") ||loantype.equalsIgnoreCase("Loan Against Property"))
                             {
                                 Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
@@ -325,7 +327,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }else{
-                                String empt=((GlobalData) getApplication()).getemptype();
+                                String empt=cl_car_global_data.dataWithAns.get("type_employment");
                                 if(empt.equals("Salaried")) {
                                     Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
                                     intent.putExtra("employer", "employer");

@@ -82,7 +82,8 @@ protected void onCreate(Bundle savedInstanceState) {
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String strtemp = String.valueOf(format.format(new BigDecimal(emi.toString())));
         strtemp = strtemp.substring(0, strtemp.length() - 3);
-        mSeekArcProgress.setText(strtemp+"");
+      //  mSeekArcProgress.setText(strtemp+"");
+                mSeekArcProgress.setText(((GlobalData) getApplication()).getTenure()+" Year");
         }
 
         tenure.addTextChangedListener(new TextWatcher() {
@@ -116,7 +117,7 @@ protected void onCreate(Bundle savedInstanceState) {
                                 try {
                                         mSeekArc.setProgress(Integer.valueOf(data));
 
-                                        mSeekArcProgress.setText(strtemp);
+                                        mSeekArcProgress.setText(data+" Year");
                                 } catch (Exception e) {
 
                                 }
@@ -140,13 +141,15 @@ public void onStartTrackingTouch(SeekArc seekArc) {
 @Override
 public void onProgressChanged(SeekArc seekArc, int progress,
         boolean fromUser) {
-        if (progress != 0)
-        progress = ((progress + 1)*1000)/1000;
-
+        //if (progress != 0)
+        //progress = ((progress + 1)*1000)/1000;
+        progress =progress + 1;
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
         strtemp = strtemp.substring(0, strtemp.length() - 3);
         mSeekArcProgress.setText(strtemp);
+
+        Log.d("check progress here", String.valueOf(progress));
 
         if(fromUser)
         tenure.setText(String.valueOf(progress));
@@ -203,26 +206,26 @@ public void onClick(View v) {
 
         case R.id.next:
         ((GlobalData) getApplication()).seTenure(tenure.getText().toString());
-                String emptype=((GlobalData) getApplication()).getemptype();
+                String emptype=cl_car_global_data.dataWithAns.get("loan_type");
                         Intent intent = null;
-                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
+                if (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Car Loan")) {
                         if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
                                 intent = new Intent(Tenure.this, Car_Loan_PAT.class);
                         }else{
                                 intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
                         }
 
-                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                }else if(cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Loan Against Property")) {
                         if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                                 intent = new Intent(Tenure.this, lp_ownsh.class);
                         } else {
                                 intent = new Intent(Tenure.this, hl_city.class);
                         }
-                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                }else if(cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Home Loan")) {
                                intent = new Intent(Tenure.this, hl_city.class);
                 }
-                else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
-                        String emptyp=((GlobalData) getApplication()).getemptype();
+                else if (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Personal Loan")) {
+                        String emptyp=cl_car_global_data.dataWithAns.get("loan_type");
                     if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
                     {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);

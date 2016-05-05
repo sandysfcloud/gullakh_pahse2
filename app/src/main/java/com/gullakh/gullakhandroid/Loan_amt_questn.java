@@ -97,10 +97,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         //  done = (ImageView) findViewById(R.id.done);
         // done.setOnClickListener(this);
 
-        if (((GlobalData) getApplication()).getloanamt() != null) {
-            Log.d("loan amt not null value:", ((GlobalData) getApplication()).getloanamt());
-            String loanamt = ((GlobalData) getApplication()).getloanamt();
-            int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
+        if (cl_car_global_data.dataWithAns.get("cl_loanamount") != null) {
+            Log.d("loan amt not null value:", cl_car_global_data.dataWithAns.get("cl_loanamount"));
+            String loanamt = cl_car_global_data.dataWithAns.get("cl_loanamount");
+            int loanamtint = (int) Double.parseDouble(cl_car_global_data.dataWithAns.get("cl_loanamount"));
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
 
 
@@ -237,6 +237,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         super.finish();
         overridePendingTransition(R.transition.left, R.transition.right);
     }*/
+
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
     @Override
     public void onClick(View v) {
 
@@ -271,8 +275,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 else
                 {
                     Log.d("intent next loanamt", "check");
-                    ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
-
+                  //  ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
+                    setDataToHashMap("cl_loanamount",amt.getText().toString().replaceAll(",", ""));
                     Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

@@ -90,20 +90,20 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
-        if(((GlobalData) getApplication()).getcarres()!=null) {
-            String resval=((GlobalData) getApplication()).getcarres();
-            Log.d("residence review not null", ((GlobalData) getApplication()).getcarres());
-            if (((GlobalData) getApplication()).getcarres().equals("Bengaluru"))
+        if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null) {
+            String resval=cl_car_global_data.dataWithAns.get("currently_living_in");
+            Log.d("residence review ", resval);
+            if (resval.equals("Bengaluru"))
                 place1.setImageResource(R.drawable.buttonselecteffect);
-            else if(((GlobalData) getApplication()).getcarres().equals("Chennai"))
+            else if(resval.equals("Chennai"))
                 place2.setImageResource(R.drawable.buttonselecteffect);
-            else if(((GlobalData) getApplication()).getcarres().equals("Delhi"))
+            else if(resval.equals("Delhi"))
                 place3.setImageResource(R.drawable.buttonselecteffect);
-            else if(((GlobalData) getApplication()).getcarres().equals("Mumbai"))
+            else if(resval.equals("Mumbai"))
                 place4.setImageResource(R.drawable.buttonselecteffect);
             if(!(resval.equals("Bengaluru")||resval.equals("Chennai")||resval.equals("Kolkata")||resval.equals("Mumbai"))) {
-                Log.d("residence review other", "0");
-                citynam.setText(((GlobalData) getApplication()).getcarres());
+                Log.d("residence review other", resval);
+                citynam.setText(resval);
             }
 
         }
@@ -130,15 +130,15 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
-
+               // ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+                setDataToHashMap("currently_living_in", citynam.getText().toString());
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
                     }
                 }
                 else {
-                    Log.d("item selected ", String.valueOf(position));
+                    Log.d("item selected onclicklist", citynam.getText().toString());
                     Intent intent = new Intent(cl_car_residence.this, Emp_type_Qustn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
@@ -192,7 +192,9 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
         requestgetserver.execute("token", "cityname", sessionid);
     }
-
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
     @Override
     public void onClick(View v) {
 
@@ -203,10 +205,12 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 if(citynam.getText().toString()!=null) {
                     if( citynam.getText().toString().length()>0) {
                         Log.d("edit text", citynam.getText().toString());
-                        ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+                        setDataToHashMap("currently_living_in", citynam.getText().toString());
+                       // ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
                     }
                 }
-                if(((GlobalData) getApplication()).getcarres()!=null)
+               // if(((GlobalData) getApplication()).getcarres()!=null)
+                if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null)
                     goToIntent();
                 else
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
@@ -233,7 +237,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
 
-                ((GlobalData) getApplication()).setcarres("Bengaluru");
+                //((GlobalData) getApplication()).setcarres("Bengaluru");
+                setDataToHashMap("currently_living_in", "Bengaluru");
                 goToIntent();
                 break;
             case R.id.ImageViewPlace2:
@@ -242,7 +247,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
 
-                ((GlobalData) getApplication()).setcarres("Chennai");
+               // ((GlobalData) getApplication()).setcarres("Chennai");
+                setDataToHashMap("currently_living_in", "Chennai");
                 goToIntent();
                 break;
             case R.id.ImageViewPlace3:
@@ -251,7 +257,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
 
-                ((GlobalData) getApplication()).setcarres("Delhi");
+                //((GlobalData) getApplication()).setcarres("Delhi");
+                setDataToHashMap("currently_living_in", "Delhi");
                 goToIntent();
                 break;
             case R.id.ImageViewPlace4:
@@ -259,7 +266,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.buttonselecteffect);
-                ((GlobalData) getApplication()).setcarres("Mumbai");
+               // ((GlobalData) getApplication()).setcarres("Mumbai");
+                setDataToHashMap("currently_living_in", "Mumbai");
                 goToIntent();
                 break;
             case R.id.locatn:
@@ -286,15 +294,16 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             }
         }
         else {
-            Log.d("selected current city is ", ((GlobalData) getApplication()).getcarres());
-            getStateName(((GlobalData) getApplication()).getcarres());
+            Log.d("selected current city is ", cl_car_global_data.dataWithAns.get("currently_living_in"));
+           // getStateName(((GlobalData) getApplication()).getcarres());
+
             Intent intent = new Intent(this, Emp_type_Qustn.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }
     }
 
-    private void getStateName(String city_name) {
+    /*private void getStateName(String city_name) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -311,19 +320,22 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Statename[] enums = gson.fromJson(jsonObject.get("result"), Statename[].class);
                 for(int i=0;i<enums.length;i++) {
-                    ((GlobalData) getApplication()).setStatename(enums[i].getStatename());
+                   // ((GlobalData) getApplication()).setStatename(enums[i].getStatename());
+                    setDataToHashMap("currently_living_in", enums[i].getStatename());
                 }
                 Log.d("check state name json", jsonObject.get("result").toString());
             }
         }, cl_car_residence.this, "2");
         requestgetserver1.execute("token", "statename", sessionid,city_name);
-    }
+    }*/
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        Log.d("item selected ", String.valueOf(position));
+
+
+        Log.d("item selected ", String.valueOf(  parent.getItemAtPosition(position)));
         Intent intent = new Intent(this, Emp_type_Qustn.class);
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);

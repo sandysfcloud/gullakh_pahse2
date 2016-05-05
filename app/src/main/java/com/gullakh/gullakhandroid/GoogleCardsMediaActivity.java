@@ -100,7 +100,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     Dialog dialog;
     Button apply,reset;
     int Max_tenure, filter_tenure, seektenure =0,prevloan=0;
-    double net_salry, emi;
+    double net_salry=0, emi;
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> searchlistviewArry = new ArrayList<ListModel>();
@@ -193,7 +193,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             // createListView();
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             //nullpointer
-            String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) this.getApplication()).getloanamt())));
+            String loan = String.valueOf(format.format(new BigDecimal(cl_car_global_data.dataWithAns.get("cl_loanamount"))));
             loan = loan.replaceAll("\\.00", "");
             // loan = loan.replaceAll("Rs.", "");
 
@@ -469,8 +469,48 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     public void loan_amtcalcutn(final String param) {
 
+
+
+
+        /*requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.e("Kavya JSON!!!!", jsonObject.toString());
+              /*  LoanParaMaster[] LoanP_cobj = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
+                String loanpid = LoanP_cobj[0].getid();
+                String loan_amt = ((GlobalData) getApplication()).getloanamt();
+                Log.e("loanpid", loanpid);
+                //requestgetserver2.execute("token", "RuleDetails", sessionid, loanpid, loan_amt);
+                String emptype=((GlobalData) getApplication()).getemptype();
+                String gender=((GlobalData) getApplication()).getgender();*/
+
+
+
+          /*  }
+        }, GoogleCardsMediaActivity.this, "2");
+
+        requestgetserver.execute("sessn", "RuleDetails");*/
+
+
+
+
+
+
+
         //***************************serverconnect***********************
-        requestgetserver = new JSONServerGet(new AsyncResponse() {
+        /*requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
 
@@ -646,9 +686,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             }
-        }, GoogleCardsMediaActivity.this, "9");
+        }, GoogleCardsMediaActivity.this, "9");*/
 
-
+        //requestgetserver3.execute("token", "RuleMaster", sessionid, listidglobal,loantype,emptype);
 
         requestgetserver3 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -657,6 +697,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
 
             public void processFinishString(String str_result, Dialog dg)  {
+
+
+               // dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -670,6 +713,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
                 JSONArray jsonArray = new JSONArray();
+
+                if(RM_cobj!=null) {
                     for (int i = 0; i < RM_cobj.length; i++) {
 
                         JSONObject imgob = new JSONObject();
@@ -690,9 +735,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     }
 
 
-
-
-                Log.e("json object value KK", String.valueOf(jsonArray));
+                    Log.e("json object value KK", String.valueOf(jsonArray));
 
 
                     cobj_RM = RM_cobj;
@@ -701,13 +744,24 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     listidmaster = listidmaster.toString().replace("[", "").replace("]", "");
 
 
+                    requestgetserver3img.execute("token", "accountimg", sessionid, jsonArray.toString());
 
 
-                   requestgetserver3img.execute("token", "accountimg", sessionid, jsonArray.toString());
-
-
-
-
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                                    intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intenth);
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
                 //******************kk
 
 
@@ -717,6 +771,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         }, GoogleCardsMediaActivity.this, "4");
 
+
+        requestgetserver3.execute("sessn", "RuleDetails");
 
 
         requestgetserver3img = new JSONServerGet(new AsyncResponse() {
@@ -780,7 +836,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.e("Check final data here3", str_result);
 
-                dgthis.dismiss();
+                //dgthis.dismiss();
                 BankList[] BL_cobj = gson.fromJson(jsonObject.get("result"), BankList[].class);
                 Map<String, String> Arry_banknamtemp = new HashMap<>();
 
@@ -791,14 +847,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
                 Arry_banknam = Arry_banknamtemp;
-
-                net_salry = ((GlobalData) getApplication()).getnetsalary();
+                Log.d("net sal", String.valueOf(cl_car_global_data.dataWithAns.get("net_mon_salary")));
+              Log.d("net sal", String.valueOf(Double.parseDouble(cl_car_global_data.dataWithAns.get("net_mon_salary"))));
+                net_salry = Double.parseDouble(cl_car_global_data.dataWithAns.get("net_mon_salary"));
 
 
 
 
                 //*cal tenure here
-                String typ_loan=((GlobalData) getApplication()).getcartype();
+                String typ_loan=cl_car_global_data.dataWithAns.get("loan_type");
 
                 if(typ_loan.equals("Car Loan"))
                 {
@@ -818,7 +875,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 }
 
 
-                emi = ((GlobalData) getApplication()).getEmi();
+                emi = Integer.parseInt(cl_car_global_data.dataWithAns.get("total_emi"));
 
                 disbank = new ArrayList<String>();
                 Log.e("flow test calculte called", "1");
@@ -839,7 +896,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 if(((GlobalData) getApplication()).getcarres()!=null) {
     Log.d("checking city name here", ((GlobalData) getApplication()).getcarres());
 
-    requestgetserver6.execute("token", "City", sessionid, ((GlobalData) getApplication()).getcarres());
+   // requestgetserver6.execute("token", "City", sessionid, ((GlobalData) getApplication()).getcarres());
 }
 
 
@@ -857,7 +914,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
     public void calculate() {
-        int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
+        int loan_amt = Integer.parseInt(cl_car_global_data.dataWithAns.get("cl_loanamount"));
         double final_bp, emi_valu, emi_value, bp;
         CustomListViewValuesArr.clear();
         if(!disbank.equals(null))
@@ -883,7 +940,9 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
 
                 } else {
-
+                    Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                    Log.d("Max_tenure", String.valueOf(Max_tenure));
+                    Log.d("loan_amt", String.valueOf(-loan_amt));
 
                     emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 
@@ -926,7 +985,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     sched.setemi_value(String.valueOf(emi_valu));
                     sched.setbp(String.valueOf(final_bp));
                     sched.setfee_charges(cobj_RM[i].getfee_charges_details());
-                    Log.d("check fee here", cobj_RM[i].getfee_charges_details());
+                  //  Log.d("check fee here", cobj_RM[i].getfee_charges_details());
                     sched.setother_details(cobj_RM[i].getother_details());
                     sched.setcardocu(cobj_RM[i].getdocu_details());
 
@@ -935,11 +994,11 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     if (Arry_bankimg.get(cobj_RM[i].getaccount_lender()) != null)
                         sched.setcarimgurl(Arry_bankimg.get(cobj_RM[i].getaccount_lender()));
 
-                    Log.d("activity docum ", cobj_RM[i].getdocu_details());
+                 //   Log.d("activity docum ", cobj_RM[i].getdocu_details());
 
                     CustomListViewValuesArr.add(sched);
                     disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-                    Log.d("activity docum ", cobj_RM[i].getaccount_lender());
+                    //Log.d("activity docum ", cobj_RM[i].getaccount_lender());
                 }
                 if (CustomListViewValuesArr.size() == 0) {
 
@@ -1000,7 +1059,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
     public void calTenure(int  sal,int nonsal)
     {
-        if (((GlobalData) getApplication()).getemptype().equals("Salaried")) {
+        if (cl_car_global_data.dataWithAns.get("type_employment").equals("Salaried")) {
 
             if ((60 - age) > sal) {
                 Max_tenure = sal * 12;
@@ -1114,7 +1173,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         Log.d("CustomListViewValuesArr value check MAIN", String.valueOf(CustomListViewValuesArr2.size()));
 //------------------------------------------------------------------------------------------------------------------------------------------
         if (firsttimeflage == 0) {
-             if(CustomListViewValuesArr2.size()>0)
+             if(CustomListViewValuesArr2.size()>1)
              {
                  for (int i = 0; i < 2; i++) {
                     arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
@@ -1123,6 +1182,13 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                  firsttimeflage = 1;
             Log.d("check compbanl arrylist", String.valueOf(arrcombank));
             }
+            else if(CustomListViewValuesArr2.size()==1)
+             {
+                 for (int i = 0; i < CustomListViewValuesArr2.size(); i++) {
+                     arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                 }
+                 ((GlobalData) this.getApplication()).setLenders(arrcombank);
+             }
 
 //------------------------------------------------------------------------------------------------------------------------------------------
     }

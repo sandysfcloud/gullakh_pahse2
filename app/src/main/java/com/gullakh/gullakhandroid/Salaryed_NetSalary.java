@@ -76,9 +76,10 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
        // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
-        if(((GlobalData) getApplication()).getnetsalary()!=null) {
+        if(cl_car_global_data.dataWithAns.get("net_mon_salary")!=null) {
 
-            String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
+            //String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
+            String netsalary=String.valueOf(cl_car_global_data.dataWithAns.get("net_mon_salary"));
             //mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 5000)));
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
@@ -182,7 +183,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         }
         return super.onOptionsItemSelected(item);
     }
-
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
     @Override
     public void onClick(View v) {
 
@@ -210,12 +213,16 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 //                overridePendingTransition(R.transition.left, R.transition.right);
 //                break;
             case R.id.next:
-                if(!sal.getText().toString().matches("")) {
+                if(!sal.getText().toString().matches("")&&!sal.getText().toString().matches("0")) {
                     if(!incent.getText().toString().matches("")) {
                     if(Float.parseFloat(sal.getText().toString().replaceAll(",", "")) > 3000) {
-                        Log.d("net sal",sal.getText().toString().replaceAll(",", ""));
-                        ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(sal.getText().toString().replaceAll(",", "")));
-                        ((GlobalData) getApplication()).setavgince(incent.getText().toString());
+                        Log.d("net sal", sal.getText().toString().replaceAll(",", ""));
+
+                        Double netsal=Double.parseDouble(sal.getText().toString().replaceAll(",", ""))+Double.parseDouble(incent.getText().toString().replaceAll(",", ""));
+                        Log.d("check net sal KK", String.valueOf(netsal));
+                        //((GlobalData) getApplication()).setnetsalary(netsal);
+                        //((GlobalData) getApplication()).setavgince(incent.getText().toString());
+                        setDataToHashMap("net_mon_salary", String.valueOf(netsal));
                         Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);

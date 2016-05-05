@@ -83,14 +83,15 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
 
 
-        if(((GlobalData) getApplication()).getEmi()!=null)
+        if((cl_car_global_data.dataWithAns.get("total_emi")!=null))
         {
-            String emi=String.valueOf(((GlobalData) getApplication()).getEmi().intValue());
+          //  String emi=String.valueOf(((GlobalData) getApplication()).getEmi().intValue());
+            String emi=String.valueOf(Integer.parseInt((cl_car_global_data.dataWithAns.get("total_emi"))));
             Log.d("emi already set", emi);
             emipaying.setText(emi);
             emipaying.setSelection(emipaying.getText().length());
 
-            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getEmi().intValue()) / 1000)));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(Integer.parseInt(cl_car_global_data.dataWithAns.get("total_emi"))) / 1000)));
 
 
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
@@ -215,6 +216,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
     @Override
     public void onClick(View v) {
 
@@ -225,7 +230,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
                 break;
             case R.id.edit:
-                String emptyp=((GlobalData) getApplication()).getemptype();
+                String emptyp=cl_car_global_data.dataWithAns.get("type_employment");
                 if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
                     RegisterPageActivity.showAlertreview(EMI_questn.this,7);
                 else
@@ -244,8 +249,9 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 //                break;
             case R.id.next:
                // if(!emi.getText().toString().matches("")) {
-                    ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));
-                    Intent intent = new Intent(EMI_questn.this, DateOfBirth_questn.class);
+                   // ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));
+                setDataToHashMap("total_emi", emipaying.getText().toString().replaceAll(",", ""));
+                Intent intent = new Intent(EMI_questn.this, DateOfBirth_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                /* }

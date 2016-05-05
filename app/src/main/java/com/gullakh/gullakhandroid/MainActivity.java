@@ -492,12 +492,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         String colorName = MaterialColor.getColorName(entry);
         return MaterialColor.getContrastColor(colorName);
     }
-
+    public void setDataToHashMap(String key, String data) {
+        cl_car_global_data.dataWithAns.put(key, data);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.carln:
+                setDataToHashMap("loan_type", "Car Loan");
                 ((GlobalData) getApplication()).setcartype("Car Loan");
                 Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
@@ -506,6 +509,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.home:
                 ((GlobalData) getApplication()).setcartype("Home Loan");
+                setDataToHashMap("loan_type", "Car Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -513,12 +517,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.busin:
                 ((GlobalData) getApplication()).setcartype("Loan Against Property");
+                setDataToHashMap("loan_type", "Car Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.persol:
                 ((GlobalData) getApplication()).setcartype("Personal Loan");
+                setDataToHashMap("loan_type", "Car Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);

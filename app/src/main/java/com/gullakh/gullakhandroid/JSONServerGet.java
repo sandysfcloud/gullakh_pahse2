@@ -91,18 +91,75 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                     try {
 
 
-                        Challenge challengedata = new Challenge();
-                        String mdata=token+ "znLkyofsf6tEmtEw";
-                        Log.e("mdatavalue", mdata);
-                        String accessKey = md5(mdata);
-                        Log.e("accessKey", accessKey);
-                        // json = jParser.getJSONFromUrl(GlobalData.SERVER_GET_URL, "login", "connectuser", accessKey);
-                        // Log.e("doInBackground-access", String.valueOf(json));
+                        ArrayList<NameValuePair> nameValuePairs;
 
-                        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                        nameValuePairs.add(new BasicNameValuePair("operation", "login"));
-                        nameValuePairs.add(new BasicNameValuePair("username", "connectuser"));
-                        nameValuePairs.add(new BasicNameValuePair("accessKey", accessKey));
+                      if(args[1].equals("RuleDetails")){
+
+
+                          Log.d("car_loan_type",cl_car_global_data.dataWithAns.get("car_loan_type"));
+                          Log.d("currently_living_in",cl_car_global_data.dataWithAns.get("currently_living_in"));
+                          Log.d("type_employment",cl_car_global_data.dataWithAns.get("type_employment"));
+                          Log.d("cl_loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount"));
+                          Log.d("gender",cl_car_global_data.dataWithAns.get("gender"));
+                          Log.d("net_mon_salary",cl_car_global_data.dataWithAns.get("net_mon_salary"));
+                          Log.d("cl_loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount"));
+
+
+                          String sessionval=null;
+                          DataHandler dbobject = new DataHandler(act);
+                          Cursor cr = dbobject.displayData("select * from session");
+                          if (cr.moveToFirst()) {
+                              //pass the session id to check wether its valid or not
+                              Log.d("session value is", String.valueOf(cr.getCount()) + " :value is:" + cr.getString(1));
+
+                             sessionval=cr.getString(1);
+
+                          }
+
+
+
+                          nameValuePairs = new ArrayList<NameValuePair>();
+                          nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                          nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
+                          nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
+
+                          nameValuePairs.add(new BasicNameValuePair("loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount")));
+                          nameValuePairs.add(new BasicNameValuePair("loantype", "Car Loan"));
+                          nameValuePairs.add(new BasicNameValuePair("cartype", cl_car_global_data.dataWithAns.get("car_loan_type")));
+                          nameValuePairs.add(new BasicNameValuePair("cityname", cl_car_global_data.dataWithAns.get("currently_living_in")));
+
+                          nameValuePairs.add(new BasicNameValuePair("employeetype", cl_car_global_data.dataWithAns.get("type_employment")));
+                          nameValuePairs.add(new BasicNameValuePair("loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount")));
+                          nameValuePairs.add(new BasicNameValuePair("gender", cl_car_global_data.dataWithAns.get("gender")));
+                          nameValuePairs.add(new BasicNameValuePair("salaryamount", cl_car_global_data.dataWithAns.get("net_mon_salary")));
+
+
+                          DefaultHttpClient httpClient = new DefaultHttpClient();
+                          HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
+
+                          httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                          response = httpClient.execute(httpPost);
+                          Log.e("Response:session id ", String.valueOf(response));
+
+
+
+                        }
+                        else {
+
+
+                          Challenge challengedata = new Challenge();
+                          String mdata = token + "znLkyofsf6tEmtEw";
+                          Log.e("mdatavalue", mdata);
+                          String accessKey = md5(mdata);
+                          Log.e("accessKey", accessKey);
+                          // json = jParser.getJSONFromUrl(GlobalData.SERVER_GET_URL, "login", "connectuser", accessKey);
+                          // Log.e("doInBackground-access", String.valueOf(json));
+
+                          nameValuePairs = new ArrayList<NameValuePair>();
+                          nameValuePairs.add(new BasicNameValuePair("operation", "login"));
+                          nameValuePairs.add(new BasicNameValuePair("username", "connectuser"));
+                          nameValuePairs.add(new BasicNameValuePair("accessKey", accessKey));
+                      }
 
                         DefaultHttpClient httpClient = new DefaultHttpClient();
                         HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
@@ -253,6 +310,8 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
                         else if(args[1].equals("accountname")){
+
+                            Log.e("Check query accountname","select accountname from Accounts where id in "+args[3]+";");
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select accountname from Accounts where id in "+args[3]+";")).toString());
