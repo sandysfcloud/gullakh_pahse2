@@ -699,7 +699,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             public void processFinishString(String str_result, Dialog dg)  {
 
 
-               // dgthis = dg;
+                dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -769,7 +769,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-        }, GoogleCardsMediaActivity.this, "4");
+        }, GoogleCardsMediaActivity.this, "1");
 
 
         requestgetserver3.execute("sessn", "RuleDetails");
@@ -813,7 +813,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             }
-        }, GoogleCardsMediaActivity.this, "5");
+        }, GoogleCardsMediaActivity.this, "2");
 
 
 
@@ -836,7 +836,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.e("Check final data here3", str_result);
 
-                //dgthis.dismiss();
+                dgthis.dismiss();
                 BankList[] BL_cobj = gson.fromJson(jsonObject.get("result"), BankList[].class);
                 Map<String, String> Arry_banknamtemp = new HashMap<>();
 
@@ -888,7 +888,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.e("flow test", String.valueOf(1));
 
             }
-        }, GoogleCardsMediaActivity.this, "5");
+        }, GoogleCardsMediaActivity.this, "3");
 
 
         ServerConnect cls2 = new ServerConnect();
@@ -940,9 +940,9 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
 
                 } else {
-                    Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                    /*Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
                     Log.d("Max_tenure", String.valueOf(Max_tenure));
-                    Log.d("loan_amt", String.valueOf(-loan_amt));
+                    Log.d("loan_amt", String.valueOf(-loan_amt));*/
 
                     emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 

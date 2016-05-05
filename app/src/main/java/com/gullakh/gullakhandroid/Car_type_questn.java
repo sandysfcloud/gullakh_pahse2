@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
     Dialog dg;
     String data;
     Button back,next,done;
+    private ContentValues contentValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +112,14 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
     }
+
+
+    private void goToDatabase(String loanType)
+    {
+        contentValues.put("loantype", loanType);
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
+    }
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -136,6 +146,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                     Log.d("car_loan_typeK",cl_car_global_data.dataWithAns.get("car_loan_type"));
                     if(cl_car_global_data.dataWithAns.get("car_loan_type").equalsIgnoreCase("used car loan")) {
                         intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
+
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else {
@@ -162,6 +173,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 oldcar.setImageResource(R.drawable.usedcar);
                // ((GlobalData) getApplication()).setCartypeloan("New Car Loan");
                 setDataToHashMap("car_loan_type","New");
+                goToDatabase("Car Loan");
                 Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
@@ -178,6 +190,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
                 //((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
                 setDataToHashMap("car_loan_type","Used");
+                goToDatabase("Car Loan");
                 Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);

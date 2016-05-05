@@ -100,6 +100,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
                         setDataToHashMap("yom", date);
                         goToDatabase("Car Loan");
                         Intent intent = new Intent(cl_car_yearofmft.this, Loan_amt_questn.class);
+                        intent.putExtra("loan_type", "Car Loan");
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                 }

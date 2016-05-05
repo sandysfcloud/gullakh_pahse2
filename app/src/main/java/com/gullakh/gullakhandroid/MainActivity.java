@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -85,7 +86,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private static final int ITEM_COUNT = 4;
     // flag for Internet connection status
     Boolean isInternetPresent = false;
-
+    private ContentValues contentValues;
     // Connection detector class
     ConnectionDetector cd;
     private int touchPositionX;
@@ -116,6 +117,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         callGarbageCollector();
+        contentValues = new ContentValues();
 //--------------------------Checking internet connection-------------------------------------------
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
@@ -502,15 +504,19 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.carln:
                 setDataToHashMap("loan_type", "Car Loan");
                 ((GlobalData) getApplication()).setcartype("Car Loan");
+                goToDatabase("Car Loan");
                 Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
+                intent.putExtra("loan_type", "Car Loan");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
 
             case R.id.home:
                 ((GlobalData) getApplication()).setcartype("Home Loan");
-                setDataToHashMap("loan_type", "Car Loan");
+                setDataToHashMap("loan_type", "Home Loan");
+                goToDatabase("Car Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
+                intent.putExtra("loan_type", "Home Loan");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
@@ -518,14 +524,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.busin:
                 ((GlobalData) getApplication()).setcartype("Loan Against Property");
                 setDataToHashMap("loan_type", "Car Loan");
+                goToDatabase("Loan Against Property");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
+                intent.putExtra("loan_type", "Loan Against Property");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.persol:
                 ((GlobalData) getApplication()).setcartype("Personal Loan");
                 setDataToHashMap("loan_type", "Car Loan");
+                goToDatabase("Personal Loan");
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
+                intent.putExtra("loan_type", "Personal Loan");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
@@ -718,6 +728,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void goToDatabase(String loanType)
+    {
+        contentValues.put("loantype", loanType);
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
+    }
+
+
 
     private class DrawerItemClickListener implements
             ListView.OnItemClickListener {

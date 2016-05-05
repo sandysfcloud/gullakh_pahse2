@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,14 +38,14 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     TextView mSeekArcProgress,onetext;
     String data;
     String valuewithcomma;
-
-
+    String loan_type;
+    private ContentValues contentValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loan_amt);
         //  getSupportActionBar().setTitle("Car Loan - Loan Amount");
-
+        contentValues=new ContentValues();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         // MaterialTextField obj=new MaterialTextField(this);
@@ -178,10 +179,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                                                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
-
                                                     mSeekArcProgress.setText(strtemp);
-                                                    if(fromUser)
-                                                    amt.setText(String.valueOf(progress));
+                                                    if (fromUser)
+                                                        amt.setText(String.valueOf(progress));
 
 
                                                 }
@@ -204,7 +204,19 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             }
         }
 
+
+
+
+        Intent intent = getIntent();
+        String loant = intent.getStringExtra("loan_type");
+        if (loant != null) {
+            loan_type=data;
+        }
+
     }
+
+
+
 
 
 
@@ -240,6 +252,15 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
+    }
+
+
+    private void goToDatabase(String loanType)
+    {
+        contentValues.put("loantype",loanType);
+        contentValues.put("questans", "cl_car_yearofmft");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
     }
     @Override
     public void onClick(View v) {
@@ -277,6 +298,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
                     setDataToHashMap("cl_loanamount",amt.getText().toString().replaceAll(",", ""));
+                    goToDatabase(loan_type);
                     Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
