@@ -208,7 +208,10 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                                                 intent.putExtra("personal", "personal");
                                                 startActivity(intent);
                                             }
-
+                                            else{
+                                                intent = new Intent(this, cl_car_salaried.class);
+                                                startActivity(intent);
+                                            }
                                         } else if (CompLoanType.equals("Self Employed Business")) {
                                             intent = new Intent(this, cl_car_selfempbusiness.class);
                                             startActivity(intent);

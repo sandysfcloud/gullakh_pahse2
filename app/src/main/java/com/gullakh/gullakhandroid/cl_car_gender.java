@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -258,9 +257,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             }
         }, cl_car_gender.this, "wait2");
-
-
-
 
         requestgetserver3 = new JSONServerGet(new AsyncResponse() {
             @Override
