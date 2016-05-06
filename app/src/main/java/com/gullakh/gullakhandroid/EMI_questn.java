@@ -91,7 +91,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
             emipaying.setText(emi);
             emipaying.setSelection(emipaying.getText().length());
 
-            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(Integer.parseInt(cl_car_global_data.dataWithAns.get("total_emi"))) / 1000)));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(emi)) / 1000);
 
 
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
@@ -217,9 +217,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         return super.onOptionsItemSelected(item);
     }
 
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
+
     @Override
     public void onClick(View v) {
 
@@ -248,9 +246,9 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 //                overridePendingTransition(R.transition.left, R.transition.right);
 //                break;
             case R.id.next:
-               // if(!emi.getText().toString().matches("")) {
+               //if(!emi.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));
-                setDataToHashMap("total_emi", emipaying.getText().toString().replaceAll(",", ""));
+
                 Intent intent = new Intent(EMI_questn.this, DateOfBirth_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

@@ -321,7 +321,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
             resultsal=((cpat1+cdep1)/12);
 
             if(resultsal > 3000) {
-                ((GlobalData) getApplication()).setnetsalary(resultsal);
+                ((GlobalData) getApplication()).setTotalsal(String.valueOf(resultsal));
                 Log.d("salary of self emp", String.valueOf(resultsal));
                 if(flag.equals("next")) {
                     Intent intent = new Intent(CarLoan_Depreciation.this, EMI_questn.class);

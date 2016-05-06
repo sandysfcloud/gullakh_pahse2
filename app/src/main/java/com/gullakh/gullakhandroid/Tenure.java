@@ -218,31 +218,35 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.next:
-                ((GlobalData) getApplication()).seTenure(tenure.getText().toString());
-                String emptype = cl_car_global_data.dataWithAns.get("loan_type");
+                ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
+                Log.d("tenure is in Tenure", tenure.getText().toString());
+                Log.d("tenure global",((GlobalData) getApplication()).getTenure());
+
+                String emptype = ((GlobalData) getApplication()).getemptype();
+                String loantype =((GlobalData) getApplication()).getcartype();
                 Intent intent = null;
-                if (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Car Loan")) {
+                if (loantype.equalsIgnoreCase("Car Loan")) {
                     if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);
-                        intent.putExtra("loan_type", "Car Loan");
+
                     } else {
                         intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
-                        intent.putExtra("loan_type", "Car Loan");
+
                     }
 
-                } else if (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Loan Against Property")) {
+                } else if (loantype.equalsIgnoreCase("Loan Against Property")) {
                     if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                         intent = new Intent(Tenure.this, lp_ownsh.class);
-                        intent.putExtra("loan_type", "Loan Against Property");
+
                     } else {
                         intent = new Intent(Tenure.this, hl_city.class);
-                        intent.putExtra("loan_type", "Loan Against Property");
+
                     }
-                } else if (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Home Loan")) {
+                } else if (loantype.equalsIgnoreCase("Home Loan")) {
                     intent = new Intent(Tenure.this, hl_city.class);
-                    intent.putExtra("loan_type", "Home Loan");
-                } else if (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Personal Loan")) {
-                    String emptyp = cl_car_global_data.dataWithAns.get("loan_type");
+
+                } else if (loantype.equalsIgnoreCase("Personal Loan")) {
+                    String emptyp = ((GlobalData) getApplication()).getemptype();
                     if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);
                     } else {

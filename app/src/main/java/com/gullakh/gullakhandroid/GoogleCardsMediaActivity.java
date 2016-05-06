@@ -114,14 +114,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     CharSequence[] bankfilter = null;
     String prev_selectbank = null,listidglobal, tierid;
     JSONServerGet requestgetserver, requestgetserver2, requestgetserver3,requestgetserver3img, requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8;
-    String globalidentity,loantype;
+    String globalidentity,loantype,loan,loant;
     Dialog dgthis;
     EditText editloan;
     TextView loan_amt,tenr_amt,title;
     ArrayAdapter<String> adapter;
     private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee","Prclosure fee" };
     Map<String, String> Arry_bankimg=null;
-    String listidmaster;
+    String listidmaster,globaltenure,globalloan_type,globalsal;
     private LoanDetails loandetailsobj1;
     private int firsttimeflage=0;
 
@@ -193,11 +193,34 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             // createListView();
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             //nullpointer
-            String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) getApplication()).getloanamt())));
-            loan = loan.replaceAll("\\.00", "");
-            // loan = loan.replaceAll("Rs.", "");
 
-            loan_amt.setText("" + loan);
+
+            if (savedInstanceState != null){
+                loant = String.valueOf(format.format(new BigDecimal(savedInstanceState.getString("loan_amt"))));
+                loant = loant.replaceAll("\\.00", "");
+                loan=savedInstanceState.getString("loan_amt");
+
+                globaltenure=savedInstanceState.getString("tenure");
+                globalloan_type=savedInstanceState.getString("loan_type");
+                globalsal=savedInstanceState.getString("net_sal");
+
+            }
+            else {
+                loan = ((GlobalData) getApplication()).getloanamt();
+                Log.d("loan amt is", loan);
+
+                 globaltenure=((GlobalData) getApplication()).getTenure();
+                 globalloan_type=((GlobalData) getApplication()).getcartype();
+                 globalsal=((GlobalData) getApplication()).getTotalsal();
+
+            }
+            if(loan!=null) {
+                loant = String.valueOf(format.format(new BigDecimal(loan)));
+                loant = loant.replaceAll("\\.00", "");
+                Log.d("loan amt is not null",loant);
+                // loan = loan.replaceAll("Rs.", "");
+            }
+            loan_amt.setText("" + loant);
 
             filter.setOnClickListener(this);
             createListView();
@@ -372,6 +395,25 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         }
     }
 //*************************************************************************************End of Oncreate
+
+   //***onsaved instance
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("loan_amt", ((GlobalData) getApplication()).getloanamt());
+        icicle.putString("tenure", ((GlobalData) getApplication()).getTenure());
+        icicle.putString("loan_type", ((GlobalData) getApplication()).getcartype());
+
+        icicle.putString("net_sal", ((GlobalData) getApplication()).getTotalsal());
+
+
+
+    }
+
+
+
+
 
 
 public void setsearchdb()
@@ -856,13 +898,13 @@ public void setsearchdb()
 
                 Arry_banknam = Arry_banknamtemp;
 
-                net_salry = Double.parseDouble(cl_car_global_data.dataWithAns.get("net_mon_salary"));
+                net_salry = Double.parseDouble(globalsal);
 
 
 
 
                 //*cal tenure here
-                String typ_loan=cl_car_global_data.dataWithAns.get("loan_type");
+                String typ_loan=globalloan_type;
 
                 if(typ_loan.equals("Car Loan"))
                 {
@@ -921,7 +963,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
     public void calculate() {
-        int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
+        int loan_amt = Integer.parseInt(loan);
         double final_bp, emi_valu, emi_value, bp;
         CustomListViewValuesArr.clear();
         if(!disbank.equals(null))
@@ -1088,10 +1130,21 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         }
 
 
-        tenr_amt.setText(String.valueOf(Max_tenure / 12)+" Year(s)");
+        //tenr_amt.setText(String.valueOf(Max_tenure / 12)+" Year(s)");
+        if(globaltenure!=null)
+        {
+            tenr_amt.setText(globaltenure+" Year(s)");
+            Log.d("tenure is global",globaltenure );
+        }
+        else {
+            tenr_amt.setText(((GlobalData) getApplication()).getTenure() + " Year(s)");
+            Log.d("tenure is", ((GlobalData) getApplication()).getTenure());
+        }
+
+
         //Max_tenure = Max_tenure / 12;
         Log.d("Max_tenure value is", String.valueOf(Max_tenure));
-        ((GlobalData) getApplication()).settenure(String.valueOf(Max_tenure / 12));
+        //((GlobalData) getApplication()).settenure(String.valueOf(Max_tenure / 12));
     }
 
 

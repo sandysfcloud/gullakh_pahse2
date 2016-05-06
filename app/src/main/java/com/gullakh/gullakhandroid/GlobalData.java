@@ -13,8 +13,8 @@ public class GlobalData extends MultiDexApplication {
 
     private String cnameVariable;
     private String cmobileVariable;
-    private String cemailVariable,hashno,incent;
-    private Double datetimevar;
+    private String cemailVariable,hashno;
+    private Double datetimevar,incent;
 
     private String questionVariable;
     private ArrayList<Double> questionVariable2;
@@ -38,6 +38,7 @@ public class GlobalData extends MultiDexApplication {
     private String statename;
     private String Tenure;
     private String baltrans;
+    private String totalsal;
 
 //*****************CarLoan********************//
 
@@ -77,7 +78,7 @@ public class GlobalData extends MultiDexApplication {
         return loantyp;
     }
 
-    public String getavgince() {
+    public Double getavgince() {
         return incent;
     }
 
@@ -186,9 +187,14 @@ public class GlobalData extends MultiDexApplication {
     public void setloantyp(String cemailVariable) {
         this.loantyp = cemailVariable;
     }
-    public void setavgince(String someVariable) {
+    public void setavgince(Double someVariable) {
         this.incent = someVariable;
     }
+
+    public void setTotalsal(String someVariable) {
+        this.totalsal = someVariable;
+    }
+
     //***************HomeLoan***********************//
 
     public void setpropcity(String cemailVariable) {
@@ -242,12 +248,12 @@ public class GlobalData extends MultiDexApplication {
         return statename;
     }
 
-    public void seTenure(String s) {
-        this.Tenure = s;
+    public void setTenure(String s) {
+        Tenure = s;
     }
 
     public String getTenure() {
-        return tenure;
+        return Tenure;
     }
 
     public void setBaltrans(String baltrans) {
@@ -256,5 +262,8 @@ public class GlobalData extends MultiDexApplication {
 
     public String getBaltrans() {
         return baltrans;
+    }
+    public String getTotalsal() {
+        return totalsal;
     }
 }

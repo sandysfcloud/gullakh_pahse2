@@ -494,17 +494,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         String colorName = MaterialColor.getColorName(entry);
         return MaterialColor.getContrastColor(colorName);
     }
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.carln:
-                setDataToHashMap("loan_type", "Car Loan");
+
                 ((GlobalData) getApplication()).setcartype("Car Loan");
-                goToDatabase("Car Loan");
+
                 Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Car Loan");
                 startActivity(intent);
@@ -513,8 +511,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.home:
                 ((GlobalData) getApplication()).setcartype("Home Loan");
-                setDataToHashMap("loan_type", "Home Loan");
-                goToDatabase("Car Loan");
+
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Home Loan");
                 startActivity(intent);
@@ -523,8 +520,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.busin:
                 ((GlobalData) getApplication()).setcartype("Loan Against Property");
-                setDataToHashMap("loan_type", "Car Loan");
-                goToDatabase("Loan Against Property");
+
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Loan Against Property");
                 startActivity(intent);
@@ -532,8 +528,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             case R.id.persol:
                 ((GlobalData) getApplication()).setcartype("Personal Loan");
-                setDataToHashMap("loan_type", "Car Loan");
-                goToDatabase("Personal Loan");
+
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Personal Loan");
                 startActivity(intent);
@@ -730,12 +725,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
 
-    private void goToDatabase(String loanType)
-    {
-        contentValues.put("loantype", loanType);
-        contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
-    }
 
 
 

@@ -76,10 +76,14 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
        // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
-        if(cl_car_global_data.dataWithAns.get("net_mon_salary")!=null) {
+
+
+
+        if(((GlobalData) getApplication()).getnetsalary()!=null) {
 
             String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
 
+            String incen=String.valueOf(((GlobalData) getApplication()).getavgince().intValue());
 
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
@@ -89,6 +93,10 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             mSeekArcProgress.setText(strtemp);
             sal.setText(netsalary);
             sal.setSelection(sal.getText().length());
+
+            incent.setText(incen);
+            incent.setSelection(incent.getText().length());
+
         }
 
         onetext = (TextView) findViewById(R.id.onetext);
@@ -214,25 +222,37 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 //                break;
             case R.id.next:
                 if(!sal.getText().toString().matches("")&&!sal.getText().toString().matches("0")) {
-                    if(!incent.getText().toString().matches("")) {
-                    if(Float.parseFloat(sal.getText().toString().replaceAll(",", "")) > 3000) {
-                        Log.d("net sal", sal.getText().toString().replaceAll(",", ""));
 
-                        Double netsal=Double.parseDouble(sal.getText().toString().replaceAll(",", ""))+Double.parseDouble(incent.getText().toString().replaceAll(",", ""));
-                        Log.d("check net sal KK", String.valueOf(netsal));
-                        ((GlobalData) getApplication()).setnetsalary(netsal);
-                        ((GlobalData) getApplication()).setavgince(incent.getText().toString());
-                        setDataToHashMap("net_mon_salary", String.valueOf(netsal));
-                        Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }else {
-                        RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
+                        if (Float.parseFloat(sal.getText().toString().replaceAll(",", "")) > 3000) {
+                            Log.d("net sal", sal.getText().toString().replaceAll(",", ""));
+
+                            Double netsal;
+                            if(incent.getText().toString()!=null&& !(incent.getText().toString().equals(""))) {
+
+                                netsal = Double.parseDouble(sal.getText().toString().replaceAll(",", "")) + Double.parseDouble(incent.getText().toString().replaceAll(",", ""));
+                                Double dincent = Double.parseDouble(incent.getText().toString().replaceAll(",", "")) ;
+                                ((GlobalData) getApplication()).setavgince(dincent);
+                            }
+
+                            else
+                                netsal = Double.parseDouble(sal.getText().toString().replaceAll(",", ""));
+
+                            Double salr = Double.parseDouble(sal.getText().toString().replaceAll(",", "")) ;
+
+
+
+                            Log.d("check net sal KK", String.valueOf(netsal));
+                            ((GlobalData) getApplication()).setnetsalary(salr);
+
+                            ((GlobalData) getApplication()).setTotalsal(String.valueOf(netsal));
+                            setDataToHashMap("net_mon_salary", String.valueOf(netsal));
+                            Intent intent = new Intent(Salaryed_NetSalary.this, EMI_questn.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        } else {
+                            RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
+                        }
                     }
-                }
-                    else {
-                    RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Please enter your Average Monthly Incentives", "failed");
-                } }
                     else {
                     RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Please enter your manthly salary", "failed");
                 }

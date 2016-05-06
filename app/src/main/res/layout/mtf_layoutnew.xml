@@ -15,7 +15,7 @@
         tools:text="Password"
         app:typeface="robotoLight"
         android:textColor="#000"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/mtf_card"

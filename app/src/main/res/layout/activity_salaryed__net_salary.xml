@@ -103,6 +103,7 @@
                 android:textSize="18dp"
                 android:id="@+id/TextViewOption4"
                 android:layout_marginTop="12dp"
+                android:layout_marginLeft="38dp"
                 android:text="Average Monthly Incentives"
                 android:textColor="#3f3f3f"
                 app:typeface="robotoLight"

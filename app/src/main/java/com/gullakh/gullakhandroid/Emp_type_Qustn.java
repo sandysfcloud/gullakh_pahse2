@@ -44,11 +44,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         business.setOnClickListener(this);
         contentValues=new ContentValues();
 
-        if(cl_car_global_data.dataWithAns.get("type_employment")!=null) {
-            Log.d("emp type not null", cl_car_global_data.dataWithAns.get("type_employment"));
-            if (cl_car_global_data.dataWithAns.get("type_employment").equals("Salaried"))
+        if(((GlobalData) getApplication()).getemptype()!=null) {
+            Log.d("emp type not null", ((GlobalData) getApplication()).getemptype());
+            if (((GlobalData) getApplication()).getemptype().equals("Salaried"))
                 sal.setImageResource(R.drawable.buttonselecteffect);
-            else if(cl_car_global_data.dataWithAns.get("type_employment").equals("Self Employed Business"))
+            else if(((GlobalData) getApplication()).getemptype().equals("Self Employed Business"))
                 self.setImageResource(R.drawable.buttonselecteffect);
             else
                 business.setImageResource(R.drawable.buttonselecteffect);
@@ -96,21 +96,11 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         //********************End of Oncreate
 
 
-        Intent intent2 = getIntent();
-        String data = intent2.getStringExtra("loan_type");
-        if (data != null) {
-            loan_type=data;
-        }
+
 
     }
 
 
-    private void goToDatabase(String loanType)
-    {
-        contentValues.put("loantype", loanType);
-        contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType),loanType);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -124,9 +114,6 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
 
     @Override
     public void onClick(View v) {
@@ -146,7 +133,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             case R.id.next:
 
 
-                if(cl_car_global_data.dataWithAns.get("type_employment")!=null){
+                if(((GlobalData) getApplication()).getemptype()!=null){
                     goToIntent();
                 }else {
                     RegisterPageActivity.showErroralert(Emp_type_Qustn.this, "Please choose Employment type!", "failed");
@@ -165,8 +152,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 self.setImageResource(R.drawable.selfempbus);
                 business.setImageResource(R.drawable.selfempprof);
                 ((GlobalData) getApplication()).setemptype("Salaried");
-                setDataToHashMap("type_employment","Salaried");
-                goToDatabase(loan_type);
+
+
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -180,9 +167,9 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 self.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 business.setImageResource(R.drawable.selfempprof);
-                setDataToHashMap("type_employment", "Self Employed Business");
+
                 ((GlobalData) getApplication()).setemptype("Self Employed Business");
-                goToDatabase(loan_type);
+
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -195,9 +182,9 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 business.setImageResource(R.drawable.buttonselecteffect);
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
-                setDataToHashMap("type_employment", "Self Employed Professional");
+
                 ((GlobalData) getApplication()).setemptype("Self Employed Professional");
-                goToDatabase(loan_type);
+
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -216,22 +203,22 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     }
     public void goToIntent(){
         Intent intent;
-       // if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
-        if((cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Car Loan"))){
+        String loantype =((GlobalData) getApplication()).getcartype();
+        if(loantype.equalsIgnoreCase("Car Loan")){
             intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
 
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Loan Against Property") ||
-                (cl_car_global_data.dataWithAns.get("loan_type").equalsIgnoreCase("Home Loan"))){
+        }else if(loantype.equalsIgnoreCase("Loan Against Property") ||
+                (loantype.equalsIgnoreCase("Home Loan"))){
             intent = new Intent(Emp_type_Qustn.this, lp_bal_tranf.class);
-            intent.putExtra("loan_type", loan_type);
+
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }
         else{
             intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
-            intent.putExtra("loan_type", loan_type);
+
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }
