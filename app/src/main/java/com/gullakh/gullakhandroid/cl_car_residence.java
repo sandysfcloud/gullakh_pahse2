@@ -139,9 +139,10 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 }
                 else {
                     Log.d("item selected onclicklist", citynam.getText().toString());
-                    Intent intent = new Intent(cl_car_residence.this, Emp_type_Qustn.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+//                    Intent intent = new Intent(cl_car_residence.this, Emp_type_Qustn.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.transition.left, R.transition.right);
+                    goToIntent();
                 }
             }
         });
@@ -295,7 +296,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
         else {
             Log.d("selected current city is ", cl_car_global_data.dataWithAns.get("currently_living_in"));
-           // getStateName(((GlobalData) getApplication()).getcarres());
+            ((GlobalData) getApplication()).setcarres(cl_car_global_data.dataWithAns.get("currently_living_in"));
+            getStateName(cl_car_global_data.dataWithAns.get("currently_living_in"));
 
             Intent intent = new Intent(this, Emp_type_Qustn.class);
             startActivity(intent);
@@ -303,7 +305,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    /*private void getStateName(String city_name) {
+    private void getStateName(String city_name) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -318,16 +320,16 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Statename[] enums = gson.fromJson(jsonObject.get("result"), Statename[].class);
-                for(int i=0;i<enums.length;i++) {
-                   // ((GlobalData) getApplication()).setStatename(enums[i].getStatename());
-                    setDataToHashMap("currently_living_in", enums[i].getStatename());
+                Statename[] state = gson.fromJson(jsonObject.get("result"), Statename[].class);
+                for(int i=0;i<state.length;i++) {
+                    ((GlobalData) getApplication()).setStatename(state[i].getStatename());
+                    //setDataToHashMap("currently_living_in", state[i].getStatename());
                 }
                 Log.d("check state name json", jsonObject.get("result").toString());
             }
         }, cl_car_residence.this, "2");
         requestgetserver1.execute("token", "statename", sessionid,city_name);
-    }*/
+    }
 
 
     @Override

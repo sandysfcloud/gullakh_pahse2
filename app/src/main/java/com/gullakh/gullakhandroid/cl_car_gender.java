@@ -188,7 +188,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     {
         cl_car_global_data.dataWithAns.put(Key, data);
     }
-    public void savetoserver() {
+    public void savetoserver()
+    {
         DataHandler dbobject = new DataHandler(cl_car_gender.this);
         Cursor cr = dbobject.displayData("select * from session");
         if (cr.moveToFirst()) {
@@ -343,7 +344,31 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 //Log.d("Application values jsonobj", String.valueOf(jsonObject));
 
-                requestgetserver9.execute("token", "contactupdate", userid, borrowercontactid);
+//                requestgetserver9.execute("token", "contactupdate", userid,borrowercontactid,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
+//                        ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
+
+
+                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan") ||
+                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                    if (coapllflag) {
+                        gson = new Gson();
+                        JSONArray CojsonArray = new JSONArray();
+                        for (Map.Entry<String, HashMap<String, String>> entry : cl_car_global_data.allcoappdetail.entrySet()) {
+                            JSONObject json = new JSONObject(entry.getValue());
+                            try {
+                                json.put("loanrequestcaseid", borrowercaseid);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            CojsonArray.put(json);
+                        }
+                        requestgetserver10.execute("token", "coappldetails", sessionid, CojsonArray.toString());
+                    }
+                }else{
+                    dgthis.dismiss();
+                    goToIntent();
+                }
+
 
             }
         }, cl_car_gender.this, "wait6");
@@ -462,7 +487,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                             CojsonArray.put(json);
                         }
                         Log.d("coapp json", CojsonArray.toString());
-                        requestgetserver10.execute("token", "coappldetails", sessionid, CojsonArray.toString());
+//                        requestgetserver10.execute("token", "coappldetails", sessionid, CojsonArray.toString());
                     } else {
                         dgthis.dismiss();
                         goToIntent();
