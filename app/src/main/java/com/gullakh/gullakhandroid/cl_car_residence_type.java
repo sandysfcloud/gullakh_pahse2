@@ -249,6 +249,7 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_car_residence_type");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
+        Log.d("check hashmap-car make", cl_car_global_data.getHashMapInString());
         cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
     private void getCity()

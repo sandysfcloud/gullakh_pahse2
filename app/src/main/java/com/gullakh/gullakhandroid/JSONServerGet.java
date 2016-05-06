@@ -96,13 +96,13 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                       if(args[1].equals("RuleDetails")){
 
 
-                          Log.d("car_loan_type",cl_car_global_data.dataWithAns.get("car_loan_type"));
-                          Log.d("currently_living_in",cl_car_global_data.dataWithAns.get("currently_living_in"));
-                          Log.d("type_employment",cl_car_global_data.dataWithAns.get("type_employment"));
-                          Log.d("cl_loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount"));
-                          Log.d("gender",cl_car_global_data.dataWithAns.get("gender"));
-                          Log.d("net_mon_salary",cl_car_global_data.dataWithAns.get("net_mon_salary"));
-                          Log.d("cl_loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount"));
+                          Log.d("car_loan_type",((GlobalData) act.getApplication()).getCartypeloan());
+                          Log.d("currently_living_in", ((GlobalData) act.getApplication()).getcarres());
+                          Log.d("type_employment",((GlobalData) act.getApplication()).getemptype());
+                          Log.d("cl_loanamount",((GlobalData) act.getApplication()).getloanamt());
+                          Log.d("gender", ((GlobalData) act.getApplication()).getgender());
+                          Log.d("net_mon_salary", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
+                          Log.d("cl_loanamount",((GlobalData) act.getApplication()).getloanamt());
 
 
                           String sessionval=null;
@@ -123,15 +123,15 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                           nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
                           nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
 
-                          nameValuePairs.add(new BasicNameValuePair("loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount")));
+                          nameValuePairs.add(new BasicNameValuePair("loanamount",((GlobalData) act.getApplication()).getloanamt()));
                           nameValuePairs.add(new BasicNameValuePair("loantype", "Car Loan"));
-                          nameValuePairs.add(new BasicNameValuePair("cartype", cl_car_global_data.dataWithAns.get("car_loan_type")));
-                          nameValuePairs.add(new BasicNameValuePair("cityname", cl_car_global_data.dataWithAns.get("currently_living_in")));
+                          nameValuePairs.add(new BasicNameValuePair("cartype",((GlobalData) act.getApplication()).getCartypeloan()));
+                          nameValuePairs.add(new BasicNameValuePair("cityname",  ((GlobalData) act.getApplication()).getcarres()));
 
-                          nameValuePairs.add(new BasicNameValuePair("employeetype", cl_car_global_data.dataWithAns.get("type_employment")));
-                          nameValuePairs.add(new BasicNameValuePair("loanamount",cl_car_global_data.dataWithAns.get("cl_loanamount")));
-                          nameValuePairs.add(new BasicNameValuePair("gender", cl_car_global_data.dataWithAns.get("gender")));
-                          nameValuePairs.add(new BasicNameValuePair("salaryamount", cl_car_global_data.dataWithAns.get("net_mon_salary")));
+                          nameValuePairs.add(new BasicNameValuePair("employeetype", ((GlobalData) act.getApplication()).getemptype()));
+
+                          nameValuePairs.add(new BasicNameValuePair("gender", ((GlobalData) act.getApplication()).getgender()));
+                          nameValuePairs.add(new BasicNameValuePair("salaryamount", String.valueOf(((GlobalData) act.getApplication()).getnetsalary())));
 
 
                           DefaultHttpClient httpClient = new DefaultHttpClient();

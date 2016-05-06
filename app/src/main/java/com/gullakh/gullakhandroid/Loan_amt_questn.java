@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,14 +38,14 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     TextView mSeekArcProgress,onetext;
     String data;
     String valuewithcomma;
-
-
+    String loan_type;
+    private ContentValues contentValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loan_amt);
         //  getSupportActionBar().setTitle("Car Loan - Loan Amount");
-
+        contentValues=new ContentValues();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         // MaterialTextField obj=new MaterialTextField(this);
@@ -97,10 +98,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         //  done = (ImageView) findViewById(R.id.done);
         // done.setOnClickListener(this);
 
-        if (cl_car_global_data.dataWithAns.get("cl_loanamount") != null) {
-            Log.d("loan amt not null value:", cl_car_global_data.dataWithAns.get("cl_loanamount"));
-            String loanamt = cl_car_global_data.dataWithAns.get("cl_loanamount");
-            int loanamtint = (int) Double.parseDouble(cl_car_global_data.dataWithAns.get("cl_loanamount"));
+        if (((GlobalData) getApplication()).getloanamt() != null) {
+
+            String loanamt = ((GlobalData) getApplication()).getloanamt();
+            int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
 
 
@@ -178,10 +179,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                                                     strtemp = strtemp.substring(0, strtemp.length() - 3);
 
 
-
                                                     mSeekArcProgress.setText(strtemp);
-                                                    if(fromUser)
-                                                    amt.setText(String.valueOf(progress));
+                                                    if (fromUser)
+                                                        amt.setText(String.valueOf(progress));
 
 
                                                 }
@@ -204,7 +204,19 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             }
         }
 
+
+
+
+        Intent intent = getIntent();
+        String loant = intent.getStringExtra("loan_type");
+        if (loant != null) {
+            loan_type=data;
+        }
+
     }
+
+
+
 
 
 
@@ -238,9 +250,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         overridePendingTransition(R.transition.left, R.transition.right);
     }*/
 
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
+
     @Override
     public void onClick(View v) {
 
@@ -276,8 +286,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 {
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
-                    setDataToHashMap("cl_loanamount",amt.getText().toString().replaceAll(",", ""));
+
                     Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
+                    intent.putExtra("loan_type",loan_type);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
 

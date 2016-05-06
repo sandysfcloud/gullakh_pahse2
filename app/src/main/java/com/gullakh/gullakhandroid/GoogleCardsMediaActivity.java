@@ -193,7 +193,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             // createListView();
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             //nullpointer
-            String loan = String.valueOf(format.format(new BigDecimal(cl_car_global_data.dataWithAns.get("cl_loanamount"))));
+            String loan = String.valueOf(format.format(new BigDecimal(((GlobalData) getApplication()).getloanamt())));
             loan = loan.replaceAll("\\.00", "");
             // loan = loan.replaceAll("Rs.", "");
 
@@ -210,6 +210,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             s1.setPrompt("Sort By");
+
+
+            //******get data from search
+            setsearchdb();
+
 
 
             s1.setOnItemSelectedListener(
@@ -240,35 +245,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 setContentView(R.layout.seach_display);
                 layout = (LinearLayout) findViewById(R.id.linear);
 
-                DataHandler dh1 = new DataHandler(this);
-                Cursor cr = dh1.displayData("select * from mysearch");
-
-                try {
-                    if (cr.moveToFirst()) {
-                        Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2));
-                        while (cr.isAfterLast() == false) {
-                            ListModel sched = new ListModel();
-                            sched = new ListModel();
-                            sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                            sched.setsearchdate(cr.getString(4));
-                            sched.setserchcartyp(cr.getString(3));
-                            cr.moveToNext();
-                            searchlistviewArry.add(sched);
-
-
-                        }
-                    }
-                    else
-                        Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    System.out.println("error3 " + e.toString());
-                    dh1.cr.close();
-                    dh1.db.close();
-                } finally {
-
-                    dh1.cr.close();
-                    dh1.db.close();
-                }
+                setsearchdb();
                 createListView();
                 setsearchadapter(searchlistviewArry);
 
@@ -426,7 +403,38 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 //*************************************************************************************End of Oncreate
 
 
+public void setsearchdb()
+{
+    DataHandler dh1 = new DataHandler(this);
+    Cursor cr = dh1.displayData("select * from mysearch");
 
+    try {
+        if (cr.moveToFirst()) {
+            Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2)+" "+cr.getString(3)+" "+cr.getString(4));
+            while (cr.isAfterLast() == false) {
+                ListModel sched = new ListModel();
+                sched = new ListModel();
+                sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                sched.setsearchdate(cr.getString(4));
+                sched.setserchcartyp(cr.getString(3));
+                cr.moveToNext();
+                searchlistviewArry.add(sched);
+
+
+            }
+        }
+        else
+            Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
+    } catch (Exception e) {
+        System.out.println("error3 " + e.toString());
+        dh1.cr.close();
+        dh1.db.close();
+    } finally {
+
+        dh1.cr.close();
+        dh1.db.close();
+    }
+}
 
 
 
@@ -728,13 +736,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             public void processFinishString(String str_result, Dialog dg)  {
 
 
-               // dgthis = dg;
+                dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
 
                 JsonParser parser = new JsonParser();
-                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                  JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.e("Check final data here3", str_result);
 
                 RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
@@ -798,7 +806,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
 
-        }, GoogleCardsMediaActivity.this, "4");
+        }, GoogleCardsMediaActivity.this, "1");
 
 
         requestgetserver3.execute("sessn", "RuleDetails");
@@ -842,7 +850,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             }
-        }, GoogleCardsMediaActivity.this, "5");
+        }, GoogleCardsMediaActivity.this, "2");
 
 
 
@@ -865,7 +873,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.e("Check final data here3", str_result);
 
-                //dgthis.dismiss();
+                dgthis.dismiss();
                 BankList[] BL_cobj = gson.fromJson(jsonObject.get("result"), BankList[].class);
                 Map<String, String> Arry_banknamtemp = new HashMap<>();
 
@@ -876,8 +884,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
                 Arry_banknam = Arry_banknamtemp;
-                Log.d("net sal", String.valueOf(cl_car_global_data.dataWithAns.get("net_mon_salary")));
-              Log.d("net sal", String.valueOf(Double.parseDouble(cl_car_global_data.dataWithAns.get("net_mon_salary"))));
+
                 net_salry = Double.parseDouble(cl_car_global_data.dataWithAns.get("net_mon_salary"));
 
 
@@ -904,7 +911,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 }
 
 
-                emi = Integer.parseInt(cl_car_global_data.dataWithAns.get("total_emi"));
+                emi = ((GlobalData) getApplication()).getEmi().intValue();
 
                 disbank = new ArrayList<String>();
                 Log.e("flow test calculte called", "1");
@@ -917,7 +924,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.e("flow test", String.valueOf(1));
 
             }
-        }, GoogleCardsMediaActivity.this, "5");
+        }, GoogleCardsMediaActivity.this, "3");
 
 
         ServerConnect cls2 = new ServerConnect();
@@ -943,7 +950,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
     public void calculate() {
-        int loan_amt = Integer.parseInt(cl_car_global_data.dataWithAns.get("cl_loanamount"));
+        int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
         double final_bp, emi_valu, emi_value, bp;
         CustomListViewValuesArr.clear();
         if(!disbank.equals(null))
@@ -969,9 +976,9 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
 
                 } else {
-                    Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                    /*Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
                     Log.d("Max_tenure", String.valueOf(Max_tenure));
-                    Log.d("loan_amt", String.valueOf(-loan_amt));
+                    Log.d("loan_amt", String.valueOf(-loan_amt));*/
 
                     emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 
@@ -1002,7 +1009,8 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
                     //********
-
+                    Log.d("bankname in googleact", String.valueOf(Arry_banknam));
+                    Log.d("bankname in googleact", String.valueOf(Arry_banknam.get(cobj_RM[i].getaccount_lender())));
                     double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
 
                     ListModel sched = new ListModel();

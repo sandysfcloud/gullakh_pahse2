@@ -160,7 +160,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 //self.setBackgroundColor(Color.parseColor("#ffffff"));
                 newcar.setImageResource(R.drawable.buttonselecteffect);
                 oldcar.setImageResource(R.drawable.usedcar);
-                ((GlobalData) getApplication()).setCartypeloan("New Car Loan");
+               // ((GlobalData) getApplication()).setCartypeloan("New Car Loan");
                 setDataToHashMap("car_loan_type","New");
                 Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
                 if(data==null) {
@@ -176,7 +176,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
             case R.id.img2:
                 newcar.setImageResource(R.drawable.newcar);
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
-                ((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
+                //((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
                 setDataToHashMap("car_loan_type","Used");
                 Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
                 if(data==null) {

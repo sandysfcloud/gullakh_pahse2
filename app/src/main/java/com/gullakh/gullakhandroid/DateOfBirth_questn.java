@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -48,6 +49,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     AutoCompleteTextView Emp;
     String dataGender=null,sessionid;;
     JSONServerGet requestgetserver;
+    private ContentValues contentValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);
-
+        contentValues = new ContentValues();
 
         gen1 = (ImageView) findViewById(R.id.usermale);
         gen2 = (ImageView) findViewById(R.id.userfemale);
@@ -102,9 +104,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             Dob.setText(((GlobalData) getApplication()).getDob().toString());
 
 
-        if(cl_car_global_data.dataWithAns.get("gender")!=null)
+        if(((GlobalData) getApplication()).getgender()!=null)
         {
-            String gender=cl_car_global_data.dataWithAns.get("gender");
+            String gender=((GlobalData) getApplication()).getgender();
             if(gender.equals("male"))
             {
                 gen1.setImageResource(R.drawable.buttonselecteffect);
@@ -256,6 +258,30 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
     }
+
+    private void goToDatabase(String loanType)
+    {
+        contentValues.put("loantype", loanType);
+        contentValues.put("questans","cl_car_make");
+        contentValues.put("data", cl_car_global_data.getHashMapInString());
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
+    }
+
+    private void storeData() {
+        setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
+        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
+        setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
+        setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
+        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+        setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
+        setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).gettenure()));
+        setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
+        setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
+        setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
+        setDataToHashMap("dep_amount", String.valueOf(((GlobalData) getApplication()).getdepreciation()));
+        setDataToHashMap("dep_amount_last", String.valueOf(((GlobalData) getApplication()).getdepreciation2()));
+
+    }
     @Override
     public void onClick(View v) {
 
@@ -304,7 +330,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                     if (dataGender != null) {
 
-                       // ((GlobalData) getApplication()).setgender(dataGender);
+                        ((GlobalData) getApplication()).setgender(dataGender);
 
                         ((GlobalData) getApplication()).setDob(Dob.getText().toString());
 
@@ -319,7 +345,12 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                         if (age > 18) {
 
                             ((GlobalData) getApplication()).setage(age);
-                            String loantype=cl_car_global_data.dataWithAns.get("loan_type");
+                            String loantype=  ((GlobalData) getApplication()).getcartype();
+
+
+
+                            storeData();
+                            goToDatabase(loantype);
                             if (loantype.equalsIgnoreCase("Car Loan") ||loantype.equalsIgnoreCase("Home Loan") ||loantype.equalsIgnoreCase("Loan Against Property"))
                             {
                                 Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
