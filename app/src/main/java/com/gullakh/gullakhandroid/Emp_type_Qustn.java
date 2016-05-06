@@ -145,7 +145,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 sal.setImageResource(R.drawable.buttonselecteffect);
                 self.setImageResource(R.drawable.selfempbus);
                 business.setImageResource(R.drawable.selfempprof);
-               // ((GlobalData) getApplication()).setemptype("Salaried");
+                ((GlobalData) getApplication()).setemptype("Salaried");
                 setDataToHashMap("type_employment","Salaried");
                 if (data != null) {
                     if (data.equals("review")) {
@@ -161,7 +161,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 sal.setImageResource(R.drawable.salaried);
                 business.setImageResource(R.drawable.selfempprof);
                 setDataToHashMap("type_employment", "Self Employed Business");
-               // ((GlobalData) getApplication()).setemptype("Self Employed Business");
+                ((GlobalData) getApplication()).setemptype("Self Employed Business");
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -175,7 +175,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 sal.setImageResource(R.drawable.salaried);
                 self.setImageResource(R.drawable.selfempbus);
                 setDataToHashMap("type_employment", "Self Employed Professional");
-              //  ((GlobalData) getApplication()).setemptype("Self Employed Professional");
+                ((GlobalData) getApplication()).setemptype("Self Employed Professional");
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
