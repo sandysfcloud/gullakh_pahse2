@@ -98,10 +98,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         //  done = (ImageView) findViewById(R.id.done);
         // done.setOnClickListener(this);
 
-        if (cl_car_global_data.dataWithAns.get("cl_loanamount") != null) {
-            Log.d("loan amt not null value:", cl_car_global_data.dataWithAns.get("cl_loanamount"));
-            String loanamt = cl_car_global_data.dataWithAns.get("cl_loanamount");
-            int loanamtint = (int) Double.parseDouble(cl_car_global_data.dataWithAns.get("cl_loanamount"));
+        if (((GlobalData) getApplication()).getloanamt() != null) {
+
+            String loanamt = ((GlobalData) getApplication()).getloanamt();
+            int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
 
 
@@ -250,18 +250,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         overridePendingTransition(R.transition.left, R.transition.right);
     }*/
 
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
 
-
-    private void goToDatabase(String loanType)
-    {
-        contentValues.put("loantype",loanType);
-        contentValues.put("questans", "cl_car_yearofmft");
-        contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
-    }
     @Override
     public void onClick(View v) {
 
@@ -297,9 +286,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 {
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
-                    setDataToHashMap("cl_loanamount",amt.getText().toString().replaceAll(",", ""));
-                    goToDatabase(loan_type);
+
                     Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
+                    intent.putExtra("loan_type",loan_type);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
 

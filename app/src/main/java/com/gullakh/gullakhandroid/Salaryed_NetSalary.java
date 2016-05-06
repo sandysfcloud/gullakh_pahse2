@@ -78,9 +78,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
         if(cl_car_global_data.dataWithAns.get("net_mon_salary")!=null) {
 
-            //String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
-            String netsalary=String.valueOf(cl_car_global_data.dataWithAns.get("net_mon_salary"));
-            //mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 5000)));
+            String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
+
+
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             String strtemp = String.valueOf(format.format(new BigDecimal(netsalary)));

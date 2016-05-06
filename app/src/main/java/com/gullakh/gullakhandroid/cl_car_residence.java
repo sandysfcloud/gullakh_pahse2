@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -130,7 +131,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-               // ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+                ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
                 setDataToHashMap("currently_living_in", citynam.getText().toString());
                 if (data != null) {
                     if (data.equals("review")) {
@@ -161,7 +162,15 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
 
     }
+    public void onRestart() {
+        super.onRestart();
+        if( ((GlobalData) getApplication()).getcarres()==null) {
+            Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+            intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intenth);
+        }
 
+    }
 
     private void goToDatabase(String loanType)
     {
@@ -324,8 +333,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             }
         }
         else {
-            Log.d("selected current city is ", cl_car_global_data.dataWithAns.get("currently_living_in"));
-           getStateName(((GlobalData) getApplication()).getcarres());
+
+            getStateName(((GlobalData) getApplication()).getcarres());
             goToDatabase(loan_type);
             Intent intent = new Intent(this, Emp_type_Qustn.class);
             intent.putExtra("loan_type", loan_type);

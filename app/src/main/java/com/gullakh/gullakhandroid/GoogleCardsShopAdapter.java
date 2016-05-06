@@ -246,6 +246,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 					int pos= (int) v.getTag();
 					Intent intent = new Intent(cont, ListView_Click.class);
 					intent.putExtra("bankname", data.get(pos).getbanknam());
+					Log.d("bankname in googlead", data.get(pos).getbanknam());
 					intent.putExtra("tenure", ((GlobalData) cont.getApplicationContext()).gettenure());
 					intent.putExtra("roi", data.get(pos).getfloating_interest_rate());
 					intent.putExtra("one_time_fee", data.get(pos).getprocessing_fee());

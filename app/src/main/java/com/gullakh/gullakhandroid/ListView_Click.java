@@ -37,7 +37,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     static boolean buttonApply=false;
-    private String lenderid;
+    private String lenderid,loan_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
 
 
-
+Log.d("bankname in listvieclick",bankname);
 
         String[] sepfee=null;
         if(sepfee!=null) {
@@ -100,7 +100,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         Log.d("documen info", +i + " " + sdocum[i]);
     }
     //Log.d("final cardocu info",cardocu);
-
+        }
 
     TextView name = (TextView) findViewById(R.id.bankname);
 
@@ -123,31 +123,40 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     TextView t5 = (TextView) findViewById(R.id.t3);
 
     TextView tprofee = (TextView) findViewById(R.id.t4);
-
+        tfee= (TextView) findViewById(R.id.tfee);
+if(one_time_fee!=null) {
     String one_time_fee_temp = String.valueOf(format.format(new BigDecimal(one_time_fee)));
     one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
     tprofee.setText(one_time_fee_temp);
-
+    tfee.setText(one_time_fee_temp);
 }
+
+
+
+
+        //*****from saved instance
+        if (savedInstanceState != null){
+            loan_type = savedInstanceState.getString("loan_type");
+        }
+          loan_type=((GlobalData) getApplication()).getcartype();
+
         ImageView mainimg= (ImageView) findViewById(R.id.searchimg);
-        if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
-        {
-            mainimg.setImageResource(R.drawable.personalloannew);
+        if(loan_type!=null) {
+            if (loan_type.equals("Personal Loan")) {
+                mainimg.setImageResource(R.drawable.personalloannew);
+            }
+
+
+            if (loan_type.equals("Loan Against Property")) {
+                mainimg.setImageResource(R.drawable.busineeloan);
+            }
+
+
+            if (loan_type.equals("Home Loan")) {
+                mainimg.setImageResource(R.drawable.homeloan);
+            }
+
         }
-
-
-        if(((GlobalData) getApplication()).getcartype().equals("Loan Against Property"))
-        {
-            mainimg.setImageResource(R.drawable.busineeloan);
-        }
-
-
-        if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
-        {
-            mainimg.setImageResource(R.drawable.homeloan);
-        }
-
-
 
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
         tabHost.setup();                                   //creates the tabhost
@@ -173,7 +182,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
 
 
-        tfee= (TextView) findViewById(R.id.tfee);
+
         //tfee.setText(feedata);
 
         t_other= (TextView) findViewById(R.id.tothr);
@@ -211,7 +220,10 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 
 
     }
-
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("loan_type", ((GlobalData) getApplication()).getcartype());
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
