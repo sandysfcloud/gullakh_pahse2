@@ -296,11 +296,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             title.setText("My Application");
             if (crobj.moveToFirst()) {
 
-                DataHandler dh1 = new DataHandler(this);
-                Cursor cr = dh1.displayData("select * from mysearch");
+               // DataHandler dh1 = new DataHandler(this);
+               // Cursor cr = dh1.displayData("select * from mysearch");
 
                 try {
-                    if (cr.moveToFirst()) {
+                //    if (cr.moveToFirst()) {
 
 
                         requestgetserver8 = new JSONServerGet(new AsyncResponse() {
@@ -319,8 +319,37 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
                                 JsonObject jsonObject1 = parser.parse(String.valueOf(jsonObject.get("result"))).getAsJsonObject();
                                 JsonArray jsonArr = jsonObject1.getAsJsonArray("loanrequest");
+                                if (jsonArr.size()==0) {
+                                    AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                                    LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+                                    final View view = factory.inflate(R.layout.applnotfound, null);
+                                    alertadd.setView(view);
+                                    alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            overridePendingTransition(R.transition.left, R.transition.right);
+                                        }
+                                    });
+                                    alertadd.show();
+
+                                }
                                 for (int i = 0; i < jsonArr.size(); i++) {
-                                    if (jsonArr.get(i).toString().equalsIgnoreCase("null")){
+                                    if (jsonArr.get(i).toString().equalsIgnoreCase("null")) {
+                                        AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                                        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+                                        final View view = factory.inflate(R.layout.applnotfound, null);
+                                        alertadd.setView(view);
+                                        alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                                overridePendingTransition(R.transition.left, R.transition.right);
+                                            }
+                                        });
+                                        alertadd.show();
 
                                     }else {
                                         JsonObject jsonObject2 = jsonArr.get(i).getAsJsonObject();
@@ -353,7 +382,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         }, GoogleCardsMediaActivity.this, "wait");
           DataHandler dbobj = new DataHandler(GoogleCardsMediaActivity.this);
           Cursor cre = dbobj.displayData("select * from userlogin");
-          String userid = null,contactid="";
+          String userid = "",contactid="";
           if(cre!=null) {
               if (cre.moveToFirst()) {
                   userid=cre.getString(1);
@@ -373,16 +402,16 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         layout = (LinearLayout) findViewById(R.id.linear);
 
 
-                    }
+               //     }
 
                 } catch (Exception e) {
                     System.out.println("error3 " + e.toString());
-                    dh1.cr.close();
-                    dh1.db.close();
+                 //   dh1.cr.close();
+                 //   dh1.db.close();
                 } finally {
 
-                    dh1.cr.close();
-                    dh1.db.close();
+                 //   dh1.cr.close();
+                 //   dh1.db.close();
                 }
 
 
@@ -1248,6 +1277,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                  for (int i = 0; i < CustomListViewValuesArr2.size(); i++) {
                      arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
                  }
+                 arrcombank.add(1,"");
                  ((GlobalData) this.getApplication()).setLenders(arrcombank);
              }
 

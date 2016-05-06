@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f8f8f8">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="170dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/applnotfound" />
+
+    <com.gullakh.gullakhandroid.font.RobotoTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Sorry..."
+        android:id="@+id/textView47"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ff0000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="No Application Found"
+        android:id="@+id/textView48"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ff0000" />
+</LinearLayout>
