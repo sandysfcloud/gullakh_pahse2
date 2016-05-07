@@ -53,7 +53,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Salaried ");
+        title.setText("Salary deposited to ");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

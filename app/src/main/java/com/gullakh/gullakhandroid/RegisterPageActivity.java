@@ -133,42 +133,47 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				if (firstName.getText().toString().equals("") || lastName.getText().toString().equals("")){
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter Full Name", "error");
 				}else{
-					if (mobilenumber.getText().toString().equals("")||mobilenumber.length()<10){
-					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
+					if (emailadress.getText().toString().equals("")){
+						RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter email field", "error");
 					}else{
+						if (mobilenumber.getText().toString().equals("")||mobilenumber.length()<10){
+							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
+						}else{
 
-						if (checkBox.isChecked())
-						{
-							useremail = emailadress.getText().toString();
-							usermobno = mobilenumber.getText().toString();
-							// Check device for Play Services APK.
-							//if (checkPlayServices()) {
-							//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-							//	regid = getRegistrationId(getApplicationContext());
-							Log.d("GCM Regid is",RegisterAppToServer.regid);
-							String[] arraydata = new String[10];
-							arraydata[0] = "registration";
-							arraydata[1] = useremail;
-							arraydata[2] = usermobno;
-							arraydata[3] = RegisterAppToServer.regid;
-							arraydata[4] = firstName.getText().toString();
-							arraydata[5] = middlename.getText().toString();
-							arraydata[6] = lastName.getText().toString();
+							if (checkBox.isChecked())
+							{
+								useremail = emailadress.getText().toString();
+								usermobno = mobilenumber.getText().toString();
+								// Check device for Play Services APK.
+								//if (checkPlayServices()) {
+								//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+								//	regid = getRegistrationId(getApplicationContext());
+								Log.d("GCM Regid is",RegisterAppToServer.regid);
+								String[] arraydata = new String[10];
+								arraydata[0] = "registration";
+								arraydata[1] = useremail;
+								arraydata[2] = usermobno;
+								arraydata[3] = RegisterAppToServer.regid;
+								arraydata[4] = firstName.getText().toString();
+								arraydata[5] = middlename.getText().toString();
+								arraydata[6] = lastName.getText().toString();
 
-							urlchange = "registration";
-							JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
-							asyncTask.delegate = RegisterPageActivity.this;
-							asyncTask.execute();
+								urlchange = "registration";
+								JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
+								asyncTask.delegate = RegisterPageActivity.this;
+								asyncTask.execute();
 
-							//} else {
-							//	Log.i(TAG, "No valid Google Play Services APK found.");
-							//}
-						} else {
-							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+								//} else {
+								//	Log.i(TAG, "No valid Google Play Services APK found.");
+								//}
+							} else {
+								RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+							}
 						}
-					}
 
+					}
 				}
+
 			}
 		});
 	}

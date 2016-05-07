@@ -96,6 +96,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="5dp"
                     android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@+id/middlename"
                     android:paddingLeft="10dp" />
             </LinearLayout>
 

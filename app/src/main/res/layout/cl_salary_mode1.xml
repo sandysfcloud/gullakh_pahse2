@@ -16,34 +16,15 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            app:typeface="robotoLight"
-            android:layout_width="fill_parent"
-            android:layout_height="60dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Salary payment type?"
-            android:id="@+id/heading"
-            android:layout_alignParentTop="true"
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewpay1"
+            android:layout_above="@+id/TextViewOption1"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:textSize="22dp"
-            android:layout_marginBottom="20dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/imageViewpay1"
-                android:layout_above="@+id/TextViewOption1"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/bankother"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
+            android:background="@drawable/bankother"
+            android:layout_weight="1"
+            android:layout_marginTop="30dp" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -55,21 +36,15 @@
             android:gravity="center"
             android:textSize="18dp"
             android:layout_above="@+id/linearLayout"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/imageViewpay2"
-                android:background="@drawable/bankcheque" />
-        </LinearLayout>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewpay2"
+            android:background="@drawable/bankcheque"
+            android:layout_weight="1" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -79,8 +54,24 @@
             android:text="By Cheque"
             android:id="@+id/TextViewOption2"
             android:gravity="center"
-            android:textSize="18dp" />
-
+            android:textSize="18dp"
+            android:layout_weight="1" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewpay3"
+            android:background="@drawable/bankcash"
+            android:layout_weight="1" />
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            app:typeface="robotoLight"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="By Cash"
+            android:id="@+id/TextViewOption5"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -23,7 +22,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     TextView heading,option1,option2;
     Button next,back;
     private String dataSalDeposite="";
-    private ImageView pay1,pay2;
+    private ImageView pay1,pay2,pay3;
     private ContentValues contentValues;
     int flag=0;
 
@@ -55,6 +54,8 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         pay1.setOnClickListener(this);
         pay2 = (ImageView) findViewById(R.id.imageViewpay2);
         pay2.setOnClickListener(this);
+        pay3 = (ImageView) findViewById(R.id.imageViewpay2);
+        pay3.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -107,6 +108,8 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
             pay1.setImageResource(R.drawable.buttonselecteffect);
         }else if(SalDeposite.equals("Cheque")){
             pay2.setImageResource(R.drawable.buttonselecteffect);
+        }else if(SalDeposite.equals("Cash")){
+            pay3.setImageResource(R.drawable.buttonselecteffect);
         }
     }
 
@@ -168,6 +171,26 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cheque";
+                setdata();
+
+                if (flag == 1) {
+
+                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                    intent2.putExtra("employer", "employer");
+                    startActivity(intent2);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+
+                } else {
+
+                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                    startActivity(intent2);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+                break;
+            case R.id.imageViewpay3:
+                pay1.setImageResource(R.drawable.bankother);
+                pay2.setImageResource(R.drawable.buttonselecteffect);
+                dataSalDeposite="Cash";
                 setdata();
 
                 if (flag == 1) {

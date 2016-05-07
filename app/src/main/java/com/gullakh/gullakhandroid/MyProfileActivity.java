@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +31,10 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
     private ImageButton edit;
     private Button Done;
     private EditText ph,email,add1,add2,add3,add4,add5;
-    private JSONServerGet requestgetserver1;
+    private JSONServerGet requestgetserver1,requestgetserver2;
     private String userid;
     private String contactid;
+    private String sessionid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,21 +67,31 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
                 contactid=cr.getString(2);
                 email.setText(cr.getString(3));
                 ph.setText(cr.getString(4));
-
+                Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5));
             } else {
                 Intent intentsignin = new Intent(this, signinPrepage.class);
                 startActivity(intentsignin);
                 finish();
             }
+            Cursor cr1 = dbobject.displayData("select * from session");
+            if (cr1.moveToFirst()) {
+                sessionid = cr1.getString(1);
+                getContactDetails();
+                Log.e("sessionid-cartypes", sessionid);
+                cr1.close();
+            }
         }
 
 
-        add1 = (EditText) findViewById(R.id.editText1);
+        //add1 = (EditText) findViewById(R.id.editText1);
         add2= (EditText) findViewById(R.id.editText2);
         add3 = (EditText) findViewById(R.id.editText3);
         add4 = (EditText) findViewById(R.id.editText4);
         add5 = (EditText) findViewById(R.id.editText5);
-
+        add2.setEnabled(false);
+        add3.setEnabled(false);
+        add4.setEnabled(false);
+        add5.setEnabled(false);
         ph.setEnabled(false);
         email.setEnabled(false);
         edit = (ImageButton) findViewById(R.id.imageButtonEdit);
@@ -92,14 +104,14 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
                 signout.setVisibility(View.GONE);
                 edit.setVisibility(View.INVISIBLE);
                 Done.setVisibility(View.VISIBLE);
-                ph.setBackgroundResource(R.drawable.edittextsimple);
-                add1.setBackgroundResource(R.drawable.edittextsimple);
+                //ph.setBackgroundResource(R.drawable.edittextsimple);
+                //add1.setBackgroundResource(R.drawable.edittextsimple);
                 add2.setBackgroundResource(R.drawable.edittextsimple);
                 add3.setBackgroundResource(R.drawable.edittextsimple);
                 add4.setBackgroundResource(R.drawable.edittextsimple);
                 add5.setBackgroundResource(R.drawable.edittextsimple);
-                ph.setEnabled(true);
-                add1.setEnabled(true);
+                //ph.setEnabled(true);
+               // add1.setEnabled(true);
                 add2.setEnabled(true);
                 add3.setEnabled(true);
                 add4.setEnabled(true);
@@ -113,19 +125,19 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
                 Done.setVisibility(View.GONE);
                 edit.setVisibility(View.VISIBLE);
                 signout.setVisibility(View.VISIBLE);
-                ph.setBackgroundResource(R.color.white_transparent);
-                add1.setBackgroundResource(R.color.white_transparent);
+                //ph.setBackgroundResource(R.color.white_transparent);
+                //add1.setBackgroundResource(R.color.white_transparent);
                 add2.setBackgroundResource(R.color.white_transparent);
                 add3.setBackgroundResource(R.color.white_transparent);
                 add4.setBackgroundResource(R.color.white_transparent);
                 add5.setBackgroundResource(R.color.white_transparent);
-                ph.setEnabled(false);
-                add1.setEnabled(false);
+               // ph.setEnabled(false);
+                //add1.setEnabled(false);
                 add2.setEnabled(false);
                 add3.setEnabled(false);
                 add4.setEnabled(false);
                 add5.setEnabled(false);
-                goToServer(ph.getText().toString(),add1.getText().toString(),add2.getText().toString(),add3.getText().toString(),add4.getText().toString(),add5.getText().toString());
+                goToServer(add2.getText().toString(),add3.getText().toString(),add4.getText().toString(),add5.getText().toString());
             }
         });
 
@@ -144,7 +156,7 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
 
     }
 
-    private void goToServer(String ph, String add1, String add2, String add3, String add4, String add5) {
+    private void goToServer(String add2, String add3, String add4, String add5) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -163,7 +175,7 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
 
             }
         }, MyProfileActivity.this, "wait");
-        requestgetserver1.execute("token", "contactupdate",userid,contactid,ph,add1,add2,add3,add4,add5);
+        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add2,add3,add4,add5);
     }
 
     @Override
@@ -183,5 +195,30 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
         }
+    }
+
+    public void getContactDetails(){
+    requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+        @Override
+        public void processFinish(JSONObject output) {
+        }
+        public void processFinishString(String str_result, Dialog dg)
+        {
+            Dialog dgthis = dg;
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+            Gson gson = gsonBuilder.create();
+            JsonParser parser = new JsonParser();
+            JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+            ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
+            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
+            add2.setText(details[0].getMailingstreet());
+            add3.setText(details[0].getMailingzip());
+            add4.setText(details[0].getMailingcity());
+            add5.setText(details[0].getMailingstate());
+            dgthis.dismiss();
+        }
+        }, MyProfileActivity.this, "wait");
+        requestgetserver2.execute("token","getcontact",sessionid,email.getText().toString());
     }
 }
