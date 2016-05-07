@@ -133,42 +133,47 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				if (firstName.getText().toString().equals("") || lastName.getText().toString().equals("")){
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter Full Name", "error");
 				}else{
-					if (mobilenumber.getText().toString().equals("")||mobilenumber.length()<10){
-					RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
+					if (emailadress.getText().toString().equals("")){
+						RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter email field", "error");
 					}else{
+						if (mobilenumber.getText().toString().equals("")||mobilenumber.length()<10){
+							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
+						}else{
 
-						if (checkBox.isChecked())
-						{
-							useremail = emailadress.getText().toString();
-							usermobno = mobilenumber.getText().toString();
-							// Check device for Play Services APK.
-							//if (checkPlayServices()) {
-							//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-							//	regid = getRegistrationId(getApplicationContext());
-							Log.d("GCM Regid is",RegisterAppToServer.regid);
-							String[] arraydata = new String[10];
-							arraydata[0] = "registration";
-							arraydata[1] = useremail;
-							arraydata[2] = usermobno;
-							arraydata[3] = RegisterAppToServer.regid;
-							arraydata[4] = firstName.getText().toString();
-							arraydata[5] = middlename.getText().toString();
-							arraydata[6] = lastName.getText().toString();
+							if (checkBox.isChecked())
+							{
+								useremail = emailadress.getText().toString();
+								usermobno = mobilenumber.getText().toString();
+								// Check device for Play Services APK.
+								//if (checkPlayServices()) {
+								//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+								//	regid = getRegistrationId(getApplicationContext());
+								Log.d("GCM Regid is",RegisterAppToServer.regid);
+								String[] arraydata = new String[10];
+								arraydata[0] = "registration";
+								arraydata[1] = useremail;
+								arraydata[2] = usermobno;
+								arraydata[3] = RegisterAppToServer.regid;
+								arraydata[4] = firstName.getText().toString();
+								arraydata[5] = middlename.getText().toString();
+								arraydata[6] = lastName.getText().toString();
 
-							urlchange = "registration";
-							JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
-							asyncTask.delegate = RegisterPageActivity.this;
-							asyncTask.execute();
+								urlchange = "registration";
+								JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
+								asyncTask.delegate = RegisterPageActivity.this;
+								asyncTask.execute();
 
-							//} else {
-							//	Log.i(TAG, "No valid Google Play Services APK found.");
-							//}
-						} else {
-							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+								//} else {
+								//	Log.i(TAG, "No valid Google Play Services APK found.");
+								//}
+							} else {
+								RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+							}
 						}
-					}
 
+					}
 				}
+
 			}
 		});
 	}
@@ -431,8 +436,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		carloan_que_salary_new=new ArrayList<String>();
 		carloan_que_salary_new.add("Current Residence: ");
 		carloan_que_salary_new.add("Employee Type: ");
-		carloan_que_salary_new.add("Car Loan Type: ");
+		String cartyp=((GlobalData) CurrentAct.getApplication()).getCartypeloan();
+		if(cartyp!=null&& !emptyp.equals("Personal Loan")) {
+			if (cartyp.equals("New Car Loan") || cartyp.equals("Used Car Loan")) {
+				carloan_que_salary_new.add("Car Loan Type: ");
+			}
+		}
 		carloan_que_salary_new.add("Loan Amount: ");
+		carloan_que_salary_new.add("Tenure: ");
+
         if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
 				flag = 1;
@@ -446,6 +458,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		carloan_que_salary_new.add("Total EMI's you pay: ");
 
+		String loantyp=((GlobalData) CurrentAct.getApplication()).getcartype();
+		if(loantyp.equals("Personal Loan"))
+		{
+			carloan_que_salary_new.add("Date Of Birth: ");
+			carloan_que_salary_new.add("Current Employer: ");
+
+
+		}
+
 
 
 
@@ -453,8 +474,14 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		if(((GlobalData) act.getApplication()).getcarres()!=null)
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
-		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
+
+			if(cartyp!=null&& !emptyp.equals("Personal Loan")) {
+				if (cartyp.equals("New Car Loan") || cartyp.equals("Used Car Loan")) {
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
+				}
+			}
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getTenure());
 		if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
 				Log.d("employee type is", emptyp);
@@ -478,7 +505,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		}
 		if(((GlobalData) act.getApplication()).getEmi()!=null)
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getEmi().toString());
+		if(loantyp.equals("Personal Loan"))
+		{
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getDob());
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemployer());
 
+
+		}
 
 		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new));
 Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new_ans));

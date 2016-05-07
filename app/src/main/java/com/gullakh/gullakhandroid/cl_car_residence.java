@@ -130,8 +130,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-               // ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
-                setDataToHashMap("currently_living_in", citynam.getText().toString());
+                ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -193,9 +193,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
         requestgetserver.execute("token", "cityname", sessionid);
     }
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
+
     @Override
     public void onClick(View v) {
 
@@ -206,12 +204,13 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 if(citynam.getText().toString()!=null) {
                     if( citynam.getText().toString().length()>0) {
                         Log.d("edit text", citynam.getText().toString());
-                        setDataToHashMap("currently_living_in", citynam.getText().toString());
+
                         ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
                     }
                 }
-               // if(((GlobalData) getApplication()).getcarres()!=null)
-                if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null)
+
+
+               if(((GlobalData) getApplication()).getcarres()!=null)
                     goToIntent();
                 else
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
@@ -238,8 +237,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
 
-                //((GlobalData) getApplication()).setcarres("Bengaluru");
-                setDataToHashMap("currently_living_in", "Bengaluru");
+                ((GlobalData) getApplication()).setcarres("Bengaluru");
+
                 goToIntent();
                 break;
             case R.id.ImageViewPlace2:
@@ -248,8 +247,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
 
-               // ((GlobalData) getApplication()).setcarres("Chennai");
-                setDataToHashMap("currently_living_in", "Chennai");
+                ((GlobalData) getApplication()).setcarres("Chennai");
+
                 goToIntent();
                 break;
             case R.id.ImageViewPlace3:
@@ -258,8 +257,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
 
-                //((GlobalData) getApplication()).setcarres("Delhi");
-                setDataToHashMap("currently_living_in", "Delhi");
+                ((GlobalData) getApplication()).setcarres("Delhi");
+
                 goToIntent();
                 break;
             case R.id.ImageViewPlace4:
@@ -267,8 +266,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.buttonselecteffect);
-               // ((GlobalData) getApplication()).setcarres("Mumbai");
-                setDataToHashMap("currently_living_in", "Mumbai");
+                ((GlobalData) getApplication()).setcarres("Mumbai");
+
                 goToIntent();
                 break;
             case R.id.locatn:
@@ -295,9 +294,9 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             }
         }
         else {
-            Log.d("selected current city is ", cl_car_global_data.dataWithAns.get("currently_living_in"));
-            ((GlobalData) getApplication()).setcarres(cl_car_global_data.dataWithAns.get("currently_living_in"));
-            getStateName(cl_car_global_data.dataWithAns.get("currently_living_in"));
+
+
+            getStateName(((GlobalData) getApplication()).getcarres());
 
             Intent intent = new Intent(this, Emp_type_Qustn.class);
             startActivity(intent);

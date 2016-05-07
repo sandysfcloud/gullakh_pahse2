@@ -11,17 +11,18 @@
     android:layout_height="match_parent"
 
     android:id="@+id/ldateofb"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:gravity="center">
     <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:textSize="20dp"
         android:text="My Gender"
-        android:layout_marginTop="60dp"
-        android:gravity="center_horizontal"
         android:textColor="#3f3f3f"
         app:typeface="robotoLight"
-        />
+        android:gravity="center"
+        android:layout_marginTop="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,8 +30,7 @@
         android:weightSum="2"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="5dp">
 
 
 
@@ -81,22 +81,25 @@
             android:gravity="left"
             android:layout_marginLeft="5dp" />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
 
-        android:layout_weight="1">
+        >
 
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:textSize="18dp"
             android:id="@+id/TextViewOption4"
             android:textColor="#3f3f3f"
             app:typeface="robotoLight"
-             />
+            android:text="My Birthday Is"
+            android:gravity="center"
+            android:layout_marginTop="5dp" />
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
@@ -107,7 +110,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/bdy"
-            >
+            android:layout_marginTop="5dp">
 
             <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
@@ -144,50 +147,6 @@
             android:textSize="22dp"
             android:paddingLeft="15dp"
 
-            app:typeface="robotoLight"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/footer"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:background="#b8546e7a">
-
-        <com.gullakh.gullakhandroid.font.RobotoButton
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Previous"
-            android:id="@+id/back"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/arrowleft"
-            android:background="#00ffffff"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="22dp"
-            android:paddingLeft="15dp"
-            android:gravity="fill"
-            app:typeface="robotoLight"/>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="#ed1c24"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Next"
-            android:drawableRight="@drawable/arrowright"
-            android:id="@+id/next"
-            android:layout_weight="1"
-            android:textAllCaps="false"
-            android:background="#00ffffff"
-            android:textColor="#ffffff"
-            android:textSize="22dp"
-            android:singleLine="false"
-            android:paddingRight="15dp"
-            android:paddingLeft="95dp"
             app:typeface="robotoLight"/>
     </LinearLayout>
 </LinearLayout>
@@ -294,6 +253,51 @@
                 android:paddingLeft="95dp"
                 app:typeface="robotoLight"/>
         </LinearLayout> </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/footer"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#b8546e7a">
+
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Previous"
+            android:id="@+id/back"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/arrowleft"
+            android:background="#00ffffff"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:paddingLeft="15dp"
+            android:gravity="fill"
+            app:typeface="robotoLight"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+        <com.gullakh.gullakhandroid.font.RobotoButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Next"
+            android:drawableRight="@drawable/arrowright"
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:background="#00ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:singleLine="false"
+            android:paddingRight="15dp"
+            android:paddingLeft="95dp"
+            app:typeface="robotoLight"/>
     </LinearLayout>
 </LinearLayout>
 

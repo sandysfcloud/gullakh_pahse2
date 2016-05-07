@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,18 +23,24 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class cl_car_gender extends AppCompatActivity implements View.OnClickListener{
+public class cl_car_gender extends AppCompatActivity implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
     Button back;
     private Button submit,coappl;
-    JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,requestgetserver9,requestgetserver10;
+    JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,
+            requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,
+            requestgetserver9,requestgetserver10,requestgetserver20,requestgetserver21;
     String sessionid;
     Dialog dgthis;
     String borrowercityid,useremail,usermobile;
@@ -41,8 +48,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     static String borrowercontactid="";
     private String borrowercaseno="";
     private ContentValues contentValues;
-
-    private EditText add1,add2,city,pin,state;
+    private EditText Doj;
+    private String date="";
+    private EditText add1,add2,city,pin,state,datefield,timefield;
     private String userid;
     DataHandler dbobject;
     private RadioButton yesb;
@@ -80,6 +88,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         city = (EditText) findViewById(R.id.city);
         city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
         pin = (EditText) findViewById(R.id.pin);
+        datefield = (EditText) findViewById(R.id.date);
+        timefield = (EditText) findViewById(R.id.date);
         state = (EditText) findViewById(R.id.state);
         state.setText(((GlobalData) getApplication()).getStatename());
         back.setOnClickListener(this);
@@ -90,6 +100,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         yesb = (RadioButton) findViewById(R.id.yes);
         nob = (RadioButton) findViewById(R.id.no);
 
+        datefield.setOnClickListener(this);
+        timefield.setOnClickListener(this);
         yesb.setOnClickListener(this);
         nob.setOnClickListener(this);
         coappl.setOnClickListener(this);
@@ -108,6 +120,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 coappl.setVisibility(View.GONE);
             }
         }
+        getContactDetails();
     }
   /*  @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -148,6 +161,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                             goToDatabase("mysearch","Car Loan");
                         }
 
+                        goToServer(add1.getText().toString(),city.getText().toString(),state.getText().toString(),pin.getText().toString());
                         savetoserver();
                     }else{
                         RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
@@ -181,6 +195,30 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 finish();
 
 
+                break;
+            case R.id.date:
+                Calendar now = Calendar.getInstance();
+                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                        cl_car_gender.this,
+                        2000,
+                        00,
+                        01
+                );
+                dpd.setAccentColor(R.color.mdtp_background_color);
+                dpd.showYearPickerFirst(true);
+                dpd.setAccentColor(Color.parseColor("#FFE2041E"));
+                //dpd.setTitle("DatePicker Title");
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+                break;
+            case R.id.time:
+                Calendar now1 = Calendar.getInstance();
+                com.wdullaer.materialdatetimepicker.time.TimePickerDialog tpd = com.wdullaer.materialdatetimepicker.time.TimePickerDialog.newInstance(
+                        (TimePickerDialog.OnTimeSetListener) cl_car_gender.this,
+                        now1.get(Calendar.HOUR_OF_DAY),
+                        now1.get(Calendar.MINUTE),true
+                );
+                tpd.show(getFragmentManager(), "Timepickerdialog");
                 break;
         }
     }
@@ -544,4 +582,70 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             dbobject1.updateDatatouserlogin("userlogin",contentValues1,userid);
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        TimePickerDialog tpd = (TimePickerDialog) getFragmentManager().findFragmentByTag("Timepickerdialog");
+        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+
+        if(tpd != null) tpd.setOnTimeSetListener((TimePickerDialog.OnTimeSetListener) this);
+        if(dpd != null) dpd.setOnDateSetListener(this);
+    }
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        datefield.setText(date);
+    }
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
+        String minuteString = minute < 10 ? "0"+minute : ""+minute;
+        String secondString = second < 10 ? "0"+second : ""+second;
+        String time =hourString+"h"+minuteString+"m"+secondString+"s";
+        timefield.setText(time);
+    }
+    public void getContactDetails(){
+        requestgetserver20 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                Dialog dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
+                Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
+                add1.setText(details[0].getMailingstreet());
+                pin.setText(details[0].getMailingzip());
+                dgthis.dismiss();
+            }
+        }, cl_car_gender.this, "wait");
+        requestgetserver20.execute("token", "getcontact", sessionid, useremail);
+    }
+    private void goToServer(String add2, String add3, String add4, String add5) {
+        requestgetserver21 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                Dialog dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                //Log.d("Application values jsonobj", String.valueOf(jsonObject));
+
+                dgthis.dismiss();
+
+            }
+        }, cl_car_gender.this, "wait");
+        requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add2,add3,add4,add5);
+    }
+
 }

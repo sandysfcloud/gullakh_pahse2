@@ -228,11 +228,22 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
                 break;
             case R.id.edit:
-                String emptyp=cl_car_global_data.dataWithAns.get("type_employment");
-                if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
-                    RegisterPageActivity.showAlertreview(EMI_questn.this,7);
+                String emptyp= ((GlobalData) getApplication()).getemptype();
+                String loanty=((GlobalData) getApplication()).getcartype();
+                if(loanty.equals("Car Loan")) {
+                    if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                        RegisterPageActivity.showAlertreview(EMI_questn.this, 8);
+                    else
+                        RegisterPageActivity.showAlertreview(EMI_questn.this, 7);
+                }
                 else
-                RegisterPageActivity.showAlertreview(EMI_questn.this,6);
+                {
+                    if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                        RegisterPageActivity.showAlertreview(EMI_questn.this, 7);
+                    else
+                        RegisterPageActivity.showAlertreview(EMI_questn.this, 6);
+
+                }
                 break;
 
             case R.id.close:

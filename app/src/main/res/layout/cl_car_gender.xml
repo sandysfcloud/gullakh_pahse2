@@ -79,7 +79,7 @@
             android:background="@drawable/edittextsimple"
             android:hint="Address  line 1"
             android:gravity="center"
-            android:singleLine="true" />
+            android:singleLine="false" />
 
         <EditText
             android:layout_width="300dp"
@@ -90,7 +90,8 @@
             android:hint="Address  line 2"
             android:gravity="center"
             android:layout_marginTop="5dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:visibility="gone" />
         <EditText
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -123,8 +124,37 @@
             android:gravity="center"
             android:layout_marginTop="5dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
             android:singleLine="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:id="@+id/date"
+                android:background="@drawable/edittextsimple"
+                android:hint="Shedule date"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/time"
+                android:background="@drawable/edittextsimple"
+                android:hint="Shedule time"
+                android:gravity="center"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 

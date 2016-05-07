@@ -210,7 +210,12 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.edit:
-                RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,5);
+                String empty=((GlobalData) getApplication()).getcartype();
+                if(empty.equals("Car Loan")) {
+                    RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
+                }
+                else
+                    RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 5);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

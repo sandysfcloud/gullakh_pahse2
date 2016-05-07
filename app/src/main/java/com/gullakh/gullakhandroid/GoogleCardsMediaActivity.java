@@ -319,7 +319,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
                                 JsonObject jsonObject1 = parser.parse(String.valueOf(jsonObject.get("result"))).getAsJsonObject();
                                 JsonArray jsonArr = jsonObject1.getAsJsonArray("loanrequest");
-                                if (jsonArr.size()==0) {
+                                if (jsonArr.size()<0) {
                                     AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
                                     LayoutInflater factory = LayoutInflater.from(getApplicationContext());
                                     final View view = factory.inflate(R.layout.applnotfound, null);
@@ -1053,6 +1053,8 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     //********
                     Log.d("bankname in googleact", String.valueOf(Arry_banknam));
                     Log.d("bankname in googleact", String.valueOf(Arry_banknam.get(cobj_RM[i].getaccount_lender())));
+
+                    Log.d("procee fee in googleact", String.valueOf(cobj_RM[i].getprocessing_fee()));
                     double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
 
                     ListModel sched = new ListModel();

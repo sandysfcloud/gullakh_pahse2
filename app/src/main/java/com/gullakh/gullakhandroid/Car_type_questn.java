@@ -132,7 +132,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
             case R.id.next:
                 if(((GlobalData) getApplication()).getCartypeloan()!=null) {
                     Log.d("car_loan_typeK",((GlobalData) getApplication()).getCartypeloan());
-                    if(((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("Used car loan")) {
+                    if(((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("used car loan")) {
                         intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);

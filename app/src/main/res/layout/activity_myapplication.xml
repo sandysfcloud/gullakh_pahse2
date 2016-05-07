@@ -11,11 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:weightSum="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
 
@@ -47,7 +48,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
 
@@ -78,7 +79,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
 
@@ -109,7 +110,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
 
@@ -141,7 +142,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="25dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal" >
@@ -175,13 +176,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <com.natasa.progressviews.CircleSegmentBar
                 android:id="@+id/segment_bar"
-                android:layout_width="320dp"
-                android:layout_height="240dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:layout_alignRight="@+id/line_progressbar"
                 android:layout_alignTop="@+id/circle_progress"
                 android:visibility="visible"

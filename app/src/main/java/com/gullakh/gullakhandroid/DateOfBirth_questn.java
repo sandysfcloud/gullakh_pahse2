@@ -42,7 +42,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     EditText Dob;
     ImageView review;
     ImageView done;
-    int day, month, yearv;
+    int day, month, yearv,empflag;
     String data;
     Button next;
     ImageView gen1,gen2;
@@ -149,6 +149,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         String data2 = intent3.getStringExtra("employer");
         if (data2 != null) {
             if (data2.equals("employer")) {
+                empflag=1;
                 Log.d("employer question DOB","0");
                 LinearLayout ldateofb = (LinearLayout) findViewById(R.id.ldateofb);
                 LinearLayout lempl = (LinearLayout) findViewById(R.id.lempl);
@@ -305,11 +306,39 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                 break;
             case R.id.edit:
-                String emptyp=((GlobalData) getApplication()).getemptype();
-                if(emptyp.equals("Self Employed Business")||emptyp.equals("Self Employed Professional"))
-                    RegisterPageActivity.showAlertreview(this,8);
+
+                String loanty=((GlobalData) getApplication()).getcartype();
+                if(loanty.equals("Car Loan")) {
+                    if (empflag == 1) {
+                        String emptyp = ((GlobalData) getApplication()).getemptype();
+                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                            RegisterPageActivity.showAlertreview(this, 10);
+                        else
+                            RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 9);
+                    } else {
+                        String emptyp = ((GlobalData) getApplication()).getemptype();
+                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                            RegisterPageActivity.showAlertreview(this, 9);
+                        else
+                            RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 8);
+                    }
+                }
                 else
-                    RegisterPageActivity.showAlertreview(DateOfBirth_questn.this,7);
+                {
+                    if (empflag == 1) {
+                        String emptyp = ((GlobalData) getApplication()).getemptype();
+                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                            RegisterPageActivity.showAlertreview(this, 9);
+                        else
+                            RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 8);
+                    } else {
+                        String emptyp = ((GlobalData) getApplication()).getemptype();
+                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                            RegisterPageActivity.showAlertreview(this, 8);
+                        else
+                            RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 7);
+                    }
+                }
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -358,7 +387,8 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }else{
-                                String empt=cl_car_global_data.dataWithAns.get("type_employment");
+                                String empt= ((GlobalData) getApplication()).getemptype();
+                                Log.d("emptyp is",empt+" its personal loan");
                                 if(empt.equals("Salaried")) {
                                     Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
                                     intent.putExtra("employer", "employer");

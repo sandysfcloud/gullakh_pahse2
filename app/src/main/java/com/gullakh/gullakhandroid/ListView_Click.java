@@ -58,7 +58,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         lenderid = intent.getStringExtra("lenderid");
 
 
-
+        Log.d("one_time_fee-proce in listvieclick",one_time_fee);
 Log.d("bankname in listvieclick",bankname);
 
         String[] sepfee=null;
