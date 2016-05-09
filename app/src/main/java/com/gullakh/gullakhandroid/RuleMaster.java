@@ -9,7 +9,7 @@ public class RuleMaster {
     public Double foir;
     public Double roi;
     public String tenure;
-    public String processing_fee;
+    public String pf;
     public String fee_char_detail;
     public String other_details;
     public String document_details;
@@ -50,11 +50,11 @@ public class RuleMaster {
     }
 
     public String getprocessing_fee(){
-        return processing_fee;
+        return pf;
     }
 
     public void setprocessing_fee(String token){
-        processing_fee=token;
+        pf=token;
     }
 
     public String getfee_charges_details(){

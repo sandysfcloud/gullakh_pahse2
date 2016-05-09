@@ -83,9 +83,15 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
             String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
 
-            String incen=String.valueOf(((GlobalData) getApplication()).getavgince().intValue());
+            if(((GlobalData) getApplication()).getavgince()!=null) {
+                String incen = String.valueOf(((GlobalData) getApplication()).getavgince().intValue());
+                incent.setText(incen);
+            }
 
-            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
+
+
+           // mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
+           mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 10000)));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             String strtemp = String.valueOf(format.format(new BigDecimal(netsalary)));
             strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -94,7 +100,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             sal.setText(netsalary);
             sal.setSelection(sal.getText().length());
 
-            incent.setText(incen);
+
             incent.setSelection(incent.getText().length());
 
         }
@@ -133,7 +139,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                     sald = sald.replaceAll("\\s+","");
                     Log.d("loan KK2", sald);
                     try {
-                        mSeekArc.setProgress(Integer.valueOf(sald) / 50000);
+                       // mSeekArc.setProgress(Integer.valueOf(sald) / 50000);
+                        mSeekArc.setProgress(Integer.valueOf(sald) / 10000);
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
 
@@ -154,7 +161,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             public void onProgressChanged(SeekArc seekArc, int progress,
                                           boolean fromUser) {
               //  progress = (progress + 4) * 5000;
-                progress = (progress + 1) * 50000;
+                //progress = (progress + 1) * 50000;
+                progress = (progress + 1) * 10000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -202,7 +210,12 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.edit:
-                RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this,5);
+                String empty=((GlobalData) getApplication()).getcartype();
+                if(empty.equals("Car Loan")) {
+                    RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
+                }
+                else
+                    RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 5);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

@@ -264,8 +264,16 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
                 break;
             case R.id.edit:
-                if(data.equals("data"))
-                    RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this,6);
+                String empty=((GlobalData) getApplication()).getcartype();
+                if(empty.equals("Car Loan")) {
+                    if (data.equals("data"))
+                        RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this, 7);
+                }
+                else
+                {
+                    if (data.equals("data"))
+                        RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this, 6);
+                }
 
                 break;
             case R.id.close:

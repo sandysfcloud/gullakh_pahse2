@@ -1054,6 +1054,8 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     //********
                     Log.d("bankname in googleact", String.valueOf(Arry_banknam));
                     Log.d("bankname in googleact", String.valueOf(Arry_banknam.get(cobj_RM[i].getaccount_lender())));
+
+                    Log.d("procee fee in googleact", String.valueOf(cobj_RM[i].getprocessing_fee()));
                     double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
 
                     ListModel sched = new ListModel();

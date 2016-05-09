@@ -65,12 +65,12 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         //review = (ImageView) findViewById(R.id.review);
         //done = (Button) findViewById(R.id.done);
         //done.setOnClickListener(this);
-        if(cl_car_global_data.dataWithAns.get("car_loan_type")!=null) {
+        if(((GlobalData) getApplication()).getCartypeloan()!=null) {
 
-            if (cl_car_global_data.dataWithAns.get("car_loan_type").equals("New"))
+            if (((GlobalData) getApplication()).getCartypeloan().equals("New Car Loan"))
                 newcar.setImageResource(R.drawable.buttonselecteffect);
             else
-            if (cl_car_global_data.dataWithAns.get("car_loan_type").equals("Used"))
+            if (((GlobalData) getApplication()).getCartypeloan().equals("Used Car Loan"))
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
 
         }
@@ -107,9 +107,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    public void setDataToHashMap(String key, String data) {
-        cl_car_global_data.dataWithAns.put(key, data);
-    }
+
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -132,9 +130,9 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.next:
-                if(cl_car_global_data.dataWithAns.get("car_loan_type")!=null) {
-                    Log.d("car_loan_typeK",cl_car_global_data.dataWithAns.get("car_loan_type"));
-                    if(cl_car_global_data.dataWithAns.get("car_loan_type").equalsIgnoreCase("used car loan")) {
+                if(((GlobalData) getApplication()).getCartypeloan()!=null) {
+                    Log.d("car_loan_typeK",((GlobalData) getApplication()).getCartypeloan());
+                    if(((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("used car loan")) {
                         intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
@@ -156,13 +154,12 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
 //                finish();
 //                overridePendingTransition(R.transition.left, R.transition.right);
             case R.id.img:
-                // sal.setBackgroundColor(Color.parseColor("#D83C2F"));
-                //self.setBackgroundColor(Color.parseColor("#ffffff"));
+
                 newcar.setImageResource(R.drawable.buttonselecteffect);
                 oldcar.setImageResource(R.drawable.usedcar);
                 ((GlobalData) getApplication()).setCartypeloan("New Car Loan");
-                setDataToHashMap("car_loan_type","New Car Loan");
-                Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
+
+
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, Loan_amt_questn.class);
                     startActivity(intent);
@@ -177,8 +174,8 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
                 newcar.setImageResource(R.drawable.newcar);
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
                 ((GlobalData) getApplication()).setCartypeloan("Used Car Loan");
-                setDataToHashMap("car_loan_type","Used Car Loan");
-                Log.d("car_loan_type K", cl_car_global_data.dataWithAns.get("car_loan_type"));
+
+
                 if(data==null) {
                     intent = new Intent(Car_type_questn.this, cl_car_yearofmft.class);
                     startActivity(intent);
@@ -211,14 +208,3 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         }
     }
 }
-
-/*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("Please choose the car!")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //do things
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();*/

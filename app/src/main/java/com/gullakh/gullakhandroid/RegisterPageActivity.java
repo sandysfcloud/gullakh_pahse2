@@ -436,8 +436,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		carloan_que_salary_new=new ArrayList<String>();
 		carloan_que_salary_new.add("Current Residence: ");
 		carloan_que_salary_new.add("Employee Type: ");
-		carloan_que_salary_new.add("Car Loan Type: ");
+		String cartyp=((GlobalData) CurrentAct.getApplication()).getCartypeloan();
+		if(cartyp!=null&& !emptyp.equals("Personal Loan")) {
+			if (cartyp.equals("New Car Loan") || cartyp.equals("Used Car Loan")) {
+				carloan_que_salary_new.add("Car Loan Type: ");
+			}
+		}
 		carloan_que_salary_new.add("Loan Amount: ");
+		carloan_que_salary_new.add("Tenure: ");
+
         if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
 				flag = 1;
@@ -451,6 +458,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		carloan_que_salary_new.add("Total EMI's you pay: ");
 
+		String loantyp=((GlobalData) CurrentAct.getApplication()).getcartype();
+		if(loantyp.equals("Personal Loan"))
+		{
+			carloan_que_salary_new.add("Date Of Birth: ");
+			carloan_que_salary_new.add("Current Employer: ");
+
+
+		}
+
 
 
 
@@ -458,8 +474,14 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		if(((GlobalData) act.getApplication()).getcarres()!=null)
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
-		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
+
+			if(cartyp!=null&& !emptyp.equals("Personal Loan")) {
+				if (cartyp.equals("New Car Loan") || cartyp.equals("Used Car Loan")) {
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
+				}
+			}
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getTenure());
 		if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
 				Log.d("employee type is", emptyp);
@@ -483,7 +505,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		}
 		if(((GlobalData) act.getApplication()).getEmi()!=null)
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getEmi().toString());
+		if(loantyp.equals("Personal Loan"))
+		{
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getDob());
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemployer());
 
+
+		}
 
 		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new));
 Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new_ans));

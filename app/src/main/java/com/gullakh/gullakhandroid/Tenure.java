@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
     SeekArc mSeekArc;
     TextView mSeekArcProgress, onetext;
     String data,loan_type;
-
+    Dialog dg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,6 +210,16 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.edit:
+
+
+
+                String empty=((GlobalData) getApplication()).getcartype();
+                if(empty.equals("Car Loan")) {
+                    dg=RegisterPageActivity.showAlertreview(Tenure.this, 5);
+                }
+                else
+                    dg=RegisterPageActivity.showAlertreview(Tenure.this, 4);
+
                 break;
 
             case R.id.close:
@@ -225,7 +236,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                 String emptype = ((GlobalData) getApplication()).getemptype();
                 String loantype =((GlobalData) getApplication()).getcartype();
                 Intent intent = null;
-                if (loantype.equalsIgnoreCase("Car Loan")) {
+                if (loantype.equalsIgnoreCase("Car Loan")||loantype.equalsIgnoreCase("Personal Loan")) {
                     if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);
 
@@ -244,14 +255,6 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                     }
                 } else if (loantype.equalsIgnoreCase("Home Loan")) {
                     intent = new Intent(Tenure.this, hl_city.class);
-
-                } else if (loantype.equalsIgnoreCase("Personal Loan")) {
-                    String emptyp = ((GlobalData) getApplication()).getemptype();
-                    if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
-                        intent = new Intent(Tenure.this, Car_Loan_PAT.class);
-                    } else {
-                        intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
-                    }
 
                 }
                 startActivity(intent);
