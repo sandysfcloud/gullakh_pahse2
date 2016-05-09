@@ -133,7 +133,6 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         String data = intent2.getStringExtra("review");
         if (data != null) {
             if (data.equals("review")) {
-                empl();
                 LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
                 footer.setVisibility(View.GONE);
                 done.setVisibility(View.VISIBLE);
@@ -151,12 +150,21 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         String data3 = intent.getStringExtra("review2");
         if (data3 != null) {
             if (data3.equals("review2")) {
+                empl();
+
                 LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
                 footer.setVisibility(View.GONE);
-                done.setVisibility(View.VISIBLE);
+                done2.setVisibility(View.VISIBLE);
 
                 // review.setVisibility(View.INVISIBLE);
 
+            }
+        }
+        Intent intent3 = getIntent();
+        String data2 = intent3.getStringExtra("employer");
+        if (data2 != null) {
+            if (data2.equals("employer")) {
+                empl();
             }
         }
 
@@ -174,10 +182,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
     public void empl()
     {
-        Intent intent3 = getIntent();
-        String data2 = intent3.getStringExtra("employer");
-        if (data2 != null) {
-            if (data2.equals("employer")) {
+
                 empflag=1;
                 Log.d("employer question DOB","0");
                 LinearLayout ldateofb = (LinearLayout) findViewById(R.id.ldateofb);
@@ -197,9 +202,6 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 getemplist();
 
 
-
-            }
-        }
     }
 
     public void getemplist()
@@ -331,6 +333,8 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                 break;
             case R.id.done:
+
+                save("done");
                 finish();
 
                 break;
@@ -389,72 +393,8 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 break;*/
             case R.id.next:
 
+                save("next");
 
-
-                if(!Dob.getText().toString().matches("")) {
-
-                    if (dataGender != null) {
-
-                        ((GlobalData) getApplication()).setgender(dataGender);
-
-                        ((GlobalData) getApplication()).setDob(Dob.getText().toString());
-
-                        setDataToHashMap("gender", dataGender);
-                        int age = 0;
-                        if (((GlobalData) getApplication()).getDob() != null) {
-
-                            age = getAge(yearv, month, day);
-                            Log.d("your age is", String.valueOf(age));
-                        }
-
-                        if (age > 18) {
-
-                            ((GlobalData) getApplication()).setage(age);
-                            String loantype=  ((GlobalData) getApplication()).getLoanType();
-
-
-
-                            storeData();
-                            goToDatabase(loantype);
-                            if (loantype.equalsIgnoreCase("Car Loan") ||loantype.equalsIgnoreCase("Home Loan") ||loantype.equalsIgnoreCase("Loan Against Property"))
-                            {
-                                Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                                intent.putExtra("data", "searchgo");
-                                startActivity(intent);
-                                overridePendingTransition(R.transition.left, R.transition.right);
-                            }else{
-                                String empt= ((GlobalData) getApplication()).getemptype();
-                                Log.d("emptyp is",empt+" its personal loan");
-                                if(empt.equals("Salaried")) {
-                                    Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
-                                    intent.putExtra("employer", "employer");
-                                    startActivity(intent);
-                                    overridePendingTransition(R.transition.left, R.transition.right);
-                                }
-
-                                else {
-
-                                    Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
-                                    intent.putExtra("data", "searchgo");
-
-                                    startActivity(intent);
-                                    overridePendingTransition(R.transition.left, R.transition.right);
-
-                                }
-                            }
-
-
-                        } else {
-                            RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
-                        }
-                    }
-                    else
-                        RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please select your Gender", "failed");
-                }
-                else
-                {
-                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter Date Of Birth", "failed");
-                }
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);
@@ -504,6 +444,82 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
         }
     }
+
+
+
+
+    public void save(String flag)
+    {
+
+        if(!Dob.getText().toString().matches("")) {
+
+            if (dataGender != null) {
+
+                ((GlobalData) getApplication()).setgender(dataGender);
+
+                ((GlobalData) getApplication()).setDob(Dob.getText().toString());
+
+                setDataToHashMap("gender", dataGender);
+                int age = 0;
+                if (((GlobalData) getApplication()).getDob() != null) {
+
+                    age = getAge(yearv, month, day);
+                    Log.d("your age is", String.valueOf(age));
+                }
+
+                if (age > 18) {
+
+                    ((GlobalData) getApplication()).setage(age);
+                    String loantype=  ((GlobalData) getApplication()).getLoanType();
+
+
+
+                    storeData();
+                    goToDatabase(loantype);
+
+                    if(flag.equals("next")) {
+                        if (loantype.equalsIgnoreCase("Car Loan") || loantype.equalsIgnoreCase("Home Loan") || loantype.equalsIgnoreCase("Loan Against Property")) {
+                            Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                            intent.putExtra("data", "searchgo");
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                        } else {
+                            String empt = ((GlobalData) getApplication()).getemptype();
+                            Log.d("emptyp is", empt + " its personal loan");
+                            if (empt.equals("Salaried")) {
+                                Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
+                                intent.putExtra("employer", "employer");
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            } else {
+
+                                Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                                intent.putExtra("data", "searchgo");
+
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+
+                            }
+                        }
+                    }
+
+
+                } else {
+                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
+                }
+            }
+            else
+                RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please select your Gender", "failed");
+        }
+        else
+        {
+            RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter Date Of Birth", "failed");
+        }
+    }
+
+
+
+
 
     @Override
     public void onResume()

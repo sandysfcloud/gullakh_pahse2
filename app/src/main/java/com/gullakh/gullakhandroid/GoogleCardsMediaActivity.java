@@ -173,7 +173,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             layout = (LinearLayout) findViewById(R.id.linear);
             linedit = (LinearLayout) findViewById(R.id.linedit);
             filter = (LinearLayout) findViewById(R.id.filter);
-            lcomp = (LinearLayout) findViewById(R.id.lcomp);
+          //  lcomp = (LinearLayout) findViewById(R.id.lcomp);
             loan_amt = (TextView) findViewById(R.id.loan_amt);
             tenr_amt = (TextView) findViewById(R.id.tenr_amt);
             tten = (TextView) findViewById(R.id.tenure);
@@ -188,7 +188,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             linedit.setOnClickListener(this);
             filter.setOnClickListener(this);
-            lcomp.setOnClickListener(this);
+           // lcomp.setOnClickListener(this);
             // createListView();
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             //nullpointer
@@ -1361,12 +1361,12 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 startActivity(intenth);
 
                 break;
-            case R.id.lcomp:
+           /* case R.id.lcomp:
                 Intent icom= new Intent(getApplicationContext(), CarCompare.class);
 
                 startActivity(icom);
 
-                break;
+                break;*/
             case R.id.filter:
 
                 bankfilter = disbank.toArray(new CharSequence[disbank.size()]);

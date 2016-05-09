@@ -463,6 +463,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		{
 			carloan_que_salary_new.add("Date Of Birth: ");
 			carloan_que_salary_new.add("Current Employer: ");
+			carloan_que_salary_new.add("Salary Payment Mode: ");
 
 
 		}
@@ -509,7 +510,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		{
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getDob());
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemployer());
-
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getSalryPayMode());
 
 		}
 

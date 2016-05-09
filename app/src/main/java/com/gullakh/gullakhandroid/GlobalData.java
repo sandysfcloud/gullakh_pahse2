@@ -38,7 +38,7 @@ public class GlobalData extends MultiDexApplication {
     private String statename;
     private String Tenure;
     private String baltrans;
-    private String totalsal;
+    private String totalsal,salpaymode;
 
 //*****************CarLoan********************//
 
@@ -99,6 +99,13 @@ public class GlobalData extends MultiDexApplication {
     }
     public String getSession() {
         return session;
+    }
+
+    public String getSalryPayMode() {
+        return salpaymode;
+    }
+    public void setSalryPayMode(String locationVariable) {
+        this.salpaymode = locationVariable;
     }
 
     public ArrayList<Double> getaccid() {

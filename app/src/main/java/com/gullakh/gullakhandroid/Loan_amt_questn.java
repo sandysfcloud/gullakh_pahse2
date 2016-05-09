@@ -255,6 +255,17 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
         switch (v.getId()) {
             case R.id.done:
+                if(amt.getText().toString().matches("")) {
+
+                    RegisterPageActivity.showErroralert(Loan_amt_questn.this, "Please enter loan amount!", "failed");
+                }
+                else
+                {
+                    Log.d("intent next loanamt", "check");
+                    ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
+
+                }
+
                 finish();
 
                 break;

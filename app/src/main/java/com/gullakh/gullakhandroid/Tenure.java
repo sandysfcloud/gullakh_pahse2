@@ -206,6 +206,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.done:
+                ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
                 finish();
                 break;
 
