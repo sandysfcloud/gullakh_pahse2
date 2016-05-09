@@ -229,7 +229,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 break;
             case R.id.edit:
                 String emptyp= ((GlobalData) getApplication()).getemptype();
-                String loanty=((GlobalData) getApplication()).getcartype();
+                String loanty=((GlobalData) getApplication()).getLoanType();
                 if(loanty.equals("Car Loan")) {
                     if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                         RegisterPageActivity.showAlertreview(EMI_questn.this, 8);

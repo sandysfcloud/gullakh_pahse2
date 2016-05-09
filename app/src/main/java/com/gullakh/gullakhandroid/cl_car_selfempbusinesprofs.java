@@ -168,7 +168,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                             setDataToHashMap("profession",spinner1.getSelectedItem().toString());
                             setDataToHashMap("start_date_of_current_business_prof",getDate());
                             setDataToHashMap("firm_type_prof",spinner2.getSelectedItem().toString());
-                            if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                            if(((GlobalData) getApplication()).getLoanType().equals("Home Loan"))
                             {
                                 goToDatabase("Home Loan");
                                 Intent intent = new Intent(cl_car_selfempbusinesprofs.this, cl_car_gender.class);

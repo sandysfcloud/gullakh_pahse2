@@ -493,8 +493,8 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                                      int size=enums.length;
                                      liste2 = new ArrayList<String>();
                                      for(int i=0;i<size;i++) {
-                                         Log.e("employerdata "+i, enums[i].getcartype());
-                                         liste2.add(enums[i].getcartype());
+                                         Log.e("employerdata "+i, enums[i].getLoanType());
+                                         liste2.add(enums[i].getLoanType());
                                      }
 
                                  }

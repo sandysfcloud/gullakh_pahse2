@@ -28,7 +28,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         close.setVisibility(View.INVISIBLE);
         review.setVisibility(View.INVISIBLE);
-        title.setText("Choose Account");
+        title.setText("Sign in with");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

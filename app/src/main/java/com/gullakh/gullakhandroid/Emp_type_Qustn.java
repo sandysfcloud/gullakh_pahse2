@@ -203,7 +203,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     }
     public void goToIntent(){
         Intent intent;
-        String loantype =((GlobalData) getApplication()).getcartype();
+        String loantype =((GlobalData) getApplication()).getLoanType();
         if(loantype.equalsIgnoreCase("Car Loan")){
             intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
 

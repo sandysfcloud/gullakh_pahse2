@@ -334,7 +334,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             case R.id.edit:
 
 
-                String loanty=((GlobalData) getApplication()).getcartype();
+                String loanty=((GlobalData) getApplication()).getLoanType();
                 if(loanty.equals("Car Loan")) {
                     if (empflag == 1) {
                         String emptyp = ((GlobalData) getApplication()).getemptype();
@@ -407,7 +407,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                         if (age > 18) {
 
                             ((GlobalData) getApplication()).setage(age);
-                            String loantype=  ((GlobalData) getApplication()).getcartype();
+                            String loantype=  ((GlobalData) getApplication()).getLoanType();
 
 
 

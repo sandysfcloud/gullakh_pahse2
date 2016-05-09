@@ -137,7 +137,7 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
                                                 RegisterPageActivity.showErroralert(this, "Select joint members", "failed");
                                             } else {
                                                 Intent intent;
-                                                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                                     intent = new Intent(hl_need3.this, DateOfBirth_questn.class);
                                                 } else {
                                                     intent = new Intent(hl_need3.this, cl_car_residence_type.class);
@@ -154,7 +154,7 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
                                         Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
 
                                         Intent intent;
-                                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                             intent = new Intent(hl_need3.this, DateOfBirth_questn.class);
                                         } else {
                                             intent = new Intent(hl_need3.this, cl_car_residence_type.class);

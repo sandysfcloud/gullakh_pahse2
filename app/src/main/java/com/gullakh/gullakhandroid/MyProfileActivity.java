@@ -83,7 +83,7 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
         }
 
 
-        //add1 = (EditText) findViewById(R.id.editText1);
+        add1 = (EditText) findViewById(R.id.editText1);
         add2= (EditText) findViewById(R.id.editText2);
         add3 = (EditText) findViewById(R.id.editText3);
         add4 = (EditText) findViewById(R.id.editText4);
@@ -105,13 +105,13 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
                 edit.setVisibility(View.INVISIBLE);
                 Done.setVisibility(View.VISIBLE);
                 //ph.setBackgroundResource(R.drawable.edittextsimple);
-                //add1.setBackgroundResource(R.drawable.edittextsimple);
+                add1.setBackgroundResource(R.drawable.edittextsimple);
                 add2.setBackgroundResource(R.drawable.edittextsimple);
                 add3.setBackgroundResource(R.drawable.edittextsimple);
                 add4.setBackgroundResource(R.drawable.edittextsimple);
                 add5.setBackgroundResource(R.drawable.edittextsimple);
                 //ph.setEnabled(true);
-               // add1.setEnabled(true);
+                add1.setEnabled(true);
                 add2.setEnabled(true);
                 add3.setEnabled(true);
                 add4.setEnabled(true);
@@ -126,18 +126,18 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
                 edit.setVisibility(View.VISIBLE);
                 signout.setVisibility(View.VISIBLE);
                 //ph.setBackgroundResource(R.color.white_transparent);
-                //add1.setBackgroundResource(R.color.white_transparent);
+                add1.setBackgroundResource(R.color.white_transparent);
                 add2.setBackgroundResource(R.color.white_transparent);
                 add3.setBackgroundResource(R.color.white_transparent);
                 add4.setBackgroundResource(R.color.white_transparent);
                 add5.setBackgroundResource(R.color.white_transparent);
                // ph.setEnabled(false);
-                //add1.setEnabled(false);
+                add1.setEnabled(false);
                 add2.setEnabled(false);
                 add3.setEnabled(false);
                 add4.setEnabled(false);
                 add5.setEnabled(false);
-                goToServer(add2.getText().toString(),add3.getText().toString(),add4.getText().toString(),add5.getText().toString());
+                goToServer(add1.getText().toString(),add2.getText().toString(),add3.getText().toString(),add4.getText().toString(),add5.getText().toString());
             }
         });
 
@@ -156,7 +156,7 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
 
     }
 
-    private void goToServer(String add2, String add3, String add4, String add5) {
+    private void goToServer(String add1, String add2, String add3, String add4, String add5) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -175,7 +175,7 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
 
             }
         }, MyProfileActivity.this, "wait");
-        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add2,add3,add4,add5);
+        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5);
     }
 
     @Override
@@ -212,7 +212,8 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
             JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
             ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
             Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
-            add2.setText(details[0].getMailingstreet());
+            add1.setText(details[0].getMailingstreet());
+            add2.setText(details[0].getOtherstreet());
             add3.setText(details[0].getMailingcity());
             add4.setText(details[0].getMailingstate());
             add5.setText(details[0].getMailingzip());

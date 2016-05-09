@@ -177,7 +177,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
                             setDataToHashMap("ind_type", spinner1.getSelectedItem().toString());
                             setDataToHashMap("start_date_of_cur_business", jdate);
                             setDataToHashMap("firm_type", spinner2.getSelectedItem().toString());
-                            if(((GlobalData) getApplication()).getcartype().equals("Home Loan"))
+                            if(((GlobalData) getApplication()).getLoanType().equals("Home Loan"))
                             {
                                 goToDatabase("Home Loan");
                                 Intent intent = new Intent(cl_car_selfempbusiness.this, cl_car_gender.class);

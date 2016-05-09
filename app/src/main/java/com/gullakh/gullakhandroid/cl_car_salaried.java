@@ -226,12 +226,12 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                         String jdate = getDate();
                         setDataToHashMap("year_you_joined_current_comp", jdate);
                         setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
-                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                             goToDatabase("Home Loan");
-                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                             goToDatabase("Personal Loan");
 
-                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
                             goToDatabase("Loan Against Property");
 
                         } else {
@@ -239,7 +239,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                         }
 
 
-                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan"))
+                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan"))
                         {
                             Intent intent = new Intent(this, cl_car_gender.class);
                             startActivity(intent);

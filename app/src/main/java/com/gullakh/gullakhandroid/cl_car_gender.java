@@ -35,7 +35,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class cl_car_gender extends AppCompatActivity implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class cl_car_gender extends AppCompatActivity implements View.OnClickListener,TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     Button back;
     private Button submit,coappl;
     JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,
@@ -105,8 +105,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         yesb.setOnClickListener(this);
         nob.setOnClickListener(this);
         coappl.setOnClickListener(this);
-        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan") ||
-        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
+        ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
             if (cl_car_global_data.dataWithAns.get("proposed_ownership") != null) {
                 if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
                     main.setVisibility(View.VISIBLE);
@@ -147,7 +147,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 // do something
-            if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+            if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
                     RegisterPageActivity.showAlertquestn(this);
                 else
@@ -171,17 +171,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                 } else {
                     if(pin.getText().toString().length()==6){
-                        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                             goToDatabase("mysearch","Home Loan");
-                        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                        }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                             goToDatabase("mysearch","Personal Loan");
-                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
                             goToDatabase("mysearch","Loan Against Property");
                         }else{
                             goToDatabase("mysearch","Car Loan");
                         }
 
-                        goToServer(add1.getText().toString(),city.getText().toString(),state.getText().toString(),pin.getText().toString());
+                        goToServer(add1.getText().toString(),add2.getText().toString(),city.getText().toString(),state.getText().toString(),pin.getText().toString());
                         savetoserver();
                     }else{
                         RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
@@ -206,7 +206,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 startActivity(intenth);
                 break;
             case R.id.back:
-               /* if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+               /* if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                     if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
                         RegisterPageActivity.showAlertquestn(this);
                     else*/
@@ -234,10 +234,12 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             case R.id.time:
                 Calendar now1 = Calendar.getInstance();
                 com.wdullaer.materialdatetimepicker.time.TimePickerDialog tpd = com.wdullaer.materialdatetimepicker.time.TimePickerDialog.newInstance(
-                        (TimePickerDialog.OnTimeSetListener) cl_car_gender.this,
+                        cl_car_gender.this,
                         now1.get(Calendar.HOUR_OF_DAY),
                         now1.get(Calendar.MINUTE),true
                 );
+                tpd.setAccentColor(R.color.mdtp_background_color);
+                tpd.setAccentColor(Color.parseColor("#FFE2041E"));
                 tpd.show(getFragmentManager(), "Timepickerdialog");
                 break;
         }
@@ -386,8 +388,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 //                        ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
 
 
-                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan") ||
-                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
+                        ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                     if (coapllflag) {
                         gson = new Gson();
                         JSONArray CojsonArray = new JSONArray();
@@ -439,7 +441,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 String loanagainstpropertytype = arrayLoantype.get("Loan Against Property");
                 // String emptype=((GlobalData) getApplication()).getemptype();
                 Log.d("hol pl lap", homeloantype + personalloantype + loanagainstpropertytype);
-                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
+                if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
                     String carloantype;
                     if (((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("New Car Loan")){
                         carloantype = arrayLoantype.get("New Car Loan");
@@ -448,11 +450,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     }
                     Log.d("car",carloantype);
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, carloantype);
-                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, homeloantype);
-                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, personalloantype);
-                }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanagainstpropertytype);
                 }
             }
@@ -510,8 +512,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("contactupdate jsonobj", String.valueOf(jsonObject));
                 goToDatabase("userlogin", "Car Loan");
-                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan") ||
-                        ((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
+                        ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                     if (coapllflag) {
                         gson = new Gson();
                         JSONArray CojsonArray = new JSONArray();
@@ -588,22 +590,20 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         TimePickerDialog tpd = (TimePickerDialog) getFragmentManager().findFragmentByTag("Timepickerdialog");
         DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
 
-        if(tpd != null) tpd.setOnTimeSetListener((TimePickerDialog.OnTimeSetListener) this);
+        if(tpd != null) tpd.setOnTimeSetListener(this);
         if(dpd != null) dpd.setOnDateSetListener(this);
+    }
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String time=hourOfDay+":"+minute+":"+second;
+        timefield.setText(time);
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
         datefield.setText(date);
     }
-    @Override
-    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
-        String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
-        String minuteString = minute < 10 ? "0"+minute : ""+minute;
-        String secondString = second < 10 ? "0"+second : ""+second;
-        String time =hourString+"h"+minuteString+"m"+secondString+"s";
-        timefield.setText(time);
-    }
+
     public void getContactDetails(){
         requestgetserver20 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -620,13 +620,16 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
                 Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
                 add1.setText(details[0].getMailingstreet());
+                add2.setText(details[0].getOtherstreet());
+                city.setText(details[0].getMailingcity());
+                state.setText(details[0].getMailingstate());
                 pin.setText(details[0].getMailingzip());
                 dgthis.dismiss();
             }
         }, cl_car_gender.this, "wait");
         requestgetserver20.execute("token","getcontact",sessionid,useremail);
     }
-    private void goToServer(String add2, String add3, String add4, String add5) {
+    private void goToServer(String add1,String add2, String add3, String add4, String add5) {
         requestgetserver21 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -645,7 +648,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             }
         }, cl_car_gender.this, "wait");
-        requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add2,add3,add4,add5);
+        requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add1,add2,add3,add4,add5);
     }
-
 }

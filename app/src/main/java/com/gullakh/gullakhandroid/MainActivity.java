@@ -501,7 +501,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             case R.id.carln:
 
-                ((GlobalData) getApplication()).setcartype("Car Loan");
+                ((GlobalData) getApplication()).setLoanType("Car Loan");
 
                 Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Car Loan");
@@ -510,7 +510,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
 
             case R.id.home:
-                ((GlobalData) getApplication()).setcartype("Home Loan");
+                ((GlobalData) getApplication()).setLoanType("Home Loan");
 
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Home Loan");
@@ -519,7 +519,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
 
             case R.id.busin:
-                ((GlobalData) getApplication()).setcartype("Loan Against Property");
+                ((GlobalData) getApplication()).setLoanType("Loan Against Property");
 
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Loan Against Property");
@@ -527,7 +527,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.persol:
-                ((GlobalData) getApplication()).setcartype("Personal Loan");
+                ((GlobalData) getApplication()).setLoanType("Personal Loan");
 
                 intent = new Intent(MainActivity.this, cl_car_residence.class);
                 intent.putExtra("loan_type", "Personal Loan");

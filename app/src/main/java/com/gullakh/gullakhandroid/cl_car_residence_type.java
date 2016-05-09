@@ -169,11 +169,11 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                                         setDataToHashMap("current_res", spinner.getSelectedItem().toString());
                                         setDataToHashMap("period_of_stay_in_cur_city", currentCityyr.getText().toString() + " Year " + currentCityyr.getText().toString() + " Month");
                                         setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString() + " Year " + currentResidencemn.getText().toString() + " Month");
-                                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                             goToDatabase("Home Loan");
-                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                                             goToDatabase("Personal Loan");
-                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+                                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
                                             goToDatabase("Loan against Property");
                                         } else {
                                             goToDatabase("Car Loan");
@@ -182,12 +182,12 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                                         // startActivity(intent);
                                         DataHandler dbobject = new DataHandler(this);
                                         Cursor cr;
-                                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                             cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Home Loan';");
-                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                                             cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Personal Loan';");
 
-                                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
                                             cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Loan Against Property';");
                                         } else {
                                             cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");

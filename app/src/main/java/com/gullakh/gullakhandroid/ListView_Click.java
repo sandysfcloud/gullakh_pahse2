@@ -138,7 +138,7 @@ if(one_time_fee!=null) {
         if (savedInstanceState != null){
             loan_type = savedInstanceState.getString("loan_type");
         }
-          loan_type=((GlobalData) getApplication()).getcartype();
+          loan_type=((GlobalData) getApplication()).getLoanType();
 
         ImageView mainimg= (ImageView) findViewById(R.id.searchimg);
         if(loan_type!=null) {
@@ -222,7 +222,7 @@ if(one_time_fee!=null) {
     }
     protected void onSaveInstanceState(Bundle icicle) {
         super.onSaveInstanceState(icicle);
-        icicle.putString("loan_type", ((GlobalData) getApplication()).getcartype());
+        icicle.putString("loan_type", ((GlobalData) getApplication()).getLoanType());
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -280,19 +280,19 @@ if(one_time_fee!=null) {
                 break;
             case  R.id.Buttonapply:
                 buttonApply=true;
-            Log.d("check loan type", ((GlobalData) getApplication()).getcartype());
-                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
+            Log.d("check loan type", ((GlobalData) getApplication()).getLoanType());
+                    if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")){
                         storeData();
                         goToDatabase("Car Loan");
 
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")){
+                    }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")){
                         storeData();
                         goToDatabase("Home Loan");
 
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                    }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                         storeData();
                         goToDatabase("Personal Loan");
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                    }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
                         storeData();
                         goToDatabase("Loan Against Property");
                     }
@@ -311,7 +311,7 @@ if(one_time_fee!=null) {
 
                 if(MainActivity.signinstate){
                     Intent intent ;
-                    String emtyp=((GlobalData) getApplication()).getcartype();
+                    String emtyp=((GlobalData) getApplication()).getLoanType();
                     Log.d("employee typ in listviewclick",emtyp);
                     if(emtyp.equalsIgnoreCase("Car Loan")){
                         intent = new Intent(ListView_Click.this, cl_car_make.class);
@@ -323,14 +323,14 @@ if(one_time_fee!=null) {
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")){
+                    }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
 
                         intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
                         intent.putExtra("personal", "personal");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }/*else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")){
+                    }/*else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")){
                         intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -351,9 +351,12 @@ if(one_time_fee!=null) {
     }
 
     private void storeData() {
+        setDataToHashMap("loantype", ((GlobalData) getApplication()).getLoanType());
         setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
         setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
+        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("car loan")){
+            setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
+        }
         setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
         setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
         setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));

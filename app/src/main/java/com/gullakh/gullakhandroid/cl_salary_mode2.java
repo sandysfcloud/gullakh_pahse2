@@ -51,7 +51,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         TextView  title = (TextView) v.findViewById(R.id.title);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
+        if(((GlobalData) getApplication()).getLoanType().equals("Personal Loan"))
         {
             review.setVisibility(View.VISIBLE);
             review.setOnClickListener(this);
@@ -147,7 +147,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     }
     private void getInfo() {
         DataHandler dbobject = new DataHandler(this);
-        String Loan=((GlobalData) getApplication()).getcartype();
+        String Loan=((GlobalData) getApplication()).getLoanType();
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='"+Loan+"';");
         cr.moveToFirst();
         Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
@@ -203,9 +203,9 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
                     setDataToHashMap("sal_dep_to", dataBankType);
-                    if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                    if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                         goToDatabase("Home Loan");
-                    }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                    }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                         goToDatabase("Personal Loan");
                     }else{
                         goToDatabase("Car Loan");

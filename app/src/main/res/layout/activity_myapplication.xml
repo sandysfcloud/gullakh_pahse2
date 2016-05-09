@@ -180,8 +180,8 @@
 
             <com.natasa.progressviews.CircleSegmentBar
                 android:id="@+id/segment_bar"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:layout_alignRight="@+id/line_progressbar"
                 android:layout_alignTop="@+id/circle_progress"
                 android:visibility="visible"
