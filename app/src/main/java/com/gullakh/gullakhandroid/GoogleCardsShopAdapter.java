@@ -149,7 +149,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.apply= (Button) convertView
 					.findViewById(R.id.apply);
-			holder.comp= (CheckBox) convertView.findViewById(R.id.cself);
+			//holder.comp= (CheckBox) convertView.findViewById(R.id.cself);
 
 
 			convertView.setTag(holder);
@@ -206,7 +206,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 
 
-			holder.comp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			/*holder.comp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					season.setcheked(isChecked);
@@ -237,7 +237,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 					}
 					Log.d("comp bank data outside", String.valueOf(compbank));
 				}
-			});
+			});*/
 
 
 			holder.apply.setOnClickListener(new OnClickListener() {
@@ -275,8 +275,8 @@ Log.d("setting image", tempValues.getcarimgurl());
 
 
 		holder.apply.setTag(position);
-		holder.comp.setTag(position);
-		holder.comp.setChecked(season.getchecked());
+//		holder.comp.setTag(position);
+//		holder.comp.setChecked(season.getchecked());
 		Log.d("check this data count", String.valueOf(position));
 
 		return convertView;

@@ -251,6 +251,9 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     public void setdata()
     {
         setDataToHashMap("sal_pay_option", dataSalDeposite);
+        ((GlobalData) getApplication()).setSalryPayMode(dataSalDeposite);
+
+
         if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
             goToDatabase("Home Loan");
         }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {

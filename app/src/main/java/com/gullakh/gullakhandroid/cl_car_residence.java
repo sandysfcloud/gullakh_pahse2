@@ -238,7 +238,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
 
-                //((GlobalData) getApplication()).setcarres("Bengaluru");
+                ((GlobalData) getApplication()).setcarres("Bengaluru");
                 setDataToHashMap("currently_living_in", "Bengaluru");
                 goToIntent();
                 break;
@@ -247,8 +247,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.buttonselecteffect);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
-
-               // ((GlobalData) getApplication()).setcarres("Chennai");
+                ((GlobalData) getApplication()).setcarres("Chennai");
                 setDataToHashMap("currently_living_in", "Chennai");
                 goToIntent();
                 break;
@@ -258,7 +257,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
 
-                //((GlobalData) getApplication()).setcarres("Delhi");
+                ((GlobalData) getApplication()).setcarres("Delhi");
                 setDataToHashMap("currently_living_in", "Delhi");
                 goToIntent();
                 break;
@@ -267,7 +266,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.buttonselecteffect);
-               // ((GlobalData) getApplication()).setcarres("Mumbai");
+                ((GlobalData) getApplication()).setcarres("Mumbai");
                 setDataToHashMap("currently_living_in", "Mumbai");
                 goToIntent();
                 break;

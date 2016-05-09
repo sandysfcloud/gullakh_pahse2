@@ -224,6 +224,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
         switch (v.getId()) {
             case R.id.done:
+                ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));
                 finish();
 
                 break;
