@@ -319,7 +319,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
                                 JsonObject jsonObject1 = parser.parse(String.valueOf(jsonObject.get("result"))).getAsJsonObject();
                                 JsonArray jsonArr = jsonObject1.getAsJsonArray("loanrequest");
-                                if (jsonArr.size()<0) {
+                                if (jsonArr.size() == 0) {
                                     AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
                                     LayoutInflater factory = LayoutInflater.from(getApplicationContext());
                                     final View view = factory.inflate(R.layout.applnotfound, null);
@@ -334,51 +334,52 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                     });
                                     alertadd.show();
 
-                                }
-                                for (int i = 0; i < jsonArr.size(); i++) {
-                                    if (jsonArr.get(i).toString().equalsIgnoreCase("null")) {
-                                        AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                                        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
-                                        final View view = factory.inflate(R.layout.applnotfound, null);
-                                        alertadd.setView(view);
-                                        alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                overridePendingTransition(R.transition.left, R.transition.right);
-                                            }
-                                        });
-                                        alertadd.show();
+                                } else {
+                                    for (int i = 0; i < jsonArr.size(); i++) {
+                                        if (jsonArr.get(i).toString().equalsIgnoreCase("null")) {
+                                            AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                                            LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+                                            final View view = factory.inflate(R.layout.applnotfound, null);
+                                            alertadd.setView(view);
+                                            alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
+                                                    startActivity(intent);
+                                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                                }
+                                            });
+                                            alertadd.show();
 
-                                    }else {
-                                        JsonObject jsonObject2 = jsonArr.get(i).getAsJsonObject();
-                                        LoanReqForMyapp loanDeatils = gson.fromJson(jsonObject2, LoanReqForMyapp.class);// LoanReqForMyapp[] loandetailsobj = gson.fromJson(jsonObject2, LoanReqForMyapp[].class);
-                                        Log.d("here is data", loanDeatils.getLoan_amount());
-                                        ListModel sched = new ListModel();
-                                        sched.setapplno(loanDeatils.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                                        sched.setappldate(loanDeatils.getCreatedtime());
-                                        sched.setstatus(loanDeatils.getStage());
-                                        sched.setLoancaseid(loanDeatils.getLoanrequestcaseid());
-                                        sched.setContactid(String.valueOf(jsonObject1.get("contactid")));
-                                        sched.setD0(loanDeatils.getD0());
-                                        sched.setD1(loanDeatils.getD1());
-                                        sched.setD2(loanDeatils.getD2());
-                                        sched.setD3(loanDeatils.getD3());
-                                        sched.setD4(loanDeatils.getD4());
-                                        sched.setD5(loanDeatils.getD5());
-                                        sched.setD6(loanDeatils.getD6());
-                                        sched.setCompletedpercentage(loanDeatils.getCompletedpercentage());
-                                        sched.setLoan_amount(loanDeatils.getLoan_amount());
-                                        sched.setBank_name(loanDeatils.getPrimary_lender());
-                                        sched.setLoan_type(loanDeatils.getLoantype());
-                                        searchlistviewArry.add(sched);
-                                        createListView();
-                                        setapplicatnadapter(searchlistviewArry);
+                                        } else {
+                                            JsonObject jsonObject2 = jsonArr.get(i).getAsJsonObject();
+                                            LoanReqForMyapp loanDeatils = gson.fromJson(jsonObject2, LoanReqForMyapp.class);// LoanReqForMyapp[] loandetailsobj = gson.fromJson(jsonObject2, LoanReqForMyapp[].class);
+                                            Log.d("here is data", loanDeatils.getLoan_amount());
+                                            ListModel sched = new ListModel();
+                                            sched.setapplno(loanDeatils.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                                            sched.setappldate(loanDeatils.getCreatedtime());
+                                            sched.setstatus(loanDeatils.getStage());
+                                            sched.setLoancaseid(loanDeatils.getLoanrequestcaseid());
+                                            sched.setContactid(String.valueOf(jsonObject1.get("contactid")));
+                                            sched.setD0(loanDeatils.getD0());
+                                            sched.setD1(loanDeatils.getD1());
+                                            sched.setD2(loanDeatils.getD2());
+                                            sched.setD3(loanDeatils.getD3());
+                                            sched.setD4(loanDeatils.getD4());
+                                            sched.setD5(loanDeatils.getD5());
+                                            sched.setD6(loanDeatils.getD6());
+                                            sched.setCompletedpercentage(loanDeatils.getCompletedpercentage());
+                                            sched.setLoan_amount(loanDeatils.getLoan_amount());
+                                            sched.setBank_name(loanDeatils.getPrimary_lender());
+                                            sched.setLoan_type(loanDeatils.getLoantype());
+                                            searchlistviewArry.add(sched);
+                                            createListView();
+                                            setapplicatnadapter(searchlistviewArry);
+                                        }
                                     }
-                                    }
-                                dgthis.dismiss();
+                                    dgthis.dismiss();
                                 }
+                            }
                         }, GoogleCardsMediaActivity.this, "wait");
           DataHandler dbobj = new DataHandler(GoogleCardsMediaActivity.this);
           Cursor cre = dbobj.displayData("select * from userlogin");

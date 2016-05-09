@@ -207,7 +207,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                     if( citynam.getText().toString().length()>0) {
                         Log.d("edit text", citynam.getText().toString());
                         setDataToHashMap("currently_living_in", citynam.getText().toString());
-                       // ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
+//                        ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
                     }
                 }
                // if(((GlobalData) getApplication()).getcarres()!=null)

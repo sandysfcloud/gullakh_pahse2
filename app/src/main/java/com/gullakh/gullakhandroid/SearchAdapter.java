@@ -194,7 +194,6 @@ public class SearchAdapter extends BaseAdapter
 
 
             //holder.name.setText(tempValues.getsearchtnam());
-
             if(tempValues.getsearchtnam().equalsIgnoreCase("car loan")){
                 holder.image.setImageResource(R.drawable.carloan);
             }else if(tempValues.getsearchtnam().equalsIgnoreCase("home loan")){
@@ -283,12 +282,6 @@ public class SearchAdapter extends BaseAdapter
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
-
-
-
-
                     //***************************
                     Intent intent = new Intent(cont, GoogleCardsMediaActivity.class);
                     intent.putExtra("data", "searchgo");

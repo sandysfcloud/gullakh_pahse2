@@ -389,12 +389,13 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("contactaddress")){
-                            Log.d("element", "\"contact\"" + args[3] + "\",\"mailstreet\"" + args[4] + "\",\"mailcity\"" + args[5] + "\",\"mailstate\""+args[6]+"\",\"mailzip\""+args[7]);
+                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"mailingcity\":\"" + args[5] + "\",\"mailingstate\":\"" + args[6] + "\",\"mailingzip\":\"" + args[7]+"\"}]");
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "updatecontactdetail"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("element","\"contact\""+args[3]+"\",\"mailstreet\""+args[4]+"\",\"mailcity\""+args[5]+"\",\"mailstate\""+args[6]+"\",\"mailzip\""+args[7]));
+                            nameValuePairs.add(new BasicNameValuePair("contact",args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"mailingcity\":\"" + args[5] + "\",\"mailingstate\":\"" + args[6] + "\",\"mailingzip\":\"" + args[7]+"\"}]"));
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());

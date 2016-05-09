@@ -213,9 +213,10 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
             ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
             Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
             add2.setText(details[0].getMailingstreet());
-            add3.setText(details[0].getMailingzip());
-            add4.setText(details[0].getMailingcity());
-            add5.setText(details[0].getMailingstate());
+            add3.setText(details[0].getMailingcity());
+            add4.setText(details[0].getMailingstate());
+            add5.setText(details[0].getMailingzip());
+
             dgthis.dismiss();
         }
         }, MyProfileActivity.this, "wait");

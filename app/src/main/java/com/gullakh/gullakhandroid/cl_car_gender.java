@@ -120,6 +120,26 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 coappl.setVisibility(View.GONE);
             }
         }
+        DataHandler dbobject = new DataHandler(cl_car_gender.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+            cr.close();
+        }
+        //sessionid="327531cb56effa5f2f67f";
+        Cursor cre = dbobject.displayData("select * from userlogin");
+        if(cre!=null) {
+            if (cre.moveToFirst()) {
+                userid=cre.getString(1);
+                useremail = cre.getString(3);
+                usermobile = cre.getString(4);
+
+                // cre.close();
+                // dbobject.close();
+            }
+
+        }
         getContactDetails();
     }
   /*  @Override
@@ -228,26 +248,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     }
     public void savetoserver()
     {
-        DataHandler dbobject = new DataHandler(cl_car_gender.this);
-        Cursor cr = dbobject.displayData("select * from session");
-        if (cr.moveToFirst()) {
-            sessionid = cr.getString(1);
-            Log.e("sessionid-cartypes", sessionid);
-            cr.close();
-        }
-        //sessionid="327531cb56effa5f2f67f";
-        Cursor cre = dbobject.displayData("select * from userlogin");
-        if(cre!=null) {
-            if (cre.moveToFirst()) {
-                userid=cre.getString(1);
-                useremail = cre.getString(3);
-                usermobile = cre.getString(4);
-
-                   // cre.close();
-                   // dbobject.close();
-                }
-
-            }
         Log.d("mobile,email",useremail+" "+usermobile);
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -624,7 +624,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 dgthis.dismiss();
             }
         }, cl_car_gender.this, "wait");
-        requestgetserver20.execute("token", "getcontact", sessionid, useremail);
+        requestgetserver20.execute("token","getcontact",sessionid,useremail);
     }
     private void goToServer(String add2, String add3, String add4, String add5) {
         requestgetserver21 = new JSONServerGet(new AsyncResponse() {
