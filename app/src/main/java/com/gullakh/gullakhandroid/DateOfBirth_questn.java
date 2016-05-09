@@ -124,8 +124,6 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
 
 
-
-
         Button bdone = (Button) findViewById(R.id.done);
         bdone.setOnClickListener(this);
         LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
@@ -143,18 +141,18 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         }
 
 
-        Button bdone2 = (Button) findViewById(R.id.done);
+       /* Button bdone2 = (Button) findViewById(R.id.done);
         bdone2.setOnClickListener(this);
-        LinearLayout done2 = (LinearLayout) findViewById(R.id.ldone);
+        LinearLayout done2 = (LinearLayout) findViewById(R.id.ldone);*/
         Intent intent = getIntent();
         String data3 = intent.getStringExtra("review2");
         if (data3 != null) {
             if (data3.equals("review2")) {
                 empl();
 
-                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer2);
                 footer.setVisibility(View.GONE);
-                done2.setVisibility(View.VISIBLE);
+                done.setVisibility(View.VISIBLE);
 
                 // review.setVisibility(View.INVISIBLE);
 
@@ -164,11 +162,12 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         String data2 = intent3.getStringExtra("employer");
         if (data2 != null) {
             if (data2.equals("employer")) {
+
                 empl();
             }
         }
 
-        empl();
+
 
         //employer question
 
@@ -198,6 +197,14 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
                 Emp.requestFocus();
                 Emp.setOnClickListener(this);
+
+                if(((GlobalData) getApplication()).getemployer()!=null)
+                {
+
+                 String empdata=((GlobalData) getApplication()).getemployer();
+                 Emp.setText(empdata);
+
+                 }
 
                 getemplist();
 

@@ -261,7 +261,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                //if(!emi.getText().toString().matches("")) {
                     ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));
 
-                Intent intent = new Intent(EMI_questn.this, DateOfBirth_questn.class);
+                    Intent intent = new Intent(EMI_questn.this, DateOfBirth_questn.class);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                /* }
