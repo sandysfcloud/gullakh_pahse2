@@ -99,6 +99,7 @@ public class SearchAdapter extends BaseAdapter
             }
 
                 Log.d("JSON OBj Kavya", String.valueOf(obj));
+                assert obj != null;
                 ((GlobalData) cont.getApplicationContext()).setLoanType(obj.getString("loantype"));
                 ((GlobalData) cont.getApplicationContext()).setcarres(obj.getString("currently_living_in"));
                 ((GlobalData) cont.getApplicationContext()).setgender(obj.getString("gender"));
@@ -121,7 +122,7 @@ public class SearchAdapter extends BaseAdapter
 
                 ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
 
-                ((GlobalData) cont.getApplicationContext()).settenure(obj.getString("loan_tenure"));
+                ((GlobalData) cont.getApplicationContext()).setTenure(obj.getString("loan_tenure"));
 
 
 
@@ -195,14 +196,15 @@ public class SearchAdapter extends BaseAdapter
 
             tempValues = null;
             tempValues = (ListModel) data.get(position);
-
+            Log.d("checkloantype",globalstore.getLoan_type());
 
             //holder.name.setText(tempValues.getsearchtnam());
-            if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("car loan")){
+//            if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("car loan")){
+            if(data.get(position).getLoan_type().equalsIgnoreCase("car loan")){
                 holder.image.setImageResource(R.drawable.carloan);
-            }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("home loan")){
+            }else if(data.get(position).getLoan_type().equalsIgnoreCase("home loan")){
                 holder.image.setImageResource(R.drawable.homeloan);
-            }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("personal loan")){
+            }else if(data.get(position).getLoan_type().equalsIgnoreCase("personal loan")){
                 holder.image.setImageResource(R.drawable.personalloannew);
             }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Loan against property")){
                 holder.image.setImageResource(R.drawable.busineeloan);

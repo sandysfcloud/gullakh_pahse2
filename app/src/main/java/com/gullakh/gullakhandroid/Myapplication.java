@@ -149,5 +149,11 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()) {
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+        }
     }
 }

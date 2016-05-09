@@ -360,7 +360,7 @@ if(one_time_fee!=null) {
         setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
         setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
         setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
-        setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).gettenure()));
+        setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).getTenure()));
         setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
         setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
         setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
