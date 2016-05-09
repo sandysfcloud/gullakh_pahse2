@@ -211,7 +211,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.edit:
-                String empty=((GlobalData) getApplication()).getcartype();
+                String empty=((GlobalData) getApplication()).getLoanType();
                 if(empty.equals("Car Loan")) {
                     RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
                 }

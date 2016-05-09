@@ -189,7 +189,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             System.gc();
             Log.d("property city is", propertyLocated);
         Intent intent = null;
-        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
             goToDatabase("Loan against Property");
 
             if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("salaried")) {

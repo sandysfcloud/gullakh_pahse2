@@ -244,7 +244,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 }
                 break;
             case R.id.edit:
-                String empty=((GlobalData) getApplication()).getcartype();
+                String empty=((GlobalData) getApplication()).getLoanType();
                 if(empty.equals("Car Loan")) {
                     if (data.equals("data"))
                         RegisterPageActivity.showAlertreview(Car_Loan_PAT.this, 6);

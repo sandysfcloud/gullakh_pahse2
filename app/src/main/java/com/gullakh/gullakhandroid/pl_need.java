@@ -108,7 +108,7 @@ public class pl_need extends AppCompatActivity implements View.OnClickListener {
 
     private void goToIntent() {
         setDataToHashMap("you_need_loan_pl", spinner.getSelectedItem().toString());
-        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
             goToDatabase("Loan Against Property");
             Intent intent = new Intent(this, cl_car_residence_type.class);
             startActivity(intent);

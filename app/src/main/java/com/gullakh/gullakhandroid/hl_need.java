@@ -69,7 +69,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         categories.add("Construction of house on a plot");
         categories.add("Purchase of plot & construction there on");
         categories.add("Home Renovation");
-        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
             categories.add("Balance Transfer of existing home loan");
         }
         categories.add("Property is not yet identified");
@@ -143,7 +143,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             intent = new Intent(hl_need.this, hl_need8.class);
             startActivity(intent);
         }else if(spinner.getSelectedItem().toString().equals("Property is not yet identified")){
-            if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+            if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                 intent = new Intent(this, DateOfBirth_questn.class);
             } else {
                 intent = new Intent(this, cl_car_residence_type.class);

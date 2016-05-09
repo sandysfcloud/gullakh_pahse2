@@ -264,7 +264,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
                 break;
             case R.id.edit:
-                String empty=((GlobalData) getApplication()).getcartype();
+                String empty=((GlobalData) getApplication()).getLoanType();
                 if(empty.equals("Car Loan")) {
                     if (data.equals("data"))
                         RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this, 7);

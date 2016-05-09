@@ -90,9 +90,6 @@ public class SearchAdapter extends BaseAdapter
         listpos=position;
 
         if (convertView == null) {
-
-
-
             globalstore = (ListModel) data.get(listpos);
             try {
                 JSONObject obj = null;
@@ -102,6 +99,10 @@ public class SearchAdapter extends BaseAdapter
             }
 
                 Log.d("JSON OBj Kavya", String.valueOf(obj));
+                ((GlobalData) cont.getApplicationContext()).setLoanType(obj.getString("loantype"));
+                ((GlobalData) cont.getApplicationContext()).setcarres(obj.getString("currently_living_in"));
+                ((GlobalData) cont.getApplicationContext()).setgender(obj.getString("gender"));
+                ((GlobalData) cont.getApplicationContext()).setTotalsal(obj.getString("net_mon_salary"));
                 ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("cl_loanamount"));
                 ((GlobalData) cont.getApplicationContext()).setemptype(obj.getString("type_employment"));
                 if(!(obj.getString("type_employment").equals("Salaried"))) {
@@ -112,7 +113,10 @@ public class SearchAdapter extends BaseAdapter
                 }
                 ((GlobalData) cont.getApplicationContext()).setnetsalary(Double.parseDouble(obj.getString("net_mon_salary")));
                 ((GlobalData) cont.getApplicationContext()).setEmi(Double.parseDouble(obj.getString("total_emi")));
-                ((GlobalData) cont.getApplicationContext()).setcartype(obj.getString("car_loan_type"));
+
+                if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Car Loan")){
+                    ((GlobalData) cont.getApplicationContext()).setCartypeloan(obj.getString("car_loan_type"));
+                }
 
 
                 ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
@@ -194,13 +198,13 @@ public class SearchAdapter extends BaseAdapter
 
 
             //holder.name.setText(tempValues.getsearchtnam());
-            if(tempValues.getsearchtnam().equalsIgnoreCase("car loan")){
+            if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("car loan")){
                 holder.image.setImageResource(R.drawable.carloan);
-            }else if(tempValues.getsearchtnam().equalsIgnoreCase("home loan")){
+            }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("home loan")){
                 holder.image.setImageResource(R.drawable.homeloan);
-            }else if(tempValues.getsearchtnam().equalsIgnoreCase("personal loan")){
+            }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("personal loan")){
                 holder.image.setImageResource(R.drawable.personalloannew);
-            }else if(tempValues.getsearchtnam().equalsIgnoreCase("Loan against property")){
+            }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Loan against property")){
                 holder.image.setImageResource(R.drawable.busineeloan);
             }
 
@@ -260,6 +264,10 @@ public class SearchAdapter extends BaseAdapter
                         globalstore = (ListModel) data.get(pos);
                         JSONObject obj = new JSONObject(globalstore.getserchcartyp());
                         Log.d("JSON OBj Kavya", String.valueOf(obj));
+                        ((GlobalData) cont.getApplicationContext()).setLoanType(obj.getString("loantype"));
+                        ((GlobalData) cont.getApplicationContext()).setcarres(obj.getString("currently_living_in"));
+                        ((GlobalData) cont.getApplicationContext()).setgender(obj.getString("gender"));
+                        ((GlobalData) cont.getApplicationContext()).setTotalsal(obj.getString("net_mon_salary"));
                         ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("cl_loanamount"));
                         ((GlobalData) cont.getApplicationContext()).setemptype(obj.getString("type_employment"));
                         if(!(obj.getString("type_employment").equals("Salaried"))) {
@@ -270,12 +278,11 @@ public class SearchAdapter extends BaseAdapter
                         }
                         ((GlobalData) cont.getApplicationContext()).setnetsalary(Double.parseDouble(obj.getString("net_mon_salary")));
                         ((GlobalData) cont.getApplicationContext()).setEmi(Double.parseDouble(obj.getString("total_emi")));
-                        ((GlobalData) cont.getApplicationContext()).setcartype(obj.getString("car_loan_type"));
-
-
+                        if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Car Loan")){
+                            ((GlobalData) cont.getApplicationContext()).setCartypeloan(obj.getString("car_loan_type"));
+                        }
                         ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
-
-                        ((GlobalData) cont.getApplicationContext()).settenure(obj.getString("loan_tenure"));
+                        ((GlobalData) cont.getApplicationContext()).setTenure(obj.getString("loan_tenure"));
 
 
 

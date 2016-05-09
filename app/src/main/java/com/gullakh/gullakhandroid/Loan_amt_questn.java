@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -272,7 +270,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.edit:
-                String emptyp=((GlobalData) getApplication()).getcartype();
+                String emptyp=((GlobalData) getApplication()).getLoanType();
                 if(emptyp.equals("Car Loan")) {
                     RegisterPageActivity.showAlertreview(Loan_amt_questn.this, 4);
                 }

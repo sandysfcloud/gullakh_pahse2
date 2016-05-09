@@ -156,26 +156,24 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 dbobject.insertdata(values, "userlogin");
                 MainActivity.signinstate = true;
                 Intent intent;
-                if (((GlobalData) getApplication()).getcartype() != null) {
                     if (ListView_Click.buttonApply) {
                         ListView_Click.buttonApply = false;
-
-                        if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
+                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
                             intent = new Intent(signin.this, cl_car_make.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
-                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                             intent = new Intent(signin.this, cl_car_residence_type.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
-                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                             intent = new Intent(signin.this, pl_need.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
-                        } else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan Against Property")) {
+                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
                             intent = new Intent(signin.this, cl_car_residence_type.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
@@ -193,13 +191,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
                 }
-                    else {
-                        intent = new Intent(signin.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-            }else {
+            else {
                     RegisterPageActivity.showErroralert(signin.this, str_result.get("error_message").toString(), "error");
                 }
         } catch (JSONException e) {

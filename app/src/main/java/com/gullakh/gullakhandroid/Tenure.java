@@ -214,7 +214,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
 
 
-                String empty=((GlobalData) getApplication()).getcartype();
+                String empty=((GlobalData) getApplication()).getLoanType();
                 if(empty.equals("Car Loan")) {
                     dg=RegisterPageActivity.showAlertreview(Tenure.this, 5);
                 }
@@ -235,7 +235,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                 Log.d("tenure global",((GlobalData) getApplication()).getTenure());
 
                 String emptype = ((GlobalData) getApplication()).getemptype();
-                String loantype =((GlobalData) getApplication()).getcartype();
+                String loantype =((GlobalData) getApplication()).getLoanType();
                 Intent intent = null;
                 if (loantype.equalsIgnoreCase("Car Loan")||loantype.equalsIgnoreCase("Personal Loan")) {
                     if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {

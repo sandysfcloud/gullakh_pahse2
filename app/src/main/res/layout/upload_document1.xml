@@ -80,7 +80,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Let Gullakh collect documents"
+        android:text="Let Gullakh/Bank collect documents"
         android:id="@+id/textViewupload3"
         android:layout_gravity="center_horizontal"
         android:gravity="center"

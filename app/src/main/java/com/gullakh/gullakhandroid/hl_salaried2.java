@@ -13,7 +13,6 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -140,7 +139,7 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                 setDataToHashMap("net_mon_salary", sal);
                                 setDataToHashMap("annual_bonus", sal1);
                                 setDataToHashMap("avg_monthly_incentives", sal2);
-                                if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+                                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                     goToDatabase("Home Loan");
                                 } else {
                                     goToDatabase("Loan Against Property");

@@ -46,7 +46,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         TextView  title = (TextView) v.findViewById(R.id.title);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
+        if(((GlobalData) getApplication()).getLoanType().equals("Personal Loan"))
         {
             review.setVisibility(View.VISIBLE);
             review.setOnClickListener(this);
@@ -251,12 +251,13 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     public void setdata()
     {
         setDataToHashMap("sal_pay_option", dataSalDeposite);
+        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
         ((GlobalData) getApplication()).setSalryPayMode(dataSalDeposite);
 
 
         if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
             goToDatabase("Home Loan");
-        }else if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+        }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
             goToDatabase("Personal Loan");
 
         }else{

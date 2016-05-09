@@ -47,7 +47,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
@@ -210,7 +209,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.d("loan amt is", loan);
 
                  globaltenure=((GlobalData) getApplication()).getTenure();
-                 globalloan_type=((GlobalData) getApplication()).getcartype();
+                 globalloan_type=((GlobalData) getApplication()).getLoanType();
                  globalsal=((GlobalData) getApplication()).getTotalsal();
 
             }
@@ -318,68 +317,53 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
                                 JsonObject jsonObject1 = parser.parse(String.valueOf(jsonObject.get("result"))).getAsJsonObject();
-                                JsonArray jsonArr = jsonObject1.getAsJsonArray("loanrequest");
-                                if (jsonArr.size() == 0) {
-                                    AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                                    LayoutInflater factory = LayoutInflater.from(getApplicationContext());
-                                    final View view = factory.inflate(R.layout.applnotfound, null);
-                                    alertadd.setView(view);
-                                    alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
-                                            startActivity(intent);
-                                            overridePendingTransition(R.transition.left, R.transition.right);
-                                        }
-                                    });
-                                    alertadd.show();
-
-                                } else {
-                                    for (int i = 0; i < jsonArr.size(); i++) {
-                                        if (jsonArr.get(i).toString().equalsIgnoreCase("null")) {
-                                            AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                                            LayoutInflater factory = LayoutInflater.from(getApplicationContext());
-                                            final View view = factory.inflate(R.layout.applnotfound, null);
-                                            alertadd.setView(view);
-                                            alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
-                                                    startActivity(intent);
-                                                    overridePendingTransition(R.transition.left, R.transition.right);
-                                                }
-                                            });
-                                            alertadd.show();
-
-                                        } else {
-                                            JsonObject jsonObject2 = jsonArr.get(i).getAsJsonObject();
-                                            LoanReqForMyapp loanDeatils = gson.fromJson(jsonObject2, LoanReqForMyapp.class);// LoanReqForMyapp[] loandetailsobj = gson.fromJson(jsonObject2, LoanReqForMyapp[].class);
-                                            Log.d("here is data", loanDeatils.getLoan_amount());
+                                LoanReqForMyapp[] loanDeatils = gson.fromJson(jsonObject1.get("loanrequest"), LoanReqForMyapp[].class);
+                                //JsonArray jsonArr = jsonObject1.getAsJsonArray("loanrequest");
+                                if (loanDeatils.length> 0) {
+                                    for (int i = 0; i < loanDeatils.length; i++) {
+                                        //JsonObject jsonObject2 = jsonArr.get(i).getAsJsonObject();
+                                        //LoanReqForMyapp loanDeatils = gson.fromJson(jsonObject2, LoanReqForMyapp.class);// LoanReqForMyapp[] loandetailsobj = gson.fromJson(jsonObject2, LoanReqForMyapp[].class);
+                                        if (loanDeatils[i] != null) {
+                                            Log.d("here is data", loanDeatils[i].getLoan_amount());
                                             ListModel sched = new ListModel();
-                                            sched.setapplno(loanDeatils.case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                                            sched.setappldate(loanDeatils.getCreatedtime());
-                                            sched.setstatus(loanDeatils.getStage());
-                                            sched.setLoancaseid(loanDeatils.getLoanrequestcaseid());
+                                            sched.setapplno(loanDeatils[i].case_loan_number);//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                                            sched.setappldate(loanDeatils[i].getCreatedtime());
+                                            sched.setstatus(loanDeatils[i].getStage());
+                                            sched.setLoancaseid(loanDeatils[i].getLoanrequestcaseid());
                                             sched.setContactid(String.valueOf(jsonObject1.get("contactid")));
-                                            sched.setD0(loanDeatils.getD0());
-                                            sched.setD1(loanDeatils.getD1());
-                                            sched.setD2(loanDeatils.getD2());
-                                            sched.setD3(loanDeatils.getD3());
-                                            sched.setD4(loanDeatils.getD4());
-                                            sched.setD5(loanDeatils.getD5());
-                                            sched.setD6(loanDeatils.getD6());
-                                            sched.setCompletedpercentage(loanDeatils.getCompletedpercentage());
-                                            sched.setLoan_amount(loanDeatils.getLoan_amount());
-                                            sched.setBank_name(loanDeatils.getPrimary_lender());
-                                            sched.setLoan_type(loanDeatils.getLoantype());
+                                            sched.setD0(loanDeatils[i].getD0());
+                                            sched.setD1(loanDeatils[i].getD1());
+                                            sched.setD2(loanDeatils[i].getD2());
+                                            sched.setD3(loanDeatils[i].getD3());
+                                            sched.setD4(loanDeatils[i].getD4());
+                                            sched.setD5(loanDeatils[i].getD5());
+                                            sched.setD6(loanDeatils[i].getD6());
+                                            sched.setCompletedpercentage(loanDeatils[i].getCompletedpercentage());
+                                            sched.setLoan_amount(loanDeatils[i].getLoan_amount());
+                                            sched.setBank_name(loanDeatils[i].getPrimary_lender());
+                                            sched.setLoan_type(loanDeatils[i].getLoantype());
                                             searchlistviewArry.add(sched);
                                             createListView();
                                             setapplicatnadapter(searchlistviewArry);
                                         }
                                     }
+                                }else {
+                                        AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                                        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+                                        final View view = factory.inflate(R.layout.applnotfound, null);
+                                        alertadd.setView(view);
+                                        alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                                overridePendingTransition(R.transition.left, R.transition.right);
+                                            }
+                                        });
+                                        alertadd.show();
+                                    }
                                     dgthis.dismiss();
                                 }
-                            }
                         }, GoogleCardsMediaActivity.this, "wait");
           DataHandler dbobj = new DataHandler(GoogleCardsMediaActivity.this);
           Cursor cre = dbobj.displayData("select * from userlogin");
@@ -433,7 +417,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         super.onSaveInstanceState(icicle);
         icicle.putString("loan_amt", ((GlobalData) getApplication()).getloanamt());
         icicle.putString("tenure", ((GlobalData) getApplication()).getTenure());
-        icicle.putString("loan_type", ((GlobalData) getApplication()).getcartype());
+        icicle.putString("loan_type", ((GlobalData) getApplication()).getLoanType());
 
         icicle.putString("net_sal", ((GlobalData) getApplication()).getTotalsal());
 
@@ -455,15 +439,12 @@ public void setsearchdb()
         if (cr.moveToFirst()) {
             Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2)+" "+cr.getString(3)+" "+cr.getString(4));
             while (cr.isAfterLast() == false) {
-                ListModel sched = new ListModel();
-                sched = new ListModel();
-                sched.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                sched.setsearchdate(cr.getString(4));
-                sched.setserchcartyp(cr.getString(3));
+                ListModel sched2 = new ListModel();
+                sched2.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                sched2.setsearchdate(cr.getString(4));
+                sched2.setserchcartyp(cr.getString(3));
                 cr.moveToNext();
-                searchlistviewArry.add(sched);
-
-
+                searchlistviewArry.add(sched2);
             }
         }
         else
@@ -753,10 +734,10 @@ public void setsearchdb()
                 for (int i = 0; i < LT_cobj.length; i++) {
                     arrayLoantype.put(LT_cobj[i].gettypename(),LT_cobj[i].gettypeid());
                 }
-                if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")){
+                if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")){
                     loantype = arrayLoantype.get(((GlobalData) getApplication()).getCartypeloan());
                 }else {
-                    loantype = arrayLoantype.get(((GlobalData) getApplication()).getcartype());
+                    loantype = arrayLoantype.get(((GlobalData) getApplication()).getLoanType());
                 }
                  // String emptype=((GlobalData) getApplication()).getemptype();
                 //loantype="40x28";
@@ -1141,8 +1122,8 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
     public void calTenure(int  sal,int nonsal)
     {
-        if (cl_car_global_data.dataWithAns.get("type_employment").equals("Salaried")) {
-
+        //if (cl_car_global_data.dataWithAns.get("type_employment").equals("Salaried")) {
+        if (((GlobalData) getApplication()).getemptype().equals("Salaried")) {
             if ((60 - age) > sal) {
                 Max_tenure = sal * 12;
                 Log.d("Max_tenure- if", String.valueOf(Max_tenure));

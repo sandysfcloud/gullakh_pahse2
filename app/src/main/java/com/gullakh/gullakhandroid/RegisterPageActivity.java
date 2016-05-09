@@ -283,20 +283,20 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					MainActivity.signinstate = true;
 					if (ListView_Click.buttonApply) {
 						ListView_Click.buttonApply = false;
-						if (((GlobalData) getApplication()).getcartype() != null) {
-							if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Car Loan")) {
+						if (((GlobalData) getApplication()).getLoanType() != null) {
+							if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
 								Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
 								startActivity(intent);
 								overridePendingTransition(R.transition.left, R.transition.right);
-							} else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
+							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
 								Intent intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
 								startActivity(intent);
 								overridePendingTransition(R.transition.left, R.transition.right);
-							} else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Personal Loan")) {
+							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
 								Intent intent = new Intent(RegisterPageActivity.this, pl_need.class);
 								startActivity(intent);
 								overridePendingTransition(R.transition.left, R.transition.right);
-							} else if (((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Loan against Property")) {
+							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
 								Intent intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
 								startActivity(intent);
 								overridePendingTransition(R.transition.left, R.transition.right);
@@ -458,7 +458,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		carloan_que_salary_new.add("Total EMI's you pay: ");
 
-		String loantyp=((GlobalData) CurrentAct.getApplication()).getcartype();
+		String loantyp=((GlobalData) CurrentAct.getApplication()).getLoanType();
 		if(loantyp.equals("Personal Loan"))
 		{
 			carloan_que_salary_new.add("Date Of Birth: ");
@@ -560,7 +560,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
-					if(((GlobalData) CurrentAct.getApplication()).getcartype().equals("Car Loan"))
+					if(((GlobalData) CurrentAct.getApplication()).getLoanType().equals("Car Loan"))
 					{
 
 
@@ -852,7 +852,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	/*	if(((GlobalData) act.getApplication()).getcarres()!=null)
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
-		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcartype());
+		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getLoanType());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
 		if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
@@ -1120,7 +1120,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 			lincar.setVisibility(View.VISIBLE);
 			temp.setText(((GlobalData) act.getApplication()).getemptype());
-			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+			tcar.setText(((GlobalData) act.getApplication()).getLoanType());
 		}
 
 		if(questionno==4)
@@ -1128,7 +1128,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			lincar.setVisibility(View.VISIBLE);
 			linloan.setVisibility(View.VISIBLE);
 			temp.setText(((GlobalData) act.getApplication()).getemptype());
-			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+			tcar.setText(((GlobalData) act.getApplication()).getLoanType());
 			tloan.setText(((GlobalData) act.getApplication()).getloanamt());
 		}
 		if(questionno==5)
@@ -1137,7 +1137,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			linloan.setVisibility(View.VISIBLE);
 			linsal.setVisibility(View.VISIBLE);
 			temp.setText(((GlobalData) act.getApplication()).getemptype());
-			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+			tcar.setText(((GlobalData) act.getApplication()).getLoanType());
 			tloan.setText(((GlobalData) act.getApplication()).getloanamt());
 			tsal.setText(((GlobalData) act.getApplication()).getnetsalary().toString());
 		}
@@ -1148,7 +1148,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			linsal.setVisibility(View.VISIBLE);
 			linemi.setVisibility(View.VISIBLE);
 			temp.setText(((GlobalData) act.getApplication()).getemptype());
-			tcar.setText(((GlobalData) act.getApplication()).getcartype());
+			tcar.setText(((GlobalData) act.getApplication()).getLoanType());
 			tloan.setText(((GlobalData) act.getApplication()).getloanamt());
 			tsal.setText(((GlobalData) act.getApplication()).getnetsalary().toString());
 			temi.setText(((GlobalData) act.getApplication()).getEmi().toString());

@@ -96,13 +96,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                       if(args[1].equals("RuleDetails")){
 
 
-                          Log.d("car_loan_type",((GlobalData) act.getApplication()).getcartype());
+                          Log.d("car_loan_type",((GlobalData) act.getApplication()).getLoanType());
                           Log.d("currently_living_in", ((GlobalData) act.getApplication()).getcarres());
                           Log.d("type_employment",((GlobalData) act.getApplication()).getemptype());
                           Log.d("cl_loanamount",((GlobalData) act.getApplication()).getloanamt());
                           Log.d("gender", ((GlobalData) act.getApplication()).getgender());
                           Log.d("net_mon_salary", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
-                          Log.d("cl_loanamount",((GlobalData) act.getApplication()).getloanamt());
 
 
                           String sessionval=null;
@@ -124,7 +123,8 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                           nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
 
                           nameValuePairs.add(new BasicNameValuePair("loanamount",((GlobalData) act.getApplication()).getloanamt()));
-                          nameValuePairs.add(new BasicNameValuePair("loantype", "Car Loan"));
+//                          nameValuePairs.add(new BasicNameValuePair("loantype", "Car Loan"));
+                          nameValuePairs.add(new BasicNameValuePair("loantype", ((GlobalData) act.getApplication()).getLoanType()));
                           nameValuePairs.add(new BasicNameValuePair("cartype",((GlobalData) act.getApplication()).getCartypeloan()));
                           nameValuePairs.add(new BasicNameValuePair("cityname",  ((GlobalData) act.getApplication()).getcarres()));
 
@@ -389,13 +389,13 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("contactaddress")){
-                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"mailingcity\":\"" + args[5] + "\",\"mailingstate\":\"" + args[6] + "\",\"mailingzip\":\"" + args[7]+"\"}]");
+                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\"}]");
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "updatecontactdetail"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("contact",args[3]));
-                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"mailingcity\":\"" + args[5] + "\",\"mailingstate\":\"" + args[6] + "\",\"mailingzip\":\"" + args[7]+"\"}]"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] +"\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\"}]"));
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
@@ -584,8 +584,8 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                      int size=enums.length;
                                      liste2 = new ArrayList<String>();
                                      for(int i=0;i<size;i++) {
-                                         Log.e("employerdata "+i, enums[i].getcartype());
-                                         liste2.add(enums[i].getcartype());
+                                         Log.e("employerdata "+i, enums[i].getLoanType());
+                                         liste2.add(enums[i].getLoanType());
                                      }
 
                                  }

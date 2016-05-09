@@ -127,5 +127,23 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textColor="#ffffff" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="#ffffff">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don&apos;t Show this message again"
+                android:id="@+id/checkBox2"
+                android:textColor="#000000"
+                android:background="#ffffff"
+                android:paddingLeft="20dp" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

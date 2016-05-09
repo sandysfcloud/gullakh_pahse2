@@ -85,7 +85,7 @@ public class GlobalData extends MultiDexApplication {
     public Double getnetsalary() {
         return datetimevar;
     }
-    public String getcartype() {
+    public String getLoanType() {
         return cemailVariable;
     }
     public ArrayList<Double> getfoir() {
@@ -150,7 +150,7 @@ public class GlobalData extends MultiDexApplication {
         this.cmobileVariable = cmobileVariable;
     }
 
-    public void setcartype(String cemailVariable) {
+    public void setLoanType(String cemailVariable) {
         this.cemailVariable = cemailVariable;
     }
 
