@@ -51,7 +51,13 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         TextView  title = (TextView) v.findViewById(R.id.title);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+        if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
+        {
+            review.setVisibility(View.VISIBLE);
+            review.setOnClickListener(this);
+        }
+        else
+            review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
         title.setText("Salary deposited to ");
         actionBar.setCustomView(v);
@@ -180,7 +186,17 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         switch (v.getId()) {
+            case R.id.edit:
 
+
+
+                String emptyp = ((GlobalData) getApplication()).getemptype();
+                if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                    RegisterPageActivity.showAlertreview(this, 11);
+                else
+                    RegisterPageActivity.showAlertreview(cl_salary_mode2.this, 10);
+
+                break;
             case R.id.next:
                 if(dataBankType.equals("")&&other.getText().toString().equals(""))
                 {

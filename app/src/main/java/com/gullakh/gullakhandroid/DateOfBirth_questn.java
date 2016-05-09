@@ -133,6 +133,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         String data = intent2.getStringExtra("review");
         if (data != null) {
             if (data.equals("review")) {
+                empl();
                 LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
                 footer.setVisibility(View.GONE);
                 done.setVisibility(View.VISIBLE);
@@ -142,9 +143,37 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             }
         }
 
+
+        Button bdone2 = (Button) findViewById(R.id.done);
+        bdone2.setOnClickListener(this);
+        LinearLayout done2 = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent = getIntent();
+        String data3 = intent.getStringExtra("review2");
+        if (data3 != null) {
+            if (data3.equals("review2")) {
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+
+                // review.setVisibility(View.INVISIBLE);
+
+            }
+        }
+
+        empl();
+
         //employer question
 
 
+
+
+
+
+    }
+
+
+    public void empl()
+    {
         Intent intent3 = getIntent();
         String data2 = intent3.getStringExtra("employer");
         if (data2 != null) {
@@ -171,9 +200,6 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
             }
         }
-
-
-
     }
 
     public void getemplist()
@@ -307,6 +333,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
 
+
                 String loanty=((GlobalData) getApplication()).getcartype();
                 if(loanty.equals("Car Loan")) {
                     if (empflag == 1) {
@@ -326,17 +353,23 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 else
                 {
                     if (empflag == 1) {
+                        Log.d("employee typ questn", String.valueOf(empflag));
                         String emptyp = ((GlobalData) getApplication()).getemptype();
                         if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                             RegisterPageActivity.showAlertreview(this, 9);
-                        else
+                        else {
+                            Log.d("employee typ q salar", String.valueOf(empflag));
                             RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 8);
+                        }
                     } else {
+                        Log.d("dob q", String.valueOf(empflag));
                         String emptyp = ((GlobalData) getApplication()).getemptype();
                         if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                             RegisterPageActivity.showAlertreview(this, 8);
-                        else
+                        else {
+                            Log.d("dob q sal", String.valueOf(empflag));
                             RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 7);
+                        }
                     }
                 }
                 break;

@@ -35,11 +35,23 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
+
+
+
+
+
+
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView  title = (TextView) v.findViewById(R.id.title);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
+        if(((GlobalData) getApplication()).getcartype().equals("Personal Loan"))
+        {
+            review.setVisibility(View.VISIBLE);
+            review.setOnClickListener(this);
+        }
+        else
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
         title.setText("Salary payment mode");
@@ -48,6 +60,8 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
+
+
 
         contentValues=new ContentValues();
         pay1 = (ImageView) findViewById(R.id.imageViewpay1);
@@ -117,6 +131,21 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+
+
+            case R.id.edit:
+
+
+
+            String emptyp = ((GlobalData) getApplication()).getemptype();
+            if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                RegisterPageActivity.showAlertreview(this, 10);
+            else
+                RegisterPageActivity.showAlertreview(cl_salary_mode1.this, 9);
+
+                break;
+
 
             case R.id.next:
                 if(dataSalDeposite.equals(""))
