@@ -949,9 +949,32 @@ public void setsearchdb()
 
                 Log.e("flow test", String.valueOf(CustomListViewValuesArr.size()));
 
-                if(param.equals("oncreate"))
-                    setadapter(CustomListViewValuesArr);
-                Log.e("flow test", String.valueOf(1));
+
+                if (CustomListViewValuesArr.size() == 0 || Max_tenure==0) {
+
+                    Log.d("CustomListViewValuesArr.size()", String.valueOf(CustomListViewValuesArr.size()));
+                    Log.d("Max_tenure val", String.valueOf(Max_tenure));
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                                    intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intenth);
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+                else {
+                    // Log.d("disbank", String.valueOf(disbank));
+
+                    if (param.equals("oncreate"))
+                        setadapter(CustomListViewValuesArr);
+                    Log.e("flow test", String.valueOf(1));
+                }
 
             }
         }, GoogleCardsMediaActivity.this, "3");
@@ -1069,25 +1092,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
                     //Log.d("activity docum ", cobj_RM[i].getaccount_lender());
                 }
-                if (CustomListViewValuesArr.size() == 0 || Max_tenure==0) {
 
-                    Log.d("CustomListViewValuesArr.size()", String.valueOf(CustomListViewValuesArr.size()));
-                    Log.d("Max_tenure val", String.valueOf(Max_tenure));
-                    AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                                    intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intenth);
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-
-                }
-                // Log.d("disbank", String.valueOf(disbank));
 
             }
 
@@ -1143,6 +1148,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         }
         else {
             Max_tenure = Integer.parseInt(String.valueOf(((GlobalData) getApplication()).getTenure()));
+            Max_tenure=Max_tenure*12;
             Log.d("tenure is user tenure", String.valueOf(Max_tenure));
         }
 

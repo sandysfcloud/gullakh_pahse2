@@ -80,7 +80,7 @@
             android:inputType="phone"
             android:textColorHint="#000"
             android:textColor="#000"
-            android:text="10000"
+            android:text="1,000"
             android:textSize="20sp"
             app:typeface="robotoLight"/>
 
