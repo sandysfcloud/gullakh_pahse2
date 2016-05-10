@@ -186,9 +186,17 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                         }
                     } else {
                         if (flag == 1) {
-
-                            Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                            intent.putExtra("employer", "employer");
+                            Intent intent=null;
+                            if (dataSalDeposite.equals("Bank")) {
+                                intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                                intent.putExtra("employer", "employer");
+                            }
+                            else
+                            {
+                                intent = new Intent(cl_salary_mode1.this, GoogleCardsMediaActivity.class);
+                                intent.putExtra("data", "searchgo");
+                                intent.putExtra("employer", "employer");
+                            }
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
 
@@ -217,14 +225,22 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                     }
                 } else {
                     if (flag == 1) {
-
-                        Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                        intent2.putExtra("employer", "employer");
-                        startActivity(intent2);
+                        Intent intent=null;
+                        if (dataSalDeposite.equals("Bank")) {
+                            intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                            intent.putExtra("employer", "employer");
+                        }
+                        else
+                        {
+                            intent = new Intent(cl_salary_mode1.this, GoogleCardsMediaActivity.class);
+                            intent.putExtra("data", "searchgo");
+                            intent.putExtra("employer", "employer");
+                        }
+                        startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
 
-                    } else {
-                        Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                    }  else {
+                        Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
@@ -241,14 +257,22 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                         finish();
                     }
                 } else {
-                if (flag == 1) {
+                    if (flag == 1) {
+                        Intent intent=null;
+                        if (dataSalDeposite.equals("Bank")) {
+                            intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                            intent.putExtra("employer", "employer");
+                        }
+                        else
+                        {
+                            intent = new Intent(cl_salary_mode1.this, GoogleCardsMediaActivity.class);
+                            intent.putExtra("data", "searchgo");
+                            intent.putExtra("employer", "employer");
+                        }
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
 
-                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                    intent2.putExtra("employer", "employer");
-                    startActivity(intent2);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-
-                } else {
+                    }  else {
 
                     Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                     startActivity(intent2);
@@ -266,13 +290,21 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                     }
                 } else {
                     if (flag == 1) {
-
-                        Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                        intent2.putExtra("employer", "employer");
-                        startActivity(intent2);
+                        Intent intent=null;
+                        if (dataSalDeposite.equals("Bank")) {
+                            intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                            intent.putExtra("employer", "employer");
+                        }
+                        else
+                        {
+                            intent = new Intent(cl_salary_mode1.this, GoogleCardsMediaActivity.class);
+                            intent.putExtra("data", "searchgo");
+                            intent.putExtra("employer", "employer");
+                        }
+                        startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
 
-                    } else {
+                    }  else {
 
                         Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                         startActivity(intent2);

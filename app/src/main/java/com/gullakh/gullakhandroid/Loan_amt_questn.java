@@ -100,7 +100,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
             String loanamt = ((GlobalData) getApplication()).getloanamt();
             int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
-            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
+          //  mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 10000)));
 
 
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
@@ -143,8 +144,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                     loan = loan.replaceAll("\\s+","");
                     Log.d("loan KK2", loan);
                     try {
-                        mSeekArc.setProgress(Integer.valueOf(loan) / 50000);
-
+                       // mSeekArc.setProgress(Integer.valueOf(loan) / 50000);
+                        mSeekArc.setProgress(Integer.valueOf(loan) / 10000);
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
 
@@ -170,7 +171,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                                                 public void onProgressChanged(SeekArc seekArc, int progress,
                                                                               boolean fromUser) {
 
-                                                    progress = (progress + 1) * 50000;
+                                                   // progress = (progress + 1) * 50000;
+                                                    progress = (progress + 1) * 10000;
                                                     Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                                                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 

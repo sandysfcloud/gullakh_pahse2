@@ -91,7 +91,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
 
            // mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
-           mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 10000)));
+           mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 1000)));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             String strtemp = String.valueOf(format.format(new BigDecimal(netsalary)));
             strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -140,7 +140,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                     Log.d("loan KK2", sald);
                     try {
                        // mSeekArc.setProgress(Integer.valueOf(sald) / 50000);
-                        mSeekArc.setProgress(Integer.valueOf(sald) / 10000);
+                        mSeekArc.setProgress(Integer.valueOf(sald) / 1000);
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
 
@@ -162,7 +162,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                                           boolean fromUser) {
               //  progress = (progress + 4) * 5000;
                 //progress = (progress + 1) * 50000;
-                progress = (progress + 1) * 10000;
+                progress = (progress + 1) * 1000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
                 strtemp = strtemp.substring(0, strtemp.length() - 3);

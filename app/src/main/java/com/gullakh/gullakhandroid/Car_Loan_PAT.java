@@ -97,7 +97,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(patv))));
 
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
-                mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(patv.intValue()) / 50000)));
+                mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(patv.intValue()) / 10000)));
                 mSeekArcProgress.setText(strtemp);
             }
             title.setText("Net Profit for Last Financial Year");
@@ -141,7 +141,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                     data = data.replaceAll("\\s+","");
                     Log.d("loan KK2", data);
                     try {
-                        mSeekArc.setProgress(Integer.valueOf(data) / 50000);
+                        mSeekArc.setProgress(Integer.valueOf(data) / 10000);
 
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
@@ -168,7 +168,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                                                 public void onProgressChanged(SeekArc seekArc, int progress,
                                                                               boolean fromUser) {
 
-                                                    progress = (progress + 1) * 50000;
+                                                    progress = (progress + 1) * 10000;
                                                     Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                                                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 

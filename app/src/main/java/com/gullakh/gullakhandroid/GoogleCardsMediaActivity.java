@@ -161,6 +161,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             sessionid = crsess.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
+        age=((GlobalData) getApplication()).getage();
         if (data.equals("searchgo")) {
             Log.e("flow test carloan", String.valueOf(0));
             loan_amtcalcutn("oncreate");
@@ -917,21 +918,26 @@ public void setsearchdb()
                 //*cal tenure here
                 String typ_loan=globalloan_type;
 
+                Log.d("tenure loantyp", typ_loan);
+
                 if(typ_loan.equals("Car Loan"))
                 {
-                    calTenure(7,5);
+
+                    //calTenure(7,5);
+                    calTenure(7);
                 }
                 else if(typ_loan.equals("Home Loan"))
                 {
-                    calTenure(30, 20);
+                   // calTenure(30, 20);
                 }
                 else if(typ_loan.equals("Loan Against Property"))
                 {
-                    calTenure(30, 15);
+                   // calTenure(30, 15);
                 }
                 else if(typ_loan.equals("Personal Loan"))
                 {
-                    calTenure(5, 15);
+                    calTenure(5);
+                    //calTenure(5, 15);
                 }
 
 
@@ -1063,8 +1069,10 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
                     //Log.d("activity docum ", cobj_RM[i].getaccount_lender());
                 }
-                if (CustomListViewValuesArr.size() == 0) {
+                if (CustomListViewValuesArr.size() == 0 || Max_tenure==0) {
 
+                    Log.d("CustomListViewValuesArr.size()", String.valueOf(CustomListViewValuesArr.size()));
+                    Log.d("Max_tenure val", String.valueOf(Max_tenure));
                     AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
                     builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
                             .setCancelable(false)
@@ -1120,7 +1128,44 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
     }
 
 
-    public void calTenure(int  sal,int nonsal)
+    public void calTenure(int  val)
+    {
+
+        Log.d("age value is", String.valueOf(age));
+        if(age > 53) {
+
+            //use formula
+            if (60 - age>val)
+                Max_tenure=val*12;
+            else
+                Max_tenure=(60-age)*12;
+            Log.d("age > 53 tenure", String.valueOf(Max_tenure));
+        }
+        else {
+            Max_tenure = Integer.parseInt(String.valueOf(((GlobalData) getApplication()).getTenure()));
+            Log.d("tenure is user tenure", String.valueOf(Max_tenure));
+        }
+
+
+
+
+
+
+            tenr_amt.setText(Max_tenure+" Year(s)");
+            Log.d("tenure is global", String.valueOf(Max_tenure));
+
+
+        //Max_tenure = Max_tenure / 12;
+        Log.d("Max_tenure value is", String.valueOf(Max_tenure));
+        //((GlobalData) getApplication()).settenure(String.valueOf(Max_tenure / 12));
+    }
+
+
+
+
+
+
+    /*public void calTenure(int  sal,int nonsal)
     {
         //if (cl_car_global_data.dataWithAns.get("type_employment").equals("Salaried")) {
         if (((GlobalData) getApplication()).getemptype().equals("Salaried")) {
@@ -1142,6 +1187,19 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
             }
         }
 
+       if(age > 53) {
+           if (60 - age>7)
+               Max_tenure=7*12;
+           else
+               Max_tenure=(60-age)*12;
+
+       }
+        else
+        Max_tenure= Integer.parseInt(String.valueOf(((GlobalData) getApplication()).getTenure()));
+
+
+
+
 
         //tenr_amt.setText(String.valueOf(Max_tenure / 12)+" Year(s)");
         if(globaltenure!=null)
@@ -1158,7 +1216,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         //Max_tenure = Max_tenure / 12;
         Log.d("Max_tenure value is", String.valueOf(Max_tenure));
         //((GlobalData) getApplication()).settenure(String.valueOf(Max_tenure / 12));
-    }
+    }*/
 
 
 

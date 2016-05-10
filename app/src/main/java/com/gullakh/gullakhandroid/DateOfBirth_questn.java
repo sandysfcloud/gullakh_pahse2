@@ -151,7 +151,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 empl();
 
                 LinearLayout footer = (LinearLayout) findViewById(R.id.footer2);
+
                 footer.setVisibility(View.GONE);
+
                 done.setVisibility(View.VISIBLE);
 
                 // review.setVisibility(View.INVISIBLE);
@@ -162,7 +164,8 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         String data2 = intent3.getStringExtra("employer");
         if (data2 != null) {
             if (data2.equals("employer")) {
-
+                LinearLayout footerm = (LinearLayout) findViewById(R.id.footer);
+                footerm.setVisibility(View.GONE);
                 empl();
             }
         }

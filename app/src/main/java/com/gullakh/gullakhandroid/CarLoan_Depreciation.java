@@ -124,7 +124,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(depv))));
 
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
-                mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(depv.intValue()) / 50000)));
+                mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(depv.intValue()) / 1000)));
                 mSeekArcProgress.setText(strtemp);
 
             }
@@ -169,7 +169,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                     data = data.replaceAll("\\s+","");
                     Log.d("loan KK2", data);
                     try {
-                        mSeekArc.setProgress(Integer.valueOf(data) / 50000);
+                        mSeekArc.setProgress(Integer.valueOf(data) / 1000);
 
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
@@ -196,7 +196,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                                                 public void onProgressChanged(SeekArc seekArc, int progress,
                                                                               boolean fromUser) {
                                                     if (progress != 0)
-                                                    progress = (progress + 1) * 50000;
+                                                    progress = (progress + 1) * 1000;
                                                     Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                                                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 

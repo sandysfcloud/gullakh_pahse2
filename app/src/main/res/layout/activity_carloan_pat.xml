@@ -34,7 +34,7 @@
                     android:padding="30dp"
                     seekarc:arcColor="@color/main_color_500"
                     seekarc:clockwise="true"
-                    seekarc:max="150"
+                    seekarc:max="1000"
 
                     seekarc:progressColor="@color/main_color_500"
                     seekarc:rotation="180"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="50,000"
+                    android:text="10,000"
                     android:textColor="@color/main_color_500"
                     android:textSize="30sp"
                     app:typeface="robotoLight"/>

@@ -614,7 +614,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								CurrentAct.startActivity(intclick);
 							}
 							if (v.getTag().toString().equals("8")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
@@ -630,7 +630,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								CurrentAct.startActivity(intclick);
 							}
 							if (v.getTag().toString().equals("9")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
@@ -684,19 +684,19 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								CurrentAct.startActivity(intclick);
 							}
 							if (v.getTag().toString().equals("7")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
 							}
 							if (v.getTag().toString().equals("8")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
 								intclick.putExtra("review2", "review2");
 								CurrentAct.startActivity(intclick);
 							}
 							if (v.getTag().toString().equals("9")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, cl_salary_mode1.class);
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
@@ -712,7 +712,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								CurrentAct.startActivity(intclick);
 							}
 							if (v.getTag().toString().equals("8")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
@@ -720,13 +720,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 							if (v.getTag().toString().equals("9")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
 								intclick.putExtra("review2", "review2");
 								CurrentAct.startActivity(intclick);
 							}
 							if (v.getTag().toString().equals("10")) {
-
+								dialog.dismiss();
 								Intent intclick = new Intent(CurrentAct, cl_salary_mode1.class);
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
