@@ -58,8 +58,7 @@
                 android:layout_marginTop="75dp"
                 android:textColor="@color/main_color_500"
                 android:textSize="20sp"
-                app:typeface="robotoLight"
-                android:visibility="gone" />
+                app:typeface="robotoLight"/>
         </FrameLayout>
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -72,8 +71,7 @@
             android:textColor="#000"
 
             android:textSize="18sp"
-            app:typeface="robotoLight"
-            android:visibility="gone" />
+            app:typeface="robotoLight"/>
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
@@ -91,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Other"
-                android:text="0"
+                android:text="1,000"
                 android:id="@+id/loanamountid"
                 android:ems="10"
                 android:inputType="phone"
