@@ -122,12 +122,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
         if (!isInternetPresent) {
-            AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
-            LayoutInflater factory = LayoutInflater.from(getApplicationContext());
-            final View view = factory.inflate(R.layout.nointernetconn, null);
-            alertadd.setView(view);
-            alertadd.setCancelable(false);
-            alertadd.show();
+           noconnection();
         }else {
 
             //new JSONParse().execute();
@@ -475,6 +470,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //********************End of Oncreate
     }
 
+    private void noconnection() {
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+        final View view = factory.inflate(R.layout.nointernetconn, null);
+        alertadd.setView(view);
+        alertadd.setCancelable(false);
+        alertadd.show();
+    }
+
     private void callGarbageCollector() {
         System.gc();
     }
@@ -500,15 +504,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.carln:
-
-                ((GlobalData) getApplication()).setLoanType("Car Loan");
-
-                Intent intent = new Intent(MainActivity.this, cl_car_residence.class);
-                intent.putExtra("loan_type", "Car Loan");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                Intent intent;
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    ((GlobalData) getApplication()).setLoanType("Car Loan");
+                    intent = new Intent(MainActivity.this, cl_car_residence.class);
+                    intent.putExtra("loan_type", "Car Loan");
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
-
             case R.id.home:
                 ((GlobalData) getApplication()).setLoanType("Home Loan");
 
@@ -517,43 +523,66 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
-
             case R.id.busin:
-                ((GlobalData) getApplication()).setLoanType("Loan Against Property");
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    ((GlobalData) getApplication()).setLoanType("Loan Against Property");
 
-                intent = new Intent(MainActivity.this, cl_car_residence.class);
-                intent.putExtra("loan_type", "Loan Against Property");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                    intent = new Intent(MainActivity.this, cl_car_residence.class);
+                    intent.putExtra("loan_type", "Loan Against Property");
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.persol:
-                ((GlobalData) getApplication()).setLoanType("Personal Loan");
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    ((GlobalData) getApplication()).setLoanType("Personal Loan");
 
-                intent = new Intent(MainActivity.this, cl_car_residence.class);
-                intent.putExtra("loan_type", "Personal Loan");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                    intent = new Intent(MainActivity.this, cl_car_residence.class);
+                    intent.putExtra("loan_type", "Personal Loan");
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
 
             case R.id.buttonSignin:
-                intent = new Intent(MainActivity.this, signinPrepage.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    intent = new Intent(MainActivity.this, signinPrepage.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.buttonReg:
-                goReg();
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    goReg();
+                }
                 break;
             case R.id.buttonMyappl:
-                intent = new Intent(MainActivity.this,GoogleCardsMediaActivity.class);
-                intent.putExtra("data", "myapplicatn");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "myapplicatn");
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.buttonMysearch:
-                intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
-                intent.putExtra("data", "search");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "search");
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
         }
 
