@@ -298,32 +298,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         cl_car_global_data.dataWithAns.put(key, data);
     }
 
-    private void goToDatabase(String loanType)
-    {
-        contentValues.put("loantype", loanType);
-        contentValues.put("questans","cl_car_make");
-        contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
-    }
 
-    private void storeData() {
-        setDataToHashMap("loantype", ((GlobalData) getApplication()).getLoanType());
-        setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());
-        setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
-        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("car loan")){
-            setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
-        }
-        setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
-        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
-        setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
-        setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).getTenure()));
-        setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
-        setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
-        setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
-        setDataToHashMap("dep_amount", String.valueOf(((GlobalData) getApplication()).getdepreciation()));
-        setDataToHashMap("dep_amount_last", String.valueOf(((GlobalData) getApplication()).getdepreciation2()));
-
-    }
     @Override
     public void onClick(View v) {
 
@@ -471,21 +446,29 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                 setDataToHashMap("gender", dataGender);
                 int age = 0;
-                if (((GlobalData) getApplication()).getDob() != null) {
+                if(((GlobalData) getApplication()).getage()==0) {
+                    if (((GlobalData) getApplication()).getDob() != null) {
 
-                    age = getAge(yearv, month, day);
-                    Log.d("your age is", String.valueOf(age));
+                        age = getAge(yearv, month, day);
+                        Log.d("your age is", String.valueOf(age));
+                    }
                 }
+                else
+                {
+                    Log.d("dob age is", String.valueOf(age));
+
+                    age =  ((GlobalData) getApplication()).getage();
+                }
+
 
                 if (age > 18) {
 
-                    ((GlobalData) getApplication()).setage(age);
+
                     String loantype=  ((GlobalData) getApplication()).getLoanType();
 
+                    ((GlobalData) getApplication()).setage(age);
 
-
-                    storeData();
-                    goToDatabase(loantype);
+                    Log.d("dob age is >18", String.valueOf(age));
 
                     if(flag.equals("next")) {
                         if (loantype.equalsIgnoreCase("Car Loan") || loantype.equalsIgnoreCase("Home Loan") || loantype.equalsIgnoreCase("Loan Against Property")) {

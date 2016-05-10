@@ -190,8 +190,8 @@ Log.d("setting image", tempValues.getcarimgurl());
 			String profee=String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
 			profee = profee.replaceAll("\\.00", "");
 
-			/*String propreclo=String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
-			propreclo = propreclo.replaceAll("\\.00", "");*/
+			String propreclo=String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
+			propreclo = propreclo.replaceAll("\\.00", "");
 
 			String bp=String.valueOf(format.format(new BigDecimal(tempValues.getbp().toString())));
 			bp = bp.replaceAll("\\.00", "");
@@ -202,7 +202,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 			//holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%");
 			holder.t4.setText(""+profee);
-			//holder.tprea.setText(""+propreclo);
+			holder.tprea.setText(""+propreclo);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 
 

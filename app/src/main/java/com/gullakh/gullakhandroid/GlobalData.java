@@ -19,7 +19,7 @@ public class GlobalData extends MultiDexApplication {
     private String questionVariable;
     private ArrayList<Double> questionVariable2;
 
-    private int sizefiltermusthave;
+    private int sizefiltermusthave=0;
     private ArrayList<Double> foir,accid;
 
     private String session,carres,loantyp,gender,employer;
