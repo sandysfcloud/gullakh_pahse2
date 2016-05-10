@@ -22,14 +22,12 @@
             android:id="@+id/imageViewpay1"
             android:layout_above="@+id/TextViewOption1"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/bankother"
-            android:layout_weight="1"
-            android:layout_marginTop="30dp" />
+            android:background="@drawable/bankother" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Direct Bank Deposit"
             android:id="@+id/TextViewOption1"
@@ -37,41 +35,41 @@
             android:textSize="18dp"
             android:layout_above="@+id/linearLayout"
             android:layout_centerHorizontal="true"
-            android:layout_weight="1" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp" />
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/imageViewpay2"
-            android:background="@drawable/bankcheque"
-            android:layout_weight="1" />
+            android:background="@drawable/bankcheque" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="By Cheque"
             android:id="@+id/TextViewOption2"
             android:gravity="center"
             android:textSize="18dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp" />
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/imageViewpay3"
-            android:background="@drawable/bankcash"
-            android:layout_weight="1" />
+            android:background="@drawable/bankcash" />
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="By Cash"
             android:id="@+id/TextViewOption5"
             android:gravity="center"
             android:textSize="18dp"
-            android:layout_weight="1" />
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <LinearLayout

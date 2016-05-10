@@ -80,7 +80,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         ImageView close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         // titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Loan Amount");
+        titl.setText("I Need Loan Amount Of");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();

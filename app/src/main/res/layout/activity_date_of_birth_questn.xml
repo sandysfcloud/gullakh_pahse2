@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="20dp"
-        android:text="My Gender"
+        android:text="Gender"
         android:textColor="#3f3f3f"
         app:typeface="robotoLight"
         android:gravity="center"
@@ -32,7 +32,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="50dp">
 
 
 
@@ -99,7 +99,7 @@
             android:id="@+id/TextViewOption4"
             android:textColor="#3f3f3f"
             app:typeface="robotoLight"
-            android:text="My Birthday Is"
+            android:text="Birthday"
             android:gravity="center"
             android:layout_marginTop="5dp" />
 

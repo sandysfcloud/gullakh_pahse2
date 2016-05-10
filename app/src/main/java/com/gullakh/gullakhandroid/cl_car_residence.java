@@ -237,8 +237,8 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
-
-                ((GlobalData) getApplication()).setcarres("Bengaluru");
+                citynam.setText("");
+        ((GlobalData) getApplication()).setcarres("Bengaluru");
                 setDataToHashMap("currently_living_in", "Bengaluru");
                 goToIntent();
                 break;
@@ -247,6 +247,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.buttonselecteffect);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
+                citynam.setText("");
                 ((GlobalData) getApplication()).setcarres("Chennai");
                 setDataToHashMap("currently_living_in", "Chennai");
                 goToIntent();
@@ -256,7 +257,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
-
+                citynam.setText("");
                 ((GlobalData) getApplication()).setcarres("Delhi");
                 setDataToHashMap("currently_living_in", "Delhi");
                 goToIntent();
@@ -266,6 +267,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.buttonselecteffect);
+                citynam.setText("");
                 ((GlobalData) getApplication()).setcarres("Mumbai");
                 setDataToHashMap("currently_living_in", "Mumbai");
                 goToIntent();
@@ -275,8 +277,6 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
-
-
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);

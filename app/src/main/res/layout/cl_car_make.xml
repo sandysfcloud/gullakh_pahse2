@@ -21,23 +21,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="2"
-        android:layout_weight="1">
-
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            app:typeface="robotoLight"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Which car are you interested in?"
-            android:id="@+id/TextViewHeading2"
-            android:textColor="#4b4b4b"
-            android:textSize="22dp"
-            android:gravity="center"
-            android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:weightSum="2"
             android:gravity="center">
             <ImageView
@@ -70,7 +59,8 @@
             android:layout_height="wrap_content"
             android:weightSum="2"
             android:gravity="center"
-            android:layout_weight="1">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
@@ -96,11 +86,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:weightSum="2"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp">
+            android:gravity="center">
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -131,7 +118,8 @@
             android:layout_height="wrap_content"
             android:weightSum="2"
             android:gravity="center"
-            android:layout_weight="1">
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp">
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
@@ -162,14 +150,9 @@
             android:layout_width="300dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="20dp"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/car"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp">
+            app:mtf_image="@drawable/car">
 
             <com.gullakh.gullakhandroid.font.RobotoAutoText
                 app:typeface="robotoLight"

@@ -22,8 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TextViewHeading"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp">
+            android:layout_centerHorizontal="true">
 
             <ImageView
                 android:layout_width="100dp"
@@ -50,7 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
@@ -81,8 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/LinearLayout"
-            android:layout_marginTop="10dp">
+            android:id="@+id/LinearLayout">
 
             <ImageView
                 android:layout_width="100dp"
@@ -108,7 +107,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
@@ -142,8 +142,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             android:focusable="false"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/piggymoney"
-            android:layout_marginTop="10dp">
+            app:mtf_image="@drawable/piggymoney">
 
             <com.gullakh.gullakhandroid.font.RobotoAutoText
                 app:typeface="robotoLight"

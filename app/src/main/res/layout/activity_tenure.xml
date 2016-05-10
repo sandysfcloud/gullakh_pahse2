@@ -12,14 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:gravity="center">
 
         <FrameLayout
             android:id="@+id/seekArcContainer"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
+            android:layout_marginBottom="20dp">
 
             <com.gullakh.gullakhandroid.SeekArc
                 android:id="@+id/seekArc"
@@ -61,15 +62,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="300dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="20dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/tenureimg"

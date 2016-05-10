@@ -292,7 +292,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
             Cursor crobj = dbobject.displayData("select * from userlogin");
-            title.setText("My Application");
+            title.setText("My Applications");
             if (crobj.moveToFirst()) {
 
                // DataHandler dh1 = new DataHandler(this);
@@ -1196,7 +1196,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         });
 
         //getSupportActionBar().setTitle("Search Result");
-        title.setText("Search Result");
+        title.setText("My Searches Result");
     }
 
 

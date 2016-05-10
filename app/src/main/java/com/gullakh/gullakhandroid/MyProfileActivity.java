@@ -88,6 +88,7 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
         add3 = (EditText) findViewById(R.id.editText3);
         add4 = (EditText) findViewById(R.id.editText4);
         add5 = (EditText) findViewById(R.id.editText5);
+        add1.setEnabled(false);
         add2.setEnabled(false);
         add3.setEnabled(false);
         add4.setEnabled(false);
@@ -211,13 +212,14 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
             JsonParser parser = new JsonParser();
             JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
             ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
-            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
-            add1.setText(details[0].getMailingstreet());
-            add2.setText(details[0].getOtherstreet());
-            add3.setText(details[0].getMailingcity());
-            add4.setText(details[0].getMailingstate());
-            add5.setText(details[0].getMailingzip());
-
+//            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
+            if (details.length>0) {
+                add1.setText(details[0].getMailingstreet());
+                add2.setText(details[0].getOtherstreet());
+                add3.setText(details[0].getMailingcity());
+                add4.setText(details[0].getMailingstate());
+                add5.setText(details[0].getMailingzip());
+            }
             dgthis.dismiss();
         }
         }, MyProfileActivity.this, "wait");

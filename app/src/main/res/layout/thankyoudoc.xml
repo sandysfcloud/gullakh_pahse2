@@ -17,6 +17,6 @@
         android:gravity="center"
         android:typeface="sans"
         android:background="@drawable/bgque"
-        android:textColor="#ff6d9b00" />
+        android:textColor="#ff0000" />
 
 </LinearLayout>

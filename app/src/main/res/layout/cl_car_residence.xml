@@ -61,7 +61,7 @@
             android:layout_marginTop="10dp"
             android:weightSum="2"
             android:gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="0">
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
             android:weightSum="2"
             android:gravity="center"
             android:layout_weight="0"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="20dp">
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

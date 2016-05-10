@@ -60,7 +60,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Salaried");
+        title.setText("My Employment Details");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -219,7 +219,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                 if (!Expmn.getText().toString().matches("") || Expyr.getText().toString().matches("")) {
                     int temp= Integer.parseInt(Expmn.getText().toString());
                     if (temp>11){
-                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct month field", "failed");
+                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Month field value cannot be greater than 11", "failed");
                     }else {
                         String EmpName = Emp.getText().toString();
                         setDataToHashMap("name_of_current_emp", EmpName);

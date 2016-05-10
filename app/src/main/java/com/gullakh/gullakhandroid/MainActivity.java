@@ -41,6 +41,7 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -139,16 +140,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
 
         }
-//--------------------------Three step pop up window-------------------------------------------
 
+//--------------------------Three step pop up window-------------------------------------------
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         Boolean welcomeScreenShown = mPrefs.getBoolean(welcomeScreenShownPref, false);
         if (!welcomeScreenShown) {
-            // the code below will display a popup
             showContextHelp();
-            SharedPreferences.Editor editor = mPrefs.edit();
-            editor.putBoolean(welcomeScreenShownPref, true);
-            editor.commit(); // Very important to save the preference
         }
 //--------------------------GCM Register-------------------------------------------
 
@@ -475,7 +472,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
         final View view = factory.inflate(R.layout.nointernetconn, null);
         alertadd.setView(view);
-        alertadd.setCancelable(false);
+        //alertadd.setCancelable(false);
         alertadd.show();
     }
 
@@ -484,10 +481,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     private void showContextHelp() {
-
         AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
         final View view = factory.inflate(R.layout.threesteps, null);
+        CheckBox ch1 = (CheckBox) view.findViewById(R.id.checkBox);
+        if(ch1.isChecked()){
+                SharedPreferences.Editor editor = mPrefs.edit();
+                editor.putBoolean(welcomeScreenShownPref, true);
+                editor.commit(); // Very important to save the preference
+        }
         alertadd.setView(view);
         alertadd.setCancelable(true);
         alertadd.show();
@@ -516,12 +518,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 }
                 break;
             case R.id.home:
-                ((GlobalData) getApplication()).setLoanType("Home Loan");
+                if (!isInternetPresent) {
+                    noconnection();
+                }else {
+                    ((GlobalData) getApplication()).setLoanType("Home Loan");
 
-                intent = new Intent(MainActivity.this, cl_car_residence.class);
-                intent.putExtra("loan_type", "Home Loan");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                    intent = new Intent(MainActivity.this, cl_car_residence.class);
+                    intent.putExtra("loan_type", "Home Loan");
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
                 break;
             case R.id.busin:
                 if (!isInternetPresent) {
@@ -763,6 +769,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             //selectItem(position, mDrawerItems.get(position).getTag());
+
+            if (!isInternetPresent) {
+                noconnection();
+            }else {
             if (position == 1) {
              Log.d("home drawer item","1");
                 mDrawerLayout.closeDrawers();
@@ -816,6 +826,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
 
 
+        }
         }
     }
 

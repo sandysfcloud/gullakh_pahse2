@@ -30,7 +30,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="10dp">
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"
@@ -107,7 +106,7 @@
             android:dropDownSelector="#c2c2c2"
             android:dropDownWidth="match_parent"
             android:background="@drawable/edittextsimple"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="20dp" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -120,14 +119,12 @@
             android:textColor="#707070"
             android:gravity="center"
             android:textSize="22dp"
-            android:background="#67d1d1d1"
-            android:layout_marginTop="10dp" />
+            android:background="#67d1d1d1" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
             <com.gullakh.gullakhandroid.MaterialTextField
                 android:layout_width="fill_parent"

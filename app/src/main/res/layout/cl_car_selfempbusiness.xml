@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -49,7 +49,7 @@
             android:textColor="#707070"
             android:background="#67d1d1d1"
             android:textSize="22dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="20dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/business"
+                app:mtf_image="@drawable/tenureimg"
                 android:layout_below="@+id/heading2"
                 android:layout_alignLeft="@+id/view"
                 android:layout_alignStart="@+id/view">
@@ -94,7 +94,7 @@
             android:textColor="#707070"
             android:background="#67d1d1d1"
             android:textSize="22dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp" />
 
         <Spinner

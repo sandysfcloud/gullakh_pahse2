@@ -47,7 +47,7 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Residence");
+        title.setText("My Residence Details");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -154,7 +154,7 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                     } else {
                         int temp = Integer.parseInt(currentCitymn.getText().toString());
                         if (temp > 11) {
-                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please enter correct month field", "failed");
+                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Month field value cannot be greater than 11", "failed");
                         } else {
                             if (currentResidenceyr.getText().toString().matches("") || currentResidencemn.getText().toString().matches("")) {
                                 RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence correctly", "failed");
@@ -164,7 +164,7 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                                     RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please enter correct month field", "failed");
                                 } else {
                                     if ( Integer.parseInt(currentCityyr.getText().toString()) <  Integer.parseInt(currentResidenceyr.getText().toString())) {
-                                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence should be smaller than Period of stay in current city", "failed");
+                                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence cannot be greater than Period of stay in current city", "failed");
                                     } else {
                                         setDataToHashMap("current_res", spinner.getSelectedItem().toString());
                                         setDataToHashMap("period_of_stay_in_cur_city", currentCityyr.getText().toString() + " Year " + currentCityyr.getText().toString() + " Month");

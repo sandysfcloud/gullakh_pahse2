@@ -55,7 +55,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         else
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Salary payment mode");
+        title.setText("My Salary Payment Mode");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -69,7 +69,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         pay1.setOnClickListener(this);
         pay2 = (ImageView) findViewById(R.id.imageViewpay2);
         pay2.setOnClickListener(this);
-        pay3 = (ImageView) findViewById(R.id.imageViewpay2);
+        pay3 = (ImageView) findViewById(R.id.imageViewpay3);
         pay3.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);
         back = (Button) findViewById(R.id.back);
@@ -209,6 +209,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
             case R.id.imageViewpay1:
                 pay1.setImageResource(R.drawable.buttonselecteffect);
                 pay2.setImageResource(R.drawable.bankcheque);
+                pay3.setImageResource(R.drawable.bankcash);
                 dataSalDeposite="Bank";
                 setdata();
                 if (rev != null) {
@@ -233,6 +234,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
             case R.id.imageViewpay2:
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.buttonselecteffect);
+                pay3.setImageResource(R.drawable.bankcash);
                 dataSalDeposite="Cheque";
                 setdata();
                 if (rev != null) {
@@ -257,7 +259,8 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                 break;
             case R.id.imageViewpay3:
                 pay1.setImageResource(R.drawable.bankother);
-                pay2.setImageResource(R.drawable.buttonselecteffect);
+                pay2.setImageResource(R.drawable.bankcash);
+                pay3.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cash";
                 setdata();
                 if (rev != null) {
