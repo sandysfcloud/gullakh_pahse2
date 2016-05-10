@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -25,7 +26,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
     private ImageView pay1,pay2,pay3;
     private ContentValues contentValues;
     int flag=0;
-
+    String rev;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -90,8 +91,32 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         }
 
 
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent = getIntent();
+        rev = intent.getStringExtra("review");
+        if (rev != null) {
+            if (rev.equals("review")) {
+                LinearLayout footer = (LinearLayout) findViewById(R.id.linearLayout3);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
 
+                // review.setVisibility(View.INVISIBLE);
 
+            }
+        }
+if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
+    String saldep=((GlobalData) getApplication()).getSalryPayMode();
+    if (saldep.equals("Bank")) {
+        pay1.setImageResource(R.drawable.buttonselecteffect);
+    } else if (saldep.equals("Cheque")) {
+        pay2.setImageResource(R.drawable.buttonselecteffect);
+    } else if (saldep.equals("Cash")) {
+        pay3.setImageResource(R.drawable.buttonselecteffect);
+    }
+
+}
 
     }
     private void getInfo() {
@@ -155,24 +180,29 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
 
                     setdata();
 
-
-                    if (flag == 1) {
-
-                        Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                        intent.putExtra("employer", "employer");
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-
+                    if (rev != null) {
+                        if (rev.equals("review")) {
+                            finish();
+                        }
                     } else {
+                        if (flag == 1) {
 
-                        if (dataSalDeposite.equals("Bank")) {
                             Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                            intent.putExtra("employer", "employer");
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
+
                         } else {
-                            Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
+
+                            if (dataSalDeposite.equals("Bank")) {
+                                Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            } else {
+                                Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            }
                         }
                     }
                 }break;
@@ -181,19 +211,23 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay2.setImageResource(R.drawable.bankcheque);
                 dataSalDeposite="Bank";
                 setdata();
+                if (rev != null) {
+                    if (rev.equals("review")) {
+                        finish();
+                    }
+                } else {
+                    if (flag == 1) {
 
-                if (flag == 1) {
+                        Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                        intent2.putExtra("employer", "employer");
+                        startActivity(intent2);
+                        overridePendingTransition(R.transition.left, R.transition.right);
 
-                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                    intent2.putExtra("employer", "employer");
-                    startActivity(intent2);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-
-                }
-             else {
-                    Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                    } else {
+                        Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
                 }
                 break;
             case R.id.imageViewpay2:
@@ -201,7 +235,12 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                 pay2.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cheque";
                 setdata();
+                if (rev != null) {
+                    if (rev.equals("review")) {
 
+                        finish();
+                    }
+                } else {
                 if (flag == 1) {
 
                     Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
@@ -214,26 +253,31 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
                     Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
                     startActivity(intent2);
                     overridePendingTransition(R.transition.left, R.transition.right);
-                }
+                }}
                 break;
             case R.id.imageViewpay3:
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cash";
                 setdata();
-
-                if (flag == 1) {
-
-                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
-                    intent2.putExtra("employer", "employer");
-                    startActivity(intent2);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-
+                if (rev != null) {
+                    if (rev.equals("review")) {
+                        finish();
+                    }
                 } else {
+                    if (flag == 1) {
 
-                    Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
-                    startActivity(intent2);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+                        Intent intent2 = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
+                        intent2.putExtra("employer", "employer");
+                        startActivity(intent2);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+
+                    } else {
+
+                        Intent intent2 = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
                 }
                 break;
             case R.id.close:
@@ -248,20 +292,21 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         }
 
     }
-    public void setdata()
-    {
+    public void setdata() {
         setDataToHashMap("sal_pay_option", dataSalDeposite);
-        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
         ((GlobalData) getApplication()).setSalryPayMode(dataSalDeposite);
+        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
 
 
-        if(((GlobalData) getApplication()).getcartype().equalsIgnoreCase("Home Loan")) {
-            goToDatabase("Home Loan");
-        }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-            goToDatabase("Personal Loan");
 
-        }else{
-            goToDatabase("Car Loan");
+            if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                goToDatabase("Home Loan");
+            } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                goToDatabase("Personal Loan");
+
+            } else {
+                goToDatabase("Car Loan");
+            }
         }
     }
     public void setDataToHashMap(String key,String data)
