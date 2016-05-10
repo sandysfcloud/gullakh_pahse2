@@ -62,23 +62,24 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
 Log.d("bankname in listvieclick",bankname);
 
         String[] sepfee=null;
-        if(sepfee!=null) {
-      //  Log.d("click docum ",docum);
 
-      // Log.d("all fee data before" , fee);
+        Log.d("click docum ",docum);
+
+
+             Log.d("all fee data before" , fee);
         sepfee = fee.split(";");
-       // Log.d("all fee data after" , String.valueOf(sepfee));
+       Log.d("all fee data after" , String.valueOf(sepfee));
 
 
 
-       // Log.d("all other data before" , other);
+        Log.d("all other data before" , other);
         String[] sepother = other.split(";");
-        //Log.d("all other data after" , String.valueOf(sepother[0]));
+        Log.d("all other data after" , String.valueOf(sepother[0]));
 
 
-       // Log.d("all docum data before" , docum);
+        Log.d("all docum data before" , docum);
         String[] sdocum = docum.split(";");
-       // Log.d("all docum data after" , String.valueOf(sdocum[0]));
+        Log.d("all docum data after" , String.valueOf(sdocum[0]));
 
 
 
@@ -99,8 +100,8 @@ Log.d("bankname in listvieclick",bankname);
         cardocu = cardocu + sdocum[i] + "\n";
         Log.d("documen info", +i + " " + sdocum[i]);
     }
-    //Log.d("final cardocu info",cardocu);
-        }
+    Log.d("final cardocu info",cardocu);
+
 
     TextView name = (TextView) findViewById(R.id.bankname);
 
@@ -183,14 +184,14 @@ if(one_time_fee!=null) {
 
 
 
-        //tfee.setText(feedata);
+        tfee.setText(feedata);
 
         t_other= (TextView) findViewById(R.id.tothr);
-        //t_other.setText(othrdata);
+        t_other.setText(othrdata);
 
         TextView t_docum= (TextView) findViewById(R.id.tdocum);
-       // t_docum.setText(cardocu);
-       // Log.d("cardocu set here", cardocu);
+       t_docum.setText(cardocu);
+       Log.d("cardocu set here", cardocu);
 
         t8= (TextView) findViewById(R.id.d2);
        // t8.setTypeface(myfontlight);

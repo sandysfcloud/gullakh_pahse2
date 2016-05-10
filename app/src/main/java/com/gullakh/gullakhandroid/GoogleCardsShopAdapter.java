@@ -254,11 +254,11 @@ Log.d("setting image", tempValues.getcarimgurl());
 					intent.putExtra("one_time_fee", data.get(pos).getprocessing_fee());
 					intent.putExtra("emi", data.get(pos).getemi_value());
 					intent.putExtra("lenderid", data.get(pos).getaccount_lender());
-					//Log.d("check fee here2", data.get(pos).getfee_charges());
+					Log.d("check fee here2", data.get(pos).getfee_charges());
 					intent.putExtra("fee", data.get(pos).getfee_charges());
 					intent.putExtra("other", data.get(pos).getother_details());
 					intent.putExtra("docum", data.get(pos).getcardocu());
-					//Log.d("adapter docum ",data.get(pos).getcardocu());
+					Log.d("adapter docum ",data.get(pos).getcardocu());
 					cont.startActivity(intent);
 					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
 				}

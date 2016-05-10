@@ -10,9 +10,9 @@ public class RuleMaster {
     public Double roi;
     public String tenure;
     public String pf;
-    public String fee_char_detail;
-    public String other_details;
-    public String document_details;
+    public String feedetails;
+    public String otherdetail;
+    public String document;
     public String pre_closure_fee;
 
 
@@ -58,28 +58,28 @@ public class RuleMaster {
     }
 
     public String getfee_charges_details(){
-        return fee_char_detail;
+        return feedetails;
     }
 
     public void setfee_charges_details(String token){
-        fee_char_detail=token;
+        feedetails=token;
     }
 
 
 
     public String getother_details(){
-        return other_details;
+        return otherdetail;
     }
 
     public void setother_details(String token){
-        other_details=token;
+        otherdetail=token;
     }
 
     public void setdocu_details(String token){
-        document_details=token;
+        document=token;
     }
     public String getdocu_details(){
-        return document_details;
+        return document;
     }
 
 
