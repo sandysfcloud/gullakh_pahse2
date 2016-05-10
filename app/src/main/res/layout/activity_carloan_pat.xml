@@ -62,7 +62,8 @@
                     android:layout_marginTop="75dp"
                     android:textColor="@color/main_color_500"
                     android:textSize="20sp"
-                    app:typeface="robotoLight"/>
+                    app:typeface="robotoLight"
+                    android:visibility="invisible" />
             </FrameLayout>
         </LinearLayout>
 
@@ -76,7 +77,8 @@
 
             android:textColor="#000"
             android:textSize="18sp"
-            app:typeface="robotoLight"/>
+            app:typeface="robotoLight"
+            android:visibility="gone" />
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"

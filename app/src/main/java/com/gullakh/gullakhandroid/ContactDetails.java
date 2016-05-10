@@ -9,6 +9,7 @@ public class ContactDetails {
     String mailingstreet="";
     String mailingstate="";
     String otherstreet="";
+    String firstname="";
     public String getMailingzip() {
         return mailingzip;
     }
@@ -27,5 +28,9 @@ public class ContactDetails {
 
     public String getOtherstreet() {
         return otherstreet;
+    }
+
+    public String getFirstname() {
+        return firstname;
     }
 }

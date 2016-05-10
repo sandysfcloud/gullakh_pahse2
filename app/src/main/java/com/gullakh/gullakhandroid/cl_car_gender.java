@@ -57,6 +57,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     private RadioButton nob;
     private View main;
     boolean coapllflag=true;
+    private String name;
+    private int month,yearv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +92,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
         pin = (EditText) findViewById(R.id.pin);
         datefield = (EditText) findViewById(R.id.date);
-        timefield = (EditText) findViewById(R.id.date);
+        timefield = (EditText) findViewById(R.id.time);
         state = (EditText) findViewById(R.id.state);
         state.setText(((GlobalData) getApplication()).getStatename());
         back.setOnClickListener(this);
@@ -171,18 +174,27 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                 } else {
                     if(pin.getText().toString().length()==6){
-                        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                            goToDatabase("mysearch","Home Loan");
-                        }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-                            goToDatabase("mysearch","Personal Loan");
-                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
-                            goToDatabase("mysearch","Loan Against Property");
-                        }else{
-                            goToDatabase("mysearch","Car Loan");
-                        }
+                        if (datefield.getText().toString().equals("")||timefield.getText().toString().equals("")){
+                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Select Date and time field", "failed");
+                        } else {
+                            if (month > Calendar.MONTH || yearv > Calendar.YEAR) {
+                                RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time ", "failed");
+                            } else {
 
-                        goToServer(add1.getText().toString(),add2.getText().toString(),city.getText().toString(),state.getText().toString(),pin.getText().toString());
-                        savetoserver();
+                                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                    goToDatabase("mysearch", "Home Loan");
+                                } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                                    goToDatabase("mysearch", "Personal Loan");
+                                } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
+                                    goToDatabase("mysearch", "Loan Against Property");
+                                } else {
+                                    goToDatabase("mysearch", "Car Loan");
+                                }
+
+                                goToServer(add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString());
+                                savetoserver();
+                            }
+                        }
                     }else{
                         RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
                     }
@@ -218,7 +230,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.date:
                 Calendar now = Calendar.getInstance();
-                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
+                now.set(now.get(Calendar.YEAR) - 18, now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_gender.this,
                         2000,
@@ -233,7 +245,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.time:
                 Calendar now1 = Calendar.getInstance();
-                com.wdullaer.materialdatetimepicker.time.TimePickerDialog tpd = com.wdullaer.materialdatetimepicker.time.TimePickerDialog.newInstance(
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
                         cl_car_gender.this,
                         now1.get(Calendar.HOUR_OF_DAY),
                         now1.get(Calendar.MINUTE),true
@@ -563,7 +575,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
     private void goToIntent() {
             Intent intent = new Intent(this, UploadDocument1.class);
-            intent.putExtra("name","Guest");
+            intent.putExtra("name",name);
             intent.putExtra("applno",borrowercaseno);
             startActivity(intent);
     }
@@ -601,6 +613,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        month=monthOfYear;
+        yearv=year;
         datefield.setText(date);
     }
 
@@ -624,6 +638,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     city.setText(details[0].getMailingcity());
                     state.setText(details[0].getMailingstate());
                     pin.setText(details[0].getMailingzip());
+                    name=details[0].getFirstname();
                 }
                 dgthis.dismiss();
             }

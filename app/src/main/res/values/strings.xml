@@ -195,7 +195,7 @@
     <string name="title_activity_car_loan__depreciation">CarLoan_Depreciation</string>
     <string name="title_activity_search_page">SearchPage</string>
     <string name="title_activity_myapplication">Myapplication</string>
-    <string name="thankyoufrongullakh">Thank You for your request ....\nWe shall be in touch with you soon to collect document...!!!</string>
+    <string name="thankyoufrongullakh">Thank you for your request...!!!\nWe shall be in touch with you soon, to collect the documents.</string>
     <string name="title_activity_edit_co_appli__home_loan">EditCoAppli_HomeLoan</string>
 
     <!-- TODO: Remove or change this placeholder text -->

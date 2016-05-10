@@ -14,17 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_horizontal">
-
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:layout_width="fill_parent"
-            android:layout_height="75dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Upload Documents"
-            android:id="@+id/heading"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="20dp" />
+        android:gravity="center">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -313,7 +303,7 @@
                 android:layout_alignTop="@+id/buttonUpload5"
                 android:gravity="center"
                 android:background="@drawable/edittextsimple"
-                android:hint="Bank Statement/Passbook of Salary account"
+                android:hint="Bank Statement/Passbook of Salary Account"
                 android:layout_weight="1"
                 android:visibility="visible" />
             <com.gullakh.gullakhandroid.font.RobotoTextView

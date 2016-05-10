@@ -138,12 +138,13 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Got it..! Don&apos;t Show this message again."
+                android:text="Don&apos;t Show this message again."
                 android:id="@+id/checkBox"
                 android:textColor="#ffffff"
                 android:paddingLeft="20dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:textSize="14dp" />
         </LinearLayout>
 
     </LinearLayout>

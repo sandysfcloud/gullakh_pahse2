@@ -34,7 +34,7 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Document");
+        title.setText("My Documents");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

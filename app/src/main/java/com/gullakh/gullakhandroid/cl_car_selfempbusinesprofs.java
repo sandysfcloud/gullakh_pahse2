@@ -46,7 +46,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Self Employed Professional ");
+        title.setText("My Profession Details ");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

@@ -32,7 +32,8 @@
         android:id="@+id/applno"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        android:textColor="#000000" />
 
     <com.gullakh.gullakhandroid.font.RobotoTextView
         app:typeface="robotoLight"
@@ -59,7 +60,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Submit documents online"
+        android:text="Submit Documents Online"
         android:id="@+id/textViewupload2"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
@@ -80,7 +81,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Let Gullakh/Bank collect documents"
+        android:text="Let Gullakh/Bank Collect Documents"
         android:id="@+id/textViewupload3"
         android:layout_gravity="center_horizontal"
         android:gravity="center"

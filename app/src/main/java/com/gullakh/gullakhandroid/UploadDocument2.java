@@ -66,7 +66,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Upload documents");
+        title.setText("Upload Documents");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -78,7 +78,6 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
-        TextView heading = (TextView) findViewById(R.id.heading);
         buttonUpoadFile1 = (Button) findViewById(R.id.buttonUpload1);
         buttonUpoadFile2 = (Button) findViewById(R.id.buttonUpload2);
         buttonUpoadFile3 = (Button) findViewById(R.id.buttonUpload3);

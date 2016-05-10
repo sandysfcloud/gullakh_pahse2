@@ -484,14 +484,23 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
         final View view = factory.inflate(R.layout.threesteps, null);
-        CheckBox ch1 = (CheckBox) view.findViewById(R.id.checkBox);
-        if(ch1.isChecked()){
-                SharedPreferences.Editor editor = mPrefs.edit();
-                editor.putBoolean(welcomeScreenShownPref, true);
-                editor.commit(); // Very important to save the preference
-        }
+        final CheckBox ch1 = (CheckBox) view.findViewById(R.id.checkBox);
+
         alertadd.setView(view);
         alertadd.setCancelable(true);
+        alertadd.setPositiveButton("Got It..!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(ch1.isChecked()){
+                    SharedPreferences.Editor editor = mPrefs.edit();
+                    editor.putBoolean(welcomeScreenShownPref, true);
+                    editor.commit(); // Very important to save the preference
+                }
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+            }
+        });
         alertadd.show();
     }
 
