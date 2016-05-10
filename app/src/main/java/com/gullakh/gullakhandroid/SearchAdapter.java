@@ -196,15 +196,15 @@ public class SearchAdapter extends BaseAdapter
 
             tempValues = null;
             tempValues = (ListModel) data.get(position);
-            Log.d("checkloantype",globalstore.getLoan_type());
+           // Log.d("checkloantype",globalstore.getLoan_type());
 
             //holder.name.setText(tempValues.getsearchtnam());
 //            if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("car loan")){
-            if(data.get(position).getLoan_type().equalsIgnoreCase("car loan")){
+            if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("car loan")){
                 holder.image.setImageResource(R.drawable.carloan);
-            }else if(data.get(position).getLoan_type().equalsIgnoreCase("home loan")){
+            }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("home loan")){
                 holder.image.setImageResource(R.drawable.homeloan);
-            }else if(data.get(position).getLoan_type().equalsIgnoreCase("personal loan")){
+            }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("personal loan")){
                 holder.image.setImageResource(R.drawable.personalloannew);
             }else if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Loan against property")){
                 holder.image.setImageResource(R.drawable.busineeloan);

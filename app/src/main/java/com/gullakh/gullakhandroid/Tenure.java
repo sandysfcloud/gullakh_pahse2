@@ -58,7 +58,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
         ImageView close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Select Tenure");
+        titl.setText("I Need A Loan Tenure Of");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();

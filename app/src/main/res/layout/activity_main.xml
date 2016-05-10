@@ -138,13 +138,13 @@
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="My search"
+            android:text="My Searches"
             android:id="@+id/buttonMysearch"
             android:layout_weight="1"
             android:background="#00ffffff"
             android:textAllCaps="false"
             android:textColor="#ffffff"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:onClick="onClick" />
         <View
             android:layout_width="1dp"
@@ -156,13 +156,13 @@
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="My application"
+            android:text="My Applications"
             android:id="@+id/buttonMyappl"
             android:layout_weight="1"
             android:textAllCaps="false"
             android:background="#00ffffff"
             android:textColor="#ffffff"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:singleLine="false"
             android:onClick="onClick" />
     </LinearLayout>
@@ -179,13 +179,13 @@
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="Sign in"
+            android:text="Sign In"
             android:id="@+id/buttonSignin"
             android:layout_weight="1"
             android:background="#00ffffff"
             android:textAllCaps="false"
             android:textColor="#ffffff"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:onClick="onClick"
             app:typeface="robotoLight"/>
         <View
@@ -203,7 +203,7 @@
             android:textAllCaps="false"
             android:background="#00ffffff"
             android:textColor="#ffffff"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:singleLine="false"
             android:onClick="onClick"
             app:typeface="robotoLight"/>

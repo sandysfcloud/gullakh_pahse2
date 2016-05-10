@@ -50,7 +50,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Choose Car");
+        title.setText("My Preferred Car Is");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

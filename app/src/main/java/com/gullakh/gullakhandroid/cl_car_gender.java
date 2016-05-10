@@ -71,7 +71,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Residential Address");
+        title.setText("My Residential Address");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -618,12 +618,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
-                Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
-                add1.setText(details[0].getMailingstreet());
-                add2.setText(details[0].getOtherstreet());
-                city.setText(details[0].getMailingcity());
-                state.setText(details[0].getMailingstate());
-                pin.setText(details[0].getMailingzip());
+                if (details.length>0) {
+                    add1.setText(details[0].getMailingstreet());
+                    add2.setText(details[0].getOtherstreet());
+                    city.setText(details[0].getMailingcity());
+                    state.setText(details[0].getMailingstate());
+                    pin.setText(details[0].getMailingzip());
+                }
                 dgthis.dismiss();
             }
         }, cl_car_gender.this, "wait");

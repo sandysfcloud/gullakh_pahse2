@@ -7,155 +7,179 @@
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView3"
+        android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/title"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/title"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    app:typeface="robotoLight"
+                    android:layout_width="fill_parent"
+                    android:layout_height="65dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Would you like to add co-applicant?"
+                    android:id="@+id/textView36"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:gravity="center" />
+
+                <RadioGroup
+                    android:layout_width="fill_parent"
+                    android:layout_height="65dp"
+                    android:weightSum="1"
+                    android:id="@+id/radioGroup"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <RadioButton
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Yes"
+                        android:id="@+id/yes"
+                        android:checked="false"
+                        android:textSize="20dp" />
+
+                    <RadioButton
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:id="@+id/no"
+                        android:checked="false"
+                        android:textSize="20dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.gullakh.gullakhandroid.font.RobotoButton
+                app:typeface="robotoLight"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Coapplicants"
+                android:textAllCaps="false"
+                android:id="@+id/addcoappl"
+                android:background="@drawable/mainbutton"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:layout_margin="20dp"
+                android:visibility="gone" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/addr1"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="Address  line 1"
+                android:gravity="center"
+                android:singleLine="false" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/addr2"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="Address  line 2"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:visibility="visible" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/pin"
+                android:inputType="number"
+                android:maxLength="6"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:hint="PIN code"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:singleLine="true" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/city"
+                android:background="@drawable/edittextsimple"
+                android:hint="City"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/state"
+                android:background="@drawable/edittextsimple"
+                android:hint="State"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true" />
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
-                android:layout_width="fill_parent"
-                android:layout_height="65dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Would you like to add co-applicant?"
-                android:id="@+id/textView36"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:gravity="center" />
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="You can call me on:"
+                android:id="@+id/heading3"
+                android:textColor="#707070"
+                android:textSize="22dp"
+                android:layout_below="@+id/textView15"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:background="#67d1d1d1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp" />
 
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="65dp"
-                android:weightSum="1"
-                android:id="@+id/radioGroup"
+            <LinearLayout
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
 
-                <RadioButton
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Yes"
-                    android:id="@+id/yes"
-                    android:checked="false"
-                    android:textSize="20dp" />
+                <EditText
+                    android:focusableInTouchMode="false"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/date"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="Schedule Date"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:singleLine="true"
+                    android:layout_weight="1" />
 
-                <RadioButton
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="No"
-                    android:id="@+id/no"
-                    android:checked="false"
-                    android:textSize="20dp" />
-            </RadioGroup>
+                <EditText
+                    android:focusableInTouchMode="false"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/time"
+                    android:background="@drawable/edittextsimple"
+                    android:hint="Schedule Time"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
         </LinearLayout>
-
-        <com.gullakh.gullakhandroid.font.RobotoButton
-            app:typeface="robotoLight"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Coapplicants"
-            android:textAllCaps="false"
-            android:id="@+id/addcoappl"
-            android:background="@drawable/mainbutton"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:layout_margin="20dp"
-            android:visibility="gone" />
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/addr1"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:hint="Address  line 1"
-            android:gravity="center"
-            android:singleLine="false" />
-
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/addr2"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:hint="Address  line 2"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:singleLine="true"
-            android:visibility="visible" />
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/pin"
-            android:inputType="number"
-            android:maxLength="6"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/edittextsimple"
-            android:hint="PIN code"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:singleLine="true" />
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/city"
-            android:background="@drawable/edittextsimple"
-            android:hint="City"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"
-            android:singleLine="true" />
-
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:id="@+id/state"
-            android:background="@drawable/edittextsimple"
-            android:hint="State"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"
-            android:singleLine="true" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:id="@+id/date"
-                android:background="@drawable/edittextsimple"
-                android:hint="Shedule date"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:singleLine="true"
-                android:layout_weight="1" />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/time"
-                android:background="@drawable/edittextsimple"
-                android:hint="Shedule time"
-                android:gravity="center"
-                android:singleLine="true"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 
     <LinearLayout

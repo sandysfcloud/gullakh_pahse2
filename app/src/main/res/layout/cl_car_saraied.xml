@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:layout_weight="1"
 
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:imeOptions="actionNext"
                 android:nextFocusDown="@+id/saljoindateofempyr"
                 android:singleLine="true"
-                android:hint="Ex- SAP" />
+                android:hint="Ex- Infosys" />
 
     </com.gullakh.gullakhandroid.MaterialTextField>
             </LinearLayout>

@@ -51,7 +51,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Self Employed Business");
+        title.setText("My Business Details");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

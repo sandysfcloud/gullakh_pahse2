@@ -24,15 +24,13 @@
         android:layout_height="300dp"
 
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"
-        android:padding="25dp">
+        android:layout_marginBottom="20dp">
 
         <com.gullakh.gullakhandroid.SeekArc
             android:id="@+id/seekArc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:padding="30dp"
 
             seekarc:arcColor="@color/main_color_500"
             seekarc:clockwise="true"
@@ -44,7 +42,8 @@
             seekarc:sweepAngle="300"
 
             seekarc:thumb="@drawable/custom_seek_arc_control_selector"
-            seekarc:touchInside="true" />
+            seekarc:touchInside="true"
+            android:padding="30dp" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/seekArcProgress"
@@ -70,7 +69,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
 <com.gullakh.gullakhandroid.MaterialTextField
     android:layout_width="300dp"
     android:layout_gravity="center_horizontal"

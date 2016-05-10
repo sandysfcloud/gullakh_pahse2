@@ -435,8 +435,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		String loantyp=((GlobalData) CurrentAct.getApplication()).getLoanType();
 		//Log.d("emptyp value is", emptyp);
 		carloan_que_salary_new=new ArrayList<String>();
-		carloan_que_salary_new.add("Current Residence: ");
-		carloan_que_salary_new.add("Employee Type: ");
+		carloan_que_salary_new.add("Residence City:");
+		carloan_que_salary_new.add("Employment Type:");
 		String cartyp=((GlobalData) CurrentAct.getApplication()).getCartypeloan();
 		if(cartyp!=null&& !loantyp.equals("Personal Loan")) {
 			if (cartyp.equals("New Car Loan") || cartyp.equals("Used Car Loan")) {
@@ -457,7 +457,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				carloan_que_salary_new.add("Net Monthly Salary: ");
 		}
 
-		carloan_que_salary_new.add("Total EMI's you pay: ");
+		carloan_que_salary_new.add("Current EMI's: ");
 
 
 		if(loantyp.equals("Personal Loan"))

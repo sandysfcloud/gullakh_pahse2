@@ -15,7 +15,8 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a"
         android:layout_weight="1"
-        android:layout_gravity="center_horizontal|bottom">
+        android:layout_gravity="center_horizontal|bottom"
+        android:gravity="center">
 
         <com.gullakh.gullakhandroid.font.RobotoButton
             app:typeface="robotoLight"
@@ -70,7 +71,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:background="#67d1d1d1"
-            android:textSize="22dp" />
+            android:textSize="22dp"
+            android:visibility="gone" />
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
@@ -81,7 +83,7 @@
             android:layout_marginTop="20dp"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/car">
+            app:mtf_image="@drawable/tenureimg">
             <com.gullakh.gullakhandroid.font.RobotoEditText
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
