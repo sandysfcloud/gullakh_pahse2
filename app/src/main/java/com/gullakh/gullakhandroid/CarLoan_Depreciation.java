@@ -268,8 +268,14 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
             case R.id.edit:
                 String empty=((GlobalData) getApplication()).getLoanType();
                 if(empty.equals("Car Loan")) {
-                    if (data.equals("data"))
-                        RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this, 7);
+                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                    if (carloantp.equals("Used Car Loan")) {
+                        RegisterPageActivity.showAlertreview(this, 8);
+                    }
+                    else {
+                        if (data.equals("data"))
+                            RegisterPageActivity.showAlertreview(CarLoan_Depreciation.this, 7);
+                    }
                 }
                 else
                 {

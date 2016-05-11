@@ -213,6 +213,11 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             case R.id.edit:
                 String empty=((GlobalData) getApplication()).getLoanType();
                 if(empty.equals("Car Loan")) {
+                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                    if (carloantp.equals("Used Car Loan")) {
+                        RegisterPageActivity.showAlertreview(this, 7);
+                    }
+                    else
                     RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
                 }
                 else

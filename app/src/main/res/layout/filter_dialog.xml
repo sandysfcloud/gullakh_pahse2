@@ -223,8 +223,8 @@
             android:layout_width="fill_parent"
             android:id="@+id/tenure"
             android:layout_height="wrap_content"
-            app:absoluteMinValue="20"
-            app:absoluteMaxValue="150"
+
+            app:absoluteMaxValue="7"
             app:singleThumb="true"
             />
 

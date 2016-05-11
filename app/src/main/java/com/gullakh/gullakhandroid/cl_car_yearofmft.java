@@ -18,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -49,7 +50,8 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         TextView  title = (TextView) v.findViewById(R.id.title);
         ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+        review.setOnClickListener(this);
+      //  review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
         title.setText("Year of Car Manufacture");
         actionBar.setCustomView(v);
@@ -70,6 +72,29 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         {
             getCarYear();
         }
+
+
+
+
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("review");
+        if (data != null) {
+            if (data.equals("review")) {
+                LinearLayout footer = (LinearLayout) findViewById(R.id.linearLayout4);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+                // review.setVisibility(View.INVISIBLE);
+
+            }
+        }
+
+
+
+
+
 
     }
     public void getCarYear()
@@ -97,27 +122,32 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.done:
+                if(yom.getText().toString().matches("")) {
+
+                    RegisterPageActivity.showErroralert(this, "Please enter loan amount!", "failed");
+                }
+                else
+                {
+                    Log.d("intent next loanamt", "check");
+                    getYear("revi ew");
+
+                }
+
+                finish();
+
+            case R.id.edit:
+
+                    RegisterPageActivity.showAlertreview(cl_car_yearofmft.this, 4);
+
+
+                break;
+
+
             case R.id.next:
                 if(!yom.getText().toString().matches("")) {
-                    Log.d("cal date", String.valueOf(getDateinYear()));
-                    Calendar c = Calendar.getInstance();
-                    String CurrDate = c.getTime().toString();
-                    int CalYear = getDateinYear();
-                    String[] CurrYr = CurrDate.split(" ");
-                    int CurrYear = Integer.parseInt(CurrYr[CurrYr.length - 1]);
-                    Log.d("curr date", c.getTime().toString());
-
-                    if (CalYear + 10 >= CurrYear) {
-                        setDataToHashMap("yom", date);
-                        goToDatabase("Car Loan");
-                        Intent intent = new Intent(cl_car_yearofmft.this, Loan_amt_questn.class);
-
-                        intent.putExtra("loan_type", "Car Loan");
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }else {
-                        showdialog();
-                    }
+                    getYear("next");
                 }else
                 {
                     RegisterPageActivity.showErroralert(cl_car_yearofmft.this, "Please enter Year of manufacture", "failed");
@@ -148,6 +178,33 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
                 //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
+        }
+    }
+
+
+    public void getYear(String flag)
+    {
+        Log.d("cal date", String.valueOf(getDateinYear()));
+        Calendar c = Calendar.getInstance();
+        String CurrDate = c.getTime().toString();
+        int CalYear = getDateinYear();
+        String[] CurrYr = CurrDate.split(" ");
+        int CurrYear = Integer.parseInt(CurrYr[CurrYr.length - 1]);
+        Log.d("curr date", c.getTime().toString());
+
+        if (CalYear + 10 >= CurrYear) {
+            setDataToHashMap("yom", date);
+            goToDatabase("Car Loan");
+            ((GlobalData) getApplication()).setCarmanuyear(date);
+            if(flag.equals("next")) {
+                Intent intent = new Intent(cl_car_yearofmft.this, Loan_amt_questn.class);
+
+                intent.putExtra("loan_type", "Car Loan");
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+            }
+        }else {
+            showdialog();
         }
     }
 

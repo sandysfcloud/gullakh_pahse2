@@ -330,10 +330,19 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 if(loanty.equals("Car Loan")) {
                     if (empflag == 1) {
                         String emptyp = ((GlobalData) getApplication()).getemptype();
-                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
-                            RegisterPageActivity.showAlertreview(this, 10);
-                        else
-                            RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 9);
+                        String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                        if (carloantp.equals("Used Car Loan")) {
+                            if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                                RegisterPageActivity.showAlertreview(this, 11);
+                            else
+                                RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 10);
+                        }
+                        else {
+                            if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                                RegisterPageActivity.showAlertreview(this, 10);
+                            else
+                                RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 9);
+                        }
                     } else {
                         String emptyp = ((GlobalData) getApplication()).getemptype();
                         if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
