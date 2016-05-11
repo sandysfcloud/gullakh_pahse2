@@ -344,10 +344,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                             sched.setBank_name(loanDeatils[i].getPrimary_lender());
                                             sched.setLoan_type(loanDeatils[i].getLoantype());
                                             searchlistviewArry.add(sched);
-                                            createListView();
-                                            setapplicatnadapter(searchlistviewArry);
+
                                         }
                                     }
+
+                                    setContentView(R.layout.seach_display);
+                                    layout = (LinearLayout) findViewById(R.id.linear);
+                                    createListView();
+                                    setapplicatnadapter(searchlistviewArry);
+
                                 }else {
                                         AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
                                         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
@@ -384,8 +389,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                         requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
 
-                        setContentView(R.layout.seach_display);
-                        layout = (LinearLayout) findViewById(R.id.linear);
+
 
 
                //     }
