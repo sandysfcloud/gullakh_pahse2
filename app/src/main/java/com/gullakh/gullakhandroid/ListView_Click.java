@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -86,6 +87,7 @@ Log.d("bankname in listvieclick",bankname);
     String feedata = "";
     for (int i = 0; i < sepfee.length; i++) {
         feedata = feedata + sepfee[i] + "\n";
+        Log.d("feedata check",feedata);
         Log.d("fee info", +i + " " + sepfee[0]);
     }
 
@@ -307,7 +309,7 @@ if(one_time_fee!=null) {
                     ((GlobalData) getApplication()).getLenders().put("plroi",roi );
                     ((GlobalData) getApplication()).getLenders().put("plemi",emi );
                     preclosure1=sepfee[0].split(" ");
-                    ((GlobalData) getApplication()).getLenders().put("plpreclosurefee",preclosure1[preclosure1.length-1]);
+                    ((GlobalData) getApplication()).getLenders().put("plpreclosurefee", preclosure1[preclosure1.length-1]);
                     ((GlobalData) getApplication()).getLenders().put("plprosesingfee",one_time_fee );
                 }
 
@@ -319,20 +321,21 @@ if(one_time_fee!=null) {
                     String emtyp=((GlobalData) getApplication()).getLoanType();
                     Log.d("employee typ in listviewclick",emtyp);
                     if(emtyp.equalsIgnoreCase("Car Loan")){
+                        Log.d("inside carloan",emtyp);
                         intent = new Intent(ListView_Click.this, cl_car_make.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
                         intent = new Intent(ListView_Click.this,cl_car_residence_type.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
 
                         intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
                         intent.putExtra("personal", "personal");
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }/*else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")){
@@ -354,7 +357,16 @@ if(one_time_fee!=null) {
                 break;
         }
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent intent  = new Intent(ListView_Click.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     private void storeData() {
         setDataToHashMap("loantype", ((GlobalData) getApplication()).getLoanType());
         setDataToHashMap("currently_living_in", ((GlobalData) getApplication()).getcarres());

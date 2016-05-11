@@ -190,6 +190,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             case R.id.done:
                 goToServer();
                 Intent i8 = new Intent(this,MainActivity.class);
+                i8.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i8);
                 break;
             case R.id.close:
