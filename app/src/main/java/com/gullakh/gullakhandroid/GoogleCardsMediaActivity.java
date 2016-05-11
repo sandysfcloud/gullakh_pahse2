@@ -1304,67 +1304,88 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
     public void setadapter(ArrayList<ListModel> arraylist) {
-       // CustomListViewValuesArr2 = CustomListViewValuesArr;
+        // CustomListViewValuesArr2 = CustomListViewValuesArr;
         Log.d("setadapter param", String.valueOf(arraylist));
         CustomListViewValuesArr2.clear();
         CustomListViewValuesArr2.addAll(arraylist);
         Log.d("CustomListViewValuesArr value check MAIN", String.valueOf(CustomListViewValuesArr2.size()));
 //------------------------------------------------------------------------------------------------------------------------------------------
+        HashMap<String, String> lenderInfo = new HashMap<String, String>();
+
         if (firsttimeflage == 0) {
-             if(CustomListViewValuesArr2.size()>1)
-             {
-                 for (int i = 0; i < 2; i++) {
-                    arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+            if (CustomListViewValuesArr2.size() > 1) {
+                for (int i = 0; i < 2; i++) {
+                    if (i == 0) {
+                        lenderInfo.put("primarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
+                        lenderInfo.put("plroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                        lenderInfo.put("plemi", CustomListViewValuesArr2.get(i).getemi_value());
+                        lenderInfo.put("plpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                        lenderInfo.put("plprosesingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
+                    } else if (i == 1) {
+                        lenderInfo.put("secondarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
+                        lenderInfo.put("slroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                        lenderInfo.put("slemi", CustomListViewValuesArr2.get(i).getemi_value());
+                        lenderInfo.put("slpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                        lenderInfo.put("slprocessingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
                     }
-                 ((GlobalData) this.getApplication()).setLenders(arrcombank);
-                 firsttimeflage = 1;
-            Log.d("check compbanl arrylist", String.valueOf(arrcombank));
-            }
-            else if(CustomListViewValuesArr2.size()==1)
-             {
-                 for (int i = 0; i < CustomListViewValuesArr2.size(); i++) {
-                     arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
-                 }
-                 arrcombank.add(1,"");
-                 ((GlobalData) this.getApplication()).setLenders(arrcombank);
-             }
+                    //arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                }
+                ((GlobalData) this.getApplication()).setLenders(lenderInfo);
+                firsttimeflage = 1;
+                Log.d("check compbanl arrylist", String.valueOf(arrcombank));
+            } else if (CustomListViewValuesArr2.size() == 1) {
+                for (int i = 0; i < 2; i++) {
+                    if (i == 0) {
+                        lenderInfo.put("primarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
+                        lenderInfo.put("plroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                        lenderInfo.put("plemi", CustomListViewValuesArr2.get(i).getemi_value());
+                        lenderInfo.put("plpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                        lenderInfo.put("plprosesingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
+                        lenderInfo.put("secondarylender", "");
+                        lenderInfo.put("slroi", "");
+                        lenderInfo.put("slemi", "");
+                        lenderInfo.put("slpreclosurefee", "");
+                        lenderInfo.put("slprocessingfee", "");
+                    }
+                    ((GlobalData) this.getApplication()).setLenders(lenderInfo);
+                }
 
 //------------------------------------------------------------------------------------------------------------------------------------------
+            }
+
+
+            mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
+
+            SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+                    new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+            swingBottomInAnimationAdapter.setAbsListView(listView);
+
+
+            assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+            swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+                    INITIAL_DELAY_MILLIS);
+
+            //listView.setAdapter(null);
+            //swingBottomInAnimationAdapter.notifyDataSetChanged();
+            listView.setAdapter(swingBottomInAnimationAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+                    Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
+                    Bundle bundleObject = new Bundle();
+                    bundleObject.putSerializable("key", CustomListViewValuesArr);
+                    intent.putExtras(bundleObject);
+                    intent.putExtra("position", Integer.toString(position));
+                    startActivity(intent);
+                    (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            });
+
+            //getSupportActionBar().setTitle("Result");
+            title.setText("Result");
+        }
     }
-
-
-          mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
-
-          SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-                  new SwipeDismissAdapter(mGoogleCardsAdapter, this));
-          swingBottomInAnimationAdapter.setAbsListView(listView);
-
-
-          assert swingBottomInAnimationAdapter.getViewAnimator() != null;
-          swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
-                  INITIAL_DELAY_MILLIS);
-
-          //listView.setAdapter(null);
-          //swingBottomInAnimationAdapter.notifyDataSetChanged();
-          listView.setAdapter(swingBottomInAnimationAdapter);
-          listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-              @Override
-              public void onItemClick(AdapterView<?> parent, View view, int position,
-                                      long id) {
-                  Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
-                  Bundle bundleObject = new Bundle();
-                  bundleObject.putSerializable("key", CustomListViewValuesArr);
-                  intent.putExtras(bundleObject);
-                  intent.putExtra("position", Integer.toString(position));
-                  startActivity(intent);
-                  (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
-              }
-          });
-
-        //getSupportActionBar().setTitle("Result");
-        title.setText("Result");
-    }
-
 
 
 
