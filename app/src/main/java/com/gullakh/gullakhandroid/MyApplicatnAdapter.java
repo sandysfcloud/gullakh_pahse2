@@ -137,7 +137,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
             }else {
             holder.image.setImageResource(R.drawable.carloan);
             }
-        if(tempValues.getstatus().equals("Submitted"))
+        if(tempValues.getstatus().equalsIgnoreCase("Created"))
         {
             holder.apply.setVisibility(View.GONE);
             holder.viewbutton.setVisibility(View.VISIBLE);

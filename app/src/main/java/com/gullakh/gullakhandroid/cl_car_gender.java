@@ -177,22 +177,43 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         if (datefield.getText().toString().equals("")||timefield.getText().toString().equals("")){
                             RegisterPageActivity.showErroralert(cl_car_gender.this, "Select Date and time field", "failed");
                         } else {
-                            if (month > Calendar.MONTH || yearv > Calendar.YEAR) {
+
+                            Calendar c = Calendar.getInstance();
+                            int currmonth = c.get(Calendar.MONTH);
+                            int curryear = c.get(Calendar.YEAR);
+                            Log.d("check date",currmonth+" "+curryear);
+                            if (yearv < curryear) {
                                 RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time ", "failed");
-                            } else {
-
-                                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                                    goToDatabase("mysearch", "Home Loan");
-                                } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-                                    goToDatabase("mysearch", "Personal Loan");
-                                } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
-                                    goToDatabase("mysearch", "Loan Against Property");
+                            }else if (yearv == curryear) {
+                                if (month < currmonth) {
+                                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time ", "failed");
                                 } else {
-                                    goToDatabase("mysearch", "Car Loan");
-                                }
+                                    if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                        goToDatabase("mysearch", "Home Loan");
+                                    } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                                        goToDatabase("mysearch", "Personal Loan");
+                                    } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
+                                        goToDatabase("mysearch", "Loan Against Property");
+                                    } else {
+                                        goToDatabase("mysearch", "Car Loan");
+                                    }
 
-                                goToServer(add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString());
-                                savetoserver();
+                                    goToServer(add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString());
+                                    savetoserver();
+                                }
+                            }else if (yearv >= curryear) {
+                                    if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                        goToDatabase("mysearch", "Home Loan");
+                                    } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                                        goToDatabase("mysearch", "Personal Loan");
+                                    } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
+                                        goToDatabase("mysearch", "Loan Against Property");
+                                    } else {
+                                        goToDatabase("mysearch", "Car Loan");
+                                    }
+
+                                    goToServer(add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString());
+                                    savetoserver();
                             }
                         }
                     }else{
@@ -230,12 +251,12 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.date:
                 Calendar now = Calendar.getInstance();
-                now.set(now.get(Calendar.YEAR) - 18, now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH));
+                now.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_gender.this,
-                        2000,
+                        2016,
                         00,
-                        01
+                        05
                 );
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);

@@ -16,14 +16,13 @@
     android:gravity="center">
     <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="Gender"
         android:textColor="#3f3f3f"
         app:typeface="robotoLight"
         android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,8 +30,7 @@
         android:weightSum="2"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="20dp">
 
 
 
@@ -94,14 +92,13 @@
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:textSize="18dp"
             android:id="@+id/TextViewOption4"
             android:textColor="#3f3f3f"
             app:typeface="robotoLight"
             android:text="Birthday"
-            android:gravity="center"
-            android:layout_marginTop="5dp" />
+            android:gravity="center" />
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
@@ -111,8 +108,7 @@
 
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/bdy"
-            android:layout_marginTop="5dp">
+            app:mtf_image="@drawable/bdy">
 
             <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"

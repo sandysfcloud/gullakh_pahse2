@@ -3,6 +3,7 @@ package com.gullakh.gullakhandroid;
 import android.support.multidex.MultiDexApplication;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by njfernandis on 05/02/16.
@@ -34,7 +35,7 @@ public class GlobalData extends MultiDexApplication {
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal_dev/webservice_new.php";
     static final String SERVER_GET_URL_web ="http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_contact_id";
     private String cartypeloan;
-    private ArrayList<String> lenders;
+    private HashMap<String, String> lenders;
     private String statename;
     private String Tenure;
     private String baltrans;
@@ -231,11 +232,11 @@ public class GlobalData extends MultiDexApplication {
         this.cartypeloan = cartypeloan;
     }
 
-    public void setLenders(ArrayList<String> lenders) {
+    public void setLenders(HashMap<String, String> lenders) {
         this.lenders = lenders;
     }
 
-    public ArrayList<String> getLenders() {
+    public HashMap<String, String> getLenders() {
             return lenders;
     }
 

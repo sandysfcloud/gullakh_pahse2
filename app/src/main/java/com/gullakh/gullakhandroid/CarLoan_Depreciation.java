@@ -73,7 +73,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
       //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Depreciation For Last Financial Year");
+        titl.setText("Last Financial Year Depreciation");
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);

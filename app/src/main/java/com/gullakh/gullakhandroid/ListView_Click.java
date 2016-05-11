@@ -37,7 +37,9 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     static boolean buttonApply=false;
-    private String lenderid,loan_type;
+    private String lenderid,loan_type,bankname,tenure,roi,emi,one_time_fee,fees,other,docum;
+    private String[] sepfee=null;
+    private String[] preclosure1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,27 +49,25 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
          getSupportActionBar().setTitle("Result");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        String bankname = intent.getStringExtra("bankname");
-        String tenure = intent.getStringExtra("tenure");
-        String roi = intent.getStringExtra("roi");
-        String one_time_fee = intent.getStringExtra("one_time_fee");
-        String emi = intent.getStringExtra("emi");
-        String fee = intent.getStringExtra("fee");
-        String other = intent.getStringExtra("other");
-        String docum = intent.getStringExtra("docum");
+        bankname = intent.getStringExtra("bankname");
+        tenure = intent.getStringExtra("tenure");
+        roi = intent.getStringExtra("roi");
+        one_time_fee = intent.getStringExtra("one_time_fee");
+        emi = intent.getStringExtra("emi");
+        fees = intent.getStringExtra("fee");
+        other = intent.getStringExtra("other");
+        docum = intent.getStringExtra("docum");
         lenderid = intent.getStringExtra("lenderid");
 
 
         Log.d("one_time_fee-proce in listvieclick",one_time_fee);
 Log.d("bankname in listvieclick",bankname);
 
-        String[] sepfee=null;
-
         Log.d("click docum ",docum);
 
 
-             Log.d("all fee data before" , fee);
-        sepfee = fee.split(";");
+             Log.d("all fee data before" , fees);
+        sepfee = fees.split(";");
        Log.d("all fee data after" , String.valueOf(sepfee));
 
 
@@ -299,12 +299,16 @@ if(one_time_fee!=null) {
                     }
 
 
-                if (lenderid.equalsIgnoreCase(((GlobalData) getApplication()).getLenders().get(0))){
+                if (lenderid.equalsIgnoreCase(((GlobalData) getApplication()).getLenders().get("bankid1"))){
                     //same lender
                 }else{
                     //different lender
-                    ((GlobalData) getApplication()).getLenders().add(0,lenderid);
-                    ((GlobalData) getApplication()).getLenders().add(1, "");
+                    ((GlobalData) getApplication()).getLenders().put("bankid1", lenderid);
+                    ((GlobalData) getApplication()).getLenders().put("roi1",roi );
+                    ((GlobalData) getApplication()).getLenders().put("emi1",emi );
+                    preclosure1=sepfee[0].split(" ");
+                    ((GlobalData) getApplication()).getLenders().put("preclosure1",preclosure1[preclosure1.length-1]);
+                    ((GlobalData) getApplication()).getLenders().put("preprocessing1",one_time_fee );
                 }
 
              //   Log.d("Result of lender1",((GlobalData) getApplication()).getLenders().get(0));

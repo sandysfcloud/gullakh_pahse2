@@ -1310,23 +1310,36 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         CustomListViewValuesArr2.addAll(arraylist);
         Log.d("CustomListViewValuesArr value check MAIN", String.valueOf(CustomListViewValuesArr2.size()));
 //------------------------------------------------------------------------------------------------------------------------------------------
+        HashMap<String,String> lenderInfo=new HashMap<String,String>();
+
         if (firsttimeflage == 0) {
              if(CustomListViewValuesArr2.size()>1)
              {
                  for (int i = 0; i < 2; i++) {
-                    arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                    //arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                     lenderInfo.put("bankid"+i,CustomListViewValuesArr2.get(i).getaccount_lender());
+                     lenderInfo.put("roi"+i,CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                     lenderInfo.put("emi"+i,CustomListViewValuesArr2.get(i).getemi_value());
+                     lenderInfo.put("preclosure"+i,CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                     lenderInfo.put("preprocessing"+i,CustomListViewValuesArr2.get(i).getprocessing_fee());
+
                     }
-                 ((GlobalData) this.getApplication()).setLenders(arrcombank);
+                 ((GlobalData) this.getApplication()).setLenders(lenderInfo);
                  firsttimeflage = 1;
             Log.d("check compbanl arrylist", String.valueOf(arrcombank));
             }
             else if(CustomListViewValuesArr2.size()==1)
              {
                  for (int i = 0; i < CustomListViewValuesArr2.size(); i++) {
-                     arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                    // arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                     lenderInfo.put("bankname"+i,CustomListViewValuesArr2.get(i).getaccount_lender());
+                     lenderInfo.put("roi"+i,CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                     lenderInfo.put("emi"+i,CustomListViewValuesArr2.get(i).getemi_value());
+                     lenderInfo.put("preclosure"+i,CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                     lenderInfo.put("preprocessing"+i,CustomListViewValuesArr2.get(i).getprocessing_fee());
                  }
                  arrcombank.add(1,"");
-                 ((GlobalData) this.getApplication()).setLenders(arrcombank);
+                 ((GlobalData) this.getApplication()).setLenders(lenderInfo);
              }
 
 //------------------------------------------------------------------------------------------------------------------------------------------

@@ -58,7 +58,8 @@
                 android:layout_marginTop="75dp"
                 android:textColor="@color/main_color_500"
                 android:textSize="20sp"
-                app:typeface="robotoLight"/>
+                app:typeface="robotoLight"
+                android:visibility="gone" />
         </FrameLayout>
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -71,7 +72,8 @@
             android:textColor="#000"
 
             android:textSize="18sp"
-            app:typeface="robotoLight"/>
+            app:typeface="robotoLight"
+            android:visibility="gone" />
 
         <com.gullakh.gullakhandroid.MaterialTextField
             android:layout_width="300dp"
@@ -148,7 +150,12 @@
             android:paddingLeft="15dp"
             android:gravity="fill"
             app:typeface="robotoLight"/>
-
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#ed1c24"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"

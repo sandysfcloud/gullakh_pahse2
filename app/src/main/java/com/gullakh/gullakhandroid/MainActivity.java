@@ -496,9 +496,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     editor.putBoolean(welcomeScreenShownPref, true);
                     editor.commit(); // Very important to save the preference
                 }
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
             }
         });
         alertadd.show();
