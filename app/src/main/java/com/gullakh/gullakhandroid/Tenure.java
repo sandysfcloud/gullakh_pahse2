@@ -216,6 +216,11 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
                 String empty=((GlobalData) getApplication()).getLoanType();
                 if(empty.equals("Car Loan")) {
+                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                    if (carloantp.equals("Used Car Loan")) {
+                        RegisterPageActivity.showAlertreview(this, 6);
+                    }
+                    else
                     dg=RegisterPageActivity.showAlertreview(Tenure.this, 5);
                 }
                 else

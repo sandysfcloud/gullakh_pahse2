@@ -236,7 +236,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             //******get data from search
-            setsearchdb();
+          //  setsearchdb();
 
 
 
@@ -290,7 +290,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         if (data.equals("myapplicatn")) {
 
-
+            Log.d("myapplication is clicked","googleact");
             DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
             Cursor crobj = dbobject.displayData("select * from userlogin");
             title.setText("My Applications");
@@ -344,10 +344,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                             sched.setBank_name(loanDeatils[i].getPrimary_lender());
                                             sched.setLoan_type(loanDeatils[i].getLoantype());
                                             searchlistviewArry.add(sched);
-                                            createListView();
-                                            setapplicatnadapter(searchlistviewArry);
+                                            Log.d("myapplication data in loop", String.valueOf(searchlistviewArry));
                                         }
                                     }
+                                    setContentView(R.layout.seach_display);
+                                    layout = (LinearLayout) findViewById(R.id.linear);
+                                    createListView();
+                                    Log.d("myapplication data outside", String.valueOf(searchlistviewArry));
+                                    setapplicatnadapter(searchlistviewArry);
+
                                 }else {
                                         AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
                                         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
@@ -383,9 +388,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
                         requestgetserver8.execute("token", "getloandetails", sessionid, contactid);
-
-                        setContentView(R.layout.seach_display);
-                        layout = (LinearLayout) findViewById(R.id.linear);
 
 
                //     }
@@ -1559,7 +1561,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 });
 
 
-                tenure.setRangeValues(1, Max_tenure / 12);
+
                 //tenure.setSelectedMaxValue(Max_tenure / 12);
                 if(seektenure==0) {
                     //when filter is clicked at 1st
@@ -1569,11 +1571,12 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 else {
                     tenur.setText(Integer.toString(seektenure) + " Years");
                     tenure.setSelectedMaxValue(seektenure);
+                    Log.d("else tenure", String.valueOf(seektenure));
                 }
 
                 Log.d("check tenure", String.valueOf(Max_tenure / 12));
                 Log.d("selected tenure", String.valueOf(seektenure));
-
+                tenure.setRangeValues(1, 7);
                 tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
                     @Override

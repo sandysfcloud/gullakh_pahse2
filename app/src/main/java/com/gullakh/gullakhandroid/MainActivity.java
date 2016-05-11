@@ -827,6 +827,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             }*/
             if (position == 4) {
+                Log.d("myapplication is clicked","mainact");
                 Intent intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                 intent.putExtra("data", "myapplicatn");
                 startActivity(intent);

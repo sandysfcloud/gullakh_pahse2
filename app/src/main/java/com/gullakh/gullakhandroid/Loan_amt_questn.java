@@ -273,7 +273,13 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.edit:
                 String emptyp=((GlobalData) getApplication()).getLoanType();
+
                 if(emptyp.equals("Car Loan")) {
+                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                    if (carloantp.equals("Used Car Loan")) {
+                        RegisterPageActivity.showAlertreview(Loan_amt_questn.this, 5);
+                    }
+                    else
                     RegisterPageActivity.showAlertreview(Loan_amt_questn.this, 4);
                 }
                 else

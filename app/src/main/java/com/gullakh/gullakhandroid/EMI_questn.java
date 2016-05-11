@@ -232,10 +232,19 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 String emptyp= ((GlobalData) getApplication()).getemptype();
                 String loanty=((GlobalData) getApplication()).getLoanType();
                 if(loanty.equals("Car Loan")) {
-                    if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
-                        RegisterPageActivity.showAlertreview(EMI_questn.this, 8);
-                    else
-                        RegisterPageActivity.showAlertreview(EMI_questn.this, 7);
+                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                    if (carloantp.equals("Used Car Loan")) {
+                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                            RegisterPageActivity.showAlertreview(EMI_questn.this, 9);
+                        else
+                            RegisterPageActivity.showAlertreview(EMI_questn.this, 8);
+                    }
+                    else {
+                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                            RegisterPageActivity.showAlertreview(EMI_questn.this, 8);
+                        else
+                            RegisterPageActivity.showAlertreview(EMI_questn.this, 7);
+                    }
                 }
                 else
                 {

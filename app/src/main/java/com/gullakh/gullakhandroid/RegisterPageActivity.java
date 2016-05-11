@@ -433,16 +433,23 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		String emptyp=((GlobalData) CurrentAct.getApplication()).getemptype();
 		String loantyp=((GlobalData) CurrentAct.getApplication()).getLoanType();
+		String carloantp=((GlobalData) CurrentAct.getApplication()).getCartypeloan();
 		//Log.d("emptyp value is", emptyp);
 		carloan_que_salary_new=new ArrayList<String>();
 		carloan_que_salary_new.add("Residence City:");
 		carloan_que_salary_new.add("Employment Type:");
-		String cartyp=((GlobalData) CurrentAct.getApplication()).getCartypeloan();
-		if(cartyp!=null&& !loantyp.equals("Personal Loan")) {
-			if (cartyp.equals("New Car Loan") || cartyp.equals("Used Car Loan")) {
-				carloan_que_salary_new.add("Car Loan Type: ");
+
+
+
+		if(loantyp!=null&& loantyp.equals("Car Loan")) {
+			carloan_que_salary_new.add("Car Loan Type: ");
+			if (carloantp.equals("Used Car Loan")) {
+				carloan_que_salary_new.add("Manufacture Year: ");
 			}
 		}
+
+
+
 		carloan_que_salary_new.add("Loan Amount: ");
 		carloan_que_salary_new.add("Tenure: ");
 
@@ -477,9 +484,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
 
-			if(cartyp!=null&& !loantyp.equals("Personal Loan")) {
-				if (cartyp.equals("New Car Loan") || cartyp.equals("Used Car Loan")) {
-					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
+		if(loantyp!=null&& loantyp.equals("Car Loan")) {
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
+			if (carloantp.equals("Used Car Loan")) {
+				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCarmanuyear());
 				}
 			}
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
@@ -563,7 +571,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 					if(((GlobalData) CurrentAct.getApplication()).getLoanType().equals("Car Loan"))
 					{
-
+						String carloantp=((GlobalData) CurrentAct.getApplication()).getCartypeloan();
 
 
 
@@ -573,71 +581,148 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							intclick.putExtra("review", "review");
 							CurrentAct.startActivity(intclick);
 						}
+						if (carloantp.equals("Used Car Loan")) {
 
-						if(v.getTag().toString().equals("4")) {
-							dialog.dismiss();
-							Intent intclick = new Intent(CurrentAct, Loan_amt_questn.class);
-							intclick.putExtra("review", "review");
-							CurrentAct.startActivity(intclick);
-						}
-						if(v.getTag().toString().equals("5")) {
-							dialog.dismiss();
-							Intent intclick = new Intent(CurrentAct, Tenure.class);
-							intclick.putExtra("review", "review");
-							CurrentAct.startActivity(intclick);
-						}
-						if(v.getTag().toString().equals("6")&&flag==0) {
-							dialog.dismiss();
-							Intent intclick = new Intent(CurrentAct, Salaryed_NetSalary.class);
-							intclick.putExtra("review", "review");
-							CurrentAct.startActivity(intclick);
-						}
-						if(v.getTag().toString().equals("6")&&flag==1) {
-							dialog.dismiss();
-							Intent intclick = new Intent(CurrentAct, Car_Loan_PAT.class);
-							intclick.putExtra("review", "review");
-							CurrentAct.startActivity(intclick);
-						}
-						if(v.getTag().toString().equals("7")&&flag==1) {
-							dialog.dismiss();
-							Intent intclick = new Intent(CurrentAct, CarLoan_Depreciation.class);
-							intclick.putExtra("review", "review");
-							CurrentAct.startActivity(intclick);
-						}
-
-						if(flag==0) {
-							if (v.getTag().toString().equals("7")) {
-								Log.d("check number click", v.getTag().toString());
+							//extra one question (manufature year) is added
+							if (v.getTag().toString().equals("4")) {
 								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, EMI_questn.class);
-								intclick.putExtra("review", "review");
-								CurrentAct.startActivity(intclick);
-							}
-							if (v.getTag().toString().equals("8")) {
-								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
-								intclick.putExtra("review", "review");
-								CurrentAct.startActivity(intclick);
-							}
-						}
-						if(flag==1) {
-
-							if (v.getTag().toString().equals("8")) {
-								Log.d("check number click", v.getTag().toString());
-								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, EMI_questn.class);
-								intclick.putExtra("review", "review");
-								CurrentAct.startActivity(intclick);
-							}
-							if (v.getTag().toString().equals("9")) {
-								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+								Intent intclick = new Intent(CurrentAct, cl_car_yearofmft.class);
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
 							}
 
-						}
+							if (v.getTag().toString().equals("5")) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Loan_amt_questn.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("6")) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Tenure.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("7") && flag == 0) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Salaryed_NetSalary.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("7") && flag == 1) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Car_Loan_PAT.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("8") && flag == 1) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, CarLoan_Depreciation.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
 
+							if (flag == 0) {
+								if (v.getTag().toString().equals("8")) {
+									Log.d("check number click", v.getTag().toString());
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, EMI_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+								if (v.getTag().toString().equals("9")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+							}
+							if (flag == 1) {
+
+								if (v.getTag().toString().equals("9")) {
+									Log.d("check number click", v.getTag().toString());
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, EMI_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+								if (v.getTag().toString().equals("10")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+
+							}
+
+
+						}//used car loan
+						else {
+
+							if (v.getTag().toString().equals("4")) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Loan_amt_questn.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("5")) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Tenure.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("6") && flag == 0) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Salaryed_NetSalary.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("6") && flag == 1) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, Car_Loan_PAT.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+							if (v.getTag().toString().equals("7") && flag == 1) {
+								dialog.dismiss();
+								Intent intclick = new Intent(CurrentAct, CarLoan_Depreciation.class);
+								intclick.putExtra("review", "review");
+								CurrentAct.startActivity(intclick);
+							}
+
+							if (flag == 0) {
+								if (v.getTag().toString().equals("7")) {
+									Log.d("check number click", v.getTag().toString());
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, EMI_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+								if (v.getTag().toString().equals("8")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+							}
+							if (flag == 1) {
+
+								if (v.getTag().toString().equals("8")) {
+									Log.d("check number click", v.getTag().toString());
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, EMI_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+								if (v.getTag().toString().equals("9")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+
+							}
+						}
 
 
 
