@@ -34,6 +34,9 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
         TextView loantype= (TextView) findViewById(R.id.tf2);
         TextView loanamt= (TextView) findViewById(R.id.loan_amt);
         TextView bnkname= (TextView) findViewById(R.id.banknam);
+        TextView tenure= (TextView) findViewById(R.id.tenure);
+        TextView roi= (TextView) findViewById(R.id.roi);
+
         Intent i=getIntent();
 
         String data=i.getStringExtra("progress").replaceAll("\\.00", "");
@@ -42,6 +45,7 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
         loantype.setText(i.getStringExtra("data1"));
         loanamt.setText(i.getStringExtra("data2"));
         bnkname.setText(i.getStringExtra("data3"));
+        tenure.setText(i.getStringExtra("data4"));
         mHandler = new Handler();
         initSegmentProgressBar();
 
