@@ -118,7 +118,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     EditText editloan;
     TextView loan_amt,tenr_amt,title;
     ArrayAdapter<String> adapter;
-    private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee","Prclosure fee" };
+    private static final String[] COUNTRIES = new String[] { "Best Rate", "Processing Fee","Preclosure fee" };
     Map<String, String> Arry_bankimg=null;
     String listidmaster,globaltenure,globalloan_type,globalsal;
     private LoanDetails loandetailsobj1;
@@ -1157,8 +1157,8 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
 
-            tenr_amt.setText(Max_tenure+" Year(s)");
-            Log.d("tenure is global", String.valueOf(Max_tenure));
+            tenr_amt.setText((Max_tenure/12)+" Year(s)");
+            Log.d("tenure is global", String.valueOf(Max_tenure/12));
 
 
         //Max_tenure = Max_tenure / 12;
