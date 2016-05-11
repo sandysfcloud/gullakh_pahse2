@@ -21,6 +21,16 @@ public class LoanReqForMyapp
     public String d5;
     public String d6;
     public String createdtime;
+    public String plemi="";
+    public String plroi="";
+
+    public String getPlemi() {
+        return plemi;
+    }
+
+    public String getPlroi() {
+        return plroi;
+    }
 
     public String getD0() {
         return d0;

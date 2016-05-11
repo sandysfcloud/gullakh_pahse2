@@ -139,25 +139,6 @@ public class MyApplicatnAdapter extends BaseAdapter {
             }
         if(tempValues.getstatus().equalsIgnoreCase("Created"))
         {
-            holder.apply.setVisibility(View.GONE);
-            holder.viewbutton.setVisibility(View.VISIBLE);
-            holder.viewbutton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v)
-                {
-                    //int pos= (int) v.getTag();
-                    Intent intent = new Intent(cont, Myapplication.class);
-                    intent.putExtra("data1", tempValues.getLoan_type());//loanParameters.getLoantype()
-                    intent.putExtra("data2", tempValues.getLoan_amount());
-                    intent.putExtra("data3", tempValues.getBank_name());
-                    intent.putExtra("progress", tempValues.getCompletedpercentage());
-                    cont.startActivity(intent);
-                    ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
-                }
-        });
-        }
-        else
-        {
             holder.viewbutton.setVisibility(View.GONE);
             holder.apply.setVisibility(View.VISIBLE);
             holder.apply.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +157,28 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     intent.putExtra("d5",data.get(pos).getD5());
                     intent.putExtra("d6",data.get(pos).getD6());
 
+                    cont.startActivity(intent);
+                    ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            });
+        }
+        else
+        {
+            holder.apply.setVisibility(View.GONE);
+            holder.viewbutton.setVisibility(View.VISIBLE);
+            holder.viewbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    //int pos= (int) v.getTag();
+                    Intent intent = new Intent(cont, Myapplication.class);
+                    intent.putExtra("data1", tempValues.getLoan_type());//loanParameters.getLoantype()
+                    intent.putExtra("data2", tempValues.getLoan_amount());
+                    intent.putExtra("data3", tempValues.getBank_name());
+                    intent.putExtra("data4",tempValues.getPlemi());
+                    intent.putExtra("data5",tempValues.getPlroi());
+                    intent.putExtra("progress", tempValues.getCompletedpercentage());
+                    intent.putExtra("status", tempValues.getstatus());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }

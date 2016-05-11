@@ -343,6 +343,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                             sched.setLoan_amount(loanDeatils[i].getLoan_amount());
                                             sched.setBank_name(loanDeatils[i].getPrimary_lender());
                                             sched.setLoan_type(loanDeatils[i].getLoantype());
+                                            sched.setPlemi(loanDeatils[i].getPlemi());
+                                            sched.setPlroi(loanDeatils[i].getPlroi());
                                             searchlistviewArry.add(sched);
 
                                         }

@@ -18,6 +18,10 @@ import android.widget.TextView;
 import com.natasa.progressviews.CircleSegmentBar;
 import com.natasa.progressviews.utils.ProgressStartPoint;
 
+import java.text.Format;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Myapplication extends AppCompatActivity  implements View.OnClickListener{
     private CircleSegmentBar segmentBar;
     private Runnable mTimer;
@@ -25,27 +29,35 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
     private Handler mHandler;
     private int progpercent;
     ImageView review;
+    private TextView loantype,loanamtemi,roi,loanamt,bnkname,emi,stat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myapplication);
 
-        TextView loantype= (TextView) findViewById(R.id.tf2);
-        TextView loanamt= (TextView) findViewById(R.id.loan_amt);
-        TextView bnkname= (TextView) findViewById(R.id.banknam);
-        TextView tenure= (TextView) findViewById(R.id.tenure);
-        TextView roi= (TextView) findViewById(R.id.roi);
+        loantype= (TextView) findViewById(R.id.tf2);
+        loanamt= (TextView) findViewById(R.id.loan_amt);
+        bnkname= (TextView) findViewById(R.id.banknam);
+        emi= (TextView) findViewById(R.id.tenure);
+        roi= (TextView) findViewById(R.id.roi);
+        stat= (TextView) findViewById(R.id.stat);
 
         Intent i=getIntent();
 
         String data=i.getStringExtra("progress").replaceAll("\\.00", "");
         progpercent= Integer.parseInt(data);
         //progpercent= 20;//Integer.parseInt(i.getStringExtra("progress"));
-        loantype.setText(i.getStringExtra("data1"));
-        loanamt.setText(i.getStringExtra("data2"));
-        bnkname.setText(i.getStringExtra("data3"));
-        tenure.setText(i.getStringExtra("data4"));
+
+        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+        if (i.getStringExtra("data1")!=null) {
+            loantype.setText(i.getStringExtra("data1"));
+            loanamt.setText(i.getStringExtra("data2"));
+            bnkname.setText(i.getStringExtra("data3"));
+            emi.setText("Rs. "+i.getStringExtra("data4"));
+            roi.setText(i.getStringExtra("data5") + " %");
+            stat.setText(i.getStringExtra("status"));
+        }
         mHandler = new Handler();
         initSegmentProgressBar();
 

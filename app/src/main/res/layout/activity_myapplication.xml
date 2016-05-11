@@ -14,169 +14,256 @@
         android:orientation="vertical"
         android:weightSum="1">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="0dp"
+            android:background="#7d5b5b5b">
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/tf1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
             android:maxLines="2"
             android:text="Loan Type: "
-            android:textColor="#616161"
+            android:textColor="#000000"
             android:textSize="16sp"
             app:typeface="robotoLight"
-            />
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:autoText="false"
+            android:background="#7d7d7d7d" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             android:id="@+id/tf2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="fill_parent"
             android:background="@android:color/transparent"
             android:maxLines="1"
             android:text="Recieving Data from server"
-            android:textColor="#616161"
+            android:textColor="#000000"
             android:textSize="16sp"
             app:typeface="robotoLight"
-            />
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingLeft="10dp" />
     </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="0dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="0dp"
+            android:background="#7d5b5b5b">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
                 android:maxLines="2"
                 android:text="Bank: "
-                android:textColor="#616161"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:typeface="robotoLight"
-                />
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:autoText="false"
+                android:background="#7d7d7d7d" />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:id="@+id/banknam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
                 android:text="data"
-                android:textColor="#616161"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:typeface="robotoLight"
-                />
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10dp" />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="0dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="0dp"
+            android:background="#7d5b5b5b">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
                 android:maxLines="2"
                 android:text="Loan Amount: "
-                android:textColor="#616161"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:typeface="robotoLight"
-                />
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:autoText="false"
+                android:background="#7d7d7d7d" />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:id="@+id/loan_amt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
                 android:text="data"
-                android:textColor="#616161"
-                android:textSize="16sp" />
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="0dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="0dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="0dp"
+            android:background="#7d5b5b5b">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
                 android:maxLines="2"
-                android:text="Tenure: "
-                android:textColor="#616161"
+                android:text="EMI: "
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:typeface="robotoLight"
-                />
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:autoText="false"
+                android:background="#7d7d7d7d" />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:id="@+id/tenure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
-                android:text="null"
-                android:textColor="#616161"
+                android:text="data"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:typeface="robotoLight"
-                />
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="25dp"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="0dp"
+            android:background="#7d5b5b5b">
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
                 android:maxLines="2"
                 android:text="ROI: "
-                android:textColor="#616161"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:typeface="robotoLight"
-                />
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:autoText="false"
+                android:background="#7d7d7d7d" />
 
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 android:id="@+id/roi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
-                android:text="null"
-                android:textColor="#616161"
+                android:text="data"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:typeface="robotoLight"
-                />
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10dp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="0dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="0dp"
+            android:background="#7d5b5b5b">
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:maxLines="2"
+                android:text="Status:"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:autoText="false"
+                android:background="#7d7d7d7d" />
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                android:id="@+id/stat"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:text="data"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:typeface="robotoLight"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:paddingLeft="10dp" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="0dp"
+            android:layout_marginTop="20dp">
 
             <com.natasa.progressviews.CircleSegmentBar
                 android:id="@+id/segment_bar"

@@ -53,6 +53,9 @@ public class ListModel implements Serializable{
     public String loan_type;
     public boolean checkeddata;
     public String pre_closure_fee;
+    public String plroi;
+    public String plemi;
+
     /*********** Set Methods ******************/
 
    public void setserchcartyp( String agenda_date)
@@ -428,6 +431,22 @@ public class ListModel implements Serializable{
     }
     public String getpre_closure_fee() {
         return pre_closure_fee;
+    }
+
+    public void setPlemi(String plemi) {
+        this.plemi = plemi;
+    }
+
+    public void setPlroi(String plroi) {
+        this.plroi = plroi;
+    }
+
+    public String getPlroi() {
+        return plroi;
+    }
+
+    public String getPlemi() {
+        return plemi;
     }
 }
 
