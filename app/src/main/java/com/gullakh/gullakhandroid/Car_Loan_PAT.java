@@ -68,6 +68,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         review.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Last Financial Year Net Profit");
+        titl.setTextSize(16);
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);

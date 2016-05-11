@@ -88,7 +88,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
     }
     private void getDataFromHashMap()
     {
-        if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null) {
+        if(cl_car_global_data.dataWithAns.get("yom")!=null) {
             yom.setText(cl_car_global_data.dataWithAns.get("yom"));
         }
     }

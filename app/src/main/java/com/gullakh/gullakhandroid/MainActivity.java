@@ -488,7 +488,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         alertadd.setView(view);
         alertadd.setCancelable(true);
-        alertadd.setPositiveButton("Got It..!", new DialogInterface.OnClickListener() {
+        alertadd.setPositiveButton("Got It..!",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(ch1.isChecked()){

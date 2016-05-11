@@ -42,6 +42,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Button back = (Button) findViewById(R.id.back);
         title = (TextView) findViewById(R.id.title);
+
      //   title.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
 
         onetext = (TextView) findViewById(R.id.onetext);
@@ -74,6 +75,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         review.setOnClickListener(this);
       //  titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Last Financial Year Depreciation");
+        titl.setTextSize(16);
         actionBar.setCustomView(v);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);

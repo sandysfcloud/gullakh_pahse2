@@ -118,6 +118,8 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
                     android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:nextFocusRight="@+id/LastName"
                     android:paddingLeft="10dp" />
 
                 <com.gullakh.gullakhandroid.font.RobotoEditText
@@ -132,6 +134,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@+id/emailaddress"
                     android:paddingLeft="10dp" />
             </LinearLayout>
 

@@ -255,8 +255,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_gender.this,
                         2016,
-                        00,
-                        05
+                        05,
+                        00
                 );
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);
@@ -350,7 +350,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 {
                     ContactBR[] Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR[].class);
                     borrowercontactid = Borrower_contact[0].getId();
-                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",((GlobalData) getApplication()).getLenders().get(0),((GlobalData) getApplication()).getLenders().get(1));
+                    Gson gson1 = new Gson();
+                    String json = gson1.toJson(((GlobalData) getApplication()).getLenders());
+                    json=json.replaceAll("\\{|\\}", "");
+                    Log.d("lender",json);
+                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",json);
                 }else{
                     requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
                             ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
@@ -660,6 +664,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     state.setText(details[0].getMailingstate());
                     pin.setText(details[0].getMailingzip());
                     name=details[0].getFirstname();
+                    borrowercontactid=details[0].getId();
                 }
                 dgthis.dismiss();
             }

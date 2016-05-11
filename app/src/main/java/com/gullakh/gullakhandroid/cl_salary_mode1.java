@@ -241,7 +241,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                         overridePendingTransition(R.transition.left, R.transition.right);
 
                     }  else {
-                        Intent intent = new Intent(cl_salary_mode1.this, cl_car_gender.class);
+                        Intent intent = new Intent(cl_salary_mode1.this, cl_salary_mode2.class);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }

@@ -299,16 +299,16 @@ if(one_time_fee!=null) {
                     }
 
 
-                if (lenderid.equalsIgnoreCase(((GlobalData) getApplication()).getLenders().get("bankid1"))){
+                if (lenderid.equalsIgnoreCase(((GlobalData) getApplication()).getLenders().get("primarylender"))){
                     //same lender
                 }else{
                     //different lender
-                    ((GlobalData) getApplication()).getLenders().put("bankid1", lenderid);
-                    ((GlobalData) getApplication()).getLenders().put("roi1",roi );
-                    ((GlobalData) getApplication()).getLenders().put("emi1",emi );
+                    ((GlobalData) getApplication()).getLenders().put("primarylender", lenderid);
+                    ((GlobalData) getApplication()).getLenders().put("plroi",roi );
+                    ((GlobalData) getApplication()).getLenders().put("plemi",emi );
                     preclosure1=sepfee[0].split(" ");
-                    ((GlobalData) getApplication()).getLenders().put("preclosure1",preclosure1[preclosure1.length-1]);
-                    ((GlobalData) getApplication()).getLenders().put("preprocessing1",one_time_fee );
+                    ((GlobalData) getApplication()).getLenders().put("plpreclosurefee",preclosure1[preclosure1.length-1]);
+                    ((GlobalData) getApplication()).getLenders().put("plprosesingfee",one_time_fee );
                 }
 
              //   Log.d("Result of lender1",((GlobalData) getApplication()).getLenders().get(0));

@@ -236,7 +236,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             //******get data from search
-            setsearchdb();
+           // setsearchdb();
 
 
 
@@ -1290,6 +1290,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
                 Intent intent = new Intent(GoogleCardsMediaActivity.this, Myapplication.class);
                 intent.putExtra("data", "carloan");
+                Log.d("Sandeep check",String.valueOf(position));
                 startActivity(intent);
                 (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
 
@@ -1304,78 +1305,85 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
     public void setadapter(ArrayList<ListModel> arraylist) {
-       // CustomListViewValuesArr2 = CustomListViewValuesArr;
+        // CustomListViewValuesArr2 = CustomListViewValuesArr;
         Log.d("setadapter param", String.valueOf(arraylist));
         CustomListViewValuesArr2.clear();
         CustomListViewValuesArr2.addAll(arraylist);
         Log.d("CustomListViewValuesArr value check MAIN", String.valueOf(CustomListViewValuesArr2.size()));
 //------------------------------------------------------------------------------------------------------------------------------------------
-        HashMap<String,String> lenderInfo=new HashMap<String,String>();
+        HashMap<String, String> lenderInfo = new HashMap<String, String>();
 
         if (firsttimeflage == 0) {
-             if(CustomListViewValuesArr2.size()>1)
-             {
-                 for (int i = 0; i < 2; i++) {
-                    //arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
-                     lenderInfo.put("bankid"+i,CustomListViewValuesArr2.get(i).getaccount_lender());
-                     lenderInfo.put("roi"+i,CustomListViewValuesArr2.get(i).getfloating_interest_rate());
-                     lenderInfo.put("emi"+i,CustomListViewValuesArr2.get(i).getemi_value());
-                     lenderInfo.put("preclosure"+i,CustomListViewValuesArr2.get(i).getpre_closure_fee());
-                     lenderInfo.put("preprocessing"+i,CustomListViewValuesArr2.get(i).getprocessing_fee());
-
+            if (CustomListViewValuesArr2.size() > 1) {
+                for (int i = 0; i < 2; i++) {
+                    if (i == 0) {
+                        lenderInfo.put("primarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
+                        lenderInfo.put("plroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                        lenderInfo.put("plemi", CustomListViewValuesArr2.get(i).getemi_value());
+                        lenderInfo.put("plpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                        lenderInfo.put("plprosesingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
+                    } else if (i == 1) {
+                        lenderInfo.put("secondarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
+                        lenderInfo.put("slroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                        lenderInfo.put("slemi", CustomListViewValuesArr2.get(i).getemi_value());
+                        lenderInfo.put("slpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                        lenderInfo.put("slprocessingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
                     }
-                 ((GlobalData) this.getApplication()).setLenders(lenderInfo);
-                 firsttimeflage = 1;
-            Log.d("check compbanl arrylist", String.valueOf(arrcombank));
-            }
-            else if(CustomListViewValuesArr2.size()==1)
-             {
-                 for (int i = 0; i < CustomListViewValuesArr2.size(); i++) {
-                    // arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
-                     lenderInfo.put("bankname"+i,CustomListViewValuesArr2.get(i).getaccount_lender());
-                     lenderInfo.put("roi"+i,CustomListViewValuesArr2.get(i).getfloating_interest_rate());
-                     lenderInfo.put("emi"+i,CustomListViewValuesArr2.get(i).getemi_value());
-                     lenderInfo.put("preclosure"+i,CustomListViewValuesArr2.get(i).getpre_closure_fee());
-                     lenderInfo.put("preprocessing"+i,CustomListViewValuesArr2.get(i).getprocessing_fee());
-                 }
-                 arrcombank.add(1,"");
-                 ((GlobalData) this.getApplication()).setLenders(lenderInfo);
-             }
+                    //arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
+                }
+                ((GlobalData) this.getApplication()).setLenders(lenderInfo);
+                firsttimeflage = 1;
+                Log.d("check compbanl arrylist", String.valueOf(arrcombank));
+            } else if (CustomListViewValuesArr2.size() == 1) {
+                for (int i = 0; i < 2; i++) {
+                    if (i == 0) {
+                        lenderInfo.put("primarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
+                        lenderInfo.put("plroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
+                        lenderInfo.put("plemi", CustomListViewValuesArr2.get(i).getemi_value());
+                        lenderInfo.put("plpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
+                        lenderInfo.put("plprosesingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
+                        lenderInfo.put("secondarylender", "");
+                        lenderInfo.put("slroi", "");
+                        lenderInfo.put("slemi", "");
+                        lenderInfo.put("slpreclosurefee", "");
+                        lenderInfo.put("slprocessingfee", "");
+                    }
+                    ((GlobalData) this.getApplication()).setLenders(lenderInfo);
+                }
 
 //------------------------------------------------------------------------------------------------------------------------------------------
-    }
+            }
+            mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
+
+            SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
+                    new SwipeDismissAdapter(mGoogleCardsAdapter, this));
+            swingBottomInAnimationAdapter.setAbsListView(listView);
 
 
-          mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
+            assert swingBottomInAnimationAdapter.getViewAnimator() != null;
+            swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
+                    INITIAL_DELAY_MILLIS);
 
-          SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
-                  new SwipeDismissAdapter(mGoogleCardsAdapter, this));
-          swingBottomInAnimationAdapter.setAbsListView(listView);
+            //listView.setAdapter(null);
+            //swingBottomInAnimationAdapter.notifyDataSetChanged();
+            listView.setAdapter(swingBottomInAnimationAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+                    Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
+                    Bundle bundleObject = new Bundle();
+                    bundleObject.putSerializable("key", CustomListViewValuesArr);
+                    intent.putExtras(bundleObject);
+                    intent.putExtra("position", Integer.toString(position));
+                    startActivity(intent);
+                    (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            });
 
-
-          assert swingBottomInAnimationAdapter.getViewAnimator() != null;
-          swingBottomInAnimationAdapter.getViewAnimator().setInitialDelayMillis(
-                  INITIAL_DELAY_MILLIS);
-
-          //listView.setAdapter(null);
-          //swingBottomInAnimationAdapter.notifyDataSetChanged();
-          listView.setAdapter(swingBottomInAnimationAdapter);
-          listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-              @Override
-              public void onItemClick(AdapterView<?> parent, View view, int position,
-                                      long id) {
-                  Intent intent = new Intent(GoogleCardsMediaActivity.this, ListView_Click.class);
-                  Bundle bundleObject = new Bundle();
-                  bundleObject.putSerializable("key", CustomListViewValuesArr);
-                  intent.putExtras(bundleObject);
-                  intent.putExtra("position", Integer.toString(position));
-                  startActivity(intent);
-                  (GoogleCardsMediaActivity.this).overridePendingTransition(R.transition.left, R.transition.right);
-              }
-          });
-
-        //getSupportActionBar().setTitle("Result");
-        title.setText("Result");
+            //getSupportActionBar().setTitle("Result");
+            title.setText("Result");
+        }
     }
 
 
@@ -1572,7 +1580,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 });
 
 
-                tenure.setRangeValues(1, Max_tenure / 12);
+
                 //tenure.setSelectedMaxValue(Max_tenure / 12);
                 if(seektenure==0) {
                     //when filter is clicked at 1st
@@ -1587,16 +1595,17 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 Log.d("check tenure", String.valueOf(Max_tenure / 12));
                 Log.d("selected tenure", String.valueOf(seektenure));
 
+                tenure.setRangeValues(1, 7);
                 tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
                     @Override
                     public void onRangeSeekBarValuesChanged(RangeSeekBar<?> rangeSeekBar, Integer integer, Integer t1) {
 
                         Log.d("tenure-value2", String.valueOf(t1));
-                       // seektenure = t1+1;
-                       // tenur.setText(String.valueOf(t1+1)+" Years");
+                        // seektenure = t1+1;
+                        // tenur.setText(String.valueOf(t1+1)+" Years");
                         seektenure = t1;
-                        tenur.setText(String.valueOf(t1)+" Years");
+                        tenur.setText(String.valueOf(t1) + " Years");
                     }
 
 
