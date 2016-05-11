@@ -188,13 +188,14 @@
         android:text="Sorted By"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="-10dp"
-        android:layout_marginRight="-125dp"
+        android:layout_marginRight="-165dp"
         app:typeface="robotoLight"/>
         <Spinner android:id="@+id/spinner1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
 
             android:textColor="#616161"
+            android:layout_marginRight="14dp"
             android:textSize="15sp"
             android:drawSelectorOnTop="true"
             android:entries="@array/sortby"
