@@ -461,7 +461,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				//carloan_que_salary_new.add("PAT for Prev. to Last FY: ");
 				//carloan_que_salary_new.add("Dep. for Prev. to Last FY: ");
 			 }else
-				carloan_que_salary_new.add("Net Monthly Salary: ");
+				carloan_que_salary_new.add("Salary/Incentives: ");
 		}
 
 		carloan_que_salary_new.add("Current EMI's: ");
@@ -469,7 +469,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		if(loantyp.equals("Personal Loan"))
 		{
-			carloan_que_salary_new.add("Date Of Birth: ");
+			carloan_que_salary_new.add("DOB/Gender: ");
 			carloan_que_salary_new.add("Current Employer: ");
 			carloan_que_salary_new.add("Salary Payment Mode: ");
 
@@ -508,7 +508,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
         else {
 
 				if (((GlobalData) act.getApplication()).getnetsalary() != null) {
-					Log.d("net sal not null", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
+					Log.d("net sal not null", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()+"/"+((GlobalData) act.getApplication()).getavgince()));
 					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getnetsalary().toString());
 				}
 			}
@@ -517,7 +517,16 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getEmi().toString());
 		if(loantyp.equals("Personal Loan"))
 		{
-			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getDob());
+			String gender=null;
+			if(((GlobalData) act.getApplication()).getgender().equals("male"))
+			{
+				Log.d("Gender is",((GlobalData) act.getApplication()).getgender());
+				gender="M";
+
+			}
+			else
+				gender="F";
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getDob()+"/"+gender);
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemployer());
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getSalryPayMode());
 

@@ -195,7 +195,7 @@
         android:text="Sorted By"
         android:layout_marginLeft="18dp"
         android:layout_marginBottom="-10dp"
-        android:layout_marginRight="-165dp"
+
         app:typeface="robotoLight"/>
         <Spinner android:id="@+id/spinner1"
             android:layout_width="wrap_content"
