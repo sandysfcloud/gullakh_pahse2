@@ -443,8 +443,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		if(loantyp!=null&& loantyp.equals("Car Loan")) {
 			carloan_que_salary_new.add("Car Loan Type: ");
-			if (carloantp.equals("Used Car Loan")) {
-				carloan_que_salary_new.add("Manufacture Year: ");
+			if(carloantp!=null) {
+				if (carloantp.equals("Used Car Loan")) {
+					carloan_que_salary_new.add("Manufacture Year: ");
+				}
 			}
 		}
 
@@ -486,10 +488,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		if(loantyp!=null&& loantyp.equals("Car Loan")) {
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCartypeloan());
-			if (carloantp.equals("Used Car Loan")) {
-				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCarmanuyear());
+			if (carloantp != null) {
+				if (carloantp.equals("Used Car Loan")) {
+
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCarmanuyear());
 				}
 			}
+		}
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getTenure());
 		if(emptyp!=null) {
