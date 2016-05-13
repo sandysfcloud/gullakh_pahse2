@@ -83,7 +83,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
 
 
-        if((cl_car_global_data.dataWithAns.get("total_emi")!=null))
+        if(((GlobalData) getApplication()).getEmi()!=null)
         {
             String emi=String.valueOf(((GlobalData) getApplication()).getEmi().intValue());
             //String emi=String.valueOf(Integer.parseInt((cl_car_global_data.dataWithAns.get("total_emi"))));

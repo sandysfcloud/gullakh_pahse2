@@ -25,6 +25,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -103,7 +105,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public ArrayList<ListModel> newCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> tenrCustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> searchlistviewArry = new ArrayList<ListModel>();
-    int seek_loanamt=1,sortbyposition,combank=1;
+    int seek_loanamt=1,sortbyposition,combank=1,edittextloan=0;
     Float roi_min=4.0f, roi_max = 8.0f ;
     Map<String, String> Arry_banknam = new HashMap<>();
     ;
@@ -444,8 +446,9 @@ public void setsearchdb()
     Log.d("my search clicked","3");
     try {
         if (cr.moveToFirst()) {
-            Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2)+" "+cr.getString(3)+" "+cr.getString(4));
+           // Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2)+" "+cr.getString(3)+" "+cr.getString(4));
             while (cr.isAfterLast() == false) {
+                Log.w("mysearch data inside", cr.getString(1) + " " + cr.getString(2)+" "+cr.getString(3)+" "+cr.getString(4));
                 ListModel sched2 = new ListModel();
                 sched2.setsearchtnam(cr.getString(1));//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
                 sched2.setsearchdate(cr.getString(4));
@@ -1009,7 +1012,8 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
     public void calculate() {
-        int loan_amt = Integer.parseInt(loan);
+
+        int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
         double final_bp, emi_valu, emi_value, bp;
         CustomListViewValuesArr.clear();
         if(!disbank.equals(null))
@@ -1035,9 +1039,9 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
 
                 } else {
-                    /*Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                    Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
                     Log.d("Max_tenure", String.valueOf(Max_tenure));
-                    Log.d("loan_amt", String.valueOf(-loan_amt));*/
+                    Log.d("loan_amt", String.valueOf(-loan_amt));
 
                     emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
 
@@ -1472,12 +1476,15 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 //Dialog dialog = new Dialog(this, android.R.style.Theme_Light);
 
                 final RangeSeekBar seekBar1 = (RangeSeekBar) dialog.findViewById(R.id.loanamt);
+                editloan = (EditText) dialog.findViewById(R.id.loanamountid);
+
+
 
                 final RangeSeekBar tenure = (RangeSeekBar) dialog.findViewById(R.id.tenure);
                 final RangeSeekBar<Float> rangeSeekBar = (RangeSeekBar) dialog.findViewById(R.id.rangsb);
                // SeekBar tenure = (SeekBar) dialog.findViewById(R.id.tenure);
                 final TextView t1 = (TextView) dialog.findViewById(R.id.textView1);
-                editloan = (EditText) dialog.findViewById(R.id.loanamountid);
+
                 min = (TextView) dialog.findViewById(R.id.min);
                 max = (TextView) dialog.findViewById(R.id.max);
                 if (roi_min != 0) {
@@ -1500,6 +1507,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                         seekBar1.setSelectedMaxValue(1);
                         loand.setText("1 Lakh");
                         editloan.setText("100000");
+                        editloan.setSelection(editloan.getText().length());
 
 
                         roi_min=8.0f;
@@ -1564,11 +1572,12 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
 
 
-                seekBar1.setRangeValues(1, 10);
+                seekBar1.setRangeValues(1, 100);
                 Log.d("selected loan", String.valueOf(seek_loanamt));
                 seekBar1.setSelectedMaxValue(seek_loanamt);
-                editloan.setText(String.valueOf(seek_loanamt) + "00000");
-                loand.setText(String.valueOf(seek_loanamt) + " Lakh");
+                editloan.setText(((GlobalData) getApplication()).getloanamt());
+                editloan.setSelection(editloan.getText().length());
+                loand.setText(((GlobalData) getApplication()).getloanamt());
 
                 seekBar1.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
@@ -1579,14 +1588,88 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                         Log.d("loan-value2", String.valueOf(t1));
                         Double value = (t1 / 10.0);
                         seek_loanamt = t1;
-                        loand.setText(String.valueOf(t1) + " Lakh");
+                        loand.setText(String.valueOf(t1) + "00000");
                         editloan.setText(String.valueOf(t1) + "00000");
+                        editloan.setSelection(editloan.getText().length());
                         updateloanamt(seek_loanamt);
 
                     }
 
 
                 });
+
+
+
+
+
+
+
+                //******
+
+                editloan.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        Format format = NumberFormat.getInstance();
+                        // you can call or do what you want with your EditText here
+                        //amt.setText(String.valueOf());
+                    }
+
+                    public void afterTextChanged(Editable s) {
+
+                        Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+                        if (!editloan.getText().toString().equals("")) {
+                            String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(editloan.getText()).replaceAll(",", ""))));
+
+                            strtemp = strtemp.substring(0, strtemp.length() - 3);
+
+                            String loan = editloan.getText().toString();
+                            Log.d("loan KK", loan);
+                            loan = loan.replaceAll("\\.00", "");
+                            loan = loan.replaceAll("Rs.", "");
+                            loan = loan.replaceAll(",", "");
+                            loan = loan.replaceAll("\\s+", "");
+                            Log.d("loan KK2", loan);
+                            try {
+                                seekBar1.setSelectedMaxValue(Integer.parseInt(loan) / 100000);
+                                loand.setText(String.valueOf(Integer.parseInt(loan)));
+                                seek_loanamt = Integer.parseInt(loan) / 100000;
+                                edittextloan=Integer.parseInt(loan);
+                                updateloanamt(seek_loanamt);
+
+                               // mSeekArc.setProgress(Integer.valueOf(loan) / 10000);
+                               // mSeekArcProgress.setText(strtemp);
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                    }
+                });
+
+
+
+
+
+
+
+                //********
+
+
+
+
+
+
+
+
+
+
+
 
 
                 tenure.setRangeValues(1, Max_tenure / 12);
@@ -1646,6 +1729,13 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     if (seek_loanamt > 0 && seek_loanamt == prevloan) {
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
                     }
+                    if(edittextloan!=0)
+                    {
+                        Log.d("loan amount edittext is changed in tenure!!", String.valueOf(edittextloan));
+                        ((GlobalData) getApplication()).setloanamt(String.valueOf(edittextloan));
+                        loan_amt.setText(edittextloan+"");
+
+                    }
 
                     calculate();
 
@@ -1658,6 +1748,12 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     loan_amt.setText(String.valueOf(seek_loanamt)+"00000");
                     Log.d("loan seekbar moved!!!!!", "");
                     ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
+                    if(edittextloan!=0)
+                    {
+                        Log.d("loan amount edittext is changed !!", String.valueOf(edittextloan));
+                        ((GlobalData) getApplication()).setloanamt(String.valueOf(edittextloan));
+                        loan_amt.setText(edittextloan+"");
+                    }
                     loan_amtcalcutn("loan");
                     //calculate();
 

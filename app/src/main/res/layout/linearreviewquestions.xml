@@ -46,7 +46,8 @@
             android:textSize="18dp"
             android:layout_weight="1"
             android:textColor="#ff00"
-            android:singleLine="true"
+
+            android:maxLines = "2"
             android:id="@+id/selectedanswer"
             android:text="Salaried"/>
 

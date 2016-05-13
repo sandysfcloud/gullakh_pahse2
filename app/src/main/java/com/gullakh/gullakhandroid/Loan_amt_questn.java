@@ -307,6 +307,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                 {
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
+                    Log.d("loan amount in la questn",((GlobalData) getApplication()).getloanamt());
 
                     Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
                     intent.putExtra("loan_type",loan_type);
