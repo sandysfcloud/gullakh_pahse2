@@ -150,7 +150,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         String Loan=((GlobalData) getApplication()).getLoanType();
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='"+Loan+"';");
         cr.moveToFirst();
-        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+//        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
         try {
             JSONObject reader = new JSONObject(cr.getString(3));
             String b = reader.getString("sal_dep_to");
@@ -206,7 +206,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                     if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                         goToDatabase("Home Loan");
                     }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-                        goToDatabase("Personal Loan");
+                        //goToDatabase("Personal Loan");
                     }else{
                         goToDatabase("Car Loan");
                     }
@@ -237,7 +237,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
 
 
                 if (flag == 1) {
-
+                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
                     Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
                     intent.putExtra("data", "searchgo");
 
@@ -262,7 +262,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
                 if (flag == 1) {
-
+                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
                     Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
                     intent.putExtra("data", "searchgo");
 
@@ -285,7 +285,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
                 if (flag == 1) {
-
+                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
                     Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
                     intent.putExtra("data", "searchgo");
 
@@ -308,7 +308,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 setDataToHashMap("sal_dep_to", dataBankType);
                 goToDatabase("Car Loan");
                 if (flag == 1) {
-
+                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
                     Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
                     intent.putExtra("data", "searchgo");
 
@@ -327,6 +327,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 bank3.setImageResource(R.drawable.bankhdfc);
                 bank4.setImageResource(R.drawable.bankother);
                 dataBankType=other.getText().toString();
+                ((GlobalData) getApplication()).setSalBankName(dataBankType);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

@@ -590,6 +590,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 if (!isInternetPresent) {
                     noconnection();
                 }else {
+                    Log.d("my search clicked","1");
                     intent = new Intent(MainActivity.this, GoogleCardsMediaActivity.class);
                     intent.putExtra("data", "search");
                     startActivity(intent);

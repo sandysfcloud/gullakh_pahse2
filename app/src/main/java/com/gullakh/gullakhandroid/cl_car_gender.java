@@ -31,7 +31,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +63,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     boolean coapllflag=true;
     private String name;
     private int month,yearv;
+    private String loanTypeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +149,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
         }
         getContactDetails();
+        getLoanId();
     }
   /*  @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -353,8 +359,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     Gson gson1 = new Gson();
                     String json = gson1.toJson(((GlobalData) getApplication()).getLenders());
                     json=json.replaceAll("\\{|\\}", "");
-                    Log.d("lender",json);
-                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",json);
+                    Log.d("lender", json);
+                    String[] tempLoanId=loanTypeId.split("x");
+                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",json,loanTypeId,datefield.getText().toString(),timefield.getText().toString());
                 }else{
                     requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
                             ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
@@ -399,9 +406,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 LoanReq Borrower_case = gson.fromJson(jsonObject.get("result"), LoanReq.class);
                 borrowercaseid = Borrower_case.getId();
                 borrowercaseno= Borrower_case.getCase_number();
+                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId,"");
+                }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
+                }
 
-
-                requestgetserver7.execute("token", "LoanType", sessionid);
+               // requestgetserver7.execute("token", "LoanType", sessionid);
 
 
                 // requestgetserver6.execute("token", "createloanvalue", sessionid,borrowercaseid);
@@ -473,7 +484,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     arrayLoantype.put(LT[i].gettypename(), LT[i].gettypeid());
                 }
 
-                String homeloantype = arrayLoantype.get("Home Loan");
+               /* String homeloantype = arrayLoantype.get("Home Loan");
                 String personalloantype = arrayLoantype.get("Personal Loan");
                 String loanagainstpropertytype = arrayLoantype.get("Loan Against Property");
                 // String emptype=((GlobalData) getApplication()).getemptype();
@@ -494,6 +505,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanagainstpropertytype);
                 }
+                */
             }
         },cl_car_gender.this, "wait7");
 
@@ -598,6 +610,42 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
     }
 
+    private void getLoanId() {
+        requestgetserver7 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+
+
+                LoanType[] LT = gson.fromJson(jsonObject.get("result"), LoanType[].class);
+
+                Map<String, String> arrayLoantype = new HashMap<>();
+                for (int i = 0; i < LT.length; i++) {
+                    arrayLoantype.put(LT[i].gettypename(), LT[i].gettypeid());
+                }
+                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
+                    if (((GlobalData) getApplication()).getCartypeloan().equalsIgnoreCase("New Car Loan")) {
+                        loanTypeId = arrayLoantype.get("New Car Loan");
+                    } else {
+                        loanTypeId = arrayLoantype.get("Used Car Loan");
+                    }
+                }else{
+                    loanTypeId=arrayLoantype.get(((GlobalData) getApplication()).getLoanType());
+                }
+
+            }
+
+        }, cl_car_gender.this, "wait20");
+        requestgetserver7.execute("token", "LoanType", sessionid);
+    }
     private void goToIntent() {
             Intent intent = new Intent(this, UploadDocument1.class);
             intent.putExtra("name",name);
@@ -633,11 +681,20 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
         String time=hourOfDay+":"+minute+":"+second;
-        timefield.setText(time);
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        DateFormat dateFormat1 = new SimpleDateFormat("hh:mm aa");
+        Date date = null;
+        try {
+            date = dateFormat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String newFormat=dateFormat1.format(date);
+        timefield.setText(newFormat);
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;//"Date: "+dayOfMonth+"/"+
+        date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
         month=monthOfYear;
         yearv=year;
         datefield.setText(date);

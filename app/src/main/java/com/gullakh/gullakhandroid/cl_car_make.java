@@ -210,8 +210,6 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
 
                 break;
             case R.id.back:
-                overridePendingTransition(R.transition.left, R.transition.right);
-                finish();
                 break;
         }
     }

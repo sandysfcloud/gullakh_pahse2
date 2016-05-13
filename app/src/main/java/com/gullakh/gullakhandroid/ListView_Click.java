@@ -22,7 +22,9 @@ import java.math.BigDecimal;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class ListView_Click extends ActionBarActivity implements View.OnClickListener{
     PopupWindow popUp;
@@ -312,7 +314,11 @@ if(one_time_fee!=null) {
                     ((GlobalData) getApplication()).getLenders().put("plpreclosurefee", preclosure1[preclosure1.length-1]);
                     ((GlobalData) getApplication()).getLenders().put("plprosesingfee",one_time_fee );
                 }
-
+                Log.d("finally lender data","check");
+                HashMap<String,String> temp=((GlobalData) getApplication()).getLenders();
+                for (Map.Entry<String, String> entry : temp.entrySet()) {
+                    System.out.println(entry.getKey()+" : "+entry.getValue());
+                }
              //   Log.d("Result of lender1",((GlobalData) getApplication()).getLenders().get(0));
             //    Log.d("Result of lender2",((GlobalData) getApplication()).getLenders().get(1));
 
@@ -373,16 +379,23 @@ if(one_time_fee!=null) {
         setDataToHashMap("type_employment",((GlobalData) getApplication()).getemptype());
         if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("car loan")){
             setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
+        }else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
+            setDataToHashMap("name_of_current_emp", ((GlobalData) getApplication()).getemployer());
         }
         setDataToHashMap("cl_loanamount", ((GlobalData) getApplication()).getloanamt());
-        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
         setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
         setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).getTenure()));
         setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
-        setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
-        setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
-        setDataToHashMap("dep_amount", String.valueOf(((GlobalData) getApplication()).getdepreciation()));
-        setDataToHashMap("dep_amount_last", String.valueOf(((GlobalData) getApplication()).getdepreciation2()));
+        setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+        if(((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Business") ||
+                ((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Professional"))
+        {
+            setDataToHashMap("pat_amount", String.valueOf(((GlobalData) getApplication()).getPat()));
+            setDataToHashMap("pat_amount_last", String.valueOf(((GlobalData) getApplication()).getPat2()));
+            setDataToHashMap("dep_amount", String.valueOf(((GlobalData) getApplication()).getdepreciation()));
+            setDataToHashMap("dep_amount_last", String.valueOf(((GlobalData) getApplication()).getdepreciation2()));
+        }
+
 
     }
 
@@ -391,6 +404,7 @@ if(one_time_fee!=null) {
         contentValues.put("loantype", loanType);
         contentValues.put("questans","cl_car_make");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
+        Log.d("gotodatabase", String.valueOf(contentValues));
         cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
     public void setDataToHashMap(String key, String data) {
