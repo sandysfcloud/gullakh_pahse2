@@ -283,7 +283,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                 break;
             case R.id.imageViewpay3:
                 pay1.setImageResource(R.drawable.bankother);
-                pay2.setImageResource(R.drawable.bankcash);
+                pay2.setImageResource(R.drawable.bankcheque);
                 pay3.setImageResource(R.drawable.buttonselecteffect);
                 dataSalDeposite="Cash";
                 setdata();
@@ -335,9 +335,9 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
 
 
             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                goToDatabase("Home Loan");
+                //goToDatabase("Home Loan");
             } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-                goToDatabase("Personal Loan");
+                //goToDatabase("Personal Loan");
 
             } else {
                 goToDatabase("Car Loan");

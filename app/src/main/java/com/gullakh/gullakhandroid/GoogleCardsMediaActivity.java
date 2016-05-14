@@ -266,7 +266,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             Cursor crobj = dbobject.displayData("select * from userlogin");
 
             if (crobj.moveToFirst()) {*/
-
+            Log.d("my search clicked","2");
                 setContentView(R.layout.seach_display);
                 layout = (LinearLayout) findViewById(R.id.linear);
 
@@ -443,7 +443,7 @@ public void setsearchdb()
 {
     DataHandler dh1 = new DataHandler(this);
     Cursor cr = dh1.displayData("select * from mysearch");
-
+    Log.d("my search clicked","3");
     try {
         if (cr.moveToFirst()) {
            // Log.w("mysearch data", cr.getString(1) + " " + cr.getString(2)+" "+cr.getString(3)+" "+cr.getString(4));
@@ -1322,7 +1322,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 //------------------------------------------------------------------------------------------------------------------------------------------
         HashMap<String, String> lenderInfo = new HashMap<String, String>();
 
-        if (firsttimeflage == 0) {
+       // if (firsttimeflage == 0) {
             if (CustomListViewValuesArr2.size() > 1) {
                 for (int i = 0; i < 2; i++) {
                     if (i == 0) {
@@ -1338,7 +1338,6 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                         lenderInfo.put("slpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
                         lenderInfo.put("slprocessingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
                     }
-                    //arrcombank.add(CustomListViewValuesArr2.get(i).getaccount_lender());
                 }
                 ((GlobalData) this.getApplication()).setLenders(lenderInfo);
                 firsttimeflage = 1;
@@ -1359,9 +1358,14 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                     }
                     ((GlobalData) this.getApplication()).setLenders(lenderInfo);
                 }
-
-//------------------------------------------------------------------------------------------------------------------------------------------
             }
+
+            for (Map.Entry<String, String> entry : lenderInfo.entrySet()) {
+                System.out.println(entry.getKey()+" : "+entry.getValue());
+            }
+       // }
+//------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
             mGoogleCardsAdapter = new GoogleCardsShopAdapter(this, CustomListViewValuesArr2, prgmImages);
@@ -1395,7 +1399,6 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
             //getSupportActionBar().setTitle("Result");
             title.setText("Result");
         }
-    }
 
 
 

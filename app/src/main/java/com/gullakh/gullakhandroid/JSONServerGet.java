@@ -95,14 +95,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                       if(args[1].equals("RuleDetails")){
 
-
                           Log.d("car_loan_type",((GlobalData) act.getApplication()).getLoanType());
                           Log.d("currently_living_in", ((GlobalData) act.getApplication()).getcarres());
                           Log.d("type_employment",((GlobalData) act.getApplication()).getemptype());
                           Log.d("cl_loanamount",((GlobalData) act.getApplication()).getloanamt());
                           Log.d("gender", ((GlobalData) act.getApplication()).getgender());
                           Log.d("net_mon_salary", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
-
 
                           String sessionval=null;
                           DataHandler dbobject = new DataHandler(act);
@@ -114,9 +112,6 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                              sessionval=cr.getString(1);
 
                           }
-
-
-
                           nameValuePairs = new ArrayList<NameValuePair>();
                           nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                           nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
@@ -127,13 +122,15 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                           nameValuePairs.add(new BasicNameValuePair("loantype", ((GlobalData) act.getApplication()).getLoanType()));
                           nameValuePairs.add(new BasicNameValuePair("cartype",((GlobalData) act.getApplication()).getCartypeloan()));
                           nameValuePairs.add(new BasicNameValuePair("cityname",  ((GlobalData) act.getApplication()).getcarres()));
-
+                          nameValuePairs.add(new BasicNameValuePair("salarydeposition",((GlobalData) act.getApplication()).getSalBankName()));
                           nameValuePairs.add(new BasicNameValuePair("employeetype", ((GlobalData) act.getApplication()).getemptype()));
-
                           nameValuePairs.add(new BasicNameValuePair("gender", ((GlobalData) act.getApplication()).getgender()));
                           nameValuePairs.add(new BasicNameValuePair("salaryamount", String.valueOf(((GlobalData) act.getApplication()).getnetsalary())));
+                          nameValuePairs.add(new BasicNameValuePair("employername", String.valueOf(((GlobalData) act.getApplication()).getemployer())));
 
-
+//                          for (NameValuePair nvp : nameValuePairs) {
+//                              Log.d(nvp.getName(),nvp.getValue());
+//                          }
                           DefaultHttpClient httpClient = new DefaultHttpClient();
                           HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
 
@@ -410,8 +407,8 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             Log.d("arg size", String.valueOf(args.length));
                            // Log.d("arguments", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\",\"primarylender\":\"" + args[5] + "\",\"secondarylender\":\"" + args[6] + "\",\"assigned_user_id\":\"admin\"}");
-                            Log.d("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\"," + args[5] + ",\"assigned_user_id\":\"admin\"}");
-                            nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\","+args[5]+",\"assigned_user_id\":\"admin\"}"));
+                            Log.d("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\","+args[5]+ ",\"loantype\":\""+args[6]+"\",\"preferabledate\":\""+args[7]+"\",\"preferabletime\":\""+args[8]+"\",\"assigned_user_id\":\"admin\"}");
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\","+args[5]+ ",\"loantype\":\""+args[6]+"\",\"preferabledate\":\""+args[7]+"\",\"preferabletime\":\""+args[8]+"\",\"assigned_user_id\":\"admin\"}"));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -434,7 +431,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             globalindetity="LoanParameterMaster";
                             Log.e("LoanParameterMasterexec", identifier);
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanParameterMaster where loan_type="+args[3]+";")).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanParameterMaster where loan_type="+args[3]+args[4]+";")).toString());
                         }
                         else if(args[1].equals("document"))
                         {

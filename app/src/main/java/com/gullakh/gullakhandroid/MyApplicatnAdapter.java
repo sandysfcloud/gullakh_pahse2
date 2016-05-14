@@ -12,7 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MyApplicatnAdapter extends BaseAdapter {
 
@@ -119,7 +124,22 @@ public class MyApplicatnAdapter extends BaseAdapter {
             tempValues = (ListModel) data.get(position);
 
             holder.applno.setText(""+tempValues.getapplno());
-            holder.date.setText(""+tempValues.getappldate());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            DateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+            Date date = null;
+            try {
+                date = dateFormat.parse( tempValues.getappldate());
+            } catch (ParseException e) {
+                Log.d("dateFormaterror",e.toString());
+                e.printStackTrace();
+            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.HOUR, 5);
+            calendar.add(Calendar.MINUTE, 30);
+            String newFormat=dateFormat1.format(calendar.getTime());
+
+            holder.date.setText(""+newFormat);
             holder.status.setText("" + tempValues.getstatus());
 //            boolean uploaded=false;
 //            final LoanDetails loanParameters=new LoanDetails();

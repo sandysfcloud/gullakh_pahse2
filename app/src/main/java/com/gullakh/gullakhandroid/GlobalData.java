@@ -40,6 +40,7 @@ public class GlobalData extends MultiDexApplication {
     private String Tenure;
     private String baltrans;
     private String totalsal,salpaymode,carmanuyear;
+    private String salBankName;
 
 //*****************CarLoan********************//
 
@@ -281,5 +282,13 @@ public class GlobalData extends MultiDexApplication {
     }
     public String getTotalsal() {
         return totalsal;
+    }
+
+    public String getSalBankName() {
+        return salBankName;
+    }
+
+    public void setSalBankName(String salBankName) {
+        this.salBankName = salBankName;
     }
 }

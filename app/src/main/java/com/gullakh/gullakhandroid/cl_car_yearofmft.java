@@ -115,6 +115,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
     {
         if(cl_car_global_data.dataWithAns.get("yom")!=null) {
             yom.setText(cl_car_global_data.dataWithAns.get("yom"));
+            yearv= Integer.parseInt(String.valueOf(cl_car_global_data.dataWithAns.get("yom").subSequence(yom.getText().toString().length()-4,yom.getText().toString().length())));
         }
     }
 
