@@ -30,10 +30,11 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView title = (TextView) v.findViewById(R.id.title);
+
         ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
-        close.setOnClickListener(this);
+        review.setOnClickListener(this);
         title.setText("Balance Transfer?");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
@@ -49,26 +50,49 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
         no = (RadioButton) findViewById(R.id.radioButton2);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
+
+
+        if(((GlobalData) getApplication()).getLoanType().equals("Home Loan"))
+        {
+            TextView questn = (TextView) findViewById(R.id.textView38);
+            questn.setText("Balance Transfer?");
+        }
+
+
+
     }
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
-            case R.id.next:
-                Intent intent;
-                if (radioGroup1.getCheckedRadioButtonId() == -1){
-                    RegisterPageActivity.showErroralert(this, "Select any one from above options ", "failed");
-                }else {
-                    if (buttonYes){
-                        ((GlobalData) getApplication()).setBaltrans("Yes");
-                        intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);
-                    }else {
-                        ((GlobalData) getApplication()).setBaltrans("No");
-                        intent = new Intent(lp_bal_tranf.this, Loan_amt_questn.class);
-                    }
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
+
+            case R.id.done:
+                save("done");
+                finish();
                 break;
+
+
+
+            case R.id.edit:
+
+                String empty=((GlobalData) getApplication()).getLoanType();
+                if(empty.equals("Home Loan")) {
+
+                    RegisterPageActivity.showAlertreview(this,3);
+                }
+
+                break;
+
+
+
+
+
+            case R.id.next:
+                save("next");
+                break;
+
+
+
             case R.id.radioButton1:
                 ((GlobalData) getApplication()).setBaltrans("Yes");
                 setDataToHashMap("", "Yes");
@@ -95,6 +119,28 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+    public void save(String flag) {
+
+        Intent intent;
+        if (radioGroup1.getCheckedRadioButtonId() == -1){
+            RegisterPageActivity.showErroralert(this, "Select any one from above options ", "failed");
+        }else {
+            if (flag.equals("next")) {
+                if (buttonYes) {
+                    ((GlobalData) getApplication()).setBaltrans("Yes");
+                    intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);
+                } else {
+                    ((GlobalData) getApplication()).setBaltrans("No");
+                    intent = new Intent(lp_bal_tranf.this, Loan_amt_questn.class);
+                }
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
+            }
+        }
+    }
+
+
+
 
     public void setDataToHashMap(String key, String data) {
         Log.d(key, data);

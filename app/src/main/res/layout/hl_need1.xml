@@ -142,6 +142,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
+            android:id="@+id/lcoappl"
             android:background="#2cababab"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal">

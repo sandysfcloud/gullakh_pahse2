@@ -484,24 +484,40 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                     Log.d("dob age is >18", String.valueOf(age));
 
                     if(flag.equals("next")) {
-                        if (loantype.equalsIgnoreCase("Car Loan") || loantype.equalsIgnoreCase("Home Loan") || loantype.equalsIgnoreCase("Loan Against Property")) {
+                        if (loantype.equalsIgnoreCase("Car Loan") || loantype.equalsIgnoreCase("Loan Against Property")) {
                             Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
                             intent.putExtra("data", "searchgo");
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
-                        } else {
+                        }
+
+                        if(loantype.equalsIgnoreCase("Home Loan"))
+                        {
+
+
+                            Intent intent = new Intent(DateOfBirth_questn.this, hl_city.class);
+
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+
+                        }
+
+
+
+                        else {
                             String empt = ((GlobalData) getApplication()).getemptype();
                             Log.d("emptyp is", empt + " its personal loan");
                             if (empt.equals("Salaried")) {
+
                                 Intent intent = new Intent(DateOfBirth_questn.this, DateOfBirth_questn.class);
                                 intent.putExtra("employer", "employer");
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
+
                             } else {
 
                                 Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
                                 intent.putExtra("data", "searchgo");
-
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);
 

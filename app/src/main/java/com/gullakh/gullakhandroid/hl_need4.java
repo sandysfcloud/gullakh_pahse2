@@ -93,7 +93,11 @@ public class hl_need4 extends AppCompatActivity implements View.OnClickListener 
                                 } else {
                                     Intent intent;
                                     if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                                        intent = new Intent(this, DateOfBirth_questn.class);
+                                        //intent = new Intent(this, DateOfBirth_questn.class);
+                                        intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                        intent.putExtra("data", "searchgo");
+                                        startActivity(intent);
+                                        overridePendingTransition(R.transition.left, R.transition.right);
                                     } else {
                                         intent = new Intent(this, cl_car_residence_type.class);
                                     }
@@ -110,7 +114,11 @@ public class hl_need4 extends AppCompatActivity implements View.OnClickListener 
 
                             Intent intent;
                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                                intent = new Intent(this, DateOfBirth_questn.class);
+                                //intent = new Intent(this, DateOfBirth_questn.class);
+                                intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                intent.putExtra("data", "searchgo");
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
                             } else {
                                 intent = new Intent(this, cl_car_residence_type.class);
                             }

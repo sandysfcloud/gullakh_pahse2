@@ -25,11 +25,12 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClickListener {
-    EditText sal,incent;
+    EditText sal,incent,bonus;
     Button next;
     ImageView review;//,done;
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
+    MaterialTextField mbonus;
     String data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,21 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
-       // mSeekArcProgress.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
+
+
+
+        String loantype =((GlobalData) getApplication()).getLoanType();
+
+        if(loantype.equalsIgnoreCase("Home Loan")) {
+            mbonus = (MaterialTextField) findViewById(R.id.mbonus);
+            mbonus.setVisibility(View.VISIBLE);
+            bonus = (EditText) findViewById(R.id.bonus);
+            bonus.addTextChangedListener(new NumberTextWatcher(bonus));
+
+        }
+
+
 
 
 

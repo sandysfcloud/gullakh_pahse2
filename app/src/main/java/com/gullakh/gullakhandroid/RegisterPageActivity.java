@@ -450,7 +450,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			}
 		}
 
+		if(loantyp!=null&& loantyp.equals("Home Loan")) {
 
+					carloan_que_salary_new.add("Balance Transfer: ");
+
+
+		}
 
 		carloan_que_salary_new.add("Loan Amount: ");
 		carloan_que_salary_new.add("Tenure: ");
@@ -495,6 +500,21 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				}
 			}
 		}
+
+		if(loantyp!=null&& loantyp.equals("Home Loan")) {
+
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getBaltrans());
+			if(((GlobalData) act.getApplication()).getBaltrans().equals("Yes"))
+			{
+				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getBaltrans());
+
+			}
+
+		}
+
+
+
+
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getTenure());
 		if(emptyp!=null) {
