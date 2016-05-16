@@ -28,8 +28,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -61,8 +61,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     SharedPreferences mPrefs;
     final String welcomeScreenShownPref = "welcomeScreenShown";
     Typeface myfontlight;
@@ -109,7 +108,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private static GoogleCloudMessaging gcm;
     public static String regid;
     private ImageView loanAgainstproperty;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -120,6 +118,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         callGarbageCollector();
         contentValues = new ContentValues();
 //--------------------------Checking internet connection-------------------------------------------
+
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
         if (!isInternetPresent) {
@@ -528,7 +527,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     noconnection();
                 }else {
                     ((GlobalData) getApplication()).setLoanType("Home Loan");
-
                     intent = new Intent(MainActivity.this, cl_car_residence.class);
                     intent.putExtra("loan_type", "Home Loan");
                     startActivity(intent);

@@ -344,12 +344,7 @@ if(one_time_fee!=null) {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
-                    }/*else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")){
-                        intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }*/else {
+                    }else {
                         intent = new Intent(ListView_Click.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

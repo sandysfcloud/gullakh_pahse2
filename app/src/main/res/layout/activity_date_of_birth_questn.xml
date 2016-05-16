@@ -169,6 +169,8 @@
                 android:textColorHint="#000"
                 android:textColor="#000"
                 android:textSize="18sp"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
                 app:typeface="robotoLight"/>
 
         </com.gullakh.gullakhandroid.MaterialTextField>

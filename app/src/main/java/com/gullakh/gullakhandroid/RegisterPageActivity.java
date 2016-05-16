@@ -280,44 +280,34 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 				if(urlchange=="setpassword") {
 					storedatatoDatabase();
+					Intent intent;
 					MainActivity.signinstate = true;
 					if (ListView_Click.buttonApply) {
 						ListView_Click.buttonApply = false;
 						if (((GlobalData) getApplication()).getLoanType() != null) {
 							if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
-								Intent intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
-								startActivity(intent);
-								overridePendingTransition(R.transition.left, R.transition.right);
+								intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
 							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-								Intent intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
-								startActivity(intent);
-								overridePendingTransition(R.transition.left, R.transition.right);
+								intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
 							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-								Intent intent = new Intent(RegisterPageActivity.this, pl_need.class);
-								startActivity(intent);
-								overridePendingTransition(R.transition.left, R.transition.right);
+								intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
+								intent.putExtra("personal", "personal");
 							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
-								Intent intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
-								startActivity(intent);
-								overridePendingTransition(R.transition.left, R.transition.right);
+								intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
 							} else {
-								Intent intent = new Intent(RegisterPageActivity.this, MainActivity.class);
-								startActivity(intent);
-								overridePendingTransition(R.transition.left, R.transition.right);
+								intent = new Intent(RegisterPageActivity.this, MainActivity.class);
 							}
 							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Registered Successfully", "success");
 						}else {
-							Intent intent = new Intent(RegisterPageActivity.this, MainActivity.class);
-							startActivity(intent);
-							overridePendingTransition(R.transition.left, R.transition.right);
+							intent = new Intent(RegisterPageActivity.this, MainActivity.class);
 						}
 					}else {
-						Intent intent = new Intent(RegisterPageActivity.this, MainActivity.class);
-						startActivity(intent);
-						overridePendingTransition(R.transition.left, R.transition.right);
+						intent = new Intent(RegisterPageActivity.this, MainActivity.class);
 					}
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					startActivity(intent);
+					overridePendingTransition(R.transition.left, R.transition.right);
 				}
-
             }else{
 				RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 			}

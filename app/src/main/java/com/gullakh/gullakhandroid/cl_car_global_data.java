@@ -94,14 +94,14 @@ public class cl_car_global_data
         DataHandler dbobject = new DataHandler(c);
         ContentValues cv=contentValues;
         if (dataInDatabase) {
-            String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+            String date = new SimpleDateFormat("dd-MM-yyyy hh:mm aa").format(new Date());
             dbobject.addTable();
             cv.put("created_date", date);
             dbobject.updateDatatoDB("mysearch", cv, loanType);
             Log.d("Data updated successfully", loanType);
         }else{
             dbobject.addTable();
-            String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+            String date = new SimpleDateFormat("dd-MM-yyyy hh:mm aa").format(new Date());
             cv.put("created_date", date);
             dbobject.insertdata(cv, "mysearch");
             Log.d("Data inserted successfully",loanType);

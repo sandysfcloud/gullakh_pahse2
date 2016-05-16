@@ -102,7 +102,6 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);
                 break;
         }
@@ -113,7 +112,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         hl_coappldetails.joint=0;
         Intent intent;
         setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
-        goToDatabase("Home Loan");
+        //goToDatabase("Home Loan");
         if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
             intent = new Intent(hl_need.this, hl_need1.class);
             startActivity(intent);

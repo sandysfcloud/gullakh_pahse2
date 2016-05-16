@@ -198,7 +198,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 intent = new Intent(hl_city.this, Car_Loan_PAT.class);
             }
         }else{
-            goToDatabase("Home Loan");
+            //goToDatabase("Home Loan");
             intent = new Intent(this, hl_need.class);
         }
         startActivity(intent);

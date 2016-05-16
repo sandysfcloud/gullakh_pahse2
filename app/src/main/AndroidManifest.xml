@@ -47,7 +47,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -126,7 +125,9 @@
         <activity
             android:name=".cl_car_residence_type"
             android:label="Select Residence"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
         <activity
             android:name=".cl_car_salaried"
             android:label="Salaried" />
@@ -200,7 +201,9 @@
             android:label="@string/title_activity_car_compare" />
         <activity android:name=".hl_coappl_EMI" />
         <activity android:name=".ForgetPassword" />
-        <activity android:name=".Tenure"></activity>
+        <activity android:name=".Tenure" />
+        <activity android:name=".hl_prop_owns">
+        </activity>
     </application>
 
 </manifest>

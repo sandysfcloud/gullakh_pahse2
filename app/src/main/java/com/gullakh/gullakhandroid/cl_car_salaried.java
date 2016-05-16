@@ -185,7 +185,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intenth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intenth);
 
                 break;
@@ -223,7 +223,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                     }else {
                         String EmpName = Emp.getText().toString();
                         setDataToHashMap("name_of_current_emp", EmpName);
-                        String jdate = getDate();
+                        String jdate = Doj.getText().toString();
                         setDataToHashMap("year_you_joined_current_comp", jdate);
                         setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
                         if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,7 +122,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
         cr.moveToFirst();
-        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+//        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
         try {
             JSONObject reader = new JSONObject(cr.getString(3));
             String b = reader.getString("sal_pay_option");
@@ -317,7 +316,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intenth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intenth);
 
                 break;

@@ -366,6 +366,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 startActivity(intent);
                                                 overridePendingTransition(R.transition.left, R.transition.right);
                                             }
@@ -825,9 +826,9 @@ public void setsearchdb()
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                                    intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intenth);
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -968,9 +969,9 @@ public void setsearchdb()
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                                    intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intenth);
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -1397,7 +1398,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
             });
 
             //getSupportActionBar().setTitle("Result");
-            title.setText("Result");
+            title.setText("Your Loan Offers");
         }
 
 
@@ -1454,9 +1455,9 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
         switch (v.getId()) {
 
             case R.id.close:
-                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intenth);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 
                 break;
            /* case R.id.lcomp:

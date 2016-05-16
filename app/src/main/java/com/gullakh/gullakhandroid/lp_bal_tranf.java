@@ -71,7 +71,7 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.radioButton1:
                 ((GlobalData) getApplication()).setBaltrans("Yes");
-                setDataToHashMap("", "Yes");
+                setDataToHashMap("hl_bal_tranf", "Yes");
                 buttonYes=true;
                 intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);
                 startActivity(intent);
@@ -79,7 +79,7 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.radioButton2:
                 ((GlobalData) getApplication()).setBaltrans("No");
-                setDataToHashMap("", "No");
+                setDataToHashMap("hl_bal_tranf", "No");
                 buttonYes=false;
                 intent = new Intent(lp_bal_tranf.this, Loan_amt_questn.class);
                 startActivity(intent);
@@ -90,7 +90,6 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.close:
                 intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
         }
