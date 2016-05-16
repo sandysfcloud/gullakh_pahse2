@@ -241,7 +241,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.close:
                 intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intenth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intenth);
                 break;
             case R.id.back:
@@ -648,6 +648,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     }
     private void goToIntent() {
             Intent intent = new Intent(this, UploadDocument1.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra("name",name);
             intent.putExtra("applno",borrowercaseno);
             startActivity(intent);

@@ -196,7 +196,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intenth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intenth);
                 break;
             case R.id.del1:

@@ -22,15 +22,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickListener {
     Button next,back;
-    TextView heading,option1,option2,option3,option4;
-    ImageView bank1,bank2,bank3,bank4,bank5,bank6;
+    ImageView bank1,bank2,bank3,bank4;
     String dataBankType="";
     private Intent intent;
     private ContentValues contentValues;
@@ -82,11 +80,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         other.setOnClickListener(this);
         back.setOnClickListener(this);
         getDataFromHashMap();
-        if(MainActivity.MyRecentSearchClicked) {
-            getInfo();
-        }
         getbanknam();
-
 
         Intent intent2 = getIntent();
         String data = intent2.getStringExtra("employer");
@@ -96,11 +90,6 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
 
             }
         }
-
-
-
-
-
     }
     public void getbanknam()
     {
@@ -128,12 +117,8 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 for(int i=0;i<size;i++) {
                     liste.add(enums[i].getbank_name());
                 }
-
                 final ShowSuggtn fAdapter = new ShowSuggtn(cl_salary_mode2.this, android.R.layout.simple_dropdown_item_1line, liste);
                 other.setAdapter(fAdapter);
-                dataBankType=other.getText().toString();
-
-
             }
         }, cl_salary_mode2.this, "2");
         DataHandler dbobject = new DataHandler(cl_salary_mode2.this);
@@ -145,21 +130,6 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
 
         requestgetserver.execute("token", "otherbank", sessionid);
     }
-    private void getInfo() {
-        DataHandler dbobject = new DataHandler(this);
-        String Loan=((GlobalData) getApplication()).getLoanType();
-        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='"+Loan+"';");
-        cr.moveToFirst();
-//        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
-        try {
-            JSONObject reader = new JSONObject(cr.getString(3));
-            String b = reader.getString("sal_dep_to");
-            setDeopsiteSalary(b);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void getDataFromHashMap()
     {
         if(cl_car_global_data.dataWithAns.get("sal_dep_to")!=null)
@@ -168,28 +138,12 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
             setDeopsiteSalary(dataBankType);
         }
     }
-
-    private void setDeopsiteSalary(String SalDeposite) {
-        if(SalDeposite.equals("Axis Bank")){
-            bank1.setImageResource(R.drawable.buttonselecteffect);
-        }else if(SalDeposite.equals("ICICI Bank")){
-            bank2.setImageResource(R.drawable.buttonselecteffect);
-        }else if(SalDeposite.equals("HDFC Bank")){
-            bank3.setImageResource(R.drawable.buttonselecteffect);
-        }else if(SalDeposite.equals("IDBI Bank")){
-            bank4.setImageResource(R.drawable.buttonselecteffect);
-        }else{
-            other.setText(SalDeposite);
-        }
-    }
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.edit:
-
-
-
                 String emptyp = ((GlobalData) getApplication()).getemptype();
                 if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                     RegisterPageActivity.showAlertreview(this, 11);
@@ -198,140 +152,49 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.next:
-                if(dataBankType.equals("")&&other.getText().toString().equals(""))
+                if(dataBankType.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
                     setDataToHashMap("sal_dep_to", dataBankType);
-                    if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                        goToDatabase("Home Loan");
-                    }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-                        //goToDatabase("Personal Loan");
-                    }else{
-                        goToDatabase("Car Loan");
-                    }
-                    if (flag == 1) {
-
-                        Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
-                        intent.putExtra("data", "searchgo");
-
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-
-                    } else {
-                        intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
+                    goToIntent();
                 }
                 break;
             case R.id.ImageViewBank1:
-                other.setText("");
-                bank1.setImageResource(R.drawable.buttonselecteffect);
-                bank2.setImageResource(R.drawable.bankicici);
-                bank3.setImageResource(R.drawable.bankhdfc);
-                bank4.setImageResource(R.drawable.bankother);
                 dataBankType="Axis Bank";
+                setDeopsiteSalary(dataBankType);
                 setDataToHashMap("sal_dep_to", dataBankType);
-                goToDatabase("Car Loan");
-
-
-                if (flag == 1) {
-                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
-                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
-                    intent.putExtra("data", "searchgo");
-
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-
-                } else {
-
-
-                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
+                goToIntent();
                 break;
             case R.id.ImageViewBank2:
-                other.setText("");
-                bank1.setImageResource(R.drawable.bankaxis);
-                bank2.setImageResource(R.drawable.buttonselecteffect);
-                bank3.setImageResource(R.drawable.bankhdfc);
-                bank4.setImageResource(R.drawable.bankother);
                 dataBankType="ICICI Bank";
+                setDeopsiteSalary(dataBankType);
                 setDataToHashMap("sal_dep_to", dataBankType);
-                goToDatabase("Car Loan");
-                if (flag == 1) {
-                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
-                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
-                    intent.putExtra("data", "searchgo");
-
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-
-                } else {
-                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
+                goToIntent();
                 break;
             case R.id.ImageViewBank3:
-                other.setText("");
-                bank1.setImageResource(R.drawable.bankaxis);
-                bank2.setImageResource(R.drawable.bankicici);
-                bank3.setImageResource(R.drawable.buttonselecteffect);
-                bank4.setImageResource(R.drawable.bankother);
                 dataBankType="HDFC Bank";
+                setDeopsiteSalary(dataBankType);
                 setDataToHashMap("sal_dep_to", dataBankType);
-                goToDatabase("Car Loan");
-                if (flag == 1) {
-                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
-                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
-                    intent.putExtra("data", "searchgo");
+               // goToDatabase("Car Loan");
 
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-
-                } else {
-                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
                 break;
             case R.id.ImageViewBank4:
-                other.setText("");
-                bank1.setImageResource(R.drawable.bankaxis);
-                bank2.setImageResource(R.drawable.bankicici);
-                bank3.setImageResource(R.drawable.bankhdfc);
-                bank4.setImageResource(R.drawable.buttonselecteffect);
                 dataBankType="IDBI Bank";
+                setDeopsiteSalary(dataBankType);
                 setDataToHashMap("sal_dep_to", dataBankType);
-                goToDatabase("Car Loan");
-                if (flag == 1) {
-                    ((GlobalData) getApplication()).setSalBankName(dataBankType);
-                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
-                    intent.putExtra("data", "searchgo");
-
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-
-                } else {
-                    intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
+               // goToDatabase("Car Loan");
+                goToIntent();
                 break;
             case R.id.bank:
-                bank1.setImageResource(R.drawable.bankaxis);
-                bank2.setImageResource(R.drawable.bankicici);
-                bank3.setImageResource(R.drawable.bankhdfc);
-                bank4.setImageResource(R.drawable.bankother);
                 dataBankType=other.getText().toString();
+                setDeopsiteSalary(dataBankType);
                 ((GlobalData) getApplication()).setSalBankName(dataBankType);
+                goToIntent();
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intenth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intenth);
                 break;
             case R.id.back:
@@ -346,11 +209,60 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
     {
         cl_car_global_data.dataWithAns.put(Key, data);
     }
+
     private void goToDatabase(String loanType)
     {
         contentValues.put("loantype",loanType);
         contentValues.put("questans", "cl_salary_mode2");
         contentValues.put("data", cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
+    }
+    public void goToIntent(){
+        if (flag == 1) {
+            ((GlobalData) getApplication()).setSalBankName(dataBankType);
+            Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+            intent.putExtra("data", "searchgo");
+
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+
+        } else {
+            intent = new Intent(cl_salary_mode2.this, cl_car_gender.class);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+    }
+    private void setDeopsiteSalary(String SalDeposite) {
+        if(SalDeposite.equals("Axis Bank")){
+            other.setText("");
+            bank1.setImageResource(R.drawable.buttonselecteffect);
+            bank2.setImageResource(R.drawable.bankicici);
+            bank3.setImageResource(R.drawable.bankhdfc);
+            bank4.setImageResource(R.drawable.bankother);
+        }else if(SalDeposite.equals("ICICI Bank")){
+            other.setText("");
+            bank1.setImageResource(R.drawable.bankaxis);
+            bank2.setImageResource(R.drawable.buttonselecteffect);
+            bank3.setImageResource(R.drawable.bankhdfc);
+            bank4.setImageResource(R.drawable.bankother);
+        }else if(SalDeposite.equals("HDFC Bank")){
+            other.setText("");
+            bank1.setImageResource(R.drawable.bankaxis);
+            bank2.setImageResource(R.drawable.bankicici);
+            bank3.setImageResource(R.drawable.buttonselecteffect);
+            bank4.setImageResource(R.drawable.bankother);
+        }else if(SalDeposite.equals("IDBI Bank")){
+            other.setText("");
+            bank1.setImageResource(R.drawable.bankaxis);
+            bank2.setImageResource(R.drawable.bankicici);
+            bank3.setImageResource(R.drawable.bankhdfc);
+            bank4.setImageResource(R.drawable.buttonselecteffect);
+        }else{
+            other.setText(SalDeposite);
+            bank1.setImageResource(R.drawable.bankaxis);
+            bank2.setImageResource(R.drawable.bankicici);
+            bank3.setImageResource(R.drawable.bankhdfc);
+            bank4.setImageResource(R.drawable.bankother);
+        }
     }
 }

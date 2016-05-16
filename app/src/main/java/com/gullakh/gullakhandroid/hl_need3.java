@@ -208,7 +208,7 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
-                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intenth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intenth);
                 break;
         }

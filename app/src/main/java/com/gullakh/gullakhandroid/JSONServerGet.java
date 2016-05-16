@@ -26,10 +26,6 @@ import java.util.ArrayList;
 
 import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
-/**
- * Created by sandeepkotian on 09/03/16.
- */
-
     public  class JSONServerGet extends AsyncTask<String, String, String> {
         String test;
         public ProgressDialog pDialog;
@@ -116,9 +112,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                           nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                           nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
                           nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
-
                           nameValuePairs.add(new BasicNameValuePair("loanamount",((GlobalData) act.getApplication()).getloanamt()));
-//                          nameValuePairs.add(new BasicNameValuePair("loantype", "Car Loan"));
                           nameValuePairs.add(new BasicNameValuePair("loantype", ((GlobalData) act.getApplication()).getLoanType()));
                           nameValuePairs.add(new BasicNameValuePair("cartype",((GlobalData) act.getApplication()).getCartypeloan()));
                           nameValuePairs.add(new BasicNameValuePair("cityname",  ((GlobalData) act.getApplication()).getcarres()));
@@ -131,14 +125,28 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 //                          for (NameValuePair nvp : nameValuePairs) {
 //                              Log.d(nvp.getName(),nvp.getValue());
 //                          }
+                     /*       ((GlobalData) act.getApplication()).setTotalsal("20000");
+                          ((GlobalData) act.getApplication()).setloanamt("60000");
+                          ((GlobalData) act.getApplication()).setEmi(0.0);
+                          nameValuePairs = new ArrayList<NameValuePair>();
+                          nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                          nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
+                          nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
+                          nameValuePairs.add(new BasicNameValuePair("loanamount","60000"));
+                          nameValuePairs.add(new BasicNameValuePair("loantype","Personal Loan"));
+                          nameValuePairs.add(new BasicNameValuePair("cityname","Bengaluru"));
+                          nameValuePairs.add(new BasicNameValuePair("salarydeposition","IDBI Bank"));
+                          nameValuePairs.add(new BasicNameValuePair("employeetype","Salaried"));
+                          nameValuePairs.add(new BasicNameValuePair("gender","Male"));
+                          nameValuePairs.add(new BasicNameValuePair("salaryamount","20000"));
+                          nameValuePairs.add(new BasicNameValuePair("employername","Riverdale Software Solutions Pvt. Ltd."));*/
+
                           DefaultHttpClient httpClient = new DefaultHttpClient();
                           HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
 
                           httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                           response = httpClient.execute(httpPost);
                           Log.e("Response:session id ", String.valueOf(response));
-
-
 
                         }
                         else {
@@ -333,23 +341,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from LoanRequestCase;")).toString());
 
                         }
-
-
-
-
                         else if(args[1].equals("otherbank")){
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from OtherBank;")).toString());
 
                         }
-
-
-
-
-
-
-
                     else if(args[1].equals("createaccount")){
 
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();

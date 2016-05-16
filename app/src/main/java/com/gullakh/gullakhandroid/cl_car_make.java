@@ -22,7 +22,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -68,10 +67,10 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         car4.setOnClickListener(this);
         next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
-        if(MainActivity.MyRecentSearchClicked)
-        {
-            getCar();
-        }
+//        if(MainActivity.MyRecentSearchClicked)
+//        {
+//            getCar();
+//        }
         getDataFromHashMap();
         carmak = (AutoCompleteTextView) findViewById(R.id.OtherCar);
         carmak.setOnClickListener(this);
@@ -200,7 +199,6 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car2.setImageResource(R.drawable.caramaze);
                 car3.setImageResource(R.drawable.careon);
                 car4.setImageResource(R.drawable.newcar);
-
                 dataCar=carmak.getText().toString();
                 break;
             case R.id.close:
@@ -225,30 +223,12 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         contentValues.put("data", cl_car_global_data.getHashMapInString());
 
         Log.d("check hashmap-car make",cl_car_global_data.getHashMapInString());
-        cl_car_global_data.addDataToDataBase(this,contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
+        cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
     }
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
     }
-    private void getCar() {
-        DataHandler dbobject = new DataHandler(this);
-        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
-        if(cr!=null) {
-            cr.moveToFirst();
-            Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
-            try {
-                JSONObject reader = new JSONObject(cr.getString(3));
-                car = reader.getString("interested_car");
-                setDataToHashMap("currently_living_in", reader.getString("currently_living_in"));
-                setCar(car);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            Log.d("DataNotFound","Please check database...it is empty");
-        }
-    }
+
 
     private void setCar(String car) {
         if(car.equals("Maruti Alto")){
@@ -281,5 +261,25 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
         }
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);
+    }
+
+    private void getCar() {
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
+        if(cr!=null) {
+            cr.moveToFirst();
+           // Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
+            try {
+                JSONObject reader = new JSONObject(cr.getString(3));
+                car = reader.getString("interested_car");
+                setDataToHashMap("currently_living_in", reader.getString("currently_living_in"));
+                setCar(car);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Log.d("DataNotFound","Please check database...it is empty");
+        }
     }
  */
