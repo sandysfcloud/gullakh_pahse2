@@ -110,9 +110,17 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
                                     setDataToHashMap("joint_acc", jointMembers);
                                     Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
                                 }
-                                Intent intent = new Intent(this, cl_car_residence_type.class);
-                                startActivity(intent);
-                                overridePendingTransition(R.transition.left, R.transition.right);
+                                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                    // intent = new Intent(hl_need2.this, DateOfBirth_questn.class);
+                                    Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                    intent.putExtra("data", "searchgo");
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                } else {
+                                    Intent intent = new Intent(this, cl_car_residence_type.class);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                }
                             }
                         }
                     }

@@ -84,6 +84,7 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
 
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -99,6 +100,12 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allot);
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         allotment.setAdapter(dataAdapter2);
+
+
+
+
+
+
     }
     @Override
     public void onClick(View v) {
@@ -129,7 +136,11 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
                                         } else {
                                             Intent intent;
                                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                                                intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
+                                               // intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
+                                                intent = new Intent(hl_need1.this, GoogleCardsMediaActivity.class);
+                                                intent.putExtra("data", "searchgo");
+                                                startActivity(intent);
+                                                overridePendingTransition(R.transition.left, R.transition.right);
                                             } else {
                                                 intent = new Intent(hl_need1.this, cl_car_residence_type.class);
                                             }
@@ -146,7 +157,11 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
 
                                     Intent intent;
                                     if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                                        intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
+                                      //  intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
+                                        intent = new Intent(hl_need1.this, GoogleCardsMediaActivity.class);
+                                        intent.putExtra("data", "searchgo");
+                                        startActivity(intent);
+                                        overridePendingTransition(R.transition.left, R.transition.right);
                                     } else {
                                         intent = new Intent(hl_need1.this, cl_car_residence_type.class);
                                     }

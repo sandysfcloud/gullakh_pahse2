@@ -538,7 +538,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     noconnection();
                 }else {
                     ((GlobalData) getApplication()).setLoanType("Loan Against Property");
-
                     intent = new Intent(MainActivity.this, cl_car_residence.class);
                     intent.putExtra("loan_type", "Loan Against Property");
                     startActivity(intent);

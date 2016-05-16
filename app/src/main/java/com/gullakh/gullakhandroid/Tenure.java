@@ -242,7 +242,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                 String emptype = ((GlobalData) getApplication()).getemptype();
                 String loantype =((GlobalData) getApplication()).getLoanType();
                 Intent intent = null;
-                if (loantype.equalsIgnoreCase("Car Loan")||loantype.equalsIgnoreCase("Personal Loan")) {
+                if (loantype.equalsIgnoreCase("Car Loan")||loantype.equalsIgnoreCase("Personal Loan")||loantype.equalsIgnoreCase("Home Loan")) {
                     if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);
 
@@ -259,10 +259,10 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                         intent = new Intent(Tenure.this, hl_city.class);
 
                     }
-                } else if (loantype.equalsIgnoreCase("Home Loan")) {
+                } /*else if (loantype.equalsIgnoreCase("Home Loan")) {
                     intent = new Intent(Tenure.this, hl_city.class);
 
-                }
+                }*/
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
 

@@ -57,7 +57,14 @@
                 app:typeface="robotoLight"/>
 
         </FrameLayout>
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -127,9 +134,36 @@
                         app:typeface="robotoLight"/>
 
                 </com.gullakh.gullakhandroid.MaterialTextField>
+
+                <com.gullakh.gullakhandroid.MaterialTextField
+                    android:layout_width="350dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/mbonus"
+
+                    app:mtf_cardCollapsedHeight="4dp"
+                    app:mtf_cardColor="#fff"
+                    app:mtf_image="@drawable/loan_amt"
+                    >
+
+                    <com.gullakh.gullakhandroid.font.RobotoEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Annual Bonus"
+
+                        android:inputType="number"
+                        android:id="@+id/bonus"
+                        android:textColorHint="#000"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        app:typeface="robotoLight"/>
+
+                </com.gullakh.gullakhandroid.MaterialTextField>
             </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+        </LinearLayout> </LinearLayout>
+        </ScrollView>
+
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/ldone"
@@ -154,6 +188,7 @@
             app:typeface="robotoLight"/>
     </LinearLayout>
 
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
