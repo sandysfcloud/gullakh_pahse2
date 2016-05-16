@@ -450,12 +450,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			}
 		}
 
-		if(loantyp!=null&& loantyp.equals("Home Loan")) {
+		/*if(loantyp!=null&& loantyp.equals("Home Loan")) {
 
 					carloan_que_salary_new.add("Balance Transfer: ");
 
 
-		}
+		}*/
 
 		carloan_que_salary_new.add("Loan Amount: ");
 		carloan_que_salary_new.add("Tenure: ");
@@ -474,14 +474,23 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		carloan_que_salary_new.add("Current EMI's: ");
 
 
-		if(loantyp.equals("Personal Loan"))
+		if(loantyp.equals("Personal Loan")||loantyp.equals("Home Loan"))
 		{
 			carloan_que_salary_new.add("DOB/Gender: ");
-			carloan_que_salary_new.add("Current Employer: ");
-			carloan_que_salary_new.add("Salary Payment Mode: ");
 
+			if(loantyp.equals("Personal Loan")) {
+				carloan_que_salary_new.add("Current Employer: ");
+				carloan_que_salary_new.add("Salary Payment Mode: ");
+			}
+			if(loantyp.equals("Home Loan"))
+			{
+				carloan_que_salary_new.add("Property Location: ");
+
+
+			}
 
 		}
+
 
 
 
@@ -501,7 +510,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			}
 		}
 
-		if(loantyp!=null&& loantyp.equals("Home Loan")) {
+		/*if(loantyp!=null&& loantyp.equals("Home Loan")) {
 
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getBaltrans());
 			if(((GlobalData) act.getApplication()).getBaltrans().equals("Yes"))
@@ -510,7 +519,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 			}
 
-		}
+		}*/
 
 
 
@@ -540,22 +549,42 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		}
 		if(((GlobalData) act.getApplication()).getEmi()!=null)
 			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getEmi().toString());
-		if(loantyp.equals("Personal Loan"))
+
+
+
+
+		if(loantyp.equals("Personal Loan")||loantyp.equals("Home Loan"))
 		{
 			String gender=null;
-			if(((GlobalData) act.getApplication()).getgender().equals("male"))
-			{
-				Log.d("Gender is",((GlobalData) act.getApplication()).getgender());
-				gender="M";
+			if(((GlobalData) act.getApplication()).getgender()!=null) {
+				if (((GlobalData) act.getApplication()).getgender().equals("male")) {
+					Log.d("Gender is", ((GlobalData) act.getApplication()).getgender());
+					gender = "M";
 
+				} else
+					gender = "F";
+				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getDob() + "/" + gender);
 			}
-			else
-				gender="F";
-			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getDob()+"/"+gender);
-			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemployer());
-			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getSalryPayMode());
+
+
+			if(loantyp.equals("Personal Loan"))
+			{
+				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemployer());
+				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getSalryPayMode());
+			}
+
+			if(loantyp.equals("Home Loan"))
+			{
+				if(((GlobalData) act.getApplication()).getCity()!=null)
+				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCity());
+			}
 
 		}
+
+
+
+
+
 
 		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new));
         Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new_ans));
@@ -808,17 +837,28 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								intclick.putExtra("review", "review");
 								CurrentAct.startActivity(intclick);
 							}
-							if (v.getTag().toString().equals("8")) {
-								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
-								intclick.putExtra("review2", "review2");
-								CurrentAct.startActivity(intclick);
-							}
-							if (v.getTag().toString().equals("9")) {
-								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, cl_salary_mode1.class);
-								intclick.putExtra("review", "review");
-								CurrentAct.startActivity(intclick);
+
+							if (((GlobalData) CurrentAct.getApplication()).getLoanType().equals("Home Loan")) {
+								if (v.getTag().toString().equals("8")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, hl_city.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+
+							} else {
+								if (v.getTag().toString().equals("8")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+									intclick.putExtra("review2", "review2");
+									CurrentAct.startActivity(intclick);
+								}
+								if (v.getTag().toString().equals("9")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, cl_salary_mode1.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
 							}
 						}
 						if(flag==1) {
@@ -837,20 +877,31 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								CurrentAct.startActivity(intclick);
 							}
 
+							if (((GlobalData) CurrentAct.getApplication()).getLoanType().equals("Home Loan")) {
+								if (v.getTag().toString().equals("9")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, hl_city.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
 
-							if (v.getTag().toString().equals("9")) {
-								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
-								intclick.putExtra("review2", "review2");
-								CurrentAct.startActivity(intclick);
-							}
-							if (v.getTag().toString().equals("10")) {
-								dialog.dismiss();
-								Intent intclick = new Intent(CurrentAct, cl_salary_mode1.class);
-								intclick.putExtra("review", "review");
-								CurrentAct.startActivity(intclick);
-							}
+							} else {
 
+
+								if (v.getTag().toString().equals("9")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, DateOfBirth_questn.class);
+									intclick.putExtra("review2", "review2");
+									CurrentAct.startActivity(intclick);
+								}
+								if (v.getTag().toString().equals("10")) {
+									dialog.dismiss();
+									Intent intclick = new Intent(CurrentAct, cl_salary_mode1.class);
+									intclick.putExtra("review", "review");
+									CurrentAct.startActivity(intclick);
+								}
+
+							}
 						}
 
 

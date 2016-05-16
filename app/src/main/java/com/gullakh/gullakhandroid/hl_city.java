@@ -15,6 +15,7 @@ import android.widget.AbsListView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -37,6 +38,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
     JSONServerGet requestgetserver;
     String sessionid,data;
     private String propertyLocated="";
+    int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,8 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView  title = (TextView) v.findViewById(R.id.title);
         review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+      //  review.setVisibility(View.INVISIBLE);
+        review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
 
@@ -82,6 +85,27 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
 
         citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
         citynam.setOnClickListener(this);
+
+
+
+        Button bdone = (Button) findViewById(R.id.done);
+        bdone.setOnClickListener(this);
+        LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
+        Intent intent2 = getIntent();
+        String data = intent2.getStringExtra("review");
+        if (data != null) {
+            if (data.equals("review")) {
+                flag=1;
+                LinearLayout footer = (LinearLayout) findViewById(R.id.footer);
+                footer.setVisibility(View.GONE);
+                done.setVisibility(View.VISIBLE);
+
+                // review.setVisibility(View.INVISIBLE);
+
+            }
+        }
+
+
     }
     public void getcitynam()
     {
@@ -119,17 +143,31 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.edit:
+                String emptyp = ((GlobalData) getApplication()).getemptype();
+                if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                    RegisterPageActivity.showAlertreview(this, 9);
+                else
+                    RegisterPageActivity.showAlertreview(this, 8);
+
+                break;
+
             case R.id.next:
 
                 if(!propertyLocated.equals("")){
                     setDataToHashMap("property_city", propertyLocated);
-                    goToIntent();
+
+                    goToIntent("");
                 }
                 else
                     RegisterPageActivity.showErroralert(hl_city.this, "Select any one location where property is located", "failed");
                 break;
             case R.id.done:
-                finish();
+
+                goToIntent("done");
+
+
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
@@ -143,7 +181,10 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place4.setImageResource(R.drawable.locmum);
                 propertyLocated="Bengaluru";
                 setDataToHashMap("property_city", propertyLocated);
-                goToIntent();
+                if(flag==1)
+                    goToIntent("done");
+                else
+                goToIntent("");
                 break;
             case R.id.ImageViewPlace2:
                 place1.setImageResource(R.drawable.locbang);
@@ -152,7 +193,10 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place4.setImageResource(R.drawable.locmum);
                 propertyLocated="Chennai";
                 setDataToHashMap("property_city", propertyLocated);
-                goToIntent();
+                if(flag==1)
+                    goToIntent("done");
+                else
+                    goToIntent("");
                 break;
             case R.id.ImageViewPlace3:
                 place1.setImageResource(R.drawable.locbang);
@@ -160,7 +204,10 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place3.setImageResource(R.drawable.buttonselecteffect);
                 place4.setImageResource(R.drawable.locmum);
                 propertyLocated="Delhi";
-                goToIntent();
+                if(flag==1)
+                    goToIntent("done");
+                else
+                    goToIntent("");
                 break;
             case R.id.ImageViewPlace4:
                 place1.setImageResource(R.drawable.locbang);
@@ -169,7 +216,10 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place4.setImageResource(R.drawable.buttonselecteffect);
                 propertyLocated="Mumbai";
                 setDataToHashMap("property_city", propertyLocated);
-                goToIntent();
+                if(flag==1)
+                    goToIntent("done");
+                else
+                    goToIntent("");
                 break;
             case R.id.locatn:
                 place1.setImageResource(R.drawable.locbang);
@@ -185,24 +235,33 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 break;
         }
     }
-    public void goToIntent(){
+    public void goToIntent(String flag){
             System.gc();
-            Log.d("property city is", propertyLocated);
-        Intent intent = null;
-        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
-            goToDatabase("Loan against Property");
 
-            if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("salaried")) {
-                intent = new Intent(this, hl_salaried2.class);
-            }else if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Business") || ((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Professional")) {
-                intent = new Intent(hl_city.this, Car_Loan_PAT.class);
-            }
-        }else{
-            goToDatabase("Home Loan");
-            intent = new Intent(this, hl_need.class);
+        ((GlobalData) getApplication()).setCity(propertyLocated);
+        if(flag.equals("done"))
+        {
+            finish();
         }
-        startActivity(intent);
-        overridePendingTransition(R.transition.left, R.transition.right);
+        else {
+            Log.d("property city is", propertyLocated);
+            Intent intent = null;
+
+            if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
+                goToDatabase("Loan against Property");
+
+                if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("salaried")) {
+                    intent = new Intent(this, hl_salaried2.class);
+                } else if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Business") || ((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Professional")) {
+                    intent = new Intent(hl_city.this, Car_Loan_PAT.class);
+                }
+            } else {
+                goToDatabase("Home Loan");
+                intent = new Intent(this, hl_need.class);
+            }
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
     }
 
     public void setDataToHashMap(String key, String data) {

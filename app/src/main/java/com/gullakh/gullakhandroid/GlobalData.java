@@ -40,7 +40,7 @@ public class GlobalData extends MultiDexApplication {
     private String Tenure;
     private String baltrans;
     private String totalsal,salpaymode,carmanuyear;
-    private String salBankName;
+    private String salBankName,hcity;
 
 //*****************CarLoan********************//
 
@@ -144,6 +144,17 @@ public class GlobalData extends MultiDexApplication {
     public String getCarmanuyear() {
         return carmanuyear;
     }
+
+
+
+
+    public void setCity(String someVariable) {
+        this.hcity = someVariable;
+    }
+    public String getCity() {
+        return hcity;
+    }
+
 
 
     public void setfoir(ArrayList<Double> questionVariable) {

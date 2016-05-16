@@ -45,7 +45,8 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         TextView title = (TextView) v.findViewById(R.id.title);
         ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+        //review.setVisibility(View.INVISIBLE);
+        review.setOnClickListener(this);
         close.setOnClickListener(this);
         title.setText("Home Loan");
         actionBar.setCustomView(v);
@@ -110,6 +111,18 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+
+            case R.id.edit:
+
+                String emptyp = ((GlobalData) getApplication()).getemptype();
+                if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                    RegisterPageActivity.showAlertreview(this, 10);
+                else
+                    RegisterPageActivity.showAlertreview(this, 9);
+
+                break;
+
             case R.id.next:
                 if (radioGroup1.getCheckedRadioButtonId() == -1){
                     RegisterPageActivity.showErroralert(this, "Select city limit", "failed");
