@@ -127,6 +127,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         hl_coappldetails.joint=0;
         Intent intent;
         setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
+        ((GlobalData) getApplication()).sethneed(spinner.getSelectedItem().toString());
         //goToDatabase("Home Loan");
         if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
             intent = new Intent(hl_need.this, hl_need1.class);

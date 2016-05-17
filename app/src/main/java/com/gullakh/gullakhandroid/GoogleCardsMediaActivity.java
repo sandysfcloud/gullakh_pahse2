@@ -209,7 +209,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
             else {
                 loan = ((GlobalData) getApplication()).getloanamt();
-                Log.d("loan amt is", loan);
+               // Log.d("loan amt is", loan);
 
                  globaltenure=((GlobalData) getApplication()).getTenure();
                  globalloan_type=((GlobalData) getApplication()).getLoanType();
@@ -938,7 +938,7 @@ public void setsearchdb()
                 }
                 else if(typ_loan.equals("Home Loan"))
                 {
-                   // calTenure(30, 20);
+                   calTenure(30);
                 }
                 else if(typ_loan.equals("Loan Against Property"))
                 {
@@ -1061,6 +1061,11 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 }
                 bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
                 final_bp = Math.ceil(bp);
+
+                Log.d("bpd value in cal", String.valueOf(bpd));
+                Log.d("emi value in cal", String.valueOf(emi));
+                Log.d("Max_tenure in cal", String.valueOf(Max_tenure));
+
                 Log.d("finalValue bp", String.valueOf(final_bp));
                 Log.d("loan_amt", String.valueOf(loan_amt));
 
