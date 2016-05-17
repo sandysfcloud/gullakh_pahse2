@@ -482,18 +482,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:id="@+id/linearLayout12"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
         <com.gullakh.gullakhandroid.font.RobotoButton
             app:typeface="robotoLight"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Done"
             android:id="@+id/done"

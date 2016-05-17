@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ConnectionDetector cd;
     private int touchPositionX;
     private int touchPositionY;
-    private ImageView coin,carloan,homeloan,persol,busin;
+    private ImageView coin,carloan,homeloan,persol,busin,info;
     private TranslateAnimation animationvu;
     private TranslateAnimation animationvd;
     private int duration=750;
@@ -156,6 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("GCM Checked", "Now finish");
         }
 //------------------------------------------------------------------------------------
+
+        info = (ImageView) findViewById(R.id.imageViewInfo);
+        info.setOnClickListener(this);
 
         carloan = (ImageView) findViewById(R.id.carln);
         carloan.setOnClickListener(this);
@@ -474,7 +477,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //alertadd.setCancelable(false);
         alertadd.show();
     }
+    private void showdialog() {
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+        final View view = factory.inflate(R.layout.info, null);
+        TextView tydoc = (TextView) view.findViewById(R.id.textdoc);
+        tydoc.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+        alertadd.setView(view);
 
+        alertadd.setCancelable(false);
+        alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        alertadd.show();
+    }
     private void callGarbageCollector() {
         System.gc();
     }
@@ -593,6 +611,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
+                break;
+            case R.id.imageViewInfo:
+                showdialog();
                 break;
         }
 

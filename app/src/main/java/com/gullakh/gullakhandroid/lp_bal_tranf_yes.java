@@ -124,13 +124,10 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                             if (Text3.getText().toString().equals("")) {
                                 RegisterPageActivity.showErroralert(this, "Present outstanding balance of home loan you wish to transfer(approx)?", "failed");
                             } else {
-                                if (Text4.getText().toString().equals("")) {
-                                    RegisterPageActivity.showErroralert(this, "Present outstanding balance of home loan you wish to transfer(approx)?", "failed");
-                                } else {
-                                    setDataToHashMap("", Text1.getText().toString());
-                                    setDataToHashMap("", getDate());
-                                    setDataToHashMap("", Text3.getText().toString());
-                                    setDataToHashMap("", Text4.getText().toString());
+                                    setDataToHashMap("existing_home_loan_bank", Text1.getText().toString());
+                                    setDataToHashMap("begin_of_existing_home_loan", getDate());
+                                    setDataToHashMap("present_outstanding_bal_of_homeloan_you_wish_to_transfer", Text3.getText().toString());
+                                    setDataToHashMap("top_up_amount", Text4.getText().toString());
                                     String loanamt1 = Text3.getText().toString();
                                     String loanamt2 = Text4.getText().toString();
                                     loanamt1 = loanamt1.replaceAll(",", "");
@@ -140,7 +137,6 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                                     Intent intent = new Intent(lp_bal_tranf_yes.this, Tenure.class);
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);
-                                }
                             }
                         }
                     }
