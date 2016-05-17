@@ -36,7 +36,8 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         TextView title = (TextView) v.findViewById(R.id.title);
         ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+       // review.setVisibility(View.INVISIBLE);
+        review.setOnClickListener(this);
         close.setOnClickListener(this);
         title.setText("Home Loan");
         actionBar.setCustomView(v);
@@ -88,6 +89,20 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v)
     {
         switch (v.getId()) {
+
+
+            case R.id.edit:
+
+                String emptyp = ((GlobalData) getApplication()).getemptype();
+                if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                    RegisterPageActivity.showAlertreview(this, 10);
+                else
+                    RegisterPageActivity.showAlertreview(this, 9);
+
+                break;
+
+
+
             case R.id.next:
                 if(!spinner.getSelectedItem().toString().equals("select"))
                 {
@@ -112,6 +127,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         hl_coappldetails.joint=0;
         Intent intent;
         setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
+        ((GlobalData) getApplication()).sethneed(spinner.getSelectedItem().toString());
         //goToDatabase("Home Loan");
         if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
             intent = new Intent(hl_need.this, hl_need1.class);

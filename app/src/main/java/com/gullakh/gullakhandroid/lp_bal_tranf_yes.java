@@ -47,7 +47,8 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         TextView title = (TextView) v.findViewById(R.id.title);
         ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+      //  review.setVisibility(View.INVISIBLE);
+        review.setOnClickListener(this);
         close.setOnClickListener(this);
         title.setText("My Current Loan Details");
         actionBar.setCustomView(v);
@@ -114,6 +115,17 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
     @Override
      public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.edit:
+
+                String empty=((GlobalData) getApplication()).getLoanType();
+                if(empty.equals("Home Loan")) {
+
+                    RegisterPageActivity.showAlertreview(this,3);
+                }
+
+                break;
+
             case R.id.next:
                     if (Text1.getText().toString().equals("")){
                         RegisterPageActivity.showErroralert(this, "Which Bank is your existing home loan with?", "failed");

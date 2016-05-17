@@ -131,7 +131,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
-
+                Log.d("cityname in itemclick", String.valueOf(((GlobalData) getApplication()).getcarres()));
                 if (data != null) {
                     if (data.equals("review")) {
                         finish();
@@ -287,16 +287,21 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     public void goToIntent(){
 
 
-        System.gc();
+       // System.gc();
         if (data != null) {
             if (data.equals("review")) {
              finish();
             }
         }
         else {
-            Log.d("selected current city is ", cl_car_global_data.dataWithAns.get("currently_living_in"));
-            ((GlobalData) getApplication()).setcarres(cl_car_global_data.dataWithAns.get("currently_living_in"));
+            Log.d("cityname in else part", String.valueOf(((GlobalData) getApplication()).getcarres()));
+           // Log.d("selected current city is ", cl_car_global_data.dataWithAns.get("currently_living_in"));
+           // ((GlobalData) getApplication()).setcarres(cl_car_global_data.dataWithAns.get("currently_living_in"));
             getStateName(cl_car_global_data.dataWithAns.get("currently_living_in"));
+
+
+
+            Log.d("cityname in else part", String.valueOf(((GlobalData) getApplication()).getcarres()));
 
             Intent intent = new Intent(this, Emp_type_Qustn.class);
             startActivity(intent);

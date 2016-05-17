@@ -91,13 +91,18 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         ArrayList<NameValuePair> nameValuePairs;
 
                       if(args[1].equals("RuleDetails")){
-
-                          Log.d("car_loan_type",((GlobalData) act.getApplication()).getLoanType());
+                          Log.d("main result","test");
+                         // Log.d("car_loan_type",((GlobalData) act.getApplication()).getLoanType());
                           Log.d("currently_living_in", ((GlobalData) act.getApplication()).getcarres());
                           Log.d("type_employment",((GlobalData) act.getApplication()).getemptype());
                           Log.d("cl_loanamount",((GlobalData) act.getApplication()).getloanamt());
                           Log.d("gender", ((GlobalData) act.getApplication()).getgender());
                           Log.d("net_mon_salary", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
+
+                          Log.d("cityname", String.valueOf(((GlobalData) act.getApplication()).getcarres()));
+
+                          Log.d("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans());
+                          Log.d("loanneededfor", String.valueOf(((GlobalData) act.getApplication()).gethneed()));
 
                           String sessionval=null;
                           DataHandler dbobject = new DataHandler(act);
@@ -122,6 +127,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                           nameValuePairs.add(new BasicNameValuePair("gender", ((GlobalData) act.getApplication()).getgender()));
                           nameValuePairs.add(new BasicNameValuePair("salaryamount", String.valueOf(((GlobalData) act.getApplication()).getnetsalary())));
                           nameValuePairs.add(new BasicNameValuePair("employername", String.valueOf(((GlobalData) act.getApplication()).getemployer())));
+                          //****Home Loan
+                          nameValuePairs.add(new BasicNameValuePair("balanecetransfer",((GlobalData) act.getApplication()).getBaltrans()));
+                          nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
+
+
+
 
 //                          for (NameValuePair nvp : nameValuePairs) {
 //                              Log.d(nvp.getName(),nvp.getValue());
