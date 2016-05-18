@@ -106,6 +106,27 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         }
 
 
+
+
+       if(((GlobalData) getApplication()).getCity()!=null){
+            String city=((GlobalData) getApplication()).getCity();
+            Log.d("residence review ", city);
+           propertyLocated=city;
+            if (city.equals("Bengaluru"))
+                place1.setImageResource(R.drawable.buttonselecteffect);
+            else if(city.equals("Chennai"))
+                place2.setImageResource(R.drawable.buttonselecteffect);
+            else if(city.equals("Delhi"))
+                place3.setImageResource(R.drawable.buttonselecteffect);
+            else if(city.equals("Mumbai"))
+                place4.setImageResource(R.drawable.buttonselecteffect);
+            if(!(city.equals("Bengaluru")||city.equals("Chennai") ||city.equals("Kolkata")||city.equals("Mumbai"))) {
+                Log.d("residence review other", city);
+                citynam.setText(city);
+            }
+
+        }
+
     }
     public void getcitynam()
     {

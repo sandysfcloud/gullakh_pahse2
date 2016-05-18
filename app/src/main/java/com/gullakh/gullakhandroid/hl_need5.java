@@ -78,6 +78,24 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
         Text1.addTextChangedListener(new NumberTextWatcher(Text1));
         Text2.setOnClickListener(this);
         Text3.addTextChangedListener(new NumberTextWatcher(Text3));
+
+
+       /* if(cl_car_global_data.dataWithAns.get("existing_home_loan_bank")!=null) {
+            Log.d("existing_home_loan_bank", cl_car_global_data.dataWithAns.get("existing_home_loan_bank"));
+
+
+            Text1.setText(cl_car_global_data.dataWithAns.get("existing_home_loan_bank"));
+            Text2.setText(cl_car_global_data.dataWithAns.get("begin_of_existing_home_loan"));
+            Text3.setText(cl_car_global_data.dataWithAns.get("present_outstanding_bal_of_homeloan_you_wish_to_transfer"));
+
+
+            if(cl_car_global_data.dataWithAns.get("city_limits").equals("yes"))
+                inside.setChecked(true);
+            else
+                outside.setChecked(true);
+
+        }*/
+
     }
 
     @Override
@@ -105,14 +123,17 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
                         if (Text3.getText().toString().equals("")) {
                             RegisterPageActivity.showErroralert(this, "Select current market value of plot", "failed");
                         } else {
-                            if (radioGroup.getCheckedRadioButtonId() == -1) {
+                           /* if (radioGroup.getCheckedRadioButtonId() == -1) {
                                 RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
-                            } else {
+                            } else {*/
                                 setDataToHashMap("existing_home_loan_bank", Text1.getText().toString());
                                 setDataToHashMap("begin_of_existing_home_loan", Text2.getText().toString());
                                 setDataToHashMap("present_outstanding_bal_of_homeloan_you_wish_to_transfer", Text3.getText().toString());
                                 setDataToHashMap("joint_acc",jointMembers);
-                                if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
+
+
+
+                           /* if(cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
                                     cl_car_global_data.totalno_coapp = getApplicants();
                                     Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
@@ -122,7 +143,7 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
                                     jointMembers="Spouse;Brother;Father;Mother;";
                                     setDataToHashMap("joint_acc", jointMembers);
                                     Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
-                                }
+                                }*/
                                 if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                     // intent = new Intent(hl_need2.this, DateOfBirth_questn.class);
                                     Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
@@ -134,7 +155,7 @@ public class hl_need5 extends AppCompatActivity implements View.OnClickListener,
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);
                                 }
-                            }
+                          //  }
                         }
                     }
                 }

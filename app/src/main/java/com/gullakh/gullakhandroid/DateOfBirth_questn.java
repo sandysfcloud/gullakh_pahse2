@@ -47,7 +47,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     Button next;
     ImageView gen1,gen2;
     AutoCompleteTextView Emp;
-    String dataGender=null,sessionid;;
+    String dataGender=null,sessionid;
     JSONServerGet requestgetserver;
     private ContentValues contentValues;
     @Override
@@ -257,7 +257,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("token", "employerlist", sessionid);
+        requestgetserver.execute("sessn", "employerlist", sessionid);
 
 
 
