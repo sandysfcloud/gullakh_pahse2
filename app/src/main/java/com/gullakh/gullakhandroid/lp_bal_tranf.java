@@ -59,6 +59,18 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
         }
 
 
+        if(((GlobalData) getApplication()).getemptype()!=null) {
+            Log.d("emp type not null", ((GlobalData) getApplication()).getBaltrans());
+            if (((GlobalData) getApplication()).getBaltrans().equals("Yes")) {
+                yes.setChecked(true);
+                buttonYes=true;
+            }
+            else if(((GlobalData) getApplication()).getBaltrans().equals("No"))
+                no.setChecked(true);
+
+        }
+
+
 
     }
     @Override

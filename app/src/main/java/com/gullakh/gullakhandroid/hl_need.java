@@ -159,7 +159,10 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             startActivity(intent);
         }else if(spinner.getSelectedItem().toString().equals("Property is not yet identified")){
             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                intent = new Intent(this, DateOfBirth_questn.class);
+                intent = new Intent(this, GoogleCardsMediaActivity.class);
+                intent.putExtra("data", "searchgo");
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
             } else {
                 intent = new Intent(this, cl_car_residence_type.class);
             }
