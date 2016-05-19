@@ -103,7 +103,18 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         allotment.setAdapter(dataAdapter2);
 
 
+        if(cl_car_global_data.dataWithAns.get("cost_of_property")!=null) {
+            Log.d("cost_of_property", cl_car_global_data.dataWithAns.get("cost_of_property"));
 
+                Text1.setText(cl_car_global_data.dataWithAns.get("cost_of_property"));
+                allotment.setSelection(Integer.parseInt(cl_car_global_data.dataWithAns.get("allotment_by")));
+
+            if(cl_car_global_data.dataWithAns.get("city_limits").equals("Inside"))
+                inside.setChecked(true);
+            else
+                outside.setChecked(true);
+
+        }
 
 
 
@@ -133,12 +144,31 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
                         if (Text1.getText().toString().equals("")){
                             RegisterPageActivity.showErroralert(this, "Select cost of plot", "failed");
                         }else {
-                            if (radioGroup2.getCheckedRadioButtonId() == -1){
+                           /* if (radioGroup2.getCheckedRadioButtonId() == -1){
                                 RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
-                            }else {
+                            }
+                            else {*/
+
+
+
                                 setDataToHashMap("cost_of_property", Text1.getText().toString());
                                 setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
-                                if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
+
+                            Intent intent;
+                            if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                //  intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
+                                intent = new Intent(hl_need1.this, GoogleCardsMediaActivity.class);
+                                intent.putExtra("data", "searchgo");
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            } else {
+                                intent = new Intent(hl_need1.this, cl_car_residence_type.class);
+                            }
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+
+
+                               /* if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
                                     cl_car_global_data.totalno_coapp = getApplicants();
                                     Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
@@ -181,7 +211,7 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);
                                 }
-                            }
+                           // }*/
                         }
                     }
                 }

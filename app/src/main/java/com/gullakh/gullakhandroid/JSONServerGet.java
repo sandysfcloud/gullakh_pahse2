@@ -88,50 +88,75 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                     try {
 
 
-                        ArrayList<NameValuePair> nameValuePairs;
+                        ArrayList<NameValuePair> nameValuePairs=null;
 
-                      if(args[1].equals("RuleDetails")){
-                          Log.d("main result","test");
-                         // Log.d("car_loan_type",((GlobalData) act.getApplication()).getLoanType());
-                          Log.d("currently_living_in", ((GlobalData) act.getApplication()).getcarres());
-                          Log.d("type_employment",((GlobalData) act.getApplication()).getemptype());
-                          Log.d("cl_loanamount",((GlobalData) act.getApplication()).getloanamt());
-                          Log.d("gender", ((GlobalData) act.getApplication()).getgender());
-                          Log.d("net_mon_salary", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
+                        if(args[1].equals("builderlist")){
+                            Log.d("main result", "builderlist");
+                            Log.d("sessn", args[2]);
 
-                          Log.d("cityname", String.valueOf(((GlobalData) act.getApplication()).getcarres()));
-
-                          Log.d("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans());
-                          Log.d("loanneededfor", String.valueOf(((GlobalData) act.getApplication()).gethneed()));
-
-                          String sessionval=null;
-                          DataHandler dbobject = new DataHandler(act);
-                          Cursor cr = dbobject.displayData("select * from session");
-                          if (cr.moveToFirst()) {
-                              //pass the session id to check wether its valid or not
-                              Log.d("session value is", String.valueOf(cr.getCount()) + " :value is:" + cr.getString(1));
-
-                             sessionval=cr.getString(1);
-
-                          }
-                          nameValuePairs = new ArrayList<NameValuePair>();
-                          nameValuePairs.add(new BasicNameValuePair("operation", "query"));
-                          nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
-                          nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
-                          nameValuePairs.add(new BasicNameValuePair("loanamount",((GlobalData) act.getApplication()).getloanamt()));
-                          nameValuePairs.add(new BasicNameValuePair("loantype", ((GlobalData) act.getApplication()).getLoanType()));
-                          nameValuePairs.add(new BasicNameValuePair("cartype",((GlobalData) act.getApplication()).getCartypeloan()));
-                          nameValuePairs.add(new BasicNameValuePair("cityname",  ((GlobalData) act.getApplication()).getcarres()));
-                          nameValuePairs.add(new BasicNameValuePair("salarydeposition",((GlobalData) act.getApplication()).getSalBankName()));
-                          nameValuePairs.add(new BasicNameValuePair("employeetype", ((GlobalData) act.getApplication()).getemptype()));
-                          nameValuePairs.add(new BasicNameValuePair("gender", ((GlobalData) act.getApplication()).getgender()));
-                          nameValuePairs.add(new BasicNameValuePair("salaryamount", String.valueOf(((GlobalData) act.getApplication()).getnetsalary())));
-                          nameValuePairs.add(new BasicNameValuePair("employername", String.valueOf(((GlobalData) act.getApplication()).getemployer())));
-                          //****Home Loan
-                          nameValuePairs.add(new BasicNameValuePair("balanecetransfer",((GlobalData) act.getApplication()).getBaltrans()));
-                          nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
+                            nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "getbuildername"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
 
 
+                        }
+                        else if(args[1].equals("projectlist")){
+                            Log.d("main result", "projectlist");
+                            Log.d("sessn", args[2]);
+                            Log.d("builder id", args[3]);
+
+                            nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "getbuilderprojectname"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("builderid", args[3]));
+
+
+                        }
+                        else {
+
+
+                            if (args[1].equals("RuleDetails")) {
+                                Log.d("main result", "test");
+                                // Log.d("car_loan_type",((GlobalData) act.getApplication()).getLoanType());
+                                Log.d("currently_living_in", ((GlobalData) act.getApplication()).getcarres());
+                                Log.d("type_employment", ((GlobalData) act.getApplication()).getemptype());
+                                Log.d("cl_loanamount", ((GlobalData) act.getApplication()).getloanamt());
+                                Log.d("gender", ((GlobalData) act.getApplication()).getgender());
+                                Log.d("net_mon_salary", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
+
+                                Log.d("cityname", String.valueOf(((GlobalData) act.getApplication()).getcarres()));
+
+                                Log.d("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans());
+                                Log.d("loanneededfor", String.valueOf(((GlobalData) act.getApplication()).gethneed()));
+
+                                String sessionval = null;
+                                DataHandler dbobject = new DataHandler(act);
+                                Cursor cr = dbobject.displayData("select * from session");
+                                if (cr.moveToFirst()) {
+                                    //pass the session id to check wether its valid or not
+                                    Log.d("session value is", String.valueOf(cr.getCount()) + " :value is:" + cr.getString(1));
+
+                                    sessionval = cr.getString(1);
+
+                                }
+                                nameValuePairs = new ArrayList<NameValuePair>();
+                                nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                                nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
+                                nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
+                                nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
+                                nameValuePairs.add(new BasicNameValuePair("loantype", ((GlobalData) act.getApplication()).getLoanType()));
+                                nameValuePairs.add(new BasicNameValuePair("cartype", ((GlobalData) act.getApplication()).getCartypeloan()));
+                                nameValuePairs.add(new BasicNameValuePair("cityname", ((GlobalData) act.getApplication()).getcarres()));
+                                nameValuePairs.add(new BasicNameValuePair("salarydeposition", ((GlobalData) act.getApplication()).getSalBankName()));
+                                nameValuePairs.add(new BasicNameValuePair("employeetype", ((GlobalData) act.getApplication()).getemptype()));
+                                nameValuePairs.add(new BasicNameValuePair("gender", ((GlobalData) act.getApplication()).getgender()));
+                                nameValuePairs.add(new BasicNameValuePair("salaryamount", String.valueOf(((GlobalData) act.getApplication()).getnetsalary())));
+                                nameValuePairs.add(new BasicNameValuePair("employername", String.valueOf(((GlobalData) act.getApplication()).getemployer())));
+                                //****Home Loan
+                                nameValuePairs.add(new BasicNameValuePair("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans()));
+                                nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
 
 
 //                          for (NameValuePair nvp : nameValuePairs) {
@@ -153,30 +178,30 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                           nameValuePairs.add(new BasicNameValuePair("salaryamount","20000"));
                           nameValuePairs.add(new BasicNameValuePair("employername","Riverdale Software Solutions Pvt. Ltd."));*/
 
-                          DefaultHttpClient httpClient = new DefaultHttpClient();
-                          HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
+                                DefaultHttpClient httpClient = new DefaultHttpClient();
+                                HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
 
-                          httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                          response = httpClient.execute(httpPost);
-                          Log.e("Response:session id ", String.valueOf(response));
+                                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                                response = httpClient.execute(httpPost);
+                                Log.e("Response:session id ", String.valueOf(response));
 
+                            } else {
+
+
+                                Challenge challengedata = new Challenge();
+                                String mdata = token + "znLkyofsf6tEmtEw";
+                                Log.e("mdatavalue", mdata);
+                                String accessKey = md5(mdata);
+                                Log.e("accessKey", accessKey);
+                                // json = jParser.getJSONFromUrl(GlobalData.SERVER_GET_URL, "login", "connectuser", accessKey);
+                                // Log.e("doInBackground-access", String.valueOf(json));
+
+                                nameValuePairs = new ArrayList<NameValuePair>();
+                                nameValuePairs.add(new BasicNameValuePair("operation", "login"));
+                                nameValuePairs.add(new BasicNameValuePair("username", "connectuser"));
+                                nameValuePairs.add(new BasicNameValuePair("accessKey", accessKey));
+                            }
                         }
-                        else {
-
-
-                          Challenge challengedata = new Challenge();
-                          String mdata = token + "znLkyofsf6tEmtEw";
-                          Log.e("mdatavalue", mdata);
-                          String accessKey = md5(mdata);
-                          Log.e("accessKey", accessKey);
-                          // json = jParser.getJSONFromUrl(GlobalData.SERVER_GET_URL, "login", "connectuser", accessKey);
-                          // Log.e("doInBackground-access", String.valueOf(json));
-
-                          nameValuePairs = new ArrayList<NameValuePair>();
-                          nameValuePairs.add(new BasicNameValuePair("operation", "login"));
-                          nameValuePairs.add(new BasicNameValuePair("username", "connectuser"));
-                          nameValuePairs.add(new BasicNameValuePair("accessKey", accessKey));
-                      }
 
                         DefaultHttpClient httpClient = new DefaultHttpClient();
                         HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);

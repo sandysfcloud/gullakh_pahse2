@@ -104,6 +104,28 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
         android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allot);
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         allotment.setAdapter(dataAdapter2);
+
+
+
+        if(cl_car_global_data.dataWithAns.get("allotment_by")!=null) {
+            Log.d("allotment_by", cl_car_global_data.dataWithAns.get("allotment_by"));
+
+            allotment.setSelection(Integer.parseInt(cl_car_global_data.dataWithAns.get("allotment_by")));
+            Text1.setText(cl_car_global_data.dataWithAns.get("cost_of_plot_reg"));
+            Text2.setText(cl_car_global_data.dataWithAns.get("current_market_value_plot"));
+
+
+            if(cl_car_global_data.dataWithAns.get("city_limits").equals("yes"))
+                inside.setChecked(true);
+            else
+                outside.setChecked(true);
+
+        }
+
+
+
+
+
     }
     @Override
     public void onClick(View v) {
@@ -132,14 +154,28 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
                             if (radioGroup1.getCheckedRadioButtonId() == -1){
                                 RegisterPageActivity.showErroralert(this, "Select city limit", "failed");
                             }else {
-                                if (radioGroup2.getCheckedRadioButtonId() == -1){
+                               /* if (radioGroup2.getCheckedRadioButtonId() == -1){
                                     RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
-                                }else {
+                                }else {*/
                                     setDataToHashMap("allotment_by",allotment.getSelectedItem().toString());
                                     setDataToHashMap("cost_of_plot_reg",Text1.getText().toString());
                                     setDataToHashMap("current_market_value_plot", Text2.getText().toString());
                                     setDataToHashMap("joint_acc", jointMembers);
-                                    if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
+                                Intent intent;
+                                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                    //  intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
+                                    intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                    intent.putExtra("data", "searchgo");
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+                                } else {
+                                    intent = new Intent(this, cl_car_residence_type.class);
+                                }
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+
+
+                                   /* if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                         cl_car_global_data.numOfApp = getApplicants();
                                         cl_car_global_data.totalno_coapp = getApplicants();
                                         Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
@@ -181,8 +217,8 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
                                         }
                                         startActivity(intent);
                                         overridePendingTransition(R.transition.left, R.transition.right);
-                                    }
-                                }
+                                    }*/
+                               // }
                             }
                         }
                     }

@@ -79,6 +79,27 @@ public class hl_need2 extends AppCompatActivity implements View.OnClickListener 
         joint.setOnClickListener(this);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
+
+
+        if(cl_car_global_data.dataWithAns.get("cost_of_plot_reg")!=null) {
+            Log.d("cost_of_plot_reg", cl_car_global_data.dataWithAns.get("cost_of_plot_reg"));
+
+            Text1.setText(cl_car_global_data.dataWithAns.get("cost_of_plot_reg"));
+            Text2.setText(cl_car_global_data.dataWithAns.get("current_market_value_plot"));
+            Text3.setText(cl_car_global_data.dataWithAns.get("construction_cost_by_architecture"));
+
+            if(cl_car_global_data.dataWithAns.get("building_map_approved").equals("yes"))
+                yes.setChecked(true);
+            else
+                no.setChecked(true);
+
+            if(cl_car_global_data.dataWithAns.get("city_limits").equals("yes"))
+                inside.setChecked(true);
+            else
+                outside.setChecked(true);
+
+        }
+
     }
 
     @Override
@@ -112,13 +133,32 @@ public class hl_need2 extends AppCompatActivity implements View.OnClickListener 
                                 if (radioGroup2.getCheckedRadioButtonId() == -1){
                                     RegisterPageActivity.showErroralert(this, "Select city limit", "failed");
                                 }else {
-                                    if (radioGroup3.getCheckedRadioButtonId() == -1){
+                                   /* if (radioGroup3.getCheckedRadioButtonId() == -1){
                                         RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
-                                    }else {
+                                    }else {*/
+
+
+
                                         setDataToHashMap("cost_of_plot_reg",Text1.getText().toString());
                                         setDataToHashMap("current_market_value_plot",Text2.getText().toString());
                                         setDataToHashMap("construction_cost_by_architecture",Text3.getText().toString());
-                                        setDataToHashMap("joint_acc",jointMembers);
+
+
+                                    Intent intent;
+                                    if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                        //  intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
+                                        intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                        intent.putExtra("data", "searchgo");
+                                        startActivity(intent);
+                                        overridePendingTransition(R.transition.left, R.transition.right);
+                                    } else {
+                                        intent = new Intent(this, cl_car_residence_type.class);
+                                    }
+                                    startActivity(intent);
+                                    overridePendingTransition(R.transition.left, R.transition.right);
+
+
+                                       /* setDataToHashMap("joint_acc",jointMembers);
                                         if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                             cl_car_global_data.numOfApp = getApplicants();
                                             cl_car_global_data.totalno_coapp = getApplicants();
@@ -161,8 +201,8 @@ public class hl_need2 extends AppCompatActivity implements View.OnClickListener 
                                             }
                                             startActivity(intent);
                                             overridePendingTransition(R.transition.left, R.transition.right);
-                                        }
-                                    }
+                                        }*/
+                                   // }
                                 }
                             }
                         }

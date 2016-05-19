@@ -70,6 +70,20 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
         c4= (CheckBox) findViewById(R.id.cfathr);
         c5= (CheckBox) findViewById(R.id.cmothr);
 
+
+        if(cl_car_global_data.dataWithAns.get("builder_name")!=null) {
+            Log.d("builder_name", cl_car_global_data.dataWithAns.get("builder_name"));
+
+
+            Text1.setText(cl_car_global_data.dataWithAns.get("builder_name"));
+            Text2.setText(cl_car_global_data.dataWithAns.get("project_name"));
+            Text3.setText(cl_car_global_data.dataWithAns.get("cost_of_flat_as_buyer"));
+
+
+
+
+        }
+
     }
     @Override
     public void onClick(View v) {
@@ -99,13 +113,26 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
                         if (Text3.getText().toString().equals("")) {
                             RegisterPageActivity.showErroralert(this, "Select cost of flat as per Flat buyer agreement", "failed");
                         } else {
-                            if (radioGroup.getCheckedRadioButtonId() == -1) {
+                           /* if (radioGroup.getCheckedRadioButtonId() == -1) {
                                 RegisterPageActivity.showErroralert(this, "Select Ownership of plot", "failed");
-                            } else {
+                            } else {*/
                                 setDataToHashMap("builder_name", Text1.getText().toString());
                                 setDataToHashMap("project_name", Text2.getText().toString());
                                 setDataToHashMap("cost_of_flat_as_allotment_letter_to_sell", Text3.getText().toString());
-                                setDataToHashMap("joint_acc", jointMembers);
+
+                            Intent intent;
+                            if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                //intent = new Intent(this, DateOfBirth_questn.class);
+                                intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                intent.putExtra("data", "searchgo");
+                                startActivity(intent);
+                                overridePendingTransition(R.transition.left, R.transition.right);
+                            } else {
+                                intent = new Intent(this, cl_car_residence_type.class);
+                            }
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                            /*setDataToHashMap("joint_acc", jointMembers);
                                 if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();
                                     cl_car_global_data.totalno_coapp = getApplicants();
@@ -136,20 +163,9 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
                                     setDataToHashMap("joint_acc", jointMembers);
                                     Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));
 
-                                    Intent intent;
-                                    if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                                        //intent = new Intent(this, DateOfBirth_questn.class);
-                                        intent = new Intent(this, GoogleCardsMediaActivity.class);
-                                        intent.putExtra("data", "searchgo");
-                                        startActivity(intent);
-                                        overridePendingTransition(R.transition.left, R.transition.right);
-                                    } else {
-                                        intent = new Intent(this, cl_car_residence_type.class);
-                                    }
-                                    startActivity(intent);
-                                    overridePendingTransition(R.transition.left, R.transition.right);
-                                }
-                            }
+
+                                }*/
+                            //}
                         }
                     }
                 }
