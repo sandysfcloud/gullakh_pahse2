@@ -168,7 +168,9 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 
                 break;
             case R.id.done:
-                finish();
+                intent = new Intent(this, cl_car_gender.class);
+                intent.putExtra("coappl","done");
+                startActivity(intent);
 
                 break;
 //            case R.id.yes:

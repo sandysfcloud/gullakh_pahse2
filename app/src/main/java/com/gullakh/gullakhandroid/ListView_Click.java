@@ -333,7 +333,7 @@ if(one_time_fee!=null) {
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
-                        intent = new Intent(ListView_Click.this,cl_car_residence_type.class);
+                        intent = new Intent(ListView_Click.this,hl_prop_owns.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         overridePendingTransition(R.transition.left, R.transition.right);

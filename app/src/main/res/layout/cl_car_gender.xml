@@ -78,7 +78,7 @@
                 android:textSize="20dp"
                 android:layout_margin="20dp"
                 android:visibility="gone" />
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/addr1"
@@ -86,9 +86,9 @@
                 android:background="@drawable/edittextsimple"
                 android:hint="Address  line 1"
                 android:gravity="center"
-                android:singleLine="false" />
+                android:singleLine="true" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/addr2"
@@ -99,7 +99,7 @@
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
                 android:visibility="visible" />
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/pin"
@@ -111,7 +111,7 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:singleLine="true" />
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/city"
@@ -122,7 +122,7 @@
                 android:layout_gravity="center_horizontal"
                 android:singleLine="true" />
 
-            <EditText
+            <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/state"
@@ -152,9 +152,10 @@
                 android:orientation="horizontal"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp">
 
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:focusableInTouchMode="false"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
@@ -166,7 +167,7 @@
                     android:singleLine="true"
                     android:layout_weight="1" />
 
-                <EditText
+                <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:focusableInTouchMode="false"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"

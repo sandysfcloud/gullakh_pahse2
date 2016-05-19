@@ -162,7 +162,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                         if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
                             intent = new Intent(signin.this, cl_car_make.class);
                         } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                            intent = new Intent(signin.this, cl_car_residence_type.class);
+                            intent = new Intent(signin.this, hl_prop_owns.class);
                         } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                             intent = new Intent(signin.this, cl_car_residence_type.class);
                             intent.putExtra("personal", "personal");

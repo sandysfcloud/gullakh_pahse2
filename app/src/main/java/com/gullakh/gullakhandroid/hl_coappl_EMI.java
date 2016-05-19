@@ -102,7 +102,9 @@ public class hl_coappl_EMI extends AppCompatActivity implements View.OnClickList
 
                     setmainhm(hashno, cl_car_global_data.dataWithAnscoapp);
                     Log.d("check main hashmap data", String.valueOf(cl_car_global_data.allcoappdetail));
-
+                    Intent i = new Intent(this, coappldetail.class);
+                    startActivity(i);
+                    overridePendingTransition(R.transition.left, R.transition.right);
                     finish();
                 }
 

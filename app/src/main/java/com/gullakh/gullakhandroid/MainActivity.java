@@ -475,6 +475,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final View view = factory.inflate(R.layout.nointernetconn, null);
         alertadd.setView(view);
         //alertadd.setCancelable(false);
+
+        alertadd.setPositiveButton("Try Again...", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         alertadd.show();
     }
     private void showdialog() {
@@ -489,6 +497,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
         alertadd.show();

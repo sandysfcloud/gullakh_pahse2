@@ -66,7 +66,15 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         //****from prequestion from personal loan
 
 
-
+        Intent intent = getIntent();
+        no = intent.getStringExtra("no");
+        if (no != null) {
+            Log.d("no got frm intent T", no);
+            Log.d("small hp", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+            Log.d("main hp", String.valueOf(cl_car_global_data.allcoappdetail));
+            Log.d("no got frm intent T", no);
+            gethmp(no);
+        }
 
 
 
@@ -147,7 +155,7 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                 cl_car_salaried.user = false;
 
                                 ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(grossSal.getText().toString().replaceAll(",", "")));
-                                Intent i = new Intent(this, EMI_questn.class);
+                                Intent i = new Intent(this, hl_coappl_EMI.class);
                                 startActivity(i);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }

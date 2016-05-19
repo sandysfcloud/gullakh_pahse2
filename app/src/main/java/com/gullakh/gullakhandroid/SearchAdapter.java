@@ -118,7 +118,9 @@ public class SearchAdapter extends BaseAdapter
                 if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Car Loan")){
                     ((GlobalData) cont.getApplicationContext()).setCartypeloan(obj.getString("car_loan_type"));
                 }
-
+                if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Home Loan")){
+                    ((GlobalData) cont.getApplicationContext()).setBaltrans(obj.getString("hl_bal_tranf"));
+                }
 
                 ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
 
