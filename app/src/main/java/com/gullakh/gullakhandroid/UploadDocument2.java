@@ -126,7 +126,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         if(intent1.getStringExtra("data").equals("myapplication")){
             frommyappl=true;
 
-            caseid=intent1.getStringExtra("loanreqcaseid");
+            caseid="x"+intent1.getStringExtra("loanreqcaseid");
             String temp=intent1.getStringExtra("contactid");
             temp=temp.replaceAll(",\"","");
             contactid= "x"+temp;
@@ -143,7 +143,6 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
 
         }else{
             caseid=cl_car_gender.borrowercaseid;
-            caseid=caseid.replaceAll("x","");
             contactid=cl_car_gender.borrowercontactid;
             Log.d("gender page caseid",caseid);
             Log.d("gender page contactid",contactid);

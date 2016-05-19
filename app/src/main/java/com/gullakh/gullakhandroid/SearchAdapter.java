@@ -104,7 +104,7 @@ public class SearchAdapter extends BaseAdapter
                 ((GlobalData) cont.getApplicationContext()).setcarres(obj.getString("currently_living_in"));
                 ((GlobalData) cont.getApplicationContext()).setgender(obj.getString("gender"));
                 ((GlobalData) cont.getApplicationContext()).setTotalsal(obj.getString("net_mon_salary"));
-                ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("cl_loanamount"));
+                ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("loanamount"));
                 ((GlobalData) cont.getApplicationContext()).setemptype(obj.getString("type_employment"));
                 if(!(obj.getString("type_employment").equals("Salaried"))) {
                     ((GlobalData) cont.getApplicationContext()).setpat(Double.parseDouble(obj.getString("pat_amount")));

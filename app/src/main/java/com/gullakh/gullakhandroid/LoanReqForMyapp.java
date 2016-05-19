@@ -6,7 +6,7 @@ package com.gullakh.gullakhandroid;
 public class LoanReqForMyapp
 {
     public String loanrequestcaseid;
-    public String loan_type;
+    public String requested_loantype;
     public String loan_amount;
     public String primary_lender;
     public String secondary_lender;
@@ -76,7 +76,7 @@ public class LoanReqForMyapp
     }
 
     public String getLoantype() {
-        return loan_type;
+        return requested_loantype;
     }
 
     public String getPrimary_lender() {
@@ -91,9 +91,6 @@ public class LoanReqForMyapp
         return completedpercentage;
     }
 
-    public String getLoan_type() {
-        return loan_type;
-    }
 
     public String getLoanrequestcaseid() {
         return loanrequestcaseid;

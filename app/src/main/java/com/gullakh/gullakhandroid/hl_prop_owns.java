@@ -69,6 +69,7 @@ public class hl_prop_owns extends AppCompatActivity implements View.OnClickListe
                 }else {
                     if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint"))
                     {
+
                         cl_car_global_data.numOfApp = getApplicants();
                         cl_car_global_data.totalno_coapp = getApplicants();
                         Log.d("no of co applicants", String.valueOf(cl_car_global_data.numOfApp));

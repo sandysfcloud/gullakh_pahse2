@@ -125,6 +125,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
                     main.setVisibility(View.VISIBLE);
                     coappl.setVisibility(View.GONE);
+                    if(coappldata!=null){
+                        yesb.setChecked(true);
+                    }
                 } else {
                     coappl.setVisibility(View.VISIBLE);
                     main.setVisibility(View.GONE);
@@ -429,7 +432,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 borrowercaseid = Borrower_case.getId();
                 borrowercaseno= Borrower_case.getCase_number();
                 if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
-                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId,"");
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
                 }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                 requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
                 }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {

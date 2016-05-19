@@ -257,10 +257,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("sessn", "employerlist", sessionid);
-
-
-
+        requestgetserver.execute("token", "employerlist", sessionid);
 
     }
 
@@ -500,11 +497,15 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
 
+                        }else if(loantype.equalsIgnoreCase("Car Loan"))
+                        {
+                            Intent intent = new Intent(DateOfBirth_questn.this, GoogleCardsMediaActivity.class);
+                            intent.putExtra("data", "searchgo");
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+
                         }
-
-
-
-                        else {
+                        else if(loantype.equalsIgnoreCase("Personal Loan")){
                             String empt = ((GlobalData) getApplication()).getemptype();
                             Log.d("emptyp is", empt + " its personal loan");
                             if (empt.equals("Salaried")) {

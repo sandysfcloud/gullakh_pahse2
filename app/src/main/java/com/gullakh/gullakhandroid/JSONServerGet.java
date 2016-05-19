@@ -128,8 +128,9 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                                 Log.d("cityname", String.valueOf(((GlobalData) act.getApplication()).getcarres()));
 
-                                Log.d("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans());
-                                Log.d("loanneededfor", String.valueOf(((GlobalData) act.getApplication()).gethneed()));
+//          These two lines gives null pointer exception
+//                                Log.d("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans());
+//                                Log.d("loanneededfor", String.valueOf(((GlobalData) act.getApplication()).gethneed()));
 
                                 String sessionval = null;
                                 DataHandler dbobject = new DataHandler(act);
@@ -157,6 +158,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 //****Home Loan
                                 nameValuePairs.add(new BasicNameValuePair("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans()));
                                 nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
+                                nameValuePairs.add(new BasicNameValuePair("property_city", ((GlobalData) act.getApplication()).getCity()));
 
 
 //                          for (NameValuePair nvp : nameValuePairs) {
