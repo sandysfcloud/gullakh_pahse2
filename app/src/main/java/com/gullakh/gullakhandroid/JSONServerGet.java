@@ -160,7 +160,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
                                 nameValuePairs.add(new BasicNameValuePair("property_city", ((GlobalData) act.getApplication()).getCity()));
 //                                nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
-                                nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getBuilderName()));
+                               // nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getBuilderName()));
 
                                 if( ((GlobalData) act.getApplication()).getLoanType().equalsIgnoreCase("Home Loan"))
                                 {
@@ -173,6 +173,10 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 }else{
                                     nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
                                 }
+                                if(((GlobalData) act.getApplication()).getprojectnam()!=null)
+                                nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getprojectnam()));
+                                else
+                                    nameValuePairs.add(new BasicNameValuePair("builderprojectname","others"));
 
 //                          for (NameValuePair nvp : nameValuePairs) {
 //                              Log.d(nvp.getName(),nvp.getValue());
