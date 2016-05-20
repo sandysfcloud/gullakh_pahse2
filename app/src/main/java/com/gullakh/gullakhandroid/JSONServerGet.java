@@ -160,7 +160,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
                                 nameValuePairs.add(new BasicNameValuePair("property_city", ((GlobalData) act.getApplication()).getCity()));
 //                                nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
-                                nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getBuilderName()));
+//                                nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getBuilderName()));
 
                                 if( ((GlobalData) act.getApplication()).getLoanType().equalsIgnoreCase("Home Loan"))
                                 {
