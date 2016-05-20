@@ -256,14 +256,12 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
                     liste.add(enums[i].getprojectname());
                 }
 
-               /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(hl_need6.this, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-                android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, liste);
-                dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinnertextview, liste);
+             //   dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 Text2.setAdapter(dataAdapter1);
-                Log.e("emplist frm server ", String.valueOf(liste));*/
+                Log.e("emplist frm server ", String.valueOf(liste));
 
 
 
@@ -319,7 +317,7 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
                                 setDataToHashMap("builder_name", Text1.getText().toString());
                                 setDataToHashMap("project_name", Text2.getSelectedItem().toString());
                                 setDataToHashMap("cost_of_flat_as_buyer", Text3.getText().toString());
-
+                             ((GlobalData) getApplication()).setprojectnam(Text2.getSelectedItem().toString());
 
                             Intent intent;
                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {

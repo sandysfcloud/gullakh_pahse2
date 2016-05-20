@@ -173,6 +173,10 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 }else{
                                     nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
                                 }
+                                if(((GlobalData) act.getApplication()).getprojectnam()!=null)
+                                nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getprojectnam()));
+                                else
+                                    nameValuePairs.add(new BasicNameValuePair("builderprojectname","others"));
 
 //                          for (NameValuePair nvp : nameValuePairs) {
 //                              Log.d(nvp.getName(),nvp.getValue());

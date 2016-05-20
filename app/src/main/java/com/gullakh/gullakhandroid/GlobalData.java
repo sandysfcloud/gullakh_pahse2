@@ -43,6 +43,7 @@ public class GlobalData extends MultiDexApplication {
     private String salBankName,hcity,baltranamt,hneed;
     private String balTransLoanAmt;
     private String builderName;
+    private String projectnam;
 
 //*****************CarLoan********************//
 
@@ -159,6 +160,12 @@ public class GlobalData extends MultiDexApplication {
 
 
 
+    public void setprojectnam(String someVariable) {
+        this.projectnam = someVariable;
+    }
+    public String getprojectnam() {
+        return projectnam;
+    }
 
 
 
