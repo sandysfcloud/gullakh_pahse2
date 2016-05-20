@@ -122,6 +122,7 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
 
                             Intent intent;
                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                                ((GlobalData) getApplication()).setBuilderName(Text1.getText().toString());
                                 //intent = new Intent(this, DateOfBirth_questn.class);
                                 intent = new Intent(this, GoogleCardsMediaActivity.class);
                                 intent.putExtra("data", "searchgo");

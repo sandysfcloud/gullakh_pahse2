@@ -41,6 +41,8 @@ public class GlobalData extends MultiDexApplication {
     private String baltrans;
     private String totalsal,salpaymode,carmanuyear;
     private String salBankName,hcity,baltranamt,hneed;
+    private String balTransLoanAmt;
+    private String builderName;
 
 //*****************CarLoan********************//
 
@@ -325,5 +327,21 @@ public class GlobalData extends MultiDexApplication {
 
     public void setSalBankName(String salBankName) {
         this.salBankName = salBankName;
+    }
+
+    public void setBalTransLoanAmt(String balTransLoanAmt) {
+        this.balTransLoanAmt = balTransLoanAmt;
+    }
+
+    public String getBalTransLoanAmt() {
+        return balTransLoanAmt;
+    }
+
+    public void setBuilderName(String builderName) {
+        this.builderName = builderName;
+    }
+
+    public String getBuilderName() {
+        return builderName;
     }
 }

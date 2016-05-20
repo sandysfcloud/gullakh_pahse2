@@ -146,7 +146,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                                 nameValuePairs.add(new BasicNameValuePair("elementType", "getqueryresult"));
                                 nameValuePairs.add(new BasicNameValuePair("sessionName", sessionval));
-                                nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
+//                                nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
                                 nameValuePairs.add(new BasicNameValuePair("loantype", ((GlobalData) act.getApplication()).getLoanType()));
                                 nameValuePairs.add(new BasicNameValuePair("cartype", ((GlobalData) act.getApplication()).getCartypeloan()));
                                 nameValuePairs.add(new BasicNameValuePair("cityname", ((GlobalData) act.getApplication()).getcarres()));
@@ -159,7 +159,20 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans()));
                                 nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
                                 nameValuePairs.add(new BasicNameValuePair("property_city", ((GlobalData) act.getApplication()).getCity()));
+//                                nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
+                                nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getBuilderName()));
 
+                                if( ((GlobalData) act.getApplication()).getLoanType().equalsIgnoreCase("Home Loan"))
+                                {
+                                    if (((GlobalData) act.getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
+                                        nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
+                                    } else {
+                                        nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
+
+                                    }
+                                }else{
+                                    nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
+                                }
 
 //                          for (NameValuePair nvp : nameValuePairs) {
 //                              Log.d(nvp.getName(),nvp.getValue());
