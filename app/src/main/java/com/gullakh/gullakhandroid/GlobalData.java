@@ -43,7 +43,7 @@ public class GlobalData extends MultiDexApplication {
     private String salBankName,hcity,baltranamt,hneed;
     private String balTransLoanAmt;
     private String builderName;
-    private String projectnam;
+    private String projectnam,existbank;
 
 //*****************CarLoan********************//
 
@@ -187,6 +187,13 @@ public class GlobalData extends MultiDexApplication {
         return hneed;
     }
 
+
+    public void setexistbank(String someVariable) {
+        this.existbank = someVariable;
+    }
+    public String getexistbank() {
+        return existbank;
+    }
 
 
 

@@ -36,7 +36,7 @@
             android:ems="10"
             android:id="@+id/editText1"
             android:background="@drawable/edittextsimple"
-            android:hint="Ex-SBI"
+            android:hint="Ex-State Bank of India"
             android:gravity="center_vertical"
             android:paddingLeft="10dp" />
 

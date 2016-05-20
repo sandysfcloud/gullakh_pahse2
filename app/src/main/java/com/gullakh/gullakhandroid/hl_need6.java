@@ -111,7 +111,7 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
 
 
             Text1.setText(cl_car_global_data.dataWithAns.get("builder_name"));
-           // Text2.getSelectedItem(cl_car_global_data.dataWithAns.get("project_name"));
+            Text2.setPrompt(((GlobalData) getApplication()).getprojectnam());
             Text3.setText(cl_car_global_data.dataWithAns.get("cost_of_flat_as_buyer"));
 
 

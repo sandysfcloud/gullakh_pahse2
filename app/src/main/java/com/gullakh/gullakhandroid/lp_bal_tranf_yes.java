@@ -35,6 +35,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
     EditText Text2,Text3,Text4;
     AutoCompleteTextView Text1;
     private JSONServerGet requestgetserver;
+    String sessionid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,11 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         Text2.setOnClickListener(this);
         getbanknam();
     }
+
+
+
+
+
 
     public void getbanknam()
     {
@@ -144,8 +150,9 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                                     String loanamt2 = Text4.getText().toString();
                                     loanamt1 = loanamt1.replaceAll(",", "");
                                     loanamt2 = loanamt2.replaceAll(",", "");
-//                                    int loanamt = Integer.parseInt(loanamt1) + Integer.parseInt(loanamt2);
-                                    ((GlobalData) getApplication()).setloanamt(loanamt1);
+                                    int loanamt = Integer.parseInt(loanamt1) + Integer.parseInt(loanamt2);
+                                    ((GlobalData) getApplication()).setloanamt(String.valueOf(loanamt));
+                                    ((GlobalData) getApplication()).setexistbank(Text1.getText().toString());
                                     Intent intent = new Intent(lp_bal_tranf_yes.this, Tenure.class);
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);

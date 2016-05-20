@@ -165,7 +165,10 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 if( ((GlobalData) act.getApplication()).getLoanType().equalsIgnoreCase("Home Loan"))
                                 {
                                     if (((GlobalData) act.getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
+                                        Log.d("tranf loan amt",((GlobalData) act.getApplication()).getloanamt());
+                                        Log.d("tranf getexistbank",((GlobalData) act.getApplication()).getexistbank());
                                         nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
+                                        nameValuePairs.add(new BasicNameValuePair("homeloan_existing_bank", ((GlobalData) act.getApplication()).getexistbank()));
                                     } else {
                                         nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
 
