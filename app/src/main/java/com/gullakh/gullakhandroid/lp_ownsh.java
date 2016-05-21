@@ -140,14 +140,15 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
                     if (allotment.getSelectedItem().toString().equals("Select")){
                         RegisterPageActivity.showErroralert(this, "Select allotment by", "failed");
                     }else {
-                        if (radioGroup2.getCheckedRadioButtonId() == -1){
+                       /* if (radioGroup2.getCheckedRadioButtonId() == -1){
                             RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
-                        }else {
+                        }else {*/
                             setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
-                            setDataToHashMap("joint_acc", jointMembers);
+                          //  setDataToHashMap("joint_acc", jointMembers);
                             Intent intent = new Intent(this, hl_city.class);
                             startActivity(intent);
-                        }
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                        //}
                     }
                 }
 

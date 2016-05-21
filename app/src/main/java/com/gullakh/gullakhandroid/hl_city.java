@@ -272,7 +272,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 goToDatabase("Loan against Property");
 
                 if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("salaried")) {
-                    intent = new Intent(this, hl_salaried2.class);
+                    intent = new Intent(this, Salaryed_NetSalary.class);
                 } else if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Business") || ((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Professional")) {
                     intent = new Intent(hl_city.this, Car_Loan_PAT.class);
                 }

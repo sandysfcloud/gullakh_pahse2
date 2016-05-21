@@ -133,6 +133,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:visibility="gone"
             android:gravity="center"
             android:background="#2cababab"
             android:layout_marginTop="20dp"
@@ -141,6 +142,7 @@
             <com.gullakh.gullakhandroid.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="fill_parent"
+
                 android:layout_height="45dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Ownership of property?"

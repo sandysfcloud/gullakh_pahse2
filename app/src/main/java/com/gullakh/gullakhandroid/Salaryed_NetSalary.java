@@ -81,7 +81,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
         String loantype =((GlobalData) getApplication()).getLoanType();
 
-        if(loantype.equalsIgnoreCase("Home Loan")) {
+        if(loantype.equalsIgnoreCase("Home Loan")||loantype.equalsIgnoreCase("Loan Against Property")) {
             mbonus = (MaterialTextField) findViewById(R.id.mbonus);
             mbonus.setVisibility(View.VISIBLE);
             bonus = (EditText) findViewById(R.id.bonus);
