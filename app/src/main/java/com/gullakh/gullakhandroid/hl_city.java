@@ -166,11 +166,28 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()) {
 
             case R.id.edit:
+                String loantype =((GlobalData) getApplication()).getLoanType();
                 String emptyp = ((GlobalData) getApplication()).getemptype();
-                if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
-                    RegisterPageActivity.showAlertreview(this, 9);
-                else
-                    RegisterPageActivity.showAlertreview(this, 8);
+
+                if (loantype.equalsIgnoreCase("Loan Against Property")) {
+                   if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                    {
+
+                            RegisterPageActivity.showAlertreview(this, 4);
+
+                    }
+                    else {
+
+                            RegisterPageActivity.showAlertreview(this, 5);
+                   }
+                }
+                else {
+
+                    if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                        RegisterPageActivity.showAlertreview(this, 9);
+                    else
+                        RegisterPageActivity.showAlertreview(this, 8);
+                }
 
                 break;
 

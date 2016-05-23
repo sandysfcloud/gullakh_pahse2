@@ -43,7 +43,7 @@ public class GlobalData extends MultiDexApplication {
     private String salBankName,hcity,baltranamt,hneed;
     private String balTransLoanAmt;
     private String builderName;
-    private String projectnam,existbank;
+    private String projectnam,existbank,prop_allotmentby,prop_mortgage;
 
 //*****************CarLoan********************//
 
@@ -196,6 +196,19 @@ public class GlobalData extends MultiDexApplication {
     }
 
 
+    public void setprop_allotmentby(String someVariable) {
+        this.prop_allotmentby = someVariable;
+    }
+    public String getprop_allotmentby() {
+        return prop_allotmentby;
+    }
+
+    public void setprop_mortgage(String someVariable) {
+        this.prop_mortgage = someVariable;
+    }
+    public String getprop_mortgage() {
+        return prop_mortgage;
+    }
 
     public void setfoir(ArrayList<Double> questionVariable) {
         this.foir = questionVariable;

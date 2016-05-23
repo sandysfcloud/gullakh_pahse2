@@ -213,15 +213,23 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
             case R.id.edit:
 
 
-
-                String empty=((GlobalData) getApplication()).getLoanType();
-                if(empty.equals("Car Loan")) {
+                String loantyp=((GlobalData) getApplication()).getLoanType();
+                if(loantyp.equals("Car Loan")) {
                     String carloantp=((GlobalData) getApplication()).getCartypeloan();
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(this, 6);
                     }
                     else
                     dg=RegisterPageActivity.showAlertreview(Tenure.this, 5);
+                }
+                else
+
+                if(loantyp!=null&& loantyp.equals("Loan Against Property")) {
+                    //skip loan amt is yes
+                    if (((GlobalData)getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                        dg=RegisterPageActivity.showAlertreview(Tenure.this, 3);
+                    else
+                        dg=RegisterPageActivity.showAlertreview(Tenure.this, 4);
                 }
                 else
                     dg=RegisterPageActivity.showAlertreview(Tenure.this, 4);

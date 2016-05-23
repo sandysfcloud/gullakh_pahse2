@@ -248,10 +248,24 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 }
                 else
                 {
-                    if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
-                        RegisterPageActivity.showAlertreview(EMI_questn.this, 7);
-                    else
-                        RegisterPageActivity.showAlertreview(EMI_questn.this, 6);
+                    if (loanty.equalsIgnoreCase("Loan Against Property")) {
+                        if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
+                            if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                                RegisterPageActivity.showAlertreview(this,7);
+                            else
+                                RegisterPageActivity.showAlertreview(this, 6);
+                        }
+
+                        else
+                        RegisterPageActivity.showAlertreview(this, 7);
+                    }
+                    else {
+
+                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                            RegisterPageActivity.showAlertreview(EMI_questn.this, 7);
+                        else
+                            RegisterPageActivity.showAlertreview(EMI_questn.this, 6);
+                    }
 
                 }
                 break;

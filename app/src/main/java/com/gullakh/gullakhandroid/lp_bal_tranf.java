@@ -87,8 +87,8 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
 
             case R.id.edit:
 
-                String empty=((GlobalData) getApplication()).getLoanType();
-                if(empty.equals("Home Loan")) {
+                String loantyp=((GlobalData) getApplication()).getLoanType();
+                if(loantyp.equals("Home Loan")||loantyp.equals("Loan Against Property")) {
 
                     RegisterPageActivity.showAlertreview(this,3);
                 }

@@ -226,12 +226,19 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.edit:
-                String empty=((GlobalData) getApplication()).getLoanType();
-                if(empty.equals("Car Loan")) {
+
+                String loantyp=((GlobalData) getApplication()).getLoanType();
+                if(loantyp.equals("Car Loan")) {
                     String carloantp=((GlobalData) getApplication()).getCartypeloan();
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(this, 7);
                     }
+                    else
+                    RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
+                }
+                else  if (loantyp.equalsIgnoreCase("Loan Against Property")) {
+                    if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                        RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 5);
                     else
                     RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
                 }

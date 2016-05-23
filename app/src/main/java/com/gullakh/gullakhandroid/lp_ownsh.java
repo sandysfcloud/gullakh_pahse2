@@ -39,6 +39,7 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lp_ownsh);
+
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -46,8 +47,10 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
         TextView title = (TextView) v.findViewById(R.id.title);
         ImageView close = (ImageView) v.findViewById(R.id.close);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+        //review.setVisibility(View.INVISIBLE);
+        review.setOnClickListener(this);
         close.setOnClickListener(this);
+
         title.setText("My Property Details");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
@@ -133,6 +136,16 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+
+            case R.id.edit:
+                //only is yes is clicked loan amt questn is skipped here
+
+                   RegisterPageActivity.showAlertreview(this, 4);
+
+                break;
+
+
             case R.id.next:
                 if (spinner.getSelectedItem().toString().equals("Select")){
                     RegisterPageActivity.showErroralert(this, "Select Type of property proposed for mortgage", "failed");
@@ -143,6 +156,9 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
                        /* if (radioGroup2.getCheckedRadioButtonId() == -1){
                             RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
                         }else {*/
+                        ((GlobalData) getApplication()).setprop_allotmentby(allotment.getSelectedItem().toString());
+                        ((GlobalData) getApplication()).setprop_mortgage(spinner.getSelectedItem().toString());
+
                             setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
                           //  setDataToHashMap("joint_acc", jointMembers);
                             Intent intent = new Intent(this, hl_city.class);
