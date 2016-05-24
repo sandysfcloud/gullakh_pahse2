@@ -942,7 +942,7 @@ public void setsearchdb()
                 }
                 else if(typ_loan.equals("Loan Against Property"))
                 {
-                   // calTenure(30, 15);
+                   calTenure(30);
                 }
                 else if(typ_loan.equals("Personal Loan"))
                 {

@@ -723,7 +723,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								CurrentAct.startActivity(intclick);
 							}
 
-							if (flag == 0) {
+							if (flag == 0) {//indicates salaried
 								if (v.getTag().toString().equals("8")) {
 									Log.d("check number click", v.getTag().toString());
 									dialog.dismiss();
@@ -738,7 +738,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 									CurrentAct.startActivity(intclick);
 								}
 							}
-							if (flag == 1) {
+							if (flag == 1) {//indicates self employed
 
 								if (v.getTag().toString().equals("9")) {
 									Log.d("check number click", v.getTag().toString());
