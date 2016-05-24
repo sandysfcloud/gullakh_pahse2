@@ -446,9 +446,29 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 		}*/
-
+		if(loantyp!=null&& loantyp.equals("Loan Against Property")) {
+			String balt=((GlobalData) act.getApplication()).getBaltrans();
+			if(balt!=null) {
+				if (balt.equalsIgnoreCase("Yes"))
+					Log.d("not to add loan amt", "");
+				else
+					carloan_que_salary_new.add("Loan Amount: ");
+			}
+		}
+		else
 		carloan_que_salary_new.add("Loan Amount: ");
+
 		carloan_que_salary_new.add("Tenure: ");
+
+
+		if(loantyp!=null&& loantyp.equals("Loan Against Property")) {
+			carloan_que_salary_new.add("Property Location: ");
+			/*String balt=((GlobalData) act.getApplication()).getBaltrans();
+			if(balt!=null) {
+				if (((GlobalData) act.getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+					carloan_que_salary_new.add("Property Location: ");
+			}*/
+		}
 
         if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
@@ -460,6 +480,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			 }else
 				carloan_que_salary_new.add("Salary/Incentives: ");
 		}
+
+
+
 
 		carloan_que_salary_new.add("Current EMI's: ");
 
@@ -513,9 +536,34 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
-
+		if(loantyp!=null&& loantyp.equals("Loan Against Property")) {
+			String balt=((GlobalData) act.getApplication()).getBaltrans();
+			if(balt!=null) {
+				if (balt.equalsIgnoreCase("Yes"))
+					Log.d("not to add loan amt", "");
+				else
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
+			}
+		}
+		else
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
+
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getTenure());
+
+
+		if(loantyp!=null&& loantyp.equals("Loan Against Property")) {
+
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCity());
+
+			/*String balt=((GlobalData) act.getApplication()).getBaltrans();
+			if(balt!=null) {
+				if (((GlobalData) act.getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getprop_allotmentby());
+				else
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCity());
+			}*/
+		}
+
 		if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
 				Log.d("employee type is", emptyp);

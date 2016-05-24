@@ -124,8 +124,8 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
 
             case R.id.edit:
 
-                String empty=((GlobalData) getApplication()).getLoanType();
-                if(empty.equals("Home Loan")) {
+                String loantyp=((GlobalData) getApplication()).getLoanType();
+                if(loantyp.equals("Home Loan")||loantyp.equals("Loan Against Property")) {
 
                     RegisterPageActivity.showAlertreview(this,3);
                 }
@@ -150,7 +150,9 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                                     String loanamt2 = Text4.getText().toString();
                                     loanamt1 = loanamt1.replaceAll(",", "");
                                     loanamt2 = loanamt2.replaceAll(",", "");
-                                    int loanamt = Integer.parseInt(loanamt1) + Integer.parseInt(loanamt2);
+                                    int loanamt=0;
+                                    if(!loanamt1.equals("") && !loanamt2.equals(""))
+                                    loanamt = Integer.parseInt(loanamt1) + Integer.parseInt(loanamt2);
                                     ((GlobalData) getApplication()).setloanamt(String.valueOf(loanamt));
                                     ((GlobalData) getApplication()).setexistbank(Text1.getText().toString());
                                     Intent intent = new Intent(lp_bal_tranf_yes.this, Tenure.class);

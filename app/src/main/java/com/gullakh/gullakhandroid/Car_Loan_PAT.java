@@ -245,8 +245,8 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 }
                 break;
             case R.id.edit:
-                String empty=((GlobalData) getApplication()).getLoanType();
-                if(empty.equals("Car Loan")) {
+                String loantype=((GlobalData) getApplication()).getLoanType();
+                if(loantype.equals("Car Loan")) {
                     String carloantp=((GlobalData) getApplication()).getCartypeloan();
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(this, 7);
@@ -258,8 +258,24 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 }
                 else
                 {
-                    if (data.equals("data"))
-                        RegisterPageActivity.showAlertreview(Car_Loan_PAT.this, 5);
+                    if (loantype.equalsIgnoreCase("Loan Against Property")) {
+                        if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                        {
+
+                            RegisterPageActivity.showAlertreview(this, 5);
+
+                        }
+                        else {
+
+                            RegisterPageActivity.showAlertreview(this, 6);
+                        }
+                    }
+                    else {
+
+
+                        if (data.equals("data"))//not review
+                            RegisterPageActivity.showAlertreview(Car_Loan_PAT.this, 5);
+                    }
                 }
 
                 break;

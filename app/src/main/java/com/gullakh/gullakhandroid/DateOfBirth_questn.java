@@ -362,11 +362,19 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                     } else {
                         Log.d("dob q", String.valueOf(empflag));
                         String emptyp = ((GlobalData) getApplication()).getemptype();
-                        if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                        if (loanty.equalsIgnoreCase("Loan Against Property")) {
+                            if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                                RegisterPageActivity.showAlertreview(this, 7);
+                            else
                             RegisterPageActivity.showAlertreview(this, 8);
+                        }
                         else {
-                            Log.d("dob q sal", String.valueOf(empflag));
-                            RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 7);
+                            if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
+                                RegisterPageActivity.showAlertreview(this, 8);
+                            else {
+                                Log.d("dob q sal", String.valueOf(empflag));
+                                RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 7);
+                            }
                         }
                     }
                 }
