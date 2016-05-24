@@ -251,7 +251,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                     if (loanty.equalsIgnoreCase("Loan Against Property")) {
                         if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                             if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
-                                RegisterPageActivity.showAlertreview(this,8);
+                                RegisterPageActivity.showAlertreview(this,7);
                             else
                                 RegisterPageActivity.showAlertreview(this, 6);
                         }

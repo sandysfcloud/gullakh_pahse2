@@ -154,7 +154,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                                     if(!loanamt1.equals("") && !loanamt2.equals(""))
                                     loanamt = Integer.parseInt(loanamt1) + Integer.parseInt(loanamt2);
                                     ((GlobalData) getApplication()).setloanamt(String.valueOf(loanamt));
-                                    ((GlobalData) getApplication()).setexistbank(Text1.getText().toString());
+                                ((GlobalData) getApplication()).setexistbank(Text1.getText().toString());
                                     Intent intent = new Intent(lp_bal_tranf_yes.this, Tenure.class);
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);

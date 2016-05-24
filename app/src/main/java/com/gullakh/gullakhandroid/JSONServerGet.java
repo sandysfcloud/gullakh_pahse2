@@ -122,6 +122,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 // Log.d("car_loan_type",((GlobalData) act.getApplication()).getLoanType());
                                 Log.d("currently_living_in", ((GlobalData) act.getApplication()).getcarres());
                                 Log.d("type_employment", ((GlobalData) act.getApplication()).getemptype());
+                                if(((GlobalData) act.getApplication()).getloanamt()!=null)
                                 Log.d("cl_loanamount", ((GlobalData) act.getApplication()).getloanamt());
                                 Log.d("gender", ((GlobalData) act.getApplication()).getgender());
                                 Log.d("net_mon_salary", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()));
@@ -161,13 +162,14 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("property_city", ((GlobalData) act.getApplication()).getCity()));
 //                                nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
 //                                nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getBuilderName()));
-
-                                if( ((GlobalData) act.getApplication()).getLoanType().equalsIgnoreCase("Home Loan"))
+                                String loantyp=((GlobalData) act.getApplication()).getLoanType();
+                                if( loantyp.equalsIgnoreCase("Home Loan")||loantyp.equalsIgnoreCase("Loan Against Property"))
                                 {
                                     if (((GlobalData) act.getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
-                                        Log.d("tranf loan amt",((GlobalData) act.getApplication()).getloanamt());
-                                        Log.d("tranf getexistbank",((GlobalData) act.getApplication()).getexistbank());
+                                       // Log.d("tranf loan amt", ((GlobalData) act.getApplication()).getloanamt());
+                                       // Log.d("tranf getexistbank", ((GlobalData) act.getApplication()).getexistbank());
                                         nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
+                                        if(loantyp.equalsIgnoreCase("Home Loan"))
                                         nameValuePairs.add(new BasicNameValuePair("homeloan_existing_bank", ((GlobalData) act.getApplication()).getexistbank()));
                                     } else {
                                         nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));

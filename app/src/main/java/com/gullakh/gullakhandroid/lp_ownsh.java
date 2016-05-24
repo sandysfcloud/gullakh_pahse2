@@ -105,7 +105,7 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
         allot.add("Residential");
         allot.add("Commercial");
 
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allot);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, allot);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         allotment.setAdapter(dataAdapter1);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
