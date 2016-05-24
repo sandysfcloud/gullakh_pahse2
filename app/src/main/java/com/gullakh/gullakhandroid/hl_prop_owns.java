@@ -37,7 +37,11 @@ public class hl_prop_owns extends AppCompatActivity implements View.OnClickListe
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
         close.setOnClickListener(this);
-        title.setText("Home Loan");
+        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")){
+            title.setText("Loan Against Property");
+        }else {
+            title.setText("Home Loan");
+        }
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
