@@ -437,6 +437,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
                 }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
+                }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
                 }
 
                // requestgetserver7.execute("token", "LoanType", sessionid);

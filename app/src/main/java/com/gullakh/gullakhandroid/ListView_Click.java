@@ -376,6 +376,8 @@ if(one_time_fee!=null) {
             setDataToHashMap("car_loan_type", ((GlobalData) getApplication()).getCartypeloan());
         }else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
             setDataToHashMap("name_of_current_emp", ((GlobalData) getApplication()).getemployer());
+        }else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")){
+           // setDataToHashMap("", );
         }
         setDataToHashMap("loanamount", ((GlobalData) getApplication()).getloanamt());
         setDataToHashMap("total_emi", String.valueOf(((GlobalData) getApplication()).getEmi()));

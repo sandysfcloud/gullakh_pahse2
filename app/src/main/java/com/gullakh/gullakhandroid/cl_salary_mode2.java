@@ -156,34 +156,29 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode2.this, "Select your Salaried Bank", "failed");
                 }else{
-                    setDataToHashMap("sal_dep_to", dataBankType);
+
                     goToIntent();
                 }
                 break;
             case R.id.ImageViewBank1:
                 dataBankType="Axis Bank";
                 setDeopsiteSalary(dataBankType);
-                setDataToHashMap("sal_dep_to", dataBankType);
                 goToIntent();
                 break;
             case R.id.ImageViewBank2:
                 dataBankType="ICICI Bank";
                 setDeopsiteSalary(dataBankType);
-                setDataToHashMap("sal_dep_to", dataBankType);
                 goToIntent();
                 break;
             case R.id.ImageViewBank3:
                 dataBankType="HDFC Bank";
                 setDeopsiteSalary(dataBankType);
-                setDataToHashMap("sal_dep_to", dataBankType);
                // goToDatabase("Car Loan");
                 goToIntent();
                 break;
             case R.id.ImageViewBank4:
                 dataBankType="IDBI Bank";
                 setDeopsiteSalary(dataBankType);
-                setDataToHashMap("sal_dep_to", dataBankType);
-               // goToDatabase("Car Loan");
                 goToIntent();
                 break;
             case R.id.bank:
@@ -218,6 +213,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
         cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
     }
     public void goToIntent(){
+        setDataToHashMap("sal_dep_to", dataBankType);
         if (flag == 1) {
             ((GlobalData) getApplication()).setSalBankName(dataBankType);
             Intent intent = new Intent(this, GoogleCardsMediaActivity.class);

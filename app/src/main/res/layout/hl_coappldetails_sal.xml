@@ -12,158 +12,167 @@
     android:weightSum="1">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView12"
         android:layout_weight="1">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            app:typeface="robotoLight"
-            android:layout_width="fill_parent"
-            android:layout_height="60dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Name of current employer?"
-            android:id="@+id/heading1"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="#67d1d1d1"
-            android:gravity="center"
-            android:textColor="#707070"
-            android:textSize="22dp" />
-
-        <com.gullakh.gullakhandroid.MaterialTextField
-            android:layout_width="300dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:focusable="false"
-            android:layout_marginRight="4dp"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/companyname">
-
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/salEmpname"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:imeOptions="actionNext"
-                android:singleLine="true" />
-        </com.gullakh.gullakhandroid.MaterialTextField>
-
-
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            app:typeface="robotoLight"
-            android:layout_width="fill_parent"
-            android:layout_height="60dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Joining date of current employer?"
-            android:id="@+id/heading2"
-            android:gravity="center"
-            android:background="#67d1d1d1"
-            android:layout_below="@+id/view"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textColor="#707070"
-            android:layout_marginTop="10dp"
-            android:textSize="22dp" />
-
-        <com.gullakh.gullakhandroid.MaterialTextField
-            android:layout_width="300dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:focusable="false"
-            android:layout_marginRight="4dp"
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/companyname">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:focusableInTouchMode="false"
-                android:id="@+id/saljoindateofempyr"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:singleLine="true" />
-        </com.gullakh.gullakhandroid.MaterialTextField>
-
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            app:typeface="robotoLight"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Total work experince?"
-            android:id="@+id/heading3"
-            android:textColor="#707070"
-            android:focusable="false"
-            android:textSize="22dp"
-            android:layout_below="@+id/textView15"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:background="#67d1d1d1"
-            android:layout_marginTop="10dp" />
-
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Name of current employer?"
+                android:id="@+id/heading1"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#67d1d1d1"
+                android:gravity="center"
+                android:textColor="#707070"
+                android:textSize="22dp" />
 
             <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
+                android:layout_width="300dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="4dp"
                 android:focusable="false"
+                android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/companyname"
-                android:layout_weight="1">
+                app:mtf_image="@drawable/companyname">
 
                 <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ex:5 years"
-                    android:inputType="number"
-                    android:id="@+id/emi"
+                    android:inputType="text"
+                    android:id="@+id/salEmpname"
                     android:textColor="#000000"
                     android:textSize="15sp"
                     android:imeOptions="actionNext"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:hint="Ex- Infosys" />
             </com.gullakh.gullakhandroid.MaterialTextField>
+
+
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Joining date of current employer?"
+                android:id="@+id/heading2"
+                android:gravity="center"
+                android:background="#67d1d1d1"
+                android:layout_below="@+id/view"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#707070"
+                android:layout_marginTop="10dp"
+                android:textSize="22dp" />
 
             <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
+                android:layout_width="300dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="4dp"
+                android:focusable="false"
+                android:layout_marginRight="4dp"
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
-                android:focusable="false"
-                app:mtf_image="@drawable/companyname"
-                android:layout_weight="1">
+                app:mtf_image="@drawable/companyname">
 
-                <AutoCompleteTextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ex:5 months"
-                    android:inputType="number"
-                    android:id="@+id/totalexpmn"
+                    android:inputType="text"
+                    android:focusableInTouchMode="false"
+                    android:id="@+id/saljoindateofempyr"
                     android:textColor="#000000"
                     android:textSize="15sp"
-                    android:imeOptions="actionDone"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:hint="Ex- 01-01-2010" />
             </com.gullakh.gullakhandroid.MaterialTextField>
-        </LinearLayout>
 
-    </LinearLayout>
+            <com.gullakh.gullakhandroid.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Total work experince?"
+                android:id="@+id/heading3"
+                android:textColor="#707070"
+                android:focusable="false"
+                android:textSize="22dp"
+                android:layout_below="@+id/textView15"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:background="#67d1d1d1"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.gullakh.gullakhandroid.MaterialTextField
+                    android:layout_width="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:focusable="false"
+                    app:mtf_cardCollapsedHeight="4dp"
+                    app:mtf_cardColor="#fff"
+                    app:mtf_image="@drawable/companyname"
+                    android:layout_weight="1">
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ex:5 years"
+                        android:inputType="number"
+                        android:id="@+id/emi"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+                </com.gullakh.gullakhandroid.MaterialTextField>
+
+                <com.gullakh.gullakhandroid.MaterialTextField
+                    android:layout_width="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    app:mtf_cardCollapsedHeight="4dp"
+                    app:mtf_cardColor="#fff"
+                    android:focusable="false"
+                    app:mtf_image="@drawable/companyname"
+                    android:layout_weight="1">
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ex:5 months"
+                        android:inputType="number"
+                        android:id="@+id/totalexpmn"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true" />
+                </com.gullakh.gullakhandroid.MaterialTextField>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:orientation="horizontal"
