@@ -286,7 +286,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             Intent intent = null;
 
             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
-                goToDatabase("Loan against Property");
+                //goToDatabase("Loan against Property");
 
                 if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("salaried")) {
                     intent = new Intent(this, Salaryed_NetSalary.class);

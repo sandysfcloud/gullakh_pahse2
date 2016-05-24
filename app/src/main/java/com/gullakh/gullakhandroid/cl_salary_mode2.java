@@ -177,7 +177,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 setDeopsiteSalary(dataBankType);
                 setDataToHashMap("sal_dep_to", dataBankType);
                // goToDatabase("Car Loan");
-
+                goToIntent();
                 break;
             case R.id.ImageViewBank4:
                 dataBankType="IDBI Bank";
