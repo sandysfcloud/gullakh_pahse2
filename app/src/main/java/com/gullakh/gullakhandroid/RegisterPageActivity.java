@@ -293,7 +293,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
 								intent.putExtra("personal", "personal");
 							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
-								intent = new Intent(RegisterPageActivity.this, cl_car_residence_type.class);
+								intent = new Intent(RegisterPageActivity.this, hl_prop_owns.class);
 							} else {
 								intent = new Intent(RegisterPageActivity.this, MainActivity.class);
 							}
