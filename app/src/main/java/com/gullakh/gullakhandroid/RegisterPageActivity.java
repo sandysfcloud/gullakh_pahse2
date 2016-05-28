@@ -339,6 +339,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.setTitle("");
 		dialog.setContentView(R.layout.dialogloadingwomsg);
 
+
+		//*******new loading
+
 		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
 
 		View dialogView = inflater.inflate(R.layout.dialogloadingwomsg, null);
@@ -352,6 +355,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		mAnimation.setRepeatCount(-1);
 		coin.setAnimation(mAnimation);
 		piggibg.startAnimation(pulse);
+
+ //********
 
 
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -373,19 +378,29 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.setTitle("");
 		dialog.setContentView(R.layout.dialogloading);
 
-		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
+
+
+      //*******new loading
+		/*LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
 
 		View dialogView = inflater.inflate(R.layout.dialogloading, null);
 		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
-		//piggi = (ImageView) findViewById(R.id.pig);
 		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
+		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);*/
+		ImageView piggibg = (ImageView) dialog.findViewById(R.id.pigbg);
+		ImageView coin = (ImageView) dialog.findViewById(R.id.coin);
 		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
+
+
 
 		mAnimation = new TranslateAnimation(0,0,0,75);
 		mAnimation.setDuration(700);
 		mAnimation.setRepeatCount(-1);
 		coin.setAnimation(mAnimation);
 		piggibg.startAnimation(pulse);
+
+
+		//********
 
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		lp.copyFrom(dialog.getWindow().getAttributes());
@@ -405,13 +420,18 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.setTitle("");
 		dialog.setContentView(R.layout.dialogloadingwait);
 
-
-		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
+//*******new loading
+		/*LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
 
 		View dialogView = inflater.inflate(R.layout.dialogloadingwait, null);
 		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
 		//piggi = (ImageView) findViewById(R.id.pig);
 		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
+		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);*/
+
+
+		ImageView piggibg = (ImageView) dialog.findViewById(R.id.pigbg);
+		ImageView coin = (ImageView) dialog.findViewById(R.id.coin);
 		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
 
 		mAnimation = new TranslateAnimation(0,0,0,75);
@@ -419,6 +439,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		mAnimation.setRepeatCount(-1);
 		coin.setAnimation(mAnimation);
 		piggibg.startAnimation(pulse);
+
+
+		//********
 
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		lp.copyFrom(dialog.getWindow().getAttributes());

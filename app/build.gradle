@@ -74,5 +74,6 @@ dependencies {
     compile 'com.github.natasam:DemoProgressViewsLibApp:fa2f8f01e0'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:support-v4:23.2.1'
+    testCompile 'junit:junit:4.12'
 //    compile 'com.facebook.android:facebook-android-sdk:4.+'
 }
