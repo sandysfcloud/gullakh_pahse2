@@ -3,12 +3,13 @@ package com.gullakh.gullakhandroid;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,7 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-
-public class Tenure extends AppCompatActivity implements View.OnClickListener {
+public class TenureNew extends AppCompatActivity implements View.OnClickListener {
     EditText tenure;
     Button next;
     ImageView review;
@@ -38,7 +38,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tenure);
+        setContentView(R.layout.activity_tenure_new);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Button back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -226,19 +226,19 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                         RegisterPageActivity.showAlertreview(this, 6);
                     }
                     else
-                    dg=RegisterPageActivity.showAlertreview(Tenure.this, 5);
+                        dg=RegisterPageActivity.showAlertreview(this, 5);
                 }
                 else
 
                 if(loantyp!=null&& loantyp.equals("Loan Against Property")) {
                     //skip loan amt is yes
                     if (((GlobalData)getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
-                        dg=RegisterPageActivity.showAlertreview(Tenure.this, 3);
+                        dg=RegisterPageActivity.showAlertreview(this, 3);
                     else
-                        dg=RegisterPageActivity.showAlertreview(Tenure.this, 4);
+                        dg=RegisterPageActivity.showAlertreview(this, 4);
                 }
                 else
-                    dg=RegisterPageActivity.showAlertreview(Tenure.this, 4);
+                    dg=RegisterPageActivity.showAlertreview(this, 4);
 
                 break;
 
@@ -258,22 +258,19 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                 Intent intent = null;
                 if (loantype.equalsIgnoreCase("Car Loan")||loantype.equalsIgnoreCase("Personal Loan")||loantype.equalsIgnoreCase("Home Loan")) {
                     if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
-                        intent = new Intent(Tenure.this, Car_Loan_PAT.class);
+                        intent = new Intent(this, Car_Loan_PAT.class);
 
                     } else {
-                        intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
+                        intent = new Intent(this, Salaryed_NetSalary.class);
 
                     }
 
                 } else if (loantype.equalsIgnoreCase("Loan Against Property")) {
                     Log.d("its loan againt prop","1");
-                   /* if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
-                        intent = new Intent(Tenure.this, lp_ownsh.class);
 
-                    } else {*/
-                        intent = new Intent(Tenure.this, lp_ownsh.class);
+                    intent = new Intent(this, lp_ownsh.class);
 
-                    //}
+
                 }
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);

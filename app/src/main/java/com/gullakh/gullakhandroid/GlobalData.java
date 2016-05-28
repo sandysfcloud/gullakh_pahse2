@@ -42,8 +42,9 @@ public class GlobalData extends MultiDexApplication {
     private String totalsal,salpaymode,carmanuyear;
     private String salBankName,hcity,baltranamt,hneed;
     private String balTransLoanAmt;
-    private String builderName;
+    private String builderName,propcat1,propcat2;
     private String projectnam,existbank,prop_allotmentby,prop_mortgage;
+    int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg;
 
 //*****************CarLoan********************//
 
@@ -276,6 +277,45 @@ public class GlobalData extends MultiDexApplication {
         this.totalsal = someVariable;
     }
 
+
+    public void setlpposalot(int someVariable) {
+        this.lpposalot = someVariable;
+    }
+    public int getlpposalot() {
+        return lpposalot;
+    }
+
+    public void setlpposprot(int someVariable) {
+        this.lpposprot = someVariable;
+    }
+    public int getlpposprot() {
+        return lpposprot;
+    }
+
+
+    public void setlpposcat1(int someVariable) {
+        this.lpposcat1 = someVariable;
+    }
+    public int getlpposcat1() {
+        return lpposcat1;
+    }
+
+
+
+
+    public void setlpposcat2(int someVariable) {
+        this.lpposcat2 = someVariable;
+    }
+    public int getlpposcat2() {
+        return lpposcat2;
+    }
+
+    public void setlpposcatg(int someVariable) {
+        this.lpposcatg = someVariable;
+    }
+    public int getlpposcatg() {
+        return lpposcatg;
+    }
     //***************HomeLoan***********************//
 
     public void setpropcity(String cemailVariable) {
@@ -370,5 +410,25 @@ public class GlobalData extends MultiDexApplication {
 
     public String getBuilderName() {
         return builderName;
+    }
+
+
+    public void setpropcat1(String builderName) {
+        this.propcat1 = builderName;
+    }
+
+    public String getpropcat1() {
+        return propcat1;
+    }
+
+
+
+
+    public void setpropcat2(String builderName) {
+        this.propcat2 = builderName;
+    }
+
+    public String getpropcat2() {
+        return propcat2;
     }
 }

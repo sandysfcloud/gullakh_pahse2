@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gullakh.gullakhandroid">
+    package="com.gullakh.gullakhandroid" >
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,14 +23,14 @@
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <receiver
             android:name=".GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -44,9 +44,10 @@
             android:name=".SplashScreensActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -125,8 +126,7 @@
         <activity
             android:name=".cl_car_residence_type"
             android:label="Select Residence"
-            android:windowSoftInputMode="stateHidden">
-
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".cl_car_salaried"
@@ -202,7 +202,11 @@
         <activity android:name=".hl_coappl_EMI" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".Tenure" />
-        <activity android:name=".hl_prop_owns">
+        <activity android:name=".hl_prop_owns" >
+        </activity>
+        <activity
+            android:name=".TenureNew"
+            android:label="@string/title_activity_tenure_new" >
         </activity>
     </application>
 

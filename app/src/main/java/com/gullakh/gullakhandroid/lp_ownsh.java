@@ -28,13 +28,14 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
     private View jointopt;
-    private Spinner spinner,allotment;
+    private Spinner spinner,allotment,prop_categ1,prop_categ2,com_prop_categ1,com_prop_categ2;
     EditText Text1;
     public static int numOfAppl;
     private CheckBox c1,c2,c3,c4,c5;
     String jointMembers="";
+    int flag=0;
     private View yn;
-
+    List<String> allot,categ,categ2,comcateg,morgaged;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,19 +80,108 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
         jointopt=findViewById(R.id.joint);
         yn=findViewById(R.id.llyn);
 
+
+        TextView ttitle = (TextView) findViewById(R.id.textView1);
+        if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
+            ttitle.setText("Type of property proposed for mortgaged");
+
+        } else {
+            ttitle.setText("Type of property proposed for mortgage");
+
+            }
+
+
+
+
         spinner = (Spinner) findViewById(R.id.spinner1);
         allotment = (Spinner) findViewById(R.id.spinner2);
+
+        prop_categ1 = (Spinner) findViewById(R.id.prop_categ);
+        prop_categ2 = (Spinner) findViewById(R.id.prop_categ2);
+
+        com_prop_categ1 = (Spinner) findViewById(R.id.com_prop_categ);
+
+        //****category data
+
+//subcategory1-cat1
+        categ = new ArrayList<String>();
+
+        categ.add("Select");
+        categ.add("Flat");
+        categ.add("Plot");
+        categ.add("Independent House");
+
+        android.widget.ArrayAdapter<String> datacateAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categ);
+        datacateAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
+        prop_categ1.setAdapter(datacateAdapter1);
+
+//subcategory2-cat1 and cat2
+
+        categ2 = new ArrayList<String>();
+
+
+        categ2.add("Select");
+        categ2.add("Rented");
+        categ2.add("Self Occupied");
+        categ2.add("Vacant");
+
+        android.widget.ArrayAdapter<String> datacateAdapter2 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categ2);
+        datacateAdapter2.setDropDownViewResource(R.layout.simple_spinnertextview);
+        prop_categ2.setAdapter(datacateAdapter2);
+
+
+
+//subcategory1-cat2
+     comcateg = new ArrayList<String>();
+
+        comcateg.add("Select");
+        comcateg.add("Plot");
+        comcateg.add("Shop");
+        comcateg.add("Office space");
+
+        android.widget.ArrayAdapter<String> comdatacateAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, comcateg);
+        comdatacateAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
+        com_prop_categ1.setAdapter(comdatacateAdapter1);
+
+
+
+
+
+
+
 
         allotment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                {
-                    if (position == 3) {
+
+
+                Log.d("property type position", String.valueOf(position));
+
+                if (position == 1) {
+                    flag=1;
+                    com_prop_categ1.setVisibility(View.GONE);
+                    prop_categ1.setVisibility(View.VISIBLE);
+
+
+                }
+
+                if (position == 2) {
+                    flag=2;
+                    prop_categ1.setVisibility(View.GONE);
+                    com_prop_categ1.setVisibility(View.VISIBLE);
+
+
+                }
+
+
+
+
+                if (position == 3) {
                         yn.setVisibility(View.VISIBLE);
                     } else {
                         yn.setVisibility(View.GONE);
                     }
-                }
+
             }
 
             @Override
@@ -100,13 +190,65 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-        List<String> allot = new ArrayList<String>();
+        //*****Category select
+
+        prop_categ1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+
+                Log.d("property catg1 position", String.valueOf(position));
+
+                if(position!=0) {
+
+                    prop_categ2.setVisibility(View.VISIBLE);
+                }
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        com_prop_categ1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+
+                Log.d("property catg1 position", String.valueOf(position));
+
+                if(position!=0) {
+
+                    prop_categ2.setVisibility(View.VISIBLE);
+                }
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
+        allot = new ArrayList<String>();
         allot.add("Select");
         allot.add("Residential");
         allot.add("Commercial");
 
         android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, allot);
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         allotment.setAdapter(dataAdapter1);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -122,15 +264,59 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
             }
         });
 
-        List<String> morgaged = new ArrayList<String>();
+        morgaged = new ArrayList<String>();
         morgaged.add("Select");
         morgaged.add("Self occupied");
         morgaged.add("Rented out");
         morgaged.add("Vacant");
 
-        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, morgaged);
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, morgaged);
+        dataAdapter2.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner.setAdapter(dataAdapter2);
+
+
+        if (((GlobalData) getApplication()).getprop_allotmentby() != null) {
+
+
+            allotment.setSelection(((GlobalData) getApplication()).getlpposalot());
+            spinner.setSelection(((GlobalData) getApplication()).getlpposprot());
+
+
+
+            prop_categ2.setVisibility(View.VISIBLE);  //(General)
+
+            if(((GlobalData) getApplication()).getprop_allotmentby().equals("Residential"))
+            {
+                Log.d("data in lp subcatm Resi",((GlobalData) getApplication()).getprop_allotmentby());
+                Log.d("data in lp subcat", String.valueOf(((GlobalData) getApplication()).getlpposcat1()));
+
+                prop_categ1.setVisibility(View.VISIBLE);
+
+                prop_categ1.setSelection(((GlobalData) getApplication()).getlpposprot());
+            }
+
+            if(((GlobalData) getApplication()).getprop_allotmentby().equals("Commercial"))
+            {
+                Log.d("data in lp subcatm Com",((GlobalData) getApplication()).getprop_allotmentby());
+                Log.d("data in lp subcat", String.valueOf(((GlobalData) getApplication()).getlpposcat1()));
+
+
+                com_prop_categ1.setVisibility(View.VISIBLE);
+                com_prop_categ1.setSelection(((GlobalData) getApplication()).getlpposprot());
+
+            }
+
+            prop_categ2.setSelection(((GlobalData) getApplication()).getlpposcatg());
+
+            Log.d("data in lp subcat2", String.valueOf(((GlobalData) getApplication()).getlpposcat2()));
+
+
+
+
+        }
+
+
+
     }
 
     @Override
@@ -147,23 +333,69 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
 
 
             case R.id.next:
-                if (spinner.getSelectedItem().toString().equals("Select")){
+               /* if (spinner.getSelectedItem().toString().equals("Select")){
                     RegisterPageActivity.showErroralert(this, "Select Type of property proposed for mortgage", "failed");
-                }else {
+                }else {*/
                     if (allotment.getSelectedItem().toString().equals("Select")){
-                        RegisterPageActivity.showErroralert(this, "Select allotment by", "failed");
-                    }else {
+                        RegisterPageActivity.showErroralert(this, "Select Property type", "failed");
+                    }
+                else{
+                    if(flag==1) {
+
+                        if (prop_categ1.getSelectedItem().toString().equals("Select")) {
+                            RegisterPageActivity.showErroralert(this, "Select Property Category", "failed");
+                        }
+                    }
+                    if(flag==2)
+                    {
+                        if (com_prop_categ1.getSelectedItem().toString().equals("Select")) {
+                            RegisterPageActivity.showErroralert(this, "Select Property Category", "failed");
+                        }
+                    }
+                    if (prop_categ2.getSelectedItem().toString().equals("Select")){
+                        RegisterPageActivity.showErroralert(this, "Select Property Category", "failed");
+                    }
+
+                    else {
                        /* if (radioGroup2.getCheckedRadioButtonId() == -1){
                             RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");
                         }else {*/
                         ((GlobalData) getApplication()).setprop_allotmentby(allotment.getSelectedItem().toString());
                         ((GlobalData) getApplication()).setprop_mortgage(spinner.getSelectedItem().toString());
 
-                            setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
+                        ((GlobalData) getApplication()).setlpposalot(allot.indexOf(allotment.getSelectedItem().toString()));
+
+                        ((GlobalData) getApplication()).setlpposprot(morgaged.indexOf(spinner.getSelectedItem().toString()));
+
+
+
+                        if(flag==1) {
+
+                            Log.d("data in lp subcatm Res set",com_prop_categ1.getSelectedItem().toString());
+                            Log.d("data in lp subcat res set", String.valueOf(categ.indexOf(prop_categ1.getSelectedItem().toString())));
+
+                            ((GlobalData) getApplication()).setpropcat1(prop_categ1.getSelectedItem().toString());
+                            ((GlobalData) getApplication()).setlpposprot(categ.indexOf(prop_categ1.getSelectedItem().toString()));
+                        }
+
+                        if(flag==2) {
+                            Log.d("data in lp subcatm Com set",com_prop_categ1.getSelectedItem().toString());
+                            Log.d("data in lp subcat com set", String.valueOf(comcateg.indexOf(com_prop_categ1.getSelectedItem().toString())));
+
+                            ((GlobalData) getApplication()).setpropcat1(com_prop_categ1.getSelectedItem().toString());
+                            ((GlobalData) getApplication()).setlpposprot(comcateg.indexOf(com_prop_categ1.getSelectedItem().toString()));
+                        }
+
+                           ((GlobalData) getApplication()).setpropcat2(prop_categ2.getSelectedItem().toString());
+
+
+                        ((GlobalData) getApplication()).setlpposcatg(categ2.indexOf(prop_categ2.getSelectedItem().toString()));
+
+                          setDataToHashMap("allotment_by", allotment.getSelectedItem().toString());
                           //  setDataToHashMap("joint_acc", jointMembers);
                             Intent intent = new Intent(this, hl_city.class);
                             startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
+                            overridePendingTransition(R.transition.left, R.transition.right);
                         //}
                     }
                 }
