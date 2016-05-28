@@ -38,6 +38,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ConnectionDetector cd;
     private int touchPositionX;
     private int touchPositionY;
-    private ImageView coin,carloan,homeloan,persol,busin,info;
+    private ImageView coin,piggi,carloan,homeloan,persol,busin,info;
     private TranslateAnimation animationvu;
     private TranslateAnimation animationvd;
     private int duration=750;
@@ -108,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static GoogleCloudMessaging gcm;
     public static String regid;
     private ImageView loanAgainstproperty;
+    private TranslateAnimation mAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -156,6 +160,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("GCM Checked", "Now finish");
         }
 //------------------------------------------------------------------------------------
+
+//        piggi = (ImageView) findViewById(R.id.pig);
+//        coin = (ImageView) findViewById(R.id.coin);
+//        Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
+//
+//        mAnimation = new TranslateAnimation(0,0,0,100);
+//        mAnimation.setDuration(1000);
+//        mAnimation.setRepeatCount(-1);
+//        coin.setAnimation(mAnimation);
+//        piggi.startAnimation(pulse);
 
         info = (ImageView) findViewById(R.id.imageViewInfo);
         info.setOnClickListener(this);
