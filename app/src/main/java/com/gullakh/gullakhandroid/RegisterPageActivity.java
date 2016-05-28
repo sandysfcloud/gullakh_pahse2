@@ -21,6 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -49,6 +52,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	private static final String PROPERTY_APP_VERSION = "appVersion";
 	private static final String TAG = "GCMRelated";
 	static GoogleCloudMessaging gcm;
+	private static TranslateAnimation mAnimation;
 	AtomicInteger msgId = new AtomicInteger();
 	static String useremail,userpassword ;
 	static String usermobno ;
@@ -335,6 +339,21 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.setTitle("");
 		dialog.setContentView(R.layout.dialogloadingwomsg);
 
+		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
+
+		View dialogView = inflater.inflate(R.layout.dialogloadingwomsg, null);
+		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
+		//piggi = (ImageView) findViewById(R.id.pig);
+		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
+		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
+
+		mAnimation = new TranslateAnimation(0,0,0,75);
+		mAnimation.setDuration(700);
+		mAnimation.setRepeatCount(-1);
+		coin.setAnimation(mAnimation);
+		piggibg.startAnimation(pulse);
+
+
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		lp.copyFrom(dialog.getWindow().getAttributes());
 		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -354,6 +373,20 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.setTitle("");
 		dialog.setContentView(R.layout.dialogloading);
 
+		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
+
+		View dialogView = inflater.inflate(R.layout.dialogloading, null);
+		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
+		//piggi = (ImageView) findViewById(R.id.pig);
+		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
+		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
+
+		mAnimation = new TranslateAnimation(0,0,0,75);
+		mAnimation.setDuration(700);
+		mAnimation.setRepeatCount(-1);
+		coin.setAnimation(mAnimation);
+		piggibg.startAnimation(pulse);
+
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		lp.copyFrom(dialog.getWindow().getAttributes());
 		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -371,6 +404,21 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 // 						Setting the title and layout for the dialog
 		dialog.setTitle("");
 		dialog.setContentView(R.layout.dialogloadingwait);
+
+
+		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
+
+		View dialogView = inflater.inflate(R.layout.dialogloadingwait, null);
+		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
+		//piggi = (ImageView) findViewById(R.id.pig);
+		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
+		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
+
+		mAnimation = new TranslateAnimation(0,0,0,75);
+		mAnimation.setDuration(500);
+		mAnimation.setRepeatCount(-1);
+		coin.setAnimation(mAnimation);
+		piggibg.startAnimation(pulse);
 
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		lp.copyFrom(dialog.getWindow().getAttributes());
