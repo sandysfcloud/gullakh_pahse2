@@ -166,11 +166,25 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 if( loantyp.equalsIgnoreCase("Home Loan")||loantyp.equalsIgnoreCase("Loan Against Property"))
                                 {
                                     if (((GlobalData) act.getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
-                                       // Log.d("tranf loan amt", ((GlobalData) act.getApplication()).getloanamt());
-                                       // Log.d("tranf getexistbank", ((GlobalData) act.getApplication()).getexistbank());
+                                        Log.d("tranf loan amt", ((GlobalData) act.getApplication()).getloanamt());
+                                        Log.d("tranf getexistbank", ((GlobalData) act.getApplication()).getexistbank());
                                         nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
-                                        if(loantyp.equalsIgnoreCase("Home Loan"))
                                         nameValuePairs.add(new BasicNameValuePair("homeloan_existing_bank", ((GlobalData) act.getApplication()).getexistbank()));
+                                        /*if(((GlobalData) act.getApplication()).getprop_mortgage()!=null) {
+                                            Log.d("typeofproperty", ((GlobalData) act.getApplication()).getprop_mortgage());
+                                            nameValuePairs.add(new BasicNameValuePair("typeofproperty", ((GlobalData) act.getApplication()).getprop_mortgage()));
+                                        }*/
+                                        if(((GlobalData) act.getApplication()).getprop_allotmentby()!=null) {
+                                            Log.d("typeofproperty", ((GlobalData) act.getApplication()).getprop_allotmentby());
+                                            Log.d("typeofpropertycat1", ((GlobalData) act.getApplication()).getpropcat1());
+                                            Log.d("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat2());
+                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat1", ((GlobalData) act.getApplication()).getpropcat1()));
+                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat2()));
+
+                                        }
+
+
+
                                     } else {
                                         nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
 
@@ -182,6 +196,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getprojectnam()));
                                 else
                                     nameValuePairs.add(new BasicNameValuePair("builderprojectname","others"));
+                                Log.d("nameValuePairs value", String.valueOf(nameValuePairs));
 
 //                          for (NameValuePair nvp : nameValuePairs) {
 //                              Log.d(nvp.getName(),nvp.getValue());

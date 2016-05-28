@@ -10,27 +10,27 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
+
         android:layout_weight="1"
-        android:gravity="center_vertical">
+        android:gravity="center">
+
         <FrameLayout
             android:id="@+id/seekArcContainer"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            >
+            android:layout_marginBottom="20dp">
 
             <com.gullakh.gullakhandroid.SeekArc
                 android:id="@+id/seekArc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:padding="30dp"
                 seekarc:arcColor="@color/main_color_500"
                 seekarc:clockwise="true"
-                seekarc:max="2500"
-
+                seekarc:max="29"
                 seekarc:progressColor="@color/main_color_500"
                 seekarc:rotation="180"
                 seekarc:startAngle="30"
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="0"
+                android:text="1 Year"
                 android:textColor="@color/main_color_500"
                 android:textSize="30sp"
                 app:typeface="robotoLight"/>
@@ -53,54 +53,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Depreciation Amount"
-
                 android:layout_marginTop="75dp"
                 android:textColor="@color/main_color_500"
                 android:textSize="20sp"
-                app:typeface="robotoLight"
-                android:visibility="gone" />
+                app:typeface="robotoLight"/>
         </FrameLayout>
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-
-            android:layout_marginBottom="5dp"
-            android:textColor="#000"
-
-            android:textSize="18sp"
-            app:typeface="robotoLight"
-            android:visibility="gone" />
-
-        <com.gullakh.gullakhandroid.MaterialTextField
-            android:layout_width="300dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-
-            app:mtf_cardCollapsedHeight="4dp"
-            app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/loan_amt"
-            >
-
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                android:layout_width="match_parent"
+            android:orientation="vertical">
+            <com.gullakh.gullakhandroid.MaterialTextField
+                android:layout_width="300dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:hint="Other"
-                android:text="0"
-                android:id="@+id/loanamountid"
-                android:ems="10"
-                android:inputType="phone"
-                android:textColorHint="#000"
-                android:textColor="#000"
-                android:textSize="20sp"
-                app:typeface="robotoLight"/>
+                android:layout_marginLeft="4dp"
+                app:mtf_cardCollapsedHeight="4dp"
+                app:mtf_cardColor="#fff"
+                app:mtf_image="@drawable/tenureimg"
+                >
 
-        </com.gullakh.gullakhandroid.MaterialTextField>
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Other"
+                    android:id="@+id/tenure"
+                    android:ems="10"
+                    android:inputType="phone"
+                    android:textColorHint="#000"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:text="1"
+                    app:typeface="robotoLight"/>
+
+            </com.gullakh.gullakhandroid.MaterialTextField>
+
+
+
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -109,8 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:background="#b8546e7a"
-        android:visibility="gone"
-       >
+        android:visibility="gone">
         <com.gullakh.gullakhandroid.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -172,49 +162,4 @@
             android:paddingLeft="95dp"
             app:typeface="robotoLight"/>
     </LinearLayout>
-
 </LinearLayout>
-<!--
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-
-        android:layout_gravity="bottom"
-        android:weightSum="3"
-        >
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/back"
-            android:gravity="left"
-            android:layout_marginRight="80dp"
-            android:layout_gravity="bottom|left"
-            android:src="@drawable/backimgnw"
-
-            />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:id="@+id/review"
-
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/reviewred"
-
-            />
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:id="@+id/next"
-            android:layout_marginLeft="80dp"
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/nextimgnw"
-
-            />
-    </LinearLayout>
--->

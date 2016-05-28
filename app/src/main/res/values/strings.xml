@@ -203,4 +203,5 @@
     <string name="app_id">588436571304022</string>
     <string name="title_activity_coappldetail">coappldetail</string>
     <string name="title_activity_car_compare">CarCompare</string>
+    <string name="title_activity_tenure_new">TenureNew</string>
 </resources>

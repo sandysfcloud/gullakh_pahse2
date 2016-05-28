@@ -309,7 +309,13 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
                     Log.d("loan amount in la questn",((GlobalData) getApplication()).getloanamt());
 
-                    Intent intent = new Intent(Loan_amt_questn.this, Tenure.class);
+                    Intent intent;
+                    String loantyp2=((GlobalData) getApplication()).getLoanType();
+                    if(loantyp2.equals("Home Loan")||loantyp2.equals("Loan Against Property"))
+                        intent = new Intent(this, TenureNew.class);
+                    else
+                    intent = new Intent(Loan_amt_questn.this, Tenure.class);
+
                     intent.putExtra("loan_type",loan_type);
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);

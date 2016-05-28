@@ -1025,6 +1025,7 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                 Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
                 if (seektenure != 0) {
+                    //if the seekbar is changed
 
                     int seekmonth = seektenure * 12;
                     ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
@@ -1645,11 +1646,11 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
                                 seekBar1.setSelectedMaxValue(Integer.parseInt(loan) / 100000);
                                 loand.setText(String.valueOf(Integer.parseInt(loan)));
                                 seek_loanamt = Integer.parseInt(loan) / 100000;
-                                edittextloan=Integer.parseInt(loan);
+                                edittextloan = Integer.parseInt(loan);
                                 updateloanamt(seek_loanamt);
 
-                               // mSeekArc.setProgress(Integer.valueOf(loan) / 10000);
-                               // mSeekArcProgress.setText(strtemp);
+                                // mSeekArc.setProgress(Integer.valueOf(loan) / 10000);
+                                // mSeekArcProgress.setText(strtemp);
                             } catch (Exception e) {
 
                             }
@@ -1666,33 +1667,38 @@ if(((GlobalData) getApplication()).getcarres()!=null) {
 
                 //********
 
+                //setting range of tenure
+
+                String loantyp2=((GlobalData) getApplication()).getLoanType();
+
+                if(loantyp2.equals("Home Loan")||loantyp2.equals("Loan Against Property"))
+                tenure.setRangeValues(1, 30);
+                else
+                  tenure.setRangeValues(1, 7);
 
 
 
 
-
-
-
-
-
-
-
-
-                tenure.setRangeValues(1, Max_tenure / 12);
-                //tenure.setSelectedMaxValue(Max_tenure / 12);
                 if(seektenure==0) {
-                    //when filter is clicked at 1st
-                    tenur.setText("7 Years");
-                    tenure.setSelectedMaxValue(7);
+                    //when filter is clicked at 1st take calculated tenure value -(caltenure())
+                    tenure.setSelectedMaxValue(Max_tenure / 12);
+                    tenur.setText(String.valueOf(Max_tenure / 12) + " Years");
+
+                    Log.d("Max_tenure", String.valueOf(Max_tenure / 12));
+
                 }
                 else {
+                    //otherwise take the value from seekbar
                     tenur.setText(Integer.toString(seektenure) + " Years");
                     tenure.setSelectedMaxValue(seektenure);
+
+                    Log.d("seektenure", String.valueOf(seektenure));
                 }
 
-                Log.d("check tenure", String.valueOf(Max_tenure / 12));
-                Log.d("selected tenure", String.valueOf(seektenure));
-                tenure.setRangeValues(1, 7);
+
+
+
+
                 tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
                     @Override

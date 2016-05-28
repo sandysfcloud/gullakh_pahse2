@@ -69,6 +69,21 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         Text4.addTextChangedListener(new NumberTextWatcher(Text4));
         Text2.setOnClickListener(this);
         getbanknam();
+
+        if (cl_car_global_data.dataWithAns.get("existing_home_loan_bank") != null) {
+            Log.d("yes is clckd data not null","");
+
+
+
+            Text1.setText(cl_car_global_data.dataWithAns.get("existing_home_loan_bank"));
+            Text2.setText(cl_car_global_data.dataWithAns.get("begin_of_existing_home_loan"));
+            Text3.setText(cl_car_global_data.dataWithAns.get("present_outstanding_bal_of_homeloan_you_wish_to_transfer"));
+            Text4.setText(cl_car_global_data.dataWithAns.get("top_up_amount"));
+        }
+
+
+
+
     }
 
 
@@ -151,11 +166,20 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                                     loanamt1 = loanamt1.replaceAll(",", "");
                                     loanamt2 = loanamt2.replaceAll(",", "");
                                     int loanamt=0;
-                                    if(!loanamt1.equals("") && !loanamt2.equals(""))
+                                    if(loanamt2.equals(""))
+                                        loanamt2="0";
                                     loanamt = Integer.parseInt(loanamt1) + Integer.parseInt(loanamt2);
+
                                     ((GlobalData) getApplication()).setloanamt(String.valueOf(loanamt));
-                                ((GlobalData) getApplication()).setexistbank(Text1.getText().toString());
-                                    Intent intent = new Intent(lp_bal_tranf_yes.this, Tenure.class);
+                                    ((GlobalData) getApplication()).setexistbank(Text1.getText().toString());
+
+                                Intent intent;
+                                String loantyp2=((GlobalData) getApplication()).getLoanType();
+                                if(loantyp2.equals("Home Loan")||loantyp2.equals("Loan Against Property"))
+                                    intent = new Intent(this, TenureNew.class);
+                                else
+                                   intent = new Intent(lp_bal_tranf_yes.this, Tenure.class);
+
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);
                             }

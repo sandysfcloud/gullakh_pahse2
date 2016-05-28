@@ -14,7 +14,8 @@
         android:layout_height="fill_parent"
         android:visibility="visible"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"
+        android:gravity="top"
+        android:layout_marginTop="20dp"
         android:id="@+id/ll1"
         android:layout_weight="1">
         <LinearLayout
@@ -23,6 +24,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:visibility="gone"
             android:background="#2cababab"
             android:layout_marginTop="20dp">
 
@@ -55,6 +57,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+
             android:background="#2cababab"
             android:layout_marginTop="20dp">
 
@@ -63,7 +66,7 @@
                 android:layout_width="200dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Allotment by?"
+                android:text="Property Type?"
                 android:id="@+id/textView2"
                 android:textColor="#000000"
                 android:textSize="16dp"
@@ -81,6 +84,58 @@
                 android:layout_marginRight="10dp"
                 android:gravity="center_vertical" />
         </LinearLayout>
+
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/com_prop_categ"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical" />
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/prop_categ"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical" />
+
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/prop_categ2"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical" />
+
+
+
+
+
+
+
+
+
+
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
