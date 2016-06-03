@@ -37,7 +37,7 @@
 
                 android:id="@+id/ImageViewCar1"
 
-                android:background="@drawable/usedcar"
+                android:background="@drawable/car_maru"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1" />
@@ -108,7 +108,7 @@
 
                 android:id="@+id/ImageViewCar4"
 
-                android:background="@drawable/newcar"
+                android:background="@drawable/car_swift"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1" />

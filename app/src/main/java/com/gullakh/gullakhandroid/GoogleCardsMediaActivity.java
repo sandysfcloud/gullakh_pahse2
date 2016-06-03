@@ -213,7 +213,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                  globaltenure=((GlobalData) getApplication()).getTenure();
                  globalloan_type=((GlobalData) getApplication()).getLoanType();
-                 globalsal=((GlobalData) getApplication()).getTotalsal();
+                 globalsal=((GlobalData) getApplication()).getnetsalary().toString();
 
             }
             if(loan!=null) {
@@ -429,7 +429,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         icicle.putString("tenure", ((GlobalData) getApplication()).getTenure());
         icicle.putString("loan_type", ((GlobalData) getApplication()).getLoanType());
 
-        icicle.putString("net_sal", ((GlobalData) getApplication()).getTotalsal());
+        icicle.putString("net_sal", ((GlobalData) getApplication()).getnetsalary().toString());
 
 
 

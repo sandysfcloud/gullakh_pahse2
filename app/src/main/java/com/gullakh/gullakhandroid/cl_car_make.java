@@ -154,7 +154,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 car1.setImageResource(R.drawable.buttonselecteffect);
                 car2.setImageResource(R.drawable.caramaze);
                 car3.setImageResource(R.drawable.careon);
-                car4.setImageResource(R.drawable.newcar);
+                car4.setImageResource(R.drawable.car_swift);
                 dataCar = "Maruti Alto";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase("Car Loan");
@@ -162,10 +162,10 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 goToIntent();
                 break;
             case R.id.ImageViewCar2:
-                car1.setImageResource(R.drawable.usedcar);
+                car1.setImageResource(R.drawable.car_maru);
                 car2.setImageResource(R.drawable.buttonselecteffect);
                 car3.setImageResource(R.drawable.careon);
-                car4.setImageResource(R.drawable.newcar);
+                car4.setImageResource(R.drawable.car_swift);
                 dataCar = "Honda amaze";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase("Car Loan");
@@ -173,10 +173,10 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 goToIntent();
                 break;
             case R.id.ImageViewCar3:
-                car1.setImageResource(R.drawable.usedcar);
+                car1.setImageResource(R.drawable.car_maru);
                 car2.setImageResource(R.drawable.caramaze);
                 car3.setImageResource(R.drawable.buttonselecteffect);
-                car4.setImageResource(R.drawable.newcar);
+                car4.setImageResource(R.drawable.car_swift);
                 dataCar = "Hundai eon";
                 setDataToHashMap("interested_car", dataCar);
                 goToDatabase("Car Loan");
@@ -184,7 +184,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 goToIntent();
                 break;
             case R.id.ImageViewCar4:
-                car1.setImageResource(R.drawable.usedcar);
+                car1.setImageResource(R.drawable.car_maru);
                 car2.setImageResource(R.drawable.caramaze);
                 car3.setImageResource(R.drawable.careon);
                 car4.setImageResource(R.drawable.buttonselecteffect);
@@ -195,10 +195,10 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
                 goToIntent();
                 break;
             case R.id.OtherCar:
-                car1.setImageResource(R.drawable.usedcar);
+                car1.setImageResource(R.drawable.car_maru);
                 car2.setImageResource(R.drawable.caramaze);
                 car3.setImageResource(R.drawable.careon);
-                car4.setImageResource(R.drawable.newcar);
+                car4.setImageResource(R.drawable.car_swift);
                 dataCar=carmak.getText().toString();
                 break;
             case R.id.close:
