@@ -32,6 +32,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
     TextView mSeekArcProgress,onetext;
     MaterialTextField mbonus;
     String data;
+    int fbonus=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +83,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         String loantype =((GlobalData) getApplication()).getLoanType();
 
         if(loantype.equalsIgnoreCase("Home Loan")||loantype.equalsIgnoreCase("Loan Against Property")) {
+            fbonus=1;
             mbonus = (MaterialTextField) findViewById(R.id.mbonus);
             mbonus.setVisibility(View.VISIBLE);
             bonus = (EditText) findViewById(R.id.bonus);
@@ -282,7 +284,31 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 Double netsal;
                 if(incent.getText().toString()!=null&& !(incent.getText().toString().equals(""))) {
 
+                    if(fbonus==1) {
+                        Double vbonus=Double.parseDouble(bonus.getText().toString().replaceAll(",", ""));
+
+                        if(vbonus!=0)
+                            vbonus=vbonus/24;
+
+                        Log.d("its home or lap loan", String.valueOf(fbonus));
+
+                        Log.d("bonus", bonus.getText().toString());
+                        Log.d("cal bonus", String.valueOf(vbonus));
+                        Log.d("total check", String.valueOf(Double.parseDouble(sal.getText().toString().replaceAll(",", "")) + Double.parseDouble(incent.getText().toString().replaceAll(",", ""))));
+                        Log.d("total check", String.valueOf(Double.parseDouble(sal.getText().toString().replaceAll(",", "")) + Double.parseDouble(incent.getText().toString().replaceAll(",", ""))));
+                        netsal = Double.parseDouble(sal.getText().toString().replaceAll(",", "")) + Double.parseDouble(incent.getText().toString().replaceAll(",", ""))+vbonus;
+
+                        Log.d("salary", sal.getText().toString());
+                        Log.d("incentive", incent.getText().toString());
+
+                        Log.d("net cal sal", String.valueOf(netsal));
+                    }
+
+                    else
                     netsal = Double.parseDouble(sal.getText().toString().replaceAll(",", "")) + Double.parseDouble(incent.getText().toString().replaceAll(",", ""));
+
+                    Log.d("net salary is", String.valueOf(netsal));
+
                     Double dincent = Double.parseDouble(incent.getText().toString().replaceAll(",", "")) ;
                     ((GlobalData) getApplication()).setavgince(dincent);
                 }
