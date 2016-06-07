@@ -59,7 +59,7 @@
         </FrameLayout>
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -171,11 +171,11 @@
     <LinearLayout
         android:orientation="horizontal"
         android:id="@+id/footer"
-
+        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="#b8546e7a"
-        android:layout_gravity="center_horizontal"
+
         android:visibility="visible">
 
         <com.gullakh.gullakhandroid.font.RobotoButton

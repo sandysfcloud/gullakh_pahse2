@@ -124,7 +124,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     Map<String, String> Arry_bankimg = null;
     String listidmaster, globaltenure, globalloan_type, globalsal;
     private LoanDetails loandetailsobj1;
-    private int firsttimeflage = 0;
+    private int firsttimeflage = 0, maxbpval;
+    private double maxbp=0;
 
 
     @Override
@@ -587,13 +588,25 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                  //  builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                    maxbp = maxbp - (maxbp % 1000);
+                    Log.d("reduced loan to server1", String.valueOf(Math.ceil(maxbp)));
+
+                    builder.setMessage("the loan amount is reduced to Rs "+ maxbp)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+
+                                    ((GlobalData) getApplication()).setloanamt(String.valueOf(Math.ceil(maxbp)));
+                                     loan_amtcalcutn("oncreate");
+
+                                    /*Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
+                                    startActivity(intent);*/
+
+
+
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -722,13 +735,26 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     Log.d("CustomListViewValuesArr.size()", String.valueOf(CustomListViewValuesArr.size()));
                     Log.d("Max_tenure val", String.valueOf(Max_tenure));
                     AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                    //  builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                    maxbp = maxbp - (maxbp % 1000);
+                    maxbpval=(int)maxbp;
+                    Log.d("reduced loan to server2", String.valueOf(Math.ceil(maxbpval)));
+
+                    builder.setMessage("the loan amount is reduced to Rs"+ maxbpval)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+
+                                    ((GlobalData) getApplication()).setloanamt(String.valueOf(maxbpval));
+                                    loan_amtcalcutn("oncreate");
+                                    loan_amt.setText(maxbpval + "");
+                                    /*Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
+                                    startActivity(intent);*/
+
+
+
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -823,6 +849,16 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.d("loan_amt", String.valueOf(loan_amt));
 
                 emi_valu = Math.ceil(emi_valu);
+
+                maxbp=final_bp;
+
+                if(final_bp>=maxbp)
+                {
+                    maxbp=final_bp;
+                   //maxbp = maxbp/1000 * 1000;
+                    Log.d("maxbp value", String.valueOf(maxbp));
+                }
+
 
                 if (loan_amt <= final_bp) {
 
