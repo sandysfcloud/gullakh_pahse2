@@ -217,7 +217,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                 pay1.setImageResource(R.drawable.buttonselecteffect);
                 pay2.setImageResource(R.drawable.bankcheque);
                 pay3.setImageResource(R.drawable.bankcash);
-                dataSalDeposite="Bank";
+                dataSalDeposite="Direct Bank Deposit";
                 setdata();
                 if (rev != null) {
                     if (rev.equals("review")) {
@@ -250,7 +250,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.buttonselecteffect);
                 pay3.setImageResource(R.drawable.bankcash);
-                dataSalDeposite="Cheque";
+                dataSalDeposite="By Cheque";
                 setdata();
                 if (rev != null) {
                     if (rev.equals("review")) {
@@ -284,7 +284,7 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                 pay1.setImageResource(R.drawable.bankother);
                 pay2.setImageResource(R.drawable.bankcheque);
                 pay3.setImageResource(R.drawable.buttonselecteffect);
-                dataSalDeposite="Cash";
+                dataSalDeposite="By Cash";
                 setdata();
                 if (rev != null) {
                     if (rev.equals("review")) {

@@ -154,9 +154,12 @@ public class MyApplicatnAdapter extends BaseAdapter {
                 holder.image.setImageResource(R.drawable.personalloannew);
             }else if(tempValues.getLoan_type().equalsIgnoreCase("Loan against property")){
                 holder.image.setImageResource(R.drawable.busineeloan);
-            }else {
-            holder.image.setImageResource(R.drawable.carloan);
+            }else if(tempValues.getLoan_type().equalsIgnoreCase("New Car Loan")){
+                holder.image.setImageResource(R.drawable.newcar);
+            }else if(tempValues.getLoan_type().equalsIgnoreCase("Used Car Loan")){
+                holder.image.setImageResource(R.drawable.usedcar);
             }
+
         if(tempValues.getstatus().equalsIgnoreCase("Created"))
         {
             holder.viewbutton.setVisibility(View.GONE);

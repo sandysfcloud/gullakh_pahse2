@@ -157,7 +157,7 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                                         RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence cannot be greater than Period of stay in current city", "failed");
                                     } else {
                                         setDataToHashMap("current_res", spinner.getSelectedItem().toString());
-                                        setDataToHashMap("period_of_stay_in_cur_city", currentCityyr.getText().toString() + " Year " + currentCityyr.getText().toString() + " Month");
+                                        setDataToHashMap("period_of_stay_in_cur_city", currentCityyr.getText().toString() + " Year " + currentCitymn.getText().toString() + " Month");
                                         setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString() + " Year " + currentResidencemn.getText().toString() + " Month");
                                         Intent intent;
                                         CompLoanType=((GlobalData) getApplication()).getemptype();

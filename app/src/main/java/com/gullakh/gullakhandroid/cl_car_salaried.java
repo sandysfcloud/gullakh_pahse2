@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class cl_car_salaried extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
 
@@ -44,6 +46,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     private EditText Doj;
     static boolean user=true;
     int flag=0;
+    private Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -77,8 +81,6 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Emp.requestFocus();
         Emp.setOnClickListener(this);
         getemplist();
-        Expyr = (EditText) findViewById(R.id.emi);
-        Expmn = (EditText) findViewById(R.id.totalexpmn);
         getDataFromHashMap();
         user=true;
 
@@ -95,6 +97,20 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
             }
         }
 
+        spinner = (Spinner) findViewById(R.id.spinner);
+
+        List<String> categories = new ArrayList<String>();
+        categories.add("Select");
+        categories.add("< 1yr");
+        categories.add(" 2yrs");
+        categories.add(" 3yrs");
+        categories.add(" 4yrs");
+        categories.add(" 5yrs");
+        categories.add("> 5yrs");
+
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter1);
 
     }
 
@@ -106,8 +122,6 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         {
             String temp=cl_car_global_data.dataWithAns.get("total_exp");
             String[] yearandmonth=temp.split(" ");
-            Expyr.setText(yearandmonth[0]);
-            Expmn.setText(yearandmonth[2]);
             Emp.setText(cl_car_global_data.dataWithAns.get("name_of_current_emp"));
             Doj.setText(cl_car_global_data.dataWithAns.get("year_you_joined_current_comp"));
         }
@@ -216,46 +230,39 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     {
 
             if (!Doj.getText().toString().matches("")) {
-                if (!Expmn.getText().toString().matches("") || Expyr.getText().toString().matches("")) {
-                    int temp= Integer.parseInt(Expmn.getText().toString());
-                    if (temp>11){
-                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Month field value cannot be greater than 11", "failed");
-                    }else {
-                        String EmpName = Emp.getText().toString();
-                        setDataToHashMap("name_of_current_emp", EmpName);
-                        String jdate = Doj.getText().toString();
-                        setDataToHashMap("year_you_joined_current_comp", jdate);
-                        setDataToHashMap("total_exp", Expyr.getText().toString() + " Year " + Expmn.getText().toString() + " Month");
-                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                            goToDatabase("Home Loan");
-                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-                            goToDatabase("Personal Loan");
+                if (!spinner.getSelectedItem().toString().equals("Select")) {
 
-                        } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
-                            goToDatabase("Loan Against Property");
+                    String EmpName = Emp.getText().toString();
+                    setDataToHashMap("name_of_current_emp", EmpName);
+                    String jdate = Doj.getText().toString();
+                    setDataToHashMap("year_you_joined_current_comp", jdate);
+                    setDataToHashMap("total_exp",spinner.getSelectedItem().toString());
+                    if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                        goToDatabase("Home Loan");
+                    } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                        goToDatabase("Personal Loan");
 
-                        } else {
-                            goToDatabase("Car Loan");
-                        }
+                    } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
+                        goToDatabase("Loan Against Property");
+
+                    } else {
+                        goToDatabase("Car Loan");
+                    }
 
 
-                        if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan"))
-                        {
-                            Intent intent = new Intent(this, cl_car_gender.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                        }
-                        else {
-                            Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                        }
+                    if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                        Intent intent = new Intent(this, cl_car_gender.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    } else {
+                        Intent intent = new Intent(cl_car_salaried.this, cl_salary_mode1.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
                     }
                 } else {
                     RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");
                 }
-            }
-            else
+            }else
             {
                 RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter date", "failed");
             }
@@ -270,7 +277,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = dayOfMonth+"-"+DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;
+        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;

@@ -30,7 +30,7 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
     private int progpercent;
     ImageView review;
     private TextView loantype,loanamtemi,roi,loanamt,bnkname,emi,stat;
-
+    int progresscompleted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +57,8 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
             emi.setText("Rs. "+i.getStringExtra("data4"));
             roi.setText(i.getStringExtra("data5") + " %");
             stat.setText(i.getStringExtra("status"));
+            String temp=i.getStringExtra("progress").substring(0,2).replaceAll(".\"","");
+            progresscompleted=Integer.parseInt(temp);
         }
         mHandler = new Handler();
         initSegmentProgressBar();
@@ -144,7 +146,7 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
             @Override
             public void run() {
                 progress += 1;
-                if (progress <= 20)
+                if (progress <= progresscompleted)
                     runOnUiThread(new Runnable() {
 
                         @Override

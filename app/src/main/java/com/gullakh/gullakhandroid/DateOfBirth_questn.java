@@ -458,10 +458,6 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                 ((GlobalData) getApplication()).setDob(Dob.getText().toString());
 
-                setDataToHashMap("gender", dataGender);
-
-
-
                 int age = 0;
                 if(((GlobalData) getApplication()).getage()==0) {
                     if (((GlobalData) getApplication()).getDob() != null) {

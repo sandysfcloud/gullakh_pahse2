@@ -384,6 +384,8 @@ if(one_time_fee!=null) {
         setDataToHashMap("loan_tenure", String.valueOf(((GlobalData) getApplication()).getTenure()));
         setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
         setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+        setDataToHashMap("gender",((GlobalData) getApplication()).getgender());
+
         if(((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Business") ||
                 ((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Professional"))
         {

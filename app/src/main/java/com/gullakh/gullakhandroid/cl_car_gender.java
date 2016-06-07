@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -24,22 +25,18 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class cl_car_gender extends AppCompatActivity implements View.OnClickListener,TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class cl_car_gender extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
     Button back;
     private Button submit,coappl;
     JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,
@@ -65,6 +62,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     private int month,yearv;
     private String loanTypeId;
     private String coappldata;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +96,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
         pin = (EditText) findViewById(R.id.pin);
         datefield = (EditText) findViewById(R.id.date);
-        timefield = (EditText) findViewById(R.id.time);
         state = (EditText) findViewById(R.id.state);
         state.setText(((GlobalData) getApplication()).getStatename());
         back.setOnClickListener(this);
@@ -110,7 +107,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         nob = (RadioButton) findViewById(R.id.no);
 
         datefield.setOnClickListener(this);
-        timefield.setOnClickListener(this);
         yesb.setOnClickListener(this);
         nob.setOnClickListener(this);
         coappl.setOnClickListener(this);
@@ -159,6 +155,16 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }
         getContactDetails();
         getLoanId();
+
+        spinner = (Spinner) findViewById(R.id.spinner);
+        List<String> categories = new ArrayList<String>();
+        categories.add("Select time slot");
+        categories.add("8am-10am");
+        categories.add("10am-12pm");
+
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter1);
     }
   /*  @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -189,21 +195,23 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
                 } else {
                     if(pin.getText().toString().length()==6){
-                        if (datefield.getText().toString().equals("")||timefield.getText().toString().equals("")){
+                        if (datefield.getText().toString().equals("")||spinner.getSelectedItem().toString().equals("Select time slot")){
                             RegisterPageActivity.showErroralert(cl_car_gender.this, "Select Date and time field", "failed");
                         } else {
 
                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
-                                    ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")){
+                                    ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")){
+
                                 if(coappldata!=null){
                                    submitfunction();
-                                }else {
-                                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Select Date and time field", "failed");
+                                }else if (!coapllflag) {
+                                         submitfunction();
+                                }else{
+                                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants field", "failed");
                                 }
                             }else{
                                 submitfunction();
                             }
-
                         }
                     }else{
                         RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
@@ -253,17 +261,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
-            case R.id.time:
-                Calendar now1 = Calendar.getInstance();
-                TimePickerDialog tpd = TimePickerDialog.newInstance(
-                        cl_car_gender.this,
-                        now1.get(Calendar.HOUR_OF_DAY),
-                        now1.get(Calendar.MINUTE),true
-                );
-                tpd.setAccentColor(R.color.mdtp_background_color);
-                tpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                tpd.show(getFragmentManager(), "Timepickerdialog");
-                break;
+
         }
     }
 
@@ -272,7 +270,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         Calendar c = Calendar.getInstance();
         int currmonth = c.get(Calendar.MONTH);
         int curryear = c.get(Calendar.YEAR);
-        Log.d("check date",currmonth+" "+curryear);
+        Log.d("check date", currmonth + " " + curryear);
         if (yearv < curryear) {
             RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time ", "failed");
         }else if (yearv == curryear) {
@@ -386,7 +384,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     json=json.replaceAll("\\{|\\}", "");
                     Log.d("lender", json);
                     String[] tempLoanId=loanTypeId.split("x");
-                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",json,loanTypeId,datefield.getText().toString(),timefield.getText().toString());
+                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",json,loanTypeId,datefield.getText().toString(),spinner.getSelectedItem().toString());
                 }else{
                     requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
                             ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
@@ -705,26 +703,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        TimePickerDialog tpd = (TimePickerDialog) getFragmentManager().findFragmentByTag("Timepickerdialog");
+//        TimePickerDialog tpd = (TimePickerDialog) getFragmentManager().findFragmentByTag("Timepickerdialog");
         DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
 
-        if(tpd != null) tpd.setOnTimeSetListener(this);
+//        if(tpd != null) tpd.setOnTimeSetListener(this);
         if(dpd != null) dpd.setOnDateSetListener(this);
     }
-    @Override
-    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
-        String time=hourOfDay+":"+minute+":"+second;
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-        DateFormat dateFormat1 = new SimpleDateFormat("hh:mm aa");
-        Date date = null;
-        try {
-            date = dateFormat.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String newFormat=dateFormat1.format(date);
-        timefield.setText(newFormat);
-    }
+
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
@@ -783,3 +768,40 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add1,add2,add3,add4,add5);
     }
 }
+
+
+
+
+/*
+
+,TimePickerDialog.OnTimeSetListener
+
+case R.id.time:
+                Calendar now1 = Calendar.getInstance();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        cl_car_gender.this,
+                        now1.get(Calendar.HOUR_OF_DAY),
+                        now1.get(Calendar.MINUTE),true
+                );
+                tpd.setAccentColor(R.color.mdtp_background_color);
+                tpd.setAccentColor(Color.parseColor("#FFE2041E"));
+                tpd.show(getFragmentManager(), "Timepickerdialog");
+                break;
+
+
+                @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String time=hourOfDay+":"+minute+":"+second;
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        DateFormat dateFormat1 = new SimpleDateFormat("hh:mm aa");
+        Date date = null;
+        try {
+            date = dateFormat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String newFormat=dateFormat1.format(date);
+        timefield.setText(newFormat);
+    }
+
+ */

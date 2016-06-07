@@ -49,7 +49,8 @@
             android:textColor="#707070"
             android:background="#67d1d1d1"
             android:textSize="22dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -58,28 +59,16 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center">
 
-            <com.gullakh.gullakhandroid.MaterialTextField
+            <Spinner
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/tenureimg"
-                android:layout_below="@+id/heading2"
-                android:layout_alignLeft="@+id/view"
-                android:layout_alignStart="@+id/view">
+                android:layout_height="50dp"
+                android:id="@+id/spinner3"
+                android:spinnerMode="dropdown"
+                android:layout_gravity="center_horizontal"
+                android:dropDownSelector="#c2c2c2"
+                android:dropDownWidth="match_parent"
+                android:background="@drawable/edittextsimple" />
 
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                    app:typeface="robotoLight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:id="@+id/joindateofempyr"
-                    android:focusableInTouchMode="false"
-                    android:textColor="#000"
-                    android:textSize="15sp"
-                    android:hint="Ex:2015" />
-
-            </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
 
         <com.gullakh.gullakhandroid.font.RobotoTextView

@@ -116,52 +116,19 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <Spinner
                 android:layout_width="300dp"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/companyname"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp">
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/emi"
-                android:inputType="number"
-                android:maxLength="6"
+                android:layout_height="50dp"
+                android:id="@+id/spinner"
+                android:spinnerMode="dropdown"
                 android:layout_gravity="center_horizontal"
-                android:hint="Ex:5 years"
-                android:imeOptions="actionNext"
-                android:nextFocusRight="@+id/totalexpmn"
-                android:singleLine="true"/>
-            </com.gullakh.gullakhandroid.MaterialTextField>
-            <com.gullakh.gullakhandroid.MaterialTextField
-                    android:layout_width="300dp"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    app:mtf_cardCollapsedHeight="4dp"
-                    app:mtf_cardColor="#fff"
-                    app:mtf_image="@drawable/companyname"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="5dp">
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                    app:typeface="robotoLight"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:hint="Ex:5 months"
-                    android:maxLength="2"
-                    android:inputType="number"
-                    android:id="@+id/totalexpmn"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:singleLine="true"/>
-            </com.gullakh.gullakhandroid.MaterialTextField>
+                android:dropDownSelector="#c2c2c2"
+                android:dropDownWidth="match_parent"
+                android:background="@drawable/edittextsimple" />
         </LinearLayout>
 
     </LinearLayout>

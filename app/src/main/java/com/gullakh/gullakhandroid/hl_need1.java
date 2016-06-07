@@ -107,7 +107,15 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
             Log.d("cost_of_property", cl_car_global_data.dataWithAns.get("cost_of_property"));
 
                 Text1.setText(cl_car_global_data.dataWithAns.get("cost_of_property"));
-                allotment.setSelection(Integer.parseInt(cl_car_global_data.dataWithAns.get("allotment_by")));
+            int count=0,position=0;
+            while(count<3){
+                if(cl_car_global_data.dataWithAns.get("allotment_by").equals(allotment.getItemAtPosition(count))){
+                    position=count;
+                    break;
+                }
+                count++;
+            }
+               allotment.setSelection(position);
 
             if(cl_car_global_data.dataWithAns.get("city_limits").equals("Inside"))
                 inside.setChecked(true);

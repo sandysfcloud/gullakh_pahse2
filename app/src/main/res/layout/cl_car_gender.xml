@@ -167,17 +167,19 @@
                     android:singleLine="true"
                     android:layout_weight="1" />
 
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                    android:focusableInTouchMode="false"
+                <Spinner
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/time"
+                    android:layout_height="50dp"
+                    android:id="@+id/spinner"
+                    android:spinnerMode="dropdown"
+                    android:layout_gravity="center_horizontal"
+                    android:dropDownSelector="#c2c2c2"
+                    android:dropDownWidth="match_parent"
                     android:background="@drawable/edittextsimple"
-                    android:hint="Schedule Time"
-                    android:gravity="center"
-                    android:singleLine="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:layout_marginLeft="5dp" />
+                    android:gravity="center" />
             </LinearLayout>
 
         </LinearLayout>

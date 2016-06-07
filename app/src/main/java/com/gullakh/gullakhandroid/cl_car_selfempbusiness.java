@@ -3,7 +3,6 @@ package com.gullakh.gullakhandroid;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class cl_car_selfempbusiness extends AppCompatActivity implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
@@ -30,7 +27,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
     private EditText Doj;
     int day,month,yearv;
     private String date="";
-    private Spinner spinner1,spinner2;
+    private Spinner spinner1,spinner2,spinner3;
     private EditText netProfit;
     private String data1 ="";
     private String data2;
@@ -65,36 +62,8 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         back.setOnClickListener(this);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner2 = (Spinner) findViewById(R.id.spinner2);
-        // Spinner click listener
+        spinner3 = (Spinner) findViewById(R.id.spinner3);
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                {
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                {
-
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         // Spinner Drop down elements
         List<String> categories1 = new ArrayList<String>();
@@ -111,6 +80,13 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         categories2.add("Pvt. Ltd. Company");
         categories2.add("Public Ltd. Company");
 
+        List<String> categories3 = new ArrayList<String>();
+        categories3.add("Select");
+        categories3.add(" < 1yr");
+        categories3.add(" 1-2yrs");
+        categories3.add(" 2-3yrs");
+        categories3.add(" > 3yrs");
+
         // Creating adapter for spinner
         android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories1);
         // Drop down layout style - list view with radio button
@@ -119,13 +95,13 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         spinner1.setAdapter(dataAdapter1);
 
         android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories2);
-        // Drop down layout style - list view with radio button
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data1 adapter to spinner
         spinner2.setAdapter(dataAdapter2);
 
-        Doj = (EditText) findViewById(R.id.joindateofempyr);
-        Doj.setOnClickListener(this);
+        android.widget.ArrayAdapter<String> dataAdapter3 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories3);
+        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner3.setAdapter(dataAdapter3);
+
         getDataFromHashMap();
         if(MainActivity.MyRecentSearchClicked) {
             getInfo();
@@ -175,7 +151,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
                         {
                             String jdate = getDate();
                             setDataToHashMap("ind_type", spinner1.getSelectedItem().toString());
-                            setDataToHashMap("start_date_of_cur_business", jdate);
+                            setDataToHashMap("start_date_of_cur_business", spinner3.getSelectedItem().toString());
                             setDataToHashMap("firm_type", spinner2.getSelectedItem().toString());
                             if(((GlobalData) getApplication()).getLoanType().equals("Home Loan"))
                             {
@@ -210,21 +186,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
             case R.id.back:
                 finish();
                 break;
-            case R.id.joindateofempyr:
-                Calendar now = Calendar.getInstance();
-                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
-                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
-                        cl_car_selfempbusiness.this,
-                        2000,
-                        00,
-                        01
-                );
-                dpd.setAccentColor(R.color.mdtp_background_color);
-                dpd.showYearPickerFirst(true);
-                dpd.setAccentColor(Color.parseColor("#FFE2041E"));
-                //dpd.setTitle("DatePicker Title");
-                dpd.show(getFragmentManager(), "Datepickerdialog");
-                break;
+
         }
     }
     @Override
