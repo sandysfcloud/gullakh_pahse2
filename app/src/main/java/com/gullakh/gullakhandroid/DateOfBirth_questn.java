@@ -50,6 +50,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     String dataGender=null,sessionid;
     JSONServerGet requestgetserver;
     private ContentValues contentValues;
+    int age=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -462,12 +463,13 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 if(((GlobalData) getApplication()).getage()==0) {
                     if (((GlobalData) getApplication()).getDob() != null) {
 
-                        age = getAge(yearv, month, day);
+                        age = getAge(yearv, month, day);//returns proper value only when edited
                         Log.d("your age is", String.valueOf(age));
                     }
-                }
-                else
+               }
+               else
                 {
+                    //otherwise take the previously set value
 
 
                     age =  ((GlobalData) getApplication()).getage();
@@ -577,5 +579,6 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         Log.d("date is KK",formatdate);
          //Dob.setText(date);
         Dob.setText(formatdate);
+        ((GlobalData) getApplication()).setage(0);
     }
 }

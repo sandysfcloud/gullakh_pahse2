@@ -180,6 +180,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 			}
 		});
+
+
 	}
 
 	@Override
