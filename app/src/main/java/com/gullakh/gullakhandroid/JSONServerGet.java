@@ -160,6 +160,8 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans()));
                                 nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
                                 nameValuePairs.add(new BasicNameValuePair("property_city", ((GlobalData) act.getApplication()).getCity()));
+                                nameValuePairs.add(new BasicNameValuePair("age", ((GlobalData) act.getApplication()).getage()+""  ));
+                                Log.d("age in jsonserver",((GlobalData) act.getApplication()).getage()+"" );
 //                                nameValuePairs.add(new BasicNameValuePair("balancetransferamount", ((GlobalData) act.getApplication()).getloanamt()));
 //                                nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getBuilderName()));
                                 String loantyp=((GlobalData) act.getApplication()).getLoanType();

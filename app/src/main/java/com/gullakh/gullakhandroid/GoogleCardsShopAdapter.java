@@ -193,7 +193,13 @@ Log.d("setting image", tempValues.getcarimgurl());
 			String propreclo=String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
 			propreclo = propreclo.replaceAll("\\.00", "");
 
-			String bp=String.valueOf(format.format(new BigDecimal(tempValues.getbp().toString())));
+			String s=tempValues.getbp().toString();
+			int ibp= new Double(s).intValue();
+
+
+			ibp = ibp - (ibp % 1000);
+
+			String bp=String.valueOf(format.format(new BigDecimal(ibp)));
 			bp = bp.replaceAll("\\.00", "");
 			//bp = bp.replaceAll("Rs.", "");
 
