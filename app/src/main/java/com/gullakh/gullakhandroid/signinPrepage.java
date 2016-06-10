@@ -36,7 +36,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         v2.setLayoutParams(lp);
 
         ImageButton fb= (ImageButton) findViewById(R.id.imageButtonfb);
-        ImageButton gp= (ImageButton) findViewById(R.id.imageButtongp);
+        ImageView gp= (ImageView) findViewById(R.id.imageButtongp);
         ImageButton gullakh= (ImageButton) findViewById(R.id.imageButtong);
         fb.setOnClickListener(this);
         gp.setOnClickListener(this);
@@ -53,7 +53,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.imageButtongp:
-                intent = new Intent(signinPrepage.this, signin.class);
+                intent = new Intent(this, GooglePlusLogin.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;

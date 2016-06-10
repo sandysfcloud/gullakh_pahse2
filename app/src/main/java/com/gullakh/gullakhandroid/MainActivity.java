@@ -38,8 +38,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -521,24 +519,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showContextHelp() {
-        AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
         LayoutInflater factory = LayoutInflater.from(getApplicationContext());
         final View view = factory.inflate(R.layout.threesteps, null);
         final CheckBox ch1 = (CheckBox) view.findViewById(R.id.checkBox);
-
-        alertadd.setView(view);
-        alertadd.setCancelable(true);
-        alertadd.setPositiveButton("Got It..!",new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton("Got It..!",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(ch1.isChecked()){
+                if (ch1.isChecked()) {
                     SharedPreferences.Editor editor = mPrefs.edit();
                     editor.putBoolean(welcomeScreenShownPref, true);
                     editor.commit(); // Very important to save the preference
                 }
             }
         });
-        alertadd.show();
+        alertDialogBuilder.setView(view);
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.show();
     }
 
 

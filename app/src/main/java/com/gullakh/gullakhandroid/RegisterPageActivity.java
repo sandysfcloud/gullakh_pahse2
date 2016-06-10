@@ -229,10 +229,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							dialog.cancel();
+							//Resend CODE here ...!!!!
 						}
 					});
-					//Resend CODE here ...!!!!
+
 					builder.show();
 				}
 

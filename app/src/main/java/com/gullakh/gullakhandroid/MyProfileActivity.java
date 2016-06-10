@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -25,7 +26,7 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
-public class MyProfileActivity extends AppCompatActivity implements  View.OnClickListener {
+public class MyProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button signout;
     private ImageButton edit;
@@ -35,6 +36,7 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
     private String userid;
     private String contactid;
     private String sessionid;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +151,9 @@ public class MyProfileActivity extends AppCompatActivity implements  View.OnClic
                 MainActivity.signinstate = false;
                 DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
                 dbobjectnew.query("DELETE FROM userlogin");
+                GooglePlusLogin.signOutFromGplus();
+//                mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
+//                mGoogleApiClient.disconnect();
                 Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
