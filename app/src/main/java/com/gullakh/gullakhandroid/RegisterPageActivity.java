@@ -229,10 +229,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							//Resend CODE here ...!!!!
+							dialog.cancel();
 						}
 					});
-
+					//Resend CODE here ...!!!!
 					builder.show();
 				}
 
@@ -342,8 +342,14 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.setContentView(R.layout.dialogloadingwomsg);
 
 
-		ImageView piggibg = (ImageView) dialog.findViewById(R.id.pigbg);
-		ImageView coin = (ImageView) dialog.findViewById(R.id.coin);
+		//*******new loading
+
+		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
+
+		View dialogView = inflater.inflate(R.layout.dialogloadingwomsg, null);
+		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
+		//piggi = (ImageView) findViewById(R.id.pig);
+		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
 		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
 
 		mAnimation = new TranslateAnimation(0,0,0,75);
@@ -351,6 +357,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		mAnimation.setRepeatCount(-1);
 		coin.setAnimation(mAnimation);
 		piggibg.startAnimation(pulse);
+
+ //********
+
 
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 		lp.copyFrom(dialog.getWindow().getAttributes());
@@ -383,6 +392,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		ImageView piggibg = (ImageView) dialog.findViewById(R.id.pigbg);
 		ImageView coin = (ImageView) dialog.findViewById(R.id.coin);
 		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
+
+
 
 		mAnimation = new TranslateAnimation(0,0,0,75);
 		mAnimation.setDuration(700);

@@ -124,7 +124,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     Map<String, String> Arry_bankimg = null;
     String listidmaster, globaltenure, globalloan_type, globalsal;
     private LoanDetails loandetailsobj1;
-    private int firsttimeflage = 0;
+    private int firsttimeflage = 0, maxbpval;
+    private double maxbp = 0;
 
 
     @Override
@@ -543,64 +544,58 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Gson gson = gsonBuilder.create();
 
                 JsonParser parser = new JsonParser();
-                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Log.e("Check final data here3", str_result);
-
-                RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
-                ArrayList Arr_RMid = new ArrayList<String>();
 
 
-                JSONArray jsonArray = new JSONArray();
+                if (parser.parse(str_result).getAsJsonObject() != null) {
+                    JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                    Log.e("Check final data here3", str_result);
 
-                if (RM_cobj != null) {
-                    for (int i = 0; i < RM_cobj.length; i++) {
+                    RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
+                    ArrayList Arr_RMid = new ArrayList<String>();
 
-                        JSONObject imgob = new JSONObject();
-                        Log.e("json Sizeee", String.valueOf(RM_cobj.length));
-                        Arr_RMid.add(RM_cobj[i].getaccount_lender());
 
-                        try {
-                            imgob.put("recordid", RM_cobj[i].getaccount_lender());
-                            imgob.put("title", "logo");
-                            jsonArray.put(imgob);
+                    JSONArray jsonArray = new JSONArray();
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                    if (RM_cobj != null) {
+                        for (int i = 0; i < RM_cobj.length; i++) {
+
+                            JSONObject imgob = new JSONObject();
+                            Log.e("json Sizeee", String.valueOf(RM_cobj.length));
+                            Arr_RMid.add(RM_cobj[i].getaccount_lender());
+
+                            try {
+                                imgob.put("recordid", RM_cobj[i].getaccount_lender());
+                                imgob.put("title", "logo");
+                                jsonArray.put(imgob);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            Log.e("json Checkkk", String.valueOf(jsonArray));
                         }
 
 
-                        Log.e("json Checkkk", String.valueOf(jsonArray));
+                        Log.e("json object value KK", String.valueOf(jsonArray));
+
+
+                        cobj_RM = RM_cobj;
+                        listidmaster = Arr_RMid.toString();
+                        //Log.e("listid2", listid);
+                        listidmaster = listidmaster.toString().replace("[", "").replace("]", "");
+
+
+                        requestgetserver3img.execute("token", "accountimg", sessionid, jsonArray.toString());
+
+
+                    } else {
+                        dispalert();
                     }
-
-
-                    Log.e("json object value KK", String.valueOf(jsonArray));
-
-
-                    cobj_RM = RM_cobj;
-                    listidmaster = Arr_RMid.toString();
-                    //Log.e("listid2", listid);
-                    listidmaster = listidmaster.toString().replace("[", "").replace("]", "");
-
-
-                    requestgetserver3img.execute("token", "accountimg", sessionid, jsonArray.toString());
-
-
+                    //******************kk
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                    dispalert();
                 }
-                //******************kk
-
 
             }
 
@@ -706,8 +701,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     calTenure(65);
 
 
-
-
                 emi = ((GlobalData) getApplication()).getEmi().intValue();
 
                 disbank = new ArrayList<String>();
@@ -722,13 +715,25 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     Log.d("CustomListViewValuesArr.size()", String.valueOf(CustomListViewValuesArr.size()));
                     Log.d("Max_tenure val", String.valueOf(Max_tenure));
                     AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                    builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                    //  builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+                    maxbp = maxbp - (maxbp % 1000);
+                    maxbpval = (int) maxbp;
+                    Log.d("reduced loan to server2", String.valueOf(Math.ceil(maxbpval)));
+
+                    builder.setMessage("the loan amount is reduced to Rs " + maxbpval)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+
+                                    ((GlobalData) getApplication()).setloanamt(String.valueOf(maxbpval));
+                                    loan_amtcalcutn("oncreate");
+                                    loan_amt.setText(maxbpval + "");
+                                    /*Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
+                                    startActivity(intent);*/
+
+
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -763,6 +768,24 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     }
 
+    public void dispalert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+        builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
+
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+
+
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
     public void calculate() {
 
@@ -823,6 +846,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.d("loan_amt", String.valueOf(loan_amt));
 
                 emi_valu = Math.ceil(emi_valu);
+
+                maxbp = final_bp;
+
+                if (final_bp >= maxbp) {
+                    maxbp = final_bp;
+                    //maxbp = maxbp/1000 * 1000;
+                    Log.d("maxbp value", String.valueOf(maxbp));
+                }
+
 
                 if (loan_amt <= final_bp) {
 
@@ -894,46 +926,39 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     }
 
 
-    public void calTenure(int  val)
-    {
+    public void calTenure(int val) {
 
 
+        int maxval = Integer.parseInt(String.valueOf(((GlobalData) getApplication()).getTenure())) + age;
+        Log.d("Max_tenure in addg age", String.valueOf(maxval));
+
+        if (maxval <= val) {
+            Max_tenure = Integer.parseInt(((GlobalData) getApplication()).getTenure());
+            Log.d("Max_tenure is if", String.valueOf(Max_tenure));
+            Log.d("limit if", String.valueOf(val));
+        } else {
+            int diff = maxval - val;
+            Max_tenure = Integer.parseInt(((GlobalData) getApplication()).getTenure()) - diff;
+
+            Log.d("diff is", String.valueOf(diff));
+            Log.d("Max_tenure else", String.valueOf(Max_tenure));
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+            builder.setMessage("Tenure is set to " + Max_tenure + "Years as your Tenure exceeds the max limit")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
 
 
-            int maxval= Integer.parseInt(String.valueOf(((GlobalData) getApplication()).getTenure()))+age;
-            Log.d("Max_tenure in addg age", String.valueOf(maxval));
-
-            if(maxval<=val)
-            {
-                Max_tenure=Integer.parseInt(((GlobalData) getApplication()).getTenure());
-                Log.d("Max_tenure is if", String.valueOf(Max_tenure));
-                Log.d("limit if", String.valueOf(val));
-            }
-            else
-            {
-                int diff=maxval-val;
-                Max_tenure=Integer.parseInt(((GlobalData) getApplication()).getTenure())-diff;
-
-                Log.d("diff is", String.valueOf(diff));
-                Log.d("Max_tenure else", String.valueOf(Max_tenure));
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-                builder.setMessage("Tenure is set to "+Max_tenure+"Years as your Tenure exceeds the max limit")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-
-
-            }
+        }
 
         tenr_amt.setText((Max_tenure) + " Year(s)");
         Log.d("tenure is global", String.valueOf(Max_tenure));
-
 
 
         Log.d("Max_tenure value is", String.valueOf(Max_tenure));
