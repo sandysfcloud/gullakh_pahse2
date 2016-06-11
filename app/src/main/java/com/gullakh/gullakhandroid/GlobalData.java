@@ -43,7 +43,7 @@ public class GlobalData extends MultiDexApplication {
     private String salBankName,hcity,baltranamt,hneed;
     private String balTransLoanAmt;
     private String builderName,propcat1,propcat2;
-    private String projectnam,existbank,prop_allotmentby,prop_mortgage;
+    private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr;
     int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg;
 
 //*****************CarLoan********************//
@@ -430,5 +430,15 @@ public class GlobalData extends MultiDexApplication {
 
     public String getpropcat2() {
         return propcat2;
+    }
+
+
+
+    public void setCurrentUser(String builderName) {
+        this.currentusr = builderName;
+    }
+
+    public String getCurrentUser() {
+        return currentusr;
     }
 }

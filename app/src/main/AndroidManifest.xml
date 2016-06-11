@@ -27,6 +27,7 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_login_protocol_scheme"/>
 
         <receiver
             android:name=".GcmBroadcastReceiver"
@@ -107,7 +108,16 @@
             android:label="@string/title_activity_filter" />
         <activity
             android:name=".signin"
-            android:label="@string/title_activity_signin" />
+            android:label="@string/title_activity_signin"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="@string/fb_login_protocol_scheme" />
+        </intent-filter>
+
+        </activity>
         <activity
             android:name=".cl_car_gender"
             android:label="Gender" />

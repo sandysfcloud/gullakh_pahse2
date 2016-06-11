@@ -130,7 +130,9 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     }
     public void resolveSignInError() {
         if (mConnectionResult.hasResolution()) {
+
             try {
+                Log.d("sign in 2","0");
                 mIntentInProgress = true;
                 mConnectionResult.startResolutionForResult(getActivity(), RC_SIGN_IN);
             } catch (SendIntentException e) {
@@ -176,6 +178,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     }
     @Override
     public void onConnected(Bundle arg0) {
+        Log.d("onConnected called","0");
         mSignInClicked = false;
         Toast.makeText(getActivity(), "User is connected!", Toast.LENGTH_LONG).show();
         getProfileInformation();
@@ -233,6 +236,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     public void signInWithGplus() {
         Log.d("signInWithGplus","is executed");
         if (!mGoogleApiClient.isConnecting()) {
+            Log.d("sign in 1","0");
             mSignInClicked = true;
             resolveSignInError();
         }
