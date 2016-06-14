@@ -58,7 +58,6 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     private Button btnSignOut;
     private String googleuserid;
     private JSONServerGet requestgetserver;
-    private String userid;
 
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
@@ -334,8 +333,10 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("check info", jsonObject.get("result").toString());
                 if (jsonObject.get("result").toString().equals("true")) {
-                    if(jsonObject.get("phone").toString().equals(""))
-                    getMobileNo(jsonObject.get("user_id").toString());
+                    if(jsonObject.get("phone").toString().equals("")){
+                        getMobileNo(jsonObject.get("user_id").toString());
+                    }
+
                 } else {
                     RegisterPageActivity.showErroralert(getActivity(),jsonObject.get("error_message").toString(),"error");
                 }
@@ -347,7 +348,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
     }
 
-    public void getMobileNo(String result) {
+    public void getMobileNo(final String userid) {
 
     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter Your Mobile Number");
