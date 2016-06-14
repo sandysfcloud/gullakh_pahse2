@@ -597,7 +597,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                         }else if(args[1].equals("udateGoogleMobNo")){
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("phone", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("user_id", args[3]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);

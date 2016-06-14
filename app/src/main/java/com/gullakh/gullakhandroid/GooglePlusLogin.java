@@ -237,10 +237,6 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         values.put("user_id", "");
         values.put("contact_id","");
         dbobject.insertdata(values, "userlogin");
-
-        MainActivity.signinstate = true;
-        Intent i = new Intent(getActivity(), MainActivity.class);
-        startActivity(i);
     }
 
     @Override
@@ -332,9 +328,15 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("check info", jsonObject.get("result").toString());
-                if (jsonObject.get("result").toString().equals("true")) {
-                    if(jsonObject.get("phone").toString().equals("")){
+                if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
+                    Log.d("clicked 1","result");
+                    if(jsonObject.get("phone").toString().replaceAll("\"","").equals("")){
+                        Log.d("clicked 2","phone");
                         getMobileNo(jsonObject.get("user_id").toString());
+                    }else{
+                        MainActivity.signinstate = true;
+                        Intent i = new Intent(getActivity(), MainActivity.class);
+                        startActivity(i);
                     }
 
                 } else {
@@ -375,7 +377,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
                                 JsonParser parser = new JsonParser();
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                                if (jsonObject.get("result").toString().equals("true")) {
+                                if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                                     dg.dismiss();
                                     getOTPVerification();
                                 }else{
@@ -386,10 +388,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             }
                         }, getActivity(), "wait");
                         usermobno = input.getText().toString();
-                        requestgetserver1.execute("token", "udateGoogleMobNo", usermobno,userid);
+                        requestgetserver1.execute("token", "udateGoogleMobNo", usermobno,userid.replaceAll("\"",""));
                     }
                 }
-        );builder.show();
+        );
+        builder.show();
     }
     private void getOTPVerification() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -415,6 +418,9 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
+                                    MainActivity.signinstate = true;
+                                    Intent i = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(i);
                                 }
                             }
                         },getActivity(),"wait");
