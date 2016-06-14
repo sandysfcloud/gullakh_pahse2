@@ -2,8 +2,6 @@ package com.gullakh.gullakhandroid;
 
 import android.support.multidex.MultiDexApplication;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,9 +43,8 @@ public class GlobalData extends MultiDexApplication {
     private String salBankName,hcity,baltranamt,hneed;
     private String balTransLoanAmt;
     private String builderName,propcat1,propcat2;
-    private String projectnam,existbank,prop_allotmentby,prop_mortgage;
+    private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr;
     int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg;
-    private GoogleApiClient googleObject;
 
 //*****************CarLoan********************//
 
@@ -435,11 +432,13 @@ public class GlobalData extends MultiDexApplication {
         return propcat2;
     }
 
-    public void setGoogleObject(GoogleApiClient googleObject) {
-        this.googleObject = googleObject;
+
+
+    public void setCurrentUser(String builderName) {
+        this.currentusr = builderName;
     }
 
-    public GoogleApiClient getGoogleObject() {
-        return googleObject;
+    public String getCurrentUser() {
+        return currentusr;
     }
 }
