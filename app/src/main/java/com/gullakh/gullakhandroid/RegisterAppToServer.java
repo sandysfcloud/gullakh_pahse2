@@ -22,7 +22,7 @@ public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
     Context ctx;
     GoogleCloudMessaging gcm;
     String SENDER_ID = "415128481397";
-    static String regid = null;
+    public static String regid = null;
     private int appVersion;
     private Dialog dialogalert;
 

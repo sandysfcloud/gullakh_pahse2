@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +44,13 @@ import java.net.URL;
 public class signinPrepage extends AppCompatActivity implements View.OnClickListener {
     CallbackManager callbackManager;
     ProgressDialog progressDialog;
-    String useremail,first_name,usermobno;
+    String useremail,first_name,usermobno,fbid;
     GooglePlusLogin obj;
     private JSONServerGet requestgetserver1,requestgetserver2;
+
+    public static boolean signinprepage;
+    private GooglePlusLogin fragmentList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +63,8 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         //*********
 
         setContentView(R.layout.activity_signin_prepage);
-
+        MyProfileActivity.myprofileFlag=false;
+        signinprepage=true;
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -122,6 +128,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                         Bundle bFacebookData = getFacebookData(object);
                         useremail=bFacebookData.getString("email");
                         first_name=bFacebookData.getString("first_name");
+                        fbid=bFacebookData.getString("idFacebook");
                         Log.d("fb login bFacebookData", String.valueOf(bFacebookData));
                         Log.d("bFacebookData email", String.valueOf(bFacebookData.getString("email")));
 
@@ -209,7 +216,10 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         obj.useremail=useremail;
         obj.personName=first_name;
         obj.currentact=this;
-        obj.getReg(this);
+        obj.googleuserid=fbid;
+        obj.tag="facebook";
+        obj.saveDataToDatabase();
+        obj.getReg();
 
 
     }
@@ -352,9 +362,10 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;*/
             case R.id.imageButtongp:
-                intent = new Intent(this, GooglePlusLogin.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                fragmentList.signInWithGplus();
+//                fragmentList.getProfileInformation();
+//                fragmentList.onActivityResult(0,-1,null);
                 break;
             case R.id.imageButtong:
                 intent = new Intent(signinPrepage.this, signin.class);
@@ -375,6 +386,12 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         callbackManager.onActivityResult(requestCode, resultCode, data);
         Log.d("fb-onActivityResult called data", String.valueOf(data));
         Log.d("fb-onActivityResult called resultCode", String.valueOf(resultCode));
+       // if (requestCode == fragmentList.RC_SIGN_IN) {
+        if (requestCode == -1 && resultCode == RESULT_OK) {
+            fragmentList.onActivityResult(requestCode, resultCode, data);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 

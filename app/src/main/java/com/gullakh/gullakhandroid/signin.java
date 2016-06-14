@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,6 +25,8 @@ import com.facebook.appevents.AppEventsLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+
 import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
@@ -37,8 +40,10 @@ public class signin extends AppCompatActivity implements AsyncResponse {
     static String m_Text;
     static String urlchange;
     public static Context baseContext;
-    private String userid,contactid;
-
+    public String userid,contactid;
+    public String profileurl;
+    public Bitmap bmp;
+    public ByteArrayOutputStream stream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,13 +155,18 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 usermobno = str_result.getString("phone");
                 userid = str_result.getString("user_id");
                 contactid = str_result.getString("contact_id");
-                Log.d("signindetails", usermobno + " : " + userid + " : " + contactid);
+                profileurl = str_result.getString("profile_image");
+                Log.d("signindetails", usermobno + " : " + userid + " : " + contactid+" "+profileurl);
                 ContentValues values = new ContentValues();
                 values.put("usersession", str_result.get("session_id").toString());
                 values.put("useremail", useremail);
                 values.put("usermobile", usermobno);
                 values.put("user_id", userid);
                 values.put("contact_id", contactid);
+                if(!profileurl.equals("")) {
+                    Log.d("profileurl","database");
+                    values.put("profile",profileurl.replaceAll(" \"",""));
+                }
                 dbobject.insertdata(values, "userlogin");
                 MainActivity.signinstate = true;
                 Intent intent;

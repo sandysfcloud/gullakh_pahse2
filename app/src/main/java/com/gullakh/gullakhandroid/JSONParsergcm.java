@@ -45,6 +45,7 @@ public class JSONParsergcm {
             nameValuePairs.add(new BasicNameValuePair("useremail", arraydata[1]));
             nameValuePairs.add(new BasicNameValuePair("mobileno", arraydata[2]));
             nameValuePairs.add(new BasicNameValuePair("regid", arraydata[3]));
+
             if(arraydata[0]=="otpcheck")
                 nameValuePairs.add(new BasicNameValuePair("userotp", arraydata[4]));
             else if(arraydata[0]=="signin")
@@ -52,6 +53,7 @@ public class JSONParsergcm {
             else if(arraydata[0]=="password")
                 nameValuePairs.add(new BasicNameValuePair("userpassword", md5(arraydata[4])));
             else if(arraydata[0]=="registration"){
+                nameValuePairs.add(new BasicNameValuePair("source", "web"));
                 nameValuePairs.add(new BasicNameValuePair("firstname",arraydata[4]));
                 nameValuePairs.add(new BasicNameValuePair("middlename",arraydata[5]));
                 nameValuePairs.add(new BasicNameValuePair("lastname",arraydata[6]));

@@ -1,11 +1,19 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,22 +34,32 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URL;
+
 public class MyProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button signout;
     private ImageButton edit;
     private Button Done;
     private EditText ph,email,add1,add2,add3,add4,add5;
-    private JSONServerGet requestgetserver1,requestgetserver2;
+    private JSONServerGet requestgetserver1,requestgetserver2,requestgetserver3;
     private String userid;
     private String contactid;
     private String sessionid;
     private GoogleApiClient mGoogleApiClient;
-
+    private ImageView ProfilePic;
+    Bitmap bmp;
+    RoundImage roundedImage,roundedImage1;
+    public static boolean myprofileFlag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        myprofileFlag=true;
+        signinPrepage.signinprepage=false;
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,7 +78,8 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
         ph = (EditText) findViewById(R.id.textViewMobNo);
         email = (EditText) findViewById(R.id.textViewEmail);
-
+        ProfilePic = (ImageView) findViewById(R.id.profilepic);
+        ProfilePic.setOnClickListener(this);
         DataHandler dbobject = new DataHandler(MyProfileActivity.this);
         Cursor cr = dbobject.displayData("select * from userlogin");
         if (cr != null) {
@@ -69,7 +88,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 contactid=cr.getString(2);
                 email.setText(cr.getString(3));
                 ph.setText(cr.getString(4));
-                Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5));
+                if(cr.getString(6)!=null){
+                   getProfilePic(cr.getString(6));
+                }
+
+                Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5)+ " " + cr.getString(6));
             } else {
                 Intent intentsignin = new Intent(this, signinPrepage.class);
                 startActivity(intentsignin);
@@ -107,6 +130,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 signout.setVisibility(View.GONE);
                 edit.setVisibility(View.INVISIBLE);
                 Done.setVisibility(View.VISIBLE);
+//                ProfilePic.setFocusableInTouchMode(true);
                 //ph.setBackgroundResource(R.drawable.edittextsimple);
                 add1.setBackgroundResource(R.drawable.edittextsimple);
                 add2.setBackgroundResource(R.drawable.edittextsimple);
@@ -128,6 +152,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 Done.setVisibility(View.GONE);
                 edit.setVisibility(View.VISIBLE);
                 signout.setVisibility(View.VISIBLE);
+//                ProfilePic.setFocusableInTouchMode(false);
                 //ph.setBackgroundResource(R.color.white_transparent);
                 add1.setBackgroundResource(R.color.white_transparent);
                 add2.setBackgroundResource(R.color.white_transparent);
@@ -140,10 +165,9 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 add3.setEnabled(false);
                 add4.setEnabled(false);
                 add5.setEnabled(false);
-                goToServer(add1.getText().toString(),add2.getText().toString(),add3.getText().toString(),add4.getText().toString(),add5.getText().toString());
+                goToServer(add1.getText().toString(), add2.getText().toString(), add3.getText().toString(), add4.getText().toString(), add5.getText().toString());
             }
         });
-
         signout.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -151,11 +175,16 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 MainActivity.signinstate = false;
                 DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
                 dbobjectnew.query("DELETE FROM userlogin");
-                GooglePlusLogin.signOutFromGplus();
+//                GooglePlusLogin obj=new GooglePlusLogin();
+//                obj.signOutFromGplus();
+//                mGoogleApiClient = ((GlobalData)getApplication()).getGoogleObject();
+                
                 signinPrepage obj=new signinPrepage();
                 obj.logoutfb();
-//                mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
-//                mGoogleApiClient.disconnect();
+             //   mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
+               // mGoogleApiClient.disconnect();
+                GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                fragmentList.signOutFromGplus();
                 Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -163,6 +192,8 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         });
 
     }
+
+
 
     private void goToServer(String add1, String add2, String add3, String add4, String add5) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
@@ -202,6 +233,12 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                break;
+            case R.id.profilepic:
+                Intent i1 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                i1.setType("image/*");
+                startActivityForResult(Intent.createChooser(i1, "Select file to upload document"), 1);
+                break;
         }
     }
 
@@ -232,4 +269,102 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         }, MyProfileActivity.this, "wait");
         requestgetserver2.execute("token","getcontact",sessionid,email.getText().toString());
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+            String[] projection = {MediaStore.MediaColumns.DATA};
+            CursorLoader cursorLoader = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+                cursorLoader = new CursorLoader(this, selectedImageUri, projection, null, null,
+                        null);
+            }
+            Cursor cursor = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+                if (cursorLoader != null) {
+                    cursor = cursorLoader.loadInBackground();
+                }
+            }
+            int column_index = 0;
+            String selectedImagePath = "";
+            if (cursor != null) {
+                column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                cursor.moveToFirst();
+                selectedImagePath = cursor.getString(column_index);
+            }
+            InputStream is = null;
+            try {
+                is = getBaseContext().getContentResolver().openInputStream(selectedImageUri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+//            Bitmap temp = bitmap;
+//            roundedImage1 = new RoundImage(temp);
+//            ProfilePic.setImageDrawable(roundedImage1);
+//------------------------------------------------------------------
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+            byte[] byteFormat = stream.toByteArray();
+            // get the base 64 string
+            String imageFromSdcard = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+            Log.d("Base64 encode data", imageFromSdcard);
+            setProfilePic(imageFromSdcard);
+        }
+    }
+
+    public void setProfilePic(String imageFromSdcard){
+        requestgetserver3 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                Dialog dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("check1",jsonObject.get("result").toString());
+                storetoDatabase(jsonObject.get("profile_image").toString().replaceAll("\"", ""));
+                dgthis.dismiss();
+            }
+        }, MyProfileActivity.this, "wait");
+        requestgetserver3.execute("token", "setProfilePic", email.getText().toString(), imageFromSdcard);
+    }
+
+    public void getProfilePic(final String picurl) {
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    URL in = new URL(picurl.replaceAll("\"",""));
+                    bmp = BitmapFactory.decodeStream(in.openConnection().getInputStream());
+                } catch (Exception e) {
+                    Log.d("error",e.toString());
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                if (bmp != null)
+                roundedImage = new RoundImage(bmp);
+                ProfilePic.setImageDrawable(roundedImage);
+//                    ProfilePic.setImageBitmap(bmp);
+            }
+
+        }.execute();
+    }
+    public void storetoDatabase(String url) {
+        getProfilePic(url.replaceAll("\"",""));
+        DataHandler dbobject1=new DataHandler(this);
+        ContentValues values = new ContentValues();
+        values.put("profile",url.replaceAll(" \"",""));
+        dbobject1.updateDatatouserlogin("userlogin", values, userid);
+    }
+
 }

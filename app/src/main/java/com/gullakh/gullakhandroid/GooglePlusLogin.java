@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -41,14 +42,14 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 
-public class GooglePlusLogin extends Fragment implements View.OnClickListener,
+public class GooglePlusLogin extends android.support.v4.app.Fragment implements View.OnClickListener,
         ConnectionCallbacks, OnConnectionFailedListener {
 
     public static final int RC_SIGN_IN = 0;
     public static final String TAG = "SignInPage";
     public static String[] PERMISSION_GETACCOUNTS = {Manifest.permission.GET_ACCOUNTS};
     public static final int PROFILE_PIC_SIZE = 400;
-    public static GoogleApiClient mGoogleApiClient;
+    public GoogleApiClient mGoogleApiClient;
     public boolean mIntentInProgress;
     public boolean mSignInClicked;
     public ConnectionResult mConnectionResult;
@@ -62,11 +63,19 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     public  String email;
     private ImageView login;
     public Activity currentact;
+    private Button btnSignOut;
+    public  String googleuserid,tag;
+    private JSONServerGet requestgetserver;
 
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
 //    public TextView txtName, txtEmail;
 //    public LinearLayout llProfileLayout;
+//    public GooglePlusLogin(){
+//        if(((GlobalData) thiscontext.getApplicationContext()).getGoogleObject()!=null){
+//            mGoogleApiClient=((GlobalData) thiscontext.getApplicationContext()).getGoogleObject();
+//        }
+//    }
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -86,7 +95,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         login.setOnClickListener(this);
 //        btnSignIn = (SignInButton) view.findViewById(R.id.btn_sign_in);
 //        btnSignIn.setOnClickListener(this);
-//        btnSignOut = (Button) findViewById(R.id.btn_sign_out);
+        btnSignOut = (Button) view.findViewById(R.id.btn_sign_out);
 //        btnRevokeAccess = (Button) findViewById(R.id.btn_revoke_access);
 //        imgProfilePic = (ImageView) findViewById(R.id.imgProfilePic);
 //        txtName = (TextView) findViewById(R.id.txtName);
@@ -95,13 +104,17 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 //
 //        // Button click listeners
 
-//        btnSignOut.setOnClickListener(this);
+        Log.d("onCreateView g+ called", "1");
+        currentact=getActivity();
+        tag="google";
+        btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
 
-//        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this).addApi(Plus.API)
-//                .addScope(Plus.SCOPE_PLUS_LOGIN).build();
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this).addApi(Plus.API)
+                .addScope(Plus.SCOPE_PLUS_LOGIN).build();
+//        ((GlobalData)getContext().getApplicationContext()).setGoogleObject(mGoogleApiClient);
         return view;
     }
     @Override
@@ -117,9 +130,11 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
 
+
     }
 
     public void onStart() {
+        Log.d("clicked1", "onStart");
         super.onStart();
         mGoogleApiClient.connect();
     }
@@ -132,9 +147,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     }
     public void resolveSignInError() {
         if (mConnectionResult.hasResolution()) {
-
             try {
-                Log.d("sign in 2","0");
                 mIntentInProgress = true;
                 mConnectionResult.startResolutionForResult(getActivity(), RC_SIGN_IN);
             } catch (SendIntentException e) {
@@ -166,7 +179,9 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     @Override
     public void onActivityResult(int requestCode, int responseCode,
                                  Intent intent) {
+        Log.d("clicked1","onActivityResult");
         if (requestCode == RC_SIGN_IN) {
+            Log.d("clicked1","onActivityResult");
             if (responseCode != RESULT_OK) {
                 mSignInClicked = false;
             }
@@ -176,32 +191,49 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
             }
+            getProfileInformation();
         }
     }
-    @Override
-    public void onConnected(Bundle arg0) {
-        Log.d("onConnected called","0");
-        mSignInClicked = false;
-        Toast.makeText(getActivity(), "User is connected!", Toast.LENGTH_LONG).show();
+//    @Override
+//    public void onConnected(Bundle arg0) {
+//        Log.d("clicked1", "onConnected");
+//        Toast.makeText(getActivity(), "Please wait!", Toast.LENGTH_LONG).show();
+//        if(signinPrepage.signinprepage) {
+//            getProfileInformation();
+//        }
+//        mSignInClicked = false;
+//        Toast.makeText(getActivity(), "User is connected!", Toast.LENGTH_LONG).show();
+//        getProfileInformation();
+//        getReg(this.getActivity());
+//    }
+@Override
+public void onConnected(Bundle arg0) {
+    Log.d("clicked1", "onConnected");
+    Toast.makeText(getActivity(), "Please wait!", Toast.LENGTH_LONG).show();
+    if(signinPrepage.signinprepage) {
         getProfileInformation();
-        getReg(this.getActivity());
     }
+    mSignInClicked = false;
+}
     public void getProfileInformation() {
         try {
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi
                         .getCurrentPerson(mGoogleApiClient);
                 personName = currentPerson.getDisplayName();
+                googleuserid=currentPerson.getId();
                 String personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
                 email = Plus.AccountApi.getAccountName(mGoogleApiClient);
 
-                Log.e(TAG, "Name: " + personName + ", plusProfile: "
+                Log.e(TAG, googleuserid+"Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
                         + ", Image: " + personPhotoUrl);
                 personPhotoUrl = personPhotoUrl.substring(0,
                         personPhotoUrl.length() - 2)
                         + PROFILE_PIC_SIZE;
+                saveDataToDatabase();
+                getReg();
             } else {
                 Toast.makeText(getActivity(),
                         "Person information is null", Toast.LENGTH_LONG).show();
@@ -209,6 +241,25 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveDataToDatabase() {
+        DataHandler dbobject = new DataHandler(currentact);
+        dbobject.addTable();
+        Cursor cr = dbobject.displayData("select * from userlogin");
+        if (cr != null) {
+            if (cr.moveToFirst()) {
+                dbobject.query("DELETE FROM userlogin");
+
+            }
+        }
+        ContentValues values = new ContentValues();
+        values.put("usersession","");
+        values.put("useremail", email);
+        values.put("usermobile", "9019852506");
+        values.put("user_id", "");
+        values.put("contact_id","");
+        dbobject.insertdata(values, "userlogin");
     }
 
     @Override
@@ -229,6 +280,11 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                 signInWithGplus();
                 btnSignIn.performClick();
                 break;
+            case R.id.btn_sign_out:
+                // Signin button clicked
+                Log.d("clicked2", "googleplus");
+                signOutFromGplus();
+                break;
         }
     }
 
@@ -236,18 +292,23 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
      * Sign-in into google
      * */
     public void signInWithGplus() {
-        Log.d("signInWithGplus","is executed");
+        Log.d("signInWithGplus","is executed"+mGoogleApiClient.isConnecting());
         if (!mGoogleApiClient.isConnecting()) {
-            Log.d("sign in 1","0");
             mSignInClicked = true;
+
             resolveSignInError();
+        }else if(mGoogleApiClient.isConnecting()){
+            getProfileInformation();
+            //getReg();
         }
+//        Intent intent = new Intent(getActivity(), signinPrepage.class);
+//        startActivity(intent);
     }
 
     /**
      * Sign-out from google
      * */
-    public static void signOutFromGplus() {
+    public void signOutFromGplus() {
         Log.d("signOutFromGplus", "Clicked 1 ");
         if (mGoogleApiClient.isConnected()) {
             Log.d("signOutFromGplus", "Clicked 2 ");
@@ -279,14 +340,58 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         }
     }
 
-    public void getReg(final Activity act) {
+    public void getReg() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("check info", jsonObject.get("result").toString());
+                if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
+                    Log.d("clicked 1","result");
+                    if(jsonObject.get("phone").toString().replaceAll("\"","").equals("")){
+                        Log.d("clicked 2","phone");
+                        getMobileNo(jsonObject.get("user_id").toString());
+                    }else{
+                        MainActivity.signinstate = true;
+                        Intent i = new Intent(currentact, MainActivity.class);
+                        currentact.startActivity(i);
+                    }
+
+                } else {
+                    RegisterPageActivity.showErroralert(currentact,jsonObject.get("error_message").toString(),"error");
+                }
+                dg.dismiss();
+            }
+        }, currentact, "wait");
+        String[] name = personName.split(" ");
+        Log.d("email is",email);
+        Log.d("googleuserid/fb is",googleuserid);
+        Log.d("regid is",RegisterAppToServer.regid);
+        Log.d("name is", name[0]);
+        Log.d("name l is",  name[name.length - 1]);
+        Log.d("tag is", tag);
+
+
+        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1],tag );
+
+    }
+
+    public void getMobileNo(final String userid) {
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(currentact);
         builder.setTitle("Enter Your Mobile Number");
         builder.setCancelable(false);
 
 // Set up the input
-        final EditText input = new EditText(act);
+        final EditText input = new EditText(currentact);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
@@ -306,102 +411,80 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 
                                 JsonParser parser = new JsonParser();
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                                if (!jsonObject.get("result").toString().equals("true")) {
+                                if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                                     dg.dismiss();
                                     Log.d("result from getReg", String.valueOf(jsonObject.get("result")));
-                                    getOTPVerification(act);
+                                    getOTPVerification();
                                 }else{
                                     dg.dismiss();
-                                    Intent i=new Intent(act,MainActivity.class);
+                                    Intent i=new Intent(currentact,MainActivity.class);
                                     startActivity(i);
                                 }
                             }
-                        }, act, "wait");
+                        }, currentact, "wait");
                         String[] name = personName.split(" ");
+
                         usermobno = input.getText().toString();
-                        useremail = email;
-                        requestgetserver1.execute("token", "getGoogleAccReg", useremail, usermobno, RegisterAppToServer.regid, name[0], name[name.length - 1]);
+                        requestgetserver1.execute("token", "udateGoogleMobNo", usermobno,userid.replaceAll("\"",""));
                     }
                 }
-
         );
         builder.show();
-
-
-
-
-
-
-
     }
 
-    private void getOTPVerification(final Activity act) {
-        currentact=act;
-        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+    private void getOTPVerification() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(currentact);
+
+
         builder.setTitle("Enter OTP");
         builder.setCancelable(false);
 
 // Set up the input
-        final EditText input = new EditText(act);
+        final EditText input = new EditText(currentact);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
-
-// Set up the buttons
+// Set up the button
         builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                requestgetserver2 = new JSONServerGet(new AsyncResponse() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void processFinish(JSONObject output) {
+                    }
 
-                        requestgetserver2 = new JSONServerGet(new AsyncResponse() {
-                            @Override
-                            public void processFinish(JSONObject output) {
+                    public void processFinishString(String str_result, Dialog dg) {
 
-                            }
+                        JsonParser parser = new JsonParser();
+                        JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                        if (!jsonObject.get("result").toString().equals("true")) {
 
-                            public void processFinishString(String str_result, Dialog dg) {
-
-                                JsonParser parser = new JsonParser();
-                                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                                if (!jsonObject.get("result").toString().equals("true")) {
-
-                                    Log.d("result from otp verify", String.valueOf(jsonObject.get("result")));
-                                    dg.dismiss();
-                                    DataHandler dbobject = new DataHandler(act);
-                                    dbobject.addTable();
-                                    Cursor cr = dbobject.displayData("select * from userlogin");
-                                    if (cr != null) {
-                                        if (cr.moveToFirst()) {
-                                            dbobject.query("DELETE FROM userlogin");
-
-                                        }
-                                    }
-                                    ContentValues values = new ContentValues();
-                                    values.put("usersession","");
-                                    values.put("useremail", useremail);
-                                    values.put("usermobile", usermobno);
-                                    values.put("user_id","");
-                                    values.put("contact_id","");
-                                    Log.d("values are- db", String.valueOf(values));
-                                    dbobject.insertdata(values, "userlogin");
-                                    MainActivity.signinstate = true;
-                                    Intent i = new Intent(currentact, MainActivity.class);
-                                    startActivity(i);
-                                }
-                            }
+                            Log.d("result from otp verify", String.valueOf(jsonObject.get("result")));
+                            dg.dismiss();
+                            MainActivity.signinstate = true;
+                            Intent i = new Intent(currentact, MainActivity.class);
+                            startActivity(i);
                         }
-
-                                ,
-
-                                act,
-
-                                "wait");
-                        requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().
-
-                                        toString()
-
-                        );
                     }
                 }
+
+                        ,
+
+                        currentact,
+
+                        "wait");
+                requestgetserver2.execute("token", "getGoogleOTPverification", useremail, usermobno, RegisterAppToServer.regid, input.getText().
+
+                                toString()
+
+                );
+            }
+
+
+
+}
 
         );
         builder.show();
