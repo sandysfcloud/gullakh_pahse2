@@ -35,6 +35,7 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
         ImageView review = (ImageView) v.findViewById(R.id.edit);
         //review.setVisibility(View.INVISIBLE);
         review.setOnClickListener(this);
+        close.setOnClickListener(this);
         title.setText("Balance Transfer?");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();

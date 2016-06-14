@@ -59,7 +59,7 @@
 
         <Button
             android:id="@+id/btn_sign_out"
-            android:layout_width="fill_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/btn_logout_from_google"
             android:visibility="gone"
@@ -76,7 +76,8 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:id="@+id/login"
-            android:src="@drawable/googleplus" />
+            android:src="@drawable/googleplus"
+            android:visibility="gone" />
     </LinearLayout>
 
 </FrameLayout>

@@ -584,14 +584,24 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         }else if(args[1].equals("getGoogleAccReg")){
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("useremail", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("sourceid", args[3]));
                             nameValuePairs.add(new BasicNameValuePair("regid", args[4]));
                             nameValuePairs.add(new BasicNameValuePair("firstname",args[5]));
                             nameValuePairs.add(new BasicNameValuePair("middlename"," "));
                             nameValuePairs.add(new BasicNameValuePair("lastname",args[6]));
+                            nameValuePairs.add(new BasicNameValuePair("source",args[7]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
                             post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/Send_Notification").toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        }else if(args[1].equals("udateGoogleMobNo")){
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("user_id", args[3]));
+                            client = new DefaultHttpClient();
+                            Log.e("Checking logo: token ", args[3]);
+                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_mobile").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("getGoogleOTPverification")){
@@ -605,7 +615,16 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/Verify_Phone").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
+                        }else if(args[1].equals("setProfilePic")){
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("useremail", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("img", args[3]));
+                            client = new DefaultHttpClient();
+                            Log.e("email ", args[2]);
+                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/upload_profile_img").toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }
+
 
 
                         //Perform the request and check the status code

@@ -2,8 +2,8 @@ package com.gullakh.gullakhandroid;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +14,15 @@ import android.widget.TextView;
 
 public class signinPrepage extends AppCompatActivity implements View.OnClickListener {
 
+    public static boolean signinprepage;
+    private GooglePlusLogin fragmentList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_prepage);
-
+        MyProfileActivity.myprofileFlag=false;
+        signinprepage=true;
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -41,6 +45,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         fb.setOnClickListener(this);
         gp.setOnClickListener(this);
         gullakh.setOnClickListener(this);
+
     }
 
     @Override
@@ -53,9 +58,10 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.imageButtongp:
-                intent = new Intent(this, GooglePlusLogin.class);
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                fragmentList.signInWithGplus();
+//                fragmentList.getProfileInformation();
+//                fragmentList.onActivityResult(0,-1,null);
                 break;
             case R.id.imageButtong:
                 intent = new Intent(signinPrepage.this, signin.class);
@@ -65,5 +71,14 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
         }
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == fragmentList.RC_SIGN_IN) {
+            fragmentList.onActivityResult(requestCode, resultCode, data);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

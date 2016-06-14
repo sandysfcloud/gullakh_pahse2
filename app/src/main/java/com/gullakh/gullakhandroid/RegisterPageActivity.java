@@ -58,6 +58,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	static String usermobno ;
 	static String m_Text;
 	static String urlchange;
+	static String urlchangeprev;
 	EditText emailadress;
 	EditText mobilenumber;
 	EditText password;
@@ -194,7 +195,11 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		try {
 			final AlertDialog.Builder builder2 = new AlertDialog.Builder(RegisterPageActivity.this);
 			builder2.setCancelable(false);
-			if(str_result.get("result").equals("true")) {
+			if(str_result.get("result").equals("true") || (str_result.get("result").equals("false") && urlchangeprev!=null && urlchangeprev=="registration")) {
+				if(str_result.get("result").equals("false") && urlchangeprev!=null && urlchangeprev=="registration") {
+					urlchange="registration";
+					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
+				}
 				if(urlchange=="registration") {
 					AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
 					builder.setTitle("Enter OTP");
@@ -218,6 +223,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							arraydata[3] = RegisterAppToServer.regid;
 							arraydata[4] = input.getText().toString();
 							inpuotp=input;
+
+							urlchangeprev = "registration";
 							urlchange = "otpregistration";
 							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
 							asyncTask.delegate= RegisterPageActivity.this;
@@ -229,7 +236,15 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							dialog.cancel();
+							String[] arraydata = new String[5];
+							arraydata[0] = "resendotp";
+							arraydata[1] = useremail;
+							arraydata[2] = usermobno;
+							arraydata[3] = RegisterAppToServer.regid;
+							urlchange="registration";
+							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
+							asyncTask.delegate= RegisterPageActivity.this;
+							asyncTask.execute();
 						}
 					});
 					//Resend CODE here ...!!!!
@@ -314,8 +329,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					startActivity(intent);
 					overridePendingTransition(R.transition.left, R.transition.right);
 				}
-            }else{
-				RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
+				}else{
+					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

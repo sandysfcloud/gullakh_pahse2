@@ -52,6 +52,8 @@ Dialog dialogalert;
         // Getting JSON from URL
         if(arraydata[0]=="otpcheck")
             urlnew=urlnew+"/Verify_Phone";
+        else if(arraydata[0]=="resendotp")
+            urlnew=urlnew+"/resend_otp";
         else if(arraydata[0]=="signin")
             urlnew=urlnew+"/user_login_process";
         else if(arraydata[0]=="registration")

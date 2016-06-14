@@ -21,6 +21,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -55,6 +56,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -109,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String regid;
     private ImageView loanAgainstproperty;
     private TranslateAnimation mAnimation;
+    private String ProfileURL;
+    private Bitmap bmp;
+    private ImageView iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,6 +212,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(checkSignInState!=null) {
             if (checkSignInState.moveToFirst()) {
                 signinstate=true;
+                ProfileURL=checkSignInState.getString(6);
+                if(ProfileURL!=null)
+                if(!ProfileURL.equals(""))
+                    Log.d("check url",ProfileURL.replaceAll("\"",""));
+//                getImageFromURL(ProfileURL);
             }
         }
         View llsignin=findViewById(R.id.llsignin);
@@ -694,12 +704,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View prepareHeaderView(int layoutRes, String url, String email) {
         View headerView = getLayoutInflater().inflate(layoutRes, mDrawerList,
                 false);
-        ImageView iv = (ImageView) headerView.findViewById(R.id.image);
+        iv = (ImageView) headerView.findViewById(R.id.image);
+        if(ProfileURL!=null)
+            if(!ProfileURL.equals(""))
+        getImageFromURL(ProfileURL);
+//        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.user);
 
-
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.user);
-        RoundImage roundedImage = new RoundImage(bm);
-        iv.setImageDrawable(roundedImage);
 
 
         TextView tv = (TextView) headerView.findViewById(R.id.email);
@@ -712,6 +722,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv.setText(email);
         //iv.setBackgroundResource(R.drawable.prof_draw);
         return headerView;
+    }
+
+    private void getImageFromURL(final String profileURL) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    URL in = new URL(profileURL.replaceAll("\"",""));
+                    bmp = BitmapFactory.decodeStream(in.openConnection().getInputStream());
+                }
+                catch (Exception e) {
+                    Log.d("error",e.toString());
+                    throw new RuntimeException(e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                try{
+                    RoundImage roundedImage = new RoundImage(bmp);
+                    iv.setImageDrawable(roundedImage);
+                }catch (Exception e) {
+                    Log.d("error",e.toString());
+                }
+            }
+        }.execute();
     }
 
 

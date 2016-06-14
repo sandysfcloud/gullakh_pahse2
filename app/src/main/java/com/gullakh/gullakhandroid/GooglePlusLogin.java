@@ -2,16 +2,12 @@ package com.gullakh.gullakhandroid;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
@@ -19,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -38,16 +35,14 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
-import java.io.InputStream;
-
-public class GooglePlusLogin extends Fragment implements View.OnClickListener,
+public class GooglePlusLogin extends android.support.v4.app.Fragment implements View.OnClickListener,
         ConnectionCallbacks, OnConnectionFailedListener {
 
     public static final int RC_SIGN_IN = 0;
     public static final String TAG = "SignInPage";
     public static String[] PERMISSION_GETACCOUNTS = {Manifest.permission.GET_ACCOUNTS};
     public static final int PROFILE_PIC_SIZE = 400;
-    public static GoogleApiClient mGoogleApiClient;
+    public GoogleApiClient mGoogleApiClient;
     public boolean mIntentInProgress;
     public boolean mSignInClicked;
     public ConnectionResult mConnectionResult;
@@ -60,11 +55,20 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     private String personName;
     private String email;
     private ImageView login;
+    private Button btnSignOut;
+    private String googleuserid;
+    private JSONServerGet requestgetserver;
+    private String userid;
 
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
 //    public TextView txtName, txtEmail;
 //    public LinearLayout llProfileLayout;
+//    public GooglePlusLogin(){
+//        if(((GlobalData) thiscontext.getApplicationContext()).getGoogleObject()!=null){
+//            mGoogleApiClient=((GlobalData) thiscontext.getApplicationContext()).getGoogleObject();
+//        }
+//    }
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -84,7 +88,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         login.setOnClickListener(this);
 //        btnSignIn = (SignInButton) view.findViewById(R.id.btn_sign_in);
 //        btnSignIn.setOnClickListener(this);
-//        btnSignOut = (Button) findViewById(R.id.btn_sign_out);
+        btnSignOut = (Button) view.findViewById(R.id.btn_sign_out);
 //        btnRevokeAccess = (Button) findViewById(R.id.btn_revoke_access);
 //        imgProfilePic = (ImageView) findViewById(R.id.imgProfilePic);
 //        txtName = (TextView) findViewById(R.id.txtName);
@@ -93,13 +97,14 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 //
 //        // Button click listeners
 
-//        btnSignOut.setOnClickListener(this);
+        btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
 
-//        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-//                .addConnectionCallbacks(this)
-//                .addOnConnectionFailedListener(this).addApi(Plus.API)
-//                .addScope(Plus.SCOPE_PLUS_LOGIN).build();
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this).addApi(Plus.API)
+                .addScope(Plus.SCOPE_PLUS_LOGIN).build();
+//        ((GlobalData)getContext().getApplicationContext()).setGoogleObject(mGoogleApiClient);
         return view;
     }
     @Override
@@ -115,9 +120,11 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
 
+
     }
 
     public void onStart() {
+        Log.d("clicked1", "onStart");
         super.onStart();
         mGoogleApiClient.connect();
     }
@@ -162,7 +169,9 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     @Override
     public void onActivityResult(int requestCode, int responseCode,
                                  Intent intent) {
+        Log.d("clicked1","onActivityResult");
         if (requestCode == RC_SIGN_IN) {
+            Log.d("clicked1","onActivityResult");
             if (responseCode != RESULT_OK) {
                 mSignInClicked = false;
             }
@@ -172,14 +181,17 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
             }
+            getProfileInformation();
         }
     }
     @Override
     public void onConnected(Bundle arg0) {
+        Log.d("clicked1", "onConnected");
+        Toast.makeText(getActivity(), "Please wait!", Toast.LENGTH_LONG).show();
+        if(signinPrepage.signinprepage) {
+            getProfileInformation();
+        }
         mSignInClicked = false;
-        Toast.makeText(getActivity(), "User is connected!", Toast.LENGTH_LONG).show();
-        getProfileInformation();
-        getReg();
     }
     public void getProfileInformation() {
         try {
@@ -187,16 +199,19 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                 Person currentPerson = Plus.PeopleApi
                         .getCurrentPerson(mGoogleApiClient);
                 personName = currentPerson.getDisplayName();
+                googleuserid=currentPerson.getId();
                 String personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
                 email = Plus.AccountApi.getAccountName(mGoogleApiClient);
 
-                Log.e(TAG, "Name: " + personName + ", plusProfile: "
+                Log.e(TAG, googleuserid+"Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
                         + ", Image: " + personPhotoUrl);
                 personPhotoUrl = personPhotoUrl.substring(0,
                         personPhotoUrl.length() - 2)
                         + PROFILE_PIC_SIZE;
+                saveDataToDatabase();
+                getReg();
             } else {
                 Toast.makeText(getActivity(),
                         "Person information is null", Toast.LENGTH_LONG).show();
@@ -204,6 +219,29 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void saveDataToDatabase() {
+        DataHandler dbobject = new DataHandler(getActivity());
+        dbobject.addTable();
+        Cursor cr = dbobject.displayData("select * from userlogin");
+        if (cr != null) {
+            if (cr.moveToFirst()) {
+                dbobject.query("DELETE FROM userlogin");
+
+            }
+        }
+        ContentValues values = new ContentValues();
+        values.put("usersession","");
+        values.put("useremail", email);
+        values.put("usermobile", "9019852506");
+        values.put("user_id", "");
+        values.put("contact_id","");
+        dbobject.insertdata(values, "userlogin");
+
+        MainActivity.signinstate = true;
+        Intent i = new Intent(getActivity(), MainActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -224,6 +262,11 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                 signInWithGplus();
                 btnSignIn.performClick();
                 break;
+            case R.id.btn_sign_out:
+                // Signin button clicked
+                Log.d("clicked2", "googleplus");
+                signOutFromGplus();
+                break;
         }
     }
 
@@ -231,17 +274,23 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
      * Sign-in into google
      * */
     public void signInWithGplus() {
-        Log.d("signInWithGplus","is executed");
+        Log.d("signInWithGplus","is executed"+mGoogleApiClient.isConnecting());
         if (!mGoogleApiClient.isConnecting()) {
             mSignInClicked = true;
+
             resolveSignInError();
+        }else if(mGoogleApiClient.isConnecting()){
+            getProfileInformation();
+            //getReg();
         }
+//        Intent intent = new Intent(getActivity(), signinPrepage.class);
+//        startActivity(intent);
     }
 
     /**
      * Sign-out from google
      * */
-    public static void signOutFromGplus() {
+    public void signOutFromGplus() {
         Log.d("signOutFromGplus", "Clicked 1 ");
         if (mGoogleApiClient.isConnected()) {
             Log.d("signOutFromGplus", "Clicked 2 ");
@@ -250,9 +299,6 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 //            mGoogleApiClient.connect();
             Log.d("signOutFromGplus", "Clicked 3 ");
         }
-        else
-            Log.d("not connected to g+", "Clicked 3 ");
-
     }
 
     /**
@@ -275,7 +321,35 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 
     public void getReg() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("check info", jsonObject.get("result").toString());
+                if (jsonObject.get("result").toString().equals("true")) {
+                    if(jsonObject.get("phone").toString().equals(""))
+                    getMobileNo(jsonObject.get("user_id").toString());
+                } else {
+                    RegisterPageActivity.showErroralert(getActivity(),jsonObject.get("error_message").toString(),"error");
+                }
+                dg.dismiss();
+            }
+        }, getActivity(), "wait");
+        String[] name = personName.split(" ");
+        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], "google");
+
+    }
+
+    public void getMobileNo(String result) {
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter Your Mobile Number");
         builder.setCancelable(false);
 
@@ -300,7 +374,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 
                                 JsonParser parser = new JsonParser();
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                                if (!jsonObject.get("result").toString().equals("true")) {
+                                if (jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
                                     getOTPVerification();
                                 }else{
@@ -310,29 +384,22 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                                 }
                             }
                         }, getActivity(), "wait");
-                        String[] name = personName.split(" ");
                         usermobno = input.getText().toString();
-                        useremail = email;
-                        requestgetserver1.execute("token", "getGoogleAccReg", useremail, usermobno, RegisterAppToServer.regid, name[0], name[name.length - 1]);
+                        requestgetserver1.execute("token", "udateGoogleMobNo", usermobno,userid);
                     }
                 }
-
-        );
-        builder.show();
+        );builder.show();
     }
-
     private void getOTPVerification() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter OTP");
         builder.setCancelable(false);
-
 // Set up the input
         final EditText input = new EditText(getActivity());
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
-
-// Set up the buttons
+// Set up the button
         builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -340,81 +407,21 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                         requestgetserver2 = new JSONServerGet(new AsyncResponse() {
                             @Override
                             public void processFinish(JSONObject output) {
-
                             }
-
                             public void processFinishString(String str_result, Dialog dg) {
 
                                 JsonParser parser = new JsonParser();
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
-                                    DataHandler dbobject = new DataHandler(getActivity());
-                                    dbobject.addTable();
-                                    Cursor cr = dbobject.displayData("select * from userlogin");
-                                    if (cr != null) {
-                                        if (cr.moveToFirst()) {
-                                            dbobject.query("DELETE FROM userlogin");
-
-                                        }
-                                    }
-                                    ContentValues values = new ContentValues();
-                                    values.put("usersession","");
-                                    values.put("useremail", useremail);
-                                    values.put("usermobile", usermobno);
-                                    values.put("user_id","");
-                                    values.put("contact_id","");
-                                    dbobject.insertdata(values, "userlogin");
-                                    MainActivity.signinstate = true;
-                                    Intent i = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(i);
                                 }
                             }
-                        }
-
-                                ,
-
-                                getActivity(),
-
-                                "wait");
-                        requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().
-
-                                        toString()
-
-                        );
+                        },getActivity(),"wait");
+                        requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().toString());
                     }
                 }
 
         );
         builder.show();
     }
-
-    /**
-     * Background Async task to load user profile picture from url
-     * */
-    public class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public LoadProfileImage(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        public Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        public void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
-
 }
