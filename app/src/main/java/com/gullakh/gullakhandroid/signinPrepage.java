@@ -1,14 +1,22 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,12 +25,27 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class signinPrepage extends AppCompatActivity implements View.OnClickListener {
     CallbackManager callbackManager;
+    ProgressDialog progressDialog;
+    String useremail,first_name,usermobno;
+    GooglePlusLogin obj;
+    private JSONServerGet requestgetserver1,requestgetserver2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,20 +84,61 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
 
 
-
-        LoginButton loginButton= (LoginButton) findViewById(R.id.login_button);
+        final LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         // If using in a fragment
         loginButton.setOnClickListener(this);
+        //loginButton.setText("");
+
+        //loginButton.setBackgroundResource(R.drawable.fb);
+        //loginButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+
         // Other app specific specialization
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d("fb login success","yahoo");
-                // App code
+
+
+
+                Log.d("fb login success", "yahoo");
+                System.out.println("onSuccess");
+
+
+                progressDialog = new ProgressDialog(signinPrepage.this);
+                progressDialog.setMessage("Procesando datos...");
+                progressDialog.show();
+                String accessToken = loginResult.getAccessToken().getToken();
+                Log.i("accessToken", accessToken);
+
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        progressDialog.dismiss();
+                        Log.i("LoginActivity", response.toString());
+                        // Get facebook data from login
+                        Bundle bFacebookData = getFacebookData(object);
+                        useremail=bFacebookData.getString("email");
+                        first_name=bFacebookData.getString("first_name");
+                        Log.d("fb login bFacebookData", String.valueOf(bFacebookData));
+                        Log.d("bFacebookData email", String.valueOf(bFacebookData.getString("email")));
+
+                        servercon();
+
+                    }
+                });
+
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+            request.setParameters(parameters);
+            request.executeAsync();
             }
+
+
+
+
 
             @Override
             public void onCancel() {
@@ -86,12 +150,198 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
             public void onError(FacebookException exception) {
                 // App code
 
-                Log.d("fb login error","0");
+                System.out.println("onError");
+                Log.v("LoginActivity", exception.getCause().toString());
             }
         });
+
+
+
+
+}
+
+    public void logoutfb()
+    {
+        LoginManager.getInstance().logOut();
     }
 
-    @Override
+    private Bundle getFacebookData(JSONObject object) {
+        Bundle bundle=null;
+        try {
+            bundle = new Bundle();
+            String id = object.getString("id");
+
+            try {
+                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                Log.i("profile_pic", profile_pic + "");
+                bundle.putString("profile_pic", profile_pic.toString());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+            bundle.putString("idFacebook", id);
+            if (object.has("first_name"))
+                bundle.putString("first_name", object.getString("first_name"));
+            if (object.has("last_name"))
+                bundle.putString("last_name", object.getString("last_name"));
+            if (object.has("email"))
+                bundle.putString("email", object.getString("email"));
+            if (object.has("gender"))
+                bundle.putString("gender", object.getString("gender"));
+            if (object.has("birthday"))
+                bundle.putString("birthday", object.getString("birthday"));
+            if (object.has("location"))
+                bundle.putString("location", object.getJSONObject("location").getString("name"));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return bundle;
+    }
+
+    public void servercon()
+    {
+        obj=new  GooglePlusLogin();
+        obj.email=useremail;
+        obj.useremail=useremail;
+        obj.personName=first_name;
+        obj.currentact=this;
+        obj.getReg(this);
+
+
+    }
+
+
+
+
+  /*  public void getReg() {
+
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter Your Mobile Number");
+        builder.setCancelable(false);
+
+// Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        requestgetserver1 = new JSONServerGet(new AsyncResponse() {
+                            @Override
+                            public void processFinish(JSONObject output) {
+
+                            }
+
+                            public void processFinishString(String str_result, Dialog dg) {
+
+                                JsonParser parser = new JsonParser();
+                                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                                if (!jsonObject.get("result").toString().equals("true")) {
+                                    dg.dismiss();
+                                    getOTPVerification();
+                                }else{
+                                    dg.dismiss();
+                                    Intent i=new Intent(signinPrepage.this,MainActivity.class);
+                                    startActivity(i);
+                                }
+                            }
+                        }, signinPrepage.this, "wait");
+
+                        usermobno = input.getText().toString();
+
+                        requestgetserver1.execute("token", "getGoogleAccReg", useremail, usermobno, RegisterAppToServer.regid, first_name, String.valueOf(first_name.length()));
+                    }
+                }
+
+        );
+        builder.show();
+    }
+
+
+    private void getOTPVerification() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter OTP");
+        builder.setCancelable(false);
+
+// Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+                            @Override
+                            public void processFinish(JSONObject output) {
+
+                            }
+
+                            public void processFinishString(String str_result, Dialog dg) {
+
+                                JsonParser parser = new JsonParser();
+                                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                                if (!jsonObject.get("result").toString().equals("true")) {
+                                    dg.dismiss();
+                                    DataHandler dbobject = new DataHandler(signinPrepage.this);
+                                    dbobject.addTable();
+                                    Cursor cr = dbobject.displayData("select * from userlogin");
+                                    if (cr != null) {
+                                        if (cr.moveToFirst()) {
+                                            dbobject.query("DELETE FROM userlogin");
+
+                                        }
+                                    }
+                                    ContentValues values = new ContentValues();
+                                    values.put("usersession","");
+                                    values.put("useremail", useremail);
+                                    values.put("usermobile", usermobno);
+                                    values.put("user_id","");
+                                    values.put("contact_id","");
+                                    dbobject.insertdata(values, "userlogin");
+                                    MainActivity.signinstate = true;
+                                    Intent i = new Intent(signinPrepage.this, MainActivity.class);
+                                    startActivity(i);
+                                }
+                            }
+                        }, signinPrepage.this, "wait");
+                        requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().
+
+                                        toString()
+
+                        );
+                    }
+                }
+
+        );
+        builder.show();
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+        @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
@@ -120,9 +370,11 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        Log.d("fb-onActivityResult called","0");
+        Log.d("fb-onActivityResult called", "0");
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.d("fb-onActivityResult called data", String.valueOf(data));
+        Log.d("fb-onActivityResult called resultCode", String.valueOf(resultCode));
     }
 
 

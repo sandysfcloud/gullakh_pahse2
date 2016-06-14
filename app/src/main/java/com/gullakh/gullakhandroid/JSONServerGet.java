@@ -591,6 +591,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("lastname",args[6]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
+                            Log.e("getGoogleAccReg nameValuePairs ", String.valueOf(nameValuePairs));
                             post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/Send_Notification").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -602,6 +603,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("userotp", args[5]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
+                            Log.e("getGoogleAccReg getGoogleOTPverification ", String.valueOf(nameValuePairs));
                             post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/Verify_Phone").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 

@@ -152,6 +152,8 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
                 dbobjectnew.query("DELETE FROM userlogin");
                 GooglePlusLogin.signOutFromGplus();
+                signinPrepage obj=new signinPrepage();
+                obj.logoutfb();
 //                mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
 //                mGoogleApiClient.disconnect();
                 Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);

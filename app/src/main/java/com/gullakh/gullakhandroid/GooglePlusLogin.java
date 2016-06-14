@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.ContentValues;
@@ -54,12 +55,13 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
     public SignInButton btnSignIn;
     private int RESULT_OK=-1;
     static EditText inpuotp;
-    private String useremail,usermobno;
+    public String useremail,usermobno;
     Context thiscontext;
     private JSONServerGet requestgetserver1,requestgetserver2;
-    private String personName;
-    private String email;
+    public String personName;
+    public  String email;
     private ImageView login;
+    public Activity currentact;
 
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
@@ -182,7 +184,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         mSignInClicked = false;
         Toast.makeText(getActivity(), "User is connected!", Toast.LENGTH_LONG).show();
         getProfileInformation();
-        getReg();
+        getReg(this.getActivity());
     }
     public void getProfileInformation() {
         try {
@@ -277,14 +279,14 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         }
     }
 
-    public void getReg() {
+    public void getReg(final Activity act) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(act);
         builder.setTitle("Enter Your Mobile Number");
         builder.setCancelable(false);
 
 // Set up the input
-        final EditText input = new EditText(getActivity());
+        final EditText input = new EditText(act);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
@@ -306,14 +308,15 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
-                                    getOTPVerification();
+                                    Log.d("result from getReg", String.valueOf(jsonObject.get("result")));
+                                    getOTPVerification(act);
                                 }else{
                                     dg.dismiss();
-                                    Intent i=new Intent(getActivity(),MainActivity.class);
+                                    Intent i=new Intent(act,MainActivity.class);
                                     startActivity(i);
                                 }
                             }
-                        }, getActivity(), "wait");
+                        }, act, "wait");
                         String[] name = personName.split(" ");
                         usermobno = input.getText().toString();
                         useremail = email;
@@ -323,15 +326,23 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 
         );
         builder.show();
+
+
+
+
+
+
+
     }
 
-    private void getOTPVerification() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    private void getOTPVerification(final Activity act) {
+        currentact=act;
+        AlertDialog.Builder builder = new AlertDialog.Builder(act);
         builder.setTitle("Enter OTP");
         builder.setCancelable(false);
 
 // Set up the input
-        final EditText input = new EditText(getActivity());
+        final EditText input = new EditText(act);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
@@ -352,8 +363,10 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                                 JsonParser parser = new JsonParser();
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
+
+                                    Log.d("result from otp verify", String.valueOf(jsonObject.get("result")));
                                     dg.dismiss();
-                                    DataHandler dbobject = new DataHandler(getActivity());
+                                    DataHandler dbobject = new DataHandler(act);
                                     dbobject.addTable();
                                     Cursor cr = dbobject.displayData("select * from userlogin");
                                     if (cr != null) {
@@ -368,9 +381,10 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
                                     values.put("usermobile", usermobno);
                                     values.put("user_id","");
                                     values.put("contact_id","");
+                                    Log.d("values are- db", String.valueOf(values));
                                     dbobject.insertdata(values, "userlogin");
                                     MainActivity.signinstate = true;
-                                    Intent i = new Intent(getActivity(), MainActivity.class);
+                                    Intent i = new Intent(currentact, MainActivity.class);
                                     startActivity(i);
                                 }
                             }
@@ -378,7 +392,7 @@ public class GooglePlusLogin extends Fragment implements View.OnClickListener,
 
                                 ,
 
-                                getActivity(),
+                                act,
 
                                 "wait");
                         requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().

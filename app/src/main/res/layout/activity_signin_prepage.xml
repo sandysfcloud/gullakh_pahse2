@@ -25,14 +25,19 @@
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:visibility="visible" />-->
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+   <com.facebook.login.widget.LoginButton
+
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/login_button"
 
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
+
+
+
+
     <!--<fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
