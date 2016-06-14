@@ -13,7 +13,7 @@
     android:background="@drawable/bgque"
     android:gravity="center">
 
-    <!--<ImageButton
+    <ImageButton
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageButtonfb"
@@ -24,15 +24,15 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
-        android:visibility="visible" />-->
-    <com.facebook.login.widget.LoginButton
+        android:visibility="visible" />
+    <!--<com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp" />-->
     <!--<fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
