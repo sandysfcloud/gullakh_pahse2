@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -178,9 +179,10 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 //                GooglePlusLogin obj=new GooglePlusLogin();
 //                obj.signOutFromGplus();
 //                mGoogleApiClient = ((GlobalData)getApplication()).getGoogleObject();
-                
-                signinPrepage obj=new signinPrepage();
-                obj.logoutfb();
+
+
+                 signinPrepage obj=new signinPrepage();
+                 obj.logoutfb(MyProfileActivity.this);
              //   mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
                // mGoogleApiClient.disconnect();
                 GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);

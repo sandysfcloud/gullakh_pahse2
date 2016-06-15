@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -167,8 +168,9 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
 }
 
-    public void logoutfb()
+    public void logoutfb(Activity act)
     {
+        FacebookSdk.sdkInitialize(act);
         LoginManager.getInstance().logOut();
     }
 
