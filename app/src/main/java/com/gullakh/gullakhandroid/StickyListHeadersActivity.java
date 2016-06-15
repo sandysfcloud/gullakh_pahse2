@@ -60,7 +60,7 @@ public class StickyListHeadersActivity extends ActionBarActivity {
 					this, DummyContent.getDummyModelList());
 			animationAdapter = new AlphaInAnimationAdapter(adapterSocial);
 		} else if (category.equals(STICKY_LIST_HEADERS_MEDIA)) {*/
-			listView.setBackgroundResource(R.drawable.background_media);
+//			listView.setBackgroundResource(R.drawable.background_media);
 			MyStickyListHeadersMediaAdapter adapterSocial = new MyStickyListHeadersMediaAdapter(
 					this, DummyContent.getDummyModelList());
 			animationAdapter = new AlphaInAnimationAdapter(adapterSocial);

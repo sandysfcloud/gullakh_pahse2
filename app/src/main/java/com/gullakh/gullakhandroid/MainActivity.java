@@ -1097,7 +1097,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             throw new RuntimeException("Could not get package name: " + e);
         }
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("executed","onDestroy");
+        carloan.setImageBitmap(null);
+        homeloan.setImageBitmap(null);
+        persol .setImageBitmap(null);
+        busin.setImageBitmap(null);
+        info.setImageBitmap(null);
+    }
 
 
 }

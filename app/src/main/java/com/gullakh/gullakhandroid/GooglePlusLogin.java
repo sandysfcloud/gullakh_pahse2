@@ -58,6 +58,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     private Button btnSignOut;
     private String googleuserid;
     private JSONServerGet requestgetserver;
+    private String user_id;
 
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
@@ -332,6 +333,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     Log.d("clicked 1","result");
                     if(jsonObject.get("phone").toString().replaceAll("\"","").equals("")){
                         Log.d("clicked 2","phone");
+                        user_id=jsonObject.get("user_id").toString();
                         getMobileNo(jsonObject.get("user_id").toString());
                     }else{
                         MainActivity.signinstate = true;
@@ -427,7 +429,13 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().toString());
                     }
                 }
-
+        );
+                builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestgetserver1.execute("token", "udateGoogleMobNo", usermobno, user_id.replaceAll("\"",""));
+                            }
+                        }
         );
         builder.show();
     }
