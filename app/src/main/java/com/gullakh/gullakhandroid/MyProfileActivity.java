@@ -178,7 +178,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 //                GooglePlusLogin obj=new GooglePlusLogin();
 //                obj.signOutFromGplus();
 //                mGoogleApiClient = ((GlobalData)getApplication()).getGoogleObject();
-//                mGoogleApiClient.disconnect();
+                
+                signinPrepage obj=new signinPrepage();
+                obj.logoutfb();
+             //   mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
+               // mGoogleApiClient.disconnect();
                 GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
                 fragmentList.signOutFromGplus();
                 Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
