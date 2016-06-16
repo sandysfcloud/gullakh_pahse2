@@ -837,7 +837,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 }
                 bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
                 final_bp = Math.ceil(bp);
-
+                Log.d("net_salry in cal", String.valueOf(net_salry));
                 Log.d("bpd value in cal", String.valueOf(bpd));
                 Log.d("emi value in cal", String.valueOf(emi));
                 Log.d("Max_tenure in cal", String.valueOf(Max_tenure));

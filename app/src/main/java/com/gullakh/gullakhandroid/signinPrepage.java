@@ -48,7 +48,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
     String useremail,first_name,usermobno,fbid;
     GooglePlusLogin obj;
     private JSONServerGet requestgetserver1,requestgetserver2;
-
+     LoginButton loginButton;
     public static boolean signinprepage;
     private GooglePlusLogin fragmentList;
 
@@ -82,23 +82,26 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
-       // ImageButton fb= (ImageButton) findViewById(R.id.imageButtonfb);
+        ImageButton fb= (ImageButton) findViewById(R.id.imageButtonfb);
         ImageView gp= (ImageView) findViewById(R.id.imageButtongp);
         ImageButton gullakh= (ImageButton) findViewById(R.id.imageButtong);
-       // fb.setOnClickListener(this);
+        fb.setOnClickListener(this);
         gp.setOnClickListener(this);
         gullakh.setOnClickListener(this);
 
 
 
-        final LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         // If using in a fragment
         loginButton.setOnClickListener(this);
-        //loginButton.setText("");
 
-        //loginButton.setBackgroundResource(R.drawable.fb);
-        //loginButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+
+
+
+
+
+
 
         // Other app specific specialization
 
@@ -357,7 +360,9 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-
+            case R.id.imageButtonfb:
+                loginButton.performClick();
+                break;
           /*  case R.id.imageButtonfb:
                 Intent intent = new Intent(signinPrepage.this, signin.class);
                 startActivity(intent);
