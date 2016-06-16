@@ -50,7 +50,8 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public SignInButton btnSignIn;
     private int RESULT_OK=-1;
     static EditText inpuotp;
-    private String useremail,usermobno;
+    public String useremail;
+    private String usermobno;
     Context thiscontext;
     public JSONServerGet requestgetserver1,requestgetserver2;
     public String personName;
@@ -97,7 +98,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 //        llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 //
 //        // Button click listeners
-
+        currentact=getActivity();
         btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
 
@@ -331,19 +332,48 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("check info", jsonObject.get("result").toString());
                 if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
-                    Log.d("clicked 1","result");
-                    if(jsonObject.get("phone").toString().replaceAll("\"","").equals("")){
-                        Log.d("clicked 2","phone");
+                    Log.d("clicked 1", "result");
+                    if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("")) {
+                        Log.d("clicked 2", "phone");
                         getMobileNo(jsonObject.get("user_id").toString());
-                    }else{
+                    } else {
                         MainActivity.signinstate = true;
-                        Intent i = new Intent(getActivity(), MainActivity.class);
-                        startActivity(i);
-                    }
+                        Intent intent;
+                        if (((GlobalData) getActivity().getApplicationContext()).getLoanType() != null) {
+                            String emtyp = ((GlobalData) getActivity().getApplicationContext()).getLoanType();
+                            Log.d("employee typ in listviewclick", emtyp);
+                            if (emtyp.equalsIgnoreCase("Car Loan")) {
+                                Log.d("inside carloan", emtyp);
+                                intent = new Intent(getActivity(), cl_car_make.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
 
-                } else {
-                    RegisterPageActivity.showErroralert(getActivity(),jsonObject.get("error_message").toString(),"error");
-                }
+                            } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
+                                intent = new Intent(getActivity(), hl_prop_owns.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+
+                            } else if (((GlobalData) getActivity().getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+
+                                intent = new Intent(getActivity(), cl_car_residence_type.class);
+                                intent.putExtra("personal", "personal");
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+
+                            } else {
+                                intent = new Intent(getActivity(), MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        }else{
+                            intent = new Intent(getActivity(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                    }
+                    }else{
+                        RegisterPageActivity.showErroralert(getActivity(), jsonObject.get("error_message").toString(), "error");
+                    }
                 dg.dismiss();
             }
         }, getActivity(), "wait");

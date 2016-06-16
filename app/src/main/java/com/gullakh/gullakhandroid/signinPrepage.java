@@ -1,24 +1,16 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,12 +21,9 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +40,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
     public static boolean signinprepage;
     private GooglePlusLogin fragmentList;
+    private boolean GoogleLogin=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -366,6 +356,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
             case R.id.imageButtongp:
                 fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
                 fragmentList.signInWithGplus();
+                GoogleLogin=true;
 //                fragmentList.getProfileInformation();
 //                fragmentList.onActivityResult(0,-1,null);
                 break;
@@ -383,19 +374,19 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        Log.d("fb-onActivityResult called", "0");
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        Log.d("fb-onActivityResult called data", String.valueOf(data));
-        Log.d("fb-onActivityResult called resultCode", String.valueOf(resultCode));
-       // if (requestCode == fragmentList.RC_SIGN_IN) {
-        if (requestCode == -1 && resultCode == RESULT_OK) {
-            fragmentList.onActivityResult(requestCode, resultCode, data);
-        } else {
+        // if (requestCode == fragmentList.RC_SIGN_IN) {
+        if (GoogleLogin) {
+            if (requestCode == fragmentList.RC_SIGN_IN) {
+                fragmentList.onActivityResult(requestCode, resultCode, data);
+            } else {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+        }else{
+            Log.d("fb-onActivityResult called", "0");
             super.onActivityResult(requestCode, resultCode, data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+            Log.d("fb-onActivityResult called data", String.valueOf(data));
+            Log.d("fb-onActivityResult called resultCode", String.valueOf(resultCode));
         }
     }
-
-
-
-}
+    }
