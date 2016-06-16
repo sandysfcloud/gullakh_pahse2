@@ -1,6 +1,7 @@
 package com.gullakh.gullakhandroid;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -47,19 +48,19 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public boolean mSignInClicked;
     public ConnectionResult mConnectionResult;
     public SignInButton btnSignIn;
-    public int RESULT_OK=-1;
+    private int RESULT_OK=-1;
     static EditText inpuotp;
-    public String useremail,usermobno;
+    private String useremail,usermobno;
     Context thiscontext;
     public JSONServerGet requestgetserver1,requestgetserver2;
     public String personName;
     public String email;
     public ImageView login;
     public Button btnSignOut;
-    public String googleuserid;
+    public String googleuserid,tag;
     public JSONServerGet requestgetserver;
-    public String user_id;
-
+    String user_id;
+    public Activity currentact;
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
 //    public TextView txtName, txtEmail;
@@ -222,7 +223,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     }
 
     public void saveDataToDatabase() {
-        DataHandler dbobject = new DataHandler(getActivity());
+        DataHandler dbobject = new DataHandler(currentact);
         dbobject.addTable();
         Cursor cr = dbobject.displayData("select * from userlogin");
         if (cr != null) {
@@ -333,7 +334,6 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     Log.d("clicked 1","result");
                     if(jsonObject.get("phone").toString().replaceAll("\"","").equals("")){
                         Log.d("clicked 2","phone");
-                        user_id=jsonObject.get("user_id").toString();
                         getMobileNo(jsonObject.get("user_id").toString());
                     }else{
                         MainActivity.signinstate = true;
@@ -396,7 +396,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         );
         builder.show();
     }
-    public void getOTPVerification() {
+    private void getOTPVerification() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter OTP");
         builder.setCancelable(false);
@@ -433,10 +433,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 requestgetserver1.execute("token", "udateGoogleMobNo", usermobno, user_id.replaceAll("\"", ""));
                             }
                         }
-                );
+        );
         builder.show();
     }
 }
