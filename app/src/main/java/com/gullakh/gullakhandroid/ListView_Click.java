@@ -323,33 +323,7 @@ if(one_time_fee!=null) {
             //    Log.d("Result of lender2",((GlobalData) getApplication()).getLenders().get(1));
 
                 if(MainActivity.signinstate){
-                    Intent intent ;
-                    String emtyp=((GlobalData) getApplication()).getLoanType();
-                    Log.d("employee typ in listviewclick",emtyp);
-                    if(emtyp.equalsIgnoreCase("Car Loan")){
-                        Log.d("inside carloan",emtyp);
-                        intent = new Intent(ListView_Click.this, cl_car_make.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
-                        intent = new Intent(ListView_Click.this,hl_prop_owns.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
-
-                        intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
-                        intent.putExtra("personal", "personal");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }else {
-                        intent = new Intent(ListView_Click.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
-                    }
+                   goToIntent();
                 }else {
                     Intent intent = new Intent(this, signinPrepage.class);
                     startActivity(intent);
@@ -358,6 +332,37 @@ if(one_time_fee!=null) {
                 break;
         }
     }
+
+    public void goToIntent() {
+        Intent intent ;
+        String emtyp=((GlobalData) getApplication()).getLoanType();
+        Log.d("employee typ in listviewclick",emtyp);
+        if(emtyp.equalsIgnoreCase("Car Loan")){
+            Log.d("inside carloan",emtyp);
+            intent = new Intent(ListView_Click.this, cl_car_make.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
+            intent = new Intent(ListView_Click.this,hl_prop_owns.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
+
+            intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
+            intent.putExtra("personal", "personal");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }else {
+            intent = new Intent(ListView_Click.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {

@@ -48,9 +48,10 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public boolean mSignInClicked;
     public ConnectionResult mConnectionResult;
     public SignInButton btnSignIn;
-    public int RESULT_OK=-1;
+    private int RESULT_OK=-1;
     static EditText inpuotp;
-    public String useremail,usermobno;
+    public String useremail;
+    private String usermobno;
     Context thiscontext;
     public JSONServerGet requestgetserver1,requestgetserver2;
     public String personName;
@@ -97,10 +98,9 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 //        llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 //
 //        // Button click listeners
-
+        currentact=getActivity();
         btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
-        currentact=getActivity();
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
@@ -332,36 +332,64 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("check info", jsonObject.get("result").toString());
                 if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
-                    Log.d("clicked 1","result");
-                    if(jsonObject.get("phone").toString().replaceAll("\"","").equals("")){
-                        Log.d("clicked 2","phone");
-                        user_id=jsonObject.get("user_id").toString();
+                    Log.d("clicked 1", "result");
+                    if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("")) {
+                        Log.d("clicked 2", "phone");
                         getMobileNo(jsonObject.get("user_id").toString());
-                    }else{
+                    } else {
                         MainActivity.signinstate = true;
-                        Intent i = new Intent(currentact, MainActivity.class);
-                        startActivity(i);
-                    }
+                        Intent intent;
+                        if (((GlobalData) getActivity().getApplicationContext()).getLoanType() != null) {
+                            String emtyp = ((GlobalData) getActivity().getApplicationContext()).getLoanType();
+                            Log.d("employee typ in listviewclick", emtyp);
+                            if (emtyp.equalsIgnoreCase("Car Loan")) {
+                                Log.d("inside carloan", emtyp);
+                                intent = new Intent(getActivity(), cl_car_make.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
 
-                } else {
-                    RegisterPageActivity.showErroralert(currentact,jsonObject.get("error_message").toString(),"error");
-                }
+                            } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
+                                intent = new Intent(getActivity(), hl_prop_owns.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+
+                            } else if (((GlobalData) getActivity().getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+
+                                intent = new Intent(getActivity(), cl_car_residence_type.class);
+                                intent.putExtra("personal", "personal");
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+
+                            } else {
+                                intent = new Intent(getActivity(), MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        }else{
+                            intent = new Intent(getActivity(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                    }
+                    }else{
+                        RegisterPageActivity.showErroralert(getActivity(), jsonObject.get("error_message").toString(), "error");
+                    }
                 dg.dismiss();
             }
-        }, currentact, "wait");
+        }, getActivity(), "wait");
         String[] name = personName.split(" ");
-        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], tag);
+        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], "google");
 
     }
 
     public void getMobileNo(final String userid) {
 
-    AlertDialog.Builder builder = new AlertDialog.Builder(currentact);
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter Your Mobile Number");
         builder.setCancelable(false);
 
 // Set up the input
-        final EditText input = new EditText(currentact);
+        final EditText input = new EditText(getActivity());
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
@@ -386,11 +414,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                     getOTPVerification();
                                 }else{
                                     dg.dismiss();
-                                    Intent i=new Intent(currentact,MainActivity.class);
+                                    Intent i=new Intent(getActivity(),MainActivity.class);
                                     startActivity(i);
                                 }
                             }
-                        }, currentact, "wait");
+                        }, getActivity(), "wait");
                         usermobno = input.getText().toString();
                         requestgetserver1.execute("token", "udateGoogleMobNo", usermobno,userid.replaceAll("\"",""));
                     }
@@ -398,12 +426,12 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         );
         builder.show();
     }
-    public void getOTPVerification() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(currentact);
+    private void getOTPVerification() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Enter OTP");
         builder.setCancelable(false);
 // Set up the input
-        final EditText input = new EditText(currentact);
+        final EditText input = new EditText(getActivity());
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
@@ -423,11 +451,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
                                     MainActivity.signinstate = true;
-                                    Intent i = new Intent(currentact, MainActivity.class);
+                                    Intent i = new Intent(getActivity(), MainActivity.class);
                                     startActivity(i);
                                 }
                             }
-                        },currentact,"wait");
+                        },getActivity(),"wait");
                         requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().toString());
                     }
                 }
@@ -439,7 +467,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 requestgetserver1.execute("token", "udateGoogleMobNo", usermobno, user_id.replaceAll("\"", ""));
                             }
                         }
-                );
+        );
         builder.show();
     }
 }

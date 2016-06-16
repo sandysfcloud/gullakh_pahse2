@@ -24,63 +24,19 @@
             android:textColor="#707070"
             android:gravity="center"
             android:textSize="22dp"
-            android:background="#67d1d1d1" />
+            android:background="#67d1d1d1"
+            android:layout_marginBottom="10dp" />
 
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/home"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp">
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                    app:typeface="robotoLight"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/currentCityyr"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="Ex:5 years"
-                    android:imeOptions="actionNext"
-                    android:nextFocusRight="@+id/currentCitymn"
-                    android:singleLine="true"/>
-            </com.gullakh.gullakhandroid.MaterialTextField>
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/home"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp">
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                    app:typeface="robotoLight"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/currentCitymn"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:layout_gravity="center_horizontal"
-                    android:imeOptions="actionNext"
-                    android:nextFocusDown="@+id/currentResidencemn"
-                    android:hint="Ex:5 months"
-                    android:singleLine="true"/>
-            </com.gullakh.gullakhandroid.MaterialTextField>
-
-
-
-        </LinearLayout>
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/spinner1"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="center_horizontal"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple" />
 
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
@@ -95,19 +51,18 @@
             android:textSize="22dp"
             android:gravity="center"
             android:background="#67d1d1d1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp" />
 
         <Spinner
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:id="@+id/spinnerloc"
+            android:id="@+id/spinner2"
             android:spinnerMode="dropdown"
             android:layout_gravity="center_horizontal"
             android:dropDownSelector="#c2c2c2"
             android:dropDownWidth="match_parent"
-            android:background="@drawable/edittextsimple"
-            android:layout_marginBottom="20dp" />
+            android:background="@drawable/edittextsimple" />
 
         <com.gullakh.gullakhandroid.font.RobotoTextView
             app:typeface="robotoLight"
@@ -120,59 +75,20 @@
             android:textColor="#707070"
             android:gravity="center"
             android:textSize="22dp"
-            android:background="#67d1d1d1" />
+            android:background="#67d1d1d1"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/home"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp">
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                    app:typeface="robotoLight"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/currentResidenceyr"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="Ex:5 years"
-                    android:imeOptions="actionNext"
-                    android:nextFocusRight="@+id/currentResidencemn"
-                    android:singleLine="true"/>
-            </com.gullakh.gullakhandroid.MaterialTextField>
-            <com.gullakh.gullakhandroid.MaterialTextField
-                android:layout_width="fill_parent"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                app:mtf_cardCollapsedHeight="4dp"
-                app:mtf_cardColor="#fff"
-                app:mtf_image="@drawable/home"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp">
-                <com.gullakh.gullakhandroid.font.RobotoEditText
-                    app:typeface="robotoLight"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:id="@+id/currentResidencemn"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:layout_gravity="center_horizontal"
-                    android:hint="Ex:5 months"
-                    android:singleLine="true"/>
-            </com.gullakh.gullakhandroid.MaterialTextField>
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/spinner3"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="center_horizontal"
+            android:dropDownSelector="#c2c2c2"
+            android:dropDownWidth="match_parent"
+            android:background="@drawable/edittextsimple" />
 
-        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

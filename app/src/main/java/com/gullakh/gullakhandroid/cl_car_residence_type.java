@@ -25,9 +25,10 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
     private TextView heading1, heading2, heading3;
     private Button back, next;
     private ContentValues contentValues;
-    private Spinner spinner;
     private String CompLoanType;
     int flag = 0;
+    private Spinner spinner1,spinner2;
+    private Spinner spinner3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +56,8 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
-        currentCityyr = (EditText) findViewById(R.id.currentCityyr);
-        currentCityyr.requestFocus();
-        currentResidenceyr = (EditText) findViewById(R.id.currentResidenceyr);
-        currentCitymn = (EditText) findViewById(R.id.currentCitymn);
-        currentResidencemn = (EditText) findViewById(R.id.currentResidencemn);
-        spinner = (Spinner) findViewById(R.id.spinnerloc);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
             }
@@ -83,17 +79,11 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         categoriesloc.add("Company provided");
         categoriesloc.add("Others");
         // Creating adapter for spinner
-        android.widget.ArrayAdapter<String> dataAdapter = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesloc);
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesloc);
         // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-        if (cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city") != null &&
-                cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res") != null &&
-                cl_car_global_data.dataWithAns.get("current_res") != null) {
-            getDataFromHashMap();
-        }
-
+        spinner2.setAdapter(dataAdapter2);
 
 //****personal loan
         Intent intent2 = getIntent();
@@ -104,86 +94,76 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
 
             }
         }
-    }
-    private void getDataFromHashMap() {
-        String temp = cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_city");
-        String[] yearandmonth = temp.split(" ");
-        currentCityyr.setText(yearandmonth[0]);
-        currentCitymn.setText(yearandmonth[2]);
-        String temp1 = cl_car_global_data.dataWithAns.get("period_of_stay_in_cur_res");
-        String[] yearandmonth1 = temp1.split(" ");
-        currentResidenceyr.setText(yearandmonth1[0]);
-        currentResidencemn.setText(yearandmonth1[2]);
-        if (cl_car_global_data.dataWithAns.get("current_res").equals("Self/Spouse owned")) {
-            spinner.setSelection(1);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Owned by parents/sibling")) {
-            spinner.setSelection(2);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Rented with family")) {
-            spinner.setSelection(3);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Rented with friends")) {
-            spinner.setSelection(4);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Rented staying alone")) {
-            spinner.setSelection(5);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Hostel")) {
-            spinner.setSelection(6);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Paying guest")) {
-            spinner.setSelection(7);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Company provided")) {
-            spinner.setSelection(8);
-        } else if (cl_car_global_data.dataWithAns.get("current_res").equals("Others")) {
-            spinner.setSelection(9);
-        }
+
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+
+        List<String> categories = new ArrayList<String>();
+        categories.add("Select");
+        categories.add("< 1yr");
+        categories.add(" 2yrs");
+        categories.add(" > 3yrs");
+
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(dataAdapter1);
+
+        spinner3 = (Spinner) findViewById(R.id.spinner3);
+
+        List<String> category = new ArrayList<String>();
+        category.add("Select");
+        category.add("< 1yr");
+        category.add(" 2yrs");
+        category.add(" > 3yrs");
+
+        android.widget.ArrayAdapter<String> dataAdapter3 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, category);
+        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner3.setAdapter(dataAdapter3);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                if (!spinner.getSelectedItem().toString().matches("Select")) {
-                    if (currentCityyr.getText().toString().matches("") || currentCitymn.getText().toString().matches("")) {
-                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in current city ", "failed");
-                    } else {
-                        int temp = Integer.parseInt(currentCitymn.getText().toString());
-                        if (temp > 11) {
-                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Month field value cannot be greater than 11", "failed");
-                        } else {
-                            if (currentResidenceyr.getText().toString().matches("") || currentResidencemn.getText().toString().matches("")) {
-                                RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence correctly", "failed");
-                            } else {
-                                int temp1 = Integer.parseInt(currentResidencemn.getText().toString());
-                                if (temp1 > 11) {
-                                    RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please enter correct month field", "failed");
-                                } else {
-                                    if (Integer.parseInt(currentCityyr.getText().toString()) < Integer.parseInt(currentResidenceyr.getText().toString())) {
-                                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence cannot be greater than Period of stay in current city", "failed");
+                if (!spinner1.getSelectedItem().toString().matches("Select")) {
+
+                    if (!spinner2.getSelectedItem().toString().matches("Select")) {
+
+                        if (!spinner3.getSelectedItem().toString().matches("Select"))
+                        {
+                            if(spinner1.getSelectedItemPosition()>=spinner3.getSelectedItemPosition()) {
+                                setDataToHashMap("current_res", spinner2.getSelectedItem().toString());
+                                setDataToHashMap("period_of_stay_in_cur_city", spinner1.getSelectedItem().toString());
+                                setDataToHashMap("period_of_stay_in_cur_res", spinner3.getSelectedItem().toString());
+                                Intent intent;
+                                CompLoanType = ((GlobalData) getApplication()).getemptype();
+                                if (CompLoanType.equals("Salaried")) {
+                                    if (flag == 1) {
+                                        intent = new Intent(this, cl_car_salaried.class);
+                                        intent.putExtra("personal", "personal");
+                                        startActivity(intent);
                                     } else {
-                                        setDataToHashMap("current_res", spinner.getSelectedItem().toString());
-                                        setDataToHashMap("period_of_stay_in_cur_city", currentCityyr.getText().toString() + " Year " + currentCitymn.getText().toString() + " Month");
-                                        setDataToHashMap("period_of_stay_in_cur_res", currentResidenceyr.getText().toString() + " Year " + currentResidencemn.getText().toString() + " Month");
-                                        Intent intent;
-                                        CompLoanType=((GlobalData) getApplication()).getemptype();
-                                        if (CompLoanType.equals("Salaried")) {
-                                            if (flag == 1) {
-                                                intent = new Intent(this, cl_car_salaried.class);
-                                                intent.putExtra("personal", "personal");
-                                                startActivity(intent);
-                                            } else {
-                                                intent = new Intent(this, cl_car_salaried.class);
-                                                startActivity(intent);
-                                            }
-                                        } else if (CompLoanType.equals("Self Employed Business")) {
-                                            intent = new Intent(this, cl_car_selfempbusiness.class);
-                                            startActivity(intent);
-                                        } else if (CompLoanType.equals("Self Employed Professional")) {
-                                            intent = new Intent(this, cl_car_selfempbusinesprofs.class);
-                                            startActivity(intent);
-                                        }
+                                        intent = new Intent(this, cl_car_salaried.class);
+                                        startActivity(intent);
                                     }
+                                } else if (CompLoanType.equals("Self Employed Business")) {
+                                    intent = new Intent(this, cl_car_selfempbusiness.class);
+                                    startActivity(intent);
+                                } else if (CompLoanType.equals("Self Employed Professional")) {
+                                    intent = new Intent(this, cl_car_selfempbusinesprofs.class);
+                                    startActivity(intent);
                                 }
+                            }else{
+                                RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence cannot be greater than Period of stay in current city", "failed");
                             }
+                        } else {
+                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence correctly", "failed");
+
                         }
+                    }else {
+                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please enter correct month field", "failed");
+
                     }
-                } else {
-                    RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Select your Residence type", "failed");
+                }else {
+                    RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in current city ", "failed");
                 }
                 break;
             case R.id.close:
