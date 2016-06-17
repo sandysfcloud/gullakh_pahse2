@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
@@ -36,7 +37,7 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
-public class GooglePlusLogin extends android.support.v4.app.Fragment implements View.OnClickListener,
+public class GooglePlusLogin extends Fragment implements View.OnClickListener,
         ConnectionCallbacks, OnConnectionFailedListener {
 
     public static final int RC_SIGN_IN = 0;
@@ -101,6 +102,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         currentact=getActivity();
         btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
+        tag="google";
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
@@ -212,7 +214,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 personPhotoUrl = personPhotoUrl.substring(0,
                         personPhotoUrl.length() - 2)
                         + PROFILE_PIC_SIZE;
-                saveDataToDatabase();
+
                 getReg();
             } else {
                 Toast.makeText(getActivity(),
@@ -339,36 +341,42 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     } else {
                         MainActivity.signinstate = true;
                         Intent intent;
-                        if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
-                            String emtyp = ((GlobalData) currentact.getApplicationContext()).getLoanType();
-                            Log.d("employee typ in listviewclick", emtyp);
-                            if (emtyp.equalsIgnoreCase("Car Loan")) {
-                                Log.d("inside carloan", emtyp);
-                                intent = new Intent(currentact, cl_car_make.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                        if (ListView_Click.buttonApply) {
+                            ListView_Click.buttonApply = false;
+                            if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
+                                saveDataToDatabase();
+                                String emtyp = ((GlobalData) currentact.getApplicationContext()).getLoanType();
+                                Log.d("employee typ in listviewclick", emtyp);
+                                if (emtyp.equalsIgnoreCase("Car Loan")) {
+                                    Log.d("inside carloan", emtyp);
+                                    intent = new Intent(currentact, cl_car_make.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    currentact.startActivity(intent);
 
-                            } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
-                                intent = new Intent(currentact, hl_prop_owns.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
+                                    intent = new Intent(currentact, hl_prop_owns.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    currentact.startActivity(intent);
 
-                            } else if (((GlobalData) currentact.getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                                } else if (((GlobalData) currentact.getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
 
-                                intent = new Intent(currentact, cl_car_residence_type.class);
-                                intent.putExtra("personal", "personal");
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                    intent = new Intent(currentact, cl_car_residence_type.class);
+                                    intent.putExtra("personal", "personal");
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    currentact.startActivity(intent);
 
+                                } else {
+                                    intent = new Intent(currentact, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    currentact.startActivity(intent);
+                                }
                             } else {
+                                saveDataToDatabase();
                                 intent = new Intent(currentact, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
+
+                                currentact.startActivity(intent);
                             }
-                        }else{
-                            intent = new Intent(currentact, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
                         }
                     }
                     }else{
@@ -378,7 +386,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
             }
         }, currentact, "wait");
         String[] name = personName.split(" ");
-        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], "google");
+        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], tag);
 
     }
 
@@ -414,6 +422,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                     getOTPVerification();
                                 }else{
                                     dg.dismiss();
+                                    saveDataToDatabase();
                                     Intent i=new Intent(currentact,MainActivity.class);
                                     startActivity(i);
                                 }
@@ -451,6 +460,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
                                     MainActivity.signinstate = true;
+                                    saveDataToDatabase();
                                     Intent i = new Intent(currentact, MainActivity.class);
                                     startActivity(i);
                                 }

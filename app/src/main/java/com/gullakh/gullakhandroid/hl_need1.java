@@ -48,7 +48,8 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
         //review.setVisibility(View.INVISIBLE);
         review.setOnClickListener(this);
         close.setOnClickListener(this);
-        title.setText("Home Loan");
+        //title.setText("Home Loan");
+        title.setText("Property Details");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();

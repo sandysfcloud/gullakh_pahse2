@@ -339,15 +339,9 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        if(citynam.getText().toString()!=null) {
-            if( citynam.getText().toString().length()>0) {
-                Log.d("edit text", citynam.getText().toString());
-
-                ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
-            }
-        }
 
         Log.d("item selected ", String.valueOf(  parent.getItemAtPosition(position)));
+        ((GlobalData) getApplication()).setcarres(String.valueOf(parent.getItemAtPosition(position)));
         Intent intent = new Intent(this, Emp_type_Qustn.class);
         startActivity(intent);
         overridePendingTransition(R.transition.left, R.transition.right);

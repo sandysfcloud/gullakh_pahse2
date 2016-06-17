@@ -44,7 +44,7 @@ public class GlobalData extends MultiDexApplication {
     private String balTransLoanAmt;
     private String builderName,propcat1,propcat2;
     private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr;
-    int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg;
+    int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg,homeneedpos,cpappprof,coappcat,coappbusp,coappbusf;
 
 //*****************CarLoan********************//
 
@@ -441,4 +441,53 @@ public class GlobalData extends MultiDexApplication {
     public String getCurrentUser() {
         return currentusr;
     }
+
+
+
+    public void setHomeneedpos(int builderName) {
+        this.homeneedpos = builderName;
+    }
+
+    public int getHomeneedpos() {
+        return homeneedpos;
+    }
+
+
+
+    public void setCoappprofpos(int builderName) {
+        this.cpappprof = builderName;
+    }
+
+    public int getCoappprofpos() {
+        return cpappprof;
+    }
+
+
+    public void setCoappcatpos(int builderName) {
+        this.coappcat = builderName;
+    }
+
+    public int getCoappcatpos() {
+        return coappcat;
+    }
+
+
+
+    public void setCoappbuspropos(int builderName) {
+        this.coappbusp = builderName;
+    }
+
+    public int getCoappbuspropos() {
+        return coappbusp;
+    }
+
+    public void setCoappbusfirmpos(int builderName) {
+        this.coappbusf = builderName;
+    }
+
+    public int getCoappbusfirmpos() {
+        return coappbusf;
+    }
+
+
 }

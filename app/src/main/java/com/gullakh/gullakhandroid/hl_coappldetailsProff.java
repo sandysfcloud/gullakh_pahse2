@@ -148,13 +148,13 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
 
                 Log.d("professn is", hdata.get("profession"));
 
-                String profession = hdata.get("profession");
+                int profession = ((GlobalData) getApplication()).getCoappprofpos();
                 String date = hdata.get("date");
-                String category = hdata.get("category");
+                int category = ((GlobalData) getApplication()).getCoappcatpos();
 
-                spinner1.setSelection(Integer.parseInt(profession));
+                spinner1.setSelection(profession);
                 Doj.setText(date);
-                spinner2.setSelection(Integer.parseInt(category));
+                spinner2.setSelection(category);
             }
 
 
@@ -174,11 +174,15 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
                         {
 
                             if (no != null) {
-                                setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItemPosition()));
+                                setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItem()));
                                 setDataToHashMap("date", Doj.getText().toString());
-                                setDataToHashMap("category", String.valueOf(spinner2.getSelectedItemPosition()));
+                                setDataToHashMap("category", String.valueOf(spinner2.getSelectedItem()));
 
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+                                ((GlobalData) getApplication()).setCoappprofpos(spinner1.getSelectedItemPosition());
+                                ((GlobalData) getApplication()).setCoappcatpos(spinner2.getSelectedItemPosition());
+
+
 
                                 Intent i = new Intent(this, coappldetail.class);
                                 i.putExtra("data", "joint");

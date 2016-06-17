@@ -59,6 +59,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        Log.d("its mpro", "file");
         myprofileFlag=true;
         signinPrepage.signinprepage=false;
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

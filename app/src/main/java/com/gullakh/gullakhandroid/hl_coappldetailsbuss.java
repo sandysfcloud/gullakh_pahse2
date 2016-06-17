@@ -151,13 +151,13 @@ String no;
                 Log.d("no in bussiness class", no);
 
 
-                String profession = hdata.get("profession");
+                int profession = ((GlobalData) getApplication()).getCoappbuspropos();
                 String date = hdata.get("start_date_of_current_business_prof");
-                String category = hdata.get("firm_type_prof");
+                int category = ((GlobalData) getApplication()).getCoappbusfirmpos();
 
-                spinner1.setSelection(Integer.parseInt(profession));
+                spinner1.setSelection(profession);
                 Doj.setText(date);
-                spinner2.setSelection(Integer.parseInt(category));
+                spinner2.setSelection(category);
             }
 
 
@@ -180,13 +180,14 @@ String no;
                         {
 
                             if (no != null) {
-                                setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItemPosition()));
+                                setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItem()));
                                 Log.d("selected position", String.valueOf(spinner1.getSelectedItemPosition()));
                                 setDataToHashMap("start_date_of_current_business_prof" ,  Doj.getText().toString());
-                                setDataToHashMap("firm_type_prof", String.valueOf(spinner2.getSelectedItemPosition()));
+                                setDataToHashMap("firm_type_prof", String.valueOf(spinner2.getSelectedItem()));
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 
-
+                                ((GlobalData) getApplication()).setCoappbuspropos(spinner1.getSelectedItemPosition());
+                                ((GlobalData) getApplication()).setCoappbusfirmpos(spinner2.getSelectedItemPosition());
 
                                 Intent i = new Intent(this, coappldetail.class);
                                 i.putExtra("data", "joint");
