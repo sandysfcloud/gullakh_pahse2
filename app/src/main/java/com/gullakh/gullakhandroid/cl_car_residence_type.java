@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ import java.util.List;
 
 public class  cl_car_residence_type extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText currentCityyr, currentCitymn, currentResidenceyr, currentResidencemn;
     private TextView heading1, heading2, heading3;
     private Button back, next;
     private ContentValues contentValues;
@@ -100,7 +98,8 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         List<String> categories = new ArrayList<String>();
         categories.add("Select");
         categories.add("< 1yr");
-        categories.add(" 2yrs");
+        categories.add(" 1-2yrs");
+        categories.add(" 2-3yrs");
         categories.add(" > 3yrs");
 
         android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
@@ -112,7 +111,8 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         List<String> category = new ArrayList<String>();
         category.add("Select");
         category.add("< 1yr");
-        category.add(" 2yrs");
+        category.add(" 1-2yrs");
+        category.add(" 2-3yrs");
         category.add(" > 3yrs");
 
         android.widget.ArrayAdapter<String> dataAdapter3 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, category);

@@ -360,11 +360,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		//*******new loading
 
 		LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
-
-		View dialogView = inflater.inflate(R.layout.dialogloadingwomsg, null);
-		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
+		ImageView piggibg = (ImageView) dialog.findViewById(R.id.pigbg);
 		//piggi = (ImageView) findViewById(R.id.pig);
-		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
+		ImageView coin = (ImageView) dialog.findViewById(R.id.coin);
 		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
 
 		mAnimation = new TranslateAnimation(0,0,0,75);

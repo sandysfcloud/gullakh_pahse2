@@ -62,6 +62,9 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public JSONServerGet requestgetserver;
     String user_id;
     public Activity currentact;
+    private String contact_id;
+    private String phone;
+
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
 //    public TextView txtName, txtEmail;
@@ -212,7 +215,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 personPhotoUrl = personPhotoUrl.substring(0,
                         personPhotoUrl.length() - 2)
                         + PROFILE_PIC_SIZE;
-                saveDataToDatabase();
+//                saveDataToDatabase();
                 getReg();
             } else {
                 Toast.makeText(getActivity(),
@@ -235,10 +238,10 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         }
         ContentValues values = new ContentValues();
         values.put("usersession","");
-        values.put("useremail", email);
-        values.put("usermobile", "9019852506");
-        values.put("user_id", "");
-        values.put("contact_id","");
+        values.put("useremail", email.replaceAll("\"",""));
+        values.put("usermobile",phone.replaceAll("\"",""));
+        values.put("user_id", user_id.replaceAll("\"",""));
+        values.put("contact_id",contact_id.replaceAll("\"",""));
         dbobject.insertdata(values, "userlogin");
     }
 
@@ -331,55 +334,77 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("check info", jsonObject.get("result").toString());
-                if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
+                if (jsonObject.get("result").toString().replaceAll("\"","").equals("true"))
+                {
+                    user_id=jsonObject.get("user_id").toString();
+                    contact_id=jsonObject.get("contact_id").toString();
+                    phone=jsonObject.get("phone").toString();
+                    saveDataToDatabase();
                     Log.d("clicked 1", "result");
                     if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("")) {
                         Log.d("clicked 2", "phone");
                         getMobileNo(jsonObject.get("user_id").toString());
                     } else {
-                        MainActivity.signinstate = true;
-                        Intent intent;
-                        if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
-                            String emtyp = ((GlobalData) currentact.getApplicationContext()).getLoanType();
-                            Log.d("employee typ in listviewclick", emtyp);
-                            if (emtyp.equalsIgnoreCase("Car Loan")) {
-                                Log.d("inside carloan", emtyp);
-                                intent = new Intent(currentact, cl_car_make.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-
-                            } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
-                                intent = new Intent(currentact, hl_prop_owns.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-
-                            } else if (((GlobalData) currentact.getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-
-                                intent = new Intent(currentact, cl_car_residence_type.class);
-                                intent.putExtra("personal", "personal");
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-
-                            } else {
-                                intent = new Intent(currentact, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                            }
-                        }else{
-                            intent = new Intent(currentact, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        }
+                        goToIntent();
                     }
-                    }else{
+                }else{
                         RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
-                    }
+                }
                 dg.dismiss();
             }
         }, currentact, "wait");
         String[] name = personName.split(" ");
         requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], "google");
 
+    }
+
+    private void goToIntent() {
+        MainActivity.signinstate = true;
+        Intent intent;
+
+        if (ListView_Click.buttonApply) {
+            ListView_Click.buttonApply = false;
+            if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
+                String emtyp = ((GlobalData) currentact.getApplicationContext()).getLoanType();
+                Log.d("employee typ in listviewclick", emtyp);
+                if (emtyp.equalsIgnoreCase("Car Loan")) {
+                    Log.d("inside carloan", emtyp);
+                    intent = new Intent(currentact, cl_car_make.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
+                    intent = new Intent(currentact, hl_prop_owns.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else if (((GlobalData) currentact.getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+
+                    intent = new Intent(currentact, cl_car_residence_type.class);
+                    intent.putExtra("personal", "personal");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else {
+                    intent = new Intent(currentact, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            } else {
+                intent = new Intent(currentact, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        } else if (MyProfileActivity.myprofileFlag) {
+            MyProfileActivity.myprofileFlag=false;
+            intent = new Intent(currentact, MyProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        } else {
+            intent = new Intent(currentact, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 
     public void getMobileNo(final String userid) {
@@ -437,37 +462,40 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         builder.setView(input);
 // Set up the button
         builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (!input.getText().toString().equals("")) {
+
+                    requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+                        @Override
+                        public void processFinish(JSONObject output) {
+                        }
+
+                        public void processFinishString(String str_result, Dialog dg) {
+
+                            JsonParser parser = new JsonParser();
+                            JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                            if (!jsonObject.get("result").toString().equals("true")) {
+                                dg.dismiss();
+                                phone=usermobno.replaceAll("\"","");
+                                saveDataToDatabase();
+                                goToIntent();
+                            }
+                        }
+                    }, currentact, "wait");
+                    requestgetserver2.execute("token", "getGoogleOTPverification", useremail, phone, RegisterAppToServer.regid, input.getText().toString());
+                } else {
+
+                }
+            }
+        });
+                builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        requestgetserver2 = new JSONServerGet(new AsyncResponse() {
-                            @Override
-                            public void processFinish(JSONObject output) {
-                            }
-                            public void processFinishString(String str_result, Dialog dg) {
-
-                                JsonParser parser = new JsonParser();
-                                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                                if (!jsonObject.get("result").toString().equals("true")) {
-                                    dg.dismiss();
-                                    MainActivity.signinstate = true;
-                                    Intent i = new Intent(currentact, MainActivity.class);
-                                    startActivity(i);
-                                }
-                            }
-                        },currentact,"wait");
-                        requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().toString());
+                        requestgetserver1.execute("token", "udateGoogleMobNo", phone, user_id.replaceAll("\"", ""));
                     }
-                }
-        );
-                builder.setNegativeButton("RESEND", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                requestgetserver1.execute("token", "udateGoogleMobNo", usermobno, user_id.replaceAll("\"", ""));
-                            }
-                        }
-        );
+                });
         builder.show();
     }
 }
