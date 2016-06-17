@@ -62,6 +62,8 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public JSONServerGet requestgetserver;
     String user_id;
     public Activity currentact;
+    private String phone;
+
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
 //    public TextView txtName, txtEmail;
@@ -412,20 +414,19 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             @Override
                             public void processFinish(JSONObject output) {
                             }
+
                             public void processFinishString(String str_result, Dialog dg) {
-
-                        public void processFinishString(String str_result, Dialog dg) {
-
-                            JsonParser parser = new JsonParser();
-                            JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                            if (!jsonObject.get("result").toString().equals("true")) {
-                                dg.dismiss();
-                                phone=usermobno.replaceAll("\"","");
-                                saveDataToDatabase();
-                                goToIntent();
+                                JsonParser parser = new JsonParser();
+                                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                                if (!jsonObject.get("result").toString().equals("true")) {
+                                    dg.dismiss();
+                                    phone = usermobno.replaceAll("\"", "");
+                                    saveDataToDatabase();
+                                    goToIntent();
+                                }
                             }
-                        },currentact,"wait");
-                        requestgetserver2.execute("token","getGoogleOTPverification",useremail,usermobno,RegisterAppToServer.regid,input.getText().toString());
+                        }, currentact, "wait");
+                        requestgetserver2.execute("token", "getGoogleOTPverification", useremail, usermobno, RegisterAppToServer.regid, input.getText().toString());
                     }
                 }
         );
@@ -436,7 +437,57 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 requestgetserver1.execute("token", "udateGoogleMobNo", usermobno, user_id.replaceAll("\"", ""));
                             }
                         }
-        );
+                );
         builder.show();
     }
+    public void goToIntent() {
+        MainActivity.signinstate = true;
+        Intent intent;
+
+        if (ListView_Click.buttonApply) {
+            ListView_Click.buttonApply = false;
+            if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
+                String emtyp = ((GlobalData) currentact.getApplicationContext()).getLoanType();
+                Log.d("employee typ in listviewclick", emtyp);
+                if (emtyp.equalsIgnoreCase("Car Loan")) {
+                    Log.d("inside carloan", emtyp);
+                    intent = new Intent(currentact, cl_car_make.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
+                    intent = new Intent(currentact, hl_prop_owns.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else if (((GlobalData) currentact.getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+
+                    intent = new Intent(currentact, cl_car_residence_type.class);
+                    intent.putExtra("personal", "personal");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                } else {
+                    intent = new Intent(currentact, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            } else {
+                intent = new Intent(currentact, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        }else if (MyProfileActivity.myprofileFlag) {
+            MyProfileActivity.myprofileFlag=false;
+            intent = new Intent(currentact, MyProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+        else {
+            intent = new Intent(currentact, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    }
+
 }
