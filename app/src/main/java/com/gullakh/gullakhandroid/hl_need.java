@@ -39,7 +39,8 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
        // review.setVisibility(View.INVISIBLE);
         review.setOnClickListener(this);
         close.setOnClickListener(this);
-        title.setText("Home Loan");
+        //title.setText("Home Loan");
+        title.setText("Property Details");
         actionBar.setCustomView(v);
         View v2 = getSupportActionBar().getCustomView();
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
@@ -81,7 +82,24 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter1);
+
+
+
+
+        if(((GlobalData) getApplication()).gethneed()!=null){
+
+            spinner.setSelection(((GlobalData) getApplication()).getHomeneedpos());
+
+        }
+
+
+
+
+
     }
+
+
+
     public void setDataToHashMap(String key, String data) {
         cl_car_global_data.dataWithAns.put(key, data);
     }
@@ -128,6 +146,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         Intent intent;
         setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
         ((GlobalData) getApplication()).sethneed(spinner.getSelectedItem().toString());
+        ((GlobalData) getApplication()).setHomeneedpos(spinner.getSelectedItemPosition());
         //goToDatabase("Home Loan");
         if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
             intent = new Intent(hl_need.this, hl_need1.class);

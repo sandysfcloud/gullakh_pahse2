@@ -295,7 +295,12 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 }
             } else {
                 //goToDatabase("Home Loan");
+                if (((GlobalData) getApplication()).getBaltrans().equals("No"))
                 intent = new Intent(this, hl_need.class);
+                else {
+                    intent = new Intent(this, GoogleCardsMediaActivity.class);
+                    intent.putExtra("data", "searchgo");
+                }
             }
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);

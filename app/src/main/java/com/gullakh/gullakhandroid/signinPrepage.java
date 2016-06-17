@@ -52,13 +52,15 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         callbackManager = CallbackManager.Factory.create();
 
         //*********
-
+        Log.d("its signinPrepage","");
         setContentView(R.layout.activity_signin_prepage);
         MyProfileActivity.myprofileFlag=false;
         signinprepage=true;
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        Log.d("its signinPrepage","2");
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView title = (TextView) v.findViewById(R.id.title);
         ImageView close = (ImageView) v.findViewById(R.id.close);
@@ -90,7 +92,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
 
 
-
+        Log.d("its signinPrepage", "3");
 
 
         // Other app specific specialization
@@ -378,7 +380,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        Log.d("onActivityResult called", "0");
         // if (requestCode == fragmentList.RC_SIGN_IN) {
         if (GoogleLogin) {
             if (requestCode == fragmentList.RC_SIGN_IN) {

@@ -209,8 +209,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(loantype.equalsIgnoreCase("Loan Against Property") ||
-                (loantype.equalsIgnoreCase("Home Loan"))){
+        }else if(loantype.equalsIgnoreCase("Loan Against Property") || (loantype.equalsIgnoreCase("Home Loan"))){
             intent = new Intent(Emp_type_Qustn.this, lp_bal_tranf.class);
 
             startActivity(intent);
@@ -218,7 +217,6 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         }
         else{
             intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
-
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }

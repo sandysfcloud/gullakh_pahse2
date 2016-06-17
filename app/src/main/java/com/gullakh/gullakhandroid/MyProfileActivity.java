@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,11 +54,13 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
     private ImageView ProfilePic;
     Bitmap bmp;
     RoundImage roundedImage,roundedImage1;
-    public static boolean myprofileFlag=true;
+    public static boolean myprofileFlag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        Log.d("its mpro", "file");
+        myprofileFlag=true;
         signinPrepage.signinprepage=false;
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
@@ -86,7 +89,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 userid=cr.getString(1);
                 contactid=cr.getString(2);
                 email.setText(cr.getString(3));
-                ph.setText(cr.getString(4).replaceAll("\"",""));
+                ph.setText(cr.getString(4));
                 if(cr.getString(6)!=null){
                    getProfilePic(cr.getString(6));
                 }
