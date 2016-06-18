@@ -63,6 +63,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     String user_id;
     public Activity currentact;
     private String phone;
+    private String contact_id;
 
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
@@ -237,10 +238,10 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         }
         ContentValues values = new ContentValues();
         values.put("usersession","");
-        values.put("useremail", email);
-        values.put("usermobile", "9019852506");
-        values.put("user_id", "");
-        values.put("contact_id","");
+        values.put("useremail", email.replaceAll("\"",""));
+        values.put("usermobile", usermobno.replaceAll("\"",""));
+        values.put("user_id", user_id.replaceAll("\"",""));
+        values.put("contact_id",contact_id.replaceAll("\"",""));
         dbobject.insertdata(values, "userlogin");
     }
 
@@ -335,6 +336,9 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 Log.d("check info", jsonObject.get("result").toString());
                 if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                     Log.d("clicked 1", "result");
+                    contact_id=jsonObject.get("contact_id").toString();
+                    user_id=jsonObject.get("user_id").toString();
+                    usermobno=jsonObject.get("phone").toString().replaceAll("\"", "");
                     if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("")) {
                         Log.d("clicked 2", "phone");
                         getMobileNo(jsonObject.get("user_id").toString());
@@ -384,8 +388,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                     getOTPVerification();
                                 }else{
                                     dg.dismiss();
-                                    Intent i=new Intent(currentact,MainActivity.class);
-                                    startActivity(i);
+                                    goToIntent();
                                 }
                             }
                         }, currentact, "wait");
@@ -420,8 +423,6 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
-                                    phone = usermobno.replaceAll("\"", "");
-                                    saveDataToDatabase();
                                     goToIntent();
                                 }
                             }
@@ -443,7 +444,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public void goToIntent() {
         MainActivity.signinstate = true;
         Intent intent;
-
+        saveDataToDatabase();
         if (ListView_Click.buttonApply) {
             ListView_Click.buttonApply = false;
             if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
