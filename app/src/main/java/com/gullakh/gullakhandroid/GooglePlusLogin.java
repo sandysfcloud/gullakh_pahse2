@@ -346,6 +346,12 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         goToIntent();
                     }
                     }else{
+                    if(tag.equals("facebook"))
+                    {
+                        Log.d("facebook signout","");
+                        signinPrepage obj=new signinPrepage();
+                        obj.logoutfb(currentact);
+                    }
                         RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
                     }
                 dg.dismiss();

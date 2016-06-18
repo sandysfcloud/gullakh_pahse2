@@ -215,7 +215,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         obj.currentact=this;
         obj.googleuserid=fbid;
         obj.tag="facebook";
-        obj.saveDataToDatabase();
+       // obj.saveDataToDatabase();
         obj.getReg();
 
 
