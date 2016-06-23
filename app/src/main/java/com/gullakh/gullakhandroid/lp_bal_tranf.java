@@ -20,6 +20,7 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
     private RadioGroup radioGroup1;
     private RadioButton yes,no;
     private boolean buttonYes=false;
+    String balt,loantyp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,20 +54,33 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
         no.setOnClickListener(this);
 
 
-        if(((GlobalData) getApplication()).getLoanType().equals("Home Loan"))
+        if (savedInstanceState != null) {
+            balt = savedInstanceState.getString("balt");
+            loantyp = savedInstanceState.getString("loantyp");
+            Log.d("savedInstanceState year", balt);
+        }
+        else {
+            balt = ((GlobalData) getApplication()).getBaltrans();
+            loantyp=((GlobalData) getApplication()).getLoanType();
+        }
+
+
+
+
+        if(loantyp.equals("Home Loan"))
         {
             TextView questn = (TextView) findViewById(R.id.textView38);
             questn.setText("Balance Transfer?");
         }
 
 
-        if(((GlobalData) getApplication()).getBaltrans()!=null) {
-            Log.d("emp type not null", ((GlobalData) getApplication()).getBaltrans());
-            if (((GlobalData) getApplication()).getBaltrans().equals("Yes")) {
+        if(balt!=null) {
+            Log.d("emp type not null",balt);
+            if (balt.equals("Yes")) {
                 yes.setChecked(true);
                 buttonYes=true;
             }
-            else if(((GlobalData) getApplication()).getBaltrans().equals("No"))
+            else if(balt.equals("No"))
                 no.setChecked(true);
 
         }
@@ -74,6 +88,20 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("loantyp", ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("balt",((GlobalData) getApplication()).getBaltrans());
+
+    }
+
+
+
+
+
     @Override
     public void onClick(View v) {
         Intent intent;

@@ -23,7 +23,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     String data;
     Button next,back,done;
     Dialog dg;
-    String loan_type;
+    String loan_type,emptyp;
     private ContentValues contentValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +44,20 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         business.setOnClickListener(this);
         contentValues=new ContentValues();
 
-        if(((GlobalData) getApplication()).getemptype()!=null) {
-            Log.d("emp type not null", ((GlobalData) getApplication()).getemptype());
-            if (((GlobalData) getApplication()).getemptype().equals("Salaried"))
+
+
+        if (savedInstanceState != null) {
+            emptyp = savedInstanceState.getString("emptyp");
+            Log.d("savedInstanceState resi", emptyp);
+        }
+        else
+            emptyp=((GlobalData) getApplication()).getemptype();
+
+        if(emptyp!=null) {
+            Log.d("emp type not null", emptyp);
+            if ((emptyp.equals("Salaried")))
                 sal.setImageResource(R.drawable.buttonselecteffect);
-            else if(((GlobalData) getApplication()).getemptype().equals("Self Employed Business"))
+            else if(emptyp.equals("Self Employed Business"))
                 self.setImageResource(R.drawable.buttonselecteffect);
             else
                 business.setImageResource(R.drawable.buttonselecteffect);
@@ -100,7 +109,12 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
 
+        icicle.putString("emptyp", ((GlobalData) getApplication()).getemptype());
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

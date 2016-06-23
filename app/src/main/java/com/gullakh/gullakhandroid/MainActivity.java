@@ -488,8 +488,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         actionBar.setCustomView(v);
 
 
+
+
+
         //********************End of Oncreate
     }
+
+
+
+
+
+
+
 
     private void noconnection() {
         AlertDialog.Builder alertadd = new AlertDialog.Builder(MainActivity.this);
@@ -646,6 +656,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageViewInfo:
                 showdialog();
                 break;
+
+
+            case R.id.credit:
+
+                DataHandler dbobject = new DataHandler(this);
+                Cursor cr = dbobject.displayData("select * from userlogin");
+                if (cr != null) {
+                    if (cr.moveToFirst()) {
+
+                        Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5) + " " + cr.getString(6));
+
+
+                    } else {
+                        Intent intentsignin = new Intent(this, signinPrepage.class);
+                        startActivity(intentsignin);
+                        finish();
+                    }
+                }
+
+                break;
+
+
+
         }
 
     }
@@ -869,18 +902,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Cursor cr = dbobject.displayData("select * from userlogin");
                 if(cr!=null) {
                     if (cr.moveToFirst()) {
+                        Log.d("already logined", "");
                         Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
+
                     }else{
+                        Log.d("not logined", "");
                         Intent intent = new Intent(MainActivity.this, signinPrepage.class);
                         startActivity(intent);
-                        overridePendingTransition(R.transition.left, R.transition.right);
+
                     }
                 }else{
                     Intent intent = new Intent(MainActivity.this, signinPrepage.class);
                     startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
+
                 }
                 overridePendingTransition(R.transition.left, R.transition.right);
             }

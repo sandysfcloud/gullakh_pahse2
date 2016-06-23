@@ -25,7 +25,7 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
     ImageView newcar,oldcar,review;
     AutoCompleteTextView email;
     Dialog dg;
-    String data;
+    String data,cartyp;
     Button back,next,done;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +65,21 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         //review = (ImageView) findViewById(R.id.review);
         //done = (Button) findViewById(R.id.done);
         //done.setOnClickListener(this);
-        if(((GlobalData) getApplication()).getCartypeloan()!=null) {
 
-            if (((GlobalData) getApplication()).getCartypeloan().equals("New Car Loan"))
+
+        if (savedInstanceState != null) {
+            cartyp = savedInstanceState.getString("cartyp");
+            Log.d("savedInstanceState cartyp", cartyp);
+        }
+        else
+            cartyp=((GlobalData) getApplication()).getCartypeloan();
+
+        if(cartyp!=null) {
+
+            if (cartyp.equals("New Car Loan"))
                 newcar.setImageResource(R.drawable.buttonselecteffect);
             else
-            if (((GlobalData) getApplication()).getCartypeloan().equals("Used Car Loan"))
+            if (cartyp.equals("Used Car Loan"))
                 oldcar.setImageResource(R.drawable.buttonselecteffect);
 
         }
@@ -106,7 +115,12 @@ public class Car_type_questn extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
 
+        icicle.putString("cartyp", ((GlobalData) getApplication()).getCartypeloan());
+
+    }
 
     @Override
     public void onClick(View v) {

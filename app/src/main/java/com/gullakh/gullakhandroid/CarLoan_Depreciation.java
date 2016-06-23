@@ -33,6 +33,8 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     Button next;
+    Double depv,patv;
+    String gloan_type,carloantp,Baltrans;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,10 +117,28 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         }
         else
         {*/
-            Double depv  =((GlobalData) getApplication()).getdepreciation();
+
+
+        if (savedInstanceState != null) {
+            depv = Double.valueOf(savedInstanceState.getString("depv"));
+            patv = Double.valueOf(savedInstanceState.getString("pat"));
+
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+            Baltrans = savedInstanceState.getString("Baltrans");
+        }
+        else {
+            depv = ((GlobalData) getApplication()).getdepreciation();
+            patv = ((GlobalData) getApplication()).getPat();
+
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+            Baltrans =((GlobalData) getApplication()).getBaltrans();
+        }
+
             if(depv!=null) {
 
-                String sdepv=String.valueOf(((GlobalData) getApplication()).getdepreciation().intValue());
+                String sdepv=String.valueOf(depv.intValue());
                 Log.d("sdepv already set", sdepv);
                 amt.setText(sdepv);
                 amt.setSelection(amt.getText().length());
@@ -235,6 +255,14 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
 
     }
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("depv", String.valueOf(((GlobalData) getApplication()).getdepreciation()));
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
+        icicle.putString("Baltrans",  ((GlobalData) getApplication()).getBaltrans());
+        icicle.putString("pat", String.valueOf(((GlobalData) getApplication()).getPat()));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -266,9 +294,9 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
                 break;
             case R.id.edit:
-                String loantype=((GlobalData) getApplication()).getLoanType();
+                String loantype=gloan_type;
                 if(loantype.equals("Car Loan")) {
-                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(this, 8);
                     }
@@ -280,7 +308,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
                 else
                 {
                     if (loantype.equalsIgnoreCase("Loan Against Property")) {
-                        if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                        if (Baltrans.equalsIgnoreCase("Yes"))
                         {
 
                             RegisterPageActivity.showAlertreview(this, 6);
@@ -340,9 +368,9 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
 
             Double cpat1,cpat2,cdep1,cdep2,resultsal;
-            cpat1= ((GlobalData) getApplication()).getPat();
+            cpat1= patv;
 
-            cdep1= ((GlobalData) getApplication()).getdepreciation();
+            cdep1= depv;
 
 
             Log.d("cpat1 ", String.valueOf(cpat1));

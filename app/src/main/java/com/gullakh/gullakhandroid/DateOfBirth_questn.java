@@ -42,14 +42,19 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     EditText Dob;
     ImageView review;
     ImageView done;
-    int day, month, yearv,empflag;
+    int day;
+    int month;
+    int yearv;
+    int empflag;
+    int ageg;
     String data;
     Button next;
     ImageView gen1,gen2;
     AutoCompleteTextView Emp;
-    String dataGender=null,sessionid;
+    String dataGender=null,sessionid,dobg,genderg;
     JSONServerGet requestgetserver;
     private ContentValues contentValues;
+    String gloan_type,carloantp,Baltrans,emptypg;
     int age=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +106,44 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         Dob = (EditText) findViewById(R.id.birthdate);
         Dob.setOnClickListener(this);
 
-        if(((GlobalData) getApplication()).getDob()!=null)
-            Dob.setText(((GlobalData) getApplication()).getDob().toString());
 
 
-        if(((GlobalData) getApplication()).getgender()!=null)
+
+        if (savedInstanceState != null) {
+            dobg = savedInstanceState.getString("dob");
+            genderg = savedInstanceState.getString("gender");
+            ageg = Integer.parseInt(savedInstanceState.getString("age"));
+            emptypg = savedInstanceState.getString("emptyp");
+
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+
+
+        }
+        else {
+
+            dobg =((GlobalData) getApplication()).getDob();
+            genderg =((GlobalData) getApplication()).getgender();
+            ageg = ((GlobalData) getApplication()).getage();
+            emptypg =((GlobalData) getApplication()).getemptype();
+
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+
+        }
+
+
+
+
+
+
+        if(dobg!=null)
+            Dob.setText(dobg);
+
+
+        if(genderg!=null)
         {
-            String gender=((GlobalData) getApplication()).getgender();
+            String gender=genderg;
             if(gender.equals("male"))
             {
                 gen1.setImageResource(R.drawable.buttonselecteffect);
@@ -176,9 +212,21 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         //employer question
 
 
+    }//end of oncreate
 
 
 
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("dob", String.valueOf(((GlobalData) getApplication()).getDob()));
+        icicle.putString("gender",((GlobalData) getApplication()).getgender());
+        icicle.putString("age", String.valueOf(((GlobalData) getApplication()).getage()));
+        icicle.putString("emptyp",((GlobalData) getApplication()).getemptype());
+
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
 
     }
 
@@ -324,11 +372,11 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             case R.id.edit:
 
 
-                String loanty=((GlobalData) getApplication()).getLoanType();
+                String loanty=gloan_type;
                 if(loanty.equals("Car Loan")) {
                     if (empflag == 1) {
-                        String emptyp = ((GlobalData) getApplication()).getemptype();
-                        String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                        String emptyp = emptypg;
+
                         if (carloantp.equals("Used Car Loan")) {
                             if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                                 RegisterPageActivity.showAlertreview(this, 11);
@@ -342,7 +390,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                                 RegisterPageActivity.showAlertreview(DateOfBirth_questn.this, 9);
                         }
                     } else {
-                        String emptyp = ((GlobalData) getApplication()).getemptype();
+                        String emptyp = emptypg;
                         if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                             RegisterPageActivity.showAlertreview(this, 9);
                         else
@@ -353,7 +401,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 {
                     if (empflag == 1) {
                         Log.d("employee typ questn", String.valueOf(empflag));
-                        String emptyp = ((GlobalData) getApplication()).getemptype();
+                        String emptyp = emptypg;
                         if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                             RegisterPageActivity.showAlertreview(this, 9);
                         else {
@@ -362,7 +410,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                         }
                     } else {
                         Log.d("dob q", String.valueOf(empflag));
-                        String emptyp = ((GlobalData) getApplication()).getemptype();
+                        String emptyp = emptypg;
                         if (loanty.equalsIgnoreCase("Loan Against Property")) {
                             if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
                                 RegisterPageActivity.showAlertreview(this, 7);
@@ -458,29 +506,29 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 ((GlobalData) getApplication()).setgender(dataGender);
 
                 ((GlobalData) getApplication()).setDob(Dob.getText().toString());
-
+                Log.d("Dob is kk",Dob.getText().toString());
                 int age = 0;
-                if(((GlobalData) getApplication()).getage()==0) {
+                //first time
+                if(ageg==0) {
+                    Log.d("age is k", String.valueOf(ageg));
                     if (((GlobalData) getApplication()).getDob() != null) {
-
+                        Log.d("dobg is k", String.valueOf(dobg));
                         age = getAge(yearv, month, day);//returns proper value only when edited
                         Log.d("your age is", String.valueOf(age));
                     }
                }
                else
                 {
-                    //otherwise take the previously set value
-
-
-                    age =  ((GlobalData) getApplication()).getage();
-                    Log.d("dob age is", String.valueOf(age));
+                    //otherwise take the previously set val
+                    age =  ageg;
+                    Log.d("dob age is else", String.valueOf(age));
                 }
 
 
                 if (age > 18) {
 
 
-                    String loantype=  ((GlobalData) getApplication()).getLoanType();
+                    String loantype=  gloan_type;
 
                     ((GlobalData) getApplication()).setage(age);
 
@@ -512,7 +560,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                         }
                         else if(loantype.equalsIgnoreCase("Personal Loan")){
-                            String empt = ((GlobalData) getApplication()).getemptype();
+                            String empt =emptypg;
                             Log.d("emptyp is", empt + " its personal loan");
                             if (empt.equals("Salaried")) {
 

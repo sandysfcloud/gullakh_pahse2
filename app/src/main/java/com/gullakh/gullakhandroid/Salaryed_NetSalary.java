@@ -31,7 +31,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     MaterialTextField mbonus;
-    String data;
+    String data,gloan_type,carloantp,Baltrans;
+    Double netsal,avg_incen;
     int fbonus=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +81,32 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
 
 
-        String loantype =((GlobalData) getApplication()).getLoanType();
 
-        if(loantype.equalsIgnoreCase("Home Loan")||loantype.equalsIgnoreCase("Loan Against Property")) {
+
+
+
+
+        if (savedInstanceState != null) {
+            netsal = Double.valueOf(savedInstanceState.getString("net_sal"));
+            avg_incen = Double.valueOf(savedInstanceState.getString("avg_incen"));
+
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+            Baltrans = savedInstanceState.getString("Baltrans");
+
+        }
+        else {
+            if(((GlobalData) getApplication()).getnetsalary()!=null)
+            netsal = Double.valueOf(String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+            avg_incen =((GlobalData) getApplication()).getavgince();
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+            Baltrans =((GlobalData) getApplication()).getBaltrans();
+        }
+
+
+
+        if(gloan_type.equalsIgnoreCase("Home Loan")||gloan_type.equalsIgnoreCase("Loan Against Property")) {
             fbonus=1;
             mbonus = (MaterialTextField) findViewById(R.id.mbonus);
             mbonus.setVisibility(View.VISIBLE);
@@ -92,16 +116,12 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         }
 
 
+        if(netsal!=null) {
 
+            String netsalary=String.valueOf(netsal.intValue());
 
-
-
-        if(((GlobalData) getApplication()).getnetsalary()!=null) {
-
-            String netsalary=String.valueOf(((GlobalData) getApplication()).getnetsalary().intValue());
-
-            if(((GlobalData) getApplication()).getavgince()!=null) {
-                String incen = String.valueOf(((GlobalData) getApplication()).getavgince().intValue());
+            if(avg_incen!=null) {
+                String incen = String.valueOf(avg_incen.intValue());
                 incent.setText(incen);
             }
 
@@ -202,6 +222,24 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             }
         }
     }
+
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("net_sal", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
+        icicle.putString("avg_incen", String.valueOf(((GlobalData) getApplication()).getavgince()));
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
+        icicle.putString("Baltrans",  ((GlobalData) getApplication()).getBaltrans());
+    }
+
+
+
+
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -229,9 +267,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.edit:
 
-                String loantyp=((GlobalData) getApplication()).getLoanType();
+                String loantyp=gloan_type;
                 if(loantyp.equals("Car Loan")) {
-                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(this, 7);
                     }
@@ -239,7 +277,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                     RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
                 }
                 else  if (loantyp.equalsIgnoreCase("Loan Against Property")) {
-                    if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                    if (Baltrans.equalsIgnoreCase("Yes"))
                         RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 5);
                     else
                     RegisterPageActivity.showAlertreview(Salaryed_NetSalary.this, 6);
@@ -273,6 +311,11 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         }
 
     }
+
+
+
+
+
 
     public void save(String flag)
     {

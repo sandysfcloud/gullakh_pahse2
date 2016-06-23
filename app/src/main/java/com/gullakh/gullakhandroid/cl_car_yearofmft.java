@@ -33,7 +33,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
     private Button back,next;
     private EditText yom;
     int day,month,yearv;
-    private String date="";
+    private String date="",year;
     private TextView heading;
     private ContentValues contentValues;
 
@@ -67,7 +67,21 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         next.setOnClickListener(this);
         yom= (EditText) findViewById(R.id.yom);
         yom.setOnClickListener(this);
-        getDataFromHashMap();
+
+        if (savedInstanceState != null) {
+            year = savedInstanceState.getString("year");
+            Log.d("savedInstanceState year", year);
+        }
+        else
+            year=cl_car_global_data.dataWithAns.get("yom");
+
+        if(year!=null) {
+            yom.setText(year);
+            yearv= Integer.parseInt(String.valueOf(year.subSequence(yom.getText().toString().length()-4,yom.getText().toString().length())));
+        }
+
+
+
         if(MainActivity.MyRecentSearchClicked)
         {
             getCarYear();
@@ -92,11 +106,17 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         }
 
 
+    }
 
 
 
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+
+        icicle.putString("year",cl_car_global_data.dataWithAns.get("yom"));
 
     }
+
     public void getCarYear()
     {
         DataHandler dbobject = new DataHandler(this);
@@ -111,13 +131,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
             e.printStackTrace();
         }
     }
-    private void getDataFromHashMap()
-    {
-        if(cl_car_global_data.dataWithAns.get("yom")!=null) {
-            yom.setText(cl_car_global_data.dataWithAns.get("yom"));
-            yearv= Integer.parseInt(String.valueOf(cl_car_global_data.dataWithAns.get("yom").subSequence(yom.getText().toString().length()-4,yom.getText().toString().length())));
-        }
-    }
+
 
     @Override
     public void onClick(View v) {

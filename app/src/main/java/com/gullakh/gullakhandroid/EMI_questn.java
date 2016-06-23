@@ -34,6 +34,8 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     String data;
+    String gloan_type,carloantp,Baltrans,emptypg;
+    Double emig;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +85,34 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
 
 
-        if(((GlobalData) getApplication()).getEmi()!=null)
+
+
+        if (savedInstanceState != null) {
+            emig = Double.valueOf(savedInstanceState.getString("emi"));
+            emptypg = savedInstanceState.getString("emptyp");
+
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+
+
+        }
+        else {
+
+            emig =((GlobalData) getApplication()).getEmi();
+            emptypg =((GlobalData) getApplication()).getemptype();
+
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+
+        }
+
+
+
+
+
+        if(emig!=null)
         {
-            String emi=String.valueOf(((GlobalData) getApplication()).getEmi().intValue());
+            String emi=String.valueOf(emig.intValue());
             //String emi=String.valueOf(Integer.parseInt((cl_car_global_data.dataWithAns.get("total_emi"))));
             Log.d("emi already set", emi);
             emipaying.setText(emi);
@@ -197,6 +224,22 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
     }
 
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("emi", String.valueOf(((GlobalData) getApplication()).getEmi()));
+        icicle.putString("emptyp",((GlobalData) getApplication()).getemptype());
+
+
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
+
+    }
+
+
+
+
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
@@ -229,10 +272,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 
                 break;
             case R.id.edit:
-                String emptyp= ((GlobalData) getApplication()).getemptype();
-                String loanty=((GlobalData) getApplication()).getLoanType();
-                if(loanty.equals("Car Loan")) {
-                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+                String emptyp= emptypg;
+
+                if(gloan_type.equals("Car Loan")) {
+
                     if (carloantp.equals("Used Car Loan")) {
                         if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                             RegisterPageActivity.showAlertreview(EMI_questn.this, 9);
@@ -248,7 +291,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
                 }
                 else
                 {
-                    if (loanty.equalsIgnoreCase("Loan Against Property")) {
+                    if (gloan_type.equalsIgnoreCase("Loan Against Property")) {
                         if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                             if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional"))
                                 RegisterPageActivity.showAlertreview(this,7);

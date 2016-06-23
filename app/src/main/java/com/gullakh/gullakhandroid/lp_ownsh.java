@@ -32,8 +32,8 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
     EditText Text1;
     public static int numOfAppl;
     private CheckBox c1,c2,c3,c4,c5;
-    String jointMembers="";
-    int flag=0;
+    String jointMembers="",allotg;
+    int flag=0,cat1,cat2;
     private View yn;
     List<String> allot,categ,categ2,comcateg,morgaged;
     @Override
@@ -82,6 +82,13 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
 
 
         TextView ttitle = (TextView) findViewById(R.id.textView1);
+
+
+
+
+
+
+
         if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
             ttitle.setText("Type of property proposed for mortgaged");
 
@@ -275,12 +282,37 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
         spinner.setAdapter(dataAdapter2);
 
 
+
+
+        /*if (savedInstanceState != null) {
+
+            allotg = savedInstanceState.getString("allot");
+            cat1 = Integer.parseInt(savedInstanceState.getString("cat1"));
+            cat2 = Integer.parseInt(savedInstanceState.getString("cat2"));
+
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+            Baltrans = savedInstanceState.getString("Baltrans");
+
+        }
+        else {
+
+            allotg =((GlobalData) getApplication()).getprop_allotmentby();
+            cat1 =((GlobalData) getApplication()).getlpposprot();
+            cat2 =((GlobalData) getApplication()).getlpposcatg();
+
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+            Baltrans =((GlobalData) getApplication()).getBaltrans();
+        }*/
+
+
+
         if (((GlobalData) getApplication()).getprop_allotmentby() != null) {
 
 
             allotment.setSelection(((GlobalData) getApplication()).getlpposalot());
             spinner.setSelection(((GlobalData) getApplication()).getlpposprot());
-
 
 
             prop_categ2.setVisibility(View.VISIBLE);  //(General)
@@ -318,6 +350,21 @@ public class lp_ownsh extends AppCompatActivity implements View.OnClickListener 
 
 
     }
+
+
+    /*protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("allot", ((GlobalData) getApplication()).getprop_allotmentby());
+        icicle.putString("cat1", String.valueOf(((GlobalData) getApplication()).getlpposprot()));
+        icicle.putString("cat2", String.valueOf(((GlobalData) getApplication()).getlpposcatg()));
+
+        icicle.putString("carloantyp", String.valueOf(((GlobalData) getApplication()).getlpposprot()));
+        icicle.putString("Baltrans",  ((GlobalData) getApplication()).getBaltrans());
+        icicle.putString("emptype",  ((GlobalData) getApplication()).getemptype());
+
+
+
+    }*/
 
     @Override
     public void onClick(View v) {

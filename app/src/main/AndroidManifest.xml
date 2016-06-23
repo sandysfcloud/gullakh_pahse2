@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gullakh.gullakhandroid">
+    package="com.gullakh.gullakhandroid" >
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,16 +23,17 @@
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/fb_login_protocol_scheme"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/fb_login_protocol_scheme" />
 
         <receiver
             android:name=".GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -46,18 +47,18 @@
             android:name=".SplashScreensActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".MainActivity"
             android:label=" Home"
@@ -114,15 +115,16 @@
             android:label="@string/title_activity_filter" />
         <activity
             android:name=".signin"
-            android:label="@string/title_activity_signin"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="@string/fb_login_protocol_scheme" />
-        </intent-filter>
+            android:exported="true"
+            android:label="@string/title_activity_signin" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".cl_car_gender"
@@ -142,7 +144,7 @@
         <activity
             android:name=".cl_car_residence_type"
             android:label="Select Residence"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".cl_car_salaried"
             android:label="Salaried" />
@@ -214,11 +216,15 @@
         <activity android:name=".hl_coappl_EMI" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".Tenure" />
-        <activity android:name=".hl_prop_owns"></activity>
+        <activity android:name=".hl_prop_owns" />
         <activity
             android:name=".TenureNew"
-            android:label="@string/title_activity_tenure_new"></activity>
-        <activity android:name=".GooglePlusLogin"></activity>
+            android:label="@string/title_activity_tenure_new" />
+        <activity android:name=".GooglePlusLogin" />
+        <activity
+            android:name=".CibilScore"
+            android:label="@string/title_activity_cibil_score" >
+        </activity>
     </application>
 
 </manifest>

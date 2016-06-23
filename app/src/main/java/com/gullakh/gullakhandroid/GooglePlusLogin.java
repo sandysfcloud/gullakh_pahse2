@@ -227,6 +227,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     }
 
     public void saveDataToDatabase() {
+        Log.d("data is saved in db","");
         DataHandler dbobject = new DataHandler(currentact);
         dbobject.addTable();
         Cursor cr = dbobject.displayData("select * from userlogin");
@@ -236,6 +237,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
             }
         }
+        Log.d("email",email);
+        Log.d("usermobno",usermobno);
+        Log.d("user_id",user_id);
+        Log.d("contact_id",contact_id);
+
         ContentValues values = new ContentValues();
         values.put("usersession","");
         values.put("useremail", email.replaceAll("\"",""));
@@ -460,40 +466,40 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     Log.d("inside carloan", emtyp);
                     intent = new Intent(currentact, cl_car_make.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    currentact.startActivity(intent);
 
                 } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
                     intent = new Intent(currentact, hl_prop_owns.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    currentact.startActivity(intent);
 
                 } else if (((GlobalData) currentact.getApplicationContext()).getLoanType().equalsIgnoreCase("Personal Loan")) {
 
                     intent = new Intent(currentact, cl_car_residence_type.class);
                     intent.putExtra("personal", "personal");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    currentact.startActivity(intent);
 
                 } else {
                     intent = new Intent(currentact, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    currentact.startActivity(intent);
                 }
             } else {
                 intent = new Intent(currentact, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                currentact.startActivity(intent);
             }
         }else if (MyProfileActivity.myprofileFlag) {
             MyProfileActivity.myprofileFlag=false;
             intent = new Intent(currentact, MyProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            currentact.startActivity(intent);
         }
         else {
             intent = new Intent(currentact, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            currentact.startActivity(intent);
         }
     }
 

@@ -820,9 +820,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     Log.d("Max_tenure", String.valueOf(Max_tenure));
                     Log.d("loan_amt", String.valueOf(-loan_amt));
 
-                    emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -loan_amt, 0, false);
+                    emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure*12, -loan_amt, 0, false);
 
-                    Log.d("checking emisandeep", String.valueOf(emi_valu) + " " + Max_tenure);
+                    Log.d("checking emisandeep", String.valueOf(emi_valu) + " " + Max_tenure*12);
 
 
                 }
@@ -833,7 +833,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     int seekmonth = seektenure * 12;
                     bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
                 } else {
-                    bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure, -100000, 0, false);
+                    bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure*12, -100000, 0, false);
                 }
                 bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
                 final_bp = Math.ceil(bp);

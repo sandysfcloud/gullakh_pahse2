@@ -35,6 +35,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
     TextView mSeekArcProgress, onetext;
     String data,loan_type;
     Dialog dg;
+    String gloan_type,gtenure,loantyp,carloantp,Baltrans,emptype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,8 +82,28 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
 
 
-        if (((GlobalData) getApplication()).getTenure() != null) {
-            String emi = String.valueOf(((GlobalData) getApplication()).getTenure());
+
+        if (savedInstanceState != null) {
+            gtenure = savedInstanceState.getString("tenure");
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+            Baltrans = savedInstanceState.getString("Baltrans");
+            emptype = savedInstanceState.getString("emptype");
+
+
+        }
+        else {
+            gtenure = ((GlobalData) getApplication()).getTenure();
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+            Baltrans =((GlobalData) getApplication()).getBaltrans();
+            emptype = ((GlobalData) getApplication()).getemptype();
+        }
+
+
+
+        if (gtenure != null) {
+            String emi = String.valueOf(gtenure);
             tenure.setText(emi);
             tenure.setSelection(tenure.getText().length());
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getTenure()))));
@@ -90,7 +111,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
             String strtemp = String.valueOf(format.format(new BigDecimal(emi.toString())));
             strtemp = strtemp.substring(0, strtemp.length() - 3);
             //  mSeekArcProgress.setText(strtemp+"");
-            mSeekArcProgress.setText(((GlobalData) getApplication()).getTenure() + " Year");
+            mSeekArcProgress.setText(gtenure + " Year");
         }
 
         tenure.addTextChangedListener(new TextWatcher() {
@@ -191,7 +212,17 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
 
     }
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("tenure", ((GlobalData) getApplication()).getTenure());
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
+        icicle.putString("Baltrans",  ((GlobalData) getApplication()).getBaltrans());
+        icicle.putString("emptype",  ((GlobalData) getApplication()).getemptype());
 
+
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -219,9 +250,9 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
             case R.id.edit:
 
 
-                String loantyp=((GlobalData) getApplication()).getLoanType();
+                String loantyp=gloan_type;
                 if(loantyp.equals("Car Loan")) {
-                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(this, 6);
                     }
@@ -232,7 +263,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
                 if(loantyp!=null&& loantyp.equals("Loan Against Property")) {
                     //skip loan amt is yes
-                    if (((GlobalData)getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                    if (Baltrans.equalsIgnoreCase("Yes"))
                         dg=RegisterPageActivity.showAlertreview(Tenure.this, 3);
                     else
                         dg=RegisterPageActivity.showAlertreview(Tenure.this, 4);
@@ -250,13 +281,13 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.next:
                 ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
-                Log.d("tenure is in Tenure", tenure.getText().toString());
-                Log.d("tenure global",((GlobalData) getApplication()).getTenure());
+               // Log.d("tenure is in Tenure", tenure.getText().toString());
+               // Log.d("tenure global",((GlobalData) getApplication()).getTenure());
 
-                String emptype = ((GlobalData) getApplication()).getemptype();
-                String loantype =((GlobalData) getApplication()).getLoanType();
+
+
                 Intent intent = null;
-                if (loantype.equalsIgnoreCase("Car Loan")||loantype.equalsIgnoreCase("Personal Loan")||loantype.equalsIgnoreCase("Home Loan")) {
+                if (gloan_type.equalsIgnoreCase("Car Loan")||gloan_type.equalsIgnoreCase("Personal Loan")||gloan_type.equalsIgnoreCase("Home Loan")) {
                     if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
                         intent = new Intent(Tenure.this, Car_Loan_PAT.class);
 
@@ -265,7 +296,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
                     }
 
-                } else if (loantype.equalsIgnoreCase("Loan Against Property")) {
+                } else if (gloan_type.equalsIgnoreCase("Loan Against Property")) {
                     Log.d("its loan againt prop","1");
                    /* if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                         intent = new Intent(Tenure.this, lp_ownsh.class);

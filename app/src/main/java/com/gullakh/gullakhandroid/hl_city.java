@@ -36,8 +36,9 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
     private String city="";
     AutoCompleteTextView citynam;
     JSONServerGet requestgetserver;
-    String sessionid,data;
+    String sessionid,data,cityg,emptypg;
     private String propertyLocated="";
+    String gloan_type,carloantp,Baltrans;
     int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,10 +107,27 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         }
 
 
+        if (savedInstanceState != null) {
+            cityg = savedInstanceState.getString("city");
+            emptypg = savedInstanceState.getString("emptyp");
 
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+            Baltrans = savedInstanceState.getString("Baltrans");
 
-       if(((GlobalData) getApplication()).getCity()!=null){
-            String city=((GlobalData) getApplication()).getCity();
+        }
+        else {
+
+            cityg =((GlobalData) getApplication()).getCity();
+            emptypg =((GlobalData) getApplication()).getemptype();
+
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+            Baltrans =((GlobalData) getApplication()).getBaltrans();
+        }
+
+       if(cityg!=null){
+            String city=cityg;
             Log.d("residence review ", city);
            propertyLocated=city;
             if (city.equals("Bengaluru"))
@@ -127,7 +145,23 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
 
         }
 
+    }//end of oncreate
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("city", ((GlobalData) getApplication()).getCity());
+
+
+        icicle.putString("emptyp",((GlobalData) getApplication()).getemptype());
+
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
+        icicle.putString("Baltrans",  ((GlobalData) getApplication()).getBaltrans());
     }
+
+
+
     public void getcitynam()
     {
         requestgetserver = new JSONServerGet(new AsyncResponse() {
@@ -166,11 +200,11 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()) {
 
             case R.id.edit:
-                String loantype =((GlobalData) getApplication()).getLoanType();
-                String emptyp = ((GlobalData) getApplication()).getemptype();
+                String loantype =gloan_type;
+                String emptyp = emptypg;
 
                 if (loantype.equalsIgnoreCase("Loan Against Property")) {
-                   if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                   if (Baltrans.equalsIgnoreCase("Yes"))
                     {
 
                             RegisterPageActivity.showAlertreview(this, 4);
@@ -285,17 +319,17 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
             Log.d("property city is", propertyLocated);
             Intent intent = null;
 
-            if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
+            if (gloan_type.equalsIgnoreCase("Loan against Property")) {
                 //goToDatabase("Loan against Property");
 
-                if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("salaried")) {
+                if (emptypg.equalsIgnoreCase("salaried")) {
                     intent = new Intent(this, Salaryed_NetSalary.class);
-                } else if (((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Business") || ((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Professional")) {
+                } else if (emptypg.equalsIgnoreCase("Self Employed Business") || (emptypg.equalsIgnoreCase("Self Employed Professional"))) {
                     intent = new Intent(hl_city.this, Car_Loan_PAT.class);
                 }
             } else {
                 //goToDatabase("Home Loan");
-                if (((GlobalData) getApplication()).getBaltrans().equals("No"))
+                if (Baltrans.equals("No"))
                 intent = new Intent(this, hl_need.class);
                 else {
                     intent = new Intent(this, GoogleCardsMediaActivity.class);

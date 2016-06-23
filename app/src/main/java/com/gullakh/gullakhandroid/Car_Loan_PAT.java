@@ -33,6 +33,8 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
     private SeekArc mSeekArc;
     TextView mSeekArcProgress,onetext;
     Button next;
+    Double patv;
+    String gloan_type,carloantp,Baltrans;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,10 +88,28 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
 
-            Double patv  =((GlobalData) getApplication()).getPat();
+
+
+
+        if (savedInstanceState != null) {
+            patv = Double.valueOf(savedInstanceState.getString("pat"));
+
+            gloan_type = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
+            Baltrans = savedInstanceState.getString("Baltrans");
+        }
+        else {
+            patv = ((GlobalData) getApplication()).getPat();
+
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+            Baltrans =((GlobalData) getApplication()).getBaltrans();
+        }
+
+
             if(patv!=null) {
 
-                String spatv=String.valueOf(((GlobalData) getApplication()).getPat().intValue());
+                String spatv=String.valueOf(patv.intValue());
                 Log.d("sdepv already set", spatv);
                 amt.setText(spatv);
                 amt.setSelection(amt.getText().length());
@@ -206,6 +226,14 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
 
 
     }
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("pat", String.valueOf(((GlobalData) getApplication()).getPat()));
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
+        icicle.putString("Baltrans",  ((GlobalData) getApplication()).getBaltrans());
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -245,9 +273,9 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 }
                 break;
             case R.id.edit:
-                String loantype=((GlobalData) getApplication()).getLoanType();
+                String loantype=gloan_type;
                 if(loantype.equals("Car Loan")) {
-                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(this, 7);
                     }
@@ -259,7 +287,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
                 else
                 {
                     if (loantype.equalsIgnoreCase("Loan Against Property")) {
-                        if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes"))
+                        if (Baltrans.equalsIgnoreCase("Yes"))
                         {
 
                             RegisterPageActivity.showAlertreview(this, 5);

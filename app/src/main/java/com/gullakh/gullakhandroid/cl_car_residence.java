@@ -26,6 +26,7 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class cl_car_residence extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener{
@@ -37,7 +38,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
     private String city="";
     AutoCompleteTextView citynam;
     JSONServerGet requestgetserver,requestgetserver1;
-    String sessionid,data;
+    String sessionid,data,resval;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +91,16 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
-        if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null) {
-            String resval=cl_car_global_data.dataWithAns.get("currently_living_in");
+
+        if (savedInstanceState != null) {
+            resval = savedInstanceState.getString("resid");
+            Log.d("savedInstanceState resi", resval);
+        }
+        else
+            resval=((GlobalData) getApplication()).getcarres();
+
+        if(resval!=null) {
+
             Log.d("residence review ", resval);
             if (resval.equals("Bengaluru"))
                 place1.setImageResource(R.drawable.buttonselecteffect);
@@ -101,7 +110,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place3.setImageResource(R.drawable.buttonselecteffect);
             else if(resval.equals("Mumbai"))
                 place4.setImageResource(R.drawable.buttonselecteffect);
-            if(!(resval.equals("Bengaluru")||resval.equals("Chennai")||resval.equals("Kolkata")||resval.equals("Mumbai"))) {
+            if(!(resval.equals("Bengaluru")||resval.equals("Chennai")||resval.equals("Delhi")||resval.equals("Mumbai"))) {
                 Log.d("residence review other", resval);
                 citynam.setText(resval);
             }
@@ -147,6 +156,17 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+
+        icicle.putString("resid", ((GlobalData) getApplication()).getcarres());
+
+    }
+
+
     public void getcitynam()
     {
 

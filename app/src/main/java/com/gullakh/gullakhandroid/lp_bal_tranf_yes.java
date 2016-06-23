@@ -35,7 +35,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
     EditText Text2,Text3,Text4;
     AutoCompleteTextView Text1;
     private JSONServerGet requestgetserver;
-    String sessionid;
+    String sessionid,existloan,existbeg,outbal,topup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +70,36 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         Text2.setOnClickListener(this);
         getbanknam();
 
-        if (cl_car_global_data.dataWithAns.get("existing_home_loan_bank") != null) {
+
+
+
+        if (savedInstanceState != null) {
+
+            existloan = savedInstanceState.getString("existing_home_loan_bank");
+            existbeg = savedInstanceState.getString("begin_of_existing_home_loan");
+            outbal = savedInstanceState.getString("present_outstanding_bal_of_homeloan_you_wish_to_transfer");
+            topup = savedInstanceState.getString("top_up_amount");
+
+            Log.d("savedInstanceState lp_bal_tranf_yes", topup);
+
+        }
+        else
+        {
+            existloan = cl_car_global_data.dataWithAns.get("existing_home_loan_bank");
+            existbeg =cl_car_global_data.dataWithAns.get("begin_of_existing_home_loan");
+            outbal = cl_car_global_data.dataWithAns.get("present_outstanding_bal_of_homeloan_you_wish_to_transfer");
+            topup = cl_car_global_data.dataWithAns.get("top_up_amount");
+        }
+
+        if (existloan!= null) {
             Log.d("yes is clckd data not null","");
 
 
 
-            Text1.setText(cl_car_global_data.dataWithAns.get("existing_home_loan_bank"));
-            Text2.setText(cl_car_global_data.dataWithAns.get("begin_of_existing_home_loan"));
-            Text3.setText(cl_car_global_data.dataWithAns.get("present_outstanding_bal_of_homeloan_you_wish_to_transfer"));
-            Text4.setText(cl_car_global_data.dataWithAns.get("top_up_amount"));
+            Text1.setText(existloan);
+            Text2.setText(existbeg);
+            Text3.setText(outbal);
+            Text4.setText(topup);
         }
 
 
@@ -89,6 +110,13 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
 
 
 
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("existing_home_loan_bank", cl_car_global_data.dataWithAns.get("existing_home_loan_bank"));
+        icicle.putString("begin_of_existing_home_loan", cl_car_global_data.dataWithAns.get("begin_of_existing_home_loan"));
+        icicle.putString("present_outstanding_bal_of_homeloan_you_wish_to_transfer", cl_car_global_data.dataWithAns.get("present_outstanding_bal_of_homeloan_you_wish_to_transfer"));
+        icicle.putString("top_up_amount",cl_car_global_data.dataWithAns.get("top_up_amount"));
+    }
 
 
     public void getbanknam()

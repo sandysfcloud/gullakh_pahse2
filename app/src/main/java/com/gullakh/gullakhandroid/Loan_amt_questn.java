@@ -36,7 +36,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     TextView mSeekArcProgress,onetext;
     String data;
     String valuewithcomma;
-    String loan_type;
+    String loan_type,loan_amt,loantyp,carloantp;
     private ContentValues contentValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +95,22 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
         //  done = (ImageView) findViewById(R.id.done);
         // done.setOnClickListener(this);
+        if (savedInstanceState != null) {
+            loan_amt = savedInstanceState.getString("loan_amt");
+            loantyp = savedInstanceState.getString("loantyp");
+            carloantp = savedInstanceState.getString("carloantyp");
 
-        if (((GlobalData) getApplication()).getloanamt() != null) {
 
-            String loanamt = ((GlobalData) getApplication()).getloanamt();
+        }
+        else {
+            loan_amt = ((GlobalData) getApplication()).getloanamt();
+            loantyp=((GlobalData) getApplication()).getLoanType();
+            carloantp=((GlobalData) getApplication()).getCartypeloan();
+        }
+
+        if (loan_amt != null) {
+
+            String loanamt = loan_amt;
             int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
           //  mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 10000)));
@@ -216,6 +228,13 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     }
 
 
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+        icicle.putString("loan_amt", ((GlobalData) getApplication()).getloanamt());
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+        icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
+
+    }
 
 
 
@@ -272,10 +291,10 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.edit:
-                String emptyp=((GlobalData) getApplication()).getLoanType();
+                String emptyp=loantyp;
 
                 if(emptyp.equals("Car Loan")) {
-                    String carloantp=((GlobalData) getApplication()).getCartypeloan();
+
                     if (carloantp.equals("Used Car Loan")) {
                         RegisterPageActivity.showAlertreview(Loan_amt_questn.this, 5);
                     }
@@ -310,8 +329,8 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                     Log.d("loan amount in la questn",((GlobalData) getApplication()).getloanamt());
 
                     Intent intent;
-                    String loantyp2=((GlobalData) getApplication()).getLoanType();
-                    if(loantyp2.equals("Home Loan")||loantyp2.equals("Loan Against Property"))
+
+                    if(loantyp.equals("Home Loan")||loantyp.equals("Loan Against Property"))
                         intent = new Intent(this, TenureNew.class);
                     else
                     intent = new Intent(Loan_amt_questn.this, Tenure.class);

@@ -109,7 +109,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
 
                 progressDialog = new ProgressDialog(signinPrepage.this);
-                progressDialog.setMessage("Procesando datos...");
+                progressDialog.setMessage("Processing ...");
                 progressDialog.show();
                 String accessToken = loginResult.getAccessToken().getToken();
                 Log.i("accessToken", accessToken);
