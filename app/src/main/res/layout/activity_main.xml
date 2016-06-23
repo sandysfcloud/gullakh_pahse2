@@ -102,6 +102,25 @@
                         android:src="@drawable/carloan"
                         />
                 </LinearLayout>
+
+
+                <com.gullakh.gullakhandroid.font.RobotoButton
+                    android:id="@+id/credit"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/rectbutton_red"
+                    android:text="Credit Report"
+                    app:typeface="robotoLight"/>
             </LinearLayout>
 
             <!--<TextView
@@ -164,23 +183,7 @@
             android:singleLine="false"
             android:onClick="onClick" />
     </LinearLayout>
-    <com.gullakh.gullakhandroid.font.RobotoButton
-        android:id="@+id/credit"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_margin="5dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/rectbutton_red"
-        android:text="Credit Report"
-        app:typeface="robotoLight"/>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

@@ -18,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -36,13 +37,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class CibilScore extends AppCompatActivity implements  View.OnClickListener,DatePickerDialog.OnDateSetListener,AdapterView.OnItemSelectedListener {
+public class CibilScore extends AppCompatActivity implements  View.OnClickListener,DatePickerDialog.OnDateSetListener{
     private static final String[] COUNTRIES = new String[]{"New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
     int day, month, yearv;
-    EditText Dob, e_state, panid, addr;
+    EditText Dob, e_state, panid, addr,name;
     JSONServerGet requestgetserver,requestgetserver1;
     String sessionid, data;
-    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph;
+    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp,nam;
     AutoCompleteTextView city;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +77,25 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
         Dob = (EditText) findViewById(R.id.dob);
         Dob.setOnClickListener(this);
 
+        Button done = (Button) findViewById(R.id.done);
+        done.setOnClickListener(this);
+
         addr = (EditText) findViewById(R.id.addr);
+        name = (EditText) findViewById(R.id.nam);
         panid = (EditText) findViewById(R.id.panid);
         city = (AutoCompleteTextView) findViewById(R.id.city);
-        city.setOnClickListener(this);
+        city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                String item =   parent.getItemAtPosition(position).toString();
+                getStateName(item);
+                Log.d("onItemSelected is called", item);
+
+            }
+        });
         e_state = (EditText) findViewById(R.id.state);
 
 
@@ -90,7 +106,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
         s1.setAdapter(ma);
 
 
-        s1.setPrompt("Loan Type");
+        s1.setPrompt("Select Loan Type");
 
 
         //******get data from search
@@ -102,7 +118,8 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                     public void onItemSelected(
                             AdapterView<?> parent, View view, int position, long id) {
                         Log.d("test position", String.valueOf(position));
-
+                        loantyp =   parent.getItemAtPosition(position).toString();
+                        Log.d("onItemSelected is called", loantyp);
 
                     }
 
@@ -219,7 +236,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("sessn", "cibil", sessionid);
+        requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
     }
 
     @Override
@@ -240,18 +257,6 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
         ((GlobalData) getApplication()).setage(0);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        String item =   parent.getItemAtPosition(position).toString();
-        getStateName(item);
-        Log.d("onItemSelected is called", item);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
 
     private class MyArrayAdapter extends BaseAdapter {
@@ -397,6 +402,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                                         s_panid = panid.getText().toString();
                                         s_city = city.getText().toString();
                                         s_state = e_state.getText().toString();
+                                        nam = name.getText().toString();
 
 
                                         Log.d("s_Dob",s_Dob);
@@ -406,7 +412,8 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                                         Log.d("s_city", s_city);
 
                                         Log.d("s_state", s_state);
-
+                                        Log.d("loan type", loantyp);
+                                        Log.d("nam", nam);
 
 
                                     }

@@ -358,7 +358,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+//doesnt work
 
         Log.d("item selected ", String.valueOf(  parent.getItemAtPosition(position)));
         ((GlobalData) getApplication()).setcarres(String.valueOf(parent.getItemAtPosition(position)));
