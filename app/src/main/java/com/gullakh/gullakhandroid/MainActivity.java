@@ -203,8 +203,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         myapplbutton.setOnClickListener(this);
         mysearchbutton = (Button) findViewById(R.id.buttonMysearch);
-
         mysearchbutton.setOnClickListener(this);
+
+
+        Button credit = (Button) findViewById(R.id.credit);
+        credit.setOnClickListener(this);
 
         DataHandler dbobject = new DataHandler(this);
         dbobject.addTable();
@@ -659,20 +662,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.credit:
-
+                Log.d("get cibil button in page", "1");
+                Intent intent2;
                 DataHandler dbobject = new DataHandler(this);
                 Cursor cr = dbobject.displayData("select * from userlogin");
                 if (cr != null) {
                     if (cr.moveToFirst()) {
 
                         Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5) + " " + cr.getString(6));
-
+                        intent2 = new Intent(this, CibilScore.class);
+                        startActivity(intent2);
 
                     } else {
-                        Intent intentsignin = new Intent(this, signinPrepage.class);
-                        startActivity(intentsignin);
+                        Log.d("sign in page", "1");
+                        intent2 = new Intent(this, signinPrepage.class);
+                        startActivity(intent2);
                         finish();
                     }
+                }
+                else {
+                    Log.d("sign in page", "2");
+                    Intent intentsignin = new Intent(this, signinPrepage.class);
+                    startActivity(intentsignin);
+
                 }
 
                 break;

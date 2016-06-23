@@ -114,6 +114,21 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
                         }
+
+
+                        else if(args[1].equals("cibil")){
+                            Log.d("main result", "cibil");
+                            Log.d("sessn", args[2]);
+                            Log.d("builder id", args[3]);
+
+                            nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "getbuilderprojectname"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("builderid", args[3]));
+
+
+                        }
                         else {
 
 

@@ -104,7 +104,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         currentact=getActivity();
         btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
-
+        tag="google";
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
@@ -364,7 +364,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
             }
         }, currentact, "wait");
         String[] name = personName.split(" ");
-        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], "google");
+        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], tag);
 
     }
 
