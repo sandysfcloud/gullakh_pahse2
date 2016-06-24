@@ -117,6 +117,9 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
                         else if(args[1].equals("cibil")){
+
+
+
                             Log.d("main result", "cibil");
                             Log.d("sessn", args[2]);
                             Log.d("builder id", args[3]);
@@ -125,9 +128,20 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "getbuilderprojectname"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("builderid", args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("dob", args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("state", args[4]));
+                            nameValuePairs.add(new BasicNameValuePair("zip", args[5]));
+                            nameValuePairs.add(new BasicNameValuePair("pan", args[6]));
+                            nameValuePairs.add(new BasicNameValuePair("street", args[7]));
+                            nameValuePairs.add(new BasicNameValuePair("userid", args[8]));
+                            nameValuePairs.add(new BasicNameValuePair("contactid", args[9]));
+
+                            nameValuePairs.add(new BasicNameValuePair("phone", args[10]));
+                            nameValuePairs.add(new BasicNameValuePair("loantype", args[11]));
+                            nameValuePairs.add(new BasicNameValuePair("firstname", args[12]));
 
 
+                            Log.d("nameValuePairs value", String.valueOf(nameValuePairs));
                         }
                         else {
 
@@ -235,7 +249,10 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                           nameValuePairs.add(new BasicNameValuePair("employername","Riverdale Software Solutions Pvt. Ltd."));*/
 
                                 DefaultHttpClient httpClient = new DefaultHttpClient();
+
+
                                 HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
+
 
                                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                                 response = httpClient.execute(httpPost);
@@ -258,9 +275,16 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("accessKey", accessKey));
                             }
                         }
-
                         DefaultHttpClient httpClient = new DefaultHttpClient();
-                        HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
+                        HttpPost httpPost;
+                        if(args[1].equals("cibil")){
+                            Log.d("its get cibil score","");
+                            httpPost = new HttpPost(GlobalData.CIBIL);
+                        }
+                        else {
+
+                            httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
+                        }
 
                         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         response = httpClient.execute(httpPost);

@@ -33,6 +33,7 @@ public class GlobalData extends MultiDexApplication {
     //static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal/webservice.php?operation=create";
     static final String SERVER_GET_URLIMage ="http://54.200.200.39/gullakh_portal_dev/";
     static final String SERVER_GET_URL ="http://54.200.200.39/gullakh_portal_dev/webservice_new.php";
+    static final String CIBIL ="http://54.200.200.39/gullakh_web_dev/equifax/equifax";
     static final String SERVER_GET_URL_web ="http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_contact_id";
     private String cartypeloan;
     private HashMap<String, String> lenders;

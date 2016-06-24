@@ -285,6 +285,7 @@ if(one_time_fee!=null) {
                 break;
             case  R.id.Buttonapply:
                 buttonApply=true;
+
             Log.d("check loan type", ((GlobalData) getApplication()).getLoanType());
                     if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")){
                         storeData();
@@ -323,6 +324,12 @@ if(one_time_fee!=null) {
             //    Log.d("Result of lender2",((GlobalData) getApplication()).getLenders().get(1));
 
                 if(MainActivity.signinstate){
+                 //******check
+                    Intent intent2 = new Intent(this, CibilScore.class);
+                    intent2.putExtra("apply","apply");
+                    startActivity(intent2);
+
+                    //******check
                    goToIntent();
                 }else {
                     Intent intent = new Intent(this, signinPrepage.class);
@@ -336,7 +343,10 @@ if(one_time_fee!=null) {
     public void goToIntent() {
         Intent intent ;
         String emtyp=((GlobalData) getApplication()).getLoanType();
-        Log.d("employee typ in listviewclick",emtyp);
+        Log.d("employee typ in listviewclick", emtyp);
+
+
+
         if(emtyp.equalsIgnoreCase("Car Loan")){
             Log.d("inside carloan",emtyp);
             intent = new Intent(ListView_Click.this, cl_car_make.class);
