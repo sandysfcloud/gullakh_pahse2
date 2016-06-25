@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,9 +36,11 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CibilScore extends AppCompatActivity implements  View.OnClickListener,DatePickerDialog.OnDateSetListener,AdapterView.OnItemSelectedListener {
     private   String[] COUNTRIES = new String[]{"Select Loan Type","New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
@@ -49,6 +52,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
     AutoCompleteTextView city;
     Spinner s1;
     String apply;
+    Dialog dgthis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +108,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
         });
         e_state = (EditText) findViewById(R.id.state);
 
+        e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
         s1 = (Spinner) findViewById(R.id.spinner1);
 
@@ -230,7 +235,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
             }
 
             public void processFinishString(String str_result, Dialog dg) {
-
+                dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -238,17 +243,25 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
-                Cibil[] enums = gson.fromJson(jsonObject.get("result"), Cibil[].class);
+                String result = jsonObject.get("result").toString().replace("\"", "");
+                if(result.equals("true")) {
 
 
-                if (enums.length > 0) {
-                    cscore = enums[0].getCibilsore();
-                    setalert();
+                    cscore=jsonObject.get("data").toString();
+                    dgthis.dismiss();
+                        setalert();
+
 
 
                 }
+                else
+                    RegisterPageActivity.showErroralert(CibilScore.this, jsonObject.get("error_message").toString(), "error");
             }
-        }, CibilScore.this, "2");
+        }, CibilScore.this, "1");
+
+
+
+
         DataHandler dbobject = new DataHandler(CibilScore.this);
         Cursor cr = dbobject.displayData("select * from session");
         if (cr.moveToFirst()) {
@@ -256,8 +269,9 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
-
+       // requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
+//CHANGE BACK LATER
+        requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp,nam);
 
 
 
@@ -470,15 +484,22 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                                                 Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5) + " " + cr.getString(6));
                                             }
 
-
+                                            //**formate date*****//
 
                                             s_Dob = Dob.getText().toString();
+
+                                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                            s_Dob = format.format(Date.parse(s_Dob));
+
+
                                             s_addr = addr.getText().toString();
                                             s_panid = panid.getText().toString();
                                             s_city = city.getText().toString();
                                             s_state = e_state.getText().toString();
                                             nam = name.getText().toString();
                                             s_zip = zip.getText().toString();
+
+                                            s_state = s_state.substring(0,1).toUpperCase() + s_state.substring(1);
 
                                             Log.d("s_Dob", s_Dob);
                                             Log.d("s_addr", s_addr);
@@ -507,4 +528,17 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
 
         }
     }
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
