@@ -45,7 +45,7 @@ public class JSONParsergcm {
             nameValuePairs.add(new BasicNameValuePair("useremail", arraydata[1]));
             nameValuePairs.add(new BasicNameValuePair("mobileno", arraydata[2]));
             nameValuePairs.add(new BasicNameValuePair("regid", arraydata[3]));
-
+            Log.d("check mobileno",arraydata[0]+arraydata[1]+arraydata[2]+arraydata[3]);
             if(arraydata[0]=="otpcheck")
                 nameValuePairs.add(new BasicNameValuePair("userotp", arraydata[4]));
             else if(arraydata[0]=="signin")

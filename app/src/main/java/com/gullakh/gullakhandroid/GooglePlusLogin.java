@@ -351,15 +351,17 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     } else {
                         goToIntent();
                     }
-                    }else{
-                    if(tag.equals("facebook"))
-                    {
-                        Log.d("facebook signout","");
-                        signinPrepage obj=new signinPrepage();
+                    }else {
+                    if (tag.equals("facebook")) {
+                        RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
+                        Log.d("facebook signout", "");
+                        signinPrepage obj = new signinPrepage();
                         obj.logoutfb(currentact);
-                    }
+                    } else {
+                        signOutFromGplus();
                         RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
                     }
+                }
                 dg.dismiss();
             }
         }, currentact, "wait");
@@ -398,9 +400,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                                     dg.dismiss();
                                     getOTPVerification();
-                                }else{
+                                }
+                                else{
                                     dg.dismiss();
-                                    goToIntent();
+                                    signOutFromGplus();
+                                    RegisterPageActivity.showErroralert(currentact, String.valueOf(jsonObject.get("error_message")), "failed");
                                 }
                             }
                         }, currentact, "wait");

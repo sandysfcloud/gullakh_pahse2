@@ -119,7 +119,7 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                             flag = "otpverify";
                             String[] arraydata = new String[5];
                             arraydata[0] = "otpcheck";
-                            arraydata[1] = useremail;
+                            arraydata[1] = resultemail;
                             arraydata[2] = usermobno;
                             arraydata[3] = RegisterAppToServer.regid;
                             arraydata[4] = input.getText().toString();
