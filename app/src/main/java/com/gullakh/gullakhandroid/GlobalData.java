@@ -42,7 +42,7 @@ public class GlobalData extends MultiDexApplication {
     private String baltrans;
     private String totalsal,salpaymode,carmanuyear;
     private String salBankName,hcity,baltranamt,hneed;
-    private String balTransLoanAmt;
+    private String balTransLoanAmt,firstnam,panid,zip;
     private String builderName,propcat1,propcat2;
     private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr;
     int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg,homeneedpos,cpappprof,coappcat,coappbusp,coappbusf;
@@ -490,5 +490,34 @@ public class GlobalData extends MultiDexApplication {
         return coappbusf;
     }
 
+    //********cibilscore
+
+    public void setfirstnam(String builderName) {
+        this.firstnam = builderName;
+    }
+
+    public String getfirstnam() {
+        return firstnam;
+    }
+
+
+
+
+    public void setpanid(String builderName) {
+        this.panid = builderName;
+    }
+
+    public String getpanid() {
+        return panid;
+    }
+
+
+    public void setzip(String builderName) {
+        this.zip = builderName;
+    }
+
+    public String getzip() {
+        return zip;
+    }
 
 }

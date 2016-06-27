@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,9 +41,10 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     static boolean buttonApply=false;
-    private String lenderid,loan_type,bankname,tenure,roi,emi,one_time_fee,fees,other,docum;
+    private String loan_type,bankname,tenure,roi,emi,one_time_fee,fees,other,docum;
     private String[] sepfee=null;
     private String[] preclosure1;
+    public  static String lenderid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -325,12 +327,13 @@ if(one_time_fee!=null) {
 
                 if(MainActivity.signinstate){
                  //******check
+                    Log.d("sign in true", "cibilscore");
                     Intent intent2 = new Intent(this, CibilScore.class);
-                    intent2.putExtra("apply","apply");
+                    intent2.putExtra("apply", "apply");
                     startActivity(intent2);
 
-                    //******check
-                   goToIntent();
+                    //******check here
+                   //goToIntent();
                 }else {
                     Intent intent = new Intent(this, signinPrepage.class);
                     startActivity(intent);
@@ -340,9 +343,10 @@ if(one_time_fee!=null) {
         }
     }
 
-    public void goToIntent() {
+    public  void goToIntent(Activity currentact) {
+
         Intent intent ;
-        String emtyp=((GlobalData) getApplication()).getLoanType();
+        String emtyp=((GlobalData) currentact.getApplication()).getLoanType();
         Log.d("employee typ in listviewclick", emtyp);
 
 
@@ -351,25 +355,25 @@ if(one_time_fee!=null) {
             Log.d("inside carloan",emtyp);
             intent = new Intent(ListView_Click.this, cl_car_make.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
+            currentact.startActivity(intent);
+            currentact.overridePendingTransition(R.transition.left, R.transition.right);
         }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
             intent = new Intent(ListView_Click.this,hl_prop_owns.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
+            currentact.startActivity(intent);
+            currentact.overridePendingTransition(R.transition.left, R.transition.right);
         }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
 
             intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
             intent.putExtra("personal", "personal");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
+            currentact.startActivity(intent);
+            currentact.overridePendingTransition(R.transition.left, R.transition.right);
         }else {
             intent = new Intent(ListView_Click.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            overridePendingTransition(R.transition.left, R.transition.right);
+            currentact.startActivity(intent);
+            currentact.overridePendingTransition(R.transition.left, R.transition.right);
         }
     }
 

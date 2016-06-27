@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,17 +43,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CibilScore extends AppCompatActivity implements  View.OnClickListener,DatePickerDialog.OnDateSetListener,AdapterView.OnItemSelectedListener {
-    private   String[] COUNTRIES = new String[]{"Select Loan Type","New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
+public class CibilScore extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
+    private String[] COUNTRIES = new String[]{"Select Loan Type", "New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
     int day, month, yearv;
-    EditText Dob, e_state, panid, addr,name,zip;
-    JSONServerGet requestgetserver,requestgetserver1;
+    EditText Dob, e_state, panid, addr, name, zip;
+    JSONServerGet requestgetserver, requestgetserver1;
     String sessionid, data, cscore;
-    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp,nam,s_zip;
+    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip;
     AutoCompleteTextView city;
     Spinner s1;
     String apply;
     Dialog dgthis;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
         ImageView close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Enter Your Details");
+        titl.setText("Credit Score");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();
@@ -91,6 +93,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
         addr = (EditText) findViewById(R.id.addr);
         name = (EditText) findViewById(R.id.nam);
         panid = (EditText) findViewById(R.id.panid);
+        panid.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         zip = (EditText) findViewById(R.id.zip);
 
         city = (AutoCompleteTextView) findViewById(R.id.city);
@@ -100,7 +103,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                String item =   parent.getItemAtPosition(position).toString();
+                String item = parent.getItemAtPosition(position).toString();
                 getStateName(item);
                 Log.d("onItemSelected is called", item);
 
@@ -126,31 +129,31 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
 
         s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                                         @Override
-                                         public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                                                    int arg2, long arg3) {
-                                             // TODO Auto-generated method stub
-                                            loantyp= s1.getSelectedItem().toString();
-                                             Log.d("loantyp frm spinner is",loantyp);
-                                         }
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                loantyp = s1.getSelectedItem().toString();
+                Log.d("loantyp frm spinner is", loantyp);
+            }
 
-                                         @Override
-                                         public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                                         }
-                                     });
-
+            }
+        });
 
 
         Intent intent = getIntent();
         apply = intent.getStringExtra("apply");
 
-                getcitynam();
+        getcitynam();
+
 
     }
 
-    public void getcitynam()
-    {
+
+    public void getcitynam() {
 
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -168,20 +171,17 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Cityname[] enums = gson.fromJson(jsonObject.get("result"), Cityname[].class);
 
-                int size=enums.length;
+                int size = enums.length;
                 Log.e("emplist frm server ", String.valueOf(size));
-                ArrayList<String> liste =new ArrayList<String>();
-                for(int i=0;i<size;i++) {
+                ArrayList<String> liste = new ArrayList<String>();
+                for (int i = 0; i < size; i++) {
                     liste.add(enums[i].getcity_name());
                 }
                 final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
                 city.setAdapter(fAdapter);
 
 
-
-
                 Log.e("emplist frm server ", String.valueOf(liste));
-
 
 
             }
@@ -213,16 +213,16 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Statename[] state = gson.fromJson(jsonObject.get("result"), Statename[].class);
-                for(int i=0;i<state.length;i++) {
+                for (int i = 0; i < state.length; i++) {
 
                     e_state.setText(state[i].getStatename());
-                   // ((GlobalData) getApplication()).setStatename(state[i].getStatename());
+                    // ((GlobalData) getApplication()).setStatename(state[i].getStatename());
                     //setDataToHashMap("currently_living_in", state[i].getStatename());
                 }
                 Log.d("check state name json", jsonObject.get("result").toString());
             }
         }, CibilScore.this, "2");
-        requestgetserver1.execute("token", "statename", sessionid,city_name);
+        requestgetserver1.execute("token", "statename", sessionid, city_name);
     }
 
 
@@ -244,22 +244,38 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
                 String result = jsonObject.get("result").toString().replace("\"", "");
-                if(result.equals("true")) {
+                dgthis.dismiss();
+                if (result.equals("true")) {
 
 
-                    cscore=jsonObject.get("data").toString();
-                    dgthis.dismiss();
+                    cscore = jsonObject.get("data").toString();
+                    cscore = cscore.replace("\"", "");
+                    if (apply != null) {
+
+                        if (apply.equals("apply")) {
+
+                            ListView_Click obj = new ListView_Click();
+                            obj.goToIntent(CibilScore.this);
+
+                        } else if (apply.equals("googlep")) {
+
+                            GooglePlusLogin obj = new GooglePlusLogin();
+                            obj.goToIntent(CibilScore.this);
+
+                        } else if (apply.equals("signin")) {
+
+                            signin obj = new signin();
+                            obj.goToIntent(CibilScore.this);
+
+                        }
+                    } else
                         setalert();
 
 
-
-                }
-                else
+                } else
                     RegisterPageActivity.showErroralert(CibilScore.this, jsonObject.get("error_message").toString(), "error");
             }
         }, CibilScore.this, "1");
-
-
 
 
         DataHandler dbobject = new DataHandler(CibilScore.this);
@@ -268,21 +284,21 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
             sessionid = cr.getString(1);
             Log.e("sessionid-cartypes", sessionid);
         }
-
-       // requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
+        if (ListView_Click.lenderid != null)
+            Log.e("ListView_Click.lenderid", ListView_Click.lenderid);
+        // requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
 //CHANGE BACK LATER
-        requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp,nam);
-
-
-
+        if (ListView_Click.lenderid != null)
+        requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp, nam,ListView_Click.lenderid);
+else
+            requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp, nam);
 
     }
 
 
-    public void setalert()
-    {
+    public void setalert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CibilScore.this);
-        builder.setMessage("Your Cibil Score is " + cscore)
+        builder.setMessage("Your Credit Score is " + cscore)
 
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -413,6 +429,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onClick(View v) {
 
@@ -460,16 +477,16 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                                     } else {
 
 
-                                        if(s1.getSelectedItem().toString().equals("1"))
-                                            loantyp ="New Car Loan";
-                                        else if(s1.getSelectedItem().toString().equals("2"))
-                                            loantyp ="Used Car Loan";
-                                        else if(s1.getSelectedItem().toString().equals("3"))
-                                            loantyp ="Personal Loan";
-                                        else if(s1.getSelectedItem().toString().equals("4"))
-                                            loantyp ="Home Loan";
-                                        else if(s1.getSelectedItem().toString().equals("5"))
-                                            loantyp ="Loan Against Property";
+                                        if (s1.getSelectedItem().toString().equals("1"))
+                                            loantyp = "New Car Loan";
+                                        else if (s1.getSelectedItem().toString().equals("2"))
+                                            loantyp = "Used Car Loan";
+                                        else if (s1.getSelectedItem().toString().equals("3"))
+                                            loantyp = "Personal Loan";
+                                        else if (s1.getSelectedItem().toString().equals("4"))
+                                            loantyp = "Home Loan";
+                                        else if (s1.getSelectedItem().toString().equals("5"))
+                                            loantyp = "Loan Against Property";
 
                                         getStateName(city.getText().toString());
 
@@ -487,6 +504,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                                             //**formate date*****//
 
                                             s_Dob = Dob.getText().toString();
+                                            ((GlobalData) getApplication()).setDob(s_Dob);
 
                                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                             s_Dob = format.format(Date.parse(s_Dob));
@@ -499,7 +517,7 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                                             nam = name.getText().toString();
                                             s_zip = zip.getText().toString();
 
-                                            s_state = s_state.substring(0,1).toUpperCase() + s_state.substring(1);
+                                            s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
 
                                             Log.d("s_Dob", s_Dob);
                                             Log.d("s_addr", s_addr);
@@ -511,6 +529,12 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
                                             Log.d("loan type", loantyp);
                                             Log.d("nam", nam);
                                             Log.d("zip code", s_zip);
+
+                                           /* ((GlobalData) getApplication()).setfirstnam(citynam.getText().toString());
+                                            ((GlobalData) getApplication()).setpanid(citynam.getText().toString());
+                                            ((GlobalData) getApplication()).setcarres(citynam.getText().toString());*/
+
+
                                             getcibil();
 
                                         }
@@ -528,11 +552,6 @@ public class CibilScore extends AppCompatActivity implements  View.OnClickListen
 
         }
     }
-
-
-
-
-
 
 
 }

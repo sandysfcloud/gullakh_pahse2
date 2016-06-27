@@ -349,7 +349,13 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         Log.d("clicked 2", "phone");
                         getMobileNo(jsonObject.get("user_id").toString());
                     } else {
-                        goToIntent();
+
+                        //kkgoToIntent();
+
+                        Intent intent2 = new Intent(getActivity(), CibilScore.class);
+                        intent2.putExtra("apply","googlep");
+                        startActivity(intent2);
+
                     }
                     }else {
                     if (tag.equals("facebook")) {
@@ -439,7 +445,10 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
-                                    goToIntent();
+                                    Intent intent2 = new Intent(getActivity(), CibilScore.class);
+                                    intent2.putExtra("apply","googlep");
+                                    startActivity(intent2);
+                                   // goToIntent();
                                 }
                             }
                         }, currentact, "wait");
@@ -457,7 +466,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 );
         builder.show();
     }
-    public void goToIntent() {
+    public void goToIntent(Activity currentact) {
         MainActivity.signinstate = true;
         Intent intent;
         saveDataToDatabase();

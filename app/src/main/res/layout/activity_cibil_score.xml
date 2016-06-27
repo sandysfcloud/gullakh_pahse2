@@ -117,14 +117,15 @@
                     app:typeface="robotoLight"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="text"
+                    android:lines="5"
+                    android:inputType="textMultiLine"
                     android:textSize="16dp"
                     android:id="@+id/addr"
                     android:background="@drawable/edittextsimple"
                     android:layout_marginRight="10dp"
                     android:paddingLeft="10dp"
 
-                    android:singleLine="true" />
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -271,6 +272,7 @@
                 android:layout_height="50dp"
                 android:background="#2cababab"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 android:weightSum="1"
                 android:gravity="center">
 
