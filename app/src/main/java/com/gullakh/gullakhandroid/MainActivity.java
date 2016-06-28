@@ -664,6 +664,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.credit:
                 Log.d("get cibil button in page", "1");
+
+                ((GlobalData) getApplication()).setcredback("mainact");
                 Intent intent2;
                 DataHandler dbobject = new DataHandler(this);
                 Cursor cr = dbobject.displayData("select * from userlogin");

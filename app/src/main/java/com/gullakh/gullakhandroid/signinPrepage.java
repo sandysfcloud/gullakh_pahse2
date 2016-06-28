@@ -41,7 +41,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
     public static boolean signinprepage;
     private GooglePlusLogin fragmentList;
     private boolean GoogleLogin=false;
-    public static String flag=null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,8 +160,8 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         });
 
         Intent intent = getIntent();
-        flag = intent.getStringExtra("flag");
-
+        String  flag = intent.getStringExtra("flag");
+        ((GlobalData) getApplication()).setcredflag(flag);
 
 }
 

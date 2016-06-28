@@ -286,6 +286,9 @@ if(one_time_fee!=null) {
                 mainLayout.setVisibility(View.VISIBLE);
                 break;
             case  R.id.Buttonapply:
+
+                ((GlobalData) getApplication()).setcredback(null);//for back pressed in cibilscore
+
                 buttonApply=true;
 
             Log.d("check loan type", ((GlobalData) getApplication()).getLoanType());

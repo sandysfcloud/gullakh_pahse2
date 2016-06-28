@@ -44,8 +44,8 @@ public class GlobalData extends MultiDexApplication {
     private String salBankName,hcity,baltranamt,hneed;
     private String balTransLoanAmt,firstnam,panid,zip;
     private String builderName,propcat1,propcat2;
-    private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr;
-    int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg,homeneedpos,cpappprof,coappcat,coappbusp,coappbusf;
+    private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr, state,city,addr,flag,back;
+    int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg,homeneedpos,cpappprof,coappcat,coappbusp,coappbusf,cltyp;
 
 //*****************CarLoan********************//
 
@@ -490,7 +490,7 @@ public class GlobalData extends MultiDexApplication {
         return coappbusf;
     }
 
-    //********cibilscore
+    //********creditscore
 
     public void setfirstnam(String builderName) {
         this.firstnam = builderName;
@@ -520,4 +520,61 @@ public class GlobalData extends MultiDexApplication {
         return zip;
     }
 
+
+
+    public void setaddr(String builderName) {
+        this.addr = builderName;
+    }
+
+    public String getaddr() {
+        return addr;
+    }
+
+
+
+
+
+    public void setcity(String builderName) {
+        this.city = builderName;
+    }
+
+    public String getcity() {
+        return city;
+    }
+
+
+
+    public void setstate(String builderName) {
+        this.state = builderName;
+    }
+
+    public String getstate() {
+        return state;
+    }
+
+
+    public void setcltyppos(int builderName) {
+        this.cltyp = builderName;
+    }
+
+    public int getcltyppos() {
+        return cltyp;
+    }
+
+
+    public void setcredflag(String builderName) {
+        this.flag = builderName;
+    }
+
+    public String getcredflag() {
+        return flag;
+    }
+
+    public void setcredback(String builderName) {
+        this.back = builderName;
+    }
+
+    public String getcredback() {
+        return back;
+    }
 }

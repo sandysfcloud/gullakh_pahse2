@@ -150,6 +150,23 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         getcitynam();
 
 
+        //*****
+if(((GlobalData) getApplication()).getfirstnam()!=null) {
+
+    name.setText(((GlobalData) getApplication()).getfirstnam());
+    addr.setText(((GlobalData) getApplication()).getaddr());
+
+
+    panid.setText(((GlobalData) getApplication()).getpanid());
+    zip.setText(((GlobalData) getApplication()).getzip());
+
+    city.setText(((GlobalData) getApplication()).getcity());
+    e_state.setText(((GlobalData) getApplication()).getstate());
+    s1.setSelection(((GlobalData) getApplication()).getcltyppos());
+    Dob.setText(((GlobalData) getApplication()).getDob());
+
+}
+
     }
 
 
@@ -290,7 +307,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 //CHANGE BACK LATER
 
 
-            requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp, nam, ListView_Click.lenderid);
+            requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp, nam, ListView_Click.lenderid);
 
 
 
@@ -430,11 +447,42 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+
+
+        if(((GlobalData) getApplication()).getcredback()!=null) {
+            Log.d("back is pressed", "from mainact");
+            Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+            intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intenth);
+        }
+        else {
+            Log.d("back is pressed", "from listview apply");
+            //back is pressed cibilscore
+
+            Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+            intent.putExtra("data", "searchgo");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+
+    }
+
+
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.close:
+                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intenth);
+
+                break;
             case R.id.dob:
                 Calendar now = Calendar.getInstance();
                 now.set(now.get(Calendar.YEAR) - 18, now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH));
@@ -531,9 +579,13 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                             Log.d("nam", nam);
                                             Log.d("zip code", s_zip);
 
-                                           /* ((GlobalData) getApplication()).setfirstnam(citynam.getText().toString());
-                                            ((GlobalData) getApplication()).setpanid(citynam.getText().toString());
-                                            ((GlobalData) getApplication()).setcarres(citynam.getText().toString());*/
+                                            ((GlobalData) getApplication()).setfirstnam(nam);
+                                            ((GlobalData) getApplication()).setpanid(s_panid);
+                                            ((GlobalData) getApplication()).setzip(s_zip);
+                                            ((GlobalData) getApplication()).setaddr(s_addr);
+                                            ((GlobalData) getApplication()).setcity(s_city);
+                                            ((GlobalData) getApplication()).setstate(s_state);
+                                            ((GlobalData) getApplication()).setcltyppos(s1.getSelectedItemPosition());
 
 
                                             getcibil();

@@ -351,15 +351,17 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     } else {
 
                         //kkgoToIntent();
+                        saveDataToDatabase();
 
-                        if(signinPrepage.flag!=null) {
-                            Log.d("from mainact", signinPrepage.flag);
+                        if(((GlobalData) getActivity().getApplication()).getcredflag()!=null) {
+
+                            Log.d("from mainact", ((GlobalData) getActivity().getApplication()).getcredflag());
                             goToIntent(getActivity());
 
                         }
                         else {
 
-                            Log.d("from apply o credit butn", signinPrepage.flag);
+                            Log.d("from apply o credit butn", "");
                             Intent intent2 = new Intent(getActivity(), CibilScore.class);
                             intent2.putExtra("apply", "googlep");
                             startActivity(intent2);
@@ -481,7 +483,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public void goToIntent(Activity currentact) {
         MainActivity.signinstate = true;
         Intent intent;
-        saveDataToDatabase();
+       // saveDataToDatabase();
         if (ListView_Click.buttonApply) {
             ListView_Click.buttonApply = false;
             if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
