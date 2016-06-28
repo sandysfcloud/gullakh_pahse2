@@ -44,7 +44,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private String loan_type,bankname,tenure,roi,emi,one_time_fee,fees,other,docum;
     private String[] sepfee=null;
     private String[] preclosure1;
-    public  static String lenderid;
+    public  static String lenderid=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -353,24 +353,24 @@ if(one_time_fee!=null) {
 
         if(emtyp.equalsIgnoreCase("Car Loan")){
             Log.d("inside carloan",emtyp);
-            intent = new Intent(ListView_Click.this, cl_car_make.class);
+            intent = new Intent(currentact, cl_car_make.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             currentact.startActivity(intent);
             currentact.overridePendingTransition(R.transition.left, R.transition.right);
         }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
-            intent = new Intent(ListView_Click.this,hl_prop_owns.class);
+            intent = new Intent(currentact,hl_prop_owns.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             currentact.startActivity(intent);
             currentact.overridePendingTransition(R.transition.left, R.transition.right);
         }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
 
-            intent = new Intent(ListView_Click.this, cl_car_residence_type.class);
+            intent = new Intent(currentact, cl_car_residence_type.class);
             intent.putExtra("personal", "personal");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             currentact.startActivity(intent);
             currentact.overridePendingTransition(R.transition.left, R.transition.right);
         }else {
-            intent = new Intent(ListView_Click.this, MainActivity.class);
+            intent = new Intent(currentact, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             currentact.startActivity(intent);
             currentact.overridePendingTransition(R.transition.left, R.transition.right);

@@ -352,9 +352,21 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
                         //kkgoToIntent();
 
-                        Intent intent2 = new Intent(getActivity(), CibilScore.class);
-                        intent2.putExtra("apply","googlep");
-                        startActivity(intent2);
+                        if(signinPrepage.flag!=null) {
+                            Log.d("from mainact", signinPrepage.flag);
+                            goToIntent(getActivity());
+
+                        }
+                        else {
+
+                            Log.d("from apply o credit butn", signinPrepage.flag);
+                            Intent intent2 = new Intent(getActivity(), CibilScore.class);
+                            intent2.putExtra("apply", "googlep");
+                            startActivity(intent2);
+                        }
+
+
+
 
                     }
                     }else {

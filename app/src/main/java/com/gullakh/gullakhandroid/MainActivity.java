@@ -624,6 +624,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     noconnection();
                 }else {
                     intent = new Intent(MainActivity.this, signinPrepage.class);
+                    intent.putExtra("flag", "Mainact");
                     startActivity(intent);
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }

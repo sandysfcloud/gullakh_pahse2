@@ -139,7 +139,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("phone", args[10]));
                             nameValuePairs.add(new BasicNameValuePair("loantype", args[11]));
                             nameValuePairs.add(new BasicNameValuePair("firstname", args[12]));
-                            if(!(args[13].equals(null))) {
+                            if((args[13]!=null)) {
                                 Log.d("args[13] value cibil", args[13]);
                                 nameValuePairs.add(new BasicNameValuePair("bankid", args[13]));
                             }

@@ -288,10 +288,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             Log.e("ListView_Click.lenderid", ListView_Click.lenderid);
         // requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
 //CHANGE BACK LATER
-        if (ListView_Click.lenderid != null)
-        requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp, nam,ListView_Click.lenderid);
-else
-            requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp, nam);
+
+
+            requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, "9341620957", loantyp, nam, ListView_Click.lenderid);
+
+
 
     }
 
