@@ -10,6 +10,7 @@ public class ContactDetails {
     String mailingstate="";
     String otherstreet="";
     String firstname="";
+    String lastname="";
     String id="";
     public String getMailingzip() {
         return mailingzip;
@@ -33,6 +34,10 @@ public class ContactDetails {
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public String getId() {

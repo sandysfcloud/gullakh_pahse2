@@ -26,7 +26,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.login.LoginManager;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,7 +44,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
     private Button signout;
     private ImageButton edit;
     private Button Done;
-    private EditText ph,email,add1,add2,add3,add4,add5;
+    private EditText ph,email,add1,add2,add3,add4,add5,name;
     private JSONServerGet requestgetserver1,requestgetserver2,requestgetserver3;
     private String userid;
     private String contactid;
@@ -78,6 +77,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
+        name = (EditText) findViewById(R.id.textViewName);
         ph = (EditText) findViewById(R.id.textViewMobNo);
         email = (EditText) findViewById(R.id.textViewEmail);
         ProfilePic = (ImageView) findViewById(R.id.profilepic);
@@ -261,6 +261,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
 //            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
             if (details.length>0) {
+                name.setText(details[0].getFirstname()+" "+details[0].getLastname());
                 add1.setText(details[0].getMailingstreet());
                 add2.setText(details[0].getOtherstreet());
                 add3.setText(details[0].getMailingcity());
