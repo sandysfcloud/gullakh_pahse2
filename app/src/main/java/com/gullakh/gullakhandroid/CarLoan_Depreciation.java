@@ -121,6 +121,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
         if (savedInstanceState != null) {
             depv = Double.valueOf(savedInstanceState.getString("depv"));
+            Log.d("dep value is savedInstanceState", String.valueOf(depv));
             patv = Double.valueOf(savedInstanceState.getString("pat"));
 
             gloan_type = savedInstanceState.getString("loantyp");
@@ -128,7 +129,9 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
             Baltrans = savedInstanceState.getString("Baltrans");
         }
         else {
+
             depv = ((GlobalData) getApplication()).getdepreciation();
+            Log.d("dep value else", String.valueOf(depv));
             patv = ((GlobalData) getApplication()).getPat();
 
             gloan_type=((GlobalData) getApplication()).getLoanType();
@@ -365,7 +368,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
             ((GlobalData) getApplication()).setdepreciation(Double.parseDouble(amt.getText().toString().replaceAll(",", "")));
 
             Log.d("check calculatn", "check");
-
+            depv=Double.parseDouble(amt.getText().toString().replaceAll(",", ""));
 
             Double cpat1,cpat2,cdep1,cdep2,resultsal;
             cpat1= patv;
@@ -375,7 +378,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
 
             Log.d("cpat1 ", String.valueOf(cpat1));
 
-            Log.d("cdep1 ", String.valueOf(cpat1));
+            Log.d("cdep1 ", String.valueOf(cdep1));
 
 
             resultsal=((cpat1+cdep1)/12);

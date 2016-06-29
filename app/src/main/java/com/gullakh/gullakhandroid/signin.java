@@ -189,6 +189,24 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 userid = str_result.getString("user_id");
                 contactid = str_result.getString("contact_id");
                 profileurl = str_result.getString("profile_image");
+
+                String firstname = str_result.getString("firstname");
+                String lastname = str_result.getString("lastname");
+                String dob = str_result.getString("dob");
+                String zip = str_result.getString("zip");
+
+                String street = str_result.getString("street");
+                String city = str_result.getString("city");
+                String state = str_result.getString("state");
+                String country = str_result.getString("country");
+
+                String addr = street+" "+city+" "+state+" "+country;
+
+                ((GlobalData) getApplication()).setfirstnam(firstname+" "+lastname);
+                ((GlobalData) getApplication()).setDob(dob);
+                ((GlobalData) getApplication()).setzip(zip);
+                ((GlobalData) getApplication()).setaddr(addr);
+
                 Log.d("signindetails", usermobno + " : " + userid + " : " + contactid+" "+profileurl);
                 ContentValues values = new ContentValues();
                 values.put("usersession", str_result.get("session_id").toString());
@@ -212,9 +230,19 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     startActivity(intent2);
 
                 }else{
-                    Intent  intent = new Intent(signin.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    //frm mainact
+                    if(((GlobalData) getApplication()).getcredback().equals("mainact"))
+                    {
+                        Log.d("sign in from mainact","1");
+                        Intent intent2 = new Intent(this, CibilScore.class);
+                        startActivity(intent2);
+                    }
+                    else {
+
+                        Intent intent = new Intent(signin.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
 

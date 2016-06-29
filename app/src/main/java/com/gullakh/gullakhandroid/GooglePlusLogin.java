@@ -208,7 +208,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 String personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
                 email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-
+                ((GlobalData) currentact.getApplication()).setfirstnam(personName);
                 Log.e(TAG, googleuserid+"Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
                         + ", Image: " + personPhotoUrl);

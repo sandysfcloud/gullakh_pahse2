@@ -44,17 +44,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CibilScore extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
-    private String[] COUNTRIES = new String[]{"Select Loan Type", "New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
+    private String[] COUNTRIES = new String[]{ "New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
+
+
     int day, month, yearv;
     EditText Dob, e_state, panid, addr, name, zip;
     JSONServerGet requestgetserver, requestgetserver1;
     String sessionid, data, cscore;
     String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip;
-    AutoCompleteTextView city;
+    Spinner city;
     Spinner s1;
     String apply;
     Dialog dgthis;
-
+    String[] liste;
+    String spcity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,8 +99,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         panid.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         zip = (EditText) findViewById(R.id.zip);
 
-        city = (AutoCompleteTextView) findViewById(R.id.city);
-        city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        city = (Spinner) findViewById(R.id.city);
+        city.setPrompt("Select City");
+        /*city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -108,7 +112,29 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 Log.d("onItemSelected is called", item);
 
             }
+        });*/
+
+
+        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                spcity= liste[arg2];
+
+                getStateName(spcity);
+                Log.d("onItemSelected is called",  liste[arg2]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
+
+
+
         e_state = (EditText) findViewById(R.id.state);
 
         e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
@@ -116,7 +142,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         s1 = (Spinner) findViewById(R.id.spinner1);
 
 
-        MyArrayAdapter ma = new MyArrayAdapter(this);
+        MyArrayAdapter ma = new MyArrayAdapter(this,COUNTRIES);
         s1.setAdapter(ma);
 
 
@@ -160,7 +186,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
     panid.setText(((GlobalData) getApplication()).getpanid());
     zip.setText(((GlobalData) getApplication()).getzip());
 
-    city.setText(((GlobalData) getApplication()).getcity());
+    city.setSelection(((GlobalData) getApplication()).getcitypos());
     e_state.setText(((GlobalData) getApplication()).getstate());
     s1.setSelection(((GlobalData) getApplication()).getcltyppos());
     Dob.setText(((GlobalData) getApplication()).getDob());
@@ -190,12 +216,20 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
 
                 int size = enums.length;
                 Log.e("emplist frm server ", String.valueOf(size));
-                ArrayList<String> liste = new ArrayList<String>();
+               // ArrayList<String> liste = new ArrayList<String>();
+
+                liste = new String[size];
+
                 for (int i = 0; i < size; i++) {
-                    liste.add(enums[i].getcity_name());
+                    liste[i]=enums[i].getcity_name();
+                   // liste.add(enums[i].getcity_name());
                 }
-                final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
-                city.setAdapter(fAdapter);
+
+                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,liste);
+                city.setAdapter(ma);
+
+              /*  final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
+                city.setAdapter(fAdapter);*/
 
 
                 Log.e("emplist frm server ", String.valueOf(liste));
@@ -322,8 +356,11 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-
-                        finish();
+                        Intent intent = new Intent(CibilScore.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                        //finish();
 
 
                     }
@@ -365,16 +402,20 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
     private class MyArrayAdapter extends BaseAdapter {
 
         private LayoutInflater mInflater;
+        private String[] Mainarry = new String[]{};
+        public MyArrayAdapter(Activity act,String[] array) {
 
-        public MyArrayAdapter(Activity act) {
+
+            Log.d("array data", String.valueOf(array));
             // TODO Auto-generated constructor stub
             mInflater = LayoutInflater.from(act);
+            Mainarry=array;
         }
 
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return COUNTRIES.length;
+            return Mainarry.length;
         }
 
         @Override
@@ -410,7 +451,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
             }
 
 
-            holder.name.setText(COUNTRIES[position]);
+            holder.name.setText(Mainarry[position]);
             Log.d("getView", holder.name.getText().toString());
 
             return v;
@@ -515,7 +556,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
                         if (panid.getText().toString().equals("")) {
                             RegisterPageActivity.showErroralert(this, "Enter Your PAN ID ", "failed");
                         } else {
-                            if (city.getText().toString().equals("")) {
+                            if (city.getSelectedItem().toString().equals("")) {
                                 RegisterPageActivity.showErroralert(this, "Enter Your City ", "failed");
                             } else {
                                 if (e_state.getText().toString().equals("")) {
@@ -537,7 +578,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
                                         else if (s1.getSelectedItem().toString().equals("5"))
                                             loantyp = "Loan Against Property";
 
-                                        getStateName(city.getText().toString());
+                                        //getStateName(city.getSelectedItem().toString());
 
                                         DataHandler dbobject = new DataHandler(CibilScore.this);
                                         Cursor cr = dbobject.displayData("select * from userlogin");
@@ -561,7 +602,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
 
                                             s_addr = addr.getText().toString();
                                             s_panid = panid.getText().toString();
-                                            s_city = city.getText().toString();
+                                            s_city = spcity;
                                             s_state = e_state.getText().toString();
                                             nam = name.getText().toString();
                                             s_zip = zip.getText().toString();
@@ -586,6 +627,8 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
                                             ((GlobalData) getApplication()).setcity(s_city);
                                             ((GlobalData) getApplication()).setstate(s_state);
                                             ((GlobalData) getApplication()).setcltyppos(s1.getSelectedItemPosition());
+
+                                            ((GlobalData) getApplication()).setcitypos(city.getSelectedItemPosition());
 
 
                                             getcibil();

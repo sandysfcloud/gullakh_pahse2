@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
 public class signinPrepage extends AppCompatActivity implements View.OnClickListener {
     CallbackManager callbackManager;
@@ -85,6 +86,9 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
+
+      /*  loginButton.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_birthday", "user_friends"));*/
         loginButton.setReadPermissions("email");
         // If using in a fragment
         loginButton.setOnClickListener(this);
@@ -128,7 +132,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                         fbid=bFacebookData.getString("idFacebook");
                         Log.d("fb login bFacebookData", String.valueOf(bFacebookData));
                         Log.d("bFacebookData email", String.valueOf(bFacebookData.getString("email")));
-
+                        ((GlobalData) getApplication()).setfirstnam(first_name);
                         servercon();
 
                     }
