@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Your Credit Score"
+            android:id="@+id/textView7"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="22dp"
+            android:textColor="#393939" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView6"
+            android:src="@drawable/equifax"
+            android:layout_weight="1"
+            android:layout_marginRight="15dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ed1c24"
+        android:layout_margin="15dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Dear"
+            android:id="@+id/textView49"
+            android:textSize="25dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:textColor="#393939" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Report Created:"
+            android:id="@+id/textView9"
+            android:textSize="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:textColor="#393939" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="700"
+            android:id="@+id/textViewEs"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#393939"
+            android:textSize="40dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageViewE"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/circle_green"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageViewB"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/circle_red"
+            android:visibility="gone" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageViewY"
+            android:src="@drawable/circle_yellow"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Excellent"
+        android:id="@+id/textViewEx"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#393939"
+        android:textSize="28dp"
+        android:visibility="visible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Good"
+        android:id="@+id/textViewGo"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#393939"
+        android:textSize="28dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Below Average"
+        android:id="@+id/textViewBe"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#393939"
+        android:textSize="28dp"
+        android:visibility="gone" />
+
+</LinearLayout>
