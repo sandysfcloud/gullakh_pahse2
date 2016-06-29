@@ -47,24 +47,39 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Dear"
             android:id="@+id/textView49"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_gravity="left|center_vertical"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:textColor="#393939" />
 
+
+
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Name"
+            android:id="@+id/name"
+            android:textSize="20dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="4"
+          android:layout_marginLeft="-20dp"
+            android:gravity="center"
+            android:textColor="#393939" />
+
+       <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Report Created:"
             android:id="@+id/textView9"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_gravity="right|center_vertical"
             android:layout_weight="1"
             android:layout_marginRight="10dp"
-            android:textColor="#393939" />
+            android:textColor="#393939" />-->
 
     </LinearLayout>
 
@@ -77,7 +92,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="700"
-            android:id="@+id/textViewEs"
+            android:id="@+id/score"
             android:layout_gravity="center_horizontal"
             android:textColor="#393939"
             android:textSize="40dp"
@@ -88,26 +103,26 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/imageViewE"
+            android:id="@+id/exce"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/circle_green"
-            android:visibility="visible" />
+           />
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/imageViewB"
+            android:id="@+id/bad"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:src="@drawable/circle_red"
-            android:visibility="gone" />
+          />
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/imageViewY"
+            android:id="@+id/good"
             android:src="@drawable/circle_yellow"
-            android:visibility="gone" />
+            />
     </RelativeLayout>
 
     <TextView
@@ -115,7 +130,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Excellent"
-        android:id="@+id/textViewEx"
+        android:id="@+id/distxt"
         android:layout_gravity="center_horizontal"
         android:textColor="#393939"
         android:textSize="28dp"

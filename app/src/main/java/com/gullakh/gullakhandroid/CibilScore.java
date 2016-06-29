@@ -350,7 +350,12 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
 
     public void setalert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CibilScore.this);
-        builder.setMessage("Your Credit Score is " + cscore)
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.cibilscorepopup, null);
+        builder.setView(dialogView)
+
+        //builder.setMessage("Your Credit Score is " + cscore)
 
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -365,8 +370,46 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
 
                     }
                 });
+
+        TextView score = (TextView) dialogView.findViewById(R.id.score);
+        score.setText(cscore);
+
+        ImageView exce = (ImageView) dialogView.findViewById(R.id.exce);
+        ImageView good = (ImageView) dialogView.findViewById(R.id.good);
+        ImageView bad = (ImageView) dialogView.findViewById(R.id.bad);
+
+        TextView distxt = (TextView) dialogView.findViewById(R.id.distxt);
+        Log.d("cscore score is",cscore);
+        if(Integer.parseInt(cscore)<500) {
+            Log.d("its bad","");
+            bad.setVisibility(View.VISIBLE);
+            distxt.setText("Below Average");
+
+        }
+        else if(Integer.parseInt(cscore)>=500||Integer.parseInt(cscore)<=700) {
+            Log.d("its Good","");
+            good.setVisibility(View.VISIBLE);
+            distxt.setText("Good");
+        }
+
+        else if(Integer.parseInt(cscore)>=700) {
+            Log.d("its Excellent","");
+            exce.setVisibility(View.VISIBLE);
+            distxt.setText("Excellent");
+
+        }
+
+
+        TextView name = (TextView) dialogView.findViewById(R.id.name);
+        name.setText(((GlobalData) getApplication()).getfirstnam());
+
         AlertDialog alert = builder.create();
         alert.show();
+
+
+
+
+
     }
 
 
