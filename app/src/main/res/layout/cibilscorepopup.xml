@@ -95,33 +95,36 @@
             android:id="@+id/score"
             android:layout_gravity="center_horizontal"
             android:textColor="#393939"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:visibility="visible" />
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/exce"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/circle_green"
+            android:visibility="invisible"
            />
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/bad"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:src="@drawable/circle_red"
+            android:visibility="invisible"
           />
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/good"
             android:src="@drawable/circle_yellow"
+            android:visibility="invisible"
             />
     </RelativeLayout>
 
@@ -157,5 +160,31 @@
         android:textColor="#393939"
         android:textSize="28dp"
         android:visibility="gone" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Report Created"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/textView9"
+        android:textSize="18dp"
+        android:layout_gravity="right"
+        android:textColor="#393939" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Date"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/rep"
+        android:textSize="18dp"
+        android:layout_gravity="right"
+
+        android:textColor="#393939" />
 
 </LinearLayout>

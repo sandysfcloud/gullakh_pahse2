@@ -40,17 +40,20 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class CibilScore extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
-    private String[] COUNTRIES = new String[]{ "New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
+    private String[] Loantypsp = new String[]{ "New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
 
 
     int day, month, yearv;
     EditText Dob, e_state, panid, addr, name, zip;
     JSONServerGet requestgetserver, requestgetserver1;
-    String sessionid, data, cscore;
+    String sessionid, data, cscore,date;
     String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip;
     Spinner city;
     Spinner s1;
@@ -121,10 +124,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 // TODO Auto-generated method stub
-                spcity= liste[arg2];
+                spcity = liste[arg2];
 
                 getStateName(spcity);
-                Log.d("onItemSelected is called",  liste[arg2]);
+                Log.d("onItemSelected is called", liste[arg2]);
             }
 
             @Override
@@ -134,7 +137,6 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         });
 
 
-
         e_state = (EditText) findViewById(R.id.state);
 
         e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
@@ -142,7 +144,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         s1 = (Spinner) findViewById(R.id.spinner1);
 
 
-        MyArrayAdapter ma = new MyArrayAdapter(this,COUNTRIES);
+        MyArrayAdapter ma = new MyArrayAdapter(this, Loantypsp);
         s1.setAdapter(ma);
 
 
@@ -177,23 +179,44 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
         //*****
-if(((GlobalData) getApplication()).getfirstnam()!=null) {
+        if (((GlobalData) getApplication()).getfirstnam() != null) {
 
-    name.setText(((GlobalData) getApplication()).getfirstnam());
-    addr.setText(((GlobalData) getApplication()).getaddr());
+            name.setText(((GlobalData) getApplication()).getfirstnam());
+            addr.setText(((GlobalData) getApplication()).getaddr());
 
 
-    panid.setText(((GlobalData) getApplication()).getpanid());
-    zip.setText(((GlobalData) getApplication()).getzip());
+            panid.setText(((GlobalData) getApplication()).getpanid());
+            zip.setText(((GlobalData) getApplication()).getzip());
 
-    city.setSelection(((GlobalData) getApplication()).getcitypos());
-    e_state.setText(((GlobalData) getApplication()).getstate());
-    s1.setSelection(((GlobalData) getApplication()).getcltyppos());
-    Dob.setText(((GlobalData) getApplication()).getDob());
+            // city.setSelection(((GlobalData) getApplication()).getcitypos());
+            e_state.setText(((GlobalData) getApplication()).getstate());
 
-}
 
-    }
+
+            Log.d("Cibilscore getLoanType", ((GlobalData) getApplication()).getLoanType());
+
+            if (((GlobalData) getApplication()).getLoanType() != null) {
+
+                List<String> list = Arrays.asList(Loantypsp);
+                int index = list.indexOf(((GlobalData) getApplication()).getLoanType()); // 1
+                s1.setSelection(index);
+
+                Log.d("index loantyp", String.valueOf(index));
+                Log.d("Cibilscore loantyp", ((GlobalData) getApplication()).getLoanType());
+
+
+                }
+            else
+                s1.setSelection(((GlobalData) getApplication()).getcltyppos());
+
+                Dob.setText(((GlobalData) getApplication()).getDob());
+
+                Log.d("city pos", String.valueOf(((GlobalData) getApplication()).getcitypos()));
+
+            }
+
+        }
+
 
 
     public void getcitynam() {
@@ -218,15 +241,30 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
                 Log.e("emplist frm server ", String.valueOf(size));
                // ArrayList<String> liste = new ArrayList<String>();
 
+
+                HashMap  cityindex = new HashMap<>();
+
+
                 liste = new String[size];
 
                 for (int i = 0; i < size; i++) {
                     liste[i]=enums[i].getcity_name();
+                    cityindex.put(i, liste[i]);
                    // liste.add(enums[i].getcity_name());
                 }
 
                 MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,liste);
                 city.setAdapter(ma);
+
+                if( ((GlobalData) getApplication()).getcity()!=null)
+                {
+                    Log.d("city index", String.valueOf(cityindex.get(((GlobalData) getApplication()).getcity())));
+                    city.setSelection((Integer) cityindex.get(((GlobalData) getApplication()).getcity()));
+                }
+
+
+                if(((GlobalData) getApplication()).getcitypos()!=-1)
+                city.setSelection(((GlobalData) getApplication()).getcitypos());
 
               /*  final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
                 city.setAdapter(fAdapter);*/
@@ -300,6 +338,10 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
 
 
                     cscore = jsonObject.get("data").toString();
+                    if (jsonObject.has("date")) {
+                        date = jsonObject.get("date").toString();
+                        date = date.replace("\"", "");
+                    }
                     cscore = cscore.replace("\"", "");
                     if (apply != null) {
 
@@ -326,7 +368,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
                 } else
                     RegisterPageActivity.showErroralert(CibilScore.this, jsonObject.get("error_message").toString(), "error");
             }
-        }, CibilScore.this, "1");
+        }, CibilScore.this, "wait");
 
 
         DataHandler dbobject = new DataHandler(CibilScore.this);
@@ -349,6 +391,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
 
 
     public void setalert() {
+        Log.d("set alert called","");
         AlertDialog.Builder builder = new AlertDialog.Builder(CibilScore.this);
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -379,6 +422,9 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
         ImageView bad = (ImageView) dialogView.findViewById(R.id.bad);
 
         TextView distxt = (TextView) dialogView.findViewById(R.id.distxt);
+        TextView tdate = (TextView) dialogView.findViewById(R.id.rep);
+        tdate.setText(date);
+
         Log.d("cscore score is",cscore);
         if(Integer.parseInt(cscore)<500) {
             Log.d("its bad","");
@@ -662,6 +708,7 @@ if(((GlobalData) getApplication()).getfirstnam()!=null) {
                                             Log.d("loan type", loantyp);
                                             Log.d("nam", nam);
                                             Log.d("zip code", s_zip);
+                                            Log.d("city pos", String.valueOf(city.getSelectedItemPosition()));
 
                                             ((GlobalData) getApplication()).setfirstnam(nam);
                                             ((GlobalData) getApplication()).setpanid(s_panid);

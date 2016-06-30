@@ -42,9 +42,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     EditText Dob;
     ImageView review;
     ImageView done;
-    int day;
-    int month;
-    int yearv;
+    int day=0;
+    int month=0;
+    int yearv=0;
     int empflag;
     int ageg;
     String data;

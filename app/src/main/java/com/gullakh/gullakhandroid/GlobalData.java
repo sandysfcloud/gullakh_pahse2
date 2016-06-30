@@ -45,7 +45,7 @@ public class GlobalData extends MultiDexApplication {
     private String balTransLoanAmt,firstnam,panid,zip;
     private String builderName,propcat1,propcat2;
     private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr, state,city,addr,flag,back;
-    int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg,homeneedpos,cpappprof,coappcat,coappbusp,coappbusf,cltyp,citypos;
+    int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg,homeneedpos,cpappprof,coappcat,coappbusp,coappbusf,cltyp,citypos=-1;
 
 //*****************CarLoan********************//
 
