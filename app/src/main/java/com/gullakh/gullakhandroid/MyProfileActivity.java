@@ -45,10 +45,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
     private ImageButton edit;
     private Button Done;
     private EditText ph,email,add1,add2,add3,add4,add5,name;
-    private JSONServerGet requestgetserver1,requestgetserver2,requestgetserver3;
+    private JSONServerGet requestgetserver1,requestgetserver2,requestgetserver3,requestgetserver4;
     private String userid;
     private String contactid;
     private String sessionid;
+    private String firstname,lastname;
     private GoogleApiClient mGoogleApiClient;
     private ImageView ProfilePic;
     Bitmap bmp;
@@ -78,6 +79,9 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         v2.setLayoutParams(lp);
 
         name = (EditText) findViewById(R.id.textViewName);
+        String[] temp=name.getText().toString().split(" ");
+        firstname=temp[0];
+        lastname=temp[temp.length-1];
         ph = (EditText) findViewById(R.id.textViewMobNo);
         email = (EditText) findViewById(R.id.textViewEmail);
         ProfilePic = (ImageView) findViewById(R.id.profilepic);
@@ -218,6 +222,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             }
         }, MyProfileActivity.this, "wait");
         requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5);
+        gotoUpdateCredential(add1,add2,add3,add4,add5);
     }
 
     @Override
@@ -369,6 +374,28 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         ContentValues values = new ContentValues();
         values.put("profile",url.replaceAll(" \"",""));
         dbobject1.updateDatatouserlogin("userlogin", values, userid);
+    }
+
+    private void gotoUpdateCredential(String add1, String add2, String add3, String add4, String add5) {
+
+        requestgetserver4 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+//                Log.d("coapp json", jsonObject.toString());
+                dg.dismiss();
+
+            }
+        }, MyProfileActivity.this, "wait6");
+        requestgetserver4.execute("token", "updateContactDetailsNew", null, null,add1,add2,add3,add4,add5, userid,firstname,lastname);
+
     }
 
 }

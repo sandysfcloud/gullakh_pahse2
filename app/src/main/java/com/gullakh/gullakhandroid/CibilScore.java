@@ -25,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -90,20 +91,43 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 //**********
 
-        Dob = (EditText) findViewById(R.id.dob);
-        Dob.setOnClickListener(this);
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("select * from userlogin");
+        if (cr != null) {
+            if (cr.moveToFirst()) {
+                Log.d("signindetails", cr.getString(0) + " : " + cr.getString(1) + " : " + cr.getString(2) + " " + cr.getString(3));
 
-        Button done = (Button) findViewById(R.id.done);
-        done.setOnClickListener(this);
+            }
+        }
 
-        addr = (EditText) findViewById(R.id.addr);
-        name = (EditText) findViewById(R.id.nam);
-        panid = (EditText) findViewById(R.id.panid);
-        panid.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        zip = (EditText) findViewById(R.id.zip);
+        if(((GlobalData) getApplication()).getcredit().length()>0&&!(((GlobalData) getApplication()).getcredit().equals("0")))
+        {
+            Log.d("credit score frm server", ((GlobalData) getApplication()).getcredit());
+            LinearLayout  main = (LinearLayout) findViewById(R.id.lmain);
+            main.setVisibility(View.INVISIBLE);
+            cscore=((GlobalData) getApplication()).getcredit();
+            date=((GlobalData) getApplication()).getcreditdate();
+            setalert();
 
-        city = (Spinner) findViewById(R.id.city);
-        city.setPrompt("Select City");
+
+        }
+        else {
+
+
+            Dob = (EditText) findViewById(R.id.dob);
+            Dob.setOnClickListener(this);
+
+            Button done = (Button) findViewById(R.id.done);
+            done.setOnClickListener(this);
+
+            addr = (EditText) findViewById(R.id.addr);
+            name = (EditText) findViewById(R.id.nam);
+            panid = (EditText) findViewById(R.id.panid);
+            panid.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+            zip = (EditText) findViewById(R.id.zip);
+
+            city = (Spinner) findViewById(R.id.city);
+            city.setPrompt("Select City");
         /*city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -118,102 +142,99 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         });*/
 
 
-        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                // TODO Auto-generated method stub
-                spcity = liste[arg2];
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                           int arg2, long arg3) {
+                    // TODO Auto-generated method stub
+                    spcity = liste[arg2];
 
-                getStateName(spcity);
-                Log.d("onItemSelected is called", liste[arg2]);
-            }
+                    getStateName(spcity);
+                    Log.d("onItemSelected is called", liste[arg2]);
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        e_state = (EditText) findViewById(R.id.state);
-
-        e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-
-        s1 = (Spinner) findViewById(R.id.spinner1);
-
-
-        MyArrayAdapter ma = new MyArrayAdapter(this, Loantypsp);
-        s1.setAdapter(ma);
-
-
-        s1.setPrompt("Select Loan Type");
-
-
-        //******get data from search
-        //  setsearchdb();
-
-
-        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int arg2, long arg3) {
-                // TODO Auto-generated method stub
-                loantyp = s1.getSelectedItem().toString();
-                Log.d("loantyp frm spinner is", loantyp);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        Intent intent = getIntent();
-        apply = intent.getStringExtra("apply");
-
-        getcitynam();
-
-
-        //*****
-        if (((GlobalData) getApplication()).getfirstnam() != null) {
-
-            name.setText(((GlobalData) getApplication()).getfirstnam());
-            addr.setText(((GlobalData) getApplication()).getaddr());
-
-
-            panid.setText(((GlobalData) getApplication()).getpanid());
-            zip.setText(((GlobalData) getApplication()).getzip());
-
-            // city.setSelection(((GlobalData) getApplication()).getcitypos());
-            e_state.setText(((GlobalData) getApplication()).getstate());
-
-
-
-            Log.d("Cibilscore getLoanType", ((GlobalData) getApplication()).getLoanType());
-
-            if (((GlobalData) getApplication()).getLoanType() != null) {
-
-                List<String> list = Arrays.asList(Loantypsp);
-                int index = list.indexOf(((GlobalData) getApplication()).getLoanType()); // 1
-                s1.setSelection(index);
-
-                Log.d("index loantyp", String.valueOf(index));
-                Log.d("Cibilscore loantyp", ((GlobalData) getApplication()).getLoanType());
-
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
                 }
-            else
-                s1.setSelection(((GlobalData) getApplication()).getcltyppos());
+            });
+
+
+            e_state = (EditText) findViewById(R.id.state);
+
+            e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+
+            s1 = (Spinner) findViewById(R.id.spinner1);
+
+
+            MyArrayAdapter ma = new MyArrayAdapter(this, Loantypsp);
+            s1.setAdapter(ma);
+
+
+            s1.setPrompt("Select Loan Type");
+
+
+            //******get data from search
+            //  setsearchdb();
+
+
+            s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                           int arg2, long arg3) {
+                    // TODO Auto-generated method stub
+                    loantyp = s1.getSelectedItem().toString();
+                    Log.d("loantyp frm spinner is", loantyp);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            Intent intent = getIntent();
+            apply = intent.getStringExtra("apply");
+
+            getcitynam();
+
+
+            //*****
+            if (((GlobalData) getApplication()).getfirstnam() != null) {
+
+                name.setText(((GlobalData) getApplication()).getfirstnam());
+                addr.setText(((GlobalData) getApplication()).getaddr());
+
+
+                panid.setText(((GlobalData) getApplication()).getpanid());
+                zip.setText(((GlobalData) getApplication()).getzip());
+
+                // city.setSelection(((GlobalData) getApplication()).getcitypos());
+                e_state.setText(((GlobalData) getApplication()).getstate());
+
+
+                if (((GlobalData) getApplication()).getLoanType() != null) {
+                    Log.d("Cibilscore getLoanType", ((GlobalData) getApplication()).getLoanType());
+                    List<String> list = Arrays.asList(Loantypsp);
+                    int index = list.indexOf(((GlobalData) getApplication()).getLoanType()); // 1
+                    s1.setSelection(index);
+
+                    Log.d("index loantyp", String.valueOf(index));
+                    Log.d("Cibilscore loantyp", ((GlobalData) getApplication()).getLoanType());
+
+
+                } else
+                    s1.setSelection(((GlobalData) getApplication()).getcltyppos());
 
                 Dob.setText(((GlobalData) getApplication()).getDob());
 
                 Log.d("city pos", String.valueOf(((GlobalData) getApplication()).getcitypos()));
 
             }
+        }
 
         }
 
@@ -249,7 +270,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 for (int i = 0; i < size; i++) {
                     liste[i]=enums[i].getcity_name();
-                    cityindex.put(i, liste[i]);
+                    cityindex.put(liste[i], i);
                    // liste.add(enums[i].getcity_name());
                 }
 
@@ -258,6 +279,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 if( ((GlobalData) getApplication()).getcity()!=null)
                 {
+                    Log.d("city index", String.valueOf(cityindex));
+                    Log.d("city", String.valueOf(((GlobalData) getApplication()).getcity()));
+
                     Log.d("city index", String.valueOf(cityindex.get(((GlobalData) getApplication()).getcity())));
                     city.setSelection((Integer) cityindex.get(((GlobalData) getApplication()).getcity()));
                 }

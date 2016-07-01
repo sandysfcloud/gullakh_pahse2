@@ -43,157 +43,163 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView13" >
 
-          <!--  <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=" Chetan Nandre"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
 
-                android:drawableLeft="@drawable/name"
-                android:id="@+id/textView6"
-                android:layout_margin="10dp" />-->
+              <!--  <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text=" Chetan Nandre"
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="abc"
-                android:drawableLeft="@drawable/name"
-                android:id="@+id/textViewName"
-                android:autoText="false"
-                android:padding="5dp"
-                android:layout_marginLeft="20dp"
-                android:focusableInTouchMode="false"
-                android:background="#00ffffff"
-                android:layout_marginBottom="5dp"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:drawablePadding="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="abc@gmail.com"
-                android:drawableLeft="@drawable/email"
-                android:drawablePadding="10dp"
-                android:id="@+id/textViewEmail"
-                android:autoText="false"
-                android:padding="5dp"
-                android:layout_marginLeft="20dp"
-                android:background="#00ffffff"
-                android:layout_marginBottom="5dp"
-                android:singleLine="true"
-                android:textColor="#000000" />
+                    android:drawableLeft="@drawable/name"
+                    android:id="@+id/textView6"
+                    android:layout_margin="10dp" />-->
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="9999999999"
-                android:drawableLeft="@drawable/phone"
-                android:drawablePadding="10dp"
-                android:id="@+id/textViewMobNo"
-                android:padding="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="5dp"
-                android:background="#00ffffff"
-                android:singleLine="true"
-                android:textColor="#000000" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="abc"
+                    android:drawableLeft="@drawable/name"
+                    android:id="@+id/textViewName"
+                    android:autoText="false"
+                    android:padding="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:focusableInTouchMode="false"
+                    android:background="#00ffffff"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:drawablePadding="10dp" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="abc@gmail.com"
+                    android:drawableLeft="@drawable/email"
+                    android:drawablePadding="10dp"
+                    android:id="@+id/textViewEmail"
+                    android:autoText="false"
+                    android:padding="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="#00ffffff"
+                    android:layout_marginBottom="5dp"
+                    android:singleLine="true"
+                    android:textColor="#000000" />
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText1"
-                android:background="#00ffffff"
-                android:hint="Address  line 1"
-                android:singleLine="true"
-                android:layout_marginLeft="20dp"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="9999999999"
+                    android:drawableLeft="@drawable/phone"
+                    android:drawablePadding="10dp"
+                    android:id="@+id/textViewMobNo"
+                    android:padding="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#00ffffff"
+                    android:singleLine="true"
+                    android:textColor="#000000" />
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText2"
-                android:background="#00ffffff"
-                android:hint="Address  line 2"
-                android:singleLine="true"
-                android:layout_marginLeft="20dp"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText1"
+                    android:background="#00ffffff"
+                    android:hint="Address  line 1"
+                    android:singleLine="true"
+                    android:layout_marginLeft="20dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#000000" />
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText3"
-                android:background="#00ffffff"
-                android:hint="City"
-                android:singleLine="true"
-                android:layout_marginLeft="20dp"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText2"
+                    android:background="#00ffffff"
+                    android:hint="Address  line 2"
+                    android:singleLine="true"
+                    android:layout_marginLeft="20dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#000000" />
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText4"
-                android:background="#00ffffff"
-                android:hint="State"
-                android:singleLine="true"
-                android:layout_marginLeft="20dp"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText3"
+                    android:background="#00ffffff"
+                    android:hint="City"
+                    android:singleLine="true"
+                    android:layout_marginLeft="20dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#000000" />
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
-                app:typeface="robotoLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText5"
-                android:inputType="number"
-                android:maxLength="6"
-                android:background="#00ffffff"
-                android:hint="PIN code"
-                android:singleLine="true"
-                android:layout_marginLeft="20dp"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText4"
+                    android:background="#00ffffff"
+                    android:hint="State"
+                    android:singleLine="true"
+                    android:layout_marginLeft="20dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#000000" />
 
-            <!-- <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:textAppearance="?android:attr/textAppearanceMedium"
-                 android:text=" Male"
-                 android:drawableLeft="@drawable/gender"
-                 android:id="@+id/textView12"
-                 android:layout_margin="10dp" />
+                <com.gullakh.gullakhandroid.font.RobotoEditText
+                    app:typeface="robotoLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText5"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:background="#00ffffff"
+                    android:hint="PIN code"
+                    android:singleLine="true"
+                    android:layout_marginLeft="20dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="#000000" />
 
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:textAppearance="?android:attr/textAppearanceMedium"
-                 android:text=" Bengaluru"
-                 android:drawableLeft="@drawable/loc"
-                 android:id="@+id/textView13"
-                 android:layout_margin="10dp" />-->
-        </LinearLayout>
+                <!-- <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:text=" Male"
+                     android:drawableLeft="@drawable/gender"
+                     android:id="@+id/textView12"
+                     android:layout_margin="10dp" />
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textAppearance="?android:attr/textAppearanceMedium"
+                     android:text=" Bengaluru"
+                     android:drawableLeft="@drawable/loc"
+                     android:id="@+id/textView13"
+                     android:layout_margin="10dp" />-->
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
     <fragment

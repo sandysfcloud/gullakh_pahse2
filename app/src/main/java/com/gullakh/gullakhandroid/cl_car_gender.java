@@ -41,7 +41,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     private Button submit,coappl;
     JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,
             requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,
-            requestgetserver9,requestgetserver10,requestgetserver20,requestgetserver21;
+            requestgetserver9,requestgetserver10,requestgetserver20,requestgetserver21,requestgetserver22;
     String sessionid;
     Dialog dgthis;
     String borrowercityid,useremail,usermobile;
@@ -384,7 +384,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     json=json.replaceAll("\\{|\\}", "");
                     Log.d("lender", json);
                     String[] tempLoanId=loanTypeId.split("x");
-                    requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",json,loanTypeId,datefield.getText().toString(),spinner.getSelectedItem().toString());
+
+                    requestgetserver5.execute("token", "createcase", sessionid, borrowercontactid, "Created", json, loanTypeId, datefield.getText().toString(), spinner.getSelectedItem().toString(), state.getText().toString(), String.valueOf(((GlobalData) getApplication()).getloanamt()));
                 }else{
                     requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
                             ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
@@ -429,6 +430,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 LoanReq Borrower_case = gson.fromJson(jsonObject.get("result"), LoanReq.class);
                 borrowercaseid = Borrower_case.getId();
                 borrowercaseno= Borrower_case.getCase_number();
+
+                gotoUpdateCredential();
+
                 if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
                     requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
                 }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
@@ -637,6 +641,26 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 goToIntent();
             }
         }, cl_car_gender.this, "wait6");
+
+    }
+
+    private void gotoUpdateCredential() {
+
+        requestgetserver22 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("coapp json", jsonObject.toString());
+            }
+        }, cl_car_gender.this, "wait6");
+        requestgetserver22.execute("token", "updateContactDetailsNew",((GlobalData)getApplication()).getDob().toString(),((GlobalData)getApplication()).getgender().toString(),add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString(),userid,null,null);
 
     }
 

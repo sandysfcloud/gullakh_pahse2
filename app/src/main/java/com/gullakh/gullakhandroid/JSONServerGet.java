@@ -525,7 +525,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             Log.d("arg size", String.valueOf(args.length));
                            // Log.d("arguments", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\",\"primarylender\":\"" + args[5] + "\",\"secondarylender\":\"" + args[6] + "\",\"assigned_user_id\":\"admin\"}");
                             Log.d("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\","+args[5]+ ",\"loantype\":\""+args[6]+"\",\"preferabledate\":\""+args[7]+"\",\"preferabletime\":\""+args[8]+"\",\"assigned_user_id\":\"admin\"}");
-                            nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\","+args[5]+ ",\"loantype\":\""+args[6]+"\",\"preferabledate\":\""+args[7]+"\",\"preferabletime\":\""+args[8]+"\",\"assigned_user_id\":\"admin\"}"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\"," + args[5] + ",\"loantype\":\"" + args[6] + "\",\"preferabledate\":\"" + args[7] + "\",\"preferabletime\":\"" + args[8] + "\",\"assigned_user_id\":\"admin\"},\"state\":" + args[9] + "\";\"loanamount\":" + args[10] + "\""));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -666,6 +666,21 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             client = new DefaultHttpClient();
                             Log.e("email ", args[2]);
                             post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/upload_profile_img").toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                        }else if(args[1].equals("updateContactDetailsNew")){
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("dob", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("gender", args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("street", args[4]+args[5]));
+                            nameValuePairs.add(new BasicNameValuePair("city", args[6]));
+                            nameValuePairs.add(new BasicNameValuePair("state", args[7]));
+                            nameValuePairs.add(new BasicNameValuePair("zip", args[8]));
+                            nameValuePairs.add(new BasicNameValuePair("user_id", args[9]));
+                            nameValuePairs.add(new BasicNameValuePair("firstname", args[10]));
+                            nameValuePairs.add(new BasicNameValuePair("lastname", args[11]));
+                            client = new DefaultHttpClient();
+                            Log.e("email ", args[2]);
+                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/user_update_process").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }
 

@@ -5,13 +5,20 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:layout_width="match_parent"
+
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lmain"
+        android:orientation="vertical">
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/scrollView9"
+        android:id="@+id/scrlmain"
+
         android:layout_weight="1">
 
         <LinearLayout
@@ -344,5 +351,6 @@
             android:paddingLeft="15dp"
 
             app:typeface="robotoLight"/>
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

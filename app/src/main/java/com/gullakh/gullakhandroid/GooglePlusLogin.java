@@ -353,21 +353,26 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         //kkgoToIntent();
                         saveDataToDatabase();
 
-                        if(((GlobalData) getActivity().getApplication()).getcredflag()!=null) {
 
-                            Log.d("from mainact", ((GlobalData) getActivity().getApplication()).getcredflag());
+                        if(((GlobalData) getActivity().getApplication()).getcredit().length()>0)
+                        {//if credit score is already present
                             goToIntent(getActivity());
-
                         }
                         else {
 
-                            Log.d("from apply o credit butn", "");
-                            Intent intent2 = new Intent(getActivity(), CibilScore.class);
-                            intent2.putExtra("apply", "googlep");
-                            startActivity(intent2);
+                            if (((GlobalData) getActivity().getApplication()).getcredflag() != null) {
+
+                                Log.d("from mainact", ((GlobalData) getActivity().getApplication()).getcredflag());
+                                goToIntent(getActivity());
+
+                            } else {
+
+                                Log.d("from apply o credit butn", "");
+                                Intent intent2 = new Intent(getActivity(), CibilScore.class);
+                                intent2.putExtra("apply", "googlep");
+                                startActivity(intent2);
+                            }
                         }
-
-
 
 
                     }
@@ -417,11 +422,10 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
                                 JsonParser parser = new JsonParser();
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                                if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
+                                if (jsonObject.get("result").toString().replaceAll("\"", "").equals("true")) {
                                     dg.dismiss();
                                     getOTPVerification();
-                                }
-                                else{
+                                } else {
                                     dg.dismiss();
                                     signOutFromGplus();
                                     RegisterPageActivity.showErroralert(currentact, String.valueOf(jsonObject.get("error_message")), "failed");
@@ -429,7 +433,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             }
                         }, currentact, "wait");
                         usermobno = input.getText().toString();
-                        requestgetserver1.execute("token", "udateGoogleMobNo", usermobno,userid.replaceAll("\"",""));
+                        requestgetserver1.execute("token", "udateGoogleMobNo", usermobno, userid.replaceAll("\"", ""));
                     }
                 }
         );
@@ -459,9 +463,16 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
-                                    Intent intent2 = new Intent(getActivity(), CibilScore.class);
-                                    intent2.putExtra("apply","googlep");
-                                    startActivity(intent2);
+
+                                    if(((GlobalData) getActivity().getApplication()).getcredit().length()>0)
+                                    {//if credit score is already present
+                                        goToIntent(getActivity());
+                                    }
+                                    else {
+                                        Intent intent2 = new Intent(getActivity(), CibilScore.class);
+                                        intent2.putExtra("apply", "googlep");
+                                        startActivity(intent2);
+                                    }
                                    // goToIntent();
                                 }
                             }

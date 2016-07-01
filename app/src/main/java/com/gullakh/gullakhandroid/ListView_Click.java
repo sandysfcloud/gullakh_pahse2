@@ -330,10 +330,17 @@ if(one_time_fee!=null) {
 
                 if(MainActivity.signinstate){
                  //******check
-                    Log.d("sign in true", "cibilscore");
-                    Intent intent2 = new Intent(this, CibilScore.class);
-                    intent2.putExtra("apply", "apply");
-                    startActivity(intent2);
+
+                    if(((GlobalData) getApplication()).getcredit().length()>0)
+                    {
+                        goToIntent(this);
+                    }
+                    else {
+                        Log.d("sign in true", "cibilscore");
+                        Intent intent2 = new Intent(this, CibilScore.class);
+                        intent2.putExtra("apply", "apply");
+                        startActivity(intent2);
+                    }
 
                     //******check here
                    //goToIntent();

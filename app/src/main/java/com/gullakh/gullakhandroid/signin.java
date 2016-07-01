@@ -200,20 +200,43 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 String state = str_result.getString("state");
                 String country = str_result.getString("country");
 
+                String score = str_result.getString("score");
+                String date = str_result.getString("date");
+
                 String addr = street+" "+city+" "+state+" "+country;
 
-                ((GlobalData) getApplication()).setfirstnam(firstname+" "+lastname);
+               ((GlobalData) getApplication()).setfirstnam(firstname+" "+lastname);
                 ((GlobalData) getApplication()).setDob(dob);
                 ((GlobalData) getApplication()).setzip(zip);
                 ((GlobalData) getApplication()).setaddr(addr);
+                ((GlobalData) getApplication()).setcity("Bengaluru");
+                ((GlobalData) getApplication()).setcredit(score);
+                ((GlobalData) getApplication()).setcreditdate(date);
 
-                Log.d("signindetails", usermobno + " : " + userid + " : " + contactid+" "+profileurl);
+                Log.d("signindetails", usermobno + " : " + userid + " : " + contactid + " " + profileurl);
                 ContentValues values = new ContentValues();
                 values.put("usersession", str_result.get("session_id").toString());
                 values.put("useremail", useremail);
                 values.put("usermobile", usermobno);
                 values.put("user_id", userid);
                 values.put("contact_id", contactid);
+
+                values.put("firstname", usermobno);
+                values.put("lastname", userid);
+                values.put("dob", contactid);
+                values.put("gender", str_result.get("gender").toString());
+
+                values.put("street", usermobno);
+                values.put("city", userid);
+                values.put("state", contactid);
+
+                values.put("country", usermobno);
+                values.put("zip", userid);
+                values.put("score", contactid);
+                values.put("date", usermobno);
+
+
+
                 if(!profileurl.equals("")) {
                     Log.d("profileurl","database");
                     values.put("profile",profileurl.replaceAll(" \"",""));
@@ -222,16 +245,24 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 MainActivity.signinstate = true;
 
                 if (ListView_Click.buttonApply) {
-                    ListView_Click.buttonApply = false;
+                    ListView_Click.buttonApply = false;//from bank click
 
                     Log.d("sign in true","cibilscore");
-                    Intent intent2 = new Intent(this, CibilScore.class);
-                    intent2.putExtra("apply","signin");
-                    startActivity(intent2);
+
+
+                    if(((GlobalData) getApplication()).getcredit().length()>0)
+                    {//if credit score is already present
+                        goToIntent(this);
+                    }
+                    else {
+                        Intent intent2 = new Intent(this, CibilScore.class);
+                        intent2.putExtra("apply", "signin");
+                        startActivity(intent2);
+                    }
 
                 }else{
-                    //frm mainact
-                    if(((GlobalData) getApplication()).getcredback().equals("mainact"))
+                    //frm mainactivity
+                    if(((GlobalData) getApplication()).getcredback()!=null)
                     {
                         Log.d("sign in from mainact","1");
                         Intent intent2 = new Intent(this, CibilScore.class);
