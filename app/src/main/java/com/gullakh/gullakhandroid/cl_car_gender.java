@@ -652,15 +652,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             }
             public void processFinishString(String str_result, Dialog dg)
             {
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-                Gson gson = gsonBuilder.create();
-                JsonParser parser = new JsonParser();
-                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Log.d("coapp json", jsonObject.toString());
+
             }
         }, cl_car_gender.this, "wait6");
-        requestgetserver22.execute("token", "updateContactDetailsNew",((GlobalData)getApplication()).getDob().toString(),((GlobalData)getApplication()).getgender().toString(),add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString(),userid,null,null);
+        requestgetserver22.execute("token", "updateContactDetailsNew",((GlobalData)getApplication()).getDob().toString(),((GlobalData)getApplication()).getgender().toString(),add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString(),userid,"","");
 
     }
 

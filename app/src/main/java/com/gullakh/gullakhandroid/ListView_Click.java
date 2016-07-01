@@ -331,7 +331,8 @@ if(one_time_fee!=null) {
                 if(MainActivity.signinstate){
                  //******check
 
-                    if(((GlobalData) getApplication()).getcredit().length()>0)
+                   // if(((GlobalData) getApplication()).getcredit().length()>0)
+                    if(0==0)
                     {
                         goToIntent(this);
                     }
