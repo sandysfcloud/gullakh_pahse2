@@ -205,13 +205,13 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
                 String addr = street+" "+city+" "+state+" "+country;
 
-               ((GlobalData) getApplication()).setfirstnam(firstname+" "+lastname);
+               /*((GlobalData) getApplication()).setfirstnam(firstname+" "+lastname);
                 ((GlobalData) getApplication()).setDob(dob);
                 ((GlobalData) getApplication()).setzip(zip);
                 ((GlobalData) getApplication()).setaddr(addr);
                 ((GlobalData) getApplication()).setcity("Bengaluru");
                 ((GlobalData) getApplication()).setcredit(score);
-                ((GlobalData) getApplication()).setcreditdate(date);
+                ((GlobalData) getApplication()).setcreditdate(date);*/
 
                 Log.d("signindetails", usermobno + " : " + userid + " : " + contactid + " " + profileurl);
                 ContentValues values = new ContentValues();
@@ -221,19 +221,20 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 values.put("user_id", userid);
                 values.put("contact_id", contactid);
 
-                values.put("firstname", usermobno);
-                values.put("lastname", userid);
-                values.put("dob", contactid);
+                values.put("firstname", firstname);
+                values.put("lastname", lastname);
+                values.put("dob", dob);
                 values.put("gender", str_result.get("gender").toString());
 
-                values.put("street", usermobno);
-                values.put("city", userid);
-                values.put("state", contactid);
+                values.put("street", street);
+                values.put("city", city);
+                values.put("state", state);
 
-                values.put("country", usermobno);
-                values.put("zip", userid);
-                values.put("score", contactid);
-                values.put("date", usermobno);
+                values.put("country", country);
+                values.put("zip", zip);
+                values.put("score", score);
+                values.put("date", date);
+                values.put("address", addr);
 
 
 
@@ -250,7 +251,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     Log.d("sign in true","cibilscore");
 
 
-                    if(((GlobalData) getApplication()).getcredit().length()>0)
+                    if(score.length()>0)
                     {//if credit score is already present
                         goToIntent(this);
                     }

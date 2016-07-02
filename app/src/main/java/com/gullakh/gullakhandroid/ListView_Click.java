@@ -3,6 +3,7 @@ package com.gullakh.gullakhandroid;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -41,7 +42,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     static boolean buttonApply=false;
-    private String loan_type,bankname,tenure,roi,emi,one_time_fee,fees,other,docum;
+    private String loan_type,bankname,tenure,roi,emi,one_time_fee,fees,other,docum,cscore;
     private String[] sepfee=null;
     private String[] preclosure1;
     public  static String lenderid=null;
@@ -331,16 +332,27 @@ if(one_time_fee!=null) {
                 if(MainActivity.signinstate){
                  //******check
 
-                    if(((GlobalData) getApplication()).getcredit().length()>0)
+                    DataHandler dbobject = new DataHandler(this);
+                    Cursor cr = dbobject.displayData("select * from userlogin");
+                    if (cr != null) {
+                        if (cr.moveToFirst()) {
+                          // Log.d("credit score",cscore);
+                            cscore=cr.getString(9);
+
+                        }
+                    }
+
+                   /* if (cscore != null && !cscore.isEmpty() && !cscore.equals("null")&& !cscore.equals("0"))
                     {
                         goToIntent(this);
-                    }
-                    else {
+                    }*/
+                   // else {
+
                         Log.d("sign in true", "cibilscore");
                         Intent intent2 = new Intent(this, CibilScore.class);
-                        intent2.putExtra("apply", "apply");
+                        intent2.putExtra("apply", "apply");//dont show the alert
                         startActivity(intent2);
-                    }
+                   // }
 
                     //******check here
                    //goToIntent();
@@ -372,7 +384,7 @@ if(one_time_fee!=null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             currentact.startActivity(intent);
             currentact.overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
+        }else if(((GlobalData) currentact.getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
 
             intent = new Intent(currentact, cl_car_residence_type.class);
             intent.putExtra("personal", "personal");

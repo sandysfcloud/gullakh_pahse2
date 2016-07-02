@@ -3,6 +3,7 @@ package com.gullakh.gullakhandroid;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -90,24 +91,76 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
 //**********
+        Intent intent = getIntent();
+        apply = intent.getStringExtra("apply");
+
+
 
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("select * from userlogin");
         if (cr != null) {
             if (cr.moveToFirst()) {
-                Log.d("signindetails", cr.getString(0) + " : " + cr.getString(1) + " : " + cr.getString(2) + " " + cr.getString(3));
+                Log.d("signindetails", cr.getString(7) + " : " + cr.getString(8) + " : " + cr.getString(9) + " " + cr.getString(10));
+                Log.d("signindetails2", cr.getString(11) + " : " + cr.getString(12) + " : " + cr.getString(13) + " " + cr.getString(14));
+                Log.d("signindetails2", cr.getString(15) + " : " + cr.getString(16) + " : " + cr.getString(17) + " " + cr.getString(18));
+
+
+                cscore=cr.getString(9);
+                date=cr.getString(17);
+                nam=cr.getString(10);
+
+                s_Dob = cr.getString(7);
+
+                Log.d("cscore is",cscore);
+
+
+                if(s_Dob.equals("0000-00-00"))
+                {
+                    Log.d("dob from db",s_Dob);
+                    s_Dob="";
+                }
+                else {
+
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    s_Dob = format.format(Date.parse(s_Dob));
+                }
+
+
+                s_addr = cr.getString(18);
+
+                s_city = cr.getString(13);
+                s_state = cr.getString(14);
+
+                s_zip = cr.getString(16);
+
+               // s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
+                userid = cr.getString(1);
+                contactid = cr.getString(2);
+                ph = cr.getString(4);
+
 
             }
         }
 
-        if(((GlobalData) getApplication()).getcredit().length()>0&&!(((GlobalData) getApplication()).getcredit().equals("0")))
-        {
-            Log.d("credit score frm server", ((GlobalData) getApplication()).getcredit());
+
+        if(cscore.length()>0&&!(cscore.equals("0")))
+        {//credit score request should be sent only once if present then show alert
+
+
+            Log.d("credit score frm server", cscore);
             LinearLayout  main = (LinearLayout) findViewById(R.id.lmain);
             main.setVisibility(View.INVISIBLE);
-            cscore=((GlobalData) getApplication()).getcredit();
-            date=((GlobalData) getApplication()).getcreditdate();
-            setalert();
+
+           if(apply!=null) {
+               if (apply.equals("apply")) {//from listviewclick page
+                   Log.d("from listviewclick", "check if can continue or not");
+                   getcibil();
+               }
+           }
+            else {
+                Log.d("from mainact","show alert");
+                setalert();
+            }
 
 
         }
@@ -196,24 +249,46 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             });
 
 
-            Intent intent = getIntent();
-            apply = intent.getStringExtra("apply");
+
 
             getcitynam();
 
 
             //*****
-            if (((GlobalData) getApplication()).getfirstnam() != null) {
 
-                name.setText(((GlobalData) getApplication()).getfirstnam());
-                addr.setText(((GlobalData) getApplication()).getaddr());
+
+
+            //**formate date*****//
+
+
+
+            if (nam!= null) {
+
+                name.setText(nam);
+
+                if( ((GlobalData) getApplication()).getfirstnam()!=null)
+                    name.setText(((GlobalData) getApplication()).getfirstnam());
+
+                addr.setText(s_addr);
+                if( ((GlobalData) getApplication()).getfirstnam()!=null)
+                    addr.setText(((GlobalData) getApplication()).getaddr());
 
 
                 panid.setText(((GlobalData) getApplication()).getpanid());
-                zip.setText(((GlobalData) getApplication()).getzip());
+
+                zip.setText(s_zip);
+
+                if( ((GlobalData) getApplication()).getzip()!=null)
+                    zip.setText(((GlobalData) getApplication()).getzip());
 
                 // city.setSelection(((GlobalData) getApplication()).getcitypos());
-                e_state.setText(((GlobalData) getApplication()).getstate());
+                e_state.setText(s_state);
+                if( ((GlobalData) getApplication()).getstate()!=null)
+                    e_state.setText(((GlobalData) getApplication()).getstate());
+
+                Dob.setText(s_Dob);
+                if( ((GlobalData) getApplication()).getDob()!=null)
+                    Dob.setText(((GlobalData) getApplication()).getDob());
 
 
                 if (((GlobalData) getApplication()).getLoanType() != null) {
@@ -229,7 +304,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 } else
                     s1.setSelection(((GlobalData) getApplication()).getcltyppos());
 
-                Dob.setText(((GlobalData) getApplication()).getDob());
+
 
                 Log.d("city pos", String.valueOf(((GlobalData) getApplication()).getcitypos()));
 
@@ -277,13 +352,15 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,liste);
                 city.setAdapter(ma);
 
-                if( ((GlobalData) getApplication()).getcity()!=null)
+                if(s_city!=null)
                 {
-                    Log.d("city index", String.valueOf(cityindex));
-                    Log.d("city", String.valueOf(((GlobalData) getApplication()).getcity()));
+                    if(s_city.length()>0) {
+                        Log.d("city index", String.valueOf(cityindex));
+                        Log.d("city value", String.valueOf(s_city));
 
-                    Log.d("city index", String.valueOf(cityindex.get(((GlobalData) getApplication()).getcity())));
-                    city.setSelection((Integer) cityindex.get(((GlobalData) getApplication()).getcity()));
+                        Log.d("city index", String.valueOf(cityindex.get(s_city)));
+                        city.setSelection((Integer) cityindex.get(s_city));
+                    }
                 }
 
 
@@ -449,7 +526,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         TextView tdate = (TextView) dialogView.findViewById(R.id.rep);
         tdate.setText(date);
 
-        Log.d("cscore score is",cscore);
+        Log.d("cscore score is", cscore);
         if(Integer.parseInt(cscore)<500) {
             Log.d("its bad","");
             bad.setVisibility(View.VISIBLE);
@@ -471,10 +548,19 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
         TextView name = (TextView) dialogView.findViewById(R.id.name);
-        name.setText(((GlobalData) getApplication()).getfirstnam());
+        name.setText(nam);
 
         AlertDialog alert = builder.create();
         alert.show();
+
+
+
+        DataHandler dbobject1=new DataHandler(this);
+        ContentValues values = new ContentValues();
+        values.put("score",cscore);
+        values.put("firstname",nam);
+        dbobject1.updateDatatouserlogin("userlogin", values, userid);
+
 
 
 
@@ -693,16 +779,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                                         //getStateName(city.getSelectedItem().toString());
 
-                                        DataHandler dbobject = new DataHandler(CibilScore.this);
-                                        Cursor cr = dbobject.displayData("select * from userlogin");
-                                        if (cr != null) {
-                                            if (cr.moveToFirst()) {
-                                                userid = cr.getString(1);
-                                                contactid = cr.getString(2);
-                                                ph = cr.getString(4);
 
-                                                Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5) + " " + cr.getString(6));
-                                            }
 
                                             //**formate date*****//
 
@@ -764,7 +841,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
     }
 
 
-}
+
 
 
 

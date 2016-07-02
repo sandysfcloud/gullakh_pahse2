@@ -64,7 +64,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public Activity currentact;
     private String phone;
     private String contact_id;
-
+    String   cscore=null;
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
 //    public TextView txtName, txtEmail;
@@ -208,7 +208,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 String personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
                 email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-                ((GlobalData) currentact.getApplication()).setfirstnam(personName);
+              //  ((GlobalData) currentact.getApplication()).setfirstnam(personName);
                 Log.e(TAG, googleuserid+"Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
                         + ", Image: " + personPhotoUrl);
@@ -353,8 +353,17 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         //kkgoToIntent();
                         saveDataToDatabase();
 
+                        DataHandler dbobject = new DataHandler(getActivity());
+                        Cursor cr = dbobject.displayData("select * from userlogin");
+                        if (cr != null) {
+                            if (cr.moveToFirst()) {
+                                Log.d("credit score",cscore);
+                                cscore=cr.getString(9);
 
-                        if(((GlobalData) getActivity().getApplication()).getcredit().length()>0)
+                            }
+                        }
+
+                        if(cscore.length()>0)
                         {//if credit score is already present
                             goToIntent(getActivity());
                         }
@@ -464,7 +473,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
 
-                                    if(((GlobalData) getActivity().getApplication()).getcredit().length()>0)
+                                    if(cscore.length()>0)
                                     {//if credit score is already present
                                         goToIntent(getActivity());
                                     }
