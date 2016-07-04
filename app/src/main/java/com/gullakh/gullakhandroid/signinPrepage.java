@@ -132,7 +132,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                         fbid=bFacebookData.getString("idFacebook");
                         Log.d("fb login bFacebookData", String.valueOf(bFacebookData));
                         Log.d("bFacebookData email", String.valueOf(bFacebookData.getString("email")));
-                        ((GlobalData) getApplication()).setfirstnam(first_name);
+                       // ((GlobalData) getApplication()).setfirstnam(first_name);
                         servercon();
 
                     }

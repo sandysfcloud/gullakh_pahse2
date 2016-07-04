@@ -523,6 +523,10 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                     age =  ageg;
                     Log.d("dob age is else", String.valueOf(age));
                 }
+                if(age==2013)
+                {
+                    age=0;
+                }
 
 
                 if (age > 18) {
