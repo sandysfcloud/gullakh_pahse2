@@ -53,16 +53,16 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
     int day, month, yearv;
-    EditText Dob, panid, addr, name, zip;
+    EditText Dob, e_state, panid, addr, name, zip;
     JSONServerGet requestgetserver, requestgetserver1;
     String sessionid, data, cscore,date;
     String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip;
-    Spinner city,e_state;
+    Spinner city;
     Spinner s1;
     String apply;
     Dialog dgthis;
     String[] liste;
-    String spcity,spstate;
+    String spcity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -203,8 +203,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     // TODO Auto-generated method stub
                     spcity = liste[arg2];
 
-                   // getStateName(spcity);
-                    getCityName(spcity);
+                    getStateName(spcity);
                     Log.d("onItemSelected is called", liste[arg2]);
                 }
 
@@ -215,27 +214,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             });
 
 
-            e_state = (Spinner) findViewById(R.id.state);
+            e_state = (EditText) findViewById(R.id.state);
 
-            e_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                @Override
-                public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                           int arg2, long arg3) {
-                    // TODO Auto-generated method stub
-                    spstate = liste[arg2];
-
-
-                    Log.d("onItemSelected is called", liste[arg2]);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-
-           // e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+            e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
             s1 = (Spinner) findViewById(R.id.spinner1);
 
@@ -270,9 +251,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
 
-           // getcitynam();
+            getcitynam();
 
-            getstatenam();
+
             //*****
 
 
@@ -301,9 +282,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     zip.setText(((GlobalData) getApplication()).getzip());
 
                 // city.setSelection(((GlobalData) getApplication()).getcitypos());
-               /* e_state.setText(s_state);
+                e_state.setText(s_state);
                 if( ((GlobalData) getApplication()).getstate()!=null)
-                    e_state.setText(((GlobalData) getApplication()).getstate());*/
+                    e_state.setText(((GlobalData) getApplication()).getstate());
 
                 Dob.setText(s_Dob);
                 if( ((GlobalData) getApplication()).getDob()!=null)
@@ -334,7 +315,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
 
-    public void getstatenam() {
+    public void getcitynam() {
 
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -350,7 +331,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Statename[] enums = gson.fromJson(jsonObject.get("result"), Statename[].class);
+                Cityname[] enums = gson.fromJson(jsonObject.get("result"), Cityname[].class);
 
                 int size = enums.length;
                 Log.e("emplist frm server ", String.valueOf(size));
@@ -363,7 +344,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 liste = new String[size];
 
                 for (int i = 0; i < size; i++) {
-                    liste[i]=enums[i].getStatename();
+                    liste[i]=enums[i].getcity_name();
                     cityindex.put(liste[i], i);
                    // liste.add(enums[i].getcity_name());
                 }
@@ -402,12 +383,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             Log.e("sessionid-cartypes", sessionid);
         }
 
-       // requestgetserver.execute("token", "cityname", sessionid);
-        requestgetserver.execute("token", "allstate", sessionid);
+        requestgetserver.execute("token", "cityname", sessionid);
     }
 
 
-    private void getCityName(String Statenam) {
+    private void getStateName(String city_name) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -422,44 +402,17 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Cityname[] enums = gson.fromJson(jsonObject.get("result"), Cityname[].class);
-               /* for (int i = 0; i < state.length; i++) {
+                Statename[] state = gson.fromJson(jsonObject.get("result"), Statename[].class);
+                for (int i = 0; i < state.length; i++) {
 
                     e_state.setText(state[i].getStatename());
                     // ((GlobalData) getApplication()).setStatename(state[i].getStatename());
                     //setDataToHashMap("currently_living_in", state[i].getStatename());
-                }*/
-
-                int size = enums.length;
-                Log.e("emplist frm server ", String.valueOf(size));
-                // ArrayList<String> liste = new ArrayList<String>();
-
-
-                HashMap  cityindex = new HashMap<>();
-
-
-                liste = new String[size];
-
-                for (int i = 0; i < size; i++) {
-                    liste[i]=enums[i].getcity_name();
-                    cityindex.put(liste[i], i);
-                    // liste.add(enums[i].getcity_name());
                 }
-
-                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,liste);
-                city.setAdapter(ma);
-
-
-
-
-
-
-
-
                 Log.d("check state name json", jsonObject.get("result").toString());
             }
         }, CibilScore.this, "2");
-        requestgetserver1.execute("token", "relatedcity", sessionid, Statenam);
+        requestgetserver1.execute("token", "statename", sessionid, city_name);
     }
 
 
@@ -805,7 +758,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                             if (city.getSelectedItem().toString().equals("")) {
                                 RegisterPageActivity.showErroralert(this, "Enter Your City ", "failed");
                             } else {
-                                if (s_state.toString().equals("")) {
+                                if (e_state.getText().toString().equals("")) {
                                     RegisterPageActivity.showErroralert(this, "Enter Your State", "failed");
                                 } else {
                                     /*if ((s1.getSelectedItem().toString().equals("0"))) {
@@ -840,8 +793,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                             s_addr = addr.getText().toString();
                                             s_panid = panid.getText().toString();
                                             s_city = spcity;
-                                           // s_state = e_state.getText().toString();
-                                            s_state = spstate;
+                                            s_state = e_state.getText().toString();
                                             nam = name.getText().toString();
                                             s_zip = zip.getText().toString();
 
