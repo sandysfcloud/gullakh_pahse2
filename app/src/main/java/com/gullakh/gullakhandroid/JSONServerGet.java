@@ -417,7 +417,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         else if(args[1].equals("allstate")){
 
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from State ORDER BY state_name;")).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from vtiger_state ORDER BY state_name;")).toString());
 
                         }
                         else if(args[1].equals("relatedcity")){
