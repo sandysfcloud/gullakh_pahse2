@@ -504,13 +504,13 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                         }else if(args[1].equals("contactaddress")){
                             Log.d("sess and contact",args[2]+" "+args[3]);
-                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\"}]");
+                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\"}]");
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "updatecontactdetail"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("contact",args[3]));
-                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\"}]"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\"}]"));
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
