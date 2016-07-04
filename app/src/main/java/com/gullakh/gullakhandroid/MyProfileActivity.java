@@ -202,7 +202,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
 
 
-    private void goToServer(String add1, String add2, String add3, String add4, String add5) {
+    private void goToServer(final String add1, final String add2, final String add3, final String add4, final String add5) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -216,13 +216,13 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 //Log.d("Application values jsonobj", String.valueOf(jsonObject));
-
+                gotoUpdateCredential(add1,add2,add3,add4,add5);
                 dgthis.dismiss();
 
             }
         }, MyProfileActivity.this, "wait");
         requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5);
-        gotoUpdateCredential(add1,add2,add3,add4,add5);
+
     }
 
     @Override
@@ -384,17 +384,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             }
             public void processFinishString(String str_result, Dialog dg)
             {
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-                Gson gson = gsonBuilder.create();
-                JsonParser parser = new JsonParser();
-                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-//                Log.d("coapp json", jsonObject.toString());
-                dg.dismiss();
+
 
             }
         }, MyProfileActivity.this, "wait6");
-        requestgetserver4.execute("token", "updateContactDetailsNew", null, null,add1,add2,add3,add4,add5, userid,firstname,lastname);
+        requestgetserver4.execute("token", "updateContactDetailsNew","","",add1,add2,add3,add4,add5,userid,firstname,lastname);
 
     }
 

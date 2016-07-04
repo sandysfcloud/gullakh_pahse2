@@ -410,9 +410,23 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         else if(args[1].equals("cityname")){
 
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City ;")).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City ORDER BY city_name;")).toString());
 
                         }
+                       //**kk
+                        else if(args[1].equals("allstate")){
+
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from State ORDER BY state_name;")).toString());
+
+                        }
+                        else if(args[1].equals("relatedcity")){
+
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City where state_name='"+args[3]+"';")).toString());
+
+                        }
+                        //**kk
                         else if(args[1].equals("statename")){
 
                             client = new DefaultHttpClient();
@@ -447,7 +461,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Accounts where accountname ='City-"+args[3]+"';")).toString());
-                            Log.e("Check query getaccount","select * from Accounts where accountname ='City-"+args[3]+"';");
+                            Log.e("Check query getaccount", "select * from Accounts where accountname ='City-" + args[3]+"';");
                         }
                      else if(args[1].equals("getcontact")){
 
@@ -487,7 +501,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("elementType", "Contacts"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             // Log.d("arguments", "{\"account_id\":\"" + args[3] + "\",\"email\":\"" + args[4] + "\",\"mobile\":\"" + args[5] + "\",\"salutationtype\":\"" + args[6] + "\",\"firstname\":\"" + args[7] + "\",\"lastname\":\"" + args[8] + "\",\"birthday\":\"" + args[9] + "\",\"mailingstreet\":\"" + args[10] + "\",\"mailingcity:\"" + args[11] + "\",\"mailingzip:\"" + args[12] + "\",\"mailingstate:\"" + args[13] + "\",\"assigned_user_id\":\"admin\"}");
-                            nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\""+args[3]+"\",\"email\":\""+args[4]+"\",\"mobile\":\""+args[5]+"\",\"salutationtype\":\""+args[6]+"\",\"firstname\":\""+args[7]+"\",\"lastname\":\""+args[8]+"\",\"birthday\":\""+args[9]+"\",\"mailingstreet\":\""+args[10]+"\",\"mailingcity\":\""+args[11]+"\",\"mailingzip\":\""+args[12]+"\",\"mailingstate\":\""+args[13]+"\",\"assigned_user_id\":\"admin\"}"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"account_id\":\"" + args[3] + "\",\"email\":\"" + args[4] + "\",\"mobile\":\"" + args[5] + "\",\"salutationtype\":\"" + args[6] + "\",\"firstname\":\"" + args[7] + "\",\"lastname\":\"" + args[8] + "\",\"birthday\":\"" + args[9] + "\",\"mailingstreet\":\"" + args[10] + "\",\"mailingcity\":\"" + args[11] + "\",\"mailingzip\":\"" + args[12] + "\",\"mailingstate\":\"" + args[13] + "\",\"assigned_user_id\":\"admin\"}"));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -504,13 +518,13 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                         }else if(args[1].equals("contactaddress")){
                             Log.d("sess and contact",args[2]+" "+args[3]);
-                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\"}]");
+                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8] + "\"}]");
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "updatecontactdetail"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("contact",args[3]));
-                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\"}]"));
+                            nameValuePairs.add(new BasicNameValuePair("contact", args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\"}]"));
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
@@ -522,10 +536,10 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("operation", "create"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "LoanRequestCase"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            Log.d("arg size", String.valueOf(args.length));
+//                            Log.d("arg size", String.valueOf(args.length));
                            // Log.d("arguments", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\",\"primarylender\":\"" + args[5] + "\",\"secondarylender\":\"" + args[6] + "\",\"assigned_user_id\":\"admin\"}");
-                            Log.d("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\","+args[5]+ ",\"loantype\":\""+args[6]+"\",\"preferabledate\":\""+args[7]+"\",\"preferabletime\":\""+args[8]+"\",\"assigned_user_id\":\"admin\"}");
-                            nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\"," + args[5] + ",\"loantype\":\"" + args[6] + "\",\"preferabledate\":\"" + args[7] + "\",\"preferabletime\":\"" + args[8] + "\",\"assigned_user_id\":\"admin\"},\"state\":" + args[9] + "\";\"loanamount\":" + args[10] + "\""));
+                            Log.d("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\"," + args[5] + ",\"loantype\":\"" + args[6] + "\",\"preferabledate\":\"" + args[7] + "\",\"preferabletime\":\"" + args[8] + "\",\"assigned_user_id\":\"admin\",\"state\":" + args[9] + "\",\"loanamount\":\"" + args[10] + "\"}");
+                            nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\"," + args[5] + ",\"loantype\":\"" + args[6] + "\",\"preferabledate\":\"" + args[7] + "\",\"preferabletime\":\"" + args[8] + "\",\"assigned_user_id\":\"admin\",\"state\":\"" + args[9] + "\",\"loanamount\":\"" + args[10] + "\"}"));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -678,6 +692,10 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("user_id", args[9]));
                             nameValuePairs.add(new BasicNameValuePair("firstname", args[10]));
                             nameValuePairs.add(new BasicNameValuePair("lastname", args[11]));
+
+                            for (NameValuePair nvp : nameValuePairs) {
+                                Log.d(nvp.getName(), nvp.getValue());
+                            }
                             client = new DefaultHttpClient();
                             Log.e("email ", args[2]);
                             post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/user_update_process").toString());
