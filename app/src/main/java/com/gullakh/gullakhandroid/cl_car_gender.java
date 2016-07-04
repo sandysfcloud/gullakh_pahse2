@@ -30,8 +30,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -784,7 +788,20 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             }
         }, cl_car_gender.this, "wait");
-        requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add1,add2,add3,add4,add5);
+        String gender =((GlobalData) getApplication()).getgender();
+        gender = gender.substring(0, 1).toUpperCase() + gender.substring(1);
+        String dob =((GlobalData) getApplication()).getDob();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = dateFormat.parse(dob);
+        } catch (ParseException e) {
+            Log.d("dateFormaterror",e.toString());
+            e.printStackTrace();
+        }
+        String newFormatdate=dateFormat1.format(date);
+        requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add1,add2,add3,add4,add5,gender,newFormatdate);
     }
 }
 
