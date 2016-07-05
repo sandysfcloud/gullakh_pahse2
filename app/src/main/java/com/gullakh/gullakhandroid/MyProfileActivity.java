@@ -221,7 +221,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
             }
         }, MyProfileActivity.this, "wait");
-        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5);
+        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5,"","");
 
     }
 
