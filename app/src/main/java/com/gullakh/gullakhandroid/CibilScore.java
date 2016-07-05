@@ -53,7 +53,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
     int day, month, yearv;
-    EditText Dob, e_state, panid, addr, name, zip;
+    EditText Dob, panid, addr, name, zip;
+    Spinner e_state;
     JSONServerGet requestgetserver, requestgetserver1;
     String sessionid, data, cscore,date;
     String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip;
@@ -61,8 +62,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
     Spinner s1;
     String apply;
     Dialog dgthis;
-    String[] liste;
-    String spcity;
+    String[] listcity,liststate;
+    String spcity,spstate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,11 +117,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 if (s_Dob.equals("0000-00-00")) {
                     Log.d("dob from db", s_Dob);
                     s_Dob = "";
-                } else {
+                } /*else {
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     s_Dob = format.format(Date.parse(s_Dob));
-                }
+                }*/
 
 
                 s_addr = cr.getString(18);
@@ -139,9 +140,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             }
         }
 
-        if(cscore!=null)
-        {
-        if (cscore.length() > 0 && !(cscore.equals("0"))) {//credit score request should be sent only once if present then show alert
+
+       if (cscore.length() > 0 && !(cscore.equals("0"))) {//credit score request should be sent only once if present then show alert
 
 
             Log.d("credit score frm server", cscore);
@@ -160,10 +160,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
         }
-    }
+
         else {
 
-
+            Log.d("else part if ther is no credit score", cscore);
             Dob = (EditText) findViewById(R.id.dob);
             Dob.setOnClickListener(this);
 
@@ -198,10 +198,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 public void onItemSelected(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
                     // TODO Auto-generated method stub
-                    spcity = liste[arg2];
+                    spcity = listcity[arg2];
 
-                    getStateName(spcity);
-                    Log.d("onItemSelected is called", liste[arg2]);
+                   // getStateName(spcity);
+                    Log.d("onItemSelected is called", spcity);
                 }
 
                 @Override
@@ -211,9 +211,37 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             });
 
 
-            e_state = (EditText) findViewById(R.id.state);
 
-            e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+
+
+            e_state = (Spinner) findViewById(R.id.state);
+
+
+
+
+        e_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                Log.d("position is", String.valueOf(arg2));
+                spstate = liststate[arg2];
+
+                getcitynam(spstate);
+                Log.d("onItemSelected is called", liststate[arg2]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        //  e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
             s1 = (Spinner) findViewById(R.id.spinner1);
 
@@ -248,9 +276,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
 
-            getcitynam();
+           // getcitynam();
 
-
+            getstatenam();
             //*****
 
 
@@ -279,9 +307,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     zip.setText(((GlobalData) getApplication()).getzip());
 
                 // city.setSelection(((GlobalData) getApplication()).getcitypos());
-                e_state.setText(s_state);
+               /* e_state.setText(s_state);
                 if( ((GlobalData) getApplication()).getstate()!=null)
-                    e_state.setText(((GlobalData) getApplication()).getstate());
+                    e_state.setText(((GlobalData) getApplication()).getstate());kk*/
 
                 Dob.setText(s_Dob);
                 if( ((GlobalData) getApplication()).getDob()!=null)
@@ -310,9 +338,79 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
         }
 
+    public void getstatenam() {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Statename[] enums = gson.fromJson(jsonObject.get("result"), Statename[].class);
+
+                int size = enums.length;
+                Log.e("emplist frm server ", String.valueOf(size));
+                // ArrayList<String> liste = new ArrayList<String>();
 
 
-    public void getcitynam() {
+                HashMap  cityindex = new HashMap<>();
+
+
+                liststate = new String[size];
+
+                for (int i = 0; i < size; i++) {
+                    liststate[i]=enums[i].getStatename();
+                    cityindex.put(liststate[i], i);
+                    // liste.add(enums[i].getcity_name());
+                }
+
+                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,liststate);
+                e_state.setAdapter(ma);
+
+                if(s_state!=null)
+                {
+                    if(s_state.length()>0) {
+                        Log.d("state index", String.valueOf(cityindex));
+                        Log.d("state value", String.valueOf(s_state));
+
+                        Log.d("state index", String.valueOf(cityindex.get(s_state)));
+                        e_state.setSelection((Integer) cityindex.get(s_state));
+                    }
+                }
+
+
+               // if(((GlobalData) getApplication()).getcitypos()!=-1)
+                 //   e_state.setSelection(((GlobalData) getApplication()).getcitypos());
+
+              /*  final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
+                city.setAdapter(fAdapter);*/
+
+
+                Log.e("emplist frm server ", String.valueOf(liststate));
+
+
+            }
+        }, CibilScore.this, "2");
+        DataHandler dbobject = new DataHandler(CibilScore.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("sessn", "statenamcibil", sessionid);
+    }
+
+
+    public void getcitynam(String Statenam) {
 
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -338,29 +436,30 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 HashMap  cityindex = new HashMap<>();
 
 
-                liste = new String[size];
+                listcity = new String[size];
 
                 for (int i = 0; i < size; i++) {
-                    liste[i]=enums[i].getcity_name();
-                    cityindex.put(liste[i], i);
+                    listcity[i]=enums[i].getcity_name();
+                    cityindex.put(listcity[i], i);
                    // liste.add(enums[i].getcity_name());
                 }
 
-                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,liste);
+                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,listcity);
                 city.setAdapter(ma);
 
-                if(s_city!=null)
+                if(s_city!=null)//only after login
                 {
                     if(s_city.length()>0) {
                         Log.d("city index", String.valueOf(cityindex));
                         Log.d("city value", String.valueOf(s_city));
 
                         Log.d("city index", String.valueOf(cityindex.get(s_city)));
+                        if(!cityindex.isEmpty())
                         city.setSelection((Integer) cityindex.get(s_city));
                     }
                 }
 
-
+                s_city=null;//required only after login
                 if(((GlobalData) getApplication()).getcitypos()!=-1)
                 city.setSelection(((GlobalData) getApplication()).getcitypos());
 
@@ -368,7 +467,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 city.setAdapter(fAdapter);*/
 
 
-                Log.e("emplist frm server ", String.valueOf(liste));
+                Log.e("emplist frm server ", String.valueOf(listcity));
 
 
             }
@@ -380,37 +479,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("token", "cityname", sessionid);
+        requestgetserver.execute("token", "relatedcity", sessionid,Statenam);
     }
 
 
-    private void getStateName(String city_name) {
-        requestgetserver1 = new JSONServerGet(new AsyncResponse() {
-            @Override
-            public void processFinish(JSONObject output) {
-
-            }
-
-            public void processFinishString(String str_result, Dialog dg) {
-
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-                Gson gson = gsonBuilder.create();
-
-                JsonParser parser = new JsonParser();
-                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Statename[] state = gson.fromJson(jsonObject.get("result"), Statename[].class);
-                for (int i = 0; i < state.length; i++) {
-
-                    e_state.setText(state[i].getStatename());
-                    // ((GlobalData) getApplication()).setStatename(state[i].getStatename());
-                    //setDataToHashMap("currently_living_in", state[i].getStatename());
-                }
-                Log.d("check state name json", jsonObject.get("result").toString());
-            }
-        }, CibilScore.this, "2");
-        requestgetserver1.execute("token", "statename", sessionid, city_name);
-    }
 
 
     public void getcibil() {
@@ -738,8 +810,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
-
-
+            case R.id.state:
+                Log.d("state is clicked",s_city);
+                s_city=null;
+                break;
             case R.id.done:
 
 
@@ -755,7 +829,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                             if (city.getSelectedItem().toString().equals("")) {
                                 RegisterPageActivity.showErroralert(this, "Enter Your City ", "failed");
                             } else {
-                                if (e_state.getText().toString().equals("")) {
+                                if (e_state.getSelectedItem().toString().equals("")) {
                                     RegisterPageActivity.showErroralert(this, "Enter Your State", "failed");
                                 } else {
                                     /*if ((s1.getSelectedItem().toString().equals("0"))) {
@@ -782,15 +856,19 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                                             s_Dob = Dob.getText().toString();
                                             ((GlobalData) getApplication()).setDob(s_Dob);
-
+                                    try {
                                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                             s_Dob = format.format(Date.parse(s_Dob));
 
+                                    } catch (Exception e) {
 
+                                        e.printStackTrace();
+
+                                    }
                                             s_addr = addr.getText().toString();
                                             s_panid = panid.getText().toString();
                                             s_city = spcity;
-                                            s_state = e_state.getText().toString();
+                                           // s_state = sstate;
                                             nam = name.getText().toString();
                                             s_zip = zip.getText().toString();
 
@@ -808,15 +886,16 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                             Log.d("zip code", s_zip);
                                             Log.d("city pos", String.valueOf(city.getSelectedItemPosition()));
 
-                                            ((GlobalData) getApplication()).setfirstnam(nam);
-                                            ((GlobalData) getApplication()).setpanid(s_panid);
-                                            ((GlobalData) getApplication()).setzip(s_zip);
-                                            ((GlobalData) getApplication()).setaddr(s_addr);
-                                            ((GlobalData) getApplication()).setcity(s_city);
-                                            ((GlobalData) getApplication()).setstate(s_state);
-                                            ((GlobalData) getApplication()).setcltyppos(s1.getSelectedItemPosition());
+                                    ((GlobalData) getApplication()).setfirstnam(nam);
+                                    ((GlobalData) getApplication()).setpanid(s_panid);
+                                    ((GlobalData) getApplication()).setzip(s_zip);
+                                    ((GlobalData) getApplication()).setaddr(s_addr);
+                                    ((GlobalData) getApplication()).setcity(s_city);
+                                    ((GlobalData) getApplication()).setstate(s_state);
+                                    ((GlobalData) getApplication()).setcltyppos(s1.getSelectedItemPosition());
 
-                                            ((GlobalData) getApplication()).setcitypos(city.getSelectedItemPosition());
+                                    ((GlobalData) getApplication()).setcitypos(city.getSelectedItemPosition());
+
 
 
                                             getcibil();
@@ -844,4 +923,31 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
 
+/* private void getStateName(String city_name) {
+        requestgetserver1 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Statename[] state = gson.fromJson(jsonObject.get("result"), Statename[].class);
+                for (int i = 0; i < state.length; i++) {
+
+                   // e_state.setText(state[i].getStatename());
+                    // ((GlobalData) getApplication()).setStatename(state[i].getStatename());
+                    //setDataToHashMap("currently_living_in", state[i].getStatename());
+                }
+                Log.d("check state name json", jsonObject.get("result").toString());
+            }
+        }, CibilScore.this, "2");
+        requestgetserver1.execute("token", "statename", sessionid, city_name);
+    }*/
 

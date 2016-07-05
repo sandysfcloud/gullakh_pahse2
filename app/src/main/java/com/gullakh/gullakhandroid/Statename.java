@@ -5,9 +5,9 @@ package com.gullakh.gullakhandroid;
  */
 public class Statename
 {
-    String statename;
+    String state_name;
 
     public String getStatename() {
-        return statename;
+        return state_name;
     }
 }

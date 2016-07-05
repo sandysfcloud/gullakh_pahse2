@@ -1018,9 +1018,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void run() {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment).commit();
+            if(!isFinishing()) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment).commit();
+            }
         }
     }
 

@@ -101,6 +101,18 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
                         }
+
+                        else if(args[1].equals("statenamcibil")){
+                            Log.d("main result", "builderlist");
+                            Log.d("sessn", args[2]);
+
+                            nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "getstate"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+
+
+                        }
                         else if(args[1].equals("projectlist")){
                             Log.d("main result", "projectlist");
                             Log.d("sessn", args[2]);
@@ -423,7 +435,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         else if(args[1].equals("relatedcity")){
 
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City where state_name='"+args[3]+"';")).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from City where statename='"+args[3]+"';")).toString());
 
                         }
                         //**kk
