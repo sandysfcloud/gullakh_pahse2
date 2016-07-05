@@ -79,9 +79,6 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         v2.setLayoutParams(lp);
 
         name = (EditText) findViewById(R.id.textViewName);
-        String[] temp=name.getText().toString().split(" ");
-        firstname=temp[0];
-        lastname=temp[temp.length-1];
         ph = (EditText) findViewById(R.id.textViewMobNo);
         email = (EditText) findViewById(R.id.textViewEmail);
         ProfilePic = (ImageView) findViewById(R.id.profilepic);
@@ -266,6 +263,8 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
 //            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
             if (details.length>0) {
+                firstname=details[0].getFirstname();
+                lastname=details[0].getLastname();
                 name.setText(details[0].getFirstname()+" "+details[0].getLastname());
                 add1.setText(details[0].getMailingstreet());
                 add2.setText(details[0].getOtherstreet());
