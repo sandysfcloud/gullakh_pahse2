@@ -214,6 +214,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 ((GlobalData) getApplication()).setcreditdate(date);*/
 
                 Log.d("signindetails", usermobno + " : " + userid + " : " + contactid + " " + profileurl);
+                Log.d("signindetails2", firstname + " : " + lastname + " : " + dob + " " + city+" "+state);
                 ContentValues values = new ContentValues();
                 values.put("usersession", str_result.get("session_id").toString());
                 values.put("useremail", useremail);
@@ -243,7 +244,23 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     values.put("profile",profileurl.replaceAll(" \"",""));
                 }
                 dbobject.insertdata(values, "userlogin");
-                MainActivity.signinstate = true;
+
+
+                DataHandler dbobject2 = new DataHandler(this);
+                Cursor cr2 = dbobject2.displayData("select * from userlogin");
+                if (cr2 != null) {
+                    if (cr.moveToFirst()) {
+                        Log.d("signindetails", cr2.getString(7) + " : " + cr2.getString(8) + " : " + cr2.getString(9) + " " + cr2.getString(10));
+                        Log.d("signindetails2", cr2.getString(11) + " : " + cr2.getString(12) + " : " + cr2.getString(13) + " " + cr2.getString(14));
+                        Log.d("signindetails2", cr2.getString(15) + " : " + cr2.getString(16) + " : " + cr2.getString(17) + " " + cr2.getString(18));
+
+                    }
+                }
+
+
+
+
+                        MainActivity.signinstate = true;
 
                 if (ListView_Click.buttonApply) {
                     ListView_Click.buttonApply = false;//from bank click
