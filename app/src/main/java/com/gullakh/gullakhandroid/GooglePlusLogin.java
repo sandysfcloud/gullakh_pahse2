@@ -357,15 +357,15 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         Cursor cr = dbobject.displayData("select * from userlogin");
                         if (cr != null) {
                             if (cr.moveToFirst()) {
-                                Log.d("credit score",cscore);
+                               // Log.d("credit score",cscore);
                                 cscore=cr.getString(9);
 
                             }
                         }
-
-                        if(cscore.length()>0)
-                        {//if credit score is already present
-                            goToIntent(getActivity());
+                        if(cscore!=null) {
+                            if (cscore.length() > 0) {//if credit score is already present
+                                goToIntent(getActivity());
+                            }
                         }
                         else {
 

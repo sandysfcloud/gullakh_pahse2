@@ -95,7 +95,6 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         apply = intent.getStringExtra("apply");
 
 
-
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("select * from userlogin");
         if (cr != null) {
@@ -105,21 +104,19 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 Log.d("signindetails2", cr.getString(15) + " : " + cr.getString(16) + " : " + cr.getString(17) + " " + cr.getString(18));
 
 
-                cscore=cr.getString(9);
-                date=cr.getString(17);
-                nam=cr.getString(10);
+                cscore = cr.getString(9);
+                date = cr.getString(17);
+                nam = cr.getString(10);
 
                 s_Dob = cr.getString(7);
 
-                Log.d("cscore is",cscore);
+                Log.d("cscore is", cscore);
 
 
-                if(s_Dob.equals("0000-00-00"))
-                {
-                    Log.d("dob from db",s_Dob);
-                    s_Dob="";
-                }
-                else {
+                if (s_Dob.equals("0000-00-00")) {
+                    Log.d("dob from db", s_Dob);
+                    s_Dob = "";
+                } else {
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     s_Dob = format.format(Date.parse(s_Dob));
@@ -133,7 +130,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 s_zip = cr.getString(16);
 
-               // s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
+                // s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
                 userid = cr.getString(1);
                 contactid = cr.getString(2);
                 ph = cr.getString(4);
@@ -142,28 +139,28 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             }
         }
 
-
-        if(cscore.length()>0&&!(cscore.equals("0")))
-        {//credit score request should be sent only once if present then show alert
+        if(cscore!=null)
+        {
+        if (cscore.length() > 0 && !(cscore.equals("0"))) {//credit score request should be sent only once if present then show alert
 
 
             Log.d("credit score frm server", cscore);
-            LinearLayout  main = (LinearLayout) findViewById(R.id.lmain);
+            LinearLayout main = (LinearLayout) findViewById(R.id.lmain);
             main.setVisibility(View.INVISIBLE);
 
-           if(apply!=null) {
-               if (apply.equals("apply")) {//from listviewclick page
-                   Log.d("from listviewclick", "check if can continue or not");
-                   getcibil();
-               }
-           }
-            else {
-                Log.d("from mainact","show alert");
+            if (apply != null) {
+                if (apply.equals("apply")) {//from listviewclick page
+                    Log.d("from listviewclick", "check if can continue or not");
+                    getcibil();
+                }
+            } else {
+                Log.d("from mainact", "show alert");
                 setalert();
             }
 
 
         }
+    }
         else {
 
 
