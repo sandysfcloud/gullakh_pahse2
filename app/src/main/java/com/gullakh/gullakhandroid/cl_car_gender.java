@@ -718,6 +718,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             ContentValues contentValues1=new ContentValues();
             contentValues1.put("contact_id",borrowercontactid);
+            contentValues1.put("street",add1.getText().toString());
+            contentValues1.put("city", city.getText().toString());
+            contentValues1.put("state",state.getText().toString());
+            contentValues1.put("zip",pin.getText().toString());
+            contentValues1.put("gender",((GlobalData)getApplication()).getgender());
+            contentValues1.put("dob",((GlobalData)getApplication()).getDob());
+            contentValues1.put("zip",pin.getText().toString());
             Log.d("seeupdateofuserlogin", "userlogin" + contentValues1 + userid);
             DataHandler dbobject1=new DataHandler(this);
             dbobject1.updateDatatouserlogin("userlogin",contentValues1,userid);
