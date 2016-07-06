@@ -100,6 +100,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         Cursor cr = dbobject.displayData("select * from userlogin");
         if (cr != null) {
             if (cr.moveToFirst()) {
+                Log.d("signindetails", cr.getString(1) + " : " + cr.getString(2) + " : " + cr.getString(3) + " " + cr.getString(4));
+                Log.d("signindetails", cr.getString(5) + " : " + cr.getString(6) + " : ");
                 Log.d("signindetails", cr.getString(7) + " : " + cr.getString(8) + " : " + cr.getString(9) + " " + cr.getString(10));
                 Log.d("signindetails2", cr.getString(11) + " : " + cr.getString(12) + " : " + cr.getString(13) + " " + cr.getString(14));
                 Log.d("signindetails2", cr.getString(15) + " : " + cr.getString(16) + " : " + cr.getString(17) + " " + cr.getString(18));
@@ -111,7 +113,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 s_Dob = cr.getString(7);
 
-                Log.d("cscore is", cscore);
+                //Log.d("cscore is", cscore);
 
 
                 if (s_Dob.equals("0000-00-00")) {

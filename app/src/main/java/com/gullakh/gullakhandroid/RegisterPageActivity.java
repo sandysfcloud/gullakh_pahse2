@@ -301,6 +301,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 				if(urlchange=="setpassword") {
 					storedatatoDatabase();
+
 					Intent intent;
 					MainActivity.signinstate = true;
 					if (ListView_Click.buttonApply) {
