@@ -86,12 +86,13 @@
                 <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="200dp"
                     android:layout_height="50dp"
-                    android:inputType="textPersonName"
+
                     android:ems="10"
                     android:id="@+id/FirstName"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/edittextsimple"
                     android:hint="First Name"
+                    android:inputType="textCapSentences"
                     android:layout_weight="2"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="5dp"
@@ -110,10 +111,11 @@
                 <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
-                    android:inputType="textPersonName"
+
                     android:ems="10"
                     android:id="@+id/middlename"
                     android:background="@drawable/edittextsimple"
+                    android:inputType="textCapSentences"
                     android:hint="Middle Name"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
@@ -125,12 +127,13 @@
                 <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
-                    android:inputType="textPersonName"
+
                     android:ems="10"
                     android:id="@+id/LastName"
                     android:background="@drawable/edittextsimple"
                     android:hint="Last Name"
                     android:layout_weight="1"
+                    android:inputType="textCapSentences"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:singleLine="true"

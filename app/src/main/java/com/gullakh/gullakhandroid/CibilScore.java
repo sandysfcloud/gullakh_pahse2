@@ -380,7 +380,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     if(s_state.length()>0) {
                         Log.d("state index", String.valueOf(cityindex));
                         Log.d("state value", String.valueOf(s_state));
-
+                        s_state = s_state.replace(" ", "");
                         Log.d("state index", String.valueOf(cityindex.get(s_state)));
                         e_state.setSelection((Integer) cityindex.get(s_state));
                     }
@@ -837,15 +837,15 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                     } else {*/
 
 
-                                        if (s1.getSelectedItem().toString().equals("1"))
+                                        if (s1.getSelectedItem().toString().equals("0"))
                                             loantyp = "New Car Loan";
-                                        else if (s1.getSelectedItem().toString().equals("2"))
+                                        else if (s1.getSelectedItem().toString().equals("1"))
                                             loantyp = "Used Car Loan";
-                                        else if (s1.getSelectedItem().toString().equals("3"))
+                                        else if (s1.getSelectedItem().toString().equals("2"))
                                             loantyp = "Personal Loan";
-                                        else if (s1.getSelectedItem().toString().equals("4"))
+                                        else if (s1.getSelectedItem().toString().equals("3"))
                                             loantyp = "Home Loan";
-                                        else if (s1.getSelectedItem().toString().equals("5"))
+                                        else if (s1.getSelectedItem().toString().equals("4"))
                                             loantyp = "Loan Against Property";
 
                                         //getStateName(city.getSelectedItem().toString());
