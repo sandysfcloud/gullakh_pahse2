@@ -418,13 +418,16 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     protected void onSaveInstanceState(Bundle icicle) {
         super.onSaveInstanceState(icicle);
-
+       if(((GlobalData) getApplication()).getloanamt()!=null)
         icicle.putString("loan_amt", ((GlobalData) getApplication()).getloanamt());
 
+        if(((GlobalData) getApplication()).getTenure()!=null)
         icicle.putString("tenure", ((GlobalData) getApplication()).getTenure());
 
+        if(((GlobalData) getApplication()).getLoanType()!=null)
         icicle.putString("loan_type", ((GlobalData) getApplication()).getLoanType());
 
+        if(((GlobalData) getApplication()).getnetsalary()!=null)
         icicle.putString("net_sal", ((GlobalData) getApplication()).getnetsalary().toString());
 
 
