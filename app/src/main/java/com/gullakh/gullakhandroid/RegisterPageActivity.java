@@ -296,9 +296,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					});
 					builder2.show();
 				}
+
 				userid=str_result.getString("user_id");
 				contactid=str_result.getString("contact_id");
-
 				if(urlchange=="setpassword") {
 					storedatatoDatabase();
 
@@ -344,8 +344,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		values.put("useremail", useremail);
 		values.put("usermobile", usermobno);
 		values.put("user_id", userid);
+		values.put("firstname", firstName.getText().toString());
+		values.put("lastname", lastName.getText().toString());
 		values.put("contact_id", contactid);
+
 		Log.d("mobileandemailinRP",useremail+" "+usermobno);
+
 		dbobject.insertdata(values, "userlogin");
 	}
 	public static Dialog showAlertinit(Activity act)
