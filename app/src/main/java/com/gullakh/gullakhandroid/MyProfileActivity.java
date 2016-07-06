@@ -368,11 +368,20 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         }.execute();
     }
     public void storetoDatabase(String url) {
-        getProfilePic(url.replaceAll("\"",""));
+
         DataHandler dbobject1=new DataHandler(this);
         ContentValues values = new ContentValues();
-        values.put("profile",url.replaceAll(" \"",""));
+        if(url!=null) {
+            getProfilePic(url.replaceAll("\"",""));
+            values.put("profile", url.replaceAll(" \"", ""));
+        }
+        values.put("street", add1.getText().toString().replaceAll(" \"", ""));
+        values.put("city", add3.getText().toString().replaceAll(" \"", ""));
+        values.put("state",add4.getText().toString().replaceAll(" \"", ""));
+        values.put("zip",add5.getText().toString().replaceAll(" \"",""));
+
         dbobject1.updateDatatouserlogin("userlogin", values, userid);
+        Log.d("userlogin is updated",add1.getText().toString()+" "+add3.getText().toString()+" "+add4.getText().toString()+" "+add5.getText().toString());
     }
 
     private void gotoUpdateCredential(String add1, String add2, String add3, String add4, String add5) {
@@ -383,7 +392,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             }
             public void processFinishString(String str_result, Dialog dg)
             {
-
+                storetoDatabase(null);
 
             }
         }, MyProfileActivity.this, "wait6");
