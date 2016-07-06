@@ -302,11 +302,16 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 				if(urlchange=="setpassword") {
 					storedatatoDatabase();
 
-					Intent intent;
+					//Intent intent=null;
 					MainActivity.signinstate = true;
 					if (ListView_Click.buttonApply) {
 						ListView_Click.buttonApply = false;
-						if (((GlobalData) getApplication()).getLoanType() != null) {
+						Log.d("sign in true", "cibilscore");
+						Intent intent2 = new Intent(this, CibilScore.class);
+						intent2.putExtra("apply", "apply");//dont show the alert
+						startActivity(intent2);
+
+						/*if (((GlobalData) getApplication()).getLoanType() != null) {
 							if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
 								intent = new Intent(RegisterPageActivity.this, cl_car_make.class);
 							} else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
@@ -320,15 +325,27 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								intent = new Intent(RegisterPageActivity.this, MainActivity.class);
 							}
 							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Registered Successfully", "success");
-						}else {
+						}else {//from mainactivity
 							intent = new Intent(RegisterPageActivity.this, MainActivity.class);
-						}
+						}*/
 					}else {
-						intent = new Intent(RegisterPageActivity.this, MainActivity.class);
+
+						if(((GlobalData) getApplication()).getcredback()!=null)
+						{
+							Log.d("sign in from mainact","1");
+							Intent intent2 = new Intent(this, CibilScore.class);
+							startActivity(intent2);
+						}
+						else {
+
+
+							Intent intent = new Intent(RegisterPageActivity.this, MainActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+							startActivity(intent);
+							overridePendingTransition(R.transition.left, R.transition.right);
+						}
 					}
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-					startActivity(intent);
-					overridePendingTransition(R.transition.left, R.transition.right);
+
 				}
 				}else{
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
@@ -337,6 +354,11 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			e.printStackTrace();
 		}
 	}
+
+
+
+
+
 	private void storedatatoDatabase() {
 		DataHandler dbobject = new DataHandler(this);
 		dbobject.addTable();

@@ -49,21 +49,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CibilScore extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
-    private String[] Loantypsp = new String[]{ "New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
+    private String[] Loantypsp = new String[]{"New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
 
 
     int day, month, yearv;
     EditText Dob, panid, addr, name, zip;
     Spinner e_state;
     JSONServerGet requestgetserver, requestgetserver1;
-    String sessionid, data, cscore,date;
+    String sessionid, data, cscore, date;
     String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip;
     Spinner city;
     Spinner s1;
     String apply;
     Dialog dgthis;
-    String[] listcity,liststate;
-    String spcity,spstate;
+    String[] listcity, liststate;
+    String spcity, spstate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,10 +116,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 //Log.d("cscore is", cscore);
 
-
-                if (s_Dob.equals("0000-00-00")) {
-                    Log.d("dob from db", s_Dob);
-                    s_Dob = "";
+                if (s_Dob != null) {
+                    if (s_Dob.equals("0000-00-00")) {
+                        Log.d("dob from db", s_Dob);
+                        s_Dob = "";
+                    }
                 } /*else {
 
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -142,44 +144,55 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             }
         }
 
+        if (cscore != null) {
+            if (cscore.length() > 0 && !(cscore.equals("0"))) {//credit score request should be sent only once if present then show alert
 
-       if (cscore.length() > 0 && !(cscore.equals("0"))) {//credit score request should be sent only once if present then show alert
 
+                Log.d("credit score frm server", cscore);
+                LinearLayout main = (LinearLayout) findViewById(R.id.lmain);
+                main.setVisibility(View.INVISIBLE);
 
-            Log.d("credit score frm server", cscore);
-            LinearLayout main = (LinearLayout) findViewById(R.id.lmain);
-            main.setVisibility(View.INVISIBLE);
-
-            if (apply != null) {
-                if (apply.equals("apply")) {//from listviewclick page
-                    Log.d("from listviewclick", "check if can continue or not");
-                    getcibil();
+                if (apply != null) {
+                    if (apply.equals("apply")) {//from listviewclick page
+                        Log.d("from listviewclick", "check if can continue or not");
+                        getcibil();
+                    }
+                } else {
+                    Log.d("from mainact", "show alert");
+                    setalert();
                 }
+
+
             } else {
-                Log.d("from mainact", "show alert");
-                setalert();
+                Log.d("display page", "1");
+                page();
             }
-
-
+        } else {
+            Log.d("display page", "2");
+            page();
         }
 
-        else {
+    }//oncreate end
 
-            Log.d("else part if ther is no credit score", cscore);
-            Dob = (EditText) findViewById(R.id.dob);
-            Dob.setOnClickListener(this);
 
-            Button done = (Button) findViewById(R.id.done);
-            done.setOnClickListener(this);
+    public void page() {
 
-            addr = (EditText) findViewById(R.id.addr);
-            name = (EditText) findViewById(R.id.nam);
-            panid = (EditText) findViewById(R.id.panid);
-            panid.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-            zip = (EditText) findViewById(R.id.zip);
 
-            city = (Spinner) findViewById(R.id.city);
-            city.setPrompt("Select City");
+        Log.d("else part if ther is no credit score", "1");
+        Dob = (EditText) findViewById(R.id.dob);
+        Dob.setOnClickListener(this);
+
+        Button done = (Button) findViewById(R.id.done);
+        done.setOnClickListener(this);
+
+        addr = (EditText) findViewById(R.id.addr);
+        name = (EditText) findViewById(R.id.nam);
+        panid = (EditText) findViewById(R.id.panid);
+        panid.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+        zip = (EditText) findViewById(R.id.zip);
+
+        city = (Spinner) findViewById(R.id.city);
+        city.setPrompt("Select City");
         /*city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -194,31 +207,26 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         });*/
 
 
-            city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                @Override
-                public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                           int arg2, long arg3) {
-                    // TODO Auto-generated method stub
-                    spcity = listcity[arg2];
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                spcity = listcity[arg2];
 
-                   // getStateName(spcity);
-                    Log.d("onItemSelected is called", spcity);
-                }
+                // getStateName(spcity);
+                Log.d("onItemSelected is called", spcity);
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
-
-
+            }
+        });
 
 
-
-            e_state = (Spinner) findViewById(R.id.state);
-
-
+        e_state = (Spinner) findViewById(R.id.state);
 
 
         e_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -242,103 +250,97 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         });
 
 
-
         //  e_state.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
-            s1 = (Spinner) findViewById(R.id.spinner1);
+        s1 = (Spinner) findViewById(R.id.spinner1);
 
 
-            MyArrayAdapter ma = new MyArrayAdapter(this, Loantypsp);
-            s1.setAdapter(ma);
+        MyArrayAdapter ma = new MyArrayAdapter(this, Loantypsp);
+        s1.setAdapter(ma);
 
 
-            s1.setPrompt("Select Loan Type");
+        s1.setPrompt("Select Loan Type");
 
 
-            //******get data from search
-            //  setsearchdb();
+        //******get data from search
+        //  setsearchdb();
 
 
-            s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                @Override
-                public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                           int arg2, long arg3) {
-                    // TODO Auto-generated method stub
-                    loantyp = s1.getSelectedItem().toString();
-                    Log.d("loantyp frm spinner is", loantyp);
-                }
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                loantyp = s1.getSelectedItem().toString();
+                Log.d("loantyp frm spinner is", loantyp);
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
-
-
+            }
+        });
 
 
-           // getcitynam();
+        // getcitynam();
 
-            getstatenam();
-            //*****
-
-
-
-            //**formate date*****//
+        getstatenam();
+        //*****
 
 
-
-            if (nam!= null) {
-
-                name.setText(nam);
-
-                if( ((GlobalData) getApplication()).getfirstnam()!=null)
-                    name.setText(((GlobalData) getApplication()).getfirstnam());
-
-                addr.setText(s_addr);
-                if( ((GlobalData) getApplication()).getfirstnam()!=null)
-                    addr.setText(((GlobalData) getApplication()).getaddr());
+        //**formate date*****//
 
 
-                panid.setText(((GlobalData) getApplication()).getpanid());
+        if (nam != null) {
 
-                zip.setText(s_zip);
+            name.setText(nam);
 
-                if( ((GlobalData) getApplication()).getzip()!=null)
-                    zip.setText(((GlobalData) getApplication()).getzip());
+            if (((GlobalData) getApplication()).getfirstnam() != null)
+                name.setText(((GlobalData) getApplication()).getfirstnam());
 
-                // city.setSelection(((GlobalData) getApplication()).getcitypos());
+            addr.setText(s_addr);
+            if (((GlobalData) getApplication()).getfirstnam() != null)
+                addr.setText(((GlobalData) getApplication()).getaddr());
+
+
+            panid.setText(((GlobalData) getApplication()).getpanid());
+
+            zip.setText(s_zip);
+
+            if (((GlobalData) getApplication()).getzip() != null)
+                zip.setText(((GlobalData) getApplication()).getzip());
+
+            // city.setSelection(((GlobalData) getApplication()).getcitypos());
                /* e_state.setText(s_state);
                 if( ((GlobalData) getApplication()).getstate()!=null)
                     e_state.setText(((GlobalData) getApplication()).getstate());kk*/
 
-                Dob.setText(s_Dob);
-                if( ((GlobalData) getApplication()).getDob()!=null)
-                    Dob.setText(((GlobalData) getApplication()).getDob());
+            Dob.setText(s_Dob);
+            if (((GlobalData) getApplication()).getDob() != null)
+                Dob.setText(((GlobalData) getApplication()).getDob());
 
 
-                if (((GlobalData) getApplication()).getLoanType() != null) {
-                    Log.d("Cibilscore getLoanType", ((GlobalData) getApplication()).getLoanType());
-                    List<String> list = Arrays.asList(Loantypsp);
-                    int index = list.indexOf(((GlobalData) getApplication()).getLoanType()); // 1
-                    s1.setSelection(index);
+            if (((GlobalData) getApplication()).getLoanType() != null) {
+                Log.d("Cibilscore getLoanType", ((GlobalData) getApplication()).getLoanType());
+                List<String> list = Arrays.asList(Loantypsp);
+                int index = list.indexOf(((GlobalData) getApplication()).getLoanType()); // 1
+                s1.setSelection(index);
 
-                    Log.d("index loantyp", String.valueOf(index));
-                    Log.d("Cibilscore loantyp", ((GlobalData) getApplication()).getLoanType());
-
-
-                } else
-                    s1.setSelection(((GlobalData) getApplication()).getcltyppos());
+                Log.d("index loantyp", String.valueOf(index));
+                Log.d("Cibilscore loantyp", ((GlobalData) getApplication()).getLoanType());
 
 
+            } else
+                s1.setSelection(((GlobalData) getApplication()).getcltyppos());
 
-                Log.d("city pos", String.valueOf(((GlobalData) getApplication()).getcitypos()));
 
-            }
-        }
+            Log.d("city pos", String.valueOf(((GlobalData) getApplication()).getcitypos()));
 
         }
+
+    }
+
 
     public void getstatenam() {
 
@@ -363,23 +365,22 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 // ArrayList<String> liste = new ArrayList<String>();
 
 
-                HashMap  cityindex = new HashMap<>();
+                HashMap cityindex = new HashMap<>();
 
 
                 liststate = new String[size];
 
                 for (int i = 0; i < size; i++) {
-                    liststate[i]=enums[i].getStatename();
+                    liststate[i] = enums[i].getStatename();
                     cityindex.put(liststate[i], i);
                     // liste.add(enums[i].getcity_name());
                 }
 
-                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,liststate);
+                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this, liststate);
                 e_state.setAdapter(ma);
 
-                if(s_state!=null)
-                {
-                    if(s_state.length()>0) {
+                if (s_state != null) {
+                    if (s_state.length() > 0) {
                         Log.d("state index", String.valueOf(cityindex));
                         Log.d("state value", String.valueOf(s_state));
                         s_state = s_state.replace(" ", "");
@@ -389,8 +390,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 }
 
 
-               // if(((GlobalData) getApplication()).getcitypos()!=-1)
-                 //   e_state.setSelection(((GlobalData) getApplication()).getcitypos());
+                // if(((GlobalData) getApplication()).getcitypos()!=-1)
+                //   e_state.setSelection(((GlobalData) getApplication()).getcitypos());
 
               /*  final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
                 city.setAdapter(fAdapter);*/
@@ -432,38 +433,38 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 int size = enums.length;
                 Log.e("emplist frm server ", String.valueOf(size));
-               // ArrayList<String> liste = new ArrayList<String>();
+                // ArrayList<String> liste = new ArrayList<String>();
 
 
-                HashMap  cityindex = new HashMap<>();
+                HashMap cityindex = new HashMap<>();
 
 
                 listcity = new String[size];
 
                 for (int i = 0; i < size; i++) {
-                    listcity[i]=enums[i].getcity_name();
+                    listcity[i] = enums[i].getcity_name();
                     cityindex.put(listcity[i], i);
-                   // liste.add(enums[i].getcity_name());
+                    // liste.add(enums[i].getcity_name());
                 }
 
-                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this,listcity);
+                MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this, listcity);
                 city.setAdapter(ma);
 
-                if(s_city!=null)//only after login
+                if (s_city != null)//only after login
                 {
-                    if(s_city.length()>0) {
+                    if (s_city.length() > 0) {
                         Log.d("city index", String.valueOf(cityindex));
                         Log.d("city value", String.valueOf(s_city));
 
                         Log.d("city index", String.valueOf(cityindex.get(s_city)));
-                        if(!cityindex.isEmpty())
-                        city.setSelection((Integer) cityindex.get(s_city));
+                        if (!cityindex.isEmpty())
+                            city.setSelection((Integer) cityindex.get(s_city));
                     }
                 }
 
-                s_city=null;//required only after login
-                if(((GlobalData) getApplication()).getcitypos()!=-1)
-                city.setSelection(((GlobalData) getApplication()).getcitypos());
+                s_city = null;//required only after login
+                if (((GlobalData) getApplication()).getcitypos() != -1)
+                    city.setSelection(((GlobalData) getApplication()).getcitypos());
 
               /*  final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
                 city.setAdapter(fAdapter);*/
@@ -481,10 +482,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("token", "relatedcity", sessionid,Statenam);
+        requestgetserver.execute("token", "relatedcity", sessionid, Statenam);
     }
-
-
 
 
     public void getcibil() {
@@ -555,22 +554,21 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 //CHANGE BACK LATER
 
 
-            requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp, nam, ListView_Click.lenderid);
-
+        requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp, nam, ListView_Click.lenderid);
 
 
     }
 
 
     public void setalert() {
-        Log.d("set alert called","");
+        Log.d("set alert called", "");
         AlertDialog.Builder builder = new AlertDialog.Builder(CibilScore.this);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.cibilscorepopup, null);
         builder.setView(dialogView)
 
-        //builder.setMessage("Your Credit Score is " + cscore)
+                //builder.setMessage("Your Credit Score is " + cscore)
 
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -598,20 +596,17 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         tdate.setText(date);
 
         Log.d("cscore score is", cscore);
-        if(Integer.parseInt(cscore)<500) {
-            Log.d("its bad","");
+        if (Integer.parseInt(cscore) < 500) {
+            Log.d("its bad", "");
             bad.setVisibility(View.VISIBLE);
             distxt.setText("Below Average");
 
-        }
-        else if(Integer.parseInt(cscore)>=500||Integer.parseInt(cscore)<=700) {
-            Log.d("its Good","");
+        } else if (Integer.parseInt(cscore) >= 500 || Integer.parseInt(cscore) <= 700) {
+            Log.d("its Good", "");
             good.setVisibility(View.VISIBLE);
             distxt.setText("Good");
-        }
-
-        else if(Integer.parseInt(cscore)>=700) {
-            Log.d("its Excellent","");
+        } else if (Integer.parseInt(cscore) >= 700) {
+            Log.d("its Excellent", "");
             exce.setVisibility(View.VISIBLE);
             distxt.setText("Excellent");
 
@@ -625,16 +620,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         alert.show();
 
 
-
-        DataHandler dbobject1=new DataHandler(this);
+        DataHandler dbobject1 = new DataHandler(this);
         ContentValues values = new ContentValues();
-        values.put("score",cscore);
-        values.put("firstname",nam);
+        values.put("score", cscore);
+        values.put("firstname", nam);
         dbobject1.updateDatatouserlogin("userlogin", values, userid);
-
-
-
-
 
 
     }
@@ -673,13 +663,14 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
         private LayoutInflater mInflater;
         private String[] Mainarry = new String[]{};
-        public MyArrayAdapter(Activity act,String[] array) {
+
+        public MyArrayAdapter(Activity act, String[] array) {
 
 
             Log.d("array data", String.valueOf(array));
             // TODO Auto-generated constructor stub
             mInflater = LayoutInflater.from(act);
-            Mainarry=array;
+            Mainarry = array;
         }
 
         @Override
@@ -762,13 +753,12 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
     public void onBackPressed() {
 
 
-        if(((GlobalData) getApplication()).getcredback()!=null) {
+        if (((GlobalData) getApplication()).getcredback() != null) {
             Log.d("back is pressed", "from mainact");
             Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
             intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intenth);
-        }
-        else {
+        } else {
             Log.d("back is pressed", "from listview apply");
             //back is pressed cibilscore
 
@@ -780,7 +770,6 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         }
 
     }
-
 
 
     @Override
@@ -813,8 +802,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
             case R.id.state:
-                Log.d("state is clicked",s_city);
-                s_city=null;
+                Log.d("state is clicked", s_city);
+                s_city = null;
                 break;
             case R.id.done:
 
@@ -839,54 +828,57 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                     } else {*/
 
 
-                                        if (s1.getSelectedItem().toString().equals("0"))
-                                            loantyp = "New Car Loan";
-                                        else if (s1.getSelectedItem().toString().equals("1"))
-                                            loantyp = "Used Car Loan";
-                                        else if (s1.getSelectedItem().toString().equals("2"))
-                                            loantyp = "Personal Loan";
-                                        else if (s1.getSelectedItem().toString().equals("3"))
-                                            loantyp = "Home Loan";
-                                        else if (s1.getSelectedItem().toString().equals("4"))
-                                            loantyp = "Loan Against Property";
+                                    if (s1.getSelectedItem().toString().equals("0"))
+                                        loantyp = "New Car Loan";
+                                    else if (s1.getSelectedItem().toString().equals("1"))
+                                        loantyp = "Used Car Loan";
+                                    else if (s1.getSelectedItem().toString().equals("2"))
+                                        loantyp = "Personal Loan";
+                                    else if (s1.getSelectedItem().toString().equals("3"))
+                                        loantyp = "Home Loan";
+                                    else if (s1.getSelectedItem().toString().equals("4"))
+                                        loantyp = "Loan Against Property";
 
-                                        //getStateName(city.getSelectedItem().toString());
+                                    //getStateName(city.getSelectedItem().toString());
 
 
+                                    //**formate date*****//
 
-                                            //**formate date*****//
-
-                                            s_Dob = Dob.getText().toString();
-                                            ((GlobalData) getApplication()).setDob(s_Dob);
+                                    s_Dob = Dob.getText().toString();
+                                    ((GlobalData) getApplication()).setDob(s_Dob);
                                     try {
-                                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                            s_Dob = format.format(Date.parse(s_Dob));
+                                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                        s_Dob = format.format(Date.parse(s_Dob));
 
                                     } catch (Exception e) {
 
                                         e.printStackTrace();
 
                                     }
-                                            s_addr = addr.getText().toString();
-                                            s_panid = panid.getText().toString();
-                                            s_city = spcity;
-                                           // s_state = sstate;
-                                            nam = name.getText().toString();
-                                            s_zip = zip.getText().toString();
+                                    s_addr = addr.getText().toString();
+                                    s_panid = panid.getText().toString();
+                                    s_city = spcity;
+                                    // s_state = sstate;
+                                    nam = name.getText().toString();
+                                    s_zip = zip.getText().toString();
 
-                                            s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
 
-                                            Log.d("s_Dob", s_Dob);
-                                            Log.d("s_addr", s_addr);
+                                        s_state=spstate;
 
-                                            Log.d("s_panid", s_panid);
-                                            Log.d("s_city", s_city);
+                                    if(s_state!=null)
+                                    s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
 
-                                            Log.d("s_state", s_state);
-                                            Log.d("loan type", loantyp);
-                                            Log.d("nam", nam);
-                                            Log.d("zip code", s_zip);
-                                            Log.d("city pos", String.valueOf(city.getSelectedItemPosition()));
+                                    Log.d("s_Dob", s_Dob);
+                                    Log.d("s_addr", s_addr);
+
+                                    Log.d("s_panid", s_panid);
+                                    Log.d("s_city", s_city);
+
+                                    Log.d("s_state", s_state);
+                                    Log.d("loan type", loantyp);
+                                    Log.d("nam", nam);
+                                    Log.d("zip code", s_zip);
+                                    Log.d("city pos", String.valueOf(city.getSelectedItemPosition()));
 
                                     ((GlobalData) getApplication()).setfirstnam(nam);
                                     ((GlobalData) getApplication()).setpanid(s_panid);
@@ -899,24 +891,23 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                     ((GlobalData) getApplication()).setcitypos(city.getSelectedItemPosition());
 
 
+                                    getcibil();
 
-                                            getcibil();
-
-                                        }
-                                    }
                                 }
                             }
-                       // }
-
+                        }
                     }
-                    break;
-
+                    // }
 
                 }
+                break;
 
 
         }
+
+
     }
+}
 
 
 

@@ -134,7 +134,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                             Log.d("main result", "cibil");
                             Log.d("sessn", args[2]);
-                            Log.d("builder id", args[3]);
+                           // Log.d("builder id", args[3]);
 
                             nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
