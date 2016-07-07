@@ -46,7 +46,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     int month=0;
     int yearv=0;
     int empflag;
-    int ageg;
+    int ageg=0;
     String data;
     Button next;
     ImageView gen1,gen2;
@@ -133,7 +133,10 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         }
 
 
-
+        if(ageg!=0)//if age data is present then
+        {
+            age=ageg;
+        }
 
 
 
@@ -322,6 +325,10 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         return super.onOptionsItemSelected(item);
     }
     public int getAge (int _year, int _month, int _day) {
+        Log.d("year", String.valueOf(_year));
+        Log.d("_month", String.valueOf(_month));
+        Log.d("_day", String.valueOf(_day));
+
 
         GregorianCalendar cal = new GregorianCalendar();
         int y, m, d, a;
@@ -336,8 +343,8 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 .get(Calendar.DAY_OF_MONTH)))) {
             --a;
         }
-        if(a < 0)
-            throw new IllegalArgumentException("Age < 0");
+       /* if(a < 0)
+            throw new IllegalArgumentException("Age < 0");*/
         return a;
     }
     public void setDataToHashMap(String key, String data) {
@@ -507,9 +514,9 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                 ((GlobalData) getApplication()).setDob(Dob.getText().toString());
                 Log.d("Dob is kk",Dob.getText().toString());
-                int age = 0;
+                //int age = 0;
                 //first time
-                if(ageg==0) {
+               /* if(ageg==0) {
                     Log.d("age is k", String.valueOf(ageg));
                     if (((GlobalData) getApplication()).getDob() != null) {
                         Log.d("dobg is k", String.valueOf(dobg));
@@ -522,12 +529,16 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                     //otherwise take the previously set val
                     age =  ageg;
                     Log.d("dob age is else", String.valueOf(age));
-                }
+                }*/
+
+               // age = getAge(yearv, month, day);
+
+
                 if(age==2013)
                 {
                     age=0;
                 }
-
+                Log.d("age is ", String.valueOf(age));
 
                 if (age > 18) {
 
@@ -631,6 +642,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         Log.d("date is KK",formatdate);
          //Dob.setText(date);
         Dob.setText(formatdate);
-        ((GlobalData) getApplication()).setage(0);
+        age = getAge(yearv, month, day);
+       // ((GlobalData) getApplication()).setage(0);
     }
 }

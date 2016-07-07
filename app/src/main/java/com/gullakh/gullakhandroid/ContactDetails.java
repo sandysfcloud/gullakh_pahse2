@@ -12,6 +12,13 @@ public class ContactDetails {
     String firstname="";
     String lastname="";
     String id="";
+
+    String cf_1082="";
+    String cf_1071="";
+    String birthday="";
+    String cf_1084="";
+    String cf_1086="";
+
     public String getMailingzip() {
         return mailingzip;
     }
@@ -43,4 +50,29 @@ public class ContactDetails {
     public String getId() {
         return id;
     }
+
+
+
+    public String getCibilScore() {
+        return cf_1082;
+    }
+
+    public String getPanid() {
+        return cf_1071;
+    }
+
+    public String getDob() {
+        return birthday;
+    }
+
+    public String reportgen() {
+        return cf_1084;
+    }
+
+    public String getgen() {
+        return cf_1086;
+    }
+
+
+
 }
