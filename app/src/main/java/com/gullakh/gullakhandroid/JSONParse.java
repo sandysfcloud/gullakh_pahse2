@@ -14,6 +14,7 @@ public class JSONParse  extends AsyncTask<String, Void, JSONObject> {
     public Activity activity;
      static String data="";
     public JSONObject json;
+  //Production  private String urlnew="http://54.200.200.39/gullakh_web/index.php/user/Webservices";
 
     private String urlnew=GlobalData.Webservice;
 

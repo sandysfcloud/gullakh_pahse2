@@ -53,14 +53,15 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
     Spinner e_state;
     JSONServerGet requestgetserver, requestgetserver1;
     String sessionid, data, cscore, date;
-    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip;
+    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip,s_pan;
     Spinner city;
     Spinner s1;
     String apply;
     Dialog dgthis;
     String[] listcity, liststate;
-    String spcity, spstate;
+    String spcity, spstate,serveremail,s_gender;
 
+    private String firstname,lastname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +104,20 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 Log.d("signindetails2", cr.getString(11) + " : " + cr.getString(12) + " : " + cr.getString(13) + " " + cr.getString(14));
                 Log.d("signindetails2", cr.getString(15) + " : " + cr.getString(16) + " : " + cr.getString(17) + " " + cr.getString(18));
 
+//******************************************************************
+                serveremail = cr.getString(3);
 
-                cscore = cr.getString(9);
+                Cursor cr1 = dbobject.displayData("select * from session");
+                if (cr1.moveToFirst()) {
+                    sessionid = cr1.getString(1);
+                    getContactDetails();//get all data from server and upadate in local db except phone,conact id,email and userid
+                    Log.e("sessionid-cartypes", sessionid);
+                    cr1.close();
+                }
+
+
+                //*******
+               /* cscore = cr.getString(9);
                 date = cr.getString(17);
                 nam = cr.getString(10);
 
@@ -117,21 +130,18 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                         Log.d("dob from db", s_Dob);
                         s_Dob = "";
                     }
-                } /*else {
-
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    s_Dob = format.format(Date.parse(s_Dob));
-                }*/
-
+                }
 
                 s_addr = cr.getString(18);
 
                 s_city = cr.getString(13);
                 s_state = cr.getString(14);
 
-                s_zip = cr.getString(16);
+                s_zip = cr.getString(16);*/
+
 
                 // s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
+                //all these fields should not be updated
                 userid = cr.getString(1);
                 contactid = cr.getString(2);
                 ph = cr.getString(4);
@@ -140,36 +150,145 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             }
         }
 
-        if (cscore != null) {
-            if (cscore.length() > 0 && !(cscore.equals("0"))) {//credit score request should be sent only once if present then show alert
 
 
-                Log.d("credit score frm server", cscore);
-                LinearLayout main = (LinearLayout) findViewById(R.id.lmain);
-                main.setVisibility(View.INVISIBLE);
 
-                if (apply != null) {
-                    if (apply.equals("apply")) {//from listviewclick page
-                        Log.d("from listviewclick", "check if can continue or not");
-                        getcibil();
-                    }
-                } else {
-                    Log.d("from mainact", "show alert");
-                    setalert();
-                }
-
-
-            } else {
-                Log.d("display page", "1");
-                page();
-            }
-        } else {
-            Log.d("display page", "2");
-            page();
-        }
 
     }//oncreate end
 
+
+
+
+    public void getContactDetails(){
+        requestgetserver1 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                Dialog dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
+//            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
+                if (details.length>0) {
+
+
+                    firstname=details[0].getFirstname();
+                    lastname=details[0].getLastname();
+
+                    Log.d("firstname", firstname);
+                    Log.d("lastname",lastname);
+                    Log.d("name",details[0].getFirstname()+" "+details[0].getLastname());
+
+                    Log.d("lastname",details[0].getMailingstreet());
+                    Log.d("lastname",details[0].getOtherstreet());
+                    Log.d("getMailingcity",details[0].getMailingcity());
+                    Log.d("getMailingstate",details[0].getMailingcity());
+                    Log.d("getMailingzip",details[0].getMailingzip());
+
+
+
+                    Log.d("getCibilScore",details[0].getCibilScore());
+                    Log.d("dob",details[0].getDob());
+                    Log.d("reportgen",details[0].reportgen());
+                    Log.d("getMailingstate",details[0].getMailingcity());
+                    Log.d("getMailingzip",details[0].getMailingzip());
+
+
+                    nam=firstname+" "+lastname;
+                    cscore = details[0].getCibilScore();
+                    date = details[0].reportgen();
+                    nam = firstname;
+
+                    s_Dob = details[0].getDob();
+                    s_pan=details[0].getPanid();
+                    //Log.d("cscore is", cscore);
+
+                    if (s_Dob != null) {
+                        if (s_Dob.equals("0000-00-00")) {
+                            Log.d("dob from db", s_Dob);
+                            s_Dob = "";
+                        }
+                    }
+
+                    s_addr = details[0].getMailingstreet();
+
+                    s_city = details[0].getMailingcity();
+                    s_state = details[0].getMailingstate();
+
+                    s_zip = details[0].getMailingzip();
+                    s_gender=details[0].getgen();
+                    storetoDatabase();
+
+                    //********
+
+                    if (cscore != null) {
+                        if (cscore.length() > 0 && !(cscore.equals("0"))) {//credit score request should be sent only once if present then show alert
+
+
+                            Log.d("credit score frm server", cscore);
+                            LinearLayout main = (LinearLayout) findViewById(R.id.lmain);
+                            main.setVisibility(View.INVISIBLE);
+
+                            if (apply != null) {
+                                if (apply.equals("apply")) {//from listviewclick page
+                                    Log.d("from listviewclick", "check if can continue or not");
+                                    getcibil();
+                                }
+                            } else {
+                                Log.d("from mainact", "show alert");
+                                setalert();
+                            }
+
+
+                        } else {
+                            Log.d("display page", "1");
+                            page();
+                        }
+                    } else {
+                        Log.d("display page", "2");
+                        page();
+                    }
+
+
+                    //*********
+
+
+
+
+
+                }
+                dgthis.dismiss();
+            }
+        }, CibilScore.this, "wait");
+        requestgetserver1.execute("token","getcontact",sessionid,serveremail.toString());
+    }
+
+
+
+
+    public void storetoDatabase() {
+
+        DataHandler dbobject1=new DataHandler(this);
+        ContentValues values = new ContentValues();
+
+        values.put("address", s_addr.replaceAll(" \"", ""));
+        values.put("city", s_city);
+        values.put("state",s_state);
+        values.put("zip",s_zip);
+        values.put("firstname",firstname);
+        values.put("lastname",lastname);
+        values.put("dob", s_Dob);
+        values.put("gender", s_gender);
+
+
+        dbobject1.updateDatatouserlogin("userlogin", values, userid);
+        Log.d("userlogin is updated", s_addr + " " + s_city+ " " + s_state + " " +s_zip);
+    }
 
     public void page() {
 
@@ -300,7 +419,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 addr.setText(((GlobalData) getApplication()).getaddr());
 
 
-            panid.setText(((GlobalData) getApplication()).getpanid());
+            panid.setText(s_pan);
 
             zip.setText(s_zip);
 

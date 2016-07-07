@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,11 +173,12 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
 
 
             case R.id.next:
+
                 if(dataSalDeposite.equals(""))
                 {
                     RegisterPageActivity.showErroralert(cl_salary_mode1.this, "Select any one Options", "failed");
                 }else {
-
+                    Log.d("type of depos",dataSalDeposite);
                     setdata();
 
                     if (rev != null) {
@@ -214,10 +216,15 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
                     }
                 }break;
             case R.id.imageViewpay1:
+
                 pay1.setImageResource(R.drawable.buttonselecteffect);
                 pay2.setImageResource(R.drawable.bankcheque);
                 pay3.setImageResource(R.drawable.bankcash);
-                dataSalDeposite="Direct Bank Deposit";
+                //dataSalDeposite="Direct Bank Deposit";
+                dataSalDeposite="Bank";
+
+
+                Log.d("type of depos",dataSalDeposite);
                 setdata();
                 if (rev != null) {
                     if (rev.equals("review")) {
