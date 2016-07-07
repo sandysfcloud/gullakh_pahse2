@@ -26,6 +26,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener{
@@ -77,7 +78,9 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
 
         if(year!=null) {
             yom.setText(year);
-            yearv= Integer.parseInt(String.valueOf(year.subSequence(yom.getText().toString().length()-4,yom.getText().toString().length())));
+
+
+           // yearv= Integer.parseInt(String.valueOf(year.subSequence(yom.getText().toString().length()-4,yom.getText().toString().length())));
         }
 
 
@@ -86,7 +89,15 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         {
             getCarYear();
         }
+        if(((GlobalData) getApplication()).getCarmanuyear()!=null)
+        {
+            Log.d("year value", ((GlobalData) getApplication()).getCarmanuyear());
+            String str[] =  ((GlobalData) getApplication()).getCarmanuyear().split("-");
+            yearv = Integer.parseInt(str[2]);
+            Log.d("year value", String.valueOf(yearv));
 
+
+        }
 
 
 
@@ -199,27 +210,45 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
 
     public void getYear(String flag)
     {
-        Log.d("cal date", String.valueOf(getDateinYear()));
-        Calendar c = Calendar.getInstance();
-        String CurrDate = c.getTime().toString();
-        int CalYear = getDateinYear();
-        String[] CurrYr = CurrDate.split(" ");
-        int CurrYear = Integer.parseInt(CurrYr[CurrYr.length - 1]);
-        Log.d("curr date", c.getTime().toString());
 
-        if (CalYear + 10 >= CurrYear) {
-            setDataToHashMap("yom", date);
-            goToDatabase("Car Loan");
-            ((GlobalData) getApplication()).setCarmanuyear(date);
-            if(flag.equals("next")) {
-                Intent intent = new Intent(cl_car_yearofmft.this, Loan_amt_questn.class);
+        if(((GlobalData) getApplication()).getCarmanuyear()!=null)
+        {
+            Log.d("date is valid","no checking req");
+            Intent intent = new Intent(cl_car_yearofmft.this, Loan_amt_questn.class);
+            intent.putExtra("loan_type", "Car Loan");
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
 
-                intent.putExtra("loan_type", "Car Loan");
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+        }
+        else {
+            Log.d("cal date", String.valueOf(getDateinYear()));
+            Calendar c = Calendar.getInstance();
+            String CurrDate = c.getTime().toString();
+            int CalYear = getDateinYear();
+            String[] CurrYr = CurrDate.split(" ");
+            int CurrYear = Integer.parseInt(CurrYr[CurrYr.length - 1]);
+            Log.d("curr date", c.getTime().toString());
+
+            Log.d("Car year", String.valueOf(CalYear));
+            Log.d("CurrYear", String.valueOf(CurrYear));
+
+
+            if (CalYear + 10 >= CurrYear) {
+                setDataToHashMap("yom", date);
+                goToDatabase("Car Loan");
+                Log.d("setCarmanuyear", date);
+                ((GlobalData) getApplication()).setCarmanuyear(date);
+
+                if (flag.equals("next")) {
+                    Intent intent = new Intent(cl_car_yearofmft.this, Loan_amt_questn.class);
+
+                    intent.putExtra("loan_type", "Car Loan");
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            } else {
+                showdialog();
             }
-        }else {
-            showdialog();
         }
     }
 
@@ -265,9 +294,12 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
         month=++monthOfYear;
         yearv=year;
         yom.setText(date);
+
+        Log.d("on dateset",date);
     }
 
     public int getDateinYear() {
+
         return yearv;
     }
 
