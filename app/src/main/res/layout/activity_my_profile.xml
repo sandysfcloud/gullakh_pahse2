@@ -5,48 +5,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView13"
         android:layout_weight="1">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:background="@drawable/background"
-            android:gravity="center_horizontal">
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/profilepic"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/user"
-                android:layout_marginTop="50dp" />
-        </RelativeLayout>
-
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:gravity="right">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/imageButtonEdit"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@drawable/background"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/profilepic"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/user"
+                    android:layout_marginTop="50dp" />
+            </RelativeLayout>
 
-                android:background="@drawable/edit"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:gravity="right">
 
-        </LinearLayout>
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageButtonEdit"
 
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scrollView13" >
+                    android:background="@drawable/edit"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -198,9 +199,10 @@
                      android:id="@+id/textView13"
                      android:layout_margin="10dp" />-->
             </LinearLayout>
-        </ScrollView>
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
