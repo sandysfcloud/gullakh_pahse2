@@ -117,59 +117,16 @@
                 android:background="#67d1d1d1"
                 android:layout_marginTop="10dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.gullakh.gullakhandroid.MaterialTextField
-                    android:layout_width="fill_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:focusable="false"
-                    app:mtf_cardCollapsedHeight="4dp"
-                    app:mtf_cardColor="#fff"
-                    app:mtf_image="@drawable/companyname"
-                    android:layout_weight="1">
-
-                    <AutoCompleteTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Ex:5 years"
-                        android:inputType="number"
-                        android:id="@+id/emi"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        android:imeOptions="actionNext"
-                        android:singleLine="true" />
-                </com.gullakh.gullakhandroid.MaterialTextField>
-
-                <com.gullakh.gullakhandroid.MaterialTextField
-                    android:layout_width="fill_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    app:mtf_cardCollapsedHeight="4dp"
-                    app:mtf_cardColor="#fff"
-                    android:focusable="false"
-                    app:mtf_image="@drawable/companyname"
-                    android:layout_weight="1">
-
-                    <AutoCompleteTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Ex:5 months"
-                        android:inputType="number"
-                        android:id="@+id/totalexpmn"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        android:imeOptions="actionDone"
-                        android:singleLine="true" />
-                </com.gullakh.gullakhandroid.MaterialTextField>
-            </LinearLayout>
+            <Spinner
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:id="@+id/spinner1"
+                android:spinnerMode="dropdown"
+                android:layout_gravity="center_horizontal"
+                android:dropDownSelector="#c2c2c2"
+                android:dropDownWidth="match_parent"
+                android:background="@drawable/edittextsimple"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
     </ScrollView>

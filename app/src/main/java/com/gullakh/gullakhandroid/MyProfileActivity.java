@@ -87,6 +87,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         Cursor cr = dbobject.displayData("select * from userlogin");
         if (cr != null) {
             if (cr.moveToFirst()) {
+                getContactDetails();
                 userid=cr.getString(1);
                 contactid=cr.getString(2);
                 email.setText(cr.getString(3));
@@ -104,7 +105,6 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             Cursor cr1 = dbobject.displayData("select * from session");
             if (cr1.moveToFirst()) {
                 sessionid = cr1.getString(1);
-                getContactDetails();
                 Log.e("sessionid-cartypes", sessionid);
                 cr1.close();
             }
@@ -116,6 +116,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         add3 = (EditText) findViewById(R.id.editText3);
         add4 = (EditText) findViewById(R.id.editText4);
         add5 = (EditText) findViewById(R.id.editText5);
+        name.setEnabled(false);
         add1.setEnabled(false);
         add2.setEnabled(false);
         add3.setEnabled(false);
@@ -135,12 +136,14 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 Done.setVisibility(View.VISIBLE);
 //                ProfilePic.setFocusableInTouchMode(true);
                 //ph.setBackgroundResource(R.drawable.edittextsimple);
+                name.setBackgroundResource(R.drawable.edittextsimple);
                 add1.setBackgroundResource(R.drawable.edittextsimple);
                 add2.setBackgroundResource(R.drawable.edittextsimple);
                 add3.setBackgroundResource(R.drawable.edittextsimple);
                 add4.setBackgroundResource(R.drawable.edittextsimple);
                 add5.setBackgroundResource(R.drawable.edittextsimple);
                 //ph.setEnabled(true);
+                name.setEnabled(true);
                 add1.setEnabled(true);
                 add2.setEnabled(true);
                 add3.setEnabled(true);
@@ -157,18 +160,23 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 signout.setVisibility(View.VISIBLE);
 //                ProfilePic.setFocusableInTouchMode(false);
                 //ph.setBackgroundResource(R.color.white_transparent);
+                name.setBackgroundResource(R.color.white_transparent);
                 add1.setBackgroundResource(R.color.white_transparent);
                 add2.setBackgroundResource(R.color.white_transparent);
                 add3.setBackgroundResource(R.color.white_transparent);
                 add4.setBackgroundResource(R.color.white_transparent);
                 add5.setBackgroundResource(R.color.white_transparent);
                // ph.setEnabled(false);
+                name.setEnabled(false);
                 add1.setEnabled(false);
                 add2.setEnabled(false);
                 add3.setEnabled(false);
                 add4.setEnabled(false);
                 add5.setEnabled(false);
-                goToServer(add1.getText().toString(), add2.getText().toString(), add3.getText().toString(), add4.getText().toString(), add5.getText().toString());
+                String[] temp=name.getText().toString().split(" ");
+                firstname=temp[0];
+                lastname=temp[temp.length-1];
+                goToServer(firstname,lastname,add1.getText().toString(), add2.getText().toString(), add3.getText().toString(), add4.getText().toString(), add5.getText().toString());
             }
         });
         signout.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +207,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
 
 
-    private void goToServer(final String add1, final String add2, final String add3, final String add4, final String add5) {
+    private void goToServer(String firstname, String lastname, final String add1, final String add2, final String add3, final String add4, final String add5) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -218,7 +226,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
             }
         }, MyProfileActivity.this, "wait");
-        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5,"","");
+        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5,"","",firstname,lastname);
 
     }
 
@@ -379,6 +387,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         values.put("city", add3.getText().toString().replaceAll(" \"", ""));
         values.put("state",add4.getText().toString().replaceAll(" \"", ""));
         values.put("zip",add5.getText().toString().replaceAll(" \"",""));
+        values.put("address",add1.getText().toString().replaceAll(" \"", "")+" "+add2.getText().toString().replaceAll(" \"", ""));
 
         dbobject1.updateDatatouserlogin("userlogin", values, userid);
         Log.d("userlogin is updated",add1.getText().toString()+" "+add3.getText().toString()+" "+add4.getText().toString()+" "+add5.getText().toString());

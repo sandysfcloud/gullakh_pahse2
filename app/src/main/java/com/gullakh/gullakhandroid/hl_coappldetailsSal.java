@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -30,19 +31,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class hl_coappldetailsSal extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
 
     Button next, back;
     int day, month, yearv;
     private String date = "";
-    private EditText Expyr, Expmn;
     AutoCompleteTextView Emp;
     JSONServerGet requestgetserver;
     String sessionid;
     private ContentValues contentValues;
     private EditText Doj;
     String no=null;
+    private Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +78,20 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         getemplist();
         Emp.requestFocus();
         Emp.setOnClickListener(this);
-        Expyr = (EditText) findViewById(R.id.emi);
-        Expmn = (EditText) findViewById(R.id.totalexpmn);
+        spinner = (Spinner) findViewById(R.id.spinner);
+
+        List<String> categories = new ArrayList<String>();
+        categories.add("Select");
+        categories.add("< 1yr");
+        categories.add(" 2yrs");
+        categories.add(" 3yrs");
+        categories.add(" 4yrs");
+        categories.add(" 5yrs");
+        categories.add("> 5yrs");
+
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter1);
 
 
         Intent intent = getIntent();
@@ -116,17 +131,12 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
                 Emp.setText(co_empnam);
                 Doj.setText(co_empdate);
-                Expyr.setText(co_empexpyr);
-                Expmn.setText(co_empexpmon);
             }
 
 
 
         }
     }
-
-
-
 
     public void getemplist() {
 
@@ -181,19 +191,14 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
             case R.id.next:
                 if(!Emp.getText().toString().matches("")) {
                     if (!Doj.getText().toString().matches("")) {
-                    if (!Expyr.getText().toString().matches("")||Expmn.getText().toString().matches("")) {
-
+                    if (!spinner.getSelectedItem().toString().matches("Select")) {
 
                         if (no != null) {
                             setDataToHashMap("co_employeename" ,  Emp.getText().toString());
                             setDataToHashMap("year_you_joined_current_comp" , getDate());
-                            setDataToHashMap("co_employeedexpyear" , Expyr.getText().toString());
-                            setDataToHashMap("co_employeedexpmon" , Expmn.getText().toString());
-                            setDataToHashMap("total_exp", Expyr.getText().toString()+" "+Expmn.getText().toString());
+                            setDataToHashMap("total_exp", spinner.getSelectedItem().toString());
                             Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                         }
-
-
 
                         /*setDataToHashMap("co_employeenam"+cl_car_global_data.numOfApp,  Emp.getText().toString());
                         setDataToHashMap("co_employeedate"+cl_car_global_data.numOfApp, getDate());
@@ -211,9 +216,6 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
                             startActivity(intent);
                             overridePendingTransition(R.transition.left, R.transition.right);
                         }
-
-
-
 
 
                     } else {

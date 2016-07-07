@@ -75,7 +75,6 @@
                     android:autoText="false"
                     android:padding="5dp"
                     android:layout_marginLeft="20dp"
-                    android:focusableInTouchMode="false"
                     android:background="#00ffffff"
                     android:layout_marginBottom="5dp"
                     android:singleLine="true"

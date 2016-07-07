@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,14 +22,9 @@ import java.util.List;
 
 public class cl_car_selfempbusiness extends AppCompatActivity implements View.OnClickListener,com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
-    private TextView heading1,heading2,heading3,heading4;
-    private EditText Doj;
     int day,month,yearv;
     private String date="";
     private Spinner spinner1,spinner2,spinner3;
-    private EditText netProfit;
-    private String data1 ="";
-    private String data2;
     private ContentValues contentValues;
 
     @Override
@@ -118,7 +112,6 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
                 cl_car_global_data.dataWithAns.get("start_date_of_cur_business")!=null &&
                     cl_car_global_data.dataWithAns.get("firm_type")!=null)
         {
-            Doj.setText(cl_car_global_data.dataWithAns.get("start_date_of_cur_business"));
             if(cl_car_global_data.dataWithAns.get("ind_type").equals("Manufacturing")) {
                 spinner1.setSelection(1);
             }else if(cl_car_global_data.dataWithAns.get("ind_type").equals("Trading")) {
@@ -146,7 +139,7 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         switch (v.getId()) {
             case R.id.next:
                 if(!spinner1.getSelectedItem().toString().matches("Select")) {
-                    if (!Doj.getText().toString().matches("")) {
+                    if (!spinner1.getSelectedItem().toString().matches("Select")) {
                         if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
                             String jdate = getDate();
@@ -202,7 +195,6 @@ public class cl_car_selfempbusiness extends AppCompatActivity implements View.On
         day=dayOfMonth;
         month=++monthOfYear;
         yearv=year;
-        Doj.setText(date);
     }
      public String getDate()
     {

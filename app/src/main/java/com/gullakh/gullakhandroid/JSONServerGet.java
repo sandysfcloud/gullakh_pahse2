@@ -525,18 +525,18 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("user_id", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("contact_id",args[3]));
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL_web).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"update_contact_id").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("contactaddress")){
                             Log.d("sess and contact",args[2]+" "+args[3]);
-                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\"}]");
+                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\",\"firstname\":\""+args[11]+"\",\"lastname\":\""+args[12]+"\"}]");
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "updatecontactdetail"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("contact",args[3]));
-                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\"}]"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\",\"firstname\":\""+args[11]+"\",\"lastname\":\""+args[12]+"\"}]"));
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
@@ -661,7 +661,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
                             Log.e("getGoogleAccReg nameValuePairs ", String.valueOf(nameValuePairs));
-                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/Send_Notification").toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"Send_Notification").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("udateGoogleMobNo")){
@@ -670,7 +670,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("user_id", args[3]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
-                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/update_mobile").toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"update_mobile").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("getGoogleOTPverification")){
@@ -682,7 +682,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
                             Log.e("getGoogleAccReg getGoogleOTPverification ", String.valueOf(nameValuePairs));
-                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/Verify_Phone").toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"Verify_Phone").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("setProfilePic")){
@@ -691,7 +691,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("img", args[3]));
                             client = new DefaultHttpClient();
                             Log.e("email ", args[2]);
-                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/upload_profile_img").toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"upload_profile_img").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }else if(args[1].equals("updateContactDetailsNew")){
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -710,7 +710,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             }
                             client = new DefaultHttpClient();
                             Log.e("email ", args[2]);
-                            post = new HttpPost(android.text.Html.fromHtml("http://54.200.200.39/gullakh_web_dev/index.php/user/Webservices/user_update_process").toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"user_update_process").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }
 

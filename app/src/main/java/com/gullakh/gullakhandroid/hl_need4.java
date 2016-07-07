@@ -58,6 +58,7 @@ public class hl_need4 extends AppCompatActivity implements View.OnClickListener 
         RadioButton single = (RadioButton) findViewById(R.id.radioButton1);
         RadioButton joint = (RadioButton) findViewById(R.id.radioButton2);
         Text1 = (EditText) findViewById(R.id.editText);
+        Text1.addTextChangedListener(new NumberTextWatcher(Text1));
         jointopt=findViewById(R.id.joint);
         single.setOnClickListener(this);
         joint.setOnClickListener(this);

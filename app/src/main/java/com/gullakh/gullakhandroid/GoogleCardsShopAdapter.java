@@ -3,31 +3,21 @@ package com.gullakh.gullakhandroid;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class GoogleCardsShopAdapter extends BaseAdapter
@@ -177,7 +167,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			//************
 Log.d("setting image", tempValues.getcarimgurl());
 			if(tempValues.getcarimgurl()!=null)
-			ImageUtil.displayImage(holder.image, GlobalData.SERVER_GET_URLIMage+tempValues.getcarimgurl(), null);
+			ImageUtil.displayImage(holder.image, GlobalData.GULLAKH_PORTAL+tempValues.getcarimgurl(), null);
 
 			//*************
 

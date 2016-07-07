@@ -28,8 +28,8 @@ public class CarCompare extends AppCompatActivity {
         if(GoogleCardsShopAdapter.compbank.size()>0) {
             bank1.setText(GoogleCardsShopAdapter.compbank.get(0));
             bank2.setText(GoogleCardsShopAdapter.compbank.get(1));
-            ImageUtil.displayImage(comb1, GlobalData.SERVER_GET_URLIMage + GoogleCardsShopAdapter.compbankimg.get(0), null);
-            ImageUtil.displayImage(comb2, GlobalData.SERVER_GET_URLIMage+GoogleCardsShopAdapter.compbankimg.get(1), null);
+            ImageUtil.displayImage(comb1, GlobalData.GULLAKH_PORTAL + GoogleCardsShopAdapter.compbankimg.get(0), null);
+            ImageUtil.displayImage(comb2, GlobalData.GULLAKH_PORTAL+GoogleCardsShopAdapter.compbankimg.get(1), null);
 
         }
 

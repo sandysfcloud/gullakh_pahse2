@@ -56,7 +56,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 {
-                    goToIntent();
+//                    goToIntent();
                 }
             }
 
