@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -90,6 +91,26 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
 
             }
         }
+
+
+
+        other.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                dataBankType=other.getText().toString();
+                setDeopsiteSalary(dataBankType);
+                ((GlobalData) getApplication()).setSalBankName(dataBankType);
+                goToIntent();
+            }
+        });
+
+
+
+
+
+
     }
     public void getbanknam()
     {
@@ -181,12 +202,12 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
                 setDeopsiteSalary(dataBankType);
                 goToIntent();
                 break;
-            case R.id.bank:
+          /*  case R.id.bank:
                 dataBankType=other.getText().toString();
                 setDeopsiteSalary(dataBankType);
                 ((GlobalData) getApplication()).setSalBankName(dataBankType);
                 goToIntent();
-                break;
+                break;*/
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -18,6 +18,7 @@ public class ContactDetails {
     String birthday="";
     String cf_1084="";
     String cf_1086="";
+    String mobile="";
 
     public String getMailingzip() {
         return mailingzip;
@@ -71,6 +72,10 @@ public class ContactDetails {
 
     public String getgen() {
         return cf_1086;
+    }
+
+    public String getmobile() {
+        return mobile;
     }
 
 

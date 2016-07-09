@@ -49,19 +49,20 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
     int day, month, yearv;
-    EditText Dob, panid, addr, name, zip;
+    EditText Dob, panid, addr, name, zip, mob;
     Spinner e_state;
     JSONServerGet requestgetserver, requestgetserver1;
     String sessionid, data, cscore, date;
-    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip,s_pan;
+    String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip, s_pan;
     Spinner city;
     Spinner s1;
     String apply;
     Dialog dgthis;
     String[] listcity, liststate;
-    String spcity, spstate,serveremail,s_gender;
+    String spcity, spstate, serveremail, s_gender;
 
-    private String firstname,lastname;
+    private String firstname, lastname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,28 +145,23 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 //all these fields should not be updated
                 userid = cr.getString(1);
                 contactid = cr.getString(2);
-                ph = cr.getString(4);
+               // ph = cr.getString(4);
 
 
             }
         }
 
 
-
-
-
     }//oncreate end
 
 
-
-
-    public void getContactDetails(){
+    public void getContactDetails() {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 Dialog dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -174,38 +170,38 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
 //            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
-                if (details.length>0) {
+                if (details.length > 0) {
 
 
-                    firstname=details[0].getFirstname();
-                    lastname=details[0].getLastname();
+                    firstname = details[0].getFirstname();
+                    lastname = details[0].getLastname();
 
                     Log.d("firstname", firstname);
-                    Log.d("lastname",lastname);
-                    Log.d("name",details[0].getFirstname()+" "+details[0].getLastname());
+                    Log.d("lastname", lastname);
+                    Log.d("name", details[0].getFirstname() + " " + details[0].getLastname());
 
-                    Log.d("lastname",details[0].getMailingstreet());
-                    Log.d("lastname",details[0].getOtherstreet());
-                    Log.d("getMailingcity",details[0].getMailingcity());
-                    Log.d("getMailingstate",details[0].getMailingcity());
-                    Log.d("getMailingzip",details[0].getMailingzip());
-
-
-
-                    Log.d("getCibilScore",details[0].getCibilScore());
-                    Log.d("dob",details[0].getDob());
-                    Log.d("reportgen",details[0].reportgen());
-                    Log.d("getMailingstate",details[0].getMailingcity());
-                    Log.d("getMailingzip",details[0].getMailingzip());
+                    Log.d("lastname", details[0].getMailingstreet());
+                    Log.d("lastname", details[0].getOtherstreet());
+                    Log.d("getMailingcity", details[0].getMailingcity());
+                    Log.d("getMailingstate", details[0].getMailingcity());
+                    Log.d("getMailingzip", details[0].getMailingzip());
 
 
-                    nam=firstname+" "+lastname;
+                    Log.d("getCibilScore", details[0].getCibilScore());
+                    Log.d("dob", details[0].getDob());
+                    Log.d("reportgen", details[0].reportgen());
+                    Log.d("getMailingstate", details[0].getMailingcity());
+                    Log.d("getMailingzip", details[0].getMailingzip());
+
+
+                    nam = firstname + " " + lastname;
                     cscore = details[0].getCibilScore();
                     date = details[0].reportgen();
                     nam = firstname;
 
                     s_Dob = details[0].getDob();
-                    s_pan=details[0].getPanid();
+                    s_pan = details[0].getPanid();
+                    ph = details[0].getmobile();
                     //Log.d("cscore is", cscore);
 
                     if (s_Dob != null) {
@@ -221,7 +217,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     s_state = details[0].getMailingstate();
 
                     s_zip = details[0].getMailingzip();
-                    s_gender=details[0].getgen();
+                    s_gender = details[0].getgen();
                     storetoDatabase();
 
                     //********
@@ -258,36 +254,31 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     //*********
 
 
-
-
-
                 }
                 dgthis.dismiss();
             }
         }, CibilScore.this, "wait");
-        requestgetserver1.execute("token","getcontact",sessionid,serveremail.toString());
+        requestgetserver1.execute("token", "getcontact", sessionid, serveremail.toString());
     }
-
-
 
 
     public void storetoDatabase() {
 
-        DataHandler dbobject1=new DataHandler(this);
+        DataHandler dbobject1 = new DataHandler(this);
         ContentValues values = new ContentValues();
 
         values.put("address", s_addr.replaceAll(" \"", ""));
         values.put("city", s_city);
-        values.put("state",s_state);
-        values.put("zip",s_zip);
-        values.put("firstname",firstname);
-        values.put("lastname",lastname);
+        values.put("state", s_state);
+        values.put("zip", s_zip);
+        values.put("firstname", firstname);
+        values.put("lastname", lastname);
         values.put("dob", s_Dob);
         values.put("gender", s_gender);
 
 
         dbobject1.updateDatatouserlogin("userlogin", values, userid);
-        Log.d("userlogin is updated", s_addr + " " + s_city+ " " + s_state + " " +s_zip);
+        Log.d("userlogin is updated", s_addr + " " + s_city + " " + s_state + " " + s_zip);
     }
 
     public void page() {
@@ -305,6 +296,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         panid = (EditText) findViewById(R.id.panid);
         panid.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         zip = (EditText) findViewById(R.id.zip);
+        mob = (EditText) findViewById(R.id.mob);
 
         city = (Spinner) findViewById(R.id.city);
         city.setPrompt("Select City");
@@ -432,6 +424,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     e_state.setText(((GlobalData) getApplication()).getstate());kk*/
 
             Dob.setText(s_Dob);
+            mob.setText(ph);
+
             if (((GlobalData) getApplication()).getDob() != null)
                 Dob.setText(((GlobalData) getApplication()).getDob());
 
@@ -930,12 +924,12 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.done:
 
-
+                Log.d("mobile length", String.valueOf(mob.getText().toString().length()));
                 if (Dob.getText().toString().equals("")) {
                     RegisterPageActivity.showErroralert(this, "Enter your Date OF Birth", "failed");
                 } else {
                     if (addr.getText().toString().equals("")) {
-                        RegisterPageActivity.showErroralert(this, "Enter your Date OF Address", "failed");
+                        RegisterPageActivity.showErroralert(this, "Enter your Address", "failed");
                     } else {
                         if (panid.getText().toString().equals("")) {
                             RegisterPageActivity.showErroralert(this, "Enter Your PAN ID ", "failed");
@@ -946,91 +940,98 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                 if (e_state.getSelectedItem().toString().equals("")) {
                                     RegisterPageActivity.showErroralert(this, "Enter Your State", "failed");
                                 } else {
+
+                                    if (mob.getText().toString().equals("") || mob.getText().toString().length() != 10) {
+                                        RegisterPageActivity.showErroralert(this, "Enter Valid Mobile Number", "failed");
+                                    } else {
                                     /*if ((s1.getSelectedItem().toString().equals("0"))) {
                                         RegisterPageActivity.showErroralert(this, "Enter Loan Type", "failed");
                                     } else {*/
 
 
-                                    if (s1.getSelectedItem().toString().equals("0"))
-                                        loantyp = "New Car Loan";
-                                    else if (s1.getSelectedItem().toString().equals("1"))
-                                        loantyp = "Used Car Loan";
-                                    else if (s1.getSelectedItem().toString().equals("2"))
-                                        loantyp = "Personal Loan";
-                                    else if (s1.getSelectedItem().toString().equals("3"))
-                                        loantyp = "Home Loan";
-                                    else if (s1.getSelectedItem().toString().equals("4"))
-                                        loantyp = "Loan Against Property";
+                                        if (s1.getSelectedItem().toString().equals("0"))
+                                            loantyp = "New Car Loan";
+                                        else if (s1.getSelectedItem().toString().equals("1"))
+                                            loantyp = "Used Car Loan";
+                                        else if (s1.getSelectedItem().toString().equals("2"))
+                                            loantyp = "Personal Loan";
+                                        else if (s1.getSelectedItem().toString().equals("3"))
+                                            loantyp = "Home Loan";
+                                        else if (s1.getSelectedItem().toString().equals("4"))
+                                            loantyp = "Loan Against Property";
 
-                                    //getStateName(city.getSelectedItem().toString());
+                                        //getStateName(city.getSelectedItem().toString());
 
 
-                                    //**formate date*****//
+                                        //**formate date*****//
 
-                                    s_Dob = Dob.getText().toString();
-                                    ((GlobalData) getApplication()).setDob(s_Dob);
-                                    try {
-                                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                        s_Dob = format.format(Date.parse(s_Dob));
+                                        s_Dob = Dob.getText().toString();
+                                        ((GlobalData) getApplication()).setDob(s_Dob);
+                                        try {
+                                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                            s_Dob = format.format(Date.parse(s_Dob));
 
-                                    } catch (Exception e) {
+                                        } catch (Exception e) {
 
-                                        e.printStackTrace();
+                                            e.printStackTrace();
+
+                                        }
+                                        s_addr = addr.getText().toString();
+                                        s_panid = panid.getText().toString();
+                                        s_city = spcity;
+                                        // s_state = sstate;
+                                        nam = name.getText().toString();
+                                        s_zip = zip.getText().toString();
+                                        ph = mob.getText().toString();
+
+
+                                        s_state = spstate;
+
+                                        if (s_state != null)
+                                            s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
+
+                                        Log.d("s_Dob", s_Dob);
+                                        Log.d("s_addr", s_addr);
+                                        Log.d("phone no", ph);
+
+                                        Log.d("s_panid", s_panid);
+                                        Log.d("s_city", s_city);
+
+                                        Log.d("s_state", s_state);
+                                        Log.d("loan type", loantyp);
+                                        Log.d("nam", nam);
+                                        Log.d("zip code", s_zip);
+                                        Log.d("city pos", String.valueOf(city.getSelectedItemPosition()));
+
+                                        ((GlobalData) getApplication()).setfirstnam(nam);
+                                        ((GlobalData) getApplication()).setpanid(s_panid);
+                                        ((GlobalData) getApplication()).setzip(s_zip);
+                                        ((GlobalData) getApplication()).setaddr(s_addr);
+                                        ((GlobalData) getApplication()).setcity(s_city);
+                                        ((GlobalData) getApplication()).setstate(s_state);
+                                        ((GlobalData) getApplication()).setcltyppos(s1.getSelectedItemPosition());
+
+                                        ((GlobalData) getApplication()).setcitypos(city.getSelectedItemPosition());
+
+
+                                        getcibil();
 
                                     }
-                                    s_addr = addr.getText().toString();
-                                    s_panid = panid.getText().toString();
-                                    s_city = spcity;
-                                    // s_state = sstate;
-                                    nam = name.getText().toString();
-                                    s_zip = zip.getText().toString();
-
-
-                                        s_state=spstate;
-
-                                    if(s_state!=null)
-                                    s_state = s_state.substring(0, 1).toUpperCase() + s_state.substring(1);
-
-                                    Log.d("s_Dob", s_Dob);
-                                    Log.d("s_addr", s_addr);
-
-                                    Log.d("s_panid", s_panid);
-                                    Log.d("s_city", s_city);
-
-                                    Log.d("s_state", s_state);
-                                    Log.d("loan type", loantyp);
-                                    Log.d("nam", nam);
-                                    Log.d("zip code", s_zip);
-                                    Log.d("city pos", String.valueOf(city.getSelectedItemPosition()));
-
-                                    ((GlobalData) getApplication()).setfirstnam(nam);
-                                    ((GlobalData) getApplication()).setpanid(s_panid);
-                                    ((GlobalData) getApplication()).setzip(s_zip);
-                                    ((GlobalData) getApplication()).setaddr(s_addr);
-                                    ((GlobalData) getApplication()).setcity(s_city);
-                                    ((GlobalData) getApplication()).setstate(s_state);
-                                    ((GlobalData) getApplication()).setcltyppos(s1.getSelectedItemPosition());
-
-                                    ((GlobalData) getApplication()).setcitypos(city.getSelectedItemPosition());
-
-
-                                    getcibil();
-
                                 }
                             }
                         }
+                         }
+
                     }
-                    // }
+                    break;
+
 
                 }
-                break;
 
 
         }
-
-
     }
-}
+
 
 
 

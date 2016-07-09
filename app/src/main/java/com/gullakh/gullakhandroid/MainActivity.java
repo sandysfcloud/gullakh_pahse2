@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Bitmap bmp;
     private ImageView iv;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -233,6 +234,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             llsignin.setVisibility(View.VISIBLE);
             llsignout.setVisibility(View.GONE);
         }
+
+
+        ListView_Click.buttonApply = false;//true only when goes from bank detail page
         //coin=(ImageView)findViewById(R.id.imageViewCoin);
        // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
       //  Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");

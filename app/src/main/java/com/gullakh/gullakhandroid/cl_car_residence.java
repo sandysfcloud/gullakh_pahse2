@@ -230,8 +230,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                         ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
                     }
                 }
-               // if(((GlobalData) getApplication()).getcarres()!=null)
-                if(cl_car_global_data.dataWithAns.get("currently_living_in")!=null)
+                if(((GlobalData) getApplication()).getcarres()!=null)
                     goToIntent();
                 else
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
