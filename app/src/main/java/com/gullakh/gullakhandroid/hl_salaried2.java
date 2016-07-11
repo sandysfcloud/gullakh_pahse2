@@ -152,10 +152,11 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                 } else {
                                     goToDatabase("Loan Against Property");
                                 }
-                                cl_car_salaried.user = false;
+                               // cl_car_salaried.user = false;
 
                                 ((GlobalData) getApplication()).setnetsalary(Double.parseDouble(grossSal.getText().toString().replaceAll(",", "")));
                                 Intent i = new Intent(this, hl_coappl_EMI.class);
+                                i.putExtra("data", "joint");
                                 startActivity(i);
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }

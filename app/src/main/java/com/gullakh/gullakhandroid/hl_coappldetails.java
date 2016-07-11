@@ -206,7 +206,8 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
 
             Log.d("father fnam", hdata.get("firstname"));
             firstName.setText(hdata.get("firstname"));
-            lastName.setText(hdata.get("Lastname"));
+            lastName.setText(hdata.get("lastname"));
+            Dob.setText(hdata.get("co_ap_dob"));
             if (hdata.get("working").equals("false"))
                 now.setChecked(true);
             else if(hdata.get("working").equals("true")) {
@@ -261,6 +262,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                             setData("working");
 
                             ((GlobalData) getApplication()).sethashno(hashno);
+                            Log.d("working true no is ", hashno);
                             //if working enter working details
                             Intent i = new Intent(this, hl_empType.class);
                             i.putExtra("hashno", hashno);

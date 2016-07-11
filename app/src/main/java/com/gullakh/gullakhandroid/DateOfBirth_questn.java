@@ -136,6 +136,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         if(ageg!=0)//if age data is present then
         {
             age=ageg;
+            Log.d("stored age", String.valueOf(age));
         }
 
 

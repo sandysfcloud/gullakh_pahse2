@@ -45,6 +45,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
     private EditText Doj;
     String no=null;
     private Spinner spinner;
+    List<String> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +79,9 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         getemplist();
         Emp.requestFocus();
         Emp.setOnClickListener(this);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner1);
 
-        List<String> categories = new ArrayList<String>();
+        categories = new ArrayList<String>();
         categories.add("Select");
         categories.add("< 1yr");
         categories.add(" 2yrs");
@@ -88,6 +89,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         categories.add(" 4yrs");
         categories.add(" 5yrs");
         categories.add("> 5yrs");
+
 
         android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -125,12 +127,16 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
                 String co_empnam = hdata.get("co_employeename");
                 String co_empdate = hdata.get("year_you_joined_current_comp");
-                String co_empexpyr = hdata.get("co_employeedexpyear");
+               // String co_empexpyr = hdata.get("co_employeedexpyear");
                 String co_empexpmon = hdata.get("co_employeedexpmon");
+                //added
+                String co_empexpyr = hdata.get("total_exp");
 
 
                 Emp.setText(co_empnam);
                 Doj.setText(co_empdate);
+                spinner.setSelection(categories.indexOf(co_empexpyr));
+
             }
 
 
@@ -195,7 +201,8 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
                         if (no != null) {
                             setDataToHashMap("co_employeename" ,  Emp.getText().toString());
-                            setDataToHashMap("year_you_joined_current_comp" , getDate());
+                           // setDataToHashMap("year_you_joined_current_comp" , getDate());
+                            setDataToHashMap("year_you_joined_current_comp" , Doj.getText().toString());
                             setDataToHashMap("total_exp", spinner.getSelectedItem().toString());
                             Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                         }

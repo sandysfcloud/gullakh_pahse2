@@ -485,6 +485,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     // liste.add(enums[i].getcity_name());
                 }
 
+
+
                 MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this, liststate);
                 e_state.setAdapter(ma);
 

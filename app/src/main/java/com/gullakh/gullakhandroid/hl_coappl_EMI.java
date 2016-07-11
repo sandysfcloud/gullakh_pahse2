@@ -97,16 +97,18 @@ public class hl_coappl_EMI extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next:
-                if (!emi.getText().toString().matches("")) {
+                //if (!emi.getText().toString().matches("")) {
                     setDataToHashMap("total_emi", emi.getText().toString());
 
                     setmainhm(hashno, cl_car_global_data.dataWithAnscoapp);
                     Log.d("check main hashmap data", String.valueOf(cl_car_global_data.allcoappdetail));
                     Intent i = new Intent(this, coappldetail.class);
+                    i.putExtra("data", "joint");
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                     overridePendingTransition(R.transition.left, R.transition.right);
                     finish();
-                }
+               // }
 
                 break;
             case R.id.back:

@@ -553,6 +553,9 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                            // Log.d("arguments", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\",\"primarylender\":\"" + args[5] + "\",\"secondarylender\":\"" + args[6] + "\",\"assigned_user_id\":\"admin\"}");
                             Log.d("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\"," + args[5] + ",\"loantype\":\"" + args[6] + "\",\"preferabledate\":\"" + args[7] + "\",\"preferabletime\":\"" + args[8] + "\",\"assigned_user_id\":\"admin\",\"state\":\"" + args[9] + "\",\"loanamount\":\"" + args[10] + "\"}");
                             nameValuePairs.add(new BasicNameValuePair("element", "{\"borrower\":\"" + args[3] + "\",\"stage\":\"" + args[4] + "\"," + args[5] + ",\"loantype\":\"" + args[6] + "\",\"preferabledate\":\"" + args[7] + "\",\"preferabletime\":\"" + args[8] + "\",\"assigned_user_id\":\"admin\",\"state\":\"" + args[9] + "\",\"loanamount\":\"" + args[10] + "\"}"));
+
+                            Log.d("createcase nameValuePairs", String.valueOf(nameValuePairs));
+
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));

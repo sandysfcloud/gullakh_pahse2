@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -84,8 +85,11 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         back.setOnClickListener(this);
         next.setOnClickListener(this);
 
-        citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
-        citynam.setOnClickListener(this);
+
+
+
+
+
 
 
 
@@ -93,7 +97,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
         bdone.setOnClickListener(this);
         LinearLayout done = (LinearLayout) findViewById(R.id.ldone);
         Intent intent2 = getIntent();
-        String data = intent2.getStringExtra("review");
+         data = intent2.getStringExtra("review");
         if (data != null) {
             if (data.equals("review")) {
                 flag=1;
@@ -105,6 +109,32 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
 
             }
         }
+
+
+
+
+        citynam = (AutoCompleteTextView) findViewById(R.id.locatn);
+        citynam.setOnClickListener(this);
+
+        citynam.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                propertyLocated = citynam.getText().toString();
+                Log.d("cityname in itemclick", String.valueOf(((GlobalData) getApplication()).getcarres()));
+                if (data != null) {
+                    if (data.equals("review")) {
+                        finish();
+                    }
+                } else {
+                    Log.d("item selected onclicklist", citynam.getText().toString());
+
+                    goToIntent("");
+                }
+            }
+        });
+
 
 
         if (savedInstanceState != null) {
@@ -138,12 +168,15 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                 place3.setImageResource(R.drawable.buttonselecteffect);
             else if(city.equals("Mumbai"))
                 place4.setImageResource(R.drawable.buttonselecteffect);
-            if(!(city.equals("Bengaluru")||city.equals("Chennai") ||city.equals("Kolkata")||city.equals("Mumbai"))) {
+            if(!(city.equals("Bengaluru")||city.equals("Chennai") ||city.equals("Delhi")||city.equals("Mumbai"))) {
                 Log.d("residence review other", city);
                 citynam.setText(city);
             }
 
         }
+
+
+
 
     }//end of oncreate
 

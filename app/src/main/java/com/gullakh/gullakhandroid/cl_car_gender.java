@@ -382,6 +382,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 if(!jsonObject.get("result").toString().equals("[]"))
                 {
                     ContactBR[] Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR[].class);
+                    Log.d("requestgetserver3 jsonobj", "1");
                     borrowercontactid = Borrower_contact[0].getId();
                     Gson gson1 = new Gson();
                     String json = gson1.toJson(((GlobalData) getApplication()).getLenders());
@@ -410,10 +411,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-
+                Log.d("requestgetserver4 jsonobj", String.valueOf(jsonObject));
                 ContactBR Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR.class);
                 borrowercontactid = Borrower_contact.getId();
                 Log.d("Borrower contact id", borrowercontactid);
+                Log.d("requestgetserver4 result", "1");
                 requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",((GlobalData) getApplication()).getLenders().get(0),((GlobalData) getApplication()).getLenders().get(1));
 
             }
