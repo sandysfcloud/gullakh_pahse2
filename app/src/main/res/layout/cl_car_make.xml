@@ -163,7 +163,7 @@
                 android:textColorHint="#fff"
                 android:inputType="text"
                 android:textColor="#3f3f3f"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:imeOptions="actionDone"
                 android:singleLine="true" />
 

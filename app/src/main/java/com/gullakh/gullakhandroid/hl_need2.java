@@ -120,19 +120,19 @@ public class hl_need2 extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.next:
                 if (Text1.getText().toString().equals("")){
-                    RegisterPageActivity.showErroralert(this, "Select cost of plot as per registry", "failed");
+                    RegisterPageActivity.showErroralert(this, "Select cost of plot as per registry!", "failed");
                 }else {
                     if (Text2.getText().toString().equals("")){
-                        RegisterPageActivity.showErroralert(this, "Select current market value of plot (approx) ", "failed");
+                        RegisterPageActivity.showErroralert(this, "Select current market value of plot (approx)!", "failed");
                     }else {
                         if (Text3.getText().toString().equals("")){
-                            RegisterPageActivity.showErroralert(this, "Select cost of construction as per architect’s estimate? ", "failed");
+                            RegisterPageActivity.showErroralert(this, "Select cost of construction as per architect’s estimate?", "failed");
                         }else {
                             if (radioGroup1.getCheckedRadioButtonId() == -1){
-                                RegisterPageActivity.showErroralert(this, "Select the building map approved by development authority ", "failed");
+                                RegisterPageActivity.showErroralert(this, "Select the building map approved by development authority!", "failed");
                             }else {
                                 if (radioGroup2.getCheckedRadioButtonId() == -1){
-                                    RegisterPageActivity.showErroralert(this, "Select city limit", "failed");
+                                    RegisterPageActivity.showErroralert(this, "Select city limit!", "failed");
                                 }else {
                                    /* if (radioGroup3.getCheckedRadioButtonId() == -1){
                                         RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");

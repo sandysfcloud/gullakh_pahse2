@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -87,14 +88,30 @@ public class signin extends AppCompatActivity implements AsyncResponse {
             public void onClick(View view) {
 
 
+
+
+
+
                 useremail = emailadress.getText().toString();
                 userpassword = md5(password.getText().toString());
 
+                //kk
+                boolean digitsOnly = TextUtils.isDigitsOnly(useremail);
+
+
                 String[] arraydata = new String[5];
-                arraydata[0] = "signin";
+                if(digitsOnly) {
+                    Log.d("username is mobile no","1");
+                    arraydata[0] = "signin_mobile";
+                }
+                else {
+                    Log.d("username is email","1");
+                    arraydata[0] = "signin";
+                }
                 arraydata[1] = useremail;
                 arraydata[2] = useremail;
-                arraydata[3] = userpassword;
+                //arraydata[3] = userpassword;
+                arraydata[3] = RegisterAppToServer.regid;
                 arraydata[4] = userpassword;
 
 
@@ -113,6 +130,8 @@ public class signin extends AppCompatActivity implements AsyncResponse {
             }
         });
     }
+
+
 
     private void goToForgetPasssword() {
         Intent intent = new Intent(this, ForgetPassword.class);
@@ -203,6 +222,8 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 String score = str_result.getString("score");
                 String date = str_result.getString("date");
 
+                String uemail = str_result.getString("email");
+
                 String addr = street+" "+city+" "+state+" "+country;
 
                /*((GlobalData) getApplication()).setfirstnam(firstname+" "+lastname);
@@ -214,10 +235,11 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 ((GlobalData) getApplication()).setcreditdate(date);*/
 
                 Log.d("signindetails", usermobno + " : " + userid + " : " + contactid + " " + profileurl);
-                Log.d("signindetails2", firstname + " : " + lastname + " : " + dob + " " + city+" "+state);
+                Log.d("signindetails2", firstname + " : " + lastname + " : " + dob + " " + city + " " + state);
                 ContentValues values = new ContentValues();
                 values.put("usersession", str_result.get("session_id").toString());
-                values.put("useremail", useremail);
+                //values.put("useremail", useremail);
+                values.put("useremail", uemail);
                 values.put("usermobile", usermobno);
                 values.put("user_id", userid);
                 values.put("contact_id", contactid);
@@ -267,16 +289,22 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
                     Log.d("sign in true","cibilscore");
 
+                    if(score!=null)
+                    {
+                        Log.d("score is",score);
+                    }
 
-                    if(score.length()>0)
+
+                    /*if(score.length()>0)
                     {//if credit score is already present
                         goToIntent(this);
                     }
-                    else {
+                    else {kk*/
                         Intent intent2 = new Intent(this, CibilScore.class);
-                        intent2.putExtra("apply", "signin");
+                       // intent2.putExtra("apply", "signin");
+                        intent2.putExtra("apply", "apply");
                         startActivity(intent2);
-                    }
+                    //}
 
                 }else{
                     //frm mainactivity
@@ -295,9 +323,8 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
 
-            }
-            else {
-                    RegisterPageActivity.showErroralert(signin.this, str_result.get("error_message").toString(), "error");
+            } else {
+                RegisterPageActivity.showErroralert(signin.this, str_result.get("error_message").toString(), "error");
                 }
         } catch (JSONException e) {
             e.printStackTrace();

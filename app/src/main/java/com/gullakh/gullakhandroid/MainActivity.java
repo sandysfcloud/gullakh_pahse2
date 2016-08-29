@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,6 +44,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +53,10 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -114,8 +120,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String ProfileURL;
     private Bitmap bmp;
     private ImageView iv;
+    private String sessionid;
+     Button credit,logout;
+    String emailfromul="",fname="",lastnam="";
 
 
+    private JSONServerGet requestgetserver2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -207,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mysearchbutton.setOnClickListener(this);
 
 
-        Button credit = (Button) findViewById(R.id.credit);
+        credit = (Button) findViewById(R.id.credit);
         credit.setOnClickListener(this);
 
         DataHandler dbobject = new DataHandler(this);
@@ -223,6 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                getImageFromURL(ProfileURL);
             }
         }
+
         View llsignin=findViewById(R.id.llsignin);
         View llsignout=findViewById(R.id.llsignout);
         if(signinstate){
@@ -237,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         ListView_Click.buttonApply = false;//true only when goes from bank detail page
+        ((GlobalData) getApplication()).setcredback(null);//true only when cs button is clicked
         //coin=(ImageView)findViewById(R.id.imageViewCoin);
        // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");
       //  Typeface myfontlight = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Light.ttf");
@@ -272,147 +284,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         double Emi=FinanceLib.pmt(0.00740260861, 180, -100000, 0, false);
         Log.d("checking PMT",String.valueOf(Emi));
-//*****************calculation
-
-        //populate the adapter, that knows how to draw each item (as you would do with a ListAdapter)
-       /* wheelView.setAdapter(new MaterialColorAdapter(entries));
-
-        //a listener for receiving a callback for when the item closest to the selection angle changes
-        wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectListener() {
-            @Override
-            public void onWheelItemSelected(WheelView parent, Drawable itemDrawable, int position) {
-                //get the item at this position
-                Map.Entry<String, Integer> selectedEntry = ((MaterialColorAdapter) parent.getAdapter()).getItem(position);
-                parent.setSelectionColor(getContrastColor(selectedEntry));
-            }
-        });*/
-
-       /* wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
-            @Override
-            public void onWheelItemClick(WheelView parent, int position, boolean isSelected) {
-                Log.d("position of wheelitem", String.valueOf(position));
-                if (position == 3) {
-                    Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.left, R.transition.right);
-                }
-            }
-        });*/
-
-        /*wheelView.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent event) {
-                touchPositionX = (int) event.getX();
-                touchPositionY = (int) event.getY();
-                return false;
-            }
-        });
-
-        wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
-            @Override
-            public void onWheelItemClick(WheelView parent, int position, boolean isSelected)
-            {
-                int[]  myImageList2 = new int[]{R.drawable.personalloannew, R.drawable.busineeloan, R.drawable.homeloan, R.drawable.carloan};
-                final MediaPlayer mp = MediaPlayer.create(getApplication(),R.raw.coindrop);
-                Log.d("position",String.valueOf(position));
-                if(position==0){
-                    loanType = "Personal Loan";
-                }else if (position==1){
-                    loanType = "Loan against Property";
-                }else if (position==2){
-                    loanType = "Home Loan";
-                }else if(position==3){
-                    loanType = "Car Loan";
-                }
-                coin.setX(touchPositionX-30);
-                coin.setY(touchPositionY);
-                //   Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                coin.setImageResource(myImageList2[position]);
-                Display display = getWindowManager().getDefaultDisplay();
-                Point size = new Point();
-                display.getSize(size);
-                int windowWidth = size.x;
-                int windowHeight= size.y;
-                Log.d("Wheel ht wd", windowHeight + " & " + windowWidth);
-                int centerYPos=windowHeight/2;
-                int centerXPos=windowWidth/2;
-                anim1 = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.rotate);
-                anim1.setRepeatCount(3);
-                anim1.setTarget(coin);
-                anim1.setDuration(duration);
-                Log.d("Wheel ht wd", wheelheight + " & " + wheelwidth);
-                // animationvd = new TranslateAnimation(0, windowWidth/2-touchPositionX-10, 0, windowHeight/2-touchPositionY-30);
-                int centerX=(windowWidth/2+touchPositionX/2)/2;
-                if(windowWidth/2>touchPositionX)
-                {
-                    animationvu = new TranslateAnimation(0,(centerXPos-touchPositionX)/2, 0,-touchPositionY);
-                    animationvd = new TranslateAnimation((centerXPos-touchPositionX)/2, (centerXPos-touchPositionX)-75,-touchPositionY,-50-touchPositionY+wheelheight);
-                }else
-                {
-                    animationvu = new TranslateAnimation(0,(centerXPos-touchPositionX)/2, 0,-touchPositionY);
-                    animationvd = new TranslateAnimation((centerXPos-touchPositionX)/2, (centerXPos-touchPositionX)-75,-touchPositionY, -50-touchPositionY+wheelheight);
-                }
-
-
-                animationvu.setDuration(duration);  // animation duration
-                animationvu.setFillAfter(true);
-
-                animationvd.setDuration(duration);  // animation duration
-                animationvd.setFillAfter(true);
-
-                animationvu.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        coin.startAnimation(animationvd);
-                       // anim1.start();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-                animationvd.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        mp.start();
-                        coin.clearAnimation();
-                        for(int i=0;i<1000*1500*1500;i++);
-                            coin.setVisibility(View.INVISIBLE);
-                            Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
-                            startActivity(intent);
-                            overridePendingTransition(R.transition.left, R.transition.right);
-                    }
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-                coin.startAnimation(animationvu);
-                //anim1.start();
-
-
-
-
-            }
-        });
-        wheelView.setWheelDrawable(R.drawable.wheelbg);
-
-
-        //initialise the selection drawable with the first contrast color
-        wheelView.setSelectionColor(getContrastColor(entries.get(0)));*/
-
-
-        //***********************************
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -458,22 +329,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        DataHandler db = new DataHandler(MainActivity.this);
-        db.addTable();
-        Cursor cr = dbobject.displayData("select * from userlogin");
-        String emailfromul="";
-        if(cr!=null) {
-            if (cr.moveToFirst()) {
-                emailfromul = cr.getString(3);
-            }
-            }
-        View headerView = null;
-        headerView = prepareHeaderView(R.layout.header_navigation_drawer,"",emailfromul);
 
 
-         mDrawerList.addHeaderView(headerView);
-        //mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -494,8 +352,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         actionBar.setCustomView(v);
 
+//**********
 
 
+
+        DataHandler db = new DataHandler(MainActivity.this);
+        //db.addTable();
+        Cursor cr = db.displayData("select * from userlogin");
+
+
+        if(cr!=null) {
+            Log.d("cr!=null","1");
+            if (cr.moveToFirst()) {
+                Log.d("cr.moveToFirst","1");
+
+                Cursor cr1 = dbobject.displayData("select * from session");
+                if (cr1.moveToFirst()) {
+                    sessionid = cr1.getString(1);
+                    Log.e("sessionid-cartypes", sessionid);
+                    cr1.close();
+                }
+                emailfromul=cr.getString(3);
+                Log.d("fnam and lnam in headerview",fname+" "+lastnam);
+                Log.d("emailfromul in headerview",emailfromul);
+                isInternetPresent = cd.isConnectingToInternet();
+                if (!isInternetPresent) {
+                    noconnection();
+
+                    Log.d("internet connectn not there", "");
+                }else {
+
+                    getContactDetails();
+                }
+            }
+            else {
+                Log.d("user has not logged in","1");
+
+                View headerView = null;
+                // headerView = prepareHeaderView(R.layout.header_navigation_drawer,"",emailfromul);
+                headerView = prepareHeaderView(R.layout.header_navigation_drawer, "", fname + " " + lastnam);
+                mDrawerList.addHeaderView(headerView);
+                //mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
+                mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+            }
+        }
 
 
         //********************End of Oncreate
@@ -504,7 +404,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    public void getContactDetails(){
+        requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+            }
+            public void processFinishString(String str_result, Dialog dg)
+            {
+                Dialog dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
+//            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
+                if(details!=null) {
+                    if (details.length > 0) {
+                        fname = details[0].getFirstname();
+                        lastnam = details[0].getLastname();
 
+                    }
+                }
+
+                View headerView = null;
+                // headerView = prepareHeaderView(R.layout.header_navigation_drawer,"",emailfromul);
+                headerView = prepareHeaderView(R.layout.header_navigation_drawer, "", fname + " " + lastnam);
+                mDrawerList.addHeaderView(headerView);
+                //mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
+                mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+                dgthis.dismiss();
+            }
+        }, MainActivity.this, "wait");
+        requestgetserver2.execute("token","getcontact",sessionid,emailfromul);
+    }
 
 
 
@@ -766,6 +700,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         TextView tv = (TextView) headerView.findViewById(R.id.email);
         tv.setTypeface(myfontlight);
+
+//kk
+
+         logout = (Button) headerView.findViewById(R.id.logout);
+
+        if(signinstate){
+            logout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            logout.setVisibility(View.INVISIBLE);
+            Log.d("not signed in","credit score buttn");
+            credit.setText("free credit report");
+
+        }
+        logout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Are you sure !!!")
+
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                logout.setVisibility(View.INVISIBLE);
+                                MainActivity.signinstate = false;
+                                DataHandler dbobjectnew = new DataHandler(MainActivity.this);
+                                dbobjectnew.query("DELETE FROM userlogin");
+
+                                signinPrepage obj=new signinPrepage();
+                                obj.logoutfb(MainActivity.this);
+
+                               /* GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                                fragmentList.signOutFromGplus();*/
+
+                                Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                                intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intenth);
+                            }
+                        });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+            }
+        });
+
+
+
+
 
         ImageLoader loader = ImageLoader.getInstance();
         loader.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
@@ -1166,3 +1163,147 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 }
+
+
+
+//*****************calculation
+
+//populate the adapter, that knows how to draw each item (as you would do with a ListAdapter)
+       /* wheelView.setAdapter(new MaterialColorAdapter(entries));
+
+        //a listener for receiving a callback for when the item closest to the selection angle changes
+        wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectListener() {
+            @Override
+            public void onWheelItemSelected(WheelView parent, Drawable itemDrawable, int position) {
+                //get the item at this position
+                Map.Entry<String, Integer> selectedEntry = ((MaterialColorAdapter) parent.getAdapter()).getItem(position);
+                parent.setSelectionColor(getContrastColor(selectedEntry));
+            }
+        });*/
+
+       /* wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
+            @Override
+            public void onWheelItemClick(WheelView parent, int position, boolean isSelected) {
+                Log.d("position of wheelitem", String.valueOf(position));
+                if (position == 3) {
+                    Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
+                }
+            }
+        });*/
+
+        /*wheelView.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                touchPositionX = (int) event.getX();
+                touchPositionY = (int) event.getY();
+                return false;
+            }
+        });
+
+        wheelView.setOnWheelItemClickListener(new WheelView.OnWheelItemClickListener() {
+            @Override
+            public void onWheelItemClick(WheelView parent, int position, boolean isSelected)
+            {
+                int[]  myImageList2 = new int[]{R.drawable.personalloannew, R.drawable.busineeloan, R.drawable.homeloan, R.drawable.carloan};
+                final MediaPlayer mp = MediaPlayer.create(getApplication(),R.raw.coindrop);
+                Log.d("position",String.valueOf(position));
+                if(position==0){
+                    loanType = "Personal Loan";
+                }else if (position==1){
+                    loanType = "Loan against Property";
+                }else if (position==2){
+                    loanType = "Home Loan";
+                }else if(position==3){
+                    loanType = "Car Loan";
+                }
+                coin.setX(touchPositionX-30);
+                coin.setY(touchPositionY);
+                //   Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                coin.setImageResource(myImageList2[position]);
+                Display display = getWindowManager().getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                int windowWidth = size.x;
+                int windowHeight= size.y;
+                Log.d("Wheel ht wd", windowHeight + " & " + windowWidth);
+                int centerYPos=windowHeight/2;
+                int centerXPos=windowWidth/2;
+                anim1 = (ObjectAnimator) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.rotate);
+                anim1.setRepeatCount(3);
+                anim1.setTarget(coin);
+                anim1.setDuration(duration);
+                Log.d("Wheel ht wd", wheelheight + " & " + wheelwidth);
+                // animationvd = new TranslateAnimation(0, windowWidth/2-touchPositionX-10, 0, windowHeight/2-touchPositionY-30);
+                int centerX=(windowWidth/2+touchPositionX/2)/2;
+                if(windowWidth/2>touchPositionX)
+                {
+                    animationvu = new TranslateAnimation(0,(centerXPos-touchPositionX)/2, 0,-touchPositionY);
+                    animationvd = new TranslateAnimation((centerXPos-touchPositionX)/2, (centerXPos-touchPositionX)-75,-touchPositionY,-50-touchPositionY+wheelheight);
+                }else
+                {
+                    animationvu = new TranslateAnimation(0,(centerXPos-touchPositionX)/2, 0,-touchPositionY);
+                    animationvd = new TranslateAnimation((centerXPos-touchPositionX)/2, (centerXPos-touchPositionX)-75,-touchPositionY, -50-touchPositionY+wheelheight);
+                }
+
+
+                animationvu.setDuration(duration);  // animation duration
+                animationvu.setFillAfter(true);
+
+                animationvd.setDuration(duration);  // animation duration
+                animationvd.setFillAfter(true);
+
+                animationvu.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        coin.startAnimation(animationvd);
+                       // anim1.start();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                animationvd.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        mp.start();
+                        coin.clearAnimation();
+                        for(int i=0;i<1000*1500*1500;i++);
+                            coin.setVisibility(View.INVISIBLE);
+                            Intent intent = new Intent(MainActivity.this, Emp_type_Qustn.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                coin.startAnimation(animationvu);
+                //anim1.start();
+
+
+
+
+            }
+        });
+        wheelView.setWheelDrawable(R.drawable.wheelbg);
+
+
+        //initialise the selection drawable with the first contrast color
+        wheelView.setSelectionColor(getContrastColor(entries.get(0)));*/
+
+
+//***********************************

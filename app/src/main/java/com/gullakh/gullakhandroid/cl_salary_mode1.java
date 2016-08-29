@@ -108,6 +108,7 @@ public class cl_salary_mode1 extends AppCompatActivity implements View.OnClickLi
         }
 if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
     String saldep=((GlobalData) getApplication()).getSalryPayMode();
+    Log.d("bank type is mode1",saldep);
     if (saldep.equals("Bank")) {
         pay1.setImageResource(R.drawable.buttonselecteffect);
     } else if (saldep.equals("Cheque")) {

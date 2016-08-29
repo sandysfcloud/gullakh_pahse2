@@ -59,13 +59,15 @@ public class JSONParse  extends AsyncTask<String, Void, JSONObject> {
             urlnew=urlnew+"/resend_otp";
         else if(arraydata[0]=="signin")
             urlnew=urlnew+"/user_login_process";
+        else if(arraydata[0]=="signin_mobile")//kk
+            urlnew=urlnew+"/user_login_processmob";
         else if(arraydata[0]=="registration")
             urlnew=urlnew+"/Send_Notification";
         else if(arraydata[0]=="forgetpassword")
             urlnew=urlnew+"/Password_Reset";
             else
             urlnew=urlnew+"/update_password";
-
+        Log.e("urlnew used in jsonparse",urlnew);
          json = jParser.getJSONFromUrl(urlnew,arraydata);
         Log.e("AsyncTask", "doinback1");
         try {

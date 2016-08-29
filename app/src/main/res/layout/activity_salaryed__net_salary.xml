@@ -82,12 +82,13 @@
         <com.gullakh.gullakhandroid.font.RobotoEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Other"
+            android:hint="Net Monthly Salary"
             android:id="@+id/netsalary"
-            android:inputType="phone"
+            android:inputType="number"
             android:textColorHint="#000"
             android:textColor="#000"
             android:text="1,000"
+android:maxLength="11"
             android:textSize="20sp"
             app:typeface="robotoLight"/>
 

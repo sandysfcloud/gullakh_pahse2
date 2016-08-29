@@ -266,7 +266,7 @@ public class hl_city extends AppCompatActivity implements View.OnClickListener{
                     goToIntent("");
                 }
                 else
-                    RegisterPageActivity.showErroralert(hl_city.this, "Select any one location where property is located", "failed");
+                    RegisterPageActivity.showErroralert(hl_city.this, "Select any one location where property is located!", "failed");
                 break;
             case R.id.done:
 

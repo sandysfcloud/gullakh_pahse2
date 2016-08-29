@@ -143,7 +143,7 @@ public class cl_car_make extends AppCompatActivity implements View.OnClickListen
             case R.id.next:
                 if (dataCar.equals("")&&carmak.getText().toString().equals(""))
                 {
-                    RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_make.this, "Select any one Car!", "failed");
                 } else {
                     setDataToHashMap("interested_car", dataCar);
                     goToDatabase("Car Loan");

@@ -96,6 +96,7 @@ public class ShowSuggtn extends ArrayAdapter<String> implements Filterable {
                 }
                 else {
                     notifyDataSetInvalidated();
+                    notifyDataSetChanged();//i added
                 }
 
             }

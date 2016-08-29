@@ -4,14 +4,20 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Base64OutputStream;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,17 +26,27 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class UploadDocument2 extends AppCompatActivity implements View.OnClickListener {
     String temp1 = "";
@@ -51,7 +67,7 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     private String caseid="";
     private boolean frommyappl=false;
     private String contactid;
-
+int flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +88,21 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         ViewGroup.LayoutParams lp = v2.getLayoutParams();
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
+
+
+        //permission for 6.0
+
+
+        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        Log.d("permission result", String.valueOf(result));
+
+
+
+
+
+
+
         DataHandler dbobject = new DataHandler(UploadDocument2.this);
         Cursor cr = dbobject.displayData("select * from session");
         if (cr.moveToFirst()) {
@@ -123,69 +154,155 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
         del6.setOnClickListener(this);
         del7.setOnClickListener(this);
         Intent intent1 = getIntent();
-        if(intent1.getStringExtra("data").equals("myapplication")){
-            frommyappl=true;
+        Log.d("intent test", String.valueOf(getIntent()));
 
-            caseid="x"+intent1.getStringExtra("loanreqcaseid");
-            String temp=intent1.getStringExtra("contactid");
-            temp=temp.replaceAll(",\"","");
-            contactid= "x"+temp;
-            Log.d("my appl page caseid",caseid);
-            Log.d("my appl page contactid",contactid);
-            String[] d= {"0",intent1.getStringExtra("d0"),intent1.getStringExtra("d1"),intent1.getStringExtra("d2"),intent1.getStringExtra("d3"),intent1.getStringExtra("d4"),intent1.getStringExtra("d5"),intent1.getStringExtra("d6")};
-            Log.d("d values",d[0]+d[1]+d[2]+d[3]+d[4]+d[5]+d[6]);
-            for(int i=1;i<=7;i++){
-                if(d[i].equals("1")){
-                    Log.d("set Attribute ", String.valueOf(i));
-                    uploadedsuccessfully(i);
-                }
+        String act = intent1.getExtras().getString("remove");
+
+        if(act!=null)
+        {
+            Log.d("finish the act", "1");
+            if(act.equals("yes"))
+                finish();
+
+        }
+
+
+        if(intent1.getIntExtra("flg", 0)!=0)
+        Log.d("intent test2", intent1.getStringExtra("flg"));
+
+
+
+        if (intent1.getStringExtra("data") != null) {
+                if (intent1.getStringExtra("data").equals("myapplication")) {
+                    frommyappl = true;
+
+                    caseid = intent1.getStringExtra("loanreqcaseid");
+                    String temp = intent1.getStringExtra("contactid");
+                    temp = temp.replaceAll(",\"", "");
+                    contactid = "x" + temp;
+                    Log.d("my appl page caseid", caseid);
+                    Log.d("my appl page contactid", contactid);
+                    String[] d = {"0", intent1.getStringExtra("d0"), intent1.getStringExtra("d1"), intent1.getStringExtra("d2"), intent1.getStringExtra("d3"), intent1.getStringExtra("d4"), intent1.getStringExtra("d5"), intent1.getStringExtra("d6")};
+                    Log.d("d values", d[0] + d[1] + d[2] + d[3] + d[4] + d[5] + d[6]);
+                    // for(int i=1;i<=7;i++){
+                    for (int i = 0; i < 7; i++) {
+                        Log.d("i value", String.valueOf(i));
+                        if (d[i].equals("1")) {
+                            Log.d("set Attribute ", String.valueOf(i));
+                            uploadedsuccessfully(i+1);
+                        }
+                    }
+
+
+            } else {
+                caseid = cl_car_gender.borrowercaseid;
+                contactid = cl_car_gender.borrowercontactid;
+                // Log.d("gender page caseid",caseid);
+                // Log.d("gender page contactid",contactid);
             }
-
-        }else{
-            caseid=cl_car_gender.borrowercaseid;
-            contactid=cl_car_gender.borrowercontactid;
-            Log.d("gender page caseid",caseid);
-            Log.d("gender page contactid",contactid);
         }
     }
 
+
+
+
+
+
+
+
+
+
+    private void showFileChooser(int code) {
+        /*Intent intent = new Intent();
+        //sets the select file to all types of files*/
+       // intent.setType("*/*");
+        //allows to select data and return it
+      /*  intent.setAction(Intent.ACTION_GET_CONTENT);
+
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        //starts new activity to select file and return data
+        startActivityForResult(Intent.createChooser(intent,"Choose File to Upload.."),code);*/
+
+
+       /* Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);*/
+        //intent.setType("*/*");
+       // intent.setType("image/*,application/pdf");
+       /* intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), code);*/
+
+
+
+     String[] ACCEPT_MIME_TYPES = {"image/*", "application/pdf"};
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+
+
+        intent.setType("application/*|image/*|pdf");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES);
+
+
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.putExtra("remove", "yes");
+
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        Log.d("intent here", String.valueOf(intent));
+        startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), code);
+
+        flag=1;
+
+
+
+
+
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonUpload1:
-                Intent i1 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+               /*kk Intent i1 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i1.setType("image/*");
-                startActivityForResult(Intent.createChooser(i1, "Select file to upload document"), 1);
+                startActivityForResult(Intent.createChooser(i1, "Select file to upload document"), 1);*/
+                showFileChooser(1);
+
                 break;
             case R.id.buttonUpload2:
-                Intent i2 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+               /* Intent i2 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i2.setType("image/*");
-                startActivityForResult(Intent.createChooser(i2, "Select file to upload document"), 2);
+                startActivityForResult(Intent.createChooser(i2, "Select file to upload document"), 2);*/
+                showFileChooser(2);
                 break;
             case R.id.buttonUpload3:
-                Intent i3 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                /*Intent i3 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i3.setType("image/*");
-                startActivityForResult(Intent.createChooser(i3, "Select file to upload document"), 3);
+                startActivityForResult(Intent.createChooser(i3, "Select file to upload document"), 3);*/
+                showFileChooser(3);
                 break;
             case R.id.buttonUpload4:
-                Intent i4 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+               /* Intent i4 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i4.setType("image/*");
-                startActivityForResult(Intent.createChooser(i4, "Select file to upload document"), 4);
+                startActivityForResult(Intent.createChooser(i4, "Select file to upload document"), 4);*/
+                showFileChooser(4);
                 break;
             case R.id.buttonUpload5:
-                Intent i5 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+               /* Intent i5 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i5.setType("image/*");
-                startActivityForResult(Intent.createChooser(i5, "Select file to upload document"), 5);
+                startActivityForResult(Intent.createChooser(i5, "Select file to upload document"), 5);*/
+                showFileChooser(5);
                 break;
             case R.id.buttonUpload6:
-                Intent i6 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+               /* Intent i6 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i6.setType("image/*");
-                startActivityForResult(Intent.createChooser(i6, "Select file to upload document"), 6);
+                startActivityForResult(Intent.createChooser(i6, "Select file to upload document"), 6);*/
+                showFileChooser(6);
                 break;
             case R.id.buttonUpload7:
-                Intent i7 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                /*Intent i7 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i7.setType("image/*");
-                startActivityForResult(Intent.createChooser(i7, "Select file to upload document"), 7);
+                startActivityForResult(Intent.createChooser(i7, "Select file to upload document"), 7);*/
+                showFileChooser(1);
                 break;
             case R.id.done:
                 goToServer();
@@ -292,10 +409,55 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     }
 
 
+
+
+    private String encodeFileToBase64Binary(String fileName)
+            throws IOException {
+
+       // File file = new File(fileName);
+       // byte[] bytes = loadFile(file);
+        byte[] bytes = fileName.getBytes("UTF-8");
+
+
+        String encoded = Base64.encodeToString(bytes, Base64.NO_WRAP);
+        String encodedString = new String(encoded);
+
+        return encodedString;
+    }
+
+    private static byte[] loadFile(File file) throws IOException {
+        InputStream is = new FileInputStream(file);
+
+        long length = file.length();
+        if (length > Integer.MAX_VALUE) {
+            // File is too large
+        }
+        byte[] bytes = new byte[(int)length];
+
+        int offset = 0;
+        int numRead = 0;
+        while (offset < bytes.length
+                && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {
+            offset += numRead;
+        }
+
+        if (offset < bytes.length) {
+            throw new IOException("Could not completely read file "+file.getName());
+        }
+
+        is.close();
+        return bytes;
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("onActivityResult", String.valueOf(data));
         if (resultCode == RESULT_OK) {
-            Uri selectedImageUri = data.getData();
+
+            Log.d("onActivityResult", String.valueOf(RESULT_OK));
+           /*kk  Uri selectedImageUri = data.getData();
             String[] projection = {MediaStore.MediaColumns.DATA};
             CursorLoader cursorLoader = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
@@ -332,10 +494,12 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
             // get the base 64 string
             String imageFromSdcard = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
             Log.d("Base64 encode data", imageFromSdcard);
-            if (requestCode == 1) {
+           if (requestCode == 1) {
+
                 temp1 = imageFromSdcard;
                 pathfromuser1.setText(selectedImagePath);
                 String FileExtension = getExt(selectedImagePath);
+
                 savetoserver(temp1, FileExtension, "ID Proof & DOB Proof", requestCode);
 
             } else if (requestCode == 2) {
@@ -368,7 +532,86 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 pathfromuser7.setText(selectedImagePath);
                 String FileExtension = getExt(selectedImagePath);
                 savetoserver(temp7, FileExtension, "Passport Size Photograph",requestCode);
+            }kk*/
+
+
+
+
+
+
+                Uri selectedFileUri = data.getData();
+            temp1 = FilePath.getPath(this, selectedFileUri);
+
+            String FileExtension = getExt(temp1);
+
+
+
+
+           try {
+                temp1= encodeFileToBase64Binary(temp1);
+                Log.i("Selected File Path:-try" , temp1);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.i("Exception is:", String.valueOf(e));
             }
+
+
+
+
+
+
+            if (requestCode == 1) {
+
+                pathfromuser1.setText(temp1);
+
+                savetoserver(temp1, FileExtension, "ID Proof & DOB Proof", requestCode);
+
+            } else if (requestCode == 2) {
+
+                pathfromuser2.setText(temp1);
+                savetoserver(temp1, FileExtension,"Address Proof",requestCode);
+
+            } else if (requestCode == 3) {
+
+                pathfromuser3.setText(temp1);
+                savetoserver(temp1, FileExtension, "Signature Proof",requestCode);
+            } else if (requestCode == 4) {
+
+                pathfromuser4.setText(temp1);
+
+                savetoserver(temp1, FileExtension, "Payslips",requestCode);
+            } else if (requestCode == 5) {
+
+                pathfromuser5.setText(temp1);
+
+                savetoserver(temp1, FileExtension, "Bank Statement/Passbook of Salary account",requestCode);
+            } else if (requestCode == 6) {
+
+                pathfromuser6.setText(temp1);
+
+                savetoserver(temp1, FileExtension, "FORM-16/ ITR",requestCode);
+            } else if (requestCode == 7) {
+
+                pathfromuser7.setText(temp1);
+
+                savetoserver(temp1, FileExtension, "Passport Size Photograph",requestCode);
+            }
+
+
+
+            //*kk
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
     }
@@ -397,7 +640,8 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("uploadresult", String.valueOf(jsonObject.get("result")));
-                if (String.valueOf(jsonObject.get("result")).equals("\"true\"")) {
+                //if (String.valueOf(jsonObject.get("result")).equals("\"true\"")) {
+                if (String.valueOf(jsonObject.get("success")).equals("true")) {
                 uploadedsuccessfully(rc);
                 } else {
                    Log.d("FailToUpload","");

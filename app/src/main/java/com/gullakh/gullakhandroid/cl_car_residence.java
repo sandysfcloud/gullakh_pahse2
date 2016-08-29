@@ -233,7 +233,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 if(((GlobalData) getApplication()).getcarres()!=null)
                     goToIntent();
                 else
-                    RegisterPageActivity.showErroralert(cl_car_residence.this, "Select any one Location", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_residence.this, "Please select any one location!", "failed");
 
 
 

@@ -79,8 +79,8 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         categories.add("Refinance a property already purchased from own sources");
         categories.add("Purchase a house/flat which is ready to move-in");
 
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner.setAdapter(dataAdapter1);
 
 
@@ -127,7 +127,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
                     goToIntent();
                 }
                 else {
-                    RegisterPageActivity.showErroralert(hl_need.this, "Select Loan for options", "failed");
+                    RegisterPageActivity.showErroralert(hl_need.this, "Select loan for options!", "failed");
                 }
                 break;
             case R.id.back:

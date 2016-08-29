@@ -326,7 +326,7 @@ public class Car_Loan_PAT extends AppCompatActivity  implements View.OnClickList
         case R.id.next:
         if(amt.getText().toString().matches("")) {
 
-            RegisterPageActivity.showErroralert(Car_Loan_PAT.this, "Please enter PAT amount!", "failed");
+            RegisterPageActivity.showErroralert(Car_Loan_PAT.this, "Please enter pat amount!", "failed");
         }
         else
         {

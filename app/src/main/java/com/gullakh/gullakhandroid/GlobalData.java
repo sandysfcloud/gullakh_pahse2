@@ -20,7 +20,7 @@ public class GlobalData extends MultiDexApplication {
     private String questionVariable;
     private ArrayList<Double> questionVariable2;
 
-    private int sizefiltermusthave=0;
+    private int sizefiltermusthave;
     private ArrayList<Double> foir,accid;
 
     private String session,carres,loantyp,gender,employer;
@@ -32,8 +32,10 @@ public class GlobalData extends MultiDexApplication {
     private Double depreciation2;
 // =====================================================================================================================
 //-------------------------production URL------------------------------------------------------------------------------
-    static final String GULLAKH_PORTAL ="http://54.200.200.39/gullakh_portal/";
-    static final String GULLAKH_WEB ="http://54.200.200.39/gullakh_web/";
+   /* static final String GULLAKH_PORTAL ="http://54.200.200.39/gullakh_portal/";
+    static final String GULLAKH_WEB ="http://54.200.200.39/gullakh_web/";*/
+    static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_dev/";
+    static final String GULLAKH_WEB ="http://52.39.95.142/gullakh_web_dev/";
 //=======================================================================================================================
     //------------------------developer URL-----------------------------------------------------------------------------
 //    static final String GULLAKH_PORTAL ="http://54.200.200.39/gullakh_portal_dev/";
@@ -56,7 +58,7 @@ public class GlobalData extends MultiDexApplication {
     private String builderName,propcat1,propcat2,credit,creditdate;
     private String projectnam,existbank,prop_allotmentby,prop_mortgage,currentusr, state,city,addr,flag,back;
     int lpposalot,lpposprot,lpposcat1,lpposcat2,lpposcatg,homeneedpos,cpappprof,coappcat,coappbusp,coappbusf,cltyp,citypos=-1;
-
+    ArrayList<String>  high_cibil=new ArrayList<String>();
 //*****************CarLoan********************//
 
     public Double getEmi() {
@@ -612,5 +614,18 @@ public class GlobalData extends MultiDexApplication {
 
     public String getcreditdate() {
         return creditdate;
+    }
+
+
+
+
+
+
+    public void sethigh_cibil(ArrayList<String> builderName) {
+        this.high_cibil = builderName;
+    }
+
+    public ArrayList<String> gethigh_cibil() {
+        return high_cibil;
     }
 }

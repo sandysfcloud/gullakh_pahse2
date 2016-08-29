@@ -1,15 +1,18 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,7 +30,13 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
     int flag = 0;
     private Spinner spinner1,spinner2;
     private Spinner spinner3;
+   // List<String> categoriesloc;
+   private static final String[] categoriesloc = new String[]{"Select", "Self/Spouse owned", "Owned by parents/sibling", "Rented with family",
+           "Rented with friends","Rented staying alone","Hostel","Paying guest","Company provided","Others"};
 
+
+    private static final String[] categories = new String[]{"Select", "< 1yr", "1-2yrs", "2-3yrs",
+            " > 3yrs"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +74,8 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
 
             }
         });
-        List<String> categoriesloc = new ArrayList<String>();
+        List<String>  categoriesloc = new ArrayList<String>();
+       // categoriesloc = new String[size];
         categoriesloc.add("Select");
         categoriesloc.add("Self/Spouse owned");
         categoriesloc.add("Owned by parents/sibling");
@@ -77,11 +87,21 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         categoriesloc.add("Company provided");
         categoriesloc.add("Others");
         // Creating adapter for spinner
-        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesloc);
+        /*android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesloc);
         // Drop down layout style - list view with radio button
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
+        spinner2.setAdapter(dataAdapter2);*/
+
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categoriesloc);
+        // Drop down layout style - list view with radio button
+        dataAdapter2.setDropDownViewResource(R.layout.simple_spinnertextview);
+        // attaching data adapter to spinner
         spinner2.setAdapter(dataAdapter2);
+
+
+        /*MyArrayAdapter ma = new MyArrayAdapter(this, categoriesloc);
+        spinner2.setAdapter(ma);*/
 
 //****personal loan
         Intent intent2 = getIntent();
@@ -93,8 +113,10 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
             }
         }
 
+        /*spinner1 = (Spinner) findViewById(R.id.spinner1);
+        MyArrayAdapter ma2 = new MyArrayAdapter(this, categories);
+        spinner1.setAdapter(ma2);*/
         spinner1 = (Spinner) findViewById(R.id.spinner1);
-
         List<String> categories = new ArrayList<String>();
         categories.add("Select");
         categories.add("< 1yr");
@@ -102,22 +124,27 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
         categories.add(" 2-3yrs");
         categories.add(" > 3yrs");
 
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner1.setAdapter(dataAdapter1);
+
+
 
         spinner3 = (Spinner) findViewById(R.id.spinner3);
 
-        List<String> category = new ArrayList<String>();
+       List<String> category = new ArrayList<String>();
         category.add("Select");
         category.add("< 1yr");
         category.add(" 1-2yrs");
         category.add(" 2-3yrs");
         category.add(" > 3yrs");
 
-        android.widget.ArrayAdapter<String> dataAdapter3 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, category);
-        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter3 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, category);
+        dataAdapter3.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner3.setAdapter(dataAdapter3);
+
+       // MyArrayAdapter ma3 = new MyArrayAdapter(this, categories);
+       // spinner3.setAdapter(ma3);
     }
     @Override
     public void onClick(View v) {
@@ -152,18 +179,18 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
                                     startActivity(intent);
                                 }
                             }else{
-                                RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence cannot be greater than Period of stay in current city", "failed");
+                                RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Period of stay in current residence cannot be greater than period of stay in current city!", "failed");
                             }
                         } else {
-                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in Residence correctly", "failed");
+                            RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please Select period of stay in residence!", "failed");
 
                         }
                     }else {
-                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please enter correct month field", "failed");
+                        RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please select residence type!", "failed");
 
                     }
                 }else {
-                    RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Enter Period of stay in current city ", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_residence_type.this, "Please select period of stay in current city!", "failed");
                 }
                 break;
             case R.id.close:
@@ -181,6 +208,80 @@ public class  cl_car_residence_type extends AppCompatActivity implements View.On
     public void setDataToHashMap(String Key, String data) {
         cl_car_global_data.dataWithAns.put(Key, data);
     }
+
+
+    //**************spinner
+
+
+    private class MyArrayAdapter extends BaseAdapter {
+
+        private LayoutInflater mInflater;
+        private String[] Mainarry = new String[]{};
+
+        public MyArrayAdapter(Activity act, String[] array) {
+
+
+            Log.d("array data", String.valueOf(array));
+            // TODO Auto-generated constructor stub
+            mInflater = LayoutInflater.from(act);
+            Mainarry = array;
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Mainarry.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+
+            Log.d("getItem", String.valueOf(position));
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            Log.d("getItemId", String.valueOf(position));
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            final ListContent holder;
+            View v = convertView;
+            if (v == null) {
+                v = mInflater.inflate(R.layout.spinner_item, null);
+                holder = new ListContent();
+
+                holder.name = (TextView) v.findViewById(R.id.textView1);
+
+                v.setTag(holder);
+            } else {
+
+                holder = (ListContent) v.getTag();
+            }
+
+
+            holder.name.setText(Mainarry[position]);
+            Log.d("getView", holder.name.getText().toString());
+
+            return v;
+        }
+
+    }
+
+    static class ListContent {
+
+        TextView name;
+
+    }
+
+
+
 
 }/*
     private void goToDatabase(String loanType)

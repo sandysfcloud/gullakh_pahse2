@@ -176,7 +176,7 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
                     getYear("next");
                 }else
                 {
-                    RegisterPageActivity.showErroralert(cl_car_yearofmft.this, "Please enter Year of manufacture", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_yearofmft.this, "Please enter year of manufacture!", "failed");
                 }
                 break;
             case R.id.close:

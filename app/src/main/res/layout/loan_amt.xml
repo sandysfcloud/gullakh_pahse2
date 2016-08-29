@@ -92,6 +92,7 @@
         android:inputType="numberDecimal"
         android:digits="0123456789"
         android:text="10,000"
+        android:maxLength="11"
         android:textColorHint="#000"
         android:textColor="#000"
         android:textSize="20sp"

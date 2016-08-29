@@ -33,9 +33,11 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DateOfBirth_questn extends AppCompatActivity implements View.OnClickListener,TimePickerDialog.OnTimeSetListener,DatePickerDialog.OnDateSetListener{
@@ -110,21 +112,23 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
 
         if (savedInstanceState != null) {
+            Log.d("if savedInstanceState not null","");
             dobg = savedInstanceState.getString("dob");
             genderg = savedInstanceState.getString("gender");
             ageg = Integer.parseInt(savedInstanceState.getString("age"));
             emptypg = savedInstanceState.getString("emptyp");
-
+            Log.d("age frm savedInstanceState", String.valueOf(ageg));
             gloan_type = savedInstanceState.getString("loantyp");
             carloantp = savedInstanceState.getString("carloantyp");
 
 
         }
         else {
-
+            Log.d("else part","");
             dobg =((GlobalData) getApplication()).getDob();
             genderg =((GlobalData) getApplication()).getgender();
             ageg = ((GlobalData) getApplication()).getage();
+            Log.d("age frm global", String.valueOf(ageg));
             emptypg =((GlobalData) getApplication()).getemptype();
 
             gloan_type=((GlobalData) getApplication()).getLoanType();
@@ -511,10 +515,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
             if (dataGender != null) {
 
-                ((GlobalData) getApplication()).setgender(dataGender);
 
-                ((GlobalData) getApplication()).setDob(Dob.getText().toString());
-                Log.d("Dob is kk",Dob.getText().toString());
                 //int age = 0;
                 //first time
                /* if(ageg==0) {
@@ -535,16 +536,41 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                // age = getAge(yearv, month, day);
 
 
-                if(age==2013)
+               if(age==2013)
                 {
+                    Log.d("age is 2013 ", String.valueOf(age));
                     age=0;
                 }
-                Log.d("age is ", String.valueOf(age));
+                Log.d("age is variable ", String.valueOf(age));
+                Log.d("dob is variable", Dob.getText().toString());
+
+                if(((GlobalData) getApplication()).getDob()!=null) {
+                    Log.d("dob is fun", ((GlobalData) getApplication()).getDob());
+                    Log.d("age is fun", String.valueOf(((GlobalData) getApplication()).getage()));
+
+
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                    String newDate = format.format(Date.parse(((GlobalData) getApplication()).getDob()));
+
+
+                    String CurrentString =newDate;
+                    String[] separated = CurrentString.split("-");
+                    Log.d("dob split",  separated[0]+" "+ separated[1]+ " "+ separated[2]);
+
+                    age = getAge(Integer.parseInt(separated[2]),Integer.parseInt(separated[1]), Integer.parseInt(separated[0]));
+                    Log.d("age is acc to dob", String.valueOf(age));
+                }
 
                 if (age > 18) {
 
 
                     String loantype=  gloan_type;
+
+
+                    ((GlobalData) getApplication()).setgender(dataGender);
+                    ((GlobalData) getApplication()).setDob(Dob.getText().toString());
+                    Log.d("Dob is kk",Dob.getText().toString());
+                    //age = getAge(yearv, month, day);
 
                     ((GlobalData) getApplication()).setage(age);
 
@@ -598,15 +624,15 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
 
                 } else {
-                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan", "failed");
+                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan!", "failed");
                 }
             }
             else
-                RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please select your Gender", "failed");
+                RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please select your gender!", "failed");
         }
         else
         {
-            RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter Date Of Birth", "failed");
+            RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please enter your date of birth!", "failed");
         }
     }
 
@@ -640,10 +666,10 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
         String formatdate = format.format(calendar.getTime());
-        Log.d("date is KK",formatdate);
+        Log.d("date is KK", formatdate);
          //Dob.setText(date);
         Dob.setText(formatdate);
-        age = getAge(yearv, month, day);
-       // ((GlobalData) getApplication()).setage(0);
+        age = getAge(yearv, month, day);//every time date is edited and set age is got
+        //((GlobalData) getApplication()).setage(age);//every time dob changes age has be set
     }
 }

@@ -42,10 +42,12 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private ContentValues contentValues;
     TabHost.TabSpec spec1,spec2,spec3;
     static boolean buttonApply=false;
-    private String loan_type,bankname,tenure,roi,emi,one_time_fee,fees,other,docum,cscore;
+    private String loan_type,tenure,roi,emi,one_time_fee,fees,other,docum,cscore;
     private String[] sepfee=null;
     private String[] preclosure1;
     public  static String lenderid=null;
+
+    public  static String bankname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,10 @@ if(one_time_fee!=null) {
     tprofee.setText(one_time_fee_temp);
     tfee.setText("Processing Fee is "+ one_time_fee_temp);
 }
+
+
+
+
 
 
 
@@ -351,7 +357,11 @@ if(one_time_fee!=null) {
                         Log.d("sign in true", "cibilscore");
                         Intent intent2 = new Intent(this, CibilScore.class);
                         intent2.putExtra("apply", "apply");//dont show the alert
+                        //intent2.putExtra("bankname", bankname);
                         startActivity(intent2);
+
+
+
                    // }
 
                     //******check here

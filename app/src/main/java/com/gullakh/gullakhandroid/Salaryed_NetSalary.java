@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,7 +71,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
         sal = (EditText) findViewById(R.id.netsalary);
         sal.setSelection(sal.getText().length());
+        //sal.setFilters(new InputFilter[]{new InputFilterMinMax("1", "5000000")});
         sal.addTextChangedListener(new NumberTextWatcher(sal));
+
 
         incent = (EditText) findViewById(R.id.incent);
         incent.addTextChangedListener(new NumberTextWatcher(incent));
@@ -374,11 +377,11 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                     overridePendingTransition(R.transition.left, R.transition.right);
                 }
             } else {
-                RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip", "failed");
+                RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Your monthly salary as per pay slip!", "failed");
             }
         }
         else {
-            RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Please enter your manthly salary", "failed");
+            RegisterPageActivity.showErroralert(Salaryed_NetSalary.this, "Please enter your monthly salary!", "failed");
         }
     }
 

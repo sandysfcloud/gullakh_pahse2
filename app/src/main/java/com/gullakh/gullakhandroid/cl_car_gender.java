@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -67,7 +69,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
     private String loanTypeId;
     private String coappldata;
     private Spinner spinner;
-
+    private static final String[] categories = new String[]{"Select time slot", "8am-10am", "10am-12pm", "12pm-2pm",
+            "2pm-4pm","4pm-6pm", "6am-8pm"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,10 +168,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         categories.add("Select time slot");
         categories.add("8am-10am");
         categories.add("10am-12pm");
+        categories.add("12pm-2pm");
+        categories.add("2pm-4pm");
+        categories.add("4pm-6pm");
+        categories.add("6pm-8pm");
 
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner.setAdapter(dataAdapter1);
+
+       /* MyArrayAdapter ma2 = new MyArrayAdapter(this, categories);
+        spinner.setAdapter(ma2);*/
     }
   /*  @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -196,11 +206,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         {
             case R.id.Submit:
                 if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
-                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields!", "failed");
                 } else {
                     if(pin.getText().toString().length()==6){
                         if (datefield.getText().toString().equals("")||spinner.getSelectedItem().toString().equals("Select time slot")){
-                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Select Date and time field", "failed");
+                            RegisterPageActivity.showErroralert(cl_car_gender.this, "Select date and time field!", "failed");
                         } else {
 
                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
@@ -211,14 +221,14 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                                 }else if (!coapllflag) {
                                          submitfunction();
                                 }else{
-                                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants field", "failed");
+                                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants field!", "failed");
                                 }
                             }else{
                                 submitfunction();
                             }
                         }
                     }else{
-                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city PIN code", "failed");
+                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city pin code!", "failed");
                     }
                 }
                 break;
@@ -276,10 +286,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         int curryear = c.get(Calendar.YEAR);
         Log.d("check date", currmonth + " " + curryear);
         if (yearv < curryear) {
-            RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time ", "failed");
+            RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time!", "failed");
         }else if (yearv == curryear) {
             if (month < currmonth) {
-                RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time ", "failed");
+                RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time!", "failed");
             } else {
                 if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                     goToDatabase("mysearch", "Home Loan");
@@ -473,7 +483,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 //                        ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
 
 
-                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan"))
+                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")||((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property"))
                         {
                     if (coapllflag) {
                         gson = new Gson();
@@ -812,6 +822,80 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         String newFormatdate=dateFormat1.format(date);
         requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add1,add2,add3,add4,add5,gender,newFormatdate,"","");
     }
+
+
+
+    //**************spinner
+
+
+    private class MyArrayAdapter extends BaseAdapter {
+
+        private LayoutInflater mInflater;
+        private String[] Mainarry = new String[]{};
+
+        public MyArrayAdapter(Activity act, String[] array) {
+
+
+            Log.d("array data", String.valueOf(array));
+            // TODO Auto-generated constructor stub
+            mInflater = LayoutInflater.from(act);
+            Mainarry = array;
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Mainarry.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+
+            Log.d("getItem", String.valueOf(position));
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            Log.d("getItemId", String.valueOf(position));
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            final ListContent holder;
+            View v = convertView;
+            if (v == null) {
+                v = mInflater.inflate(R.layout.spinner_item, null);
+                holder = new ListContent();
+
+                holder.name = (TextView) v.findViewById(R.id.textView1);
+
+                v.setTag(holder);
+            } else {
+
+                holder = (ListContent) v.getTag();
+            }
+
+
+            holder.name.setText(Mainarry[position]);
+            Log.d("getView", holder.name.getText().toString());
+
+            return v;
+        }
+
+    }
+
+    static class ListContent {
+
+        TextView name;
+
+    }
+
+
 }
 
 

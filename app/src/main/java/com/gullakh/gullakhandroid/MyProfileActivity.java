@@ -1,10 +1,12 @@
 package com.gullakh.gullakhandroid;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,8 +16,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -104,6 +108,15 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                     Log.e("sessionid-cartypes", sessionid);
                     cr1.close();
                 }
+
+                //kk
+                /*boolean digitsOnly = TextUtils.isDigitsOnly(cr.getString(3));
+
+                if(digitsOnly)
+                {
+                    email.setVisibility(View.GONE);
+                }*/
+
 
 
                 userid=cr.getString(1);
@@ -196,9 +209,26 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 add4.setEnabled(false);
                 add5.setEnabled(false);
                 String[] temp=name.getText().toString().split(" ");
-                firstname=temp[0];
+              //kk  firstname=temp[0];
                 //lastname=temp[temp.length-1];
-                Log.d("name length", String.valueOf(temp.length));
+
+
+                String nam= name.getText().toString();
+
+
+                if(nam.split("\\w+").length>1){
+
+                    lastname = nam.substring(nam.lastIndexOf(" ")+1);
+                    firstname = nam.substring(0, nam.lastIndexOf(' '));
+                }
+                else{
+                    firstname = nam;
+                }
+
+
+
+
+               /*kk Log.d("name length", String.valueOf(temp.length));
                 if(temp.length>1) {
                     Log.d("last name not null", String.valueOf(temp.length));
                     lastname = temp[1];
@@ -207,10 +237,14 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                     Log.d("last name is null", "1");
                     lastname = "";
                     Log.d("last name is null", lastname);
-                }
+                }*/
 
                 Log.d("firstname is",firstname);
                 Log.d("lastname is",lastname);
+
+
+
+
 
 
 
@@ -224,25 +258,63 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onClick(View view) {
-                MainActivity.signinstate = false;
-                DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
-                dbobjectnew.query("DELETE FROM userlogin");
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyProfileActivity.this);
+                builder.setMessage("Are you sure !!!")
+
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                MainActivity.signinstate = false;
+                                DataHandler dbobjectnew = new DataHandler(MyProfileActivity.this);
+                                dbobjectnew.query("DELETE FROM userlogin");
 //                GooglePlusLogin obj=new GooglePlusLogin();
 //                obj.signOutFromGplus();
 //                mGoogleApiClient = ((GlobalData)getApplication()).getGoogleObject();
 
 
-                 signinPrepage obj=new signinPrepage();
-                 obj.logoutfb(MyProfileActivity.this);
-             //   mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
-               // mGoogleApiClient.disconnect();
-                GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
-                fragmentList.signOutFromGplus();
-                Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                                signinPrepage obj=new signinPrepage();
+                                obj.logoutfb(MyProfileActivity.this);
+                                //   mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
+                                // mGoogleApiClient.disconnect();
+                                GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                                fragmentList.signOutFromGplus();
+                                Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+
+
+                                //
+                            }
+                        });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+
             }
         });
+
+
+
+
+
+        //
+
+
+
+
+
 
 
         //*c//
@@ -300,7 +372,16 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == android.view.KeyEvent.KEYCODE_BACK ) {
+            Intent intent  = new Intent(MyProfileActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     public void getstatenam() {
 
@@ -349,10 +430,15 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 if (state != null) {
                     if (state.length() > 0) {
                         Log.d("state index", String.valueOf(cityindex));
+
+                        state=Character.toUpperCase(state.charAt(0)) + state.substring(1);
                         Log.d("state value", String.valueOf(state));
                         //state = state.replace(" ", "");
-                        Log.d("state index", String.valueOf(cityindex.get(state)));
-                        add4.setSelection((Integer) cityindex.get(state));
+
+                        if(cityindex.get(state)!=null) {
+                            Log.d("state index", String.valueOf(cityindex.get(state)));
+                            add4.setSelection((Integer) cityindex.get(state));
+                        }
                     }
                 }
 
@@ -399,6 +485,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.e("citylist frm server  jsonObject", String.valueOf(jsonObject));
                 Cityname[] enums = gson.fromJson(jsonObject.get("result"), Cityname[].class);
 
                 int size = enums.length;
@@ -410,28 +497,29 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
 
                 listcity = new String[size];
-
+                listcity[0]="Select";
                 for (int i = 0; i < size; i++) {
-                    listcity[i] = enums[i].getcity_name();
-
-                    if(i == 0)
+                    listcity[i] = enums[i].getcity_name().trim();
+                    Log.e("city list frm server", String.valueOf(listcity[i]));
+                    /*if(i == 0)
                     {
                         Log.d("index c 0", "0");
                         liststate[i]="No City";
                     }
-                    else
+                    else*/
                     cityindex.put(listcity[i], i);
                     // liste.add(enums[i].getcity_name());
                 }
-
+                Log.e("emplist frm server ", String.valueOf(listcity));
                 MyArrayAdapter ma = new MyArrayAdapter(MyProfileActivity.this, listcity);
                 add3.setAdapter(ma);
 
                 if (city != null)//only after login
                 {
                     if (city.length() > 0) {
+                        city=city.trim();
                         Log.d("city index", String.valueOf(cityindex));
-                        Log.d("city value", String.valueOf(city));
+                        Log.d("city value frm profile", String.valueOf(city));
 
                         Log.d("city index", String.valueOf(cityindex.get(city)));
                         if (!cityindex.isEmpty())
@@ -447,7 +535,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 city.setAdapter(fAdapter);*/
 
 
-                Log.e("emplist frm server ", String.valueOf(listcity));
+
 
 
             }
@@ -608,6 +696,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                // add4.setText(details[0].getMailingstate());
                 Log.d("state is",state);
                 Log.d("city is", city);
+                Log.d("name frm contact is", details[0].getFirstname()+" "+details[0].getLastname());
 
                 getstatenam();
                 add5.setText(details[0].getMailingzip());
@@ -659,6 +748,9 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             String imageFromSdcard = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
             Log.d("Base64 encode data", imageFromSdcard);
             setProfilePic(imageFromSdcard);
+
+
+
         }
     }
 
@@ -678,6 +770,12 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 Log.d("check1",jsonObject.get("result").toString());
                 storetoDatabase(jsonObject.get("profile_image").toString().replaceAll("\"", ""));
                 dgthis.dismiss();
+
+
+                //refresh
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         }, MyProfileActivity.this, "wait");
         requestgetserver3.execute("token", "setProfilePic", email.getText().toString(), imageFromSdcard);

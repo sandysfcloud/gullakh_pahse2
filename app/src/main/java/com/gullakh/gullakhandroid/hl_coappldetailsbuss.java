@@ -111,15 +111,15 @@ String no;
         categories2.add("Public Ltd. Company");
 
         // Creating adapter for spinner
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories1);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories1);
         // Drop down layout style - list view with radio button
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         // attaching data1 adapter to spinner
         spinner1.setAdapter(dataAdapter1);
 
-        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories2);
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories2);
         // Drop down layout style - list view with radio button
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter2.setDropDownViewResource(R.layout.simple_spinnertextview);
         // attaching data1 adapter to spinner
         spinner2.setAdapter(dataAdapter2);
 
@@ -184,6 +184,9 @@ String no;
                                 Log.d("selected position", String.valueOf(spinner1.getSelectedItemPosition()));
                                 setDataToHashMap("start_date_of_current_business_prof" ,  Doj.getText().toString());
                                 setDataToHashMap("firm_type_prof", String.valueOf(spinner2.getSelectedItem()));
+
+                               // setDataToHashMap("date" ,  Doj.getText().toString());
+                               // setDataToHashMap("category", String.valueOf(spinner2.getSelectedItem()));
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
 
                                 ((GlobalData) getApplication()).setCoappbuspropos(spinner1.getSelectedItemPosition());

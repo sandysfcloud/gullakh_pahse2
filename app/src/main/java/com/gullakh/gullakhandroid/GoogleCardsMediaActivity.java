@@ -49,6 +49,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
@@ -115,7 +117,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     CharSequence[] bankfilter = null;
     String prev_selectbank = null, listidglobal, tierid;
     JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver3img, requestgetserver4, requestgetserver5, requestgetserver6, requestgetserver7, requestgetserver8;
-    String globalidentity, loantype, loan, loant;
+    String globalidentity, loantype, loan, loant,bankid_cibil;
     Dialog dgthis;
     EditText editloan;
     TextView loan_amt, tenr_amt, title;
@@ -126,15 +128,43 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     private LoanDetails loandetailsobj1;
     private int firsttimeflage = 0, maxbpval;
     private double maxbp = 0;
-
+    Format format;
+    ArrayList<String> high_cibil = new ArrayList<String>();
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
         Intent intent = getIntent();
         String data = intent.getStringExtra("data");
+        bankid_cibil = intent.getStringExtra("bankid");
+
+
+        if(bankid_cibil==null)//first time ..initialize only once
+        {
+
+            Log.d("bankname_cibil is null","1");
+
+        }
+        else
+        {
+            /*if (savedInstanceState != null) {
+                Log.d("savedInstanceState not null","1");
+                high_cibil = savedInstanceState.getStringArrayList("cibil_high");
+                Log.d("high_cibil in oncreate", String.valueOf(high_cibil));
+            }*/
+            if (((GlobalData) getApplication()).gethigh_cibil() != null) {
+                high_cibil =((GlobalData) getApplication()).gethigh_cibil();
+                Log.d("high_cibil in oncreate", String.valueOf(high_cibil));
+
+            }
+
+
+            Log.d("bankname_cibil is not null",bankid_cibil);
+            high_cibil.add(bankid_cibil);
+            Log.d("bankname_cibil is in goog", String.valueOf(high_cibil));
+        }
 
 
         //********************changing actionbar
@@ -194,11 +224,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             filter.setOnClickListener(this);
             // lcomp.setOnClickListener(this);
             // createListView();
-            Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+             format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             //nullpointer
 
 
             if (savedInstanceState != null) {
+                Log.d("savedInstanceState not null","1");
                 loant = String.valueOf(format.format(new BigDecimal(savedInstanceState.getString("loan_amt"))));
                 loant = loant.replaceAll("\\.00", "");
                 loan = savedInstanceState.getString("loan_amt");
@@ -416,8 +447,23 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     //***onsaved instance
 
 
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+        if(high_cibil!=null) {
+            savedInstanceState.putStringArrayList("cibil_high", high_cibil);
+            Log.d("high_cibil onRestoreInstanceState", String.valueOf(high_cibil));
+        }
+
+    }
+
+
+    @Override
     protected void onSaveInstanceState(Bundle icicle) {
         super.onSaveInstanceState(icicle);
+
+
        if(((GlobalData) getApplication()).getloanamt()!=null)
         icicle.putString("loan_amt", ((GlobalData) getApplication()).getloanamt());
 
@@ -429,6 +475,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
         if(((GlobalData) getApplication()).getnetsalary()!=null)
         icicle.putString("net_sal", ((GlobalData) getApplication()).getnetsalary().toString());
+
+        if(high_cibil!=null) {
+           ((GlobalData) getApplication()).sethigh_cibil(high_cibil);
+            //icicle.putStringArrayList("cibil_high", high_cibil);
+            Log.d("high_cibil onSaveInstanceState", String.valueOf(high_cibil));
+        }
+        super.onSaveInstanceState(icicle);
+
 
 
     }
@@ -500,7 +554,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             final ListContent holder;
             View v = convertView;
             if (v == null) {
-                v = mInflater.inflate(R.layout.spinner_item, null);
+                v = mInflater.inflate(R.layout.resultpagespinner, null);
                 holder = new ListContent();
 
                 holder.name = (TextView) v.findViewById(R.id.textView1);
@@ -524,7 +578,47 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         TextView name;
 
     }
+    public JSONObject parse(String jsonLine) {
+        String result=null;
+        JsonElement jelement = new JsonParser().parse(jsonLine);
+        JsonObject  jobject = jelement.getAsJsonObject();
+        JSONObject jsonObject2 = new JSONObject();
+        JsonArray jarray = jobject.getAsJsonArray("result");
 
+        Log.d(" jobject is2", String.valueOf(jarray));
+
+        for (int i = 0; i < jarray.size(); i++) {
+
+
+            jobject = jarray.get(i).getAsJsonObject();
+            Log.d(" jobject is", String.valueOf(jobject));
+            result = jobject.get("bankid").toString();
+            Log.d(" result is", result);
+
+            for (int i2 = 0; i2 < high_cibil.size(); i2++) {
+                if (high_cibil.get(i2).equals(result)) {
+
+                    jobject.remove(String.valueOf(jobject));
+                }
+                else
+                {
+                    try {
+                        jsonObject2.put("result",jobject);
+                    } catch (JSONException e) {
+                        Log.d("exception is", String.valueOf(e));
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+
+        }
+
+
+        return jsonObject2;
+
+    }
 
     //********************************************************************
 
@@ -553,18 +647,59 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                     Log.e("Check final data here3", str_result);
 
+                    //****cibilscore
+
+
+
+
+                   /* if(bankid_cibil!=null) {
+                        JSONArray resultarry = new JSONArray();
+                        resultarry.put(parse(str_result));
+
+                        try {
+                           // Log.d("bankid_cibil is not null cibil", String.valueOf(resultarry.getJSONArray(0)));
+                            Log.d("bankid_cibil is not null cibil", String.valueOf(resultarry.get(0)));
+
+                            RM_cobj = gson.fromJson(String.valueOf(resultarry.get(0)), RuleMaster[].class);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                       RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
+                    }*/
+
+
+
+
                     RuleMaster[] RM_cobj = gson.fromJson(jsonObject.get("result"), RuleMaster[].class);
                     ArrayList Arr_RMid = new ArrayList<String>();
 
 
                     JSONArray jsonArray = new JSONArray();
 
+                    //***********high cibil
+
+
+
+
+
+
+
+                    //***********
+
+
+
                     if (RM_cobj != null) {
                         for (int i = 0; i < RM_cobj.length; i++) {
 
                             JSONObject imgob = new JSONObject();
-                            Log.e("json Sizeee", String.valueOf(RM_cobj.length));
+                            Log.e("json Sizeee in RM_cobj", String.valueOf(RM_cobj.length));
+                            Log.e("RM_cobj is ", String.valueOf(RM_cobj[i]));
+
+
                             Arr_RMid.add(RM_cobj[i].getaccount_lender());
+
 
                             try {
                                 imgob.put("recordid", RM_cobj[i].getaccount_lender());
@@ -579,6 +714,43 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                             Log.e("json Checkkk", String.valueOf(jsonArray));
                         }
 
+                        if(bankid_cibil!=null) {
+
+                            for (int i2 = 0; i2 < high_cibil.size(); i2++) {
+
+                                Arr_RMid.remove(high_cibil.get(i2));
+                                Log.e("high_cibil.get(i2)", high_cibil.get(i2));
+
+
+
+                                for (int i=0; i<jsonArray.length(); i++) {
+                                    JSONObject actor = null;
+                                    try {
+                                        actor = jsonArray.getJSONObject(i);
+                                        String name = actor.getString("recordid");
+                                        if(name.equals(high_cibil.get(i2)))
+                                        {
+                                            Log.e("jsonArray recordid", name);
+                                           jsonArray.remove(i);
+                                        }
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                }
+
+
+
+
+
+
+
+                            }
+
+                            Log.e("Arr_RMid", String.valueOf(Arr_RMid));
+                        }
 
                         Log.e("json object value KK", String.valueOf(jsonArray));
 
@@ -832,7 +1004,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 double bpd;
                 if (seektenure != 0) {
                     Log.d("tenure value is changed", String.valueOf(seektenure));
-                    tenr_amt.setText(String.valueOf(seektenure));
+                    tenr_amt.setText(String.valueOf(seektenure)+ " Year(s)");
                     int seekmonth = seektenure * 12;
                     bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
                 } else {
@@ -857,6 +1029,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     //maxbp = maxbp/1000 * 1000;
                     Log.d("maxbp value", String.valueOf(maxbp));
                 }
+
+
+
 
 
                 if (loan_amt <= final_bp) {
@@ -892,8 +1067,45 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                     //   Log.d("activity docum ", cobj_RM[i].getdocu_details());
 
-                    CustomListViewValuesArr.add(sched);
-                    disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                    //user not eligible to this bank remove this bank from cibil score.
+
+
+
+
+                   /* if(bankname_cibil!=null) {
+
+                        for (int i2 = 0; i2 < high_cibil.size(); i2++) {
+
+                            Log.d("bank frm cibil", String.valueOf(high_cibil));
+                            Log.d("server data", Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+
+
+                            if (high_cibil.get(i2).equals(Arry_banknam.get(cobj_RM[i].getaccount_lender()))) {
+                                Log.d("bank is not added to the list", Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                                break;
+                            } else {
+                                Log.d("else inside loop", "1");
+                                CustomListViewValuesArr.add(sched);
+                                break;
+
+                            }
+                        }
+                    }
+                    else {
+                        Log.d("normal way", "1");
+                        CustomListViewValuesArr.add(sched);
+                    }*/
+
+
+                        if(Arry_banknam.get(cobj_RM[i].getaccount_lender())==null)
+                        {
+                            Log.d("cibil remove","1");
+                        }
+                    else {
+                        CustomListViewValuesArr.add(sched);
+                        disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                        Log.d("disbank", String.valueOf(disbank));
+                    }
                     //Log.d("activity docum ", cobj_RM[i].getaccount_lender());
                 }
 
@@ -1476,7 +1688,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     if (edittextloan != 0) {
                         Log.d("loan amount edittext is changed in tenure!!", String.valueOf(edittextloan));
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(edittextloan));
-                        loan_amt.setText(edittextloan + "");
+
+                        //*kk
+                        String sloan_amt = String.valueOf(format.format(new BigDecimal(edittextloan)));
+                        //*k
+                        loan_amt.setText(sloan_amt);
 
                     }
 
@@ -1493,7 +1709,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     if (edittextloan != 0) {
                         Log.d("loan amount edittext is changed !!", String.valueOf(edittextloan));
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(edittextloan));
-                        loan_amt.setText(edittextloan + "");
+
+
+                        //*kk
+                        String sloan_amt = String.valueOf(format.format(new BigDecimal(edittextloan)));
+                        //*k
+
+                        loan_amt.setText(sloan_amt);
                     }
                     loan_amtcalcutn("loan");
                     //calculate();

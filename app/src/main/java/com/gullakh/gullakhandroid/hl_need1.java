@@ -145,13 +145,13 @@ public class hl_need1 extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.next:
                 if (radioGroup1.getCheckedRadioButtonId() == -1){
-                    RegisterPageActivity.showErroralert(this, "Select city limit", "failed");
+                    RegisterPageActivity.showErroralert(this, "Select city limit!", "failed");
                 }else {
                     if (allotment.getSelectedItem().toString().equals("Select")){
-                        RegisterPageActivity.showErroralert(this, "Select allotment by", "failed");
+                        RegisterPageActivity.showErroralert(this, "Select allotment by!", "failed");
                     }else {
                         if (Text1.getText().toString().equals("")){
-                            RegisterPageActivity.showErroralert(this, "Select cost of plot", "failed");
+                            RegisterPageActivity.showErroralert(this, "Select cost of plot!", "failed");
                         }else {
                            /* if (radioGroup2.getCheckedRadioButtonId() == -1){
                                 RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");

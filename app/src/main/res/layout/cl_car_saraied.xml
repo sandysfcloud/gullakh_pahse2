@@ -53,11 +53,13 @@
                 android:inputType="text"
                 android:id="@+id/salEmpname"
                 android:textColor="#000000"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:imeOptions="actionNext"
                 android:nextFocusDown="@+id/saljoindateofempyr"
                 android:singleLine="true"
-                android:hint="Ex- Infosys" />
+                android:hint="Ex- Infosys"
+
+                />
 
     </com.gullakh.gullakhandroid.MaterialTextField>
             </LinearLayout>
@@ -98,12 +100,13 @@
                     android:inputType="text"
                     android:id="@+id/saljoindateofempyr"
                     android:textColor="#000000"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:imeOptions="actionNext"
                     android:focusableInTouchMode="false"
                     android:nextFocusDown="@+id/emi"
                     android:singleLine="true"
-                    android:hint="Ex- 01-01-2010"/>
+                    android:hint="Ex- 01-01-2010"
+                    />
             </com.gullakh.gullakhandroid.MaterialTextField>
         </LinearLayout>
 

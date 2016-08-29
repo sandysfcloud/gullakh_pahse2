@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,6 +70,7 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
 //**********
 
         tenure = (EditText) findViewById(R.id.tenure);
+        tenure.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "30")});
         tenure.setSelection(tenure.getText().length());
         onetext = (TextView) findViewById(R.id.onetext);
         tenure.addTextChangedListener(new NumberTextWatcher(tenure));

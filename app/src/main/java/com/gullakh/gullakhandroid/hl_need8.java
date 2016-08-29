@@ -256,13 +256,13 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.next:
                 if (Text1.getText().toString().equals("")) {
-                    RegisterPageActivity.showErroralert(this, "Select name of builder", "failed");
+                    RegisterPageActivity.showErroralert(this, "Select name of builder!", "failed");
                 } else {
                     if (Text2.getSelectedItem().toString().equals("")) {
-                        RegisterPageActivity.showErroralert(this, "Select name of the project ", "failed");
+                        RegisterPageActivity.showErroralert(this, "Select name of the project!", "failed");
                     } else {
                         if (Text3.getText().toString().equals("")) {
-                            RegisterPageActivity.showErroralert(this, "Select cost of flat as per Flat buyer agreement", "failed");
+                            RegisterPageActivity.showErroralert(this, "Select cost of flat as per flat buyer agreement!", "failed");
                         } else {
                            /* if (radioGroup.getCheckedRadioButtonId() == -1) {
                                 RegisterPageActivity.showErroralert(this, "Select Ownership of plot", "failed");

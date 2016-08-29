@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,7 +50,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     static boolean user=true;
     int flag=0;
     private Spinner spinner;
-
+    private static final String[] categories = new String[]{"Select", "< 1yr", "2yrs", "3yrs",
+            " 4yrs","5yrs", ">5yrs",};
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -110,8 +112,11 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         categories.add(" 5yrs");
         categories.add("> 5yrs");
 
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        /*MyArrayAdapter ma3 = new MyArrayAdapter(this, categories);
+        spinner.setAdapter(ma3);*/
+
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner.setAdapter(dataAdapter1);
 
     }
@@ -194,7 +199,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                         nextfun();
 
                     } else {
-                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter Company Name", "failed");
+                        RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter company name!", "failed");
                     }
                 }
 
@@ -231,6 +236,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
     public void nextfun()
     {
 
+        if(Emp.getText().toString()!=null) {
+
             if (!Doj.getText().toString().matches("")) {
                 if (!spinner.getSelectedItem().toString().equals("Select")) {
 
@@ -238,7 +245,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                     setDataToHashMap("name_of_current_emp", EmpName);
                     String jdate = Doj.getText().toString();
                     setDataToHashMap("year_you_joined_current_comp", jdate);
-                    setDataToHashMap("total_exp",spinner.getSelectedItem().toString());
+                    setDataToHashMap("total_exp", spinner.getSelectedItem().toString());
                     if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                         goToDatabase("Home Loan");
                     } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
@@ -262,11 +269,15 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                         overridePendingTransition(R.transition.left, R.transition.right);
                     }
                 } else {
-                    RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter correct work experience", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please select correct work experience!", "failed");
                 }
-            }else
+            } else {
+                RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter joining date of current employer!", "failed");
+            }
+        }
+            else
             {
-                RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter date", "failed");
+                RegisterPageActivity.showErroralert(cl_car_salaried.this, "Please enter name of current employer!", "failed");
             }
 
     }
@@ -300,4 +311,81 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Log.d("check hashmap-car make", cl_car_global_data.getHashMapInString());
         cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
+
+
+
+    //**************spinner
+
+
+    private class MyArrayAdapter extends BaseAdapter {
+
+        private LayoutInflater mInflater;
+        private String[] Mainarry = new String[]{};
+
+        public MyArrayAdapter(Activity act, String[] array) {
+
+
+            Log.d("array data", String.valueOf(array));
+            // TODO Auto-generated constructor stub
+            mInflater = LayoutInflater.from(act);
+            Mainarry = array;
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Mainarry.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+
+            Log.d("getItem", String.valueOf(position));
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            Log.d("getItemId", String.valueOf(position));
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            final ListContent holder;
+            View v = convertView;
+            if (v == null) {
+                v = mInflater.inflate(R.layout.spinner_item, null);
+                holder = new ListContent();
+
+                holder.name = (TextView) v.findViewById(R.id.textView1);
+
+                v.setTag(holder);
+            } else {
+
+                holder = (ListContent) v.getTag();
+            }
+
+
+            holder.name.setText(Mainarry[position]);
+            Log.d("getView", holder.name.getText().toString());
+
+            return v;
+        }
+
+    }
+
+    static class ListContent {
+
+        TextView name;
+
+    }
+
+
+
+
+
 }

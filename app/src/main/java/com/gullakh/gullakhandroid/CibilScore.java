@@ -56,10 +56,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
     String s_Dob, s_state, s_city, s_panid, s_addr, userid, contactid, ph, loantyp, nam, s_zip, s_pan;
     Spinner city;
     Spinner s1;
-    String apply;
+    String apply,bankid;
     Dialog dgthis;
     String[] listcity, liststate;
-    String spcity, spstate, serveremail, s_gender;
+    String spcity, spstate, serveremail, s_gender,err_msg;
 
     private String firstname, lastname;
 
@@ -93,6 +93,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 //**********
         Intent intent = getIntent();
         apply = intent.getStringExtra("apply");
+        bankid = ListView_Click.lenderid;
+
+        if(bankid!=null)
+        Log.d("bank name in cibil score page",bankid);
 
 
         DataHandler dbobject = new DataHandler(this);
@@ -156,6 +160,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
     public void getContactDetails() {
+
+
+        Log.d("getContactDetails called", "1");
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -228,25 +235,38 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                             Log.d("credit score frm server", cscore);
                             LinearLayout main = (LinearLayout) findViewById(R.id.lmain);
-                            main.setVisibility(View.INVISIBLE);
+                            main.setVisibility(View.INVISIBLE);//cibil score request shd be sent only once
 
                             if (apply != null) {
                                 if (apply.equals("apply")) {//from listviewclick page
                                     Log.d("from listviewclick", "check if can continue or not");
-                                    getcibil();
+                                    getcibil();//comparing my cibil with bank
                                 }
                             } else {
                                 Log.d("from mainact", "show alert");
-                                setalert();
+                                if (((GlobalData) getApplication()).getcredback() != null) {//frm creditscore buttn click
+                                    Log.d("from mainact", "from cs button click");
+                                    setalert();//if cibil score is present and frm mainactivity
+                                }
+                                else
+                                {
+
+                                    Log.d("from mainact", "from profile login");
+                                    Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
+                                    intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intenth);
+
+
+                                }
                             }
 
 
                         } else {
-                            Log.d("display page", "1");
+                            Log.d("cibil score is null", "1");
                             page();
                         }
                     } else {
-                        Log.d("display page", "2");
+                        Log.d("cibil score is null", "2");
                         page();
                     }
 
@@ -629,26 +649,30 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                         if (apply.equals("apply")) {
 
-                            ListView_Click obj = new ListView_Click();
+                            ListView_Click obj = new ListView_Click();//apply from listview click page
                             obj.goToIntent(CibilScore.this);
 
                         } else if (apply.equals("googlep")) {
 
-                            GooglePlusLogin obj = new GooglePlusLogin();
+                            GooglePlusLogin obj = new GooglePlusLogin();//from g+  and fb login  page
                             obj.goToIntent(CibilScore.this);
 
                         } else if (apply.equals("signin")) {
 
-                            signin obj = new signin();
-                            obj.goToIntent(CibilScore.this);
+                            signin obj = new signin(); //from signin page
+                            obj.goToIntent(CibilScore.this);//
 
                         }
                     } else
-                        setalert();
+                        setalert();//from mainactivity
 
 
-                } else
+                } else {
                     RegisterPageActivity.showErroralert(CibilScore.this, jsonObject.get("error_message").toString(), "error");
+                    Log.d("error messg is", jsonObject.get("error_message").toString());
+                    err_msg=jsonObject.get("error_message").toString();
+
+                }
             }
         }, CibilScore.this, "wait");
 
@@ -878,11 +902,19 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intenth);
         } else {
-            Log.d("back is pressed", "from listview apply");
+            Log.d("back is pressed", bankid);
             //back is pressed cibilscore
-
             Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
             intent.putExtra("data", "searchgo");
+            if(err_msg!=null) {
+                Log.d("err_msg is b ", err_msg);
+                err_msg = err_msg.replace("\"", "");
+                Log.d("err_msg is a", err_msg);
+                if(err_msg.equals("Your score does'nt meet bank requirements")) {
+                    Log.d("error msg matches", bankid);
+                    intent.putExtra("bankid", bankid);
+                }
+            }
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);

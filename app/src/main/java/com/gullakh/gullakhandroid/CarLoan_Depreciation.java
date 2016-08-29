@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
         next = (Button) findViewById(R.id.next);
         next.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.loanamountid);
+       // amt.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "2500000")});
         amt.setSelection(amt.getText().length());
 
         amt.addTextChangedListener(new NumberTextWatcher(amt));
@@ -399,7 +401,7 @@ public class CarLoan_Depreciation extends AppCompatActivity implements View.OnCl
             }
             else
             {
-                RegisterPageActivity.showErroralert(CarLoan_Depreciation.this, "Sorry!!! You are not Eligible to take Loan", "failed");
+                RegisterPageActivity.showErroralert(CarLoan_Depreciation.this, "Sorry you are not eligible to take loan!", "failed");
             }
 
         }

@@ -397,9 +397,11 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         }else{
             Log.d("fb-onActivityResult called", "0");
             super.onActivityResult(requestCode, resultCode, data);
-            callbackManager.onActivityResult(requestCode, resultCode, data);
-            Log.d("fb-onActivityResult called data", String.valueOf(data));
-            Log.d("fb-onActivityResult called resultCode", String.valueOf(resultCode));
+            Log.d("resultCode in fb login", String.valueOf(resultCode));
+                    callbackManager.onActivityResult(requestCode, resultCode, data);
+             Log.d("fb-onActivityResult called data", String.valueOf(data));
+             Log.d("fb-onActivityResult called resultCode", String.valueOf(resultCode));
+
         }
     }
     }

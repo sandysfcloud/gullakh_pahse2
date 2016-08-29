@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +30,11 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
     private Spinner spinner1,spinner2,spinner3;
     private EditText netProfit;
     private ContentValues contentValues;
-
+    private static final String[] categories1 = new String[]{"Select", "CA", "Doctor", "Architect","Lawyer","Engineer","Others"};
+    private static final String[] categories2 = new String[]{"Select", "Proprietorship", "Partnership", "LLP",
+            "Pvt. Ltd. Company","Public Ltd. Company"};
+    private static final String[] categories3 = new String[]{"Select", "< 1yr", "1-2yrs", "2-3yrs",
+            " > 3yrs"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +68,7 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         // Spinner click listener
 
         // Spinner Drop down elements
-        List<String> categories1 = new ArrayList<String>();
+       List<String> categories1 = new ArrayList<String>();
         categories1.add("Select");
         categories1.add("CA");
         categories1.add("Doctor");
@@ -88,29 +94,38 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
 
 
         // Creating adapter for spinner
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories1);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories1);
         // Drop down layout style - list view with radio button
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         // attaching data adapter to spinner
         spinner1.setAdapter(dataAdapter1);
 
-        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories2);
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories2);
+        dataAdapter2.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner2.setAdapter(dataAdapter2);
 
-        android.widget.ArrayAdapter<String> dataAdapter3 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories3);
-        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter3 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories3);
+        dataAdapter3.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner3.setAdapter(dataAdapter3);
+
+
+       /* MyArrayAdapter ma1 = new MyArrayAdapter(this, categories1);
+        spinner1.setAdapter(ma1);
+
+        MyArrayAdapter ma2 = new MyArrayAdapter(this, categories2);
+        spinner2.setAdapter(ma2);
+
+        MyArrayAdapter ma3 = new MyArrayAdapter(this, categories3);
+        spinner3.setAdapter(ma3);*/
 
         getDataFromHashMap();
     }
     private void getDataFromHashMap()
     {
-        if(cl_car_global_data.dataWithAns.get("profession")!=null &&
-                cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof")!=null &&
+        if(cl_car_global_data.dataWithAns.get("profession")!=null && cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof")!=null &&
                 cl_car_global_data.dataWithAns.get("firm_type_prof")!=null)
         {
-            Doj.setText(cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof"));
+           // Doj.setText(cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof"));
             if(cl_car_global_data.dataWithAns.get("profession").equals("CA")) {
                 spinner1.setSelection(1);
             }else if(cl_car_global_data.dataWithAns.get("profession").equals("Doctor")) {
@@ -166,13 +181,13 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                                 overridePendingTransition(R.transition.left, R.transition.right);
                             }
                         } else {
-                        RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your firm", "failed");
+                        RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your firm!", "failed");
                         }
                     }else {
-                    RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please enter date", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select start date of current business!", "failed");
                     }
                 }else{
-                    RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your profession", "failed");
+                    RegisterPageActivity.showErroralert(cl_car_selfempbusinesprofs.this, "Please select your profession!", "failed");
                 }
                 break;
             case R.id.close:
@@ -214,4 +229,77 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
         contentValues.put("data", cl_car_global_data.getHashMapInString());
         cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
     }
+
+
+
+    //**************spinner
+
+
+    private class MyArrayAdapter extends BaseAdapter {
+
+        private LayoutInflater mInflater;
+        private String[] Mainarry = new String[]{};
+
+        public MyArrayAdapter(Activity act, String[] array) {
+
+
+            Log.d("array data", String.valueOf(array));
+            // TODO Auto-generated constructor stub
+            mInflater = LayoutInflater.from(act);
+            Mainarry = array;
+        }
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return Mainarry.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+
+            Log.d("getItem", String.valueOf(position));
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            Log.d("getItemId", String.valueOf(position));
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            final ListContent holder;
+            View v = convertView;
+            if (v == null) {
+                v = mInflater.inflate(R.layout.spinner_item, null);
+                holder = new ListContent();
+
+                holder.name = (TextView) v.findViewById(R.id.textView1);
+
+                v.setTag(holder);
+            } else {
+
+                holder = (ListContent) v.getTag();
+            }
+
+
+            holder.name.setText(Mainarry[position]);
+            Log.d("getView", holder.name.getText().toString());
+
+            return v;
+        }
+
+    }
+
+    static class ListContent {
+
+        TextView name;
+
+    }
+
 }

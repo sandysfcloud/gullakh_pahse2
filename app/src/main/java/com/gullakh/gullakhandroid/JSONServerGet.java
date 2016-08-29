@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.JsonParser;
@@ -221,11 +222,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                             nameValuePairs.add(new BasicNameValuePair("typeofproperty", ((GlobalData) act.getApplication()).getprop_mortgage()));
                                         }*/
                                         if(((GlobalData) act.getApplication()).getprop_allotmentby()!=null) {
-                                            Log.d("typeofproperty", ((GlobalData) act.getApplication()).getprop_allotmentby());
-                                            Log.d("typeofpropertycat1", ((GlobalData) act.getApplication()).getpropcat1());
-                                            Log.d("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat2());
-                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat1", ((GlobalData) act.getApplication()).getpropcat1()));
-                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat2()));
+                                            Log.d("typeofpropertycat1", ((GlobalData) act.getApplication()).getprop_allotmentby());
+                                            Log.d("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat1());
+                                            Log.d("typeofpropertycat3", ((GlobalData) act.getApplication()).getpropcat2());
+                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat1", ((GlobalData) act.getApplication()).getprop_allotmentby()));
+                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat1()));
+                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat3", ((GlobalData) act.getApplication()).getpropcat2()));
 
                                         }
 
@@ -479,6 +481,14 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                      else if(args[1].equals("getcontact")){
 
                         client = new DefaultHttpClient();
+                           /* boolean digitsOnly = TextUtils.isDigitsOnly(args[3]);
+                            if(digitsOnly)
+                            {
+                                Log.d("username is mobile no",args[3]);
+                                post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Contacts where mobile ='"+args[3]+"';")).toString());
+                            }
+                            else*/
+                            Log.d("username is",args[3]);
                         post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Contacts where email ='"+args[3]+"';")).toString());
 
                     }
@@ -568,6 +578,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("elementType", "LoanApplicationValues"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("element",args[3]));
+                            Log.d("data sent to server", String.valueOf(nameValuePairs));
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -586,14 +597,15 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "documentupload"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("recordid",args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("recordid","x"+args[3]));
                             nameValuePairs.add(new BasicNameValuePair("filedata",args[4]));
                             nameValuePairs.add(new BasicNameValuePair("fileextension",args[5]));
                             nameValuePairs.add(new BasicNameValuePair("title",args[6]));
-                            Log.d("argsumentsfromdoc",args[1]+","+args[2]+","+args[3]+","+args[4]+","+args[5]+","+args[6]);
+                            Log.d("argsumentsfromdoc", args[1] + "," + args[2] + "," + args[3] + "," + args[4] + "," + args[5] + "," + args[6]);
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                            Log.d("document namevap", String.valueOf(nameValuePairs));
                         }
                         else if(args[1].equals("deletedocument"))
                         {
@@ -695,6 +707,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("img", args[3]));
                             client = new DefaultHttpClient();
                             Log.e("email ", args[2]);
+                            Log.e("w  setProfilePic", String.valueOf(nameValuePairs));
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"upload_profile_img").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         }else if(args[1].equals("updateContactDetailsNew")){

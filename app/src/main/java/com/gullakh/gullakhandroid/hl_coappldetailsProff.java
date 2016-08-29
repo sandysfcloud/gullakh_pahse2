@@ -107,15 +107,15 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
         categories2.add("Public Ltd. Company");
 
         // Creating adapter for spinner
-        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories1);
+        android.widget.ArrayAdapter<String> dataAdapter1 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories1);
         // Drop down layout style - list view with radio button
-        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         // attaching data adapter to spinner
         spinner1.setAdapter(dataAdapter1);
 
-        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories2);
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, categories2);
         // Drop down layout style - list view with radio button
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter2.setDropDownViewResource(R.layout.simple_spinnertextview);
         // attaching data adapter to spinner
         spinner2.setAdapter(dataAdapter2);
 
@@ -175,8 +175,11 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
 
                             if (no != null) {
                                 setDataToHashMap("profession", String.valueOf(spinner1.getSelectedItem()));
-                                setDataToHashMap("date", Doj.getText().toString());
-                                setDataToHashMap("category", String.valueOf(spinner2.getSelectedItem()));
+                               // setDataToHashMap("date", Doj.getText().toString());
+                               // setDataToHashMap("category", String.valueOf(spinner2.getSelectedItem()));
+
+                                setDataToHashMap("start_date_of_current_business_prof", Doj.getText().toString());
+                                setDataToHashMap("firm_type_prof", String.valueOf(spinner2.getSelectedItem()));
 
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                                 ((GlobalData) getApplication()).setCoappprofpos(spinner1.getSelectedItemPosition());

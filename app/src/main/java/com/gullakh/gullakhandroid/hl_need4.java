@@ -100,7 +100,7 @@ public class hl_need4 extends AppCompatActivity implements View.OnClickListener 
 
             case R.id.next:
                 if (Text1.getText().toString().equals("")) {
-                    RegisterPageActivity.showErroralert(this, "Select current market value of plot", "failed");
+                    RegisterPageActivity.showErroralert(this, "Select current market value of plot!", "failed");
                 } else {
                     /*if (radioGroup.getCheckedRadioButtonId() == -1) {
                         RegisterPageActivity.showErroralert(this, "Select Proposed ownership", "failed");

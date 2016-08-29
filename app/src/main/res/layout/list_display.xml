@@ -100,7 +100,7 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="4"
+    android:weightSum="3"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
@@ -109,12 +109,12 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:id="@+id/filter"
         android:padding="5dp"
-        android:layout_weight="1"
+        android:layout_weight="1.8"
 
         android:orientation="horizontal"
         >
@@ -131,19 +131,21 @@
             android:textColor="#616161"
             android:id="@+id/tfilter"
             android:textSize="15sp"
+            android:maxLines="1"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
-            android:text="Filter "
+            android:layout_marginRight="5dp"
+            android:text="Filter"
             app:typeface="robotoLight"/>
     </LinearLayout>
-    <ImageView
+    <!--<ImageView
         android:layout_width="100dp"
         android:layout_height="25dp"
         android:layout_weight="1"
 
 
 
-        />
+        />-->
     <!--<LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -181,28 +183,36 @@
         />-->
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="right"
+        android:gravity="right"
 
-        android:layout_weight="2"
+        android:layout_weight="1.2"
         >
-    <com.gullakh.gullakhandroid.font.RobotoTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#616161"
-        android:textSize="12sp"
-        android:text="Sorted By"
-        android:layout_marginLeft="18dp"
-        android:layout_marginBottom="-10dp"
-
-        app:typeface="robotoLight"/>
-        <Spinner android:id="@+id/spinner1"
-            android:layout_width="wrap_content"
+        <com.gullakh.gullakhandroid.font.RobotoTextView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColor="#616161"
+            android:textSize="15sp"
+            android:text="Sorted By"
+            android:layout_gravity="center"
+            android:gravity="center"
+
+
+            android:layout_marginBottom="-5dp"
+
+            app:typeface="robotoLight"/>
+        <Spinner android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           android:paddingLeft="30dip"
+
 
             android:textColor="#616161"
             android:layout_marginRight="14dp"
+
             android:textSize="15sp"
             android:drawSelectorOnTop="true"
             android:entries="@array/sortby"

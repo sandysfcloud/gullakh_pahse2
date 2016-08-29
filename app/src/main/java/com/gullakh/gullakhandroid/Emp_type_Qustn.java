@@ -150,7 +150,7 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
                 if(((GlobalData) getApplication()).getemptype()!=null){
                     goToIntent();
                 }else {
-                    RegisterPageActivity.showErroralert(Emp_type_Qustn.this, "Please choose Employment type!", "failed");
+                    RegisterPageActivity.showErroralert(Emp_type_Qustn.this, "Please select employment type!", "failed");
                 }
                 break;
             case R.id.back:
