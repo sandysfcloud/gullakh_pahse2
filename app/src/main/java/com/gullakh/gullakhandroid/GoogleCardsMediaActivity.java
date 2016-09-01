@@ -369,6 +369,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                         sched.setD4(loanDeatils[i].getD4());
                                         sched.setD5(loanDeatils[i].getD5());
                                         sched.setD6(loanDeatils[i].getD6());
+
+                                        sched.setD7(loanDeatils[i].getD7());
+                                        sched.setD8(loanDeatils[i].getD8());
+
                                         sched.setCompletedpercentage(loanDeatils[i].getCompletedpercentage());
                                         sched.setLoan_amount(loanDeatils[i].getLoan_amount());
                                         sched.setBank_name(loanDeatils[i].getPrimary_lender());
@@ -490,7 +494,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     public void setsearchdb() {
         DataHandler dh1 = new DataHandler(this);
-        Cursor cr = dh1.displayData("select * from mysearch");
+        Cursor cr = dh1.displayData("select * from mysearch ORDER BY created_date DESC");
         Log.d("my search clicked", "3");
         try {
             if (cr.moveToFirst()) {

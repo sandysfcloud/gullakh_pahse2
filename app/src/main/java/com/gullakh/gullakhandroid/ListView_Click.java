@@ -134,12 +134,21 @@ Log.d("bankname in listvieclick",bankname);
 
     TextView tprofee = (TextView) findViewById(R.id.t4);
         tfee= (TextView) findViewById(R.id.tfee);
-if(one_time_fee!=null) {
-    String one_time_fee_temp = String.valueOf(format.format(new BigDecimal(one_time_fee)));
-    one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
-    tprofee.setText(one_time_fee_temp);
-    tfee.setText("Processing Fee is "+ one_time_fee_temp);
-}
+        String one_time_fee_temp=null;
+
+        if (one_time_fee != null) {
+            if (one_time_fee.contains("%")) {
+                one_time_fee_temp = one_time_fee;
+            } else {
+
+                one_time_fee_temp = String.valueOf(format.format(new BigDecimal(one_time_fee)));
+                one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
+
+
+            }
+            tprofee.setText(one_time_fee_temp);
+            tfee.setText("Processing Fee is " + one_time_fee_temp);
+        }
 
 
 
@@ -348,24 +357,19 @@ if(one_time_fee!=null) {
                         }
                     }
 
-                   /* if (cscore != null && !cscore.isEmpty() && !cscore.equals("null")&& !cscore.equals("0"))
-                    {
-                        goToIntent(this);
-                    }*/
-                   // else {
 
-                        Log.d("sign in true", "cibilscore");
+
+                      /*change back  Log.d("sign in true", "cibilscore");
                         Intent intent2 = new Intent(this, CibilScore.class);
                         intent2.putExtra("apply", "apply");//dont show the alert
                         //intent2.putExtra("bankname", bankname);
-                        startActivity(intent2);
+                        startActivity(intent2);*/
 
 
 
-                   // }
 
                     //******check here
-                   //goToIntent();
+                    goToIntent(this);
                 }else {
                     Intent intent = new Intent(this, signinPrepage.class);
                     startActivity(intent);
@@ -377,36 +381,69 @@ if(one_time_fee!=null) {
 
     public  void goToIntent(Activity currentact) {
 
-        Intent intent ;
+        Intent intent =null;
         String emtyp=((GlobalData) currentact.getApplication()).getLoanType();
         Log.d("employee typ in listviewclick", emtyp);
 
 
 
         if(emtyp.equalsIgnoreCase("Car Loan")){
-            Log.d("inside carloan",emtyp);
+            Log.d("inside carloan", emtyp);
             intent = new Intent(currentact, cl_car_make.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            currentact.startActivity(intent);
-            currentact.overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
+
+
+        }//else if(emtyp.equalsIgnoreCase("Home Loan")||emtyp.equalsIgnoreCase("Loan Against Property")){
+        else if(emtyp.equalsIgnoreCase("Loan Against Property")){
             intent = new Intent(currentact,hl_prop_owns.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            currentact.startActivity(intent);
-            currentact.overridePendingTransition(R.transition.left, R.transition.right);
-        }else if(((GlobalData) currentact.getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
+
+        }
+
+        else if(emtyp.equalsIgnoreCase("Home Loan")) {
+
+
+            if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a plot")) {
+                intent = new Intent(currentact, hl_need1.class);
+                currentact.startActivity(intent);
+
+            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Construction of house on a plot")) {
+                intent = new Intent(currentact, hl_need2.class);
+                currentact.startActivity(intent);
+
+            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase of plot & construction there on")) {
+                intent = new Intent(currentact, hl_need3.class);
+                currentact.startActivity(intent);
+
+            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Home Renovation")) {
+                intent = new Intent(currentact, hl_need4.class);
+                currentact.startActivity(intent);
+            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Balance Transfer of existing home loan")) {
+                intent = new Intent(currentact, hl_need5.class);
+                currentact.startActivity(intent);
+            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Refinance a property already purchased from own sources")) {
+                intent = new Intent(currentact, hl_need7.class);
+                currentact.startActivity(intent);
+            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a house/flat which is ready to move-in")) {
+                intent = new Intent(currentact, hl_need8.class);
+                currentact.startActivity(intent);
+            }
+            else
+            {
+                intent = new Intent(currentact,hl_prop_owns.class);
+            }
+
+        }
+
+        else if(((GlobalData) currentact.getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")){
 
             intent = new Intent(currentact, cl_car_residence_type.class);
             intent.putExtra("personal", "personal");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            currentact.startActivity(intent);
-            currentact.overridePendingTransition(R.transition.left, R.transition.right);
-        }else {
-            intent = new Intent(currentact, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            currentact.startActivity(intent);
-            currentact.overridePendingTransition(R.transition.left, R.transition.right);
+
         }
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        currentact.startActivity(intent);
+        currentact.overridePendingTransition(R.transition.left, R.transition.right);
+
     }
 
     @Override

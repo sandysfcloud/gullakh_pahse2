@@ -90,6 +90,8 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
 
 
+     if(password.getText().toString().length()<8)
+      {
 
 
                 useremail = emailadress.getText().toString();
@@ -121,7 +123,12 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
 
             }
-        });
+
+            else
+                    RegisterPageActivity.showErroralert(signin.this,"password should be minimum 8 characters", "error");
+            }
+            });
+
         reg.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -129,6 +136,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                goToNewUser();
             }
         });
+
     }
 
 

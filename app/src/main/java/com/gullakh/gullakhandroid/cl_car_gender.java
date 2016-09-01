@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,33 +46,37 @@ import java.util.Map;
 
 public class cl_car_gender extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
     Button back;
-    private Button submit,coappl;
-    JSONServerGet requestgetserver,requestgetserver2,requestgetserver3,requestgetserver4,
-            requestgetserver5,requestgetserver6,requestgetserver7,requestgetserver8,
-            requestgetserver9,requestgetserver10,requestgetserver20,requestgetserver21,requestgetserver22;
+    private Button submit, coappl;
+    JSONServerGet requestgetserver, requestgetserver2, requestgetserver3, requestgetserver4,
+            requestgetserver5, requestgetserver6, requestgetserver7, requestgetserver8,
+            requestgetserver9, requestgetserver10, requestgetserver20, requestgetserver21, requestgetserver22;
     String sessionid;
     Dialog dgthis;
-    String borrowercityid,useremail,usermobile;
-    static  String borrowercaseid;
-    static String borrowercontactid="";
-    private String borrowercaseno="";
+    String borrowercityid, useremail, usermobile;
+    static String borrowercaseid;
+    static String borrowercontactid = "";
+    private String borrowercaseno = "";
     private ContentValues contentValues;
     private EditText Doj;
-    private String date="";
-    private EditText add1,add2,city,pin,state,datefield,timefield;
+    private String date = "";
+    private EditText add1, add2, pin, datefield, timefield;
+    Spinner city, state;
+    String[] listcity, liststate;
+    private String scity, sstate;
     private String userid;
     DataHandler dbobject;
     private RadioButton yesb;
     private RadioButton nob;
     private View main;
-    boolean coapllflag=true;
+    boolean coapllflag = true;
     private String name;
-    private int month,yearv;
+    private int month, yearv;
     private String loanTypeId;
     private String coappldata;
     private Spinner spinner;
     private static final String[] categories = new String[]{"Select time slot", "8am-10am", "10am-12pm", "12pm-2pm",
-            "2pm-4pm","4pm-6pm", "6am-8pm"};
+            "2pm-4pm", "4pm-6pm", "6am-8pm"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,12 +105,14 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         back = (Button) findViewById(R.id.back);
         add1 = (EditText) findViewById(R.id.addr1);
         add2 = (EditText) findViewById(R.id.addr2);
-        city = (EditText) findViewById(R.id.city);
+       /* city = (EditText) findViewById(R.id.city);
         city.setText(cl_car_global_data.dataWithAns.get("currently_living_in"));
+         state = (EditText) findViewById(R.id.state);
+        state.setText(((GlobalData) getApplication()).getStatename());*/
+
         pin = (EditText) findViewById(R.id.pin);
         datefield = (EditText) findViewById(R.id.date);
-        state = (EditText) findViewById(R.id.state);
-        state.setText(((GlobalData) getApplication()).getStatename());
+
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
 
@@ -122,13 +130,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         coappldata = intent2.getStringExtra("coappl");
 
         if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
-        ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
+                ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
 
             if (cl_car_global_data.dataWithAns.get("proposed_ownership") != null) {
                 if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single")) {
                     main.setVisibility(View.VISIBLE);
                     coappl.setVisibility(View.GONE);
-                    if(coappldata!=null){
+                    if (coappldata != null) {
                         yesb.setChecked(true);
                     }
                 } else {
@@ -149,9 +157,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }
         //sessionid="327531cb56effa5f2f67f";
         Cursor cre = dbobject.displayData("select * from userlogin");
-        if(cre!=null) {
+        if (cre != null) {
             if (cre.moveToFirst()) {
-                userid=cre.getString(1);
+                userid = cre.getString(1);
                 useremail = cre.getString(3);
                 usermobile = cre.getString(4);
 
@@ -160,7 +168,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             }
 
         }
-        getContactDetails();
+
         getLoanId();
 
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -177,57 +185,288 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner.setAdapter(dataAdapter1);
 
+
+
+        getContactDetails();
+        city = (Spinner) findViewById(R.id.city);
+        city.setPrompt("Select City");
+
+
+        state = (Spinner) findViewById(R.id.state);
+        state.setPrompt("Select State");
+
+
+
+        scity=cl_car_global_data.dataWithAns.get("currently_living_in");
+        sstate=((GlobalData) getApplication()).getStatename();
+
+
+        getstatenam();
+
+        state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                Log.d("position is", String.valueOf(arg2));
+                sstate = liststate[arg2];
+
+                getcitynam(sstate);
+                Log.d("onItemSelected is called", liststate[arg2]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        state.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    scity = null;
+                }
+                return false;
+            }
+        });
+
+        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                scity = listcity[arg2];
+
+                // getStateName(spcity);
+                Log.d("onItemSelected is called", scity);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
        /* MyArrayAdapter ma2 = new MyArrayAdapter(this, categories);
         spinner.setAdapter(ma2);*/
     }
-  /*  @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-// do something
-            if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-               if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
-                    RegisterPageActivity.showAlertquestn(this);
-                else
-                   finish();
-            }else{
-                finish();
+
+    /*******************************
+     * oncreate end
+     */
+    public void getstatenam() {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
             }
-            return false;
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Statename[] enums = gson.fromJson(jsonObject.get("result"), Statename[].class);
+
+                int size = enums.length;
+                Log.e("statelist frm server ", String.valueOf(size));
+                // ArrayList<String> liste = new ArrayList<String>();
+
+
+                HashMap cityindex = new HashMap<>();
+
+
+                liststate = new String[size];
+
+                for (int i = 0; i < size; i++) {
+                    if(i == 0)
+                    {
+                        Log.d("index s 0", "0");
+                        liststate[i]="No State";
+                    }
+                    else
+                        liststate[i] = enums[i].getStatename();
+
+                    cityindex.put(liststate[i], i);
+                    // liste.add(enums[i].getcity_name());
+                }
+
+                MyArrayAdapter ma = new MyArrayAdapter(cl_car_gender.this, liststate);
+                state.setAdapter(ma);
+
+                if (sstate != null) {
+                    if (sstate.length() > 0) {
+                        Log.d("state index", String.valueOf(cityindex));
+
+                        sstate=Character.toUpperCase(sstate.charAt(0)) + sstate.substring(1);
+                        Log.d("state value", String.valueOf(sstate));
+                        //state = state.replace(" ", "");
+
+                        if(cityindex.get(sstate)!=null) {
+                            Log.d("state index", String.valueOf(cityindex.get(sstate)));
+                            state.setSelection((Integer) cityindex.get(sstate));
+                        }
+                    }
+                }
+
+
+
+                // if(((GlobalData) getApplication()).getcitypos()!=-1)
+                //   e_state.setSelection(((GlobalData) getApplication()).getcitypos());
+
+              /*  final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
+                city.setAdapter(fAdapter);*/
+
+
+                Log.e("emplist frm server ", String.valueOf(liststate));
+
+
+            }
+        }, cl_car_gender.this, "2");
+        DataHandler dbobject = new DataHandler(cl_car_gender.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
         }
 
+        requestgetserver.execute("sessn", "statenamcibil", sessionid);
+    }
 
-        return super.onKeyDown(keyCode, event);
-    }*/
+
+
+    public void getcitynam(String Statenam) {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.e("citylist frm server  jsonObject", String.valueOf(jsonObject));
+                Cityname[] enums = gson.fromJson(jsonObject.get("result"), Cityname[].class);
+
+                int size = enums.length;
+                Log.e("citylist frm server ", String.valueOf(size));
+                // ArrayList<String> liste = new ArrayList<String>();
+
+
+                HashMap cityindex = new HashMap<>();
+
+
+                listcity = new String[size];
+                if(size>0) {
+                    listcity[0] = "Select";
+                    for (int i = 0; i < size; i++) {
+                        listcity[i] = enums[i].getcity_name().trim();
+                        Log.e("city list frm server", String.valueOf(listcity[i]));
+
+                        cityindex.put(listcity[i], i);
+                        // liste.add(enums[i].getcity_name());
+                    }
+                    Log.e("emplist frm server ", String.valueOf(listcity));
+                    MyArrayAdapter ma = new MyArrayAdapter(cl_car_gender.this, listcity);
+                    city.setAdapter(ma);
+                }
+
+                if (scity != null)//only after login
+                {
+                    if (scity.length() > 0) {
+                        scity = scity.trim();
+                        Log.d("city index", String.valueOf(cityindex));
+                        Log.d("city value frm profile", String.valueOf(scity));
+
+                        Log.d("city index", String.valueOf(cityindex.get(scity)));
+                        if (!cityindex.isEmpty())
+                            city.setSelection((Integer) cityindex.get(scity));
+                    }
+                }
+
+
+                if (((GlobalData) getApplication()).getcitypos() != -1)
+                    city.setSelection(((GlobalData) getApplication()).getcitypos());
+
+
+            }
+        }, cl_car_gender.this, "2");
+        DataHandler dbobject = new DataHandler(cl_car_gender.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("token", "relatedcity", sessionid, Statenam);
+    }
+
+
+    /*  @Override
+      public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+          if (keyCode == KeyEvent.KEYCODE_BACK) {
+  // do something
+              if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                 if(!cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Single"))
+                      RegisterPageActivity.showAlertquestn(this);
+                  else
+                     finish();
+              }else{
+                  finish();
+              }
+              return false;
+          }
+
+
+          return super.onKeyDown(keyCode, event);
+      }*/
     @Override
     public void onClick(View v) {
 
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.Submit:
-                if (add1.getText().toString().equals("")||add2.getText().toString().equals("")||pin.getText().toString().equals("")||city.getText().toString().equals("")||state.getText().toString().equals("")) {
+                if (add1.getText().toString().equals("") || add2.getText().toString().equals("") || pin.getText().toString().equals("") || city.getSelectedItem()==null || state.getSelectedItem()==null) {
                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields!", "failed");
                 } else {
-                    if(pin.getText().toString().length()==6){
-                        if (datefield.getText().toString().equals("")||spinner.getSelectedItem().toString().equals("Select time slot")){
+                    if (pin.getText().toString().length() == 6) {
+                        if (datefield.getText().toString().equals("") || spinner.getSelectedItem().toString().equals("Select time slot")) {
                             RegisterPageActivity.showErroralert(cl_car_gender.this, "Select date and time field!", "failed");
                         } else {
 
                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
-                                    ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")){
+                                    ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
 
-                                if(coappldata!=null){
-                                   submitfunction();
-                                }else if (!coapllflag) {
-                                         submitfunction();
-                                }else{
-                                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants field!", "failed");
+                                if (coappldata != null) {
+                                    submitfunction();
+                                } else if (!coapllflag) {
+                                    submitfunction();
+                                } else {
+                                    RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants field!", "failed");
                                 }
-                            }else{
+                            } else {
                                 submitfunction();
                             }
                         }
-                    }else{
+                    } else {
                         RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter correct city pin code!", "failed");
                     }
                 }
@@ -238,7 +477,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 startActivity(intenth);
                 break;
             case R.id.no:
-                coapllflag=false;
+                coapllflag = false;
                 break;
             case R.id.addcoappl:
                 intenth = new Intent(getApplicationContext(), coappldetail.class);
@@ -287,7 +526,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         Log.d("check date", currmonth + " " + curryear);
         if (yearv < curryear) {
             RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time!", "failed");
-        }else if (yearv == curryear) {
+        } else if (yearv == curryear) {
             if (month < currmonth) {
                 RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time!", "failed");
             } else {
@@ -301,10 +540,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     goToDatabase("mysearch", "Car Loan");
                 }
 
-                goToServer(add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString());
+                goToServer(add1.getText().toString(), add2.getText().toString(), city.getSelectedItem().toString(), state.getSelectedItem().toString(), pin.getText().toString());
                 savetoserver();
             }
-        }else if (yearv >= curryear) {
+        } else if (yearv >= curryear) {
             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                 goToDatabase("mysearch", "Home Loan");
             } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
@@ -315,43 +554,42 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 goToDatabase("mysearch", "Car Loan");
             }
 
-            goToServer(add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString());
+            goToServer(add1.getText().toString(), add2.getText().toString(), city.getSelectedItem().toString(), state.getSelectedItem().toString(), pin.getText().toString());
             savetoserver();
         }
     }
 
-    public void setDataToHashMap(String Key,String data)
-    {
+    public void setDataToHashMap(String Key, String data) {
         cl_car_global_data.dataWithAns.put(Key, data);
     }
-    public void savetoserver()
-    {
-        Log.d("mobile,email",useremail+" "+usermobile);
+
+    public void savetoserver() {
+        Log.d("mobile,email", useremail + " " + usermobile);
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
 
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                if(!jsonObject.get("result").toString().equals("[]")) {
-                    Log.d("City is here","fdgdf"+jsonObject.get("result").toString());
+                if (!jsonObject.get("result").toString().equals("[]")) {
+                    Log.d("City is here", "fdgdf" + jsonObject.get("result").toString());
                     BankList[] Borrower_city = gson.fromJson(jsonObject.get("result"), BankList[].class);
                     borrowercityid = Borrower_city[0].getid();
-                    requestgetserver3.execute("token", "getcontact", sessionid,useremail,usermobile);
-                }else{
-                    Log.d("City is here2","dfgdfg");
-                    requestgetserver2.execute("token", "createaccount", sessionid,cl_car_global_data.dataWithAns.get("currently_living_in"));
+                    requestgetserver3.execute("token", "getcontact", sessionid, useremail, usermobile);
+                } else {
+                    Log.d("City is here2", "dfgdfg");
+                    requestgetserver2.execute("token", "createaccount", sessionid, cl_car_global_data.dataWithAns.get("currently_living_in"));
                 }
             }
         }, cl_car_gender.this, "wait");
-        requestgetserver.execute("token", "getaccount", sessionid,cl_car_global_data.dataWithAns.get("currently_living_in"));
+        requestgetserver.execute("token", "getaccount", sessionid, cl_car_global_data.dataWithAns.get("currently_living_in"));
 
 
         requestgetserver2 = new JSONServerGet(new AsyncResponse() {
@@ -359,8 +597,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             public void processFinish(JSONObject output) {
 
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -369,7 +607,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
                 BankList Borrower_city = gson.fromJson(jsonObject.get("result"), BankList.class);
                 borrowercityid = Borrower_city.getid();
-                requestgetserver3.execute("token", "getcontact", sessionid,useremail,usermobile);
+                requestgetserver3.execute("token", "getcontact", sessionid, useremail, usermobile);
 
 
             }
@@ -381,29 +619,27 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             }
 
-            public void processFinishString(String str_result, Dialog dg)
-            {
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
 
-                if(!jsonObject.get("result").toString().equals("[]"))
-                {
+                if (!jsonObject.get("result").toString().equals("[]")) {
                     ContactBR[] Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR[].class);
                     Log.d("requestgetserver3 jsonobj", "1");
                     borrowercontactid = Borrower_contact[0].getId();
                     Gson gson1 = new Gson();
                     String json = gson1.toJson(((GlobalData) getApplication()).getLenders());
-                    json=json.replaceAll("\\{|\\}", "");
+                    json = json.replaceAll("\\{|\\}", "");
                     Log.d("lender", json);
-                    String[] tempLoanId=loanTypeId.split("x");
+                    String[] tempLoanId = loanTypeId.split("x");
 
-                    requestgetserver5.execute("token", "createcase", sessionid, borrowercontactid, "Created", json, loanTypeId, datefield.getText().toString(), spinner.getSelectedItem().toString(), state.getText().toString(), String.valueOf(((GlobalData) getApplication()).getloanamt()));
-                }else{
-                    requestgetserver4.execute("token", "createcontact",sessionid,borrowercityid,useremail,usermobile,cl_car_global_data.dataWithAns.get("dob"),add1.getText().toString()+" "+add2.getText().toString()
-                            ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
+                    requestgetserver5.execute("token", "createcase", sessionid, borrowercontactid, "Created", json, loanTypeId, datefield.getText().toString(), spinner.getSelectedItem().toString(), state.getSelectedItem().toString(), String.valueOf(((GlobalData) getApplication()).getloanamt()));
+                } else {
+                    requestgetserver4.execute("token", "createcontact", sessionid, borrowercityid, useremail, usermobile, cl_car_global_data.dataWithAns.get("dob"), add1.getText().toString() + " " + add2.getText().toString()
+                            , city.getSelectedItem().toString(), pin.getText().toString(), state.getSelectedItem().toString());
                 }
             }
         }, cl_car_gender.this, "wait3");
@@ -414,8 +650,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             }
 
-            public void processFinishString(String str_result, Dialog dg)
-            {
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -426,7 +661,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 borrowercontactid = Borrower_contact.getId();
                 Log.d("Borrower contact id", borrowercontactid);
                 Log.d("requestgetserver4 result", "1");
-                requestgetserver5.execute("token", "createcase", sessionid,borrowercontactid ,"Created",((GlobalData) getApplication()).getLenders().get(0),((GlobalData) getApplication()).getLenders().get(1));
+                requestgetserver5.execute("token", "createcase", sessionid, borrowercontactid, "Created", ((GlobalData) getApplication()).getLenders().get(0), ((GlobalData) getApplication()).getLenders().get(1));
 
             }
         }, cl_car_gender.this, "wait4");
@@ -435,8 +670,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -445,21 +680,21 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 Log.d("Borrower jsonobj", String.valueOf(jsonObject));
                 LoanReq Borrower_case = gson.fromJson(jsonObject.get("result"), LoanReq.class);
                 borrowercaseid = Borrower_case.getId();
-                borrowercaseno= Borrower_case.getCase_number();
+                borrowercaseno = Borrower_case.getCase_number();
 
                 gotoUpdateCredential();
 
                 if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
-                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
-                }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
-                requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
-                }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
-                }else  if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
-                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId," OR loan_type=x19332");
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId, " OR loan_type=x19332");
+                } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId, " OR loan_type=x19332");
+                } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId, " OR loan_type=x19332");
+                } else if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
+                    requestgetserver8.execute("token", "LoanParameterMasterForWebRef", sessionid, loanTypeId, " OR loan_type=x19332");
                 }
 
-               // requestgetserver7.execute("token", "LoanType", sessionid);
+                // requestgetserver7.execute("token", "LoanType", sessionid);
 
 
                 // requestgetserver6.execute("token", "createloanvalue", sessionid,borrowercaseid);
@@ -470,8 +705,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -483,8 +718,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 //                        ,city.getText().toString(),pin.getText().toString(),state.getText().toString());
 
 
-                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")||((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property"))
-                        {
+                if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") || ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
                     if (coapllflag) {
                         gson = new Gson();
                         JSONArray CojsonArray = new JSONArray();
@@ -498,11 +732,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                             CojsonArray.put(json);
                         }
                         requestgetserver10.execute("token", "coappldetails", sessionid, CojsonArray.toString());
-                    }else{
+                    } else {
                         dgthis.dismiss();
                         goToIntent();
                     }
-                }else{
+                } else {
                     dgthis.dismiss();
                     goToIntent();
                 }
@@ -512,12 +746,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }, cl_car_gender.this, "wait6");
 
 
-
-
         requestgetserver7 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
             }
+
             public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -557,15 +790,15 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 }
                 */
             }
-        },cl_car_gender.this, "wait7");
+        }, cl_car_gender.this, "wait7");
 
         requestgetserver8 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
 
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -575,18 +808,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 LoanParaMaster[] LoanP = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
                 Map<String, String> arrayLoanParameter = new HashMap<>();
                 for (int i = 0; i < LoanP.length; i++) {
-                    arrayLoanParameter.put(LoanP[i].getWebreference(),LoanP[i].getid());
+                    arrayLoanParameter.put(LoanP[i].getWebreference(), LoanP[i].getid());
                     Log.d("webref", LoanP[i].getWebreference() + " value :" + LoanP[i].getid());
                 }
 
                 JSONArray jsonArray = new JSONArray();
-                for (Map.Entry<String, String> entry : cl_car_global_data.dataWithAns.entrySet())
-                {
+                for (Map.Entry<String, String> entry : cl_car_global_data.dataWithAns.entrySet()) {
                     JSONObject LoanData = new JSONObject();
                     try {
-                        Log.d("parametevalue",arrayLoanParameter.get(entry.getKey())+ entry.getValue());
+                        Log.d("parametevalue", arrayLoanParameter.get(entry.getKey()) + entry.getValue());
                         LoanData.put("parametername", arrayLoanParameter.get(entry.getKey()));
-                        LoanData.put("parameter_value",  entry.getValue());
+                        LoanData.put("parameter_value", entry.getValue());
                         LoanData.put("loanrequestcase", borrowercaseid);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -602,8 +834,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -631,7 +863,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         dgthis.dismiss();
                         goToIntent();
                     }
-                }else {
+                } else {
                     dgthis.dismiss();
                     goToIntent();
                 }
@@ -645,8 +877,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
@@ -666,12 +898,12 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
 
             }
         }, cl_car_gender.this, "wait6");
-        requestgetserver22.execute("token", "updateContactDetailsNew",((GlobalData)getApplication()).getDob().toString(),((GlobalData)getApplication()).getgender().toString(),add1.getText().toString(), add2.getText().toString(), city.getText().toString(), state.getText().toString(), pin.getText().toString(),userid,"","");
+        requestgetserver22.execute("token", "updateContactDetailsNew", ((GlobalData) getApplication()).getDob().toString(), ((GlobalData) getApplication()).getgender().toString(), add1.getText().toString(), add2.getText().toString(), city.getSelectedItem().toString(), state.getSelectedItem().toString(), pin.getText().toString(), userid, "", "");
 
     }
 
@@ -702,8 +934,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     } else {
                         loanTypeId = arrayLoantype.get("Used Car Loan");
                     }
-                }else{
-                    loanTypeId=arrayLoantype.get(((GlobalData) getApplication()).getLoanType());
+                } else {
+                    loanTypeId = arrayLoantype.get(((GlobalData) getApplication()).getLoanType());
                 }
 
             }
@@ -711,37 +943,38 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         }, cl_car_gender.this, "wait20");
         requestgetserver7.execute("token", "LoanType", sessionid);
     }
+
     private void goToIntent() {
-            Intent intent = new Intent(this, UploadDocument1.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.putExtra("name",name);
-            intent.putExtra("applno",borrowercaseno);
-            startActivity(intent);
+        Intent intent = new Intent(this, UploadDocument1.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("name", name);
+        intent.putExtra("applno", borrowercaseno);
+        startActivity(intent);
     }
 
-    private void goToDatabase(String table, String loanType)
-    {
-        if(table.equals("mysearch")) {
+    private void goToDatabase(String table, String loanType) {
+        if (table.equals("mysearch")) {
             contentValues.put("loantype", loanType);
             contentValues.put("questans", "cl_car_residence_type");
             contentValues.put("data", cl_car_global_data.getHashMapInString());
-            cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this,loanType),loanType);
-        }else if(table.equals("userlogin")){
+            cl_car_global_data.addDataToDataBase(this, contentValues, cl_car_global_data.checkDataToDataBase(this, loanType), loanType);
+        } else if (table.equals("userlogin")) {
 
-            ContentValues contentValues1=new ContentValues();
-            contentValues1.put("contact_id",borrowercontactid);
-            contentValues1.put("street",add1.getText().toString());
-            contentValues1.put("city", city.getText().toString());
-            contentValues1.put("state",state.getText().toString());
-            contentValues1.put("zip",pin.getText().toString());
-            contentValues1.put("gender",((GlobalData)getApplication()).getgender());
-            contentValues1.put("dob",((GlobalData)getApplication()).getDob());
-            contentValues1.put("zip",pin.getText().toString());
+            ContentValues contentValues1 = new ContentValues();
+            contentValues1.put("contact_id", borrowercontactid);
+            contentValues1.put("street", add1.getText().toString());
+            contentValues1.put("city", city.getSelectedItem().toString());
+            contentValues1.put("state", state.getSelectedItem().toString());
+            contentValues1.put("zip", pin.getText().toString());
+            contentValues1.put("gender", ((GlobalData) getApplication()).getgender());
+            contentValues1.put("dob", ((GlobalData) getApplication()).getDob());
+            contentValues1.put("zip", pin.getText().toString());
             Log.d("seeupdateofuserlogin", "userlogin" + contentValues1 + userid);
-            DataHandler dbobject1=new DataHandler(this);
-            dbobject1.updateDatatouserlogin("userlogin",contentValues1,userid);
+            DataHandler dbobject1 = new DataHandler(this);
+            dbobject1.updateDatatouserlogin("userlogin", contentValues1, userid);
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -749,24 +982,24 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
 
 //        if(tpd != null) tpd.setOnTimeSetListener(this);
-        if(dpd != null) dpd.setOnDateSetListener(this);
+        if (dpd != null) dpd.setOnDateSetListener(this);
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
-        month=monthOfYear;
-        yearv=year;
+        date = dayOfMonth + "-" + (++monthOfYear) + "-" + year;
+        month = monthOfYear;
+        yearv = year;
         datefield.setText(date);
     }
 
-    public void getContactDetails(){
+    public void getContactDetails() {
         requestgetserver20 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 Dialog dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -774,27 +1007,30 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
-                if (details.length>0) {
+                if (details.length > 0) {
                     add1.setText(details[0].getMailingstreet());
                     add2.setText(details[0].getOtherstreet());
-                    city.setText(details[0].getMailingcity());
-                    state.setText(details[0].getMailingstate());
+                   // city.setsel(details[0].getMailingcity());
+                   // state.setText(details[0].getMailingstate());
+                    sstate=details[0].getMailingstate();
+                    scity=details[0].getMailingcity();
                     pin.setText(details[0].getMailingzip());
-                    name=details[0].getFirstname();
-                    borrowercontactid=details[0].getId();
+                    name = details[0].getFirstname();
+                    borrowercontactid = details[0].getId();
                 }
                 dgthis.dismiss();
             }
         }, cl_car_gender.this, "wait");
-        requestgetserver20.execute("token","getcontact",sessionid,useremail);
+        requestgetserver20.execute("token", "getcontact", sessionid, useremail);
     }
-    private void goToServer(String add1,String add2, String add3, String add4, String add5) {
+
+    private void goToServer(String add1, String add2, String add3, String add4, String add5) {
         requestgetserver21 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 Dialog dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -807,22 +1043,21 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
             }
         }, cl_car_gender.this, "wait");
-        String gender =((GlobalData) getApplication()).getgender();
+        String gender = ((GlobalData) getApplication()).getgender();
         gender = gender.substring(0, 1).toUpperCase() + gender.substring(1);
-        String dob =((GlobalData) getApplication()).getDob();
+        String dob = ((GlobalData) getApplication()).getDob();
         DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
         DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
             date = dateFormat.parse(dob);
         } catch (ParseException e) {
-            Log.d("dateFormaterror",e.toString());
+            Log.d("dateFormaterror", e.toString());
             e.printStackTrace();
         }
-        String newFormatdate=dateFormat1.format(date);
-        requestgetserver21.execute("token", "contactaddress",sessionid,borrowercontactid,add1,add2,add3,add4,add5,gender,newFormatdate,"","");
+        String newFormatdate = dateFormat1.format(date);
+        requestgetserver21.execute("token", "contactaddress", sessionid, borrowercontactid, add1, add2, add3, add4, add5, gender, newFormatdate, "", "");
     }
-
 
 
     //**************spinner
@@ -869,7 +1104,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             final ListContent holder;
             View v = convertView;
             if (v == null) {
-                v = mInflater.inflate(R.layout.spinner_item, null);
+                v = mInflater.inflate(R.layout.spinner_item2, null);
                 holder = new ListContent();
 
                 holder.name = (TextView) v.findViewById(R.id.textView1);

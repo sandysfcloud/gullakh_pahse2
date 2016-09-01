@@ -102,8 +102,8 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
         allot.add("Builder");
         allot.add("Resale");
 
-        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, allot);
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        android.widget.ArrayAdapter<String> dataAdapter2 = new android.widget.ArrayAdapter<String>(this, R.layout.simple_spinnertextview, allot);
+        dataAdapter2.setDropDownViewResource(R.layout.simple_spinnertextview);
         allotment.setAdapter(dataAdapter2);
 
 
@@ -165,7 +165,8 @@ public class hl_need3 extends AppCompatActivity implements View.OnClickListener 
                                 Intent intent;
                                 if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                     //  intent = new Intent(hl_need1.this, DateOfBirth_questn.class);
-                                    intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                    //kk intent = new Intent(hl_need1.this, GoogleCardsMediaActivity.class);
+                                    intent = new Intent(this,hl_prop_owns.class);
                                     intent.putExtra("data", "searchgo");
                                     startActivity(intent);
                                     overridePendingTransition(R.transition.left, R.transition.right);

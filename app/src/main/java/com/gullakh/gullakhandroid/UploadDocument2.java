@@ -1,5 +1,6 @@
 package com.gullakh.gullakhandroid;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -10,10 +11,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -56,18 +59,19 @@ public class UploadDocument2 extends AppCompatActivity implements View.OnClickLi
     String temp5 = "";
     String temp6 = "";
     String temp7 = "";
-    Button done,buttonUpoadFile1, buttonUpoadFile2, buttonUpoadFile3, buttonUpoadFile4, buttonUpoadFile5, buttonUpoadFile6, buttonUpoadFile7;
-    TextView pathfromuser1, pathfromuser2, pathfromuser3, pathfromuser4, pathfromuser5, pathfromuser6, pathfromuser7;
-    TextView uploadSuccess1, uploadSuccess2, uploadSuccess3, uploadSuccess4, uploadSuccess5, uploadSuccess6, uploadSuccess7;
+    Button done,buttonUpoadFile1, buttonUpoadFile2, buttonUpoadFile3, buttonUpoadFile4,buttonUpoadFileps1,buttonUpoadFileps2, buttonUpoadFile5, buttonUpoadFile6, buttonUpoadFile7;
+    TextView pathfromuser1, pathfromuser2, pathfromuser3, pathfromuser4,pathfromuserps2,pathfromuserps3, pathfromuser5, pathfromuser6, pathfromuser7;
+    TextView uploadSuccess1, uploadSuccess2, uploadSuccess3, uploadSuccess4,uploadSuccessps2,uploadSuccessps3, uploadSuccess5, uploadSuccess6, uploadSuccess7;
     private String sessionid;
     private JSONServerGet requestgetserver,requestgetserver2,requestgetserver3;
     private Dialog dgthis,dgthis1;
-    private ImageView del1,del2,del3,del4,del5,del6,del7;
+    private ImageView del1,del2,del3,del4,delps2,delps3,del5,del6,del7;
     int count=0;
     private String caseid="";
     private boolean frommyappl=false;
     private String contactid;
 int flag=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +107,8 @@ int flag=0;
 
 
 
+
+
         DataHandler dbobject = new DataHandler(UploadDocument2.this);
         Cursor cr = dbobject.displayData("select * from session");
         if (cr.moveToFirst()) {
@@ -113,38 +119,58 @@ int flag=0;
         buttonUpoadFile2 = (Button) findViewById(R.id.buttonUpload2);
         buttonUpoadFile3 = (Button) findViewById(R.id.buttonUpload3);
         buttonUpoadFile4 = (Button) findViewById(R.id.buttonUpload4);
+
+        buttonUpoadFileps1 = (Button) findViewById(R.id.buttonUploadps2);
+        buttonUpoadFileps2 = (Button) findViewById(R.id.buttonUploadps3);
+
         buttonUpoadFile5 = (Button) findViewById(R.id.buttonUpload5);
         buttonUpoadFile6 = (Button) findViewById(R.id.buttonUpload6);
-        buttonUpoadFile7 = (Button) findViewById(R.id.buttonUpload7);
+        //buttonUpoadFile7 = (Button) findViewById(R.id.buttonUpload7);
         done = (Button) findViewById(R.id.done);
         uploadSuccess1 = (TextView) findViewById(R.id.UploadSuccess1);
         uploadSuccess2 = (TextView) findViewById(R.id.UploadSuccess2);
         uploadSuccess3 = (TextView) findViewById(R.id.UploadSuccess3);
         uploadSuccess4 = (TextView) findViewById(R.id.UploadSuccess4);
+
+        uploadSuccessps2 = (TextView) findViewById(R.id.UploadSuccessps2);
+        uploadSuccessps3 = (TextView) findViewById(R.id.UploadSuccessps3);
+
         uploadSuccess5 = (TextView) findViewById(R.id.UploadSuccess5);
         uploadSuccess6 = (TextView) findViewById(R.id.UploadSuccess6);
-        uploadSuccess7 = (TextView) findViewById(R.id.UploadSuccess7);
+       // uploadSuccess7 = (TextView) findViewById(R.id.UploadSuccess7);
         del1 = (ImageView) findViewById(R.id.del1);
         del2 = (ImageView) findViewById(R.id.del2);
         del3 = (ImageView) findViewById(R.id.del3);
         del4 = (ImageView) findViewById(R.id.del4);
+
+        delps2 = (ImageView) findViewById(R.id.delps2);
+        delps3 = (ImageView) findViewById(R.id.delps3);
+
         del5 = (ImageView) findViewById(R.id.del5);
         del6 = (ImageView) findViewById(R.id.del6);
-        del7 = (ImageView) findViewById(R.id.del7);
+       // del7 = (ImageView) findViewById(R.id.del7);
         pathfromuser1 = (TextView) findViewById(R.id.path1);
         pathfromuser2 = (TextView) findViewById(R.id.path2);
         pathfromuser3 = (TextView) findViewById(R.id.path3);
         pathfromuser4 = (TextView) findViewById(R.id.path4);
+
+        pathfromuserps2 = (TextView) findViewById(R.id.pays2);
+        pathfromuserps3 = (TextView) findViewById(R.id.pays3);
+
         pathfromuser5 = (TextView) findViewById(R.id.path5);
         pathfromuser6 = (TextView) findViewById(R.id.path6);
-        pathfromuser7 = (TextView) findViewById(R.id.path7);
+       // pathfromuser7 = (TextView) findViewById(R.id.path7);
         buttonUpoadFile1.setOnClickListener(this);
         buttonUpoadFile2.setOnClickListener(this);
         buttonUpoadFile3.setOnClickListener(this);
         buttonUpoadFile4.setOnClickListener(this);
         buttonUpoadFile5.setOnClickListener(this);
         buttonUpoadFile6.setOnClickListener(this);
-        buttonUpoadFile7.setOnClickListener(this);
+       // buttonUpoadFile7.setOnClickListener(this);
+
+        buttonUpoadFileps1.setOnClickListener(this);
+        buttonUpoadFileps2.setOnClickListener(this);
+
         done.setOnClickListener(this);
         del1.setOnClickListener(this);
         del2.setOnClickListener(this);
@@ -152,7 +178,10 @@ int flag=0;
         del4.setOnClickListener(this);
         del5.setOnClickListener(this);
         del6.setOnClickListener(this);
-        del7.setOnClickListener(this);
+        //del7.setOnClickListener(this);
+
+        delps2.setOnClickListener(this);
+        delps3.setOnClickListener(this);
         Intent intent1 = getIntent();
         Log.d("intent test", String.valueOf(getIntent()));
 
@@ -182,14 +211,14 @@ int flag=0;
                     contactid = "x" + temp;
                     Log.d("my appl page caseid", caseid);
                     Log.d("my appl page contactid", contactid);
-                    String[] d = {"0", intent1.getStringExtra("d0"), intent1.getStringExtra("d1"), intent1.getStringExtra("d2"), intent1.getStringExtra("d3"), intent1.getStringExtra("d4"), intent1.getStringExtra("d5"), intent1.getStringExtra("d6")};
-                    Log.d("d values", d[0] + d[1] + d[2] + d[3] + d[4] + d[5] + d[6]);
+                    String[] d = {"0", intent1.getStringExtra("d0"), intent1.getStringExtra("d1"), intent1.getStringExtra("d2"), intent1.getStringExtra("d3"), intent1.getStringExtra("d4"), intent1.getStringExtra("d5"), intent1.getStringExtra("d6"), intent1.getStringExtra("d7"), intent1.getStringExtra("d8")};
+                    Log.d("d values", d[0] + d[1] + d[2] + d[3] + d[4] + d[5] + d[6]+ d[7]+ d[8]);
                     // for(int i=1;i<=7;i++){
-                    for (int i = 0; i < 7; i++) {
+                    for (int i = 1; i <=8; i++) {
                         Log.d("i value", String.valueOf(i));
                         if (d[i].equals("1")) {
                             Log.d("set Attribute ", String.valueOf(i));
-                            uploadedsuccessfully(i+1);
+                            uploadedsuccessfully(i);
                         }
                     }
 
@@ -205,6 +234,20 @@ int flag=0;
 
 
 
+
+@TargetApi(Build.VERSION_CODES.M)
+
+private boolean isReadStorageAllowed() {
+    //Getting the permission status
+    int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+    //If permission is granted returning true
+    if (result == PackageManager.PERMISSION_GRANTED)
+        return true;
+
+    //If permission is not granted returning false
+    return false;
+}
 
 
 
@@ -231,33 +274,49 @@ int flag=0;
        // intent.setType("image/*,application/pdf");
        /* intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
         startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), code);*/
+        if(isReadStorageAllowed()) {
+
+            String[] ACCEPT_MIME_TYPES = {"image/*", "application/pdf"};
+
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 
 
-
-     String[] ACCEPT_MIME_TYPES = {"image/*", "application/pdf"};
-
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("application/*|image/*|pdf");
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES);
 
 
-        intent.setType("application/*|image/*|pdf");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.putExtra("remove", "yes");
 
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            Log.d("intent here", String.valueOf(intent));
+            startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), code);
 
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.putExtra("remove", "yes");
-
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        Log.d("intent here", String.valueOf(intent));
-        startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), code);
-
-        flag=1;
-
-
-
-
-
+            flag = 1;
+        }
+        else
+        {
+            requestStoragePermission();
+        }
     }
+//Requesting permission
+        private void requestStoragePermission(){
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+                //If the user has denied the permission previously your code will come to this block
+                //Here you can explain why you need this permission
+                //Explain here why you need this permission
+            }
+
+            //And finally ask for the permission
+            ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }
+
+
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -286,6 +345,9 @@ int flag=0;
                 startActivityForResult(Intent.createChooser(i4, "Select file to upload document"), 4);*/
                 showFileChooser(4);
                 break;
+
+
+
             case R.id.buttonUpload5:
                /* Intent i5 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i5.setType("image/*");
@@ -298,12 +360,21 @@ int flag=0;
                 startActivityForResult(Intent.createChooser(i6, "Select file to upload document"), 6);*/
                 showFileChooser(6);
                 break;
-            case R.id.buttonUpload7:
-                /*Intent i7 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                i7.setType("image/*");
-                startActivityForResult(Intent.createChooser(i7, "Select file to upload document"), 7);*/
-                showFileChooser(1);
+          /*  case R.id.buttonUpload7:
+
+                showFileChooser(7);
+                break;*/
+
+
+            case R.id.buttonUploadps2:
+
+                showFileChooser(7);
                 break;
+            case R.id.buttonUploadps3:
+
+                showFileChooser(8);
+                break;
+
             case R.id.done:
                 goToServer();
                 Intent i8 = new Intent(this,MainActivity.class);
@@ -316,32 +387,47 @@ int flag=0;
                 startActivity(intenth);
                 break;
             case R.id.del1:
-                    deleteFileFromServer("ID Proof & DOB Proof", 1);
+                deleteFileFromServer("ID Proof & DOB Proof", 1);
                 break;
             case R.id.del2:
-                deleteFileFromServer("Address Proof",2);
+                deleteFileFromServer("Address Proof", 2);
                 break;
             case R.id.del3:
                 deleteFileFromServer("Signature Proof",3);
                 break;
             case R.id.del4:
-                deleteFileFromServer("Payslips",4);
+                deleteFileFromServer("Payslip1",4);
                 break;
+
+
             case R.id.del5:
-                deleteFileFromServer("Bank Statement/Passbook of Salary account",5);
+               // deleteFileFromServer("Bank Statement/Passbook of Salary account",5);
+                deleteFileFromServer("Bank Statement",5);
                 break;
             case R.id.del6:
-                deleteFileFromServer("FORM-16/ ITR",6);
+               // deleteFileFromServer("FORM-16/ ITR",6);
+                deleteFileFromServer("FORM-16ITR",6);
                 break;
-            case R.id.del7:
+          /*  case R.id.del7:
                 deleteFileFromServer("Passport Size Photograph",7);
+                break;*/
+
+
+
+            case R.id.delps2:
+                deleteFileFromServer("Payslip2",7);
                 break;
+
+            case R.id.delps3:
+                deleteFileFromServer("Payslip3",8);
+                break;
+
         }
     }
 
     private void goToServer() {
        // count++;
-        if(count==7){
+        if(count==8){
             Log.d("Uploaded all", String.valueOf(count));
             requestgetserver3 = new JSONServerGet(new AsyncResponse() {
                 @Override
@@ -579,25 +665,42 @@ int flag=0;
 
                 pathfromuser4.setText(temp1);
 
-                savetoserver(temp1, FileExtension, "Payslips",requestCode);
-            } else if (requestCode == 5) {
+                savetoserver(temp1, FileExtension, "Payslip1",requestCode);
+            }
+
+
+
+            else if (requestCode == 5) {
 
                 pathfromuser5.setText(temp1);
 
-                savetoserver(temp1, FileExtension, "Bank Statement/Passbook of Salary account",requestCode);
+               // savetoserver(temp1, FileExtension, "Bank Statement/Passbook of Salary account",requestCode);
+                savetoserver(temp1, FileExtension, "Bank Statement",requestCode);
             } else if (requestCode == 6) {
 
                 pathfromuser6.setText(temp1);
 
-                savetoserver(temp1, FileExtension, "FORM-16/ ITR",requestCode);
-            } else if (requestCode == 7) {
+               // savetoserver(temp1, FileExtension, "FORM-16/ ITR",requestCode);
+                savetoserver(temp1, FileExtension, "FORM-16ITR",requestCode);
+            } /*else if (requestCode == 7) {
 
                 pathfromuser7.setText(temp1);
 
                 savetoserver(temp1, FileExtension, "Passport Size Photograph",requestCode);
+            }*/
+
+            else if (requestCode == 7) {
+
+                pathfromuserps2.setText(temp1);
+
+                savetoserver(temp1, FileExtension, "Payslip2",requestCode);
             }
+            else if (requestCode == 8) {
 
+                pathfromuserps3.setText(temp1);
 
+                savetoserver(temp1, FileExtension, "Payslip3",requestCode);
+            }
 
             //*kk
 
@@ -649,7 +752,7 @@ int flag=0;
                 dgthis.dismiss();
             }
         }, UploadDocument2.this, "wait");
-            requestgetserver.execute("token", "document", sessionid,caseid, Data, exe, title);
+        requestgetserver.execute("token", "document", sessionid,caseid, Data, exe, title);
     }
 
     private void uploadedsuccessfully(int rc)
@@ -676,7 +779,10 @@ int flag=0;
             buttonUpoadFile4.setVisibility(View.GONE);
             uploadSuccess4.setVisibility(View.VISIBLE);
             del4.setVisibility(View.VISIBLE);
-        } else if (rc == 5) {
+        }
+
+
+        else if (rc == 5) {
             pathfromuser5.setVisibility(View.GONE);
             buttonUpoadFile5.setVisibility(View.GONE);
             uploadSuccess5.setVisibility(View.VISIBLE);
@@ -686,60 +792,99 @@ int flag=0;
             buttonUpoadFile6.setVisibility(View.GONE);
             uploadSuccess6.setVisibility(View.VISIBLE);
             del6.setVisibility(View.VISIBLE);
-        }else if (rc == 7) {
+        }/*else if (rc ==7) {
             pathfromuser7.setVisibility(View.GONE);
             buttonUpoadFile7.setVisibility(View.GONE);
             uploadSuccess7.setVisibility(View.VISIBLE);
             del7.setVisibility(View.VISIBLE);
+        }*/
+
+
+
+
+
+        else if (rc == 7) {
+            pathfromuserps2.setVisibility(View.GONE);
+            buttonUpoadFileps1.setVisibility(View.GONE);
+            uploadSuccessps2.setVisibility(View.VISIBLE);
+            delps2.setVisibility(View.VISIBLE);
         }
+        else if (rc == 8) {
+            pathfromuserps3.setVisibility(View.GONE);
+            buttonUpoadFileps2.setVisibility(View.GONE);
+            uploadSuccessps3.setVisibility(View.VISIBLE);
+            delps3.setVisibility(View.VISIBLE);
+        }
+
     }
 
-    private void setAttributes(int reqcode)
-    {
+    private void setAttributes(int reqcode) {
         count--;
-        if(reqcode==1){
+        if(reqcode== 1) {
             pathfromuser1.setVisibility(View.VISIBLE);
             pathfromuser1.setText("");
             buttonUpoadFile1.setVisibility(View.VISIBLE);
             uploadSuccess1.setVisibility(View.GONE);
             del1.setVisibility(View.GONE);
-        }else if(reqcode==2){
+        }else if(reqcode== 2) {
             pathfromuser2.setVisibility(View.VISIBLE);
             pathfromuser2.setText("");
             buttonUpoadFile2.setVisibility(View.VISIBLE);
             uploadSuccess2.setVisibility(View.GONE);
             del2.setVisibility(View.GONE);
-        }else if(reqcode==3){
+        }else if(reqcode== 3) {
             pathfromuser3.setVisibility(View.VISIBLE);
             pathfromuser3.setText("");
             buttonUpoadFile3.setVisibility(View.VISIBLE);
             uploadSuccess3.setVisibility(View.GONE);
             del3.setVisibility(View.GONE);
-        }else if(reqcode==4){
+        }else if(reqcode== 4) {
             pathfromuser4.setVisibility(View.VISIBLE);
             pathfromuser4.setText("");
             buttonUpoadFile4.setVisibility(View.VISIBLE);
             uploadSuccess4.setVisibility(View.GONE);
             del4.setVisibility(View.GONE);
-        }else if(reqcode==5){
+        }
+
+
+        else if(reqcode== 5) {
             pathfromuser5.setVisibility(View.VISIBLE);
             pathfromuser5.setText("");
             buttonUpoadFile5.setVisibility(View.VISIBLE);
             uploadSuccess5.setVisibility(View.GONE);
             del5.setVisibility(View.GONE);
-        }else if(reqcode==6){
+        }else if(reqcode== 6) {
             pathfromuser6.setVisibility(View.VISIBLE);
             pathfromuser6.setText("");
             buttonUpoadFile6.setVisibility(View.VISIBLE);
             uploadSuccess6.setVisibility(View.GONE);
             del6.setVisibility(View.GONE);
-        }else if(reqcode==7){
+        }/*else if(reqcode==7){
             pathfromuser7.setVisibility(View.VISIBLE);
             pathfromuser7.setText("");
             buttonUpoadFile7.setVisibility(View.VISIBLE);
             uploadSuccess7.setVisibility(View.GONE);
             del7.setVisibility(View.GONE);
+        }*/
+
+
+
+        else if(reqcode==7){
+            pathfromuserps2.setVisibility(View.VISIBLE);
+            pathfromuserps2.setText("");
+            buttonUpoadFileps1.setVisibility(View.VISIBLE);
+            uploadSuccessps2.setVisibility(View.GONE);
+            delps2.setVisibility(View.GONE);
         }
+
+        else if(reqcode==8){
+            pathfromuserps3.setVisibility(View.VISIBLE);
+            pathfromuserps3.setText("");
+            buttonUpoadFileps2.setVisibility(View.VISIBLE);
+            uploadSuccessps3.setVisibility(View.GONE);
+            delps3.setVisibility(View.GONE);
+        }
+
 
     }
 }

@@ -19,7 +19,7 @@ public class LoanReqForMyapp
     public String d3;
     public String d4;
     public String d5;
-    public String d6;
+    public String d6,d7,d8;
     public String createdtime;
     public String plemi="";
     public String plroi="";
@@ -56,8 +56,18 @@ public class LoanReqForMyapp
         return d5;
     }
 
+
     public String getD6() {
         return d6;
+    }
+
+
+    public String getD7() {
+        return d7;
+    }
+
+    public String getD8() {
+        return d8;
     }
 
     public String getCreatedtime() {

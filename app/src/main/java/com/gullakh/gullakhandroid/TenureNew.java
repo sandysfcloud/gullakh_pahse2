@@ -252,7 +252,7 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
 
             case R.id.next:
                 ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
-                Log.d("tenure is in Tenure", tenure.getText().toString());
+                Log.d("tenure is in Tenurenew", tenure.getText().toString());
                 Log.d("tenure global",((GlobalData) getApplication()).getTenure());
 
                 String emptype = ((GlobalData) getApplication()).getemptype();

@@ -44,7 +44,7 @@ public class GlobalData extends MultiDexApplication {
 // ----------------------------------------------dont change below URLS----------------------------------------------------
 
     static final String SERVER_GET_URL =GULLAKH_PORTAL+"webservice_new.php";
-    static final String CIBIL =GULLAKH_WEB+"equifax/equifax";
+    static final String CIBIL =GULLAKH_WEB+"equifax/equifax1";
     static final String Webservice=GULLAKH_WEB+"index.php/user/Webservices/";
 
     private String cartypeloan;

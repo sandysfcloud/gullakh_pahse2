@@ -275,7 +275,8 @@ public class hl_need8 extends AppCompatActivity implements View.OnClickListener 
                             if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
                                 ((GlobalData) getApplication()).setBuilderName(Text1.getText().toString());
                                 //intent = new Intent(this, DateOfBirth_questn.class);
-                                intent = new Intent(this, GoogleCardsMediaActivity.class);
+                                //kk intent = new Intent(hl_need1.this, GoogleCardsMediaActivity.class);
+                                intent = new Intent(this,hl_prop_owns.class);
                                 intent.putExtra("data", "searchgo");
                                 startActivity(intent);
                                 overridePendingTransition(R.transition.left, R.transition.right);

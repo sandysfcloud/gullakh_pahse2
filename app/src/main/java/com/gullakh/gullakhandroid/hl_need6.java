@@ -300,11 +300,12 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.next:
-                if (Text1.getText().toString().equals("")) {
+                if (Text1.getText()==null) {
                     RegisterPageActivity.showErroralert(this, "Select name of builder!", "failed");
                 } else {
-                    if (Text2.getSelectedItem().toString().equals("")) {
-                        RegisterPageActivity.showErroralert(this, "Select name of the project!", "failed");
+                    //if (Text2.getSelectedItem().toString().equals("")) {
+                    if (Text2.getSelectedItem()==null) {
+                        RegisterPageActivity.showErroralert(this, "Select proper name of builder!", "failed");
                     } else {
                         if (Text3.getText().toString().equals("")) {
                             RegisterPageActivity.showErroralert(this, "Select cost of flat as per Flat buyer agreement!", "failed");

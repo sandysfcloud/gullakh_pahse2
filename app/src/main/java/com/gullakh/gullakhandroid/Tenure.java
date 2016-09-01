@@ -106,6 +106,10 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
 
         if (gtenure != null) {
+            if(Integer.parseInt(gtenure)>7)
+            {
+                gtenure="7";
+            }
             String emi = String.valueOf(gtenure);
             tenure.setText(emi);
             tenure.setSelection(tenure.getText().length());
@@ -246,6 +250,8 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.done:
+
+
                 ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
                 finish();
                 break;
@@ -284,7 +290,8 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.next:
                 ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
-               // Log.d("tenure is in Tenure", tenure.getText().toString());
+
+               Log.d("tenure is in Tenure", ((GlobalData) getApplication()).getTenure());
                // Log.d("tenure global",((GlobalData) getApplication()).getTenure());
 
 

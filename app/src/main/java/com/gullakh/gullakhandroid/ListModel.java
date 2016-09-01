@@ -45,7 +45,7 @@ public class ListModel implements Serializable{
     private  String sdate="";
     String agenda_date;
     private String loancaseid="";
-    private String contactid,d0,d1,d2,d3,d4,d5,d6;
+    private String contactid,d0,d1,d2,d3,d4,d5,d6,d7,d8;
     private String completedpercentage;
     private String loan_amount;
     private String setCompletedpercentage;
@@ -393,6 +393,22 @@ public class ListModel implements Serializable{
 
     public String getD6() {
         return d6;
+    }
+
+    public void setD7(String d7) {
+        this.d7 = d7;
+    }
+
+    public String getD7() {
+        return d7;
+    }
+
+    public void setD8(String d8) {
+        this.d8 = d8;
+    }
+
+    public String getD8() {
+        return d8;
     }
 
     public void setCompletedpercentage(String completedpercentage) {

@@ -159,6 +159,8 @@ public class MyApplicatnAdapter extends BaseAdapter {
             }else if(tempValues.getLoan_type().equalsIgnoreCase("Used Car Loan")){
                 holder.image.setImageResource(R.drawable.usedcar);
             }
+            if(tempValues.getstatus()!=null)
+            Log.d("tempValues.getstatus() value is",tempValues.getstatus());
 
         if(tempValues.getstatus().equalsIgnoreCase("Created"))
         {
@@ -180,6 +182,9 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     intent.putExtra("d5",data.get(pos).getD5());
                     intent.putExtra("d6",data.get(pos).getD6());
 
+                    intent.putExtra("d7",data.get(pos).getD7());
+                    intent.putExtra("d8",data.get(pos).getD8());
+
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
@@ -193,15 +198,16 @@ public class MyApplicatnAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v)
                 {
-                    //int pos= (int) v.getTag();
+                    int pos= (int) v.getTag();
                     Intent intent = new Intent(cont, Myapplication.class);
-                    intent.putExtra("data1", tempValues.getLoan_type());//loanParameters.getLoantype()
-                    intent.putExtra("data2", tempValues.getLoan_amount());
-                    intent.putExtra("data3", tempValues.getBank_name());
-                    intent.putExtra("data4",tempValues.getPlemi());
-                    intent.putExtra("data5",tempValues.getPlroi());
-                    intent.putExtra("progress", tempValues.getCompletedpercentage());
-                    intent.putExtra("status", tempValues.getstatus());
+
+                    intent.putExtra("data1",   data.get(pos).getLoan_type());//loanParameters.getLoantype()
+                    intent.putExtra("data2",  data.get(pos).getLoan_amount());
+                    intent.putExtra("data3",  data.get(pos).getBank_name());
+                    intent.putExtra("data4", data.get(pos).getPlemi());
+                    intent.putExtra("data5", data.get(pos).getPlroi());
+                    intent.putExtra("progress", data.get(pos).getCompletedpercentage());
+                    intent.putExtra("status",  data.get(pos).getstatus());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
@@ -209,6 +215,7 @@ public class MyApplicatnAdapter extends BaseAdapter {
         }
         }
         holder.apply.setTag(position);
+        holder.viewbutton.setTag(position);
         return convertView;
     }
 

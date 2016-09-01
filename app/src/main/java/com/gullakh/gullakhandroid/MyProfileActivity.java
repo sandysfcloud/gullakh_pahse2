@@ -495,24 +495,26 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
                 HashMap cityindex = new HashMap<>();
 
-
-                listcity = new String[size];
-                listcity[0]="Select";
-                for (int i = 0; i < size; i++) {
-                    listcity[i] = enums[i].getcity_name().trim();
-                    Log.e("city list frm server", String.valueOf(listcity[i]));
+if(size>0) {
+    listcity = new String[size];
+    listcity[0] = "Select";
+    for (int i = 0; i < size; i++) {
+        listcity[i] = enums[i].getcity_name().trim();
+        Log.e("city list frm server", String.valueOf(listcity[i]));
                     /*if(i == 0)
                     {
                         Log.d("index c 0", "0");
                         liststate[i]="No City";
                     }
                     else*/
-                    cityindex.put(listcity[i], i);
-                    // liste.add(enums[i].getcity_name());
-                }
+        cityindex.put(listcity[i], i);
+        // liste.add(enums[i].getcity_name());
+    }
+
                 Log.e("emplist frm server ", String.valueOf(listcity));
                 MyArrayAdapter ma = new MyArrayAdapter(MyProfileActivity.this, listcity);
                 add3.setAdapter(ma);
+}
 
                 if (city != null)//only after login
                 {

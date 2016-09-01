@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +123,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
 
 
             case R.id.next:
-                if(!spinner.getSelectedItem().toString().equals("select"))
+                if(!spinner.getSelectedItem().toString().equals("Select"))
                 {
                     goToIntent();
                 }
@@ -147,8 +148,10 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
         ((GlobalData) getApplication()).sethneed(spinner.getSelectedItem().toString());
         ((GlobalData) getApplication()).setHomeneedpos(spinner.getSelectedItemPosition());
+
+        Log.d("need loan fo in hl_nedd",((GlobalData) getApplication()).gethneed());
         //goToDatabase("Home Loan");
-        if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
+        /*if(spinner.getSelectedItem().toString().equals("Purchase a plot")){
             intent = new Intent(hl_need.this, hl_need1.class);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
@@ -167,10 +170,20 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         }else if(spinner.getSelectedItem().toString().equals("Balance Transfer of existing home loan")){
             intent = new Intent(hl_need.this, hl_need5.class);
             startActivity(intent);
-        }else if(spinner.getSelectedItem().toString().equals("Purchase of a under construction builder flat")){
+        }else*/ if(spinner.getSelectedItem().toString().equals("Purchase of a under construction builder flat")){
             intent = new Intent(hl_need.this, hl_need6.class);
             startActivity(intent);
-        }else if(spinner.getSelectedItem().toString().equals("Refinance a property already purchased from own sources")){
+        }
+        else
+    {
+        intent = new Intent(this, GoogleCardsMediaActivity.class);
+        intent.putExtra("data", "searchgo");
+        startActivity(intent);
+        overridePendingTransition(R.transition.left, R.transition.right);
+    }
+
+
+        /*else if(spinner.getSelectedItem().toString().equals("Refinance a property already purchased from own sources")){
             intent = new Intent(hl_need.this, hl_need7.class);
             startActivity(intent);
         }else if(spinner.getSelectedItem().toString().equals("Purchase a house/flat which is ready to move-in")){
@@ -187,7 +200,10 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             }
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
-        }
+        }*/
+
+
+
 
     }
     private void goToDatabase(String loanType)

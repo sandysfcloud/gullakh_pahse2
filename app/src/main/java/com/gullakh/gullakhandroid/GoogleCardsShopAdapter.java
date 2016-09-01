@@ -176,12 +176,27 @@ Log.d("setting image", tempValues.getcarimgurl());
 			String emi=String.valueOf(format.format(new BigDecimal(tempValues.getemi_value())));
 			emi = emi.replaceAll("\\.00", "");
 		//	emi = emi.replaceAll("Rs.", "");
+			String profee=null;
 
-			String profee=String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
-			profee = profee.replaceAll("\\.00", "");
+if(isNumeric(tempValues.getprocessing_fee()))
+{
+	profee = String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
+	profee = profee.replaceAll("\\.00", "");
 
-			String propreclo=String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
-			propreclo = propreclo.replaceAll("\\.00", "");
+}
+			else {
+	profee=tempValues.getprocessing_fee();
+    }
+
+			String propreclo;
+			if(isNumeric(tempValues.getpre_closure_fee()))
+			{
+				propreclo = String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
+				propreclo = propreclo.replaceAll("\\.00", "");
+			}
+			else {
+				propreclo=tempValues.getpre_closure_fee();
+			}
 
 			String s=tempValues.getbp().toString();
 			int ibp= new Double(s).intValue();
@@ -239,7 +254,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 			holder.apply.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					int pos= (int) v.getTag();
+					int pos = (int) v.getTag();
 					Intent intent = new Intent(cont, ListView_Click.class);
 					intent.putExtra("bankname", data.get(pos).getbanknam());
 					Log.d("bankname in googlead", data.get(pos).getbanknam());
@@ -254,7 +269,7 @@ Log.d("setting image", tempValues.getcarimgurl());
 					intent.putExtra("fee", data.get(pos).getfee_charges());
 					intent.putExtra("other", data.get(pos).getother_details());
 					intent.putExtra("docum", data.get(pos).getcardocu());
-					Log.d("adapter docum ",data.get(pos).getcardocu());
+					Log.d("adapter docum ", data.get(pos).getcardocu());
 					cont.startActivity(intent);
 					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
 				}
@@ -277,7 +292,18 @@ Log.d("setting image", tempValues.getcarimgurl());
 
 		return convertView;
 	}
-
+		public static boolean isNumeric(String str)
+		{
+			try
+			{
+				double d = Double.parseDouble(str);
+			}
+			catch(NumberFormatException nfe)
+			{
+				return false;
+			}
+			return true;
+		}
 	private static class ViewHolder {
 		public ImageView image;
 		public TextView promo,name,t1,t2,t3,t4;
