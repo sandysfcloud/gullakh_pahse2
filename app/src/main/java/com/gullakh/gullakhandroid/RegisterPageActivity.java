@@ -15,7 +15,6 @@ import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -25,7 +24,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -48,13 +46,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RegisterPageActivity extends AppCompatActivity  implements AsyncResponse
 {
 
-	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+	public static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 	public static final String EXTRA_MESSAGE = "message";
 	public static final String PROPERTY_REG_ID = "registration_id";
-	private static final String PROPERTY_APP_VERSION = "appVersion";
-	private static final String TAG = "GCMRelated";
+	public static final String PROPERTY_APP_VERSION = "appVersion";
+	public static final String TAG = "GCMRelated";
 	static GoogleCloudMessaging gcm;
-	private static TranslateAnimation mAnimation;
+	public static TranslateAnimation mAnimation;
 	AtomicInteger msgId = new AtomicInteger();
 	static String useremail,userpassword ;
 	static String usermobno ;
@@ -72,11 +70,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	static String textdata;
 	static  TextView temp,tcar,tloan,temi,tsal;
 	static int flag=0;
-	private Button register;
-	private EditText firstName,middlename,lastName;
-	private Spinner spinner;
-	private String userid;
-	private String contactid,loantyp;
+	public Button register;
+	public EditText firstName,middlename,lastName,Password;
+	public Spinner spinner;
+	public String userid,tempUid=null;
+	public String contactid,loantyp;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +103,11 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		middlename.setError("This field is optional");
 		firstName.requestFocus();
 		lastName=(EditText)findViewById(R.id.LastName);
-
+		Password=(EditText)findViewById(R.id.password);
 
 		register = (Button) findViewById(R.id.Registerbutton);
 		 baseContext = getBaseContext();
-		 emailadress=(EditText) findViewById(R.id.emailaddress);
+		 emailadress=(EditText) findViewById(R.id.otp);
 		 mobilenumber=(EditText) findViewById(R.id.mobilenumber);
 		// password=(EditText) findViewById(R.id.password);
 		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
@@ -164,6 +163,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								arraydata[4] = firstName.getText().toString();
 								arraydata[5] = middlename.getText().toString();
 								arraydata[6] = lastName.getText().toString();
+								arraydata[7] = Password.getText().toString();
+								if(tempUid!=null)
+								arraydata[8] = tempUid;
 
 								urlchange = "registration";
 								JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
@@ -195,6 +197,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	public void  processFinish(JSONObject str_result){
 
 		try {
+			tempUid= String.valueOf(str_result.get("temp_u_id"));
 			final AlertDialog.Builder builder2 = new AlertDialog.Builder(RegisterPageActivity.this);
 			builder2.setCancelable(false);
 			if(str_result.get("result").equals("true") || (str_result.get("result").equals("false") && urlchangeprev!=null && urlchangeprev=="registration")) {
@@ -203,31 +206,39 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 				}
 				if(urlchange=="registration") {
-					AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
+					final AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
 					builder.setTitle("Enter OTP");
 					builder.setCancelable(false);
 
 // Set up the input
-					final EditText input = new EditText(RegisterPageActivity.this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-					input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-					builder.setView(input);
 
+//					final EditText input = new EditText(RegisterPageActivity.this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+//					input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+
+					View v = getLayoutInflater().inflate(R.layout.otpscreen, null, false);
+					final EditText OTP = (EditText) v.findViewById(R.id.otp);
+					Button myButton =(Button) v.findViewById(R.id.ChangeMobilebutton);
+					myButton.setText("Change Mobile Number");
+
+					builder.setView(v);
 // Set up the buttons
 					builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
-							String[] arraydata = new String[5];
+							String[] arraydata = new String[10];
 							arraydata[0] = "otpcheck";
 							arraydata[1] = useremail;
 							arraydata[2] = usermobno;
 							arraydata[3] = RegisterAppToServer.regid;
-							arraydata[4] = input.getText().toString();
-							inpuotp=input;
+							arraydata[4] = OTP.getText().toString();
+							arraydata[5] = tempUid;
+//							inpuotp=input;
 
 							urlchangeprev = "registration";
-							urlchange = "otpregistration";
+							urlchange = "setpassword";
 							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
 							asyncTask.delegate= RegisterPageActivity.this;
 							asyncTask.execute();
@@ -243,6 +254,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							arraydata[1] = useremail;
 							arraydata[2] = usermobno;
 							arraydata[3] = RegisterAppToServer.regid;
+							arraydata[4] = tempUid;
 							urlchange="registration";
 							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
 							asyncTask.delegate= RegisterPageActivity.this;
@@ -250,7 +262,22 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						}
 					});
 					//Resend CODE here ...!!!!
-					builder.show();
+					final AlertDialog dialog = builder.create();
+
+						dialog.show();
+
+//					builder.show();
+					myButton.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View arg0) {
+
+							dialog.dismiss();
+
+						}
+
+					});
+
 				}
 
 				if(urlchange=="otpregistration"){
@@ -386,7 +413,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
-	private void storedatatoDatabase() {
+	public void storedatatoDatabase() {
 		DataHandler dbobject = new DataHandler(this);
 		dbobject.addTable();
 		ContentValues values = new ContentValues();

@@ -21,15 +21,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
-import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.util.regex.Pattern;
 
 import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
@@ -75,7 +70,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
         Button reg = (Button) findViewById(R.id.newuser);
         baseContext = getBaseContext();
 
-        emailadress=(EditText) findViewById(R.id.emailaddress);
+        emailadress=(EditText) findViewById(R.id.otp);
         password=(EditText) findViewById(R.id.password);
         TextView forgpassword = (TextView)findViewById(R.id.forgetpass);
         forgpassword.setOnClickListener(new View.OnClickListener() {

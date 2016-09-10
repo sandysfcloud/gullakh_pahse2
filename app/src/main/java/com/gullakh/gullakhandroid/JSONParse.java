@@ -62,7 +62,7 @@ public class JSONParse  extends AsyncTask<String, Void, JSONObject> {
         else if(arraydata[0]=="signin_mobile")//kk
             urlnew=urlnew+"/user_login_processmob";
         else if(arraydata[0]=="registration")
-            urlnew=urlnew+"/Send_Notification";
+            urlnew=urlnew+"/temp_user_registration";
         else if(arraydata[0]=="forgetpassword")
             urlnew=urlnew+"/Password_Reset";
             else

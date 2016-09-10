@@ -138,7 +138,7 @@
                     android:layout_marginRight="10dp"
                     android:singleLine="true"
                     android:imeOptions="actionNext"
-                    android:nextFocusDown="@+id/emailaddress"
+                    android:nextFocusDown="@+id/otp"
                     android:paddingLeft="10dp" />
             </LinearLayout>
 
@@ -148,7 +148,7 @@
                 android:inputType="textEmailAddress"
                 android:hint="Email"
                 android:ems="10"
-                android:id="@+id/emailaddress"
+                android:id="@+id/otp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
                 android:typeface="sans"
@@ -165,6 +165,20 @@
                 android:ems="10"
                 android:maxLength="10"
                 android:id="@+id/mobilenumber"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/edittextsimple"
+                android:typeface="sans"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+            <com.gullakh.gullakhandroid.font.RobotoEditText
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:ems="10"
+                android:id="@+id/password"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edittextsimple"
                 android:typeface="sans"

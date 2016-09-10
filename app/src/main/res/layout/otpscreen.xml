@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="OTP has been sent to your mobile number"
+        android:id="@+id/textView54"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="9090909090"
+        android:id="@+id/showMobNo"
+        android:layout_gravity="center_horizontal"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Kindly verify your mobile number."
+        android:id="@+id/textView56"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
+
+    <com.gullakh.gullakhandroid.font.RobotoEditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:inputType="textEmailAddress"
+        android:hint="Verification code"
+        android:ems="10"
+        android:id="@+id/otp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edittextsimple"
+        android:typeface="sans"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Not received OTP/SMS yet? Please click on resend button."
+        android:id="@+id/textView57"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Is Mobile number incorrect?"
+        android:id="@+id/textView55"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" />
+    <com.gullakh.gullakhandroid.font.RobotoButton
+        app:typeface="robotoLight"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Change Mobile Number"
+        android:id="@+id/ChangeMobilebutton"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="22dp"
+        android:singleLine="false"
+        android:gravity="center"
+        android:background="#b8546e7a"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp" />
+</LinearLayout>

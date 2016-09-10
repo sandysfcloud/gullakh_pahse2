@@ -46,8 +46,11 @@ public class JSONParsergcm {
             nameValuePairs.add(new BasicNameValuePair("mobileno", arraydata[2]));
             nameValuePairs.add(new BasicNameValuePair("regid", arraydata[3]));
             Log.d("check mobileno",arraydata[0]+arraydata[1]+arraydata[2]+arraydata[3]);
-            if(arraydata[0]=="otpcheck")
+            if(arraydata[0]=="otpcheck") {
                 nameValuePairs.add(new BasicNameValuePair("userotp", arraydata[4]));
+                if (arraydata[5] != null)
+                    nameValuePairs.add(new BasicNameValuePair("temp_u_id", arraydata[5]));
+            }
             else if(arraydata[0]=="signin"||arraydata[0]=="signin_mobile")
                 nameValuePairs.add(new BasicNameValuePair("userpassword", arraydata[4]));
             else if(arraydata[0]=="password")
@@ -57,6 +60,14 @@ public class JSONParsergcm {
                 nameValuePairs.add(new BasicNameValuePair("firstname",arraydata[4]));
                 nameValuePairs.add(new BasicNameValuePair("middlename",arraydata[5]));
                 nameValuePairs.add(new BasicNameValuePair("lastname",arraydata[6]));
+                nameValuePairs.add(new BasicNameValuePair("password",arraydata[7]));
+                if(arraydata[8]!=null)
+                nameValuePairs.add(new BasicNameValuePair("temp_u_id",arraydata[8]));
+
+            }
+            else if(arraydata[0]=="resendotp"){
+                if(arraydata[4]!=null)
+                    nameValuePairs.add(new BasicNameValuePair("temp_u_id",arraydata[4]));
 
             }
             Log.d("nameValuePairs", String.valueOf(nameValuePairs));

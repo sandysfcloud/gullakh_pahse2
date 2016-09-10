@@ -65,6 +65,8 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     private String phone;
     private String contact_id;
     String   cscore=null;
+    private String[] name;
+
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
 //    public TextView txtName, txtEmail;
@@ -342,12 +344,17 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 Log.d("check info", jsonObject.get("result").toString());
                 if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                     Log.d("clicked 1", "result");
+                    if(jsonObject.get("contact_id").toString().equals("") || jsonObject.get("contact_id").toString()!=null)
                     contact_id=jsonObject.get("contact_id").toString();
-                    user_id=jsonObject.get("user_id").toString();
-                    usermobno=jsonObject.get("phone").toString().replaceAll("\"", "");
-                    if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("")) {
-                        Log.d("clicked 2", "phone");
-                        getMobileNo(jsonObject.get("user_id").toString());
+                    if(jsonObject.get("user_id").toString().equals("") || jsonObject.get("user_id").toString()!=null)
+                        user_id=jsonObject.get("user_id").toString();
+                    if(jsonObject.get("phone").toString().equals("") || jsonObject.get("phone").toString()!=null)
+                        usermobno=jsonObject.get("phone").toString().replaceAll("\"", "");
+
+                    if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("") || (jsonObject.get("temp_u_id")!=null && jsonObject.get("temp_u_id").toString() != ""))
+                    {
+
+                        getMobileNo(jsonObject.get("temp_u_id").toString());
                     } else {
 
                         //kkgoToIntent();
@@ -399,12 +406,12 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 dg.dismiss();
             }
         }, currentact, "wait");
-        String[] name = personName.split(" ");
-        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, RegisterAppToServer.regid, name[0], name[name.length - 1], tag);
+        name = personName.split(" ");
+        requestgetserver.execute("token", "getGoogleAccReg", email, googleuserid, null, RegisterAppToServer.regid, name[0], name[name.length - 1], tag, null);
 
     }
 
-    public void getMobileNo(final String userid) {
+    public void getMobileNo(final String tempuid) {
 
     AlertDialog.Builder builder = new AlertDialog.Builder(currentact);
         builder.setTitle("Enter Your Mobile Number");
@@ -433,7 +440,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (jsonObject.get("result").toString().replaceAll("\"", "").equals("true")) {
                                     dg.dismiss();
-                                    getOTPVerification();
+                                    getOTPVerification(tempuid);
                                 } else {
                                     dg.dismiss();
                                     signOutFromGplus();
@@ -442,13 +449,14 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             }
                         }, currentact, "wait");
                         usermobno = input.getText().toString();
-                        requestgetserver1.execute("token", "udateGoogleMobNo", usermobno, userid.replaceAll("\"", ""));
+                        requestgetserver1.execute("token", "getGoogleAccReg", email, googleuserid, usermobno, RegisterAppToServer.regid, name[0], name[name.length - 1], tag, tempuid.replaceAll("\"", ""));
+
                     }
                 }
         );
         builder.show();
     }
-    private void getOTPVerification() {
+    private void getOTPVerification(final String tempuid) {
         AlertDialog.Builder builder = new AlertDialog.Builder(currentact);
         builder.setTitle("Enter OTP");
         builder.setCancelable(false);
@@ -472,21 +480,21 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                 if (!jsonObject.get("result").toString().equals("true")) {
                                     dg.dismiss();
-
-                                    if(cscore.length()>0)
-                                    {//if credit score is already present
-                                        goToIntent(getActivity());
-                                    }
-                                    else {
+                                    saveDataToDatabase();
+                                    if (cscore != null) {
+                                        if (cscore.length() > 0) {//if credit score is already present
+                                            goToIntent(getActivity());
+                                        }
+                                    } else {
                                         Intent intent2 = new Intent(getActivity(), CibilScore.class);
                                         intent2.putExtra("apply", "googlep");
                                         startActivity(intent2);
                                     }
-                                   // goToIntent();
+                                    // goToIntent();
                                 }
                             }
                         }, currentact, "wait");
-                        requestgetserver2.execute("token", "getGoogleOTPverification", useremail, usermobno, RegisterAppToServer.regid, input.getText().toString());
+                        requestgetserver2.execute("token", "getGoogleOTPverification", tempuid, input.getText().toString());
                     }
                 }
         );

@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.JsonParser;
@@ -670,20 +669,24 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("useremail", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("sourceid", args[3]));
-                            nameValuePairs.add(new BasicNameValuePair("regid", args[4]));
-                            nameValuePairs.add(new BasicNameValuePair("firstname",args[5]));
+                            nameValuePairs.add(new BasicNameValuePair("regid", args[5]));
+                            nameValuePairs.add(new BasicNameValuePair("firstname",args[6]));
                             nameValuePairs.add(new BasicNameValuePair("middlename"," "));
-                            nameValuePairs.add(new BasicNameValuePair("lastname",args[6]));
-                            nameValuePairs.add(new BasicNameValuePair("source",args[7]));
+                            nameValuePairs.add(new BasicNameValuePair("lastname",args[7]));
+                            nameValuePairs.add(new BasicNameValuePair("source",args[8]));
+                            if(args[9]!=null)
+                            nameValuePairs.add(new BasicNameValuePair("temp_u_id",args[9]));
+                            if(args[4]!=null)
+                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[4]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
                             Log.e("getGoogleAccReg nameValuePairs ", String.valueOf(nameValuePairs));
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"Send_Notification").toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"temp_user_registration").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("udateGoogleMobNo")){
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                            nameValuePairs.add(new BasicNameValuePair("phone", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("user_id", args[3]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
@@ -692,10 +695,8 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
                         }else if(args[1].equals("getGoogleOTPverification")){
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                            nameValuePairs.add(new BasicNameValuePair("useremail", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[3]));
-                            nameValuePairs.add(new BasicNameValuePair("regid", args[4]));
-                            nameValuePairs.add(new BasicNameValuePair("userotp", args[5]));
+                           nameValuePairs.add(new BasicNameValuePair("temp_u_id", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("userotp", args[3]));
                             client = new DefaultHttpClient();
                             Log.e("Checking logo: token ", args[3]);
                             Log.e("getGoogleAccReg getGoogleOTPverification ", String.valueOf(nameValuePairs));
