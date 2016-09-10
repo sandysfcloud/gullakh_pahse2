@@ -267,12 +267,12 @@ public class SearchAdapter extends BaseAdapter
                     try {
                         globalstore = (ListModel) data.get(pos);
                         JSONObject obj = new JSONObject(globalstore.getserchcartyp());
-                        Log.d("JSON OBj Kavya", String.valueOf(obj));
+                        Log.d("JSON OBj Kavya search adapter", String.valueOf(obj));
                         ((GlobalData) cont.getApplicationContext()).setLoanType(obj.getString("loantype"));
                         ((GlobalData) cont.getApplicationContext()).setcarres(obj.getString("currently_living_in"));
                         ((GlobalData) cont.getApplicationContext()).setgender(obj.getString("gender"));
                         ((GlobalData) cont.getApplicationContext()).setTotalsal(obj.getString("net_mon_salary"));
-                        ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("cl_loanamount"));
+                        ((GlobalData) cont.getApplicationContext()).setloanamt(obj.getString("loanamount"));
                         ((GlobalData) cont.getApplicationContext()).setemptype(obj.getString("type_employment"));
                         if(!(obj.getString("type_employment").equals("Salaried"))) {
                             ((GlobalData) cont.getApplicationContext()).setpat(Double.parseDouble(obj.getString("pat_amount")));
@@ -286,8 +286,17 @@ public class SearchAdapter extends BaseAdapter
                             ((GlobalData) cont.getApplicationContext()).setCartypeloan(obj.getString("car_loan_type"));
                         }
                         ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
+
+                            Log.d("age in search is", obj.getString("age"));
+
                         ((GlobalData) cont.getApplicationContext()).setage(Integer.parseInt(obj.getString("age")));
                         ((GlobalData) cont.getApplicationContext()).setTenure(obj.getString("loan_tenure"));
+
+                        if(obj.getString("need_loan_for")!=null)
+                        ((GlobalData) cont.getApplicationContext()).sethneed(obj.getString("need_loan_for"));
+
+                        if(obj.getString("property_city")!=null)
+                        ((GlobalData) cont.getApplicationContext()).setCity(obj.getString("property_city"));
 
 
 

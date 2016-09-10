@@ -544,13 +544,13 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 Log.d("age is variable ", String.valueOf(age));
                 Log.d("dob is variable", Dob.getText().toString());
 
-                if(((GlobalData) getApplication()).getDob()!=null) {
-                    Log.d("dob is fun", ((GlobalData) getApplication()).getDob());
+                if(Dob.getText().toString()!=null) {
+                    Log.d("dob is fun", Dob.getText().toString());
                     Log.d("age is fun", String.valueOf(((GlobalData) getApplication()).getage()));
 
 
                     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                    String newDate = format.format(Date.parse(((GlobalData) getApplication()).getDob()));
+                    String newDate = format.format(Date.parse(Dob.getText().toString()));
 
 
                     String CurrentString =newDate;

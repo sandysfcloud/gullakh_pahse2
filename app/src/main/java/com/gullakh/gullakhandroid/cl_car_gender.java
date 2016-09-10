@@ -294,7 +294,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     if(i == 0)
                     {
                         Log.d("index s 0", "0");
-                        liststate[i]="No State";
+                        liststate[i]="Select";
                     }
                     else
                         liststate[i] = enums[i].getStatename();
@@ -397,8 +397,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         Log.d("city value frm profile", String.valueOf(scity));
 
                         Log.d("city index", String.valueOf(cityindex.get(scity)));
-                        if (!cityindex.isEmpty())
-                            city.setSelection((Integer) cityindex.get(scity));
+                        if(cityindex.get(scity)!=null) {
+                            if (!cityindex.isEmpty())
+                                city.setSelection((Integer) cityindex.get(scity));
+                        }
                     }
                 }
 
@@ -508,9 +510,15 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         05,
                         00
                 );
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.add(Calendar.DATE, 1);
+
+
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
+                dpd.setMinDate(now);
                 //dpd.setTitle("DatePicker Title");
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
@@ -520,11 +528,67 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
     private void submitfunction() {
 
+        String tim=spinner.getSelectedItem().toString();
+        String[] separated = tim.split("-");
+        Log.d("borrw1", separated[0]);
+        Log.d("borrw2", separated[1]);
+
+
+
+
+        /*String seldate=null;
+        DateFormat readFormat=null;
+        if(separated[1].toLowerCase().contains("am")) {
+            readFormat = new SimpleDateFormat("dd-MM-yy hh:mm:ss aa");
+             seldate=datefield.getText().toString()+" "+separated[1].replaceAll("[^0-9]", "")+":00:"+"00"+" "+"am";
+        }
+        if(separated[1].toLowerCase().contains("pm")) {
+            readFormat = new SimpleDateFormat("dd-MM-yy hh:mm:ss pa");
+            seldate=datefield.getText().toString()+" "+separated[1].replaceAll("[^0-9]", "")+":00:"+"00"+" "+"pm";
+        }*/
+
+        Log.d("datefield value", String.valueOf(datefield));
+        DateFormat readFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+        String seldate=datefield.getText().toString()+" "+separated[1].replaceAll("[^0-9]", "")+":00:"+"00"+" "+separated[1].replaceAll("[0-9]", "");
+
+        Log.d("before selected date", seldate);
+        DateFormat writeFormat = new SimpleDateFormat( "dd-MMM-yy HH");
+        Date date = null;
+        try {
+            date = readFormat.parse(seldate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String selects=null;
+        if (date != null) {
+            selects = writeFormat.format(date);
+
+        }
+Log.d("after selected date", selects);
+//***********
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy HH");
+        String currents = sdf.format(new Date());
+
+        Date currentd = null;
+        Date selectd = null;
+        try {
+            currentd = sdf.parse(currents);
+            selectd = sdf.parse(selects);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.d("current date", String.valueOf(currentd));
+        Log.d("selected date", String.valueOf(selectd));
+
         Calendar c = Calendar.getInstance();
         int currmonth = c.get(Calendar.MONTH);
         int curryear = c.get(Calendar.YEAR);
         Log.d("check date", currmonth + " " + curryear);
-        if (yearv < curryear) {
+       // if (yearv < curryear) {
+        if (selectd.compareTo(currentd)<0)
+        {
             RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time!", "failed");
         } else if (yearv == curryear) {
             if (month < currmonth) {

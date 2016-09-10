@@ -427,12 +427,12 @@ Log.d("bankname in listvieclick",bankname);
         intent = new Intent(currentact, hl_need8.class);
         currentact.startActivity(intent);
     }
-}
-else {
-        Log.d("prop not ident selected","1");
+    else if (((GlobalData) currentact.getApplication()).gethneed().equals("Property is not yet identified")) {
         intent = new Intent(currentact, hl_prop_owns.class);
         currentact.startActivity(intent);
+    }
 }
+
 
         }
 
@@ -476,7 +476,10 @@ else {
         setDataToHashMap("dob", ((GlobalData) getApplication()).getDob());
         setDataToHashMap("net_mon_salary", String.valueOf(((GlobalData) getApplication()).getnetsalary()));
         setDataToHashMap("gender",((GlobalData) getApplication()).getgender());
-        setDataToHashMap("age", String.valueOf(((GlobalData) getApplication()).getgender()));
+        setDataToHashMap("age", String.valueOf(((GlobalData) getApplication()).getage()));
+
+
+
 
         if(((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Business") ||
                 ((GlobalData) getApplication()).getemptype().equalsIgnoreCase("Self Employed Professional"))
