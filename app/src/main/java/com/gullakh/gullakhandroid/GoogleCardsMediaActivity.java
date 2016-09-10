@@ -60,8 +60,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -89,7 +91,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public ArrayList<ListModel> CustomListViewValuesArr = new ArrayList<ListModel>();
     public ArrayList<ListModel> CustomListViewValuesArr2 = new ArrayList<ListModel>();
     public int age;
-    TextView min, max, loand, tenur, tten;
+    TextView min, max, tenur, tten;
+    EditText loand;
     public String[] search = {"PERSONAL LOAN", "CAR LOAN"};
 
 
@@ -122,7 +125,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     EditText editloan;
     TextView loan_amt, tenr_amt, title;
     ArrayAdapter<String> adapter;
-    private static final String[] COUNTRIES = new String[]{"Best Rate", "Processing Fee", "Preclosure fee"};
+    //private static final String[] COUNTRIES = new String[]{"Best Rate", "Processing Fee", "Preclosure fee"};
+    private static final String[] COUNTRIES = new String[]{"Best Rate"};
     Map<String, String> Arry_bankimg = null;
     String listidmaster, globaltenure, globalloan_type, globalsal;
     private LoanDetails loandetailsobj1;
@@ -130,7 +134,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     private double maxbp = 0;
     Format format;
     ArrayList<String> high_cibil = new ArrayList<String>();
-
+    DecimalFormat df,dfnd;
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -445,6 +449,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             }
 
         }
+
+        //******
+        //format
+
+
+        df = new DecimalFormat("#,##,###");
+       // df.setDecimalSeparatorAlwaysShown(true);
+
+
     }
 //*************************************************************************************End of Oncreate
 
@@ -1468,7 +1481,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 }
 
 
-                loand = (TextView) dialog.findViewById(R.id.loandata);
+                loand = (EditText) dialog.findViewById(R.id.loandata);
                 tenur = (TextView) dialog.findViewById(R.id.tenr);
 
                 apply = (Button) dialog.findViewById(R.id.applyf);
@@ -1548,9 +1561,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 seekBar1.setRangeValues(1, 100);
                 Log.d("selected loan", String.valueOf(seek_loanamt));
                 seekBar1.setSelectedMaxValue(seek_loanamt);
-                editloan.setText(((GlobalData) getApplication()).getloanamt());
+
+
+
+                //editloan.setText(((GlobalData) getApplication()).getloanamt());
+                editloan.setText(df.format(formatfun(((GlobalData) getApplication()).getloanamt())));
                 editloan.setSelection(editloan.getText().length());
-                loand.setText(((GlobalData) getApplication()).getloanamt());
+                //loand.setText(((GlobalData) getApplication()).getloanamt());
+                loand.setText(df.format(formatfun(((GlobalData) getApplication()).getloanamt())));
 
                 seekBar1.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
@@ -1561,8 +1579,20 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         Log.d("loan-value2", String.valueOf(t1));
                         Double value = (t1 / 10.0);
                         seek_loanamt = t1;
-                        loand.setText(String.valueOf(t1) + "00000");
-                        editloan.setText(String.valueOf(t1) + "00000");
+
+                        /*Number n=null;
+                        try {
+                             n = df.parse(String.valueOf(t1) + "00000");
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        loand.setText(df.format(n));
+                        editloan.setText(df.format(n));*/
+
+                        loand.setText( df.format(formatfun(String.valueOf(t1) + "00000")));
+                        editloan.setText(df.format(formatfun(String.valueOf(t1) + "00000")));
+
                         editloan.setSelection(editloan.getText().length());
                         updateloanamt(seek_loanamt);
 
@@ -1609,11 +1639,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 seek_loanamt = Integer.parseInt(loan) / 100000;
                                 edittextloan = Integer.parseInt(loan);
                                 updateloanamt(seek_loanamt);
-
+                                Log.d("loan edittextloan value", String.valueOf(edittextloan));
                                 // mSeekArc.setProgress(Integer.valueOf(loan) / 10000);
                                 // mSeekArcProgress.setText(strtemp);
                             } catch (Exception e) {
-
+                                Log.d("loan edittextloan Exception", String.valueOf(e));
                             }
                         }
 
@@ -1694,9 +1724,19 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(edittextloan));
 
                         //*kk
-                        String sloan_amt = String.valueOf(format.format(new BigDecimal(edittextloan)));
+                        /*DecimalFormat df,dfnd;
+                        df = new DecimalFormat("#,##,###");
+                        df.setDecimalSeparatorAlwaysShown(false);
+                        Number n=null;
+                        try {
+                            n = df.parse(String.valueOf(edittextloan));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }*/
+
                         //*k
-                        loan_amt.setText(sloan_amt);
+
+                        loan_amt.setText(df.format(formatfun(String.valueOf(edittextloan))));
 
                     }
 
@@ -1707,19 +1747,18 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.d("prevloan!!!!!", String.valueOf(prevloan));
                 Log.d("seek_loanamt!!!!!", String.valueOf(seek_loanamt));
                 if (seek_loanamt == prevloan) {
-                    loan_amt.setText(String.valueOf(seek_loanamt) + "00000");
-                    Log.d("loan seekbar moved!!!!!", "");
+
+
+                   // loan_amt.setText(String.valueOf(seek_loanamt) + "00000");
+                    loan_amt.setText(df.format(formatfun(String.valueOf(seek_loanamt) + "00000")));
+                    Log.d("loan seekbar moved!!!!!", String.valueOf(edittextloan));
                     ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
                     if (edittextloan != 0) {
                         Log.d("loan amount edittext is changed !!", String.valueOf(edittextloan));
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(edittextloan));
 
 
-                        //*kk
-                        String sloan_amt = String.valueOf(format.format(new BigDecimal(edittextloan)));
-                        //*k
-
-                        loan_amt.setText(sloan_amt);
+                        loan_amt.setText(df.format(formatfun(String.valueOf(seek_loanamt) + "00000")));
                     }
                     loan_amtcalcutn("loan");
                     //calculate();
@@ -1783,6 +1822,20 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
         }
+    }
+
+    public Number formatfun(String data)
+    {
+
+
+
+        Number n=null;
+        try {
+            n = df.parse(String.valueOf(data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return n;
     }
 
     protected void showSelectColoursDialog() {

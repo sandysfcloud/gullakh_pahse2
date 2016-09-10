@@ -60,7 +60,7 @@ public class SeekArc extends View {
 	/**
 	 * The Maximum value that this SeekArc can be set to
 	 */
-	private int mMax = 100;
+	public int mMax = 100;
 	
 	/**
 	 * The Current value that the SeekArc is set to

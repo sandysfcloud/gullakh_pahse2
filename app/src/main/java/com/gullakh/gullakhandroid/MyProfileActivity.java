@@ -54,27 +54,28 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
     private Button signout;
     private ImageButton edit;
     private Button Done;
-    private EditText ph,email,add1,add2,add5,name;
-    Spinner add3,add4;
-    private JSONServerGet requestgetserver1,requestgetserver2,requestgetserver3,requestgetserver4;
+    private EditText ph, email, add1, add2, add5, name;
+    Spinner add3, add4;
+    private JSONServerGet requestgetserver1, requestgetserver2, requestgetserver3, requestgetserver4;
     private String userid;
     private String contactid;
-    private String sessionid,spstate;
-    private String firstname,lastname,city,state;
+    private String sessionid, spstate;
+    private String firstname, lastname, city, state;
     private GoogleApiClient mGoogleApiClient;
     private ImageView ProfilePic;
     Bitmap bmp;
-    RoundImage roundedImage,roundedImage1;
+    RoundImage roundedImage, roundedImage1;
     public static boolean myprofileFlag;
     JSONServerGet requestgetserver;
     String[] listcity, liststate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
         Log.d("its mpro", "file");
-        myprofileFlag=true;
-        signinPrepage.signinprepage=false;
+        myprofileFlag = true;
+        signinPrepage.signinprepage = false;
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -118,16 +119,15 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 }*/
 
 
-
-                userid=cr.getString(1);
-                contactid=cr.getString(2);
+                userid = cr.getString(1);
+                contactid = cr.getString(2);
                 email.setText(cr.getString(3));
                 ph.setText(cr.getString(4));
-                if(cr.getString(6)!=null){
-                   getProfilePic(cr.getString(6));
+                if (cr.getString(6) != null) {
+                    getProfilePic(cr.getString(6));
                 }
                 getContactDetails();
-                Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5)+ " " + cr.getString(6));
+                Log.d("checkmyprofile", cr.getString(1) + " " + cr.getString(2) + " " + cr.getString(3) + " " + cr.getString(4) + " " + cr.getString(5) + " " + cr.getString(6));
             } else {
                 Intent intentsignin = new Intent(this, signinPrepage.class);
                 startActivity(intentsignin);
@@ -138,8 +138,8 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
 
         add1 = (EditText) findViewById(R.id.editText1);
-        add2= (EditText) findViewById(R.id.editText2);
-       // add3 = (EditText) findViewById(R.id.editText3);
+        add2 = (EditText) findViewById(R.id.editText2);
+        // add3 = (EditText) findViewById(R.id.editText3);
         //*cadd4 = (EditText) findViewById(R.id.editText4);
         add3 = (Spinner) findViewById(R.id.city);
         add3.setPrompt("Select City");
@@ -201,27 +201,26 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 add3.setBackgroundResource(R.color.white_transparent);
                 add4.setBackgroundResource(R.color.white_transparent);
                 add5.setBackgroundResource(R.color.white_transparent);
-               // ph.setEnabled(false);
+                // ph.setEnabled(false);
                 name.setEnabled(false);
                 add1.setEnabled(false);
                 add2.setEnabled(false);
                 add3.setEnabled(false);
                 add4.setEnabled(false);
                 add5.setEnabled(false);
-                String[] temp=name.getText().toString().split(" ");
-              //kk  firstname=temp[0];
+                String[] temp = name.getText().toString().split(" ");
+                //kk  firstname=temp[0];
                 //lastname=temp[temp.length-1];
 
 
-                String nam= name.getText().toString();
+                String nam = name.getText().toString();
 
 
-                if(nam.split("\\w+").length>1){
+                if (nam.split("\\w+").length > 1) {
 
-                    lastname = nam.substring(nam.lastIndexOf(" ")+1);
+                    lastname = nam.substring(nam.lastIndexOf(" ") + 1);
                     firstname = nam.substring(0, nam.lastIndexOf(' '));
-                }
-                else{
+                } else {
                     firstname = nam;
                 }
 
@@ -239,16 +238,18 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                     Log.d("last name is null", lastname);
                 }*/
 
-                Log.d("firstname is",firstname);
-                Log.d("lastname is",lastname);
+                Log.d("firstname is", firstname);
+                Log.d("lastname is", lastname);
 
 
+                if (city != null)
+                    Log.d("city is", city);
+
+                if (state != null)
+                    Log.d("state is", state);
 
 
-
-
-
-               // goToServer(firstname,lastname,add1.getText().toString(), add2.getText().toString(), add3.getText().toString(), add4.getText().toString(), add5.getText().toString());
+                // goToServer(firstname,lastname,add1.getText().toString(), add2.getText().toString(), add3.getText().toString(), add4.getText().toString(), add5.getText().toString());
 
                 goToServer(firstname, lastname, add1.getText().toString(), add2.getText().toString(), city, state, add5.getText().toString());
             }
@@ -275,11 +276,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 //                mGoogleApiClient = ((GlobalData)getApplication()).getGoogleObject();
 
 
-                                signinPrepage obj=new signinPrepage();
+                                signinPrepage obj = new signinPrepage();
                                 obj.logoutfb(MyProfileActivity.this);
                                 //   mGoogleApiClient = GooglePlusLogin.mGoogleApiClient;
                                 // mGoogleApiClient.disconnect();
-                                GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                                GooglePlusLogin fragmentList = (GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
                                 fragmentList.signOutFromGplus();
                                 Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
                                 startActivity(intent);
@@ -301,20 +302,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 alert.show();
 
 
-
             }
         });
 
 
-
-
-
         //
-
-
-
-
-
 
 
         //*c//
@@ -344,7 +336,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    city=null;
+                    city = null;
                 }
                 return false;
             }
@@ -374,8 +366,8 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == android.view.KeyEvent.KEYCODE_BACK ) {
-            Intent intent  = new Intent(MyProfileActivity.this, MainActivity.class);
+        if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
@@ -412,13 +404,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 liststate = new String[size];
 
                 for (int i = 0; i < size; i++) {
-                  if(i == 0)
-                    {
+                    if (i == 0) {
                         Log.d("index s 0", "0");
-                     liststate[i]="No State";
-                    }
-                    else
-                    liststate[i] = enums[i].getStatename();
+                        liststate[i] = "No State";
+                    } else
+                        liststate[i] = enums[i].getStatename();
 
                     cityindex.put(liststate[i], i);
                     // liste.add(enums[i].getcity_name());
@@ -431,17 +421,16 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                     if (state.length() > 0) {
                         Log.d("state index", String.valueOf(cityindex));
 
-                        state=Character.toUpperCase(state.charAt(0)) + state.substring(1);
+                        state = Character.toUpperCase(state.charAt(0)) + state.substring(1);
                         Log.d("state value", String.valueOf(state));
                         //state = state.replace(" ", "");
 
-                        if(cityindex.get(state)!=null) {
+                        if (cityindex.get(state) != null) {
                             Log.d("state index", String.valueOf(cityindex.get(state)));
                             add4.setSelection((Integer) cityindex.get(state));
                         }
                     }
                 }
-
 
 
                 // if(((GlobalData) getApplication()).getcitypos()!=-1)
@@ -465,8 +454,6 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
         requestgetserver.execute("sessn", "statenamcibil", sessionid);
     }
-
-
 
 
     public void getcitynam(String Statenam) {
@@ -495,31 +482,31 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
                 HashMap cityindex = new HashMap<>();
 
-if(size>0) {
-    listcity = new String[size];
-    listcity[0] = "Select";
-    for (int i = 0; i < size; i++) {
-        listcity[i] = enums[i].getcity_name().trim();
-        Log.e("city list frm server", String.valueOf(listcity[i]));
+                if (size > 0) {
+                    listcity = new String[size];
+                    listcity[0] = "Select";
+                    for (int i = 0; i < size; i++) {
+                        listcity[i] = enums[i].getcity_name().trim();
+                        Log.e("city list frm server", String.valueOf(listcity[i]));
                     /*if(i == 0)
                     {
                         Log.d("index c 0", "0");
                         liststate[i]="No City";
                     }
                     else*/
-        cityindex.put(listcity[i], i);
-        // liste.add(enums[i].getcity_name());
-    }
+                        cityindex.put(listcity[i], i);
+                        // liste.add(enums[i].getcity_name());
+                    }
 
-                Log.e("emplist frm server ", String.valueOf(listcity));
-                MyArrayAdapter ma = new MyArrayAdapter(MyProfileActivity.this, listcity);
-                add3.setAdapter(ma);
-}
+                    Log.e("emplist frm server ", String.valueOf(listcity));
+                    MyArrayAdapter ma = new MyArrayAdapter(MyProfileActivity.this, listcity);
+                    add3.setAdapter(ma);
+                }
 
                 if (city != null)//only after login
                 {
                     if (city.length() > 0) {
-                        city=city.trim();
+                        city = city.trim();
                         Log.d("city index", String.valueOf(cityindex));
                         Log.d("city value frm profile", String.valueOf(city));
 
@@ -529,15 +516,12 @@ if(size>0) {
                     }
                 }
 
-               // city = null;//required only after login
+                // city = null;//required only after login
                 if (((GlobalData) getApplication()).getcitypos() != -1)
                     add3.setSelection(((GlobalData) getApplication()).getcitypos());
 
               /*  final ShowSuggtn fAdapter = new ShowSuggtn(CibilScore.this, android.R.layout.simple_dropdown_item_1line, liste);
                 city.setAdapter(fAdapter);*/
-
-
-
 
 
             }
@@ -551,7 +535,6 @@ if(size>0) {
 
         requestgetserver.execute("token", "relatedcity", sessionid, Statenam);
     }
-
 
 
     private class MyArrayAdapter extends BaseAdapter {
@@ -627,8 +610,8 @@ if(size>0) {
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 Dialog dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -636,12 +619,12 @@ if(size>0) {
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 //Log.d("Application values jsonobj", String.valueOf(jsonObject));
-                gotoUpdateCredential(add1,add2,add3,add4,add5);
+                gotoUpdateCredential(add1, add2, add3, add4, add5);
                 dgthis.dismiss();
 
             }
         }, MyProfileActivity.this, "wait");
-        requestgetserver1.execute("token", "contactaddress",sessionid,contactid,add1,add2,add3,add4,add5,"","",firstname,lastname);
+        requestgetserver1.execute("token", "contactaddress", sessionid, contactid, add1, add2, add3, add4, add5, "", "", firstname, lastname);
 
     }
 
@@ -671,42 +654,42 @@ if(size>0) {
         }
     }
 
-    public void getContactDetails(){
-    requestgetserver2 = new JSONServerGet(new AsyncResponse() {
-        @Override
-        public void processFinish(JSONObject output) {
-        }
-        public void processFinishString(String str_result, Dialog dg)
-        {
-            Dialog dgthis = dg;
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.setDateFormat("M/d/yy hh:mm a");
-            Gson gson = gsonBuilder.create();
-            JsonParser parser = new JsonParser();
-            JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-            ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
-//            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
-            if (details.length>0) {
-                firstname=details[0].getFirstname();
-                lastname=details[0].getLastname();
-                name.setText(details[0].getFirstname()+" "+details[0].getLastname());
-                add1.setText(details[0].getMailingstreet());
-                add2.setText(details[0].getOtherstreet());
-                city=details[0].getMailingcity();
-                state=details[0].getMailingstate();
-              //*c  add3.setText(details[0].getMailingcity());
-               // add4.setText(details[0].getMailingstate());
-                Log.d("state is",state);
-                Log.d("city is", city);
-                Log.d("name frm contact is", details[0].getFirstname()+" "+details[0].getLastname());
-
-                getstatenam();
-                add5.setText(details[0].getMailingzip());
+    public void getContactDetails() {
+        requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
             }
-            dgthis.dismiss();
-        }
+
+            public void processFinishString(String str_result, Dialog dg) {
+                Dialog dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                ContactDetails[] details = gson.fromJson(jsonObject.get("result"), ContactDetails[].class);
+//            Log.d("values", String.valueOf(jsonObject) + " " + details[0].getMailingcity());
+                if (details.length > 0) {
+                    firstname = details[0].getFirstname();
+                    lastname = details[0].getLastname();
+                    name.setText(details[0].getFirstname() + " " + details[0].getLastname());
+                    add1.setText(details[0].getMailingstreet());
+                    add2.setText(details[0].getOtherstreet());
+                    city = details[0].getMailingcity();
+                    state = details[0].getMailingstate();
+                    //*c  add3.setText(details[0].getMailingcity());
+                    // add4.setText(details[0].getMailingstate());
+                    Log.d("state is", state);
+                    Log.d("city is", city);
+                    Log.d("name frm contact is", details[0].getFirstname() + " " + details[0].getLastname());
+
+                    getstatenam();
+                    add5.setText(details[0].getMailingzip());
+                }
+                dgthis.dismiss();
+            }
         }, MyProfileActivity.this, "wait");
-        requestgetserver2.execute("token","getcontact",sessionid,email.getText().toString());
+        requestgetserver2.execute("token", "getcontact", sessionid, email.getText().toString());
     }
 
     @Override
@@ -752,24 +735,23 @@ if(size>0) {
             setProfilePic(imageFromSdcard);
 
 
-
         }
     }
 
-    public void setProfilePic(String imageFromSdcard){
+    public void setProfilePic(String imageFromSdcard) {
         requestgetserver3 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 Dialog dgthis = dg;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Log.d("check1",jsonObject.get("result").toString());
+                Log.d("check1", jsonObject.get("result").toString());
                 storetoDatabase(jsonObject.get("profile_image").toString().replaceAll("\"", ""));
                 dgthis.dismiss();
 
@@ -789,10 +771,10 @@ if(size>0) {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    URL in = new URL(picurl.replaceAll("\"",""));
+                    URL in = new URL(picurl.replaceAll("\"", ""));
                     bmp = BitmapFactory.decodeStream(in.openConnection().getInputStream());
                 } catch (Exception e) {
-                    Log.d("error",e.toString());
+                    Log.d("error", e.toString());
                 }
                 return null;
             }
@@ -800,31 +782,32 @@ if(size>0) {
             @Override
             protected void onPostExecute(Void result) {
                 if (bmp != null)
-                roundedImage = new RoundImage(bmp);
+                    roundedImage = new RoundImage(bmp);
                 ProfilePic.setImageDrawable(roundedImage);
 //                    ProfilePic.setImageBitmap(bmp);
             }
 
         }.execute();
     }
+
     public void storetoDatabase(String url) {
 
-        DataHandler dbobject1=new DataHandler(this);
+        DataHandler dbobject1 = new DataHandler(this);
         ContentValues values = new ContentValues();
-        if(url!=null) {
-            getProfilePic(url.replaceAll("\"",""));
+        if (url != null) {
+            getProfilePic(url.replaceAll("\"", ""));
             values.put("profile", url.replaceAll(" \"", ""));
         }
         values.put("street", add1.getText().toString().replaceAll(" \"", ""));
-       // values.put("city", add3.getText().toString().replaceAll(" \"", ""));
+        // values.put("city", add3.getText().toString().replaceAll(" \"", ""));
         //values.put("state",add4.getText().toString().replaceAll(" \"", ""));
         values.put("city", city.replaceAll(" \"", ""));
-        values.put("state",state.replaceAll(" \"", ""));
-        values.put("zip",add5.getText().toString().replaceAll(" \"",""));
-        values.put("address",add1.getText().toString().replaceAll(" \"", "")+" "+add2.getText().toString().replaceAll(" \"", ""));
+        values.put("state", state.replaceAll(" \"", ""));
+        values.put("zip", add5.getText().toString().replaceAll(" \"", ""));
+        values.put("address", add1.getText().toString().replaceAll(" \"", "") + " " + add2.getText().toString().replaceAll(" \"", ""));
 
         dbobject1.updateDatatouserlogin("userlogin", values, userid);
-        Log.d("userlogin is updated",add1.getText().toString()+" "+city+" "+state+" "+add5.getText().toString());
+        Log.d("userlogin is updated", add1.getText().toString() + " " + city + " " + state + " " + add5.getText().toString());
     }
 
     private void gotoUpdateCredential(String add1, String add2, String add3, String add4, String add5) {
@@ -833,13 +816,13 @@ if(size>0) {
             @Override
             public void processFinish(JSONObject output) {
             }
-            public void processFinishString(String str_result, Dialog dg)
-            {
+
+            public void processFinishString(String str_result, Dialog dg) {
                 storetoDatabase(null);
 
             }
         }, MyProfileActivity.this, "wait6");
-        requestgetserver4.execute("token", "updateContactDetailsNew","","",add1,add2,add3,add4,add5,userid,firstname,lastname);
+        requestgetserver4.execute("token", "updateContactDetailsNew", "", "", add1, add2, add3, add4, add5, userid, firstname, lastname);
 
     }
 

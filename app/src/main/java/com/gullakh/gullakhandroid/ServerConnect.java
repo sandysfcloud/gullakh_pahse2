@@ -597,7 +597,8 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
             @Override
             protected void onPostExecute(String json) {
                 dialogalert.dismiss();
-                Log.e("Sandeep JSON!!!!", json.toString());
+                //if(json!=null)
+                Log.d("Sandeep JSON!!!!", json.toString());
                 delegate.processFinishString(json, dialogalert);
                 try {
 

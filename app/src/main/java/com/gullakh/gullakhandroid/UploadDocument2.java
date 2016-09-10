@@ -224,10 +224,20 @@ int flag=0;
 
 
             } else {
+                    //from submit page
                 caseid = cl_car_gender.borrowercaseid;
+
+                    String CurrentString =caseid;
+                    String[] separated = CurrentString.split("x");
+                    Log.d("borrw1", separated[0]);
+                    Log.d("borrw2", separated[1]);
+                    caseid= separated[1];
+
                 contactid = cl_car_gender.borrowercontactid;
-                // Log.d("gender page caseid",caseid);
-                // Log.d("gender page contactid",contactid);
+                    if(caseid!=null)
+                Log.d("gender page caseid",caseid);
+                    if(contactid!=null)
+                Log.d("gender page contactid",contactid);
             }
         }
     }

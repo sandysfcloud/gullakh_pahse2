@@ -286,6 +286,7 @@ public class SearchAdapter extends BaseAdapter
                             ((GlobalData) cont.getApplicationContext()).setCartypeloan(obj.getString("car_loan_type"));
                         }
                         ((GlobalData) cont.getApplicationContext()).setDob(obj.getString("dob"));
+                        ((GlobalData) cont.getApplicationContext()).setage(Integer.parseInt(obj.getString("age")));
                         ((GlobalData) cont.getApplicationContext()).setTenure(obj.getString("loan_tenure"));
 
 

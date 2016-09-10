@@ -107,26 +107,33 @@
             android:label="@string/title_activity_questionier2" />
         <activity
             android:name=".Loan_amt_questn"
-            android:label="@string/title_activity_cartypes__questn" />
+            android:label="@string/title_activity_cartypes__questn"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Emp_type_Qustn"
-            android:label="" />
+            android:label=""
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Salaryed_NetSalary"
-            android:label="@string/title_activity_salaryed__net_salary" />
+            android:label="@string/title_activity_salaryed__net_salary"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".EMI_questn"
-            android:label="@string/title_activity_emi_questn" />
+            android:label="@string/title_activity_emi_questn"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DateOfBirth_questn"
-            android:label="@string/title_activity_date_of_birth_questn" />
+            android:label="@string/title_activity_date_of_birth_questn"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Filter"
-            android:label="@string/title_activity_filter" />
+            android:label="@string/title_activity_filter"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".signin"
             android:exported="true"
-            android:label="@string/title_activity_signin" >
+            android:label="@string/title_activity_signin"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -138,51 +145,66 @@
         </activity>
         <activity
             android:name=".cl_car_gender"
-            android:label="Gender" />
+            android:label="Gender"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_car_make"
             android:label="Select Cars"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_car_residence"
             android:label=""
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_salary_mode2"
             android:label="Salaried Bank"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_car_residence_type"
             android:label="Select Residence"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_car_salaried"
-            android:label="Salaried" />
+            android:label="Salaried"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_car_selfempbusiness"
-            android:label="Self Employed-Business" />
+            android:label="Self Employed-Business"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_car_selfempbusinesprofs"
-            android:label="Self Employed Professional" />
+            android:label="Self Employed Professional"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Car_Loan_PAT"
-            android:label="@string/title_activity_car__loan__pat" />
+            android:label="@string/title_activity_car__loan__pat"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CarLoan_Depreciation"
-            android:label="@string/title_activity_car_loan__depreciation" />
+            android:label="@string/title_activity_car_loan__depreciation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".cl_salary_mode1"
-            android:label="Salary Deposited to" />
+            android:label="Salary Deposited to"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SearchAdapter"
-            android:label="@string/title_activity_search_page" />
-        <activity android:name=".cl_car_yearofmft" />
-        <activity android:name=".signinPrepage" />
-        <activity android:name=".UploadDocument1" />
+            android:label="@string/title_activity_search_page"
+            android:screenOrientation="portrait" />
+        <activity android:name=".cl_car_yearofmft"
+            android:screenOrientation="portrait" />
+        <activity android:name=".signinPrepage"
+            android:screenOrientation="portrait" />
+        <activity android:name=".UploadDocument1"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UploadDocument2"
             android:label="Upload Documents"
-
+            android:screenOrientation="portrait"
             >
 
         <intent-filter>
@@ -196,24 +218,42 @@
     </activity>
         <activity
             android:name=".Myapplication"
-            android:label="@string/title_activity_myapplication" />
-        <activity android:name=".hl_city" />
-        <activity android:name=".hl_need" />
-        <activity android:name=".hl_salaried2" />
-        <activity android:name=".hl_coappldetails" />
-        <activity android:name=".hl_need1" />
-        <activity android:name=".hl_need2" />
-        <activity android:name=".hl_need3" />
-        <activity android:name=".hl_need4" />
-        <activity android:name=".hl_need5" />
-        <activity android:name=".hl_need6" />
-        <activity android:name=".hl_need8" />
-        <activity android:name=".hl_need7" />
-        <activity android:name=".hl_empType" />
-        <activity android:name=".hl_coappldetailsSal" />
-        <activity android:name=".hl_coappldetailsbuss" />
-        <activity android:name=".hl_coappldetailsProff" />
-        <activity android:name=".pl_need" />
+            android:label="@string/title_activity_myapplication"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_city"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_salaried2"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_coappldetails"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need1"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need2"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need3"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need4"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need5"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need6"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need8"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_need7"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_empType"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_coappldetailsSal"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_coappldetailsbuss"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_coappldetailsProff"
+            android:screenOrientation="portrait" />
+        <activity android:name=".pl_need"
+            android:screenOrientation="portrait" />
 
         <!--
         <meta-data
@@ -225,27 +265,39 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         -->
-        <activity android:name=".lp_ownsh" />
+        <activity android:name=".lp_ownsh"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".coappldetail"
-            android:label="@string/title_activity_coappldetail" />
+            android:label="@string/title_activity_coappldetail"
+            android:screenOrientation="portrait" />
         <!-- <activity android:name=".lp_ownsh" /> -->
-        <activity android:name=".lp_bal_tranf" />
-        <activity android:name=".lp_bal_tranf_yes" />
+        <activity android:name=".lp_bal_tranf"
+            android:screenOrientation="portrait" />
+        <activity android:name=".lp_bal_tranf_yes"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CarCompare"
-            android:label="@string/title_activity_car_compare" />
-        <activity android:name=".hl_coappl_EMI" />
-        <activity android:name=".ForgetPassword" />
-        <activity android:name=".Tenure" />
-        <activity android:name=".hl_prop_owns" />
+            android:label="@string/title_activity_car_compare"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_coappl_EMI"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ForgetPassword"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Tenure"
+            android:screenOrientation="portrait" />
+        <activity android:name=".hl_prop_owns"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TenureNew"
-            android:label="@string/title_activity_tenure_new" />
-        <activity android:name=".GooglePlusLogin" />
+            android:label="@string/title_activity_tenure_new"
+            android:screenOrientation="portrait" />
+        <activity android:name=".GooglePlusLogin"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CibilScore"
-            android:label="@string/title_activity_cibil_score" >
+            android:label="@string/title_activity_cibil_score"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

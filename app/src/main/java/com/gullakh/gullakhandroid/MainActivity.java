@@ -783,7 +783,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 catch (Exception e) {
                     Log.d("error",e.toString());
-                    throw new RuntimeException(e);
+                  //  throw new RuntimeException(e);
                 }
                 return null;
             }

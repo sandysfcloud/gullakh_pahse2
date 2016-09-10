@@ -15,6 +15,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -271,21 +273,46 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					inputpassword2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 					//builder2.setView(inputpassword2);
 
+
+				/*	(inputpassword2).setOnEditorActionListener(
+							new EditText.OnEditorActionListener() {
+								@Override
+								public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+									if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+											actionId == EditorInfo.IME_ACTION_DONE ||
+											event.getAction() == KeyEvent.ACTION_DOWN &&
+													event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+										if (!event.isShiftPressed()) {
+											// the user is done typing.
+											if(inputpassword.getText().toString().length()>=8) {
+											}
+											return true; // consume.
+										}
+									}
+									return false; // pass on to other listeners.
+								}
+							});*/
+
+
+
 					// Set up the buttons
 					builder2.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
-							String[] arraydata = new String[5];
-							arraydata[0]="password";
-							arraydata[1]=useremail;
-							arraydata[2]=usermobno;
-							arraydata[3]=RegisterAppToServer.regid;
-							arraydata[4]=inputpassword.getText().toString();
-							urlchange = "setpassword";
-							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
-							asyncTask.delegate= RegisterPageActivity.this;
-							asyncTask.execute();
+
+
+								String[] arraydata = new String[5];
+								arraydata[0] = "password";
+								arraydata[1] = useremail;
+								arraydata[2] = usermobno;
+								arraydata[3] = RegisterAppToServer.regid;
+								arraydata[4] = inputpassword.getText().toString();
+								urlchange = "setpassword";
+								JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
+								asyncTask.delegate = RegisterPageActivity.this;
+								asyncTask.execute();
+
 						}
 					});
 					builder2.setNegativeButton("", new DialogInterface.OnClickListener() {

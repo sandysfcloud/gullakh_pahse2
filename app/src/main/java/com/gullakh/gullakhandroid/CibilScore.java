@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -199,7 +200,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                     Log.d("reportgen", details[0].reportgen());
                     Log.d("getMailingstate", details[0].getMailingcity());
                     Log.d("getMailingzip", details[0].getMailingzip());
-
+                    Log.d("getMailingstate", details[0].getMailingstate());
 
                     nam = firstname + " " + lastname;
                     cscore = details[0].getCibilScore();
@@ -510,8 +511,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this, liststate);
                 e_state.setAdapter(ma);
 
+
                 if (s_state != null) {
-                    if (s_state.length() > 0) {
+                    boolean digitsOnly = TextUtils.isDigitsOnly(s_state);
+                    if (s_state.length() > 0 && !(digitsOnly)) {
                         Log.d("state index", String.valueOf(cityindex));
                         Log.d("state value", String.valueOf(s_state));
                         s_state = s_state.replace(" ", "");
@@ -581,15 +584,19 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 MyArrayAdapter ma = new MyArrayAdapter(CibilScore.this, listcity);
                 city.setAdapter(ma);
 
-                if (s_city != null)//only after login
+                if (s_city != null&& !s_city.isEmpty())//only after login
                 {
                     if (s_city.length() > 0) {
-                        Log.d("city index", String.valueOf(cityindex));
-                        Log.d("city value", String.valueOf(s_city));
+                        if (!s_city.equals("0")) {
+                            Log.d("city index", String.valueOf(cityindex));
+                            Log.d("city value", String.valueOf(s_city));
 
-                        Log.d("city index", String.valueOf(cityindex.get(s_city)));
-                        if (!cityindex.isEmpty())
-                            city.setSelection((Integer) cityindex.get(s_city));
+                            Log.d("city index", String.valueOf(cityindex.get(s_city)));
+
+                            if (cityindex != null && !cityindex.isEmpty()&&cityindex.get(s_city)!=null) {
+                                    city.setSelection((Integer) cityindex.get(s_city));
+                            }
+                        }
                     }
                 }
 

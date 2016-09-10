@@ -24,10 +24,12 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.regex.Pattern;
 
 import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
@@ -88,44 +90,44 @@ public class signin extends AppCompatActivity implements AsyncResponse {
             public void onClick(View view) {
 
 
+               // if (password.getText().toString().length() >= 8) {
+                    //if (isAlphaNumeric(password.getText().toString())) {
+                        Log.d("string is alpanu","1");
 
 
-     if(password.getText().toString().length()<8)
-      {
+                        useremail = emailadress.getText().toString();
+                        userpassword = md5(password.getText().toString());
+
+                        //kk
+                        boolean digitsOnly = TextUtils.isDigitsOnly(useremail);
 
 
-                useremail = emailadress.getText().toString();
-                userpassword = md5(password.getText().toString());
-
-                //kk
-                boolean digitsOnly = TextUtils.isDigitsOnly(useremail);
-
-
-                String[] arraydata = new String[5];
-                if(digitsOnly) {
-                    Log.d("username is mobile no","1");
-                    arraydata[0] = "signin_mobile";
-                }
-                else {
-                    Log.d("username is email","1");
-                    arraydata[0] = "signin";
-                }
-                arraydata[1] = useremail;
-                arraydata[2] = useremail;
-                //arraydata[3] = userpassword;
-                arraydata[3] = RegisterAppToServer.regid;
-                arraydata[4] = userpassword;
+                        String[] arraydata = new String[5];
+                        if (digitsOnly) {
+                            Log.d("username is mobile no", "1");
+                            arraydata[0] = "signin_mobile";
+                        } else {
+                            Log.d("username is email", "1");
+                            arraydata[0] = "signin";
+                        }
+                        arraydata[1] = useremail;
+                        arraydata[2] = useremail;
+                        //arraydata[3] = userpassword;
+                        arraydata[3] = RegisterAppToServer.regid;
+                        arraydata[4] = userpassword;
 
 
-                JSONParse asyncTask = new JSONParse(signin.this, arraydata);
-                asyncTask.delegate = signin.this;
-                asyncTask.execute();
+                        JSONParse asyncTask = new JSONParse(signin.this, arraydata);
+                        asyncTask.delegate = signin.this;
+                        asyncTask.execute();
 
 
-            }
-
+                    //}
+                    //else
+                      //  RegisterPageActivity.showErroralert(signin.this,"password must contain letters a-zA-Z and at least one digit 0-9", "error");
+            /*    }
             else
-                    RegisterPageActivity.showErroralert(signin.this,"password should be minimum 8 characters", "error");
+                    RegisterPageActivity.showErroralert(signin.this,"password should be minimum 8 characters", "error");*/
             }
             });
 
@@ -139,7 +141,19 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
     }
 
+   /* public boolean isAlphaNumeric(String s){
+        //String pattern= "^[a-zA-Z0-9]*$";
+        String pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$";
+        if(s.matches(pattern)){
+            Log.d("returning true","");
+            return true;
+        }
+        return false;
 
+
+
+
+    }*/
 
     private void goToForgetPasssword() {
         Intent intent = new Intent(this, ForgetPassword.class);

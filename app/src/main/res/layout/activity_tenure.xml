@@ -114,7 +114,6 @@
             android:textColor="#ffffff"
             android:textSize="22dp"
             android:paddingLeft="15dp"
-
             app:typeface="robotoLight"/>
     </LinearLayout>
     <LinearLayout

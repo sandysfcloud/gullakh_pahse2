@@ -159,7 +159,8 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                 // App code
 
                 System.out.println("onError");
-                Log.v("LoginActivity", exception.getCause().toString());
+                Log.d("LoginActivity", String.valueOf(exception));
+                //Log.v("LoginActivity", exception.getCause().toString());
             }
         });
 

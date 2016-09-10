@@ -86,6 +86,11 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
 
 
 
+
+
+
+
+
         if (savedInstanceState != null) {
             gtenure = savedInstanceState.getString("tenure");
             gloan_type = savedInstanceState.getString("loantyp");
@@ -103,12 +108,18 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
             emptype = ((GlobalData) getApplication()).getemptype();
         }
 
-
+        if(gloan_type.equalsIgnoreCase("Personal Loan")) {
+            Log.d("its personal loan in tenure", "");
+            mSeekArc.mMax=4;
+        }
 
         if (gtenure != null) {
             if(Integer.parseInt(gtenure)>7)
             {
-                gtenure="7";
+                if(gloan_type.equalsIgnoreCase("Personal Loan"))
+                gtenure="5";
+                else
+                   gtenure="7";
             }
             String emi = String.valueOf(gtenure);
             tenure.setText(emi);
@@ -120,6 +131,8 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
             //  mSeekArcProgress.setText(strtemp+"");
             mSeekArcProgress.setText(gtenure + " Year");
         }
+
+
 
         tenure.addTextChangedListener(new TextWatcher() {
 

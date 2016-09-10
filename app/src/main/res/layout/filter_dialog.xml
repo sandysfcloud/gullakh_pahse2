@@ -91,7 +91,7 @@
         android:orientation="horizontal">
         <com.gullakh.gullakhandroid.font.RobotoTextView
 
-            android:text="Loan Amount"
+            android:text="Loan Amount:"
             android:id="@+id/textView2"
             android:layout_width="fill_parent"
             android:textSize="16sp"
@@ -100,7 +100,7 @@
             android:textColor="#90ffffff"
             android:padding="5dip"
             app:typeface="robotoLight"/>
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <!--<com.gullakh.gullakhandroid.font.RobotoEditText
 
 
             android:id="@+id/loandata"
@@ -110,7 +110,24 @@
             android:layout_height="wrap_content"
             android:textColor="#90ffffff"
             android:padding="5dip"
-            app:typeface="robotoLight"/>
+            android:editable="false"
+            android:background="@null"
+            app:typeface="robotoLight"/>-->
+
+
+            <com.gullakh.gullakhandroid.font.RobotoEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Other"
+                android:id="@+id/loandata"
+                android:visibility="invisible"
+
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                app:typeface="robotoLight"/>
+
+
 
     </LinearLayout>
 
@@ -169,8 +186,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Other"
                 android:id="@+id/loanamountid"
-                android:ems="10"
-                android:inputType="phone"
+
                 android:textColorHint="#fff"
                 android:textColor="#fff"
                 android:textSize="15sp"
