@@ -129,6 +129,7 @@ public class hl_prop_owns extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d("back pressed","1");
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             Intent intent  = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

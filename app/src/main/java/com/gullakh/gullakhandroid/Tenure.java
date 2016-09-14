@@ -111,20 +111,24 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
         if(gloan_type.equalsIgnoreCase("Personal Loan")) {
             Log.d("its personal loan in tenure", "");
             mSeekArc.mMax=4;
+            gtenure="5";
+            tenure.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "5")});
         }
 
         if (gtenure != null) {
             if(Integer.parseInt(gtenure)>7)
             {
-                if(gloan_type.equalsIgnoreCase("Personal Loan"))
-                gtenure="5";
-                else
+                if(!gloan_type.equalsIgnoreCase("Personal Loan"))
+               // gtenure="5";
                    gtenure="7";
             }
             String emi = String.valueOf(gtenure);
             tenure.setText(emi);
             tenure.setSelection(tenure.getText().length());
+            if(((GlobalData) getApplication()).getTenure()!=null)
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getTenure()))));
+            else
+                mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(gtenure))));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             String strtemp = String.valueOf(format.format(new BigDecimal(emi.toString())));
             strtemp = strtemp.substring(0, strtemp.length() - 3);

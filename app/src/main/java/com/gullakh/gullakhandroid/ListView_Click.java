@@ -137,14 +137,12 @@ Log.d("bankname in listvieclick",bankname);
         String one_time_fee_temp=null;
 
         if (one_time_fee != null) {
-            if (one_time_fee.contains("%")) {
-                one_time_fee_temp = one_time_fee;
-            } else {
+            if(isNumeric(one_time_fee) ){
 
                 one_time_fee_temp = String.valueOf(format.format(new BigDecimal(one_time_fee)));
                 one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
-
-
+            } else {
+                one_time_fee_temp = one_time_fee;
             }
             tprofee.setText(one_time_fee_temp);
             tfee.setText("Processing Fee is " + one_time_fee_temp);
@@ -242,6 +240,19 @@ Log.d("bankname in listvieclick",bankname);
        // mainLayout.addView(tv);*/
 
 
+    }
+
+    public static boolean isNumeric(String str)
+    {
+        try
+        {
+            double d = Double.parseDouble(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
     }
     protected void onSaveInstanceState(Bundle icicle) {
         super.onSaveInstanceState(icicle);
@@ -400,7 +411,7 @@ Log.d("bankname in listvieclick",bankname);
 
         else if(emtyp.equalsIgnoreCase("Home Loan")) {
             Log.d("its home loan","1");
-            if(((GlobalData) currentact.getApplication()).getBaltrans().equals("No")){
+            if(((GlobalData)  currentact.getApplication()).getBaltrans().equals("Yes")){
 
     if(((GlobalData) currentact.getApplication()).gethneed()!=null) {
 

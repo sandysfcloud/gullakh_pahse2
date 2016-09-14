@@ -146,7 +146,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
                 break;
             case R.id.bmoth:
 
-               intent = new Intent(this, hl_coappldetails.class);
+                intent = new Intent(this, hl_coappldetails.class);
                 intent.putExtra("data", "joint");
                 intent.putExtra("title", "Mother's");
                 startActivity(intent);
@@ -169,9 +169,18 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 
                 break;
             case R.id.done:
-                intent = new Intent(this, cl_car_gender.class);
-                intent.putExtra("coappl","done");
-                startActivity(intent);
+                if (cl_car_global_data.dataWithAnscoapp != null)
+                {
+                    if ( cl_car_global_data.dataWithAnscoapp.get("firstname")!=null)
+                    {
+                        intent = new Intent(this, cl_car_gender.class);
+                        intent.putExtra("coappl", "done");
+                        startActivity(intent);
+                    }
+
+                }
+                else
+                    RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");
 
                 break;
 //            case R.id.yes:

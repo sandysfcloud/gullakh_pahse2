@@ -396,7 +396,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
             }
         }
-
+if(cl_car_global_data.dataWithAnscoapp!=null)
+{
+    cl_car_global_data.dataWithAnscoapp=new HashMap<String,String>();
+    cl_car_global_data.allcoappdetail= new HashMap<String, HashMap<String, String>>();
+}
 
         //********************End of Oncreate
     }

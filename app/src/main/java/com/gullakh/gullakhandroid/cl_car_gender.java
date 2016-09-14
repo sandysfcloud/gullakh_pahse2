@@ -458,13 +458,24 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                                     ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
 
                                 if (coappldata != null) {
-                                    submitfunction();
+                                    Log.d("coappldata != null","1");
+
+                                    if(cl_car_global_data.dataWithAnscoapp!=null) {
+                                        if ( cl_car_global_data.dataWithAnscoapp.get("firstname")!=null) {
+                                            Log.d("coappldata != null", "2");
+                                            submitfunction();
+                                        }
+                                    }
+                                    else
+                                        RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants data!", "failed");
                                 } else if (!coapllflag) {
+                                    Log.d("!coapllflag","2");
                                     submitfunction();
                                 } else {
                                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants field!", "failed");
                                 }
                             } else {
+                                Log.d("submitfunction called","1");
                                 submitfunction();
                             }
                         }
