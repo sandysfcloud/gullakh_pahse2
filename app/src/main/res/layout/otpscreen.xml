@@ -6,12 +6,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="OTP has been sent to your mobile number"
         android:id="@+id/textView54"
-        android:gravity="center" />
+        android:textSize="16dp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,8 +25,19 @@
         android:textSize="22dp" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/changemobno"
+        android:id="@+id/ChangeMobilebutton"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:autoText="true"
+        android:textColor="#ff6969" />
+
+    <TextView
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Kindly verify your mobile number."
         android:id="@+id/textView56"
@@ -57,26 +70,4 @@
         android:gravity="center"
         android:layout_marginTop="20dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Is Mobile number incorrect?"
-        android:id="@+id/textView55"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" />
-    <com.gullakh.gullakhandroid.font.RobotoButton
-        app:typeface="robotoLight"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Change Mobile Number"
-        android:id="@+id/ChangeMobilebutton"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="22dp"
-        android:singleLine="false"
-        android:gravity="center"
-        android:background="#b8546e7a"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp" />
 </LinearLayout>

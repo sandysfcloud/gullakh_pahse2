@@ -216,4 +216,7 @@
 
     <string name="fb_login_protocol_scheme">210705562656447</string>
     <string name="title_activity_cibil_score">CibilScore</string>
+    <string name="changemobno"> Or <u>change mobile number</u></string>
+
+
 </resources>

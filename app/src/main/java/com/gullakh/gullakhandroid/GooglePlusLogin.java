@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -66,6 +67,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     private String contact_id;
     String   cscore=null;
     private String[] name;
+    private String tempId;
 
     //    public Button btnSignOut, btnRevokeAccess;
 //    public ImageView imgProfilePic;
@@ -269,7 +271,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
             case R.id.login:
                 Log.d("clicked1","googleplus");
                 signInWithGplus();
-                btnSignIn.performClick();
+//                btnSignIn.performClick();
                 break;
             case R.id.btn_sign_out:
                 // Signin button clicked
@@ -342,6 +344,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                 Log.d("check info", jsonObject.get("result").toString());
+
                 if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                     Log.d("clicked 1", "result");
                     if(jsonObject.get("contact_id").toString().equals("") || jsonObject.get("contact_id").toString()!=null)
@@ -351,10 +354,18 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     if(jsonObject.get("phone").toString().equals("") || jsonObject.get("phone").toString()!=null)
                         usermobno=jsonObject.get("phone").toString().replaceAll("\"", "");
 
-                    if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("") || (jsonObject.get("temp_u_id")!=null && jsonObject.get("temp_u_id").toString() != ""))
+                    if (jsonObject.get("phone").toString().replaceAll("\"", "").equals("") || (jsonObject.get("temp_u_id")!=null && !jsonObject.get("temp_u_id").toString().equals("")))
                     {
+                        if((jsonObject.get("temp_u_id")!=null)) {
+                            tempId = jsonObject.get("temp_u_id").toString();
 
-                        getMobileNo(jsonObject.get("temp_u_id").toString());
+                            getMobileNo(jsonObject.get("temp_u_id").toString());
+                        }else{
+                            signOutFromGplus();
+                            Intent intent = new Intent(currentact, RegisterPageActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            currentact.startActivity(intent);
+                        }
                     } else {
 
                         //kkgoToIntent();
@@ -464,8 +475,16 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         final EditText input = new EditText(currentact);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(input);
+//        builder.setView(input);
 // Set up the button
+        View v = getActivity().getLayoutInflater().inflate(R.layout.otpscreen, null, false);
+        final EditText OTP = (EditText) v.findViewById(R.id.otp);
+        TextView myButton =(TextView) v.findViewById(R.id.ChangeMobilebutton);
+        myButton.setText("Change Mobile Number");
+        TextView mn = (TextView) v.findViewById(R.id.showMobNo);
+        mn.setText(usermobno);
+        builder.setView(v);
+
         builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -494,7 +513,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 }
                             }
                         }, currentact, "wait");
-                        requestgetserver2.execute("token", "getGoogleOTPverification", tempuid, input.getText().toString());
+                        requestgetserver2.execute("token", "getGoogleOTPverification", tempuid, OTP.getText().toString());
                     }
                 }
         );
@@ -506,7 +525,23 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             }
                         }
                 );
-        builder.show();
+//        builder.show();
+        final AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+//					builder.show();
+        myButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+
+                getMobileNo(tempuid);
+
+            }
+
+        });
     }
     public void goToIntent(Activity currentact) {
         MainActivity.signinstate = true;

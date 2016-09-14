@@ -219,9 +219,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 					View v = getLayoutInflater().inflate(R.layout.otpscreen, null, false);
 					final EditText OTP = (EditText) v.findViewById(R.id.otp);
-					Button myButton =(Button) v.findViewById(R.id.ChangeMobilebutton);
+					TextView myButton =(TextView) v.findViewById(R.id.ChangeMobilebutton);
 					myButton.setText("Change Mobile Number");
-
+					TextView mn = (TextView) v.findViewById(R.id.showMobNo);
+					mn.setText(usermobno);
 					builder.setView(v);
 // Set up the buttons
 					builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {

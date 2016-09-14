@@ -30,7 +30,6 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 
 public class signinPrepage extends AppCompatActivity implements View.OnClickListener {
     CallbackManager callbackManager;
@@ -217,7 +216,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
     {
         obj=new  GooglePlusLogin();
         obj.email=useremail;
-        obj.useremail=useremail;
+//        obj.useremail=useremail;
         obj.personName=first_name;
         obj.currentact=this;
         obj.googleuserid=fbid;
