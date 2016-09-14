@@ -400,39 +400,46 @@ Log.d("bankname in listvieclick",bankname);
 
         else if(emtyp.equalsIgnoreCase("Home Loan")) {
             Log.d("its home loan","1");
+            if(((GlobalData) currentact.getApplication()).getBaltrans().equals("No")){
+
     if(((GlobalData) currentact.getApplication()).gethneed()!=null) {
 
-    if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a plot")) {
-        intent = new Intent(currentact, hl_need1.class);
-        currentact.startActivity(intent);
+        if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a plot")) {
+            intent = new Intent(currentact, hl_need1.class);
+            currentact.startActivity(intent);
 
-    } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Construction of house on a plot")) {
-        intent = new Intent(currentact, hl_need2.class);
-        currentact.startActivity(intent);
+        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Construction of house on a plot")) {
+            intent = new Intent(currentact, hl_need2.class);
+            currentact.startActivity(intent);
 
-    } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase of plot & construction there on")) {
-        intent = new Intent(currentact, hl_need3.class);
-        currentact.startActivity(intent);
+        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase of plot & construction there on")) {
+            intent = new Intent(currentact, hl_need3.class);
+            currentact.startActivity(intent);
 
-    } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Home Renovation")) {
-        intent = new Intent(currentact, hl_need4.class);
-        currentact.startActivity(intent);
-    } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Balance Transfer of existing home loan")) {
-        intent = new Intent(currentact, hl_need5.class);
-        currentact.startActivity(intent);
-    } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Refinance a property already purchased from own sources")) {
-        intent = new Intent(currentact, hl_need7.class);
-        currentact.startActivity(intent);
-    } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a house/flat which is ready to move-in")) {
-        intent = new Intent(currentact, hl_need8.class);
-        currentact.startActivity(intent);
+        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Home Renovation")) {
+            intent = new Intent(currentact, hl_need4.class);
+            currentact.startActivity(intent);
+        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Balance Transfer of existing home loan")) {
+            intent = new Intent(currentact, hl_need5.class);
+            currentact.startActivity(intent);
+        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Refinance a property already purchased from own sources")) {
+            intent = new Intent(currentact, hl_need7.class);
+            currentact.startActivity(intent);
+        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a house/flat which is ready to move-in")) {
+            intent = new Intent(currentact, hl_need8.class);
+            currentact.startActivity(intent);
+        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Property is not yet identified")) {
+            intent = new Intent(currentact, hl_prop_owns.class);
+            currentact.startActivity(intent);
+        }
     }
-    else if (((GlobalData) currentact.getApplication()).gethneed().equals("Property is not yet identified")) {
-        intent = new Intent(currentact, hl_prop_owns.class);
-        currentact.startActivity(intent);
-    }
+
 }
-
+            else
+            {
+                intent = new Intent(currentact, hl_prop_owns.class);
+                currentact.startActivity(intent);
+            }
 
         }
 
