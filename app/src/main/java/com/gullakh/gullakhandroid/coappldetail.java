@@ -177,6 +177,9 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
                         intent.putExtra("coappl", "done");
                         startActivity(intent);
                     }
+                    else
+                        RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");
+
 
                 }
                 else

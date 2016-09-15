@@ -230,8 +230,20 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                         ((GlobalData) getApplication()).setcarres(citynam.getText().toString());
                     }
                 }
-                if(((GlobalData) getApplication()).getcarres()!=null)
+                if(((GlobalData) getApplication()).getcarres()!=null) {
+                    Log.d("city present in global ","1");
+                    if(((GlobalData) getApplication()).getcarres().equals("Bengaluru")||((GlobalData) getApplication()).getcarres().equals("Chennai")
+                            ||((GlobalData) getApplication()).getcarres().equals("Delhi") ||((GlobalData) getApplication()).getcarres().equals("Mumbai"))
                     goToIntent();
+                    else
+                    {
+                        Log.d("else frm edittext","");
+                        if(citynam.getText().toString()==null)
+                        {
+                            Log.d("else frm edittext","no data");
+                        RegisterPageActivity.showErroralert(cl_car_residence.this, "Please select any one location!", "failed");
+                }}
+                }
                 else
                     RegisterPageActivity.showErroralert(cl_car_residence.this, "Please select any one location!", "failed");
 

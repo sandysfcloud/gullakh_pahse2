@@ -978,10 +978,31 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         AlertDialog alert = builder.create();
         alert.show();
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("onPause called","");
+        dgthis.dismiss();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("onStop called", "");
+        dgthis.dismiss();
+    }
     public void calculate() {
 
-        int loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
+        int loan_amt;
+        if(((GlobalData) getApplication()).getloanamt()!=null)
+            loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
+        else
+            loan_amt = Integer.parseInt(loant);
+
+
+
+
+
         double final_bp, emi_valu, emi_value, bp;
         CustomListViewValuesArr.clear();
         if (!disbank.equals(null))

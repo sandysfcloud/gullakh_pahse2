@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Other"
                 android:id="@+id/loanamountid"
-
+                android:inputType="number"
                 android:textColorHint="#fff"
                 android:textColor="#fff"
                 android:textSize="15sp"
