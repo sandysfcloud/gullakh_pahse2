@@ -69,7 +69,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         List<String> categories = new ArrayList<String>();
         categories.add("Select");
         categories.add("Purchase a plot");
-        categories.add("Construction of house on a plot");
+        categories.add("Purchase of a plot alloted by Development Authority(Govt. body) or Builder");
         categories.add("Purchase of plot & construction there on");
         categories.add("Home Renovation");
         if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
@@ -145,6 +145,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
     {
         hl_coappldetails.joint=0;
         Intent intent;
+        if(spinner.getSelectedItem().toString().equals(""))
         setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
         ((GlobalData) getApplication()).sethneed(spinner.getSelectedItem().toString());
         ((GlobalData) getApplication()).setHomeneedpos(spinner.getSelectedItemPosition());

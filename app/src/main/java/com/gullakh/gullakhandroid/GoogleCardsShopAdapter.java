@@ -189,14 +189,16 @@ if(isNumeric(tempValues.getprocessing_fee()))
     }
 
 			String propreclo;
-			if(isNumeric(tempValues.getpre_closure_fee()))
-			{
-				propreclo = String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
-				propreclo = propreclo.replaceAll("\\.00", "");
+			if(tempValues.getpre_closure_fee()!=null) {
+				if (isNumeric(tempValues.getpre_closure_fee())) {
+					propreclo = String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
+					propreclo = propreclo.replaceAll("\\.00", "");
+				} else {
+					propreclo = tempValues.getpre_closure_fee();
+				}
 			}
-			else {
-				propreclo=tempValues.getpre_closure_fee();
-			}
+			else
+				propreclo = "";
 
 			String s=tempValues.getbp().toString();
 			int ibp= new Double(s).intValue();
