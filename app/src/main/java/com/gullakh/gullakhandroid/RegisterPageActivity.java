@@ -197,14 +197,19 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	public void  processFinish(JSONObject str_result){
 
 		try {
-			tempUid= String.valueOf(str_result.get("temp_u_id"));
+
+
 			final AlertDialog.Builder builder2 = new AlertDialog.Builder(RegisterPageActivity.this);
 			builder2.setCancelable(false);
-			if(str_result.get("result").equals("true") || (str_result.get("result").equals("false") && urlchangeprev!=null && urlchangeprev=="registration")) {
-				if(str_result.get("result").equals("false") && urlchangeprev!=null && urlchangeprev=="registration") {
+			if(str_result.get("result").equals("true") || (str_result.get("result").equals("false") && urlchangeprev!=null && urlchangeprev.equals("registration"))) {
+
+				if(str_result.get("result").equals("false") && urlchangeprev!=null && urlchangeprev.equals("registration")) {
+
 					urlchange="registration";
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 				}
+				tempUid= String.valueOf(str_result.get("temp_u_id"));
+
 				if(urlchange=="registration") {
 					final AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
 					builder.setTitle("Enter OTP");
@@ -403,6 +408,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 				}
 				}else{
+
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 			}
 		} catch (JSONException e) {
