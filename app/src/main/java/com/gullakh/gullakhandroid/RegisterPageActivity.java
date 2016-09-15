@@ -208,7 +208,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					urlchange="registration";
 					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 				}
-				tempUid= String.valueOf(str_result.get("temp_u_id"));
+				if(str_result.has("temp_u_id")) {
+					tempUid = str_result.optString("temp_u_id");
+				}
 
 				if(urlchange=="registration") {
 					final AlertDialog.Builder builder = new AlertDialog.Builder(RegisterPageActivity.this);
