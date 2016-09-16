@@ -52,9 +52,11 @@ public class JSONParse  extends AsyncTask<String, Void, JSONObject> {
     {
 
         JSONParsergcm jParser = new JSONParsergcm();
-        // Getting JSON from URL
+        // Getting JSON from URL  otpcheckforgetpassword
         if(arraydata[0]=="otpcheck")
             urlnew=urlnew+"/Verify_Phone";
+        else if(arraydata[0]=="otpcheckforgetpassword")
+            urlnew=urlnew+"/Verify_Phone_new";
         else if(arraydata[0]=="resendotp")
             urlnew=urlnew+"/resend_otp";
         else if(arraydata[0]=="signin")

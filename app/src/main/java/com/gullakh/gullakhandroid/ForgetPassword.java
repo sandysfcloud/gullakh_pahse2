@@ -117,12 +117,13 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             flag = "otpverify";
-                            String[] arraydata = new String[5];
-                            arraydata[0] = "otpcheck";
+                            String[] arraydata = new String[10];
+                            arraydata[0] = "otpcheckforgetpassword";
                             arraydata[1] = resultemail;
                             arraydata[2] = usermobno;
                             arraydata[3] = RegisterAppToServer.regid;
                             arraydata[4] = input.getText().toString();
+                            arraydata[5] =null;
                             JSONParse asyncTask = new JSONParse(ForgetPassword.this, arraydata);
                             asyncTask.delegate = ForgetPassword.this;
                             asyncTask.execute();

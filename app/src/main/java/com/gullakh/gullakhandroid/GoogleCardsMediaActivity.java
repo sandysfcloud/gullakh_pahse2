@@ -912,7 +912,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     maxbpval = (int) maxbp;
                     Log.d("reduced loan to server2", String.valueOf(Math.ceil(maxbpval)));
 
-                    builder.setMessage("the loan amount is reduced to Rs " + maxbpval)
+                    builder.setMessage("You are eligible for Rs " + maxbpval+" amount only.")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -1197,7 +1197,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             Log.d("Max_tenure else", String.valueOf(Max_tenure));
 
             AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
-            builder.setMessage("Tenure is set to " + Max_tenure + "Years as your Tenure exceeds the max limit")
+            builder.setMessage("You are eligible for " + Max_tenure + " tenure only.")
                     .setCancelable(false)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
