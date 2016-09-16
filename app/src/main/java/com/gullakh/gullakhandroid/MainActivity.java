@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -32,6 +33,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
@@ -63,6 +65,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -174,6 +178,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("GCM Checked", "Now finish");
         }
 //------------------------------------------------------------------------------------
+
+
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo("com.gullakh.gullakhandroid", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
 
 //        piggi = (ImageView) findViewById(R.id.pig);
 //        coin = (ImageView) findViewById(R.id.coin);
@@ -381,7 +400,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     Log.d("internet connectn not there", "");
                 }else {
-
+                    Log.d("getContactDetails called", "");
                     getContactDetails();
                 }
             }
@@ -402,7 +421,7 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
     cl_car_global_data.allcoappdetail= new HashMap<String, HashMap<String, String>>();
 }
 
-        //********************End of Oncreate
+        //*********************************************************************************End of Oncreate
     }
 
 
@@ -709,7 +728,7 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
 
          logout = (Button) headerView.findViewById(R.id.logout);
 
-        if(signinstate){
+        /* commented if(signinstate){
             logout.setVisibility(View.VISIBLE);
         }
         else
@@ -732,6 +751,9 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
+
+
+
                                 logout.setVisibility(View.INVISIBLE);
                                 MainActivity.signinstate = false;
                                 DataHandler dbobjectnew = new DataHandler(MainActivity.this);
@@ -740,8 +762,13 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
                                 signinPrepage obj=new signinPrepage();
                                 obj.logoutfb(MainActivity.this);
 
-                               /* GooglePlusLogin fragmentList =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
-                                fragmentList.signOutFromGplus();*/
+
+                                GooglePlusLogin fragmentList2 =(GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment1);
+                                if(fragmentList2!=null) {
+                                    Log.d("sign-out of g+", "");
+                                    fragmentList2.signOutFromGplus();
+
+                                }
 
                                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -762,7 +789,7 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
 
 
             }
-        });
+        });*/
 
 
 

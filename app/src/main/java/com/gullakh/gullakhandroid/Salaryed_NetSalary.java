@@ -58,6 +58,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
+
         titl.setText("My Net Monthly Salary Is");
         actionBar.setCustomView(v);
 

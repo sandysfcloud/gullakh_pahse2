@@ -981,7 +981,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("onPause called","");
+        Log.d("onPause called", "");
+        if (dgthis != null)
         dgthis.dismiss();
     }
 
@@ -989,15 +990,21 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public void onStop() {
         super.onStop();
         Log.d("onStop called", "");
-        dgthis.dismiss();
+        if (dgthis != null)
+            dgthis.dismiss();
     }
     public void calculate() {
 
         int loan_amt;
         if(((GlobalData) getApplication()).getloanamt()!=null)
             loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
-        else
-            loan_amt = Integer.parseInt(loant);
+        else {
+            loant=loant.replace("Rs.","");
+
+            loant=loant.replace(",", "");
+            loant=loant.replace(" ","");
+            loan_amt = Integer.parseInt(loant.trim());
+        }
 
 
 
@@ -1589,6 +1596,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 editloan.setText(df.format(formatfun(((GlobalData) getApplication()).getloanamt())));
                 editloan.setSelection(editloan.getText().length());
                 //loand.setText(((GlobalData) getApplication()).getloanamt());
+                editloan.addTextChangedListener(new NumberTextWatcher(editloan));
                 loand.setText(df.format(formatfun(((GlobalData) getApplication()).getloanamt())));
 
                 seekBar1.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
@@ -1770,16 +1778,17 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 if (seek_loanamt == prevloan) {
 
 
-                   // loan_amt.setText(String.valueOf(seek_loanamt) + "00000");
-                    loan_amt.setText(df.format(formatfun(String.valueOf(seek_loanamt) + "00000")));
+
+                    //loan_amt.setText(df.format(formatfun(String.valueOf(seek_loanamt) + "00000")));
                     Log.d("loan seekbar moved!!!!!", String.valueOf(edittextloan));
-                    ((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
+                   //((GlobalData) getApplication()).setloanamt(String.valueOf(seek_loanamt) + "00000");
+
                     if (edittextloan != 0) {
                         Log.d("loan amount edittext is changed !!", String.valueOf(edittextloan));
                         ((GlobalData) getApplication()).setloanamt(String.valueOf(edittextloan));
+                        loan_amt.setText(df.format(formatfun(String.valueOf(edittextloan))));
 
-
-                        loan_amt.setText(df.format(formatfun(String.valueOf(seek_loanamt) + "00000")));
+                       // loan_amt.setText(df.format(formatfun(String.valueOf(seek_loanamt) + "00000")));
                     }
                     loan_amtcalcutn("loan");
                     //calculate();

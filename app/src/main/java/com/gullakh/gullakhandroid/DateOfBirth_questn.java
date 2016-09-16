@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -58,6 +61,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     private ContentValues contentValues;
     String gloan_type,carloantp,Baltrans,emptypg;
     int age=0;
+    ArrayList<String> liste;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -258,6 +262,54 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 Emp.requestFocus();
                 Emp.setOnClickListener(this);
 
+
+
+
+       /* Emp.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String empd = s.toString();
+                if (empd.length() > 0) {
+                    Log.d("data from autotext", empd);
+                    getemplist(empd);
+                }
+
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+
+      Emp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    Log.d("has focus","1");
+                    final ShowSuggtn fAdapter = new ShowSuggtn(DateOfBirth_questn.this, android.R.layout.simple_dropdown_item_1line, liste);
+                    Emp.setAdapter(fAdapter);
+                    //user has focused
+                } else {
+                    Log.d(" does not have focus","1");
+                    //focus has stopped perform your desired action
+                    final ShowSuggtn fAdapter = new ShowSuggtn(DateOfBirth_questn.this, android.R.layout.simple_dropdown_item_1line, liste);
+                    Emp.setAdapter(fAdapter);
+                }
+            }
+        });*/
+
+
+
                 if(((GlobalData) getApplication()).getemployer()!=null)
                 {
 
@@ -270,7 +322,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
 
     }
-
+//*************************
     public void getemplist()
     {
 
@@ -293,12 +345,16 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                 int size=enums.length;
                 Log.e("emplist frm server ", String.valueOf(size));
-                ArrayList<String> liste =new ArrayList<String>();
+                liste =new ArrayList<String>();
                 for(int i=0;i<size;i++) {
                     liste.add(enums[i].getemployername());
                 }
+
+
                 final ShowSuggtn fAdapter = new ShowSuggtn(DateOfBirth_questn.this, android.R.layout.simple_dropdown_item_1line, liste);
                 Emp.setAdapter(fAdapter);
+
+
 
 
                 Log.e("emplist frm server ", String.valueOf(liste));
@@ -314,8 +370,8 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
             Log.e("sessionid-cartypes", sessionid);
         }
 
+       // requestgetserver.execute("token", "employerlist", sessionid,empnam);
         requestgetserver.execute("token", "employerlist", sessionid);
-
     }
 
     @Override

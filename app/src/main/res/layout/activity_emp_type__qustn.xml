@@ -48,7 +48,7 @@
         android:textSize="16dp"
         android:id="@+id/t2"
         android:textColor="#000"
-        android:text="Self Employed Business"
+        android:text="Self Employed Businessmen"
         android:layout_marginBottom="20dp"
         app:typeface="robotoLight"
         />

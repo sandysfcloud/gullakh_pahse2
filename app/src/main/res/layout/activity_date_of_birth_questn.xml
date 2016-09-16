@@ -164,6 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
+                android:focusableInTouchMode="true"
 
                 android:id="@+id/salEmpname"
                 android:textColorHint="#000"

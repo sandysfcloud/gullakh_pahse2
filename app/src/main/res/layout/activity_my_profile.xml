@@ -228,21 +228,22 @@
                      android:id="@+id/textView13"
                      android:layout_margin="10dp" />-->
             </LinearLayout>
+            <fragment
+                android:id="@+id/fragment"
 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                class ="com.gullakh.gullakhandroid.GooglePlusLogin"/>
         </LinearLayout>
     </ScrollView>
 
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.gullakh.gullakhandroid.GooglePlusLogin"
-        android:id="@+id/fragment"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
     <com.gullakh.gullakhandroid.font.RobotoButton
         app:typeface="robotoLight"
         style="?android:attr/buttonStyleSmall"

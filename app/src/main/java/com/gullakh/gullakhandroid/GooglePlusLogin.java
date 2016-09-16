@@ -87,7 +87,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.activity_google_plus_login, container, false);
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(currentact)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
@@ -105,11 +105,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 //        llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 //
 //        // Button click listeners
-        currentact=getActivity();
+        currentact=currentact;
         btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
         tag="google";
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(currentact)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
@@ -124,7 +124,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
         btnSignIn.setOnClickListener(this);
         login.setOnClickListener(this);
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+        mGoogleApiClient = new GoogleApiClient.Builder(currentact)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
@@ -148,7 +148,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         if (mConnectionResult.hasResolution()) {
             try {
                 mIntentInProgress = true;
-                mConnectionResult.startResolutionForResult(getActivity(), RC_SIGN_IN);
+                mConnectionResult.startResolutionForResult(currentact, RC_SIGN_IN);
             } catch (SendIntentException e) {
                 mIntentInProgress = false;
                 mGoogleApiClient.connect();
@@ -159,7 +159,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         if (!result.hasResolution()) {
-            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), getActivity(),
+            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), currentact,
                     0).show();
             return;
         }
@@ -196,7 +196,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     @Override
     public void onConnected(Bundle arg0) {
         Log.d("clicked1", "onConnected");
-        Toast.makeText(getActivity(), "Please wait!", Toast.LENGTH_LONG).show();
+       // Toast.makeText(currentact, "Please wait!", Toast.LENGTH_LONG).show();
         if(signinPrepage.signinprepage) {
             getProfileInformation();
         }
@@ -222,7 +222,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
                 getReg();
             } else {
-                Toast.makeText(getActivity(),
+                Toast.makeText(currentact,
                         "Person information is null", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
@@ -294,7 +294,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
             getProfileInformation();
             //getReg();
         }
-//        Intent intent = new Intent(getActivity(), signinPrepage.class);
+//        Intent intent = new Intent(currentact, signinPrepage.class);
 //        startActivity(intent);
     }
 
@@ -361,7 +361,12 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
                             getMobileNo(jsonObject.get("temp_u_id").toString());
                         }else{
-                            signOutFromGplus();
+                            if(tag.equals("google"))
+                                signOutFromGplus();
+                            else{
+                                signinPrepage obj = new signinPrepage();
+                                obj.logoutfb(currentact);
+                            }
                             Intent intent = new Intent(currentact, RegisterPageActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             currentact.startActivity(intent);
@@ -371,7 +376,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         //kkgoToIntent();
                         saveDataToDatabase();
 
-                        DataHandler dbobject = new DataHandler(getActivity());
+                        DataHandler dbobject = new DataHandler(currentact);
                         Cursor cr = dbobject.displayData("select * from userlogin");
                         if (cr != null) {
                             if (cr.moveToFirst()) {
@@ -382,22 +387,22 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         }
                         if(cscore!=null) {
                             if (cscore.length() > 0) {//if credit score is already present
-                                goToIntent(getActivity());
+                                goToIntent(currentact);
                             }
                         }
                         else {
 
-                            if (((GlobalData) getActivity().getApplication()).getcredflag() != null) {
+                            if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
 
-                                Log.d("from mainact", ((GlobalData) getActivity().getApplication()).getcredflag());
-                                goToIntent(getActivity());
+                                Log.d("from mainact", ((GlobalData) currentact.getApplication()).getcredflag());
+                                goToIntent(currentact);
 
                             } else {
 
                                 Log.d("from apply o credit butn", "");
-                                Intent intent2 = new Intent(getActivity(), CibilScore.class);
+                                Intent intent2 = new Intent(currentact, CibilScore.class);
                                 intent2.putExtra("apply", "googlep");
-                                startActivity(intent2);
+                                currentact.startActivity(intent2);
                             }
                         }
 
@@ -454,7 +459,12 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                     getOTPVerification(tempuid);
                                 } else {
                                     dg.dismiss();
+                                    if(tag.equals("google"))
                                     signOutFromGplus();
+                                    else{
+                                        signinPrepage obj = new signinPrepage();
+                                    obj.logoutfb(currentact);
+                                    }
                                     RegisterPageActivity.showErroralert(currentact, String.valueOf(jsonObject.get("error_message")), "failed");
                                 }
                             }
@@ -477,7 +487,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 //        builder.setView(input);
 // Set up the button
-        View v = getActivity().getLayoutInflater().inflate(R.layout.otpscreen, null, false);
+        View v = currentact.getLayoutInflater().inflate(R.layout.otpscreen, null, false);
         final EditText OTP = (EditText) v.findViewById(R.id.otp);
         TextView myButton =(TextView) v.findViewById(R.id.ChangeMobilebutton);
         myButton.setText("Change Mobile Number");
@@ -502,12 +512,12 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                     saveDataToDatabase();
                                     if (cscore != null) {
                                         if (cscore.length() > 0) {//if credit score is already present
-                                            goToIntent(getActivity());
+                                            goToIntent(currentact);
                                         }
                                     } else {
-                                        Intent intent2 = new Intent(getActivity(), CibilScore.class);
+                                        Intent intent2 = new Intent(currentact, CibilScore.class);
                                         intent2.putExtra("apply", "googlep");
-                                        startActivity(intent2);
+                                        currentact.startActivity(intent2);
                                     }
                                     // goToIntent();
                                 }

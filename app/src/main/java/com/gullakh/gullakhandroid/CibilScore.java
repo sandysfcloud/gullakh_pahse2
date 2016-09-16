@@ -518,8 +518,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                         Log.d("state index", String.valueOf(cityindex));
                         Log.d("state value", String.valueOf(s_state));
                         s_state = s_state.replace(" ", "");
-                        Log.d("state index", String.valueOf(cityindex.get(s_state)));
-                        e_state.setSelection((Integer) cityindex.get(s_state));
+
+                        if(cityindex.get(s_state)!=null) {
+                            Log.d("state index2", String.valueOf(cityindex.get(s_state)));
+                            e_state.setSelection((Integer) cityindex.get(s_state));
+                        }
                     }
                 }
 
@@ -936,6 +939,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
 
             case R.id.close:
+
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);
                 intenth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intenth);

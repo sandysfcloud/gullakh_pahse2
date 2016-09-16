@@ -383,7 +383,8 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             Log.e("LoanParameterMasterexec", identifier);
                             Log.e("LoanParameterMasterexec-query", "select * from Employermaster;");
                             client = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Employermaster;")).toString());
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Employermaster where employer_name like '"+args[3]+"%';")).toString());
+                           // post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Employermaster;")).toString());
                         }
 
 
