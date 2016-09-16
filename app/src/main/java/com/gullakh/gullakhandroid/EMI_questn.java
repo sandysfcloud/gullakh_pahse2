@@ -325,6 +325,10 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
 //                break;
             case R.id.next:
                //if(!emi.getText().toString().matches("")) {
+
+                if(emipaying.getText().toString()==null || emipaying.getText().toString().equals("")) {
+                    emipaying.setText("0");
+                }
                     ((GlobalData) getApplication()).setEmi(Double.parseDouble(emipaying.getText().toString().replaceAll(",", "")));
 
                     Intent intent = new Intent(EMI_questn.this, DateOfBirth_questn.class);

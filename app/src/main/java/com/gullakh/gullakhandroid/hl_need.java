@@ -57,7 +57,11 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 {
-//                    goToIntent();
+                    if (position ==6 || position ==8 )
+                        next.setText("Next");
+                    else
+                        next.setText("Submit");
+
                 }
             }
 
@@ -68,15 +72,12 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         });
         List<String> categories = new ArrayList<String>();
         categories.add("Select");
-        categories.add("Purchase a plot");
         categories.add("Purchase of a plot alloted by Development Authority(Govt. body) or Builder");
-        categories.add("Purchase of plot & construction there on");
+        categories.add("Construction of house on a plot");
+        categories.add("Purchase of plot and construction thereon");
         categories.add("Home Renovation");
-        if(((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan against Property")) {
-            categories.add("Balance Transfer of existing home loan");
-        }
         categories.add("Property is not yet identified");
-        categories.add("Purchase of a under construction builder flat");
+        categories.add("Purchase of an under construction builder flat");
         categories.add("Refinance a property already purchased from own sources");
         categories.add("Purchase a house/flat which is ready to move-in");
 
@@ -145,8 +146,13 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
     {
         hl_coappldetails.joint=0;
         Intent intent;
-        if(spinner.getSelectedItem().toString().equals(""))
-        setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
+        if(spinner.getSelectedItem().toString().equals("Purchase of a plot alloted by Development Authority(Govt. body) or Builder")){
+            setDataToHashMap("need_loan_for", "Purchase a plot");
+        }else if(spinner.getSelectedItem().toString().equals("Purchase of an under construction builder flat")){
+            setDataToHashMap("need_loan_for", "Purchase of a under construction builder flat");
+        }else{
+            setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
+        }
         ((GlobalData) getApplication()).sethneed(spinner.getSelectedItem().toString());
         ((GlobalData) getApplication()).setHomeneedpos(spinner.getSelectedItemPosition());
 
@@ -171,10 +177,14 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         }else if(spinner.getSelectedItem().toString().equals("Balance Transfer of existing home loan")){
             intent = new Intent(hl_need.this, hl_need5.class);
             startActivity(intent);
-        }else*/ if(spinner.getSelectedItem().toString().equals("Purchase of a under construction builder flat")){
+        }else*/ if(spinner.getSelectedItem().toString().equals("Purchase of an under construction builder flat")){
+
             intent = new Intent(hl_need.this, hl_need6.class);
             startActivity(intent);
-        }
+        }else if(spinner.getSelectedItem().toString().equals("Purchase a house/flat which is ready to move-in")){
+        intent = new Intent(hl_need.this, hl_need6.class);
+        startActivity(intent);
+    }
         else
     {
         intent = new Intent(this, GoogleCardsMediaActivity.class);

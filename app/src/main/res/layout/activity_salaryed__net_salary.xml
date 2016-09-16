@@ -6,168 +6,175 @@
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center">
-        <FrameLayout
-            android:id="@+id/seekArcContainer"
+        android:id="@+id/scrollView14"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp">
-
-            <com.gullakh.gullakhandroid.SeekArc
-                android:id="@+id/seekArc"
+            android:layout_weight="1"
+            android:gravity="center">
+            <FrameLayout
+                android:id="@+id/seekArcContainer"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                seekarc:arcColor="@color/main_color_500"
-                seekarc:clockwise="true"
-                seekarc:max="2500"
-                
-
-                seekarc:progressColor="@color/main_color_500"
-                seekarc:rotation="180"
-                seekarc:startAngle="30"
-                seekarc:sweepAngle="300"
-                seekarc:thumb="@drawable/custom_seek_arc_control_selector"
-                seekarc:touchInside="true"
-                android:padding="40dp" />
-
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                android:id="@+id/seekArcProgress"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="1,000"
-                android:textColor="@color/main_color_500"
-                android:textSize="30sp"
-                app:typeface="robotoLight"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
-                android:id="@+id/onetext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="75dp"
-                android:textColor="@color/main_color_500"
-                android:textSize="20sp"
-                app:typeface="robotoLight"/>
+                <com.gullakh.gullakhandroid.SeekArc
+                    android:id="@+id/seekArc"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    seekarc:arcColor="@color/main_color_500"
+                    seekarc:clockwise="true"
+                    seekarc:max="2500"
 
-        </FrameLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-    <com.gullakh.gullakhandroid.MaterialTextField
-        android:layout_width="350dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"
-        app:mtf_cardCollapsedHeight="4dp"
-        app:mtf_cardColor="#ffffff"
-        app:mtf_image="@drawable/loan_amt"
-        android:layout_marginBottom="10dp">
 
-        <com.gullakh.gullakhandroid.font.RobotoEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Net Monthly Salary"
-            android:id="@+id/netsalary"
-            android:inputType="number"
-            android:textColorHint="#000"
-            android:textColor="#000"
-            android:text="1,000"
-android:maxLength="11"
-            android:textSize="20sp"
-            app:typeface="robotoLight"/>
+                    seekarc:progressColor="@color/main_color_500"
+                    seekarc:rotation="180"
+                    seekarc:startAngle="30"
+                    seekarc:sweepAngle="300"
+                    seekarc:thumb="@drawable/custom_seek_arc_control_selector"
+                    seekarc:touchInside="true"
+                    android:padding="40dp" />
 
-    </com.gullakh.gullakhandroid.MaterialTextField>
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/seekArcProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="1,000"
+                    android:textColor="@color/main_color_500"
+                    android:textSize="30sp"
+                    app:typeface="robotoLight"/>
 
+                <com.gullakh.gullakhandroid.font.RobotoTextView
+                    android:id="@+id/onetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="75dp"
+                    android:textColor="@color/main_color_500"
+                    android:textSize="20sp"
+                    app:typeface="robotoLight"/>
+
+            </FrameLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+        <com.gullakh.gullakhandroid.MaterialTextField
+            android:layout_width="350dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            app:mtf_cardCollapsedHeight="4dp"
+            app:mtf_cardColor="#ffffff"
+            app:mtf_image="@drawable/loan_amt"
+            android:layout_marginBottom="10dp">
 
-               >
+            <com.gullakh.gullakhandroid.font.RobotoEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Net Monthly Salary"
+                android:id="@+id/netsalary"
+                android:inputType="number"
+                android:textColorHint="#000"
+                android:textColor="#000"
+                android:text="1,000"
+    android:maxLength="11"
+                android:textSize="20sp"
+                app:typeface="robotoLight"/>
 
+        </com.gullakh.gullakhandroid.MaterialTextField>
 
-                <com.gullakh.gullakhandroid.font.RobotoTextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:id="@+id/TextViewOption4"
-                    android:layout_marginLeft="38dp"
-                    android:textColor="#3f3f3f"
-                    app:typeface="robotoLight"
-                    android:visibility="gone" />
 
-                <com.gullakh.gullakhandroid.MaterialTextField
-                    android:layout_width="350dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
+                   >
 
 
-                    app:mtf_cardCollapsedHeight="4dp"
-                    app:mtf_cardColor="#fff"
-                    app:mtf_image="@drawable/loan_amt"
-                    >
-
-                    <com.gullakh.gullakhandroid.font.RobotoEditText
-                        android:layout_width="match_parent"
+                    <com.gullakh.gullakhandroid.font.RobotoTextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Average Monthly Incentives"
-                        android:inputType="number"
-                        android:id="@+id/incent"
-                        android:textColorHint="#000"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        app:typeface="robotoLight"/>
+                        android:textSize="18dp"
+                        android:id="@+id/TextViewOption4"
+                        android:layout_marginLeft="38dp"
+                        android:textColor="#3f3f3f"
+                        app:typeface="robotoLight"
+                        android:visibility="gone" />
 
-                </com.gullakh.gullakhandroid.MaterialTextField>
-
-                <com.gullakh.gullakhandroid.MaterialTextField
-                    android:layout_width="350dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/mbonus"
-
-                    app:mtf_cardCollapsedHeight="4dp"
-                    app:mtf_cardColor="#fff"
-                    app:mtf_image="@drawable/loan_amt"
-                    >
-
-                    <com.gullakh.gullakhandroid.font.RobotoEditText
-                        android:layout_width="match_parent"
+                    <com.gullakh.gullakhandroid.MaterialTextField
+                        android:layout_width="350dp"
+                        android:layout_gravity="center_horizontal"
                         android:layout_height="wrap_content"
-                        android:hint="Annual Bonus"
-
-                        android:inputType="number"
-                        android:id="@+id/bonus"
-                        android:textColorHint="#000"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        app:typeface="robotoLight"/>
-
-                </com.gullakh.gullakhandroid.MaterialTextField>
-            </LinearLayout>
-        </LinearLayout> </LinearLayout>
-        </ScrollView>
 
 
+                        app:mtf_cardCollapsedHeight="4dp"
+                        app:mtf_cardColor="#fff"
+                        app:mtf_image="@drawable/loan_amt"
+                        >
 
-    </LinearLayout>
+                        <com.gullakh.gullakhandroid.font.RobotoEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Average Monthly Incentives"
+                            android:inputType="number"
+                            android:id="@+id/incent"
+                            android:textColorHint="#000"
+                            android:textColor="#000"
+                            android:textSize="20sp"
+                            app:typeface="robotoLight"/>
+
+                    </com.gullakh.gullakhandroid.MaterialTextField>
+
+                    <com.gullakh.gullakhandroid.MaterialTextField
+                        android:layout_width="350dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/mbonus"
+
+                        app:mtf_cardCollapsedHeight="4dp"
+                        app:mtf_cardColor="#fff"
+                        app:mtf_image="@drawable/loan_amt"
+                        >
+
+                        <com.gullakh.gullakhandroid.font.RobotoEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Annual Bonus"
+
+                            android:inputType="number"
+                            android:id="@+id/bonus"
+                            android:textColorHint="#000"
+                            android:textColor="#000"
+                            android:textSize="20sp"
+                            app:typeface="robotoLight"/>
+
+                    </com.gullakh.gullakhandroid.MaterialTextField>
+                </LinearLayout>
+            </LinearLayout> </LinearLayout>
+            </ScrollView>
+
+
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:orientation="horizontal"

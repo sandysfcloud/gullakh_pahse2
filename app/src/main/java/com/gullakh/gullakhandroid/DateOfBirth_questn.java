@@ -36,7 +36,6 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -259,6 +258,30 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 ldateofb.setVisibility(View.GONE);
                 lempl.setVisibility(View.VISIBLE);
                 Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
+        Emp.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 2)
+                    getemplistnew(Emp.getText().toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+//                if (s.length() == 2)
+//                    getemplistnew(Emp.getText().toString());
+            }
+        });
+
+
+
+
                 Emp.requestFocus();
                 Emp.setOnClickListener(this);
 
@@ -318,7 +341,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                  }
 
-                getemplist();
+             //   getemplist();
 
 
     }
@@ -728,4 +751,54 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         age = getAge(yearv, month, day);//every time date is edited and set age is got
         //((GlobalData) getApplication()).setage(age);//every time dob changes age has be set
     }
+
+    public void getemplistnew(String emp)
+    {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Employer[] enums = gson.fromJson(jsonObject.get("result"), Employer[].class);
+
+                int size=enums.length;
+                Log.e("emplist frm server ", String.valueOf(size));
+                ArrayList<String> liste =new ArrayList<String>();
+                for(int i=0;i<size;i++) {
+                    liste.add(enums[i].getemployername());
+                }
+                final ShowSuggtn fAdapter = new ShowSuggtn(DateOfBirth_questn.this, android.R.layout.simple_dropdown_item_1line, liste);
+                Emp.setAdapter(fAdapter);
+
+
+                Log.e("emplist frm server ", String.valueOf(liste));
+
+
+
+            }
+        }, DateOfBirth_questn.this, "2");
+        DataHandler dbobject = new DataHandler(DateOfBirth_questn.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("token", "employerlist", sessionid,emp);
+
+    }
+
+
+
 }
