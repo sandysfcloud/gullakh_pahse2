@@ -87,7 +87,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.activity_google_plus_login, container, false);
-        mGoogleApiClient = new GoogleApiClient.Builder(currentact)
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
@@ -105,11 +105,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 //        llProfileLayout = (LinearLayout) findViewById(R.id.llProfile);
 //
 //        // Button click listeners
-        currentact=currentact;
+        currentact=getActivity();
         btnSignOut.setOnClickListener(this);
 //        btnRevokeAccess.setOnClickListener(this);
         tag="google";
-        mGoogleApiClient = new GoogleApiClient.Builder(currentact)
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
@@ -124,7 +124,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
         btnSignIn.setOnClickListener(this);
         login.setOnClickListener(this);
-        mGoogleApiClient = new GoogleApiClient.Builder(currentact)
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
@@ -148,7 +148,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         if (mConnectionResult.hasResolution()) {
             try {
                 mIntentInProgress = true;
-                mConnectionResult.startResolutionForResult(currentact, RC_SIGN_IN);
+                mConnectionResult.startResolutionForResult(getActivity(), RC_SIGN_IN);
             } catch (SendIntentException e) {
                 mIntentInProgress = false;
                 mGoogleApiClient.connect();
@@ -159,7 +159,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         if (!result.hasResolution()) {
-            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), currentact,
+            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), getActivity(),
                     0).show();
             return;
         }
@@ -271,7 +271,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
             case R.id.login:
                 Log.d("clicked1","googleplus");
                 signInWithGplus();
-//                btnSignIn.performClick();
+                btnSignIn.performClick();
                 break;
             case R.id.btn_sign_out:
                 // Signin button clicked
@@ -437,6 +437,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         final EditText input = new EditText(currentact);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
         builder.setView(input);
 
 // Set up the buttons
@@ -469,12 +470,22 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                 }
                             }
                         }, currentact, "wait");
+
                         usermobno = input.getText().toString();
+                        if(usermobno.equals("") || usermobno.length()!=10)
+                            RegisterPageActivity.showErroralert(currentact,"Please enter 10 digit mobile number.","error");
+                        else
                         requestgetserver1.execute("token", "getGoogleAccReg", email, googleuserid, usermobno, RegisterAppToServer.regid, name[0], name[name.length - 1], tag, tempuid.replaceAll("\"", ""));
 
                     }
                 }
         );
+        builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
         builder.show();
     }
     private void getOTPVerification(final String tempuid) {

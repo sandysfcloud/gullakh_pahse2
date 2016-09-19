@@ -145,38 +145,40 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						if (mobilenumber.getText().toString().equals("")||mobilenumber.length()<10){
 							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
 						}else{
+							if (Password.getText().toString().equals("")){
+								RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter password", "error");
+							}else {
+								if (checkBox.isChecked()) {
+									useremail = emailadress.getText().toString();
+									usermobno = mobilenumber.getText().toString();
+									// Check device for Play Services APK.
+									//if (checkPlayServices()) {
+									//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+									//	regid = getRegistrationId(getApplicationContext());
+									Log.d("GCM Regid is", RegisterAppToServer.regid);
+									String[] arraydata = new String[10];
+									arraydata[0] = "registration";
+									arraydata[1] = useremail;
+									arraydata[2] = usermobno;
+									arraydata[3] = RegisterAppToServer.regid;
+									arraydata[4] = firstName.getText().toString();
+									arraydata[5] = middlename.getText().toString();
+									arraydata[6] = lastName.getText().toString();
+									arraydata[7] = Password.getText().toString();
+									if (tempUid != null)
+										arraydata[8] = tempUid;
 
-							if (checkBox.isChecked())
-							{
-								useremail = emailadress.getText().toString();
-								usermobno = mobilenumber.getText().toString();
-								// Check device for Play Services APK.
-								//if (checkPlayServices()) {
-								//	gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-								//	regid = getRegistrationId(getApplicationContext());
-								Log.d("GCM Regid is",RegisterAppToServer.regid);
-								String[] arraydata = new String[10];
-								arraydata[0] = "registration";
-								arraydata[1] = useremail;
-								arraydata[2] = usermobno;
-								arraydata[3] = RegisterAppToServer.regid;
-								arraydata[4] = firstName.getText().toString();
-								arraydata[5] = middlename.getText().toString();
-								arraydata[6] = lastName.getText().toString();
-								arraydata[7] = Password.getText().toString();
-								if(tempUid!=null)
-								arraydata[8] = tempUid;
+									urlchange = "registration";
+									JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
+									asyncTask.delegate = RegisterPageActivity.this;
+									asyncTask.execute();
 
-								urlchange = "registration";
-								JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
-								asyncTask.delegate = RegisterPageActivity.this;
-								asyncTask.execute();
-
-								//} else {
-								//	Log.i(TAG, "No valid Google Play Services APK found.");
-								//}
-							} else {
-								RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+									//} else {
+									//	Log.i(TAG, "No valid Google Play Services APK found.");
+									//}
+								} else {
+									RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
+								}
 							}
 						}
 
@@ -236,21 +238,25 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
-							String[] arraydata = new String[10];
-							arraydata[0] = "otpcheck";
-							arraydata[1] = useremail;
-							arraydata[2] = usermobno;
-							arraydata[3] = RegisterAppToServer.regid;
-							arraydata[4] = OTP.getText().toString();
-							arraydata[5] = tempUid;
+							if(OTP.getText().toString().equals(""))
+								RegisterPageActivity.showErroralert(RegisterPageActivity.this,"Please enter valid OTP number.","error");
+							else {
+
+								String[] arraydata = new String[10];
+								arraydata[0] = "otpcheck";
+								arraydata[1] = useremail;
+								arraydata[2] = usermobno;
+								arraydata[3] = RegisterAppToServer.regid;
+								arraydata[4] = OTP.getText().toString();
+								arraydata[5] = tempUid;
 //							inpuotp=input;
 
-							urlchangeprev = "registration";
-							urlchange = "setpassword";
-							JSONParse asyncTask =new JSONParse(RegisterPageActivity.this,arraydata);
-							asyncTask.delegate= RegisterPageActivity.this;
-							asyncTask.execute();
-
+								urlchangeprev = "registration";
+								urlchange = "setpassword";
+								JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
+								asyncTask.delegate = RegisterPageActivity.this;
+								asyncTask.execute();
+							}
 
 						}
 					});
@@ -334,8 +340,6 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					builder2.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-
-
 
 								String[] arraydata = new String[5];
 								arraydata[0] = "password";
