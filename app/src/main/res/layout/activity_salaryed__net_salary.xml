@@ -94,7 +94,7 @@
                 android:textColorHint="#000"
                 android:textColor="#000"
                 android:text="1,000"
-    android:maxLength="11"
+                android:maxLength="11"
                 android:textSize="20sp"
                 app:typeface="robotoLight"/>
 

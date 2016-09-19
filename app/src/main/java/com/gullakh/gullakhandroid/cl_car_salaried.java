@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,7 +86,34 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
         Emp.requestFocus();
         Emp.setOnClickListener(this);
-        getemplist();
+        //getemplist();
+
+
+
+
+        Emp.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 2)
+                    getemplist(Emp.getText().toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+//                if (s.length() == 2)
+//                    getemplistnew(Emp.getText().toString());
+            }
+        });
+
+
+
         getDataFromHashMap();
         user=true;
 
@@ -133,7 +162,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
             Doj.setText(cl_car_global_data.dataWithAns.get("year_you_joined_current_comp"));
         }
     }
-    public void getemplist()
+    public void getemplist(String emp)
     {
 
         requestgetserver = new JSONServerGet(new AsyncResponse() {
@@ -176,7 +205,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("token", "employerlist", sessionid);
+        requestgetserver.execute("token", "employerlist", sessionid,emp);
 
 
 

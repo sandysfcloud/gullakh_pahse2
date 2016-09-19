@@ -258,11 +258,11 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 ldateofb.setVisibility(View.GONE);
                 lempl.setVisibility(View.VISIBLE);
                 Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
-        Emp.addTextChangedListener(new TextWatcher() {
+                Emp.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 2)
+                if (s.length() == 3)
                     getemplistnew(Emp.getText().toString());
             }
 

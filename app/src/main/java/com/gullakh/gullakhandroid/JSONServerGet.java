@@ -93,11 +93,12 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         if(args[1].equals("builderlist")){
                             Log.d("main result", "builderlist");
                             Log.d("sessn", args[2]);
-
+                            Log.d("keyword is", args[3]);
                             nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "getbuildername"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("keyword", args[3]));
 
 
                         }

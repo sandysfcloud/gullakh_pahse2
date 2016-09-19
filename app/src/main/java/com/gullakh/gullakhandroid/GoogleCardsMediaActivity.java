@@ -397,6 +397,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
                                 LayoutInflater factory = LayoutInflater.from(getApplicationContext());
                                 final View view = factory.inflate(R.layout.applnotfound, null);
+                                TextView name = (TextView)view.findViewById(R.id.nf);
+                                name.setText("No Application Found");
                                 alertadd.setView(view);
                                 alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
@@ -521,8 +523,25 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     cr.moveToNext();
                     searchlistviewArry.add(sched2);
                 }
-            } else
-                Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
+            } else {
+                //Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+                final View view = factory.inflate(R.layout.applnotfound, null);
+                TextView name = (TextView)view.findViewById(R.id.nf);
+                name.setText("No Search Data Found");
+                alertadd.setView(view);
+                alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                });
+                alertadd.show();
+            }
         } catch (Exception e) {
             System.out.println("error3 " + e.toString());
             dh1.cr.close();

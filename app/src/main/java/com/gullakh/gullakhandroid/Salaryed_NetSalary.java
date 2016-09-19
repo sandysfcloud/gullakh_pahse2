@@ -111,11 +111,15 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
 
         if(gloan_type.equalsIgnoreCase("Home Loan")||gloan_type.equalsIgnoreCase("Loan Against Property")) {
+            Log.d("its hl o lap","1");
             fbonus=1;
             mbonus = (MaterialTextField) findViewById(R.id.mbonus);
             mbonus.setVisibility(View.VISIBLE);
             bonus = (EditText) findViewById(R.id.bonus);
             bonus.addTextChangedListener(new NumberTextWatcher(bonus));
+            titl.setText("My Gross Monthly Salary Is");
+            sal.setText("");
+            sal.setHint("Gross Monthly Salary");
 
         }
 
