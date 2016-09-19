@@ -510,7 +510,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     private void getOTPVerification(final String tempuid) {
         AlertDialog.Builder builder = new AlertDialog.Builder(currentact);
         builder.setTitle("Enter OTP");
-        builder.setCancelable(false);
+        builder.setCancelable(true);
 // Set up the input
         final EditText input = new EditText(currentact);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text

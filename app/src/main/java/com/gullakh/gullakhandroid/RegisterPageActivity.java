@@ -145,8 +145,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						if (mobilenumber.getText().toString().equals("")||mobilenumber.length()<10){
 							RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter 10 digit mobile number", "error");
 						}else{
-							if (Password.getText().toString().equals("")){
-								RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter password", "error");
+							if (Password.getText().toString().equals("") || Password.getText().toString().length()<7){
+								RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter valid password of minimum 8 characters.", "error");
 							}else {
 								if (checkBox.isChecked()) {
 									useremail = emailadress.getText().toString();
