@@ -138,7 +138,7 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                             }
                         }
                     });
-                    builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
@@ -185,7 +185,7 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                             }
                         }
                     });
-                    builder2.setNegativeButton("", new DialogInterface.OnClickListener() {
+                    builder2.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();

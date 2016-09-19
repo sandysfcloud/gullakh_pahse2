@@ -97,7 +97,7 @@
                 android:layout_height="100dp"
                 android:id="@+id/ImageViewBank4"
                 android:layout_weight="1"
-                android:background="@drawable/bankother"
+                android:background="@drawable/bankidbi"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp" />
         </LinearLayout>

@@ -6,7 +6,7 @@
     android:background="@drawable/bgque"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <com.gullakh.gullakhandroid.CustomScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView14"
@@ -82,13 +82,15 @@
             android:layout_height="wrap_content"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#ffffff"
+            android:id="@+id/esal"
+            android:hint="Net Monthly Salary"
             app:mtf_image="@drawable/loan_amt"
             android:layout_marginBottom="10dp">
 
             <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Net Monthly Salary"
+
                 android:id="@+id/netsalary"
                 android:inputType="number"
                 android:textColorHint="#000"
@@ -174,7 +176,7 @@
 
 
         </LinearLayout>
-    </ScrollView>
+    </com.gullakh.gullakhandroid.CustomScrollView>
 
     <LinearLayout
         android:orientation="horizontal"

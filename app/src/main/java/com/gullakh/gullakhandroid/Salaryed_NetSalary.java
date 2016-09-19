@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -35,6 +37,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
     String data,gloan_type,carloantp,Baltrans;
     Double netsal,avg_incen;
     int fbonus=0;
+    CustomScrollView myScroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +86,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
 
 
-
-
+          myScroll = (CustomScrollView) findViewById(R.id.scrollView14);
 
 
 
@@ -118,7 +120,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             bonus = (EditText) findViewById(R.id.bonus);
             bonus.addTextChangedListener(new NumberTextWatcher(bonus));
             titl.setText("My Gross Monthly Salary Is");
-            sal.setText("");
+          //  sal.setText("");
             sal.setHint("Gross Monthly Salary");
 
         }
@@ -170,6 +172,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
             public void afterTextChanged(Editable s) {
 
+
+
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 if (!sal.getText().toString().equals("")) {
                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(sal.getText()).replaceAll(",", ""))));
@@ -198,6 +202,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         {
             @Override
             public void onStopTrackingTouch(SeekArc seekArc) {
+                myScroll.setEnableScrolling(true);
             }
             @Override
             public void onStartTrackingTouch(SeekArc seekArc) {
@@ -205,7 +210,11 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             @Override
             public void onProgressChanged(SeekArc seekArc, int progress,
                                           boolean fromUser) {
-              //  progress = (progress + 4) * 5000;
+
+
+                myScroll.setEnableScrolling(false);
+
+                //  progress = (progress + 4) * 5000;
                 //progress = (progress + 1) * 50000;
                 progress = (progress + 1) * 1000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));

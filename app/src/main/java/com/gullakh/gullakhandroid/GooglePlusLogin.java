@@ -395,7 +395,9 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             }
                         }
                         else {
-                            if (tag.equals("facebook")&&((GlobalData) currentact.getApplication()).getcredback() == null&&ListView_Click.listvc==null) {
+                            if(tag!=null)
+                            Log.d("tag is K",tag);
+                            if (tag.equals("facebook")||tag.equals("google")&&((GlobalData) currentact.getApplication()).getcredback() == null&&ListView_Click.listvc==null) {
                                 RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
                                 Log.d("facebook signout", "");
                                 signinPrepage obj = new signinPrepage();
@@ -497,7 +499,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     }
                 }
         );
-        builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
