@@ -72,9 +72,13 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fp:
-                useremail = emailadress.getText().toString();
-                usermobno = mobileno.getText().toString();
-                goToReqPassword();
+                if(mobileno.getText().toString().length()==10) {
+                    useremail = emailadress.getText().toString();
+                    usermobno = mobileno.getText().toString();
+                    goToReqPassword();
+                }else{
+                    RegisterPageActivity.showErroralert(ForgetPassword.this,"Please enter valid 10 digit mobile number.", "failed");
+                }
                 break;
         }
     }
@@ -107,7 +111,7 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                     resultmobno=str_result.getString("phone");
                     userid=str_result.getString("user_id");
                     contactid=str_result.getString("contact_id");
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ForgetPassword.this);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(ForgetPassword.this);
                     builder.setTitle("Enter Verification code");
                     builder.setCancelable(false);
                     final EditText input = new EditText(ForgetPassword.this);
@@ -116,17 +120,28 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                     builder.setPositiveButton("VERIFY", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            flag = "otpverify";
-                            String[] arraydata = new String[10];
-                            arraydata[0] = "otpcheckforgetpassword";
-                            arraydata[1] = resultemail;
-                            arraydata[2] = usermobno;
-                            arraydata[3] = RegisterAppToServer.regid;
-                            arraydata[4] = input.getText().toString();
-                            arraydata[5] =null;
-                            JSONParse asyncTask = new JSONParse(ForgetPassword.this, arraydata);
-                            asyncTask.delegate = ForgetPassword.this;
-                            asyncTask.execute();
+                            if (input.getText().toString().equals(""))
+                                RegisterPageActivity.showErroralert(ForgetPassword.this, "Please enter valid verification code.", "error");
+                            else {
+
+                                flag = "otpverify";
+                                String[] arraydata = new String[10];
+                                arraydata[0] = "otpcheckforgetpassword";
+                                arraydata[1] = resultemail;
+                                arraydata[2] = usermobno;
+                                arraydata[3] = RegisterAppToServer.regid;
+                                arraydata[4] = input.getText().toString();
+                                arraydata[5] = null;
+                                JSONParse asyncTask = new JSONParse(ForgetPassword.this, arraydata);
+                                asyncTask.delegate = ForgetPassword.this;
+                                asyncTask.execute();
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
                         }
                     });
                     builder.show();
@@ -153,17 +168,27 @@ public class ForgetPassword extends AppCompatActivity implements View.OnClickLis
                     builder2.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            flag =  "newpass";
-                            String[] arraydata = new String[5];
-                            arraydata[0] = "password";
-                            arraydata[1] = resultemail;
-                            arraydata[2] = resultmobno;
-                            arraydata[3] = RegisterAppToServer.regid;
-                            arraydata[4] = inputpassword.getText().toString();
-                            storedatatoDatabase();
-                            JSONParse asyncTask = new JSONParse(ForgetPassword.this, arraydata);
-                            asyncTask.delegate = ForgetPassword.this;
-                            asyncTask.execute();
+                            if(inputpassword.getText().toString().equals("") || inputpassword.getText().toString().length()<7)
+                                RegisterPageActivity.showErroralert(ForgetPassword.this,"Please enter password of equals or more than 8 digit.","error");
+                            else {
+                                flag = "newpass";
+                                String[] arraydata = new String[5];
+                                arraydata[0] = "password";
+                                arraydata[1] = resultemail;
+                                arraydata[2] = resultmobno;
+                                arraydata[3] = RegisterAppToServer.regid;
+                                arraydata[4] = inputpassword.getText().toString();
+                                storedatatoDatabase();
+                                JSONParse asyncTask = new JSONParse(ForgetPassword.this, arraydata);
+                                asyncTask.delegate = ForgetPassword.this;
+                                asyncTask.execute();
+                            }
+                        }
+                    });
+                    builder2.setNegativeButton("", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
                         }
                     });
                     builder2.show();
