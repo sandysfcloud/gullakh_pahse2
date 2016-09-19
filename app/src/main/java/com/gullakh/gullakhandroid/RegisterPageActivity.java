@@ -354,7 +354,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 						}
 					});
-					builder2.setNegativeButton("", new DialogInterface.OnClickListener() {
+					builder2.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.cancel();

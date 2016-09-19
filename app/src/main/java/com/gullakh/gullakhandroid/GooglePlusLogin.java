@@ -480,7 +480,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     }
                 }
         );
-        builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
