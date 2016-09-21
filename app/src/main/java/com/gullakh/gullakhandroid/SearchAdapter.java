@@ -118,7 +118,8 @@ public class SearchAdapter extends BaseAdapter
                 if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Car Loan")){
                     ((GlobalData) cont.getApplicationContext()).setCartypeloan(obj.getString("car_loan_type"));
                 }
-                if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Home Loan")){
+                if(((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Home Loan")
+                        ||((GlobalData) cont.getApplicationContext()).getLoanType().equalsIgnoreCase("Loan Against Property")){
                     ((GlobalData) cont.getApplicationContext()).setBaltrans(obj.getString("hl_bal_tranf"));
                 }
 
@@ -292,8 +293,10 @@ public class SearchAdapter extends BaseAdapter
                         ((GlobalData) cont.getApplicationContext()).setage(Integer.parseInt(obj.getString("age")));
                         ((GlobalData) cont.getApplicationContext()).setTenure(obj.getString("loan_tenure"));
 
-                        if(obj.getString("need_loan_for")!=null)
-                        ((GlobalData) cont.getApplicationContext()).sethneed(obj.getString("need_loan_for"));
+                        if (obj.has("need_loan_for")) {
+                            if (obj.getString("need_loan_for") != null)
+                                ((GlobalData) cont.getApplicationContext()).sethneed(obj.getString("need_loan_for"));
+                        }
 
                         if(obj.getString("property_city")!=null)
                         ((GlobalData) cont.getApplicationContext()).setCity(obj.getString("property_city"));

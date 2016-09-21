@@ -84,7 +84,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 2)
+                if (s.length() == 3)
                     getemplist(Emp.getText().toString());
             }
 

@@ -133,8 +133,8 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.next:
                 if (!grossSal.getText().toString().equals("")) {
-                    if (!annualBonus.getText().toString().equals("")) {
-                        if (!avgmninc.getText().toString().equals("")) {
+                    //if (!annualBonus.getText().toString().equals("")) {
+                     //   if (!avgmninc.getText().toString().equals("")) {
                             Log.d("City user2", String.valueOf(cl_car_salaried.user));
 
 
@@ -196,12 +196,12 @@ public class hl_salaried2 extends AppCompatActivity implements View.OnClickListe
                                     }
                                 }*/
 
-                        } else {
+                        /*} else {
                             RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter avg monthly incentives ", "failed");
                         }
                     } else {
                         RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter annual bonus?", "failed");
-                    }
+                    }*/
                 } else {
                     RegisterPageActivity.showErroralert(hl_salaried2.this, "Please enter monthly gross salary?", "failed");
                 }

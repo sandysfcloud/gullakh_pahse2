@@ -90,7 +90,7 @@
             <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Other"
+                android:hint="Depreciation"
                 android:text="0"
                 android:id="@+id/loanamountid"
                 android:ems="10"

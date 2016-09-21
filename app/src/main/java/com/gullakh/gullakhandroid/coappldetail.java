@@ -17,33 +17,34 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-public class coappldetail extends AppCompatActivity  implements View.OnClickListener{
+public class coappldetail extends AppCompatActivity implements View.OnClickListener {
     RadioButton yesb, nob;
     LinearLayout main;
     ImageView review;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coappldetail);
 
 
-        LinearLayout lfath= (LinearLayout) findViewById(R.id.lfath);
-        LinearLayout lmoth= (LinearLayout) findViewById(R.id.lmoth);
-        LinearLayout lbro= (LinearLayout) findViewById(R.id.lbro);
-        LinearLayout lspou= (LinearLayout) findViewById(R.id.lspou);
+        LinearLayout lfath = (LinearLayout) findViewById(R.id.lfath);
+        LinearLayout lmoth = (LinearLayout) findViewById(R.id.lmoth);
+        LinearLayout lbro = (LinearLayout) findViewById(R.id.lbro);
+        LinearLayout lspou = (LinearLayout) findViewById(R.id.lspou);
 
-        Button bfath= (Button) findViewById(R.id.bfath);
+        Button bfath = (Button) findViewById(R.id.bfath);
 
-        Button bmoth= (Button) findViewById(R.id.bmoth);
-        Button bbro= (Button) findViewById(R.id.bbro);
-        Button bspous= (Button) findViewById(R.id.bspous);
+        Button bmoth = (Button) findViewById(R.id.bmoth);
+        Button bbro = (Button) findViewById(R.id.bbro);
+        Button bspous = (Button) findViewById(R.id.bspous);
         bfath.setOnClickListener(this);
         bmoth.setOnClickListener(this);
         bbro.setOnClickListener(this);
         bspous.setOnClickListener(this);
 
 
-        Button done= (Button) findViewById(R.id.done);
+        Button done = (Button) findViewById(R.id.done);
         done.setOnClickListener(this);
 //        main= (LinearLayout) findViewById(R.id.lmain);
 //        yesb = (RadioButton) findViewById(R.id.yes);
@@ -52,18 +53,17 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 //        nob.setOnClickListener(this);
 
 
-
         //********************changing actionbar
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
 
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView titl = (TextView) v.findViewById(R.id.title);
         review = (ImageView) v.findViewById(R.id.edit);
         review.setVisibility(View.INVISIBLE);
-        ImageView  close = (ImageView) v.findViewById(R.id.close);
+        ImageView close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
         titl.setText("Co Applicant");
@@ -78,7 +78,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 //**********
 
         Log.d("check all data here", String.valueOf(cl_car_global_data.dataWithAns));
-        if (cl_car_global_data.dataWithAns.get("proposed_ownership")!=null) {
+        if (cl_car_global_data.dataWithAns.get("proposed_ownership") != null) {
             if (cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("joint")) {
                 String coapp = cl_car_global_data.dataWithAns.get("joint_acc");
                 // Log.d("check coapp name here", coapp);
@@ -104,7 +104,7 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
                 lbro.setVisibility(View.VISIBLE);
                 lspou.setVisibility(View.VISIBLE);
             }
-        }else {
+        } else {
             lmoth.setVisibility(View.VISIBLE);
             lfath.setVisibility(View.VISIBLE);
             lbro.setVisibility(View.VISIBLE);
@@ -118,8 +118,8 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 
                 //main.setVisibility(View.VISIBLE);
 //add even working details of coapplicant
-                String hasno=((GlobalData) getApplication()).gethashno();
-                Log.d("working store data at last",hasno);
+                String hasno = ((GlobalData) getApplication()).gethashno();
+                Log.d("working store data at last", hasno);
                 setmainhm(hasno, cl_car_global_data.dataWithAnscoapp);
                 Log.d("check main hashmap data", String.valueOf(cl_car_global_data.allcoappdetail));
             }
@@ -169,21 +169,63 @@ public class coappldetail extends AppCompatActivity  implements View.OnClickList
 
                 break;
             case R.id.done:
-                if (cl_car_global_data.dataWithAnscoapp != null)
-                {
-                    if ( cl_car_global_data.dataWithAnscoapp.get("firstname")!=null)
-                    {
-                        intent = new Intent(this, cl_car_gender.class);
-                        intent.putExtra("coappl", "done");
-                        startActivity(intent);
+                if (cl_car_global_data.dataWithAns.get("proposed_ownership") != null) {
+                    Log.d("co applicants 1", cl_car_global_data.dataWithAns.get("proposed_ownership"));
+
+                    if (cl_car_global_data.dataWithAns.get("proposed_ownership").equalsIgnoreCase("joint")) {
+
+                        if (cl_car_global_data.dataWithAnscoapp != null) {
+                            Log.d("co applicants 2", String.valueOf(cl_car_global_data.dataWithAnscoapp));
+                            int count = 0;
+                            if (cl_car_global_data.allcoappdetail != null) {
+
+                                if (cl_car_global_data.allcoappdetail.get("1") != null) {
+                                    count = count + 1;
+                                }
+                                if (cl_car_global_data.allcoappdetail.get("2") != null) {
+                                    count = count + 1;
+                                }
+                                if (cl_car_global_data.allcoappdetail.get("3") != null) {
+                                    count = count + 1;
+                                }
+                                if (cl_car_global_data.allcoappdetail.get("4") != null) {
+                                    count = count + 1;
+                                }
+                                Log.d("co applicants all", String.valueOf(cl_car_global_data.allcoappdetail.get("1")));
+                            }
+
+                            Log.d("joint acc mem", cl_car_global_data.dataWithAns.get("joint_acc"));
+                            int count2 = 0;
+                            if (cl_car_global_data.dataWithAns.get("joint_acc") != null) {
+                                String trimmed = cl_car_global_data.dataWithAns.get("joint_acc").trim();
+                                count2 = trimmed.isEmpty() ? 0 : trimmed.split(";").length;
+                            }
+                            Log.d("joint acc mem count", String.valueOf(count));
+                            Log.d("joint acc mem count2", String.valueOf(count2));
+
+                            if (count == count2)
+                            {
+                                Log.d("all co app added","1");
+                                intent = new Intent(this, cl_car_gender.class);
+                                intent.putExtra("coappl", "done");
+                                startActivity(intent);
+                            }
+                            else
+                                RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");
+
+
+                           /* if (cl_car_global_data.dataWithAnscoapp.get("firstname") != null) {
+                                intent = new Intent(this, cl_car_gender.class);
+                                intent.putExtra("coappl", "done");
+                                startActivity(intent);
+                            } else
+                                RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");*/
+
+
+                        } else
+                            RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");
                     }
-                    else
-                        RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");
-
-
                 }
-                else
-                    RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");
 
                 break;
 //            case R.id.yes:

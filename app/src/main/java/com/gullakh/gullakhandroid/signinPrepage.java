@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ import java.security.NoSuchAlgorithmException;
 public class signinPrepage extends AppCompatActivity implements View.OnClickListener {
     CallbackManager callbackManager;
     ProgressDialog progressDialog;
-    String useremail,first_name,usermobno,fbid;
+    String useremail,first_name,last_name,usermobno,fbid;
     GooglePlusLogin obj;
     private JSONServerGet requestgetserver1,requestgetserver2;
      LoginButton loginButton;
@@ -134,6 +135,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
                         Bundle bFacebookData = getFacebookData(object);
                         useremail=bFacebookData.getString("email");
                         first_name=bFacebookData.getString("first_name");
+                        last_name=bFacebookData.getString("last_name");
                         fbid=bFacebookData.getString("idFacebook");
                         Log.d("fb login bFacebookData", String.valueOf(bFacebookData));
                         Log.d("bFacebookData email", String.valueOf(bFacebookData.getString("email")));
@@ -223,7 +225,8 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         obj=new  GooglePlusLogin();
         obj.email=useremail;
 //        obj.useremail=useremail;
-        obj.personName=first_name;
+        Log.d("name in fb",first_name+" "+last_name);
+        obj.personName=first_name+" "+last_name;
         obj.currentact=this;
         obj.googleuserid=fbid;
         obj.tag="facebook";
@@ -354,7 +357,17 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
 
 
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d("back pressed","1");
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent intent  = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 

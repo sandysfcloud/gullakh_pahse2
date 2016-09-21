@@ -212,6 +212,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 String loantyp=((GlobalData) act.getApplication()).getLoanType();
                                 if( loantyp.equalsIgnoreCase("Home Loan")||loantyp.equalsIgnoreCase("Loan Against Property"))
                                 {
+                                    Log.d("loantyp is kk",loantyp);
                                     if (((GlobalData) act.getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                                         Log.d("tranf loan amt", ((GlobalData) act.getApplication()).getloanamt());
                                         Log.d("tranf getexistbank", ((GlobalData) act.getApplication()).getexistbank());
@@ -234,16 +235,22 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
                                     } else {
+                                        Log.d("getBaltrans is no","3");
                                         nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
 
                                     }
                                 }else{
+
                                     nameValuePairs.add(new BasicNameValuePair("loanamount", ((GlobalData) act.getApplication()).getloanamt()));
                                 }
-                                if(((GlobalData) act.getApplication()).getprojectnam()!=null)
-                                nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getprojectnam()));
-                                else
-                                    nameValuePairs.add(new BasicNameValuePair("builderprojectname","others"));
+                                Log.d("test KKK","3");
+                                if(loantyp.equalsIgnoreCase("Home Loan")) {
+                                    Log.d("its home loan so add builder","3");
+                                    if (((GlobalData) act.getApplication()).getprojectnam() != null)
+                                        nameValuePairs.add(new BasicNameValuePair("builderprojectname", ((GlobalData) act.getApplication()).getprojectnam()));
+                                    else
+                                        nameValuePairs.add(new BasicNameValuePair("builderprojectname", "others"));
+                                }
                                 Log.d("nameValuePairs value", String.valueOf(nameValuePairs));
 
 //                          for (NameValuePair nvp : nameValuePairs) {
@@ -913,7 +920,9 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
         @Override
         protected void onPostExecute(String json) {
             //dialogalert.dismiss();
-            callback.processFinishString(json,dialogalert);
+            callback.processFinishString(json, dialogalert);
+
+            if(json!=null)
             Log.e("Sandeep JSON!!!!", json.toString());
             // delegate.processFinishString(json);
             try {

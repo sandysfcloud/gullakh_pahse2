@@ -121,6 +121,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             bonus.addTextChangedListener(new NumberTextWatcher(bonus));
             titl.setText("My Gross Monthly Salary Is");
           //  sal.setText("");
+
             sal.setHint("Gross Monthly Salary");
 
         }

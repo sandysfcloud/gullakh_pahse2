@@ -113,7 +113,10 @@ public class hl_prop_owns extends AppCompatActivity implements View.OnClickListe
                 jointopt.setVisibility(View.VISIBLE);
                 break;
             case R.id.back:
-                finish();
+                Intent intent  = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.close:
                 Intent intenth = new Intent(getApplicationContext(), MainActivity.class);

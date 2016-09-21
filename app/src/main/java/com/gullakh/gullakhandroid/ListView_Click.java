@@ -95,20 +95,40 @@ Log.d("bankname in listvieclick",bankname);
 
     String feedata = "";
     for (int i = 0; i < sepfee.length; i++) {
-        feedata = feedata + sepfee[i] + "\n";
+        if(i == 0)
+            feedata="•"+feedata;
+
+        if(i==sepfee.length-1)
+            feedata = feedata + sepfee[i] + "\n"+"\n";
+        else
+        feedata = feedata + sepfee[i] + "\n"+"\n"+"\u2022";
+
         Log.d("feedata check",feedata);
         Log.d("fee info", +i + " " + sepfee[0]);
     }
 
     String othrdata = "";
     for (int i = 0; i < sepother.length; i++) {
-        othrdata = othrdata + sepother[i] + "\n";
+        if(i == 0)
+            othrdata="•"+othrdata;
+
+        if(i==sepother.length-1)
+        othrdata = othrdata + sepother[i] + "\n"+"\n";
+        else
+            othrdata = othrdata + sepother[i] + "\n"+"\n"+"\u2022";
         Log.d("sepother info", +i + " " + sepother[i]);
     }
 
     String cardocu = "";
     for (int i = 0; i < sdocum.length; i++) {
-        cardocu = cardocu + sdocum[i] + "\n";
+        if(i == 0)
+            cardocu="•"+cardocu;
+
+        if(i==sdocum.length-1)
+        cardocu = cardocu + sdocum[i] + "\n"+"\n";
+        else
+            cardocu = cardocu + sdocum[i] + "\n"+"\n"+"\u2022";
+
         Log.d("documen info", +i + " " + sdocum[i]);
     }
     Log.d("final cardocu info",cardocu);
@@ -447,6 +467,13 @@ Log.d("bankname in listvieclick",bankname);
             intent = new Intent(currentact, hl_prop_owns.class);
             currentact.startActivity(intent);
         }
+        else if(((GlobalData) currentact.getApplication()).gethneed().equals("Purchase of an under construction builder flat")
+                ||((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a house/flat which is ready to move-in"))
+        {
+            intent = new Intent(currentact, hl_prop_owns.class);
+            currentact.startActivity(intent);
+
+        }
     }
 
 }
@@ -474,7 +501,9 @@ Log.d("bankname in listvieclick",bankname);
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Intent intent  = new Intent(ListView_Click.this, MainActivity.class);
+            //Intent intent  = new Intent(ListView_Click.this, MainActivity.class);
+            Intent intent = new Intent(this, GoogleCardsMediaActivity.class);
+            intent.putExtra("data", "searchgo");
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);

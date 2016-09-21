@@ -66,7 +66,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     private String phone;
     private String contact_id;
     String   cscore=null;
-    private String[] name;
+    public String[] name;
     private String tempId;
 
     //    public Button btnSignOut, btnRevokeAccess;
@@ -396,16 +396,18 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         }
                         else {
                             if(tag!=null)
-                            Log.d("tag is K",tag);
-                            if (tag.equals("facebook")||tag.equals("google")&&((GlobalData) currentact.getApplication()).getcredback() == null&&ListView_Click.listvc==null) {
-                                RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
-                                Log.d("facebook signout", "");
-                                signinPrepage obj = new signinPrepage();
-                                obj.logoutfb(currentact);
-                                Intent  intent = new Intent(currentact, MyProfileActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                currentact.startActivity(intent);
-                            } else {
+                                Log.d("!ListView_Click.buttonApply", String.valueOf(!ListView_Click.buttonApply));
+                                if(!ListView_Click.buttonApply) {
+                                    if (tag.equals("facebook") || tag.equals("google") && ((GlobalData) currentact.getApplication()).getcredback() == null && ListView_Click.listvc == null) {
+                                        RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
+                                        Log.d("facebook signout", "");
+                                        signinPrepage obj = new signinPrepage();
+                                        obj.logoutfb(currentact);
+                                        Intent intent = new Intent(currentact, MyProfileActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        currentact.startActivity(intent);
+                                    }
+                                }else {
                                 Log.d("cscore is KK", "3");
                                 if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
 
@@ -546,15 +548,18 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                         }
                                     } else {
                                         //first time login through fb
-                                        if (tag.equals("facebook")&&((GlobalData) currentact.getApplication()).getcredback() == null&&ListView_Click.listvc==null) {
-                                            RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
-                                            Log.d("facebook signout", "");
-                                            signinPrepage obj = new signinPrepage();
-                                            obj.logoutfb(currentact);
-                                            Intent  intent = new Intent(currentact, MyProfileActivity.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            currentact.startActivity(intent);
-                                        } else {
+                                        Log.d("!ListView_Click.buttonApply", String.valueOf(!ListView_Click.buttonApply));
+                                        if(!ListView_Click.buttonApply) {
+                                            if (tag.equals("facebook") && ((GlobalData) currentact.getApplication()).getcredback() == null && ListView_Click.listvc == null) {
+                                                RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
+                                                Log.d("facebook signout", "1");
+                                                signinPrepage obj = new signinPrepage();
+                                                obj.logoutfb(currentact);
+                                                Intent intent = new Intent(currentact, MyProfileActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                currentact.startActivity(intent);
+                                            }
+                                        }else {
                                             Log.d("cscore is KK", "3");
                                             if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
 
@@ -663,6 +668,13 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Property is not yet identified")) {
                                 intent = new Intent(currentact, hl_prop_owns.class);
                                 currentact.startActivity(intent);
+                            }
+                            else if(((GlobalData) currentact.getApplication()).gethneed().equals("Purchase of an under construction builder flat")
+                                    ||((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a house/flat which is ready to move-in"))
+                            {
+                                intent = new Intent(currentact, hl_prop_owns.class);
+                                currentact.startActivity(intent);
+
                             }
                         }
 

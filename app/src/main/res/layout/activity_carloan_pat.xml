@@ -95,11 +95,11 @@
             <com.gullakh.gullakhandroid.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Other"
+                android:hint="Net Profit"
                 android:id="@+id/loanamountid"
                 android:ems="10"
                 android:text="10,000"
-                android:maxLength="11"
+
                 android:inputType="phone"
                 android:textColorHint="#000"
                 android:textColor="#000"

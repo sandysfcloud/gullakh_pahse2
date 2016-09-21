@@ -80,7 +80,7 @@
                 <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Other"
+                    android:hint="Total EMI's"
                     android:id="@+id/emipaying"
                     android:ems="10"
                     android:inputType="phone"

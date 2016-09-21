@@ -296,25 +296,25 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         } else if (data.equals("search")) {
 
 
-           /* DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
+            DataHandler dbobject = new DataHandler(GoogleCardsMediaActivity.this);
             Cursor crobj = dbobject.displayData("select * from userlogin");
 
-            if (crobj.moveToFirst()) {*/
-            Log.d("my search clicked", "2");
-            setContentView(R.layout.seach_display);
-            layout = (LinearLayout) findViewById(R.id.linear);
+            if (crobj.moveToFirst()) {
+                Log.d("my search clicked", "2");
+                setContentView(R.layout.seach_display);
+                layout = (LinearLayout) findViewById(R.id.linear);
 
-            setsearchdb();
-            createListView();
-            setsearchadapter(searchlistviewArry);
+                setsearchdb();
+                createListView();
+                setsearchadapter(searchlistviewArry);
 
 
-        } /*else {
+            } else {
 
-                Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(GoogleCardsMediaActivity.this, "Please login to view search details!!!", Toast.LENGTH_LONG).show();
                 title.setText("Search Result");
-            }*/
+            }
+        }
 
          /*Log.e("You are not logged in", String.valueOf(0));
                 Intent intentsignin=new Intent(this,signinPrepage.class);
@@ -447,7 +447,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
             } else {
-                Toast.makeText(GoogleCardsMediaActivity.this, "Please login to view Application details!!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(GoogleCardsMediaActivity.this, "Please login to view application details!!!", Toast.LENGTH_LONG).show();
             }
 
         }

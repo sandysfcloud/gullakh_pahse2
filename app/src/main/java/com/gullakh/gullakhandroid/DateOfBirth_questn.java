@@ -379,7 +379,6 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
 
 
-
                 Log.e("emplist frm server ", String.valueOf(liste));
 
 
@@ -780,7 +779,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 }
                 final ShowSuggtn fAdapter = new ShowSuggtn(DateOfBirth_questn.this, android.R.layout.simple_dropdown_item_1line, liste);
                 Emp.setAdapter(fAdapter);
-
+                fAdapter.notifyDataSetChanged();
 
                 Log.e("emplist frm server ", String.valueOf(liste));
 

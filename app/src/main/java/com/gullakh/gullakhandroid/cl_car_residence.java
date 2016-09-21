@@ -308,6 +308,7 @@ public class cl_car_residence extends AppCompatActivity implements View.OnClickL
                 place2.setImageResource(R.drawable.locchn);
                 place3.setImageResource(R.drawable.locdelhi);
                 place4.setImageResource(R.drawable.locmum);
+                ((GlobalData) getApplication()).setcarres(null);
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);

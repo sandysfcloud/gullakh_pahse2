@@ -282,9 +282,12 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                                 // mGoogleApiClient.disconnect();
                                 GooglePlusLogin fragmentList = (GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
                                 fragmentList.signOutFromGplus();
-                                Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
+                                /*Intent intent = new Intent(MyProfileActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                finish();
+                                finish();*/
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
 
 
                                 //
@@ -513,8 +516,10 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                         Log.d("city value frm profile", String.valueOf(city));
 
                         Log.d("city index", String.valueOf(cityindex.get(city)));
-                        if (!cityindex.isEmpty())
-                            add3.setSelection((Integer) cityindex.get(city));
+                        if (cityindex.get(city) != null) {
+                            if (!cityindex.isEmpty())
+                                add3.setSelection((Integer) cityindex.get(city));
+                        }
                     }
                 }
 
@@ -803,7 +808,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         values.put("street", add1.getText().toString().replaceAll(" \"", ""));
         // values.put("city", add3.getText().toString().replaceAll(" \"", ""));
         //values.put("state",add4.getText().toString().replaceAll(" \"", ""));
+        if(city!=null)
         values.put("city", city.replaceAll(" \"", ""));
+        else
+        values.put("city", city);
+
         values.put("state", state.replaceAll(" \"", ""));
         values.put("zip", add5.getText().toString().replaceAll(" \"", ""));
         values.put("address", add1.getText().toString().replaceAll(" \"", "") + " " + add2.getText().toString().replaceAll(" \"", ""));

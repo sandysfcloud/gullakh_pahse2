@@ -95,7 +95,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 2)
+                if (s.length() == 3)
                     getemplist(Emp.getText().toString());
             }
 

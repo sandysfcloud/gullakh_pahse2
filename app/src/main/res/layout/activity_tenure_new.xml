@@ -76,7 +76,7 @@
                 <com.gullakh.gullakhandroid.font.RobotoEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Other"
+                    android:hint="Loan Tenure"
                     android:id="@+id/tenure"
                     android:ems="10"
                     android:inputType="phone"
