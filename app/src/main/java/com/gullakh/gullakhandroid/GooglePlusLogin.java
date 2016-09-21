@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
@@ -22,6 +23,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -30,6 +34,7 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.google.gson.JsonObject;
@@ -179,6 +184,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public void onActivityResult(int requestCode, int responseCode,
                                  Intent intent) {
         Log.d("clicked1","onActivityResult");
+        /*
         if (requestCode == RC_SIGN_IN) {
             Log.d("clicked1","onActivityResult");
             if (responseCode != RESULT_OK) {
@@ -191,11 +197,43 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 mGoogleApiClient.connect();
             }
             getProfileInformation();
+        }*/
+        super.onActivityResult(requestCode, responseCode, intent);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(intent);
+            if (result.isSuccess())
+            {
+                GoogleSignInAccount acct = result.getSignInAccount();
+                Toast.makeText(getContext().getApplicationContext(),""+acct.getDisplayName(),Toast.LENGTH_LONG).show();
+
+                Plus.PeopleApi.load(mGoogleApiClient, acct.getId()).setResultCallback(new ResultCallback<People.LoadPeopleResult>() {
+                    @Override
+                    public void onResult(@NonNull People.LoadPeopleResult loadPeopleResult) {
+                        Person person = loadPeopleResult.getPersonBuffer().get(0);
+                        Log.d(TAG,"Person loaded");
+                        Log.d(TAG,"GivenName "+person.getName().getGivenName());
+                        Log.d(TAG,"FamilyName "+person.getName().getFamilyName());
+                        Log.d(TAG,("DisplayName "+person.getDisplayName()));
+                        Log.d(TAG,"Gender "+person.getGender());
+                        Log.d(TAG,"Url "+person.getUrl());
+                        Log.d(TAG,"CurrentLocation "+person.getCurrentLocation());
+                        Log.d(TAG,"AboutMe "+person.getAboutMe());
+                        Log.d(TAG,"Birthday "+person.getBirthday());
+                        Log.d(TAG,"Image "+person.getImage());
+                    }
+                });
+
+                //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+                //updateUI(true);
+            } else {
+                //updateUI(false);
+            }
         }
     }
     @Override
     public void onConnected(Bundle arg0) {
         Log.d("clicked1", "onConnected");
+        //Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
        // Toast.makeText(currentact, "Please wait!", Toast.LENGTH_LONG).show();
         if(signinPrepage.signinprepage) {
             getProfileInformation();
@@ -212,6 +250,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                 String personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
                 email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+
               //  ((GlobalData) currentact.getApplication()).setfirstnam(personName);
                 Log.e(TAG, googleuserid+"Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
