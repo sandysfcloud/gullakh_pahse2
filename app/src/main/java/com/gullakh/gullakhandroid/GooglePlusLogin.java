@@ -261,7 +261,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
                 getReg();
             } else {
-                Toast.makeText(currentact,
+                Toast.makeText(getActivity(),
                         "Person information is null", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
@@ -411,7 +411,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             currentact.startActivity(intent);
                         }
                     } else {
-
+                        Log.d("else in googlepluslogin", "1");
                         //kkgoToIntent();
                         saveDataToDatabase();
 
@@ -419,32 +419,51 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                         Cursor cr = dbobject.displayData("select * from userlogin");
                         if (cr != null) {
                             if (cr.moveToFirst()) {
-                               // Log.d("credit score",cscore);
+
                                 cscore=cr.getString(9);
+                                if(cscore!=null)
+                                    Log.d("credit score",cscore);
 
                             }
                         }
                         if(cscore!=null) {
+                            Log.d("cscore is KK","1");
                             if (cscore.length() > 0) {//if credit score is already present
+                                Log.d("cscore is KK","2");
                                 goToIntent(currentact);
                             }
                         }
                         else {
-
-                            if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
-
-                                Log.d("from mainact", ((GlobalData) currentact.getApplication()).getcredflag());
-                                goToIntent(currentact);
-
+                            if(tag!=null)
+                            Log.d("tag is K",tag);
+                            if (tag.equals("facebook")||tag.equals("google")&&((GlobalData) currentact.getApplication()).getcredback() == null&&ListView_Click.listvc==null) {
+                                RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
+                                Log.d("facebook signout", "");
+                                signinPrepage obj = new signinPrepage();
+                                obj.logoutfb(currentact);
+                                Intent  intent = new Intent(currentact, MyProfileActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                currentact.startActivity(intent);
                             } else {
+                                Log.d("cscore is KK", "3");
+                                if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
 
-                                Log.d("from apply o credit butn", "");
-                                Intent intent2 = new Intent(currentact, CibilScore.class);
-                                intent2.putExtra("apply", "googlep");
-                                currentact.startActivity(intent2);
+                                    //Log.d("from mainact", ((GlobalData) currentact.getApplication()).getcredflag());
+                                    goToIntent(currentact);
+
+
+                                } else {
+
+                                    Log.d("from apply o credit butn", "");
+                                    Intent intent2 = new Intent(currentact, CibilScore.class);
+                                    if(ListView_Click.listvc!=null)
+                                        intent2.putExtra("apply", "apply");
+                                    //intent2.putExtra("apply", "googlep");
+                                    currentact.startActivity(intent2);
+                                    ListView_Click.listvc=null;
+                                }
                             }
                         }
-
 
                     }
                     }else {
@@ -565,12 +584,41 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                             goToIntent(currentact);
                                         }
                                     } else {
-                                        Intent intent2 = new Intent(currentact, CibilScore.class);
+                                        //first time login through fb
+                                        if (tag.equals("facebook")&&((GlobalData) currentact.getApplication()).getcredback() == null&&ListView_Click.listvc==null) {
+                                            RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
+                                            Log.d("facebook signout", "");
+                                            signinPrepage obj = new signinPrepage();
+                                            obj.logoutfb(currentact);
+                                            Intent  intent = new Intent(currentact, MyProfileActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            currentact.startActivity(intent);
+                                        } else {
+                                            Log.d("cscore is KK", "3");
+                                            if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
+
+                                                //Log.d("from mainact", ((GlobalData) currentact.getApplication()).getcredflag());
+                                                goToIntent(currentact);
+
+
+                                            } else {
+
+                                                Log.d("from apply o credit butn", "");
+                                                Intent intent2 = new Intent(currentact, CibilScore.class);
+                                                if(ListView_Click.listvc!=null)
+                                                    intent2.putExtra("apply", "apply");
+                                                //intent2.putExtra("apply", "googlep");
+                                                currentact.startActivity(intent2);
+                                                ListView_Click.listvc=null;
+                                            }
+                                        }
+                                        /*kkIntent intent2 = new Intent(currentact, CibilScore.class);
                                         intent2.putExtra("apply", "googlep");
-                                        currentact.startActivity(intent2);
+                                        currentact.startActivity(intent2);*/
                                     }
                                     // goToIntent();
-                                }
+                                }else
+                                    RegisterPageActivity.showErroralert(currentact, String.valueOf(jsonObject.get("error_message")), "failed");
                             }
                         }, currentact, "wait");
                         requestgetserver2.execute("token", "getGoogleOTPverification", tempuid, OTP.getText().toString());
@@ -618,7 +666,56 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     currentact.startActivity(intent);
 
-                } else if (emtyp.equalsIgnoreCase("Home Loan") || emtyp.equalsIgnoreCase("Loan Against Property")) {
+                }
+
+                else if(emtyp.equalsIgnoreCase("Home Loan"))
+                {
+                    Log.d("its home loan","1");
+                    if(((GlobalData)  currentact.getApplication()).getBaltrans().equals("No")){
+
+                        if(((GlobalData) currentact.getApplication()).gethneed()!=null) {
+
+                            if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a plot")) {
+                                intent = new Intent(currentact, hl_need1.class);
+                                currentact.startActivity(intent);
+
+                            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Construction of house on a plot")) {
+                                intent = new Intent(currentact, hl_need2.class);
+                                currentact.startActivity(intent);
+
+                            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase of plot & construction there on")) {
+                                intent = new Intent(currentact, hl_need3.class);
+                                currentact.startActivity(intent);
+
+                            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Home Renovation")) {
+                                intent = new Intent(currentact, hl_need4.class);
+                                currentact.startActivity(intent);
+                            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Balance Transfer of existing home loan")) {
+                                intent = new Intent(currentact, hl_need5.class);
+                                currentact.startActivity(intent);
+                            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Refinance a property already purchased from own sources")) {
+                                intent = new Intent(currentact, hl_need7.class);
+                                currentact.startActivity(intent);
+                            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a house/flat which is ready to move-in")) {
+                                intent = new Intent(currentact, hl_need8.class);
+                                currentact.startActivity(intent);
+                            } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Property is not yet identified")) {
+                                intent = new Intent(currentact, hl_prop_owns.class);
+                                currentact.startActivity(intent);
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        intent = new Intent(currentact, hl_prop_owns.class);
+                        currentact.startActivity(intent);
+                    }
+
+                }
+
+
+                else if (emtyp.equalsIgnoreCase("Loan Against Property")) {
                     intent = new Intent(currentact, hl_prop_owns.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     currentact.startActivity(intent);

@@ -74,7 +74,7 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         categories.add("Select");
         categories.add("Purchase of a plot alloted by Development Authority(Govt. body) or Builder");
         categories.add("Construction of house on a plot");
-        categories.add("Purchase of plot and construction thereon");
+        categories.add("Purchase of plot and construction there on");
         categories.add("Home Renovation");
         categories.add("Property is not yet identified");
         categories.add("Purchase of an under construction builder flat");
@@ -153,7 +153,11 @@ public class hl_need extends AppCompatActivity implements View.OnClickListener {
         }else{
             setDataToHashMap("need_loan_for", spinner.getSelectedItem().toString());
         }
+        if(spinner.getSelectedItem().toString().equals("Purchase of a plot alloted by Development Authority(Govt. body) or Builder"))
+            ((GlobalData) getApplication()).sethneed("Purchase a plot");
+        else
         ((GlobalData) getApplication()).sethneed(spinner.getSelectedItem().toString());
+
         ((GlobalData) getApplication()).setHomeneedpos(spinner.getSelectedItemPosition());
 
         Log.d("need loan fo in hl_nedd",((GlobalData) getApplication()).gethneed());

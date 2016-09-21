@@ -197,11 +197,15 @@ public class cl_car_yearofmft extends AppCompatActivity implements View.OnClickL
                 );
                 //now.add(Calendar.YEAR, -16);
                 //dpd.setMinDate(now);
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.DATE, 0);
+
                 dpd.setAccentColor(R.color.mdtp_background_color);
                 //dpd.vibrate(vibrateDate.isChecked());
                 dpd.showYearPickerFirst(true);
                 dpd.setAccentColor(Color.parseColor("#FFE2041E"));
                 //dpd.setTitle("DatePicker Title");
+                dpd.setMaxDate(calendar);
                 dpd.show(getFragmentManager(), "Datepickerdialog");
                 break;
         }

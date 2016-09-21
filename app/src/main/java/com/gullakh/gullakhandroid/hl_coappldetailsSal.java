@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +78,34 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         Doj = (EditText) findViewById(R.id.saljoindateofempyr);
         Doj.setOnClickListener(this);
         Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
-        getemplist();
+        //getemplist();
+
+        Emp.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 2)
+                    getemplist(Emp.getText().toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+//                if (s.length() == 2)
+//                    getemplistnew(Emp.getText().toString());
+            }
+        });
+
+
+
+
+
+
         Emp.requestFocus();
         Emp.setOnClickListener(this);
         spinner = (Spinner) findViewById(R.id.spinner1);
@@ -144,7 +173,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
         }
     }
 
-    public void getemplist() {
+    public void getemplist(String emp) {
 
         requestgetserver = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -185,7 +214,7 @@ public class hl_coappldetailsSal extends AppCompatActivity implements View.OnCli
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("token", "employerlist", sessionid);
+        requestgetserver.execute("token", "employerlist", sessionid,emp);
 
 
     }

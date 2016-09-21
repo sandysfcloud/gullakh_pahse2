@@ -173,7 +173,7 @@ public class signin extends AppCompatActivity implements AsyncResponse {
 
     }
     public void goToIntent(Activity currentact) {
-        Intent intent;
+        Intent intent=null;
 
         if (((GlobalData) currentact.getApplication()).getLoanType() != null) {
 
@@ -181,7 +181,48 @@ public class signin extends AppCompatActivity implements AsyncResponse {
                 intent = new Intent(currentact, cl_car_make.class);
             }
             else if (((GlobalData) currentact.getApplication()).getLoanType().equalsIgnoreCase("Home Loan")) {
-                intent = new Intent(currentact, hl_prop_owns.class);
+
+                Log.d("its home loan in signin page","1");
+                if(((GlobalData)  currentact.getApplication()).getBaltrans().equals("No")){
+
+                    if(((GlobalData) currentact.getApplication()).gethneed()!=null) {
+
+                        if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a plot")) {
+                            intent = new Intent(currentact, hl_need1.class);
+                            currentact.startActivity(intent);
+
+                        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Construction of house on a plot")) {
+                            intent = new Intent(currentact, hl_need2.class);
+                            currentact.startActivity(intent);
+
+                        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase of plot & construction there on")) {
+                            intent = new Intent(currentact, hl_need3.class);
+                            currentact.startActivity(intent);
+
+                        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Home Renovation")) {
+                            intent = new Intent(currentact, hl_need4.class);
+                            currentact.startActivity(intent);
+                        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Balance Transfer of existing home loan")) {
+                            intent = new Intent(currentact, hl_need5.class);
+                            currentact.startActivity(intent);
+                        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Refinance a property already purchased from own sources")) {
+                            intent = new Intent(currentact, hl_need7.class);
+                            currentact.startActivity(intent);
+                        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a house/flat which is ready to move-in")) {
+                            intent = new Intent(currentact, hl_need8.class);
+                            currentact.startActivity(intent);
+                        } else if (((GlobalData) currentact.getApplication()).gethneed().equals("Property is not yet identified")) {
+                            intent = new Intent(currentact, hl_prop_owns.class);
+                            currentact.startActivity(intent);
+                        }
+                    }
+
+                }
+                else
+                {
+                    intent = new Intent(currentact, hl_prop_owns.class);
+                    currentact.startActivity(intent);
+                }
             }
             else if (((GlobalData) currentact.getApplication()).getLoanType().equalsIgnoreCase("Personal Loan")) {
                 intent = new Intent(currentact, cl_car_residence_type.class);

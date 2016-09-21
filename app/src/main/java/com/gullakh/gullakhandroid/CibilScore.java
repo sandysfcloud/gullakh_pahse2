@@ -239,6 +239,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                             main.setVisibility(View.INVISIBLE);//cibil score request shd be sent only once
 
                             if (apply != null) {
+                                Log.d("apply not null", "1");
                                 if (apply.equals("apply")) {//from listviewclick page
                                     Log.d("from listviewclick", "check if can continue or not");
                                     getcibil();//comparing my cibil with bank

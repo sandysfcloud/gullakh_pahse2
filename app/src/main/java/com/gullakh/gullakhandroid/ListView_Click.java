@@ -47,6 +47,8 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private String[] preclosure1;
     public  static String lenderid=null;
 
+    public  static String listvc=null;
+
     public  static String bankname;
 
     @Override
@@ -382,6 +384,8 @@ Log.d("bankname in listvieclick",bankname);
                     //******check here
                    // goToIntent(this);
                 }else {
+                    listvc="listvc";
+                    Log.d("from listvi KK","2");
                     Intent intent = new Intent(this, signinPrepage.class);
                     startActivity(intent);
                     this.overridePendingTransition(R.transition.left, R.transition.right);
@@ -411,10 +415,10 @@ Log.d("bankname in listvieclick",bankname);
 
         else if(emtyp.equalsIgnoreCase("Home Loan")) {
             Log.d("its home loan","1");
-            if(((GlobalData)  currentact.getApplication()).getBaltrans().equals("Yes")){
+            if(((GlobalData)  currentact.getApplication()).getBaltrans().equals("No")){
 
     if(((GlobalData) currentact.getApplication()).gethneed()!=null) {
-
+        Log.d("its home loan in signin page","1");
         if (((GlobalData) currentact.getApplication()).gethneed().equals("Purchase a plot")) {
             intent = new Intent(currentact, hl_need1.class);
             currentact.startActivity(intent);

@@ -23,9 +23,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/nf"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="No Application Found"
-        android:id="@+id/textView48"
+
         android:layout_gravity="center_horizontal"
         android:textColor="#ff0000" />
 </LinearLayout>

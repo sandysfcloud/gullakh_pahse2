@@ -397,6 +397,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
                                 LayoutInflater factory = LayoutInflater.from(getApplicationContext());
                                 final View view = factory.inflate(R.layout.applnotfound, null);
+                                TextView name = (TextView)view.findViewById(R.id.nf);
+                                name.setText("No Application Found");
                                 alertadd.setView(view);
                                 alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
@@ -521,8 +523,25 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     cr.moveToNext();
                     searchlistviewArry.add(sched2);
                 }
-            } else
-                Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
+            } else {
+                //Toast.makeText(GoogleCardsMediaActivity.this, "Sorry No Search Data Found", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder alertadd = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
+                LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+                final View view = factory.inflate(R.layout.applnotfound, null);
+                TextView name = (TextView)view.findViewById(R.id.nf);
+                name.setText("No Search Data Found");
+                alertadd.setView(view);
+                alertadd.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(GoogleCardsMediaActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
+                    }
+                });
+                alertadd.show();
+            }
         } catch (Exception e) {
             System.out.println("error3 " + e.toString());
             dh1.cr.close();
@@ -1519,11 +1538,30 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     @Override
                     public void onClick(View v) {
                         Log.d("reset clicked", "1");
-                        seek_loanamt = 1;
-                        seekBar1.setSelectedMaxValue(1);
-                        loand.setText("1 Lakh");
-                        editloan.setText("100000");
-                        editloan.setSelection(editloan.getText().length());
+
+
+                        if(((GlobalData) getApplication()).getloanamt()!=null) {
+                            Double loan = (Double.parseDouble(((GlobalData) getApplication()).getloanamt()));
+                            Double loans =loan/100000;
+
+                            Log.d("loan amt is not null", String.valueOf(loans));
+
+
+                            Log.d("spit loan", String.valueOf(loans));
+                            seekBar1.setSelectedMaxValue(loans);
+
+
+                            seek_loanamt = loans.intValue();
+
+
+                           // loand.setText("1 Lakh");
+                            editloan.setText(((GlobalData) getApplication()).getloanamt());
+                            editloan.setSelection(editloan.getText().length());
+                        }
+
+
+
+
 
 
                         roi_min = 8.0f;
@@ -1533,10 +1571,13 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                         min.setText(String.valueOf(roi_max) + " % -");
                         max.setText(String.valueOf(roi_min) + " %");
 
-                        seektenure = 1;
-                        tenur.setText("7 Years");
-                        tenure.setSelectedMaxValue(7);
 
+                        if(((GlobalData) getApplication()).getTenure()!=null) {
+
+                            seektenure = Integer.parseInt(((GlobalData) getApplication()).getTenure());
+                            tenur.setText(((GlobalData) getApplication()).getTenure());
+                            tenure.setSelectedMaxValue(Integer.parseInt(((GlobalData) getApplication()).getTenure()));
+                        }
                         selectedBanks.clear();
                         selectColoursButton.setText("-None Selected-");
                     }
@@ -1588,6 +1629,17 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 seekBar1.setRangeValues(1, 100);
                 Log.d("selected loan", String.valueOf(seek_loanamt));
+                if(((GlobalData) getApplication()).getloanamt()!=null) {
+                    Double loan = (Double.parseDouble(((GlobalData) getApplication()).getloanamt()));
+                    Double loans =loan/100000;
+
+                    Log.d("loan amt is not null", String.valueOf(loans));
+
+
+                    Log.d("spit loan", String.valueOf(loans));
+                    seekBar1.setSelectedMaxValue(loans);
+                }
+                else
                 seekBar1.setSelectedMaxValue(seek_loanamt);
 
 
@@ -1688,6 +1740,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 if (loantyp2.equals("Home Loan") || loantyp2.equals("Loan Against Property"))
                     tenure.setRangeValues(1, 30);
+                else if(loantyp2.equals("Personal Loan"))
+                    tenure.setRangeValues(1, 5);
                 else
                     tenure.setRangeValues(1, 7);
 
@@ -1707,6 +1761,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     Log.d("seektenure", String.valueOf(seektenure));
                 }
 
+if(((GlobalData) getApplication()).getTenure()!=null) {
+    tenure.setSelectedMaxValue(Integer.parseInt(((GlobalData) getApplication()).getTenure()));
+    tenur.setText(((GlobalData) getApplication()).getTenure() + " Years");
+}
 
                 tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 

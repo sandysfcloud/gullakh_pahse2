@@ -365,6 +365,7 @@ public class signinPrepage extends AppCompatActivity implements View.OnClickList
         Intent intent;
         switch (v.getId()) {
             case R.id.imageButtonfb:
+
                 loginButton.performClick();
                 break;
           /*  case R.id.imageButtonfb:

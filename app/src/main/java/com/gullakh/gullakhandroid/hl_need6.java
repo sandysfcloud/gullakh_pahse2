@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +83,38 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
         Text2 = (Spinner) findViewById(R.id.editText2);
         Text3 = (EditText) findViewById(R.id.editText3);
         Text1.setOnClickListener(this);
-       // Text2.setOnItemClickListener(this);
+
+
+
+        Text1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 3)
+                    getbuilder(Text1.getText().toString());
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+//                if (s.length() == 2)
+//                    getemplistnew(Emp.getText().toString());
+            }
+        });
+
+
+
+
+        Text1.requestFocus();
+        Text1.setOnClickListener(this);
+
+        // Text2.setOnItemClickListener(this);
        // Text2.addTextChangedListener(new NumberTextWatcher(Text2));
         Text3.addTextChangedListener(new NumberTextWatcher(Text3));
         c1= (CheckBox) findViewById(R.id.cself);
@@ -116,7 +149,7 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
 
 
         }
-        getbuilder();
+       // getbuilder();
 
         Text1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -167,7 +200,7 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
 
     }*/
 
-    public void getbuilder()
+    public void getbuilder(String buildr)
     {
 
         requestgetserver = new JSONServerGet(new AsyncResponse() {
@@ -216,7 +249,7 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener 
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("sessn", "builderlist", sessionid);
+        requestgetserver.execute("sessn", "builderlist", sessionid,buildr);
 
 
 
