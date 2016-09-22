@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,7 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
     private int progpercent;
     ImageView review;
     private TextView loantype,loanamtemi,roi,loanamt,bnkname,emi,stat;
-    int progresscompleted;
+    Double progresscompleted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +52,19 @@ public class Myapplication extends AppCompatActivity  implements View.OnClickLis
 
         Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
         if (i.getStringExtra("data1")!=null) {
+            Log.d("data of myapp KK", String.valueOf(i.getStringExtra("data1")));
+
             loantype.setText(i.getStringExtra("data1"));
             loanamt.setText(i.getStringExtra("data2"));
             bnkname.setText(i.getStringExtra("data3"));
             emi.setText("Rs. "+i.getStringExtra("data4"));
             roi.setText(i.getStringExtra("data5") + " %");
             stat.setText(i.getStringExtra("status"));
-            String temp=i.getStringExtra("progress").substring(0,2).replaceAll(".\"","");
-            progresscompleted=Integer.parseInt(temp);
+            Log.d("data of myapp progress KK", String.valueOf(i.getStringExtra("progress")));
+           // String temp=i.getStringExtra("progress").substring(0,2).replaceAll(".\"","");
+            String temp=i.getStringExtra("progress");
+            Log.d("data of myapp temp KK", temp);
+            progresscompleted=Double.parseDouble(temp);
         }
         mHandler = new Handler();
         initSegmentProgressBar();

@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -741,6 +742,10 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         TextView tdate = (TextView) dialogView.findViewById(R.id.rep);
         tdate.setText(date);
         TextView URL = (TextView) dialogView.findViewById(R.id.textViewURL);
+
+
+
+
         URL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

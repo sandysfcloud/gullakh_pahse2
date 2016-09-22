@@ -255,19 +255,19 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
             bank1.setImageResource(R.drawable.buttonselecteffect);
             bank2.setImageResource(R.drawable.bankicici);
             bank3.setImageResource(R.drawable.bankhdfc);
-            bank4.setImageResource(R.drawable.bankother);
+            bank4.setImageResource(R.drawable.bankidbi);
         }else if(SalDeposite.equals("ICICI Bank")){
             other.setText("");
             bank1.setImageResource(R.drawable.bankaxis);
             bank2.setImageResource(R.drawable.buttonselecteffect);
             bank3.setImageResource(R.drawable.bankhdfc);
-            bank4.setImageResource(R.drawable.bankother);
+            bank4.setImageResource(R.drawable.bankidbi);
         }else if(SalDeposite.equals("HDFC Bank")){
             other.setText("");
             bank1.setImageResource(R.drawable.bankaxis);
             bank2.setImageResource(R.drawable.bankicici);
             bank3.setImageResource(R.drawable.buttonselecteffect);
-            bank4.setImageResource(R.drawable.bankother);
+            bank4.setImageResource(R.drawable.bankidbi);
         }else if(SalDeposite.equals("IDBI Bank")){
             other.setText("");
             bank1.setImageResource(R.drawable.bankaxis);
@@ -279,7 +279,7 @@ public class cl_salary_mode2 extends AppCompatActivity implements View.OnClickLi
             bank1.setImageResource(R.drawable.bankaxis);
             bank2.setImageResource(R.drawable.bankicici);
             bank3.setImageResource(R.drawable.bankhdfc);
-            bank4.setImageResource(R.drawable.bankother);
+            bank4.setImageResource(R.drawable.bankidbi);
         }
     }
 }

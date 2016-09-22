@@ -22,6 +22,8 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public class hl_coappldetails extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
@@ -41,7 +43,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
     int day, month, yearv;
     private String date = "";
     private EditText emi;
-
+    int age=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -251,10 +253,34 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.next:
 
+
+
+
+                if(Dob.getText().toString()!=null) {
+                    Log.d("dob is fun", Dob.getText().toString());
+                    Log.d("age is fun", String.valueOf(((GlobalData) getApplication()).getage()));
+
+
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                    String newDate = format.format(Date.parse(Dob.getText().toString()));
+
+
+                    String CurrentString =newDate;
+                    String[] separated = CurrentString.split("-");
+                    Log.d("dob split",  separated[0]+" "+ separated[1]+ " "+ separated[2]);
+
+                    age = getAge(Integer.parseInt(separated[2]),Integer.parseInt(separated[1]), Integer.parseInt(separated[0]));
+                    Log.d("age is acc to dob", String.valueOf(age));
+                }
+
+
+
+
                 if (coapp) {
                     //if co-applicant is present
                     if (firstName.getText().toString().length() > 0) {
-                        cl_car_global_data.dataWithAnscoapp=new HashMap<String,String>();
+                        if (age > 18) {
+                        cl_car_global_data.dataWithAnscoapp = new HashMap<String, String>();
 
                         if (working) {
                             Log.d("working true", "");
@@ -301,6 +327,12 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                             }*/
 
                         }
+                    }
+                    else
+                    {
+                        RegisterPageActivity.showErroralert(this, "You are too young to get loan!", "failed");
+                    }
+
                     } else
                         RegisterPageActivity.showErroralert(hl_coappldetails.this, "Please enter all details", "failed");
                 } else {
@@ -368,6 +400,31 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
         }
+    }
+
+
+    public int getAge (int _year, int _month, int _day) {
+        Log.d("year", String.valueOf(_year));
+        Log.d("_month", String.valueOf(_month));
+        Log.d("_day", String.valueOf(_day));
+
+
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(_year, _month, _day);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+       /* if(a < 0)
+            throw new IllegalArgumentException("Age < 0");*/
+        return a;
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
