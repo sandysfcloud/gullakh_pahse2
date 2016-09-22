@@ -735,13 +735,21 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         score.setText(cscore);
 
         ImageView exce = (ImageView) dialogView.findViewById(R.id.exce);
+        ImageView vgood = (ImageView) dialogView.findViewById(R.id.vgood);
         ImageView good = (ImageView) dialogView.findViewById(R.id.good);
-        ImageView bad = (ImageView) dialogView.findViewById(R.id.bad);
+       // ImageView bad = (ImageView) dialogView.findViewById(R.id.bad);
+
+        ImageView unsatis = (ImageView) dialogView.findViewById(R.id.unsatis);
+        ImageView poor = (ImageView) dialogView.findViewById(R.id.poor);
+        ImageView vpoor = (ImageView) dialogView.findViewById(R.id.vpoor);
 
         TextView distxt = (TextView) dialogView.findViewById(R.id.distxt);
         TextView tdate = (TextView) dialogView.findViewById(R.id.rep);
         tdate.setText(date);
         TextView URL = (TextView) dialogView.findViewById(R.id.textViewURL);
+        Button downl = (Button) dialogView.findViewById(R.id.downl);
+        downl.setOnClickListener(this);
+
 
 
 
@@ -755,22 +763,47 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
             }
         });
         Log.d("cscore score is", cscore);
-        if (Integer.parseInt(cscore) < 500) {
-            Log.d("its bad", "");
-            bad.setVisibility(View.VISIBLE);
-            distxt.setText("Below Average");
 
-        } else if (Integer.parseInt(cscore) >= 500 || Integer.parseInt(cscore) <= 700) {
+
+        if (Integer.parseInt(cscore)  > 0 && Integer.parseInt(cscore)<=399) {
+            Log.d("its vpoor", "");
+            vpoor.setVisibility(View.VISIBLE);
+            distxt.setText("Very Poor");
+
+        }
+
+        else if(Integer.parseInt(cscore)>= 400 && Integer.parseInt(cscore) <=499 )
+        {
+            Log.d("its poor", "");
+            poor.setVisibility(View.VISIBLE);
+            distxt.setText("Poor");
+        }
+
+
+        else if (Integer.parseInt(cscore) >= 500&&Integer.parseInt(cscore)  <= 599 ) {
+            Log.d("its unsatis", "");
+            unsatis.setVisibility(View.VISIBLE);
+            distxt.setText("Unsatisfactory");
+
+        } else if (Integer.parseInt(cscore) >= 600 && Integer.parseInt(cscore) <= 699) {
             Log.d("its Good", "");
             good.setVisibility(View.VISIBLE);
             distxt.setText("Good");
-        } else if (Integer.parseInt(cscore) >= 700) {
+        }
+        else if(Integer.parseInt(cscore) >= 700 && Integer.parseInt(cscore)<= 799 )
+        {
+            Log.d("its vgood", "");
+            vgood.setVisibility(View.VISIBLE);
+            distxt.setText("Very Good");
+
+        }
+        else if(Integer.parseInt(cscore) >= 800  )
+        {
             Log.d("its Excellent", "");
             exce.setVisibility(View.VISIBLE);
             distxt.setText("Excellent");
 
         }
-
 
         TextView name = (TextView) dialogView.findViewById(R.id.name);
         name.setText(nam);
@@ -973,6 +1006,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 Log.d("state is clicked", s_city);
                 s_city = null;
                 break;
+            case R.id.downl:
+                Log.d("download buttn in cibil is clicked", "2");
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GlobalData.GULLAKH_WEB + "/assets/pdffiles/CreditReportsummary" + userid+ ".pdf")));
+
+                break;
             case R.id.done:
 
                 Log.d("mobile length", String.valueOf(mob.getText().toString().length()));
@@ -1081,7 +1119,95 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
         }
+
+
+
+    public void downlrep() {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+                dgthis = dg;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+                Log.d("checkloandetail", String.valueOf(jsonObject.get("result")));
+                String result = jsonObject.get("result").toString().replace("\"", "");
+                dgthis.dismiss();
+                if (result.equals("true")) {
+
+
+                    cscore = jsonObject.get("data").toString();
+                    if (jsonObject.has("date")) {
+                        date = jsonObject.get("date").toString();
+                        date = date.replace("\"", "");
+                    }
+                    cscore = cscore.replace("\"", "");
+                    if (apply != null) {
+
+                        if (apply.equals("apply")) {
+
+                            ListView_Click obj = new ListView_Click();//apply from listview click page
+                            obj.goToIntent(CibilScore.this);
+
+                        } else if (apply.equals("googlep")) {
+
+                            GooglePlusLogin obj = new GooglePlusLogin();//from g+  and fb login  page
+                            obj.goToIntent(CibilScore.this);
+
+                        } else if (apply.equals("signin")) {
+
+                            signin obj = new signin(); //from signin page
+                            obj.goToIntent(CibilScore.this);//
+
+                        }
+                    } else
+                        setalert();//from mainactivity
+
+
+                } else {
+                    RegisterPageActivity.showErroralert(CibilScore.this, jsonObject.get("error_message").toString(), "error");
+                    Log.d("error messg is", jsonObject.get("error_message").toString());
+                    err_msg=jsonObject.get("error_message").toString();
+
+                }
+            }
+        }, CibilScore.this, "wait");
+
+
+        DataHandler dbobject = new DataHandler(CibilScore.this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+        if (ListView_Click.lenderid != null)
+            Log.e("ListView_Click.lenderid", ListView_Click.lenderid);
+        // requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
+//CHANGE BACK LATER
+
+
+        requestgetserver.execute("sessn", "downl", userid);
+
+
     }
+
+
+
+
+
+
+
+
+
+}
 
 
 

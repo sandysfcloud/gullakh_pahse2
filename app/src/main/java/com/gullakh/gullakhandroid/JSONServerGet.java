@@ -345,6 +345,14 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                         }
 
 
+                       /* else if (args[1].equals("downl")) {
+                            //get all employer list
+                            Log.e("downloading credit rep!!!!!", args[1]);
+
+                            client = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.GULLAKH_WEB+"/assets/pdffiles/CreditReportsummary"+args[2]+".pdf").toString());
+                        }*/
+
                         else if (args[1].equals("emp")) {
                             //get all employer list
                             Log.e("employeee!!!!!", args[1]);
@@ -352,7 +360,6 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+ URLEncoder.encode("select * from Employermaster;")).toString());
                         }
-
 
 
                         else if (args[1].equals("cartype")) {
@@ -547,14 +554,14 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                         }else if(args[1].equals("contactaddress")){
-                            Log.d("sess and contact",args[2]+" "+args[3]);
-                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\",\"firstname\":\""+args[11]+"\",\"lastname\":\""+args[12]+"\"}]");
+                            Log.d("sess and contact", args[2] + " " + args[3]);
+                            Log.d("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8] + "\",\"gender\":\"" + args[9] + "\",\"dob\":\"" + args[10] + "\",\"firstname\":\"" + args[11] + "\",\"lastname\":\"" + args[12] + "\"}]");
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "updatecontactdetail"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("contact",args[3]));
-                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] +"\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8]+"\",\"gender\":\""+args[9]+"\",\"dob\":\""+args[10]+"\",\"firstname\":\""+args[11]+"\",\"lastname\":\""+args[12]+"\"}]"));
+                            nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8] + "\",\"gender\":\"" + args[9] + "\",\"dob\":\"" + args[10] + "\",\"firstname\":\"" + args[11] + "\",\"lastname\":\"" + args[12] + "\"}]"));
 
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
@@ -711,7 +718,18 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"Verify_Phone").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-                        }else if(args[1].equals("setProfilePic")){
+                        }else if(args[1].equals("resendotp")){
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("temp_u_id", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[3]));
+                            client = new DefaultHttpClient();
+                            Log.e("Checking logo: token ", args[3]);
+                            Log.e("getGoogleAccReg getGoogleOTPverification ", String.valueOf(nameValuePairs));
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"resend_otp").toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        }
+                        else if(args[1].equals("setProfilePic")){
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("useremail", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("img", args[3]));

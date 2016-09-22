@@ -32,9 +32,9 @@ public class GlobalData extends MultiDexApplication {
     private Double depreciation2;
 // =====================================================================================================================
 //-------------------------production URL------------------------------------------------------------------------------
-    static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_uat/";
+   static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_uat/";
     static final String GULLAKH_WEB ="http://52.39.95.142/gullakh_web/";
-     /* static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_dev/";
+      /* static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_dev/";
     static final String GULLAKH_WEB ="http://52.39.95.142/gullakh_web_dev/";*/
 //======================================================================================================================
     //------------------------developer URL-----------------------------------------------------------------------------

@@ -11,7 +11,7 @@
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content">
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -21,7 +21,8 @@
             android:gravity="center"
             android:layout_weight="1"
             android:textSize="20dp"
-            android:textColor="#393939" />
+            android:textColor="#393939"
+            app:typeface="robotoLight"/>
 
         <ImageView
             android:layout_width="10dp"
@@ -45,7 +46,7 @@
 
         android:layout_marginBottom="20dp">
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -53,14 +54,16 @@
             android:id="@+id/textView49"
             android:textSize="18dp"
             android:layout_gravity="left|center_vertical"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
+
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="10dp"
             android:gravity="center"
-            android:textColor="#393939" />
+            android:textColor="#393939"
+            app:typeface="robotoLight"/>
 
 
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -69,8 +72,8 @@
             android:textSize="18dp"
 
             android:layout_gravity="left|center_vertical"
-            android:layout_weight="2"
 
+            app:typeface="robotoLight"
             android:gravity="left"
             android:textColor="#393939" />
 
@@ -92,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
+        <com.gullakh.gullakhandroid.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -103,7 +106,8 @@
             android:textSize="25dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:typeface="robotoLight"/>
 
         <ImageView
             android:layout_width="150dp"
@@ -123,17 +127,46 @@
             android:src="@drawable/circle_red"
             android:visibility="invisible"
           />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/vgood"
+            android:visibility="invisible"
+            android:src="@drawable/very_good"
+
+            />
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:id="@+id/good"
-            android:src="@drawable/circle_yellow"
+            android:src="@drawable/good"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/unsatis"
+            android:src="@drawable/unsatisfactory"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/poor"
+            android:src="@drawable/poor"
+            android:visibility="invisible"
+            />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/vpoor"
+            android:src="@drawable/very_poor"
             android:visibility="invisible"
             />
     </RelativeLayout>
 
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -142,9 +175,10 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#393939"
         android:textSize="18dp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:typeface="robotoLight"/>
 
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -153,9 +187,10 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#393939"
         android:textSize="18dp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:typeface="robotoLight"/>
 
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -164,10 +199,11 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#393939"
         android:textSize="18dp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:typeface="robotoLight"/>
 
 
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -175,11 +211,12 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
         android:id="@+id/textView9"
-        android:textSize="18dp"
+        android:textSize="14sp"
         android:layout_gravity="right"
-        android:textColor="#393939" />
+        android:textColor="#393939"
+        app:typeface="robotoLight"/>
 
-    <TextView
+    <com.gullakh.gullakhandroid.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -187,19 +224,13 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:id="@+id/rep"
-        android:textSize="18dp"
+        android:textSize="14sp"
         android:layout_gravity="right"
 
-        android:textColor="#393939" />
+        android:textColor="#393939"
+        app:typeface="robotoLight"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Any discrepancies in your report?"
-        android:id="@+id/textViewURL"
-        android:gravity="center"
-        android:textColor="#ef0000" />
+
 
     <com.gullakh.gullakhandroid.font.RobotoButton
         android:id="@+id/downl"
@@ -207,14 +238,26 @@
         android:layout_height="wrap_content"
         android:minHeight="0dp"
         android:minWidth="0dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_margin="5dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginTop="15dp"
+        android:textSize="14sp"
         android:textColor="#ffffff"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rectbutton_red"
-        android:text="Download Report"
+        android:text="View Credit Summary"
         app:typeface="robotoLight"/>
-
+    <com.gullakh.gullakhandroid.font.RobotoTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Any discrepancies in your report?"
+        android:id="@+id/textViewURL"
+        android:textSize="14sp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textColor="#ef0000"
+        app:typeface="robotoLight"/>
 </LinearLayout>
