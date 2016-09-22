@@ -704,7 +704,18 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"Verify_Phone").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-                        }else if(args[1].equals("setProfilePic")){
+                        }else if(args[1].equals("resendotp")){
+                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("temp_u_id", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("mobileno", args[3]));
+                            client = new DefaultHttpClient();
+                            Log.e("Checking logo: token ", args[3]);
+                            Log.e("getGoogleAccReg getGoogleOTPverification ", String.valueOf(nameValuePairs));
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"resend_otp").toString());
+                            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        }
+                        else if(args[1].equals("setProfilePic")){
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("useremail", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("img", args[3]));
