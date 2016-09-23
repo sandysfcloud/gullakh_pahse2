@@ -81,6 +81,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
         btnSignOut = (Button) view.findViewById(R.id.btn_sign_out);
         currentact=getActivity();
+        Log.d("currentact", "getActivity()");
         btnSignOut.setOnClickListener(this);
         tag="google";
         return view;
@@ -115,7 +116,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         }
     }
     public void resolveSignInError() {
-        if(mGoogleApiClient!=null)
+        if(mConnectionResult!=null)
             if (mConnectionResult.hasResolution()) {
                 try {
                     mIntentInProgress = true;
@@ -182,9 +183,17 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
 
                     int hasWriteContactsPermission = getActivity().checkSelfPermission(Manifest.permission.GET_ACCOUNTS);
                     if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-                        requestPermissions(new String[] {Manifest.permission.GET_ACCOUNTS},
-                                123);
+                        Log.d("check permission true","1");
+                        requestPermissions(new String[] {Manifest.permission.GET_ACCOUNTS},123);
                         return;
+                    }else{
+                        Log.d("check permission true","2");
+                        email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                        getReg();
+                        Log.e(TAG, googleuserid+"Name: " + personName + ", plusProfile: "
+                                + personGooglePlusProfile + ", email: " + email
+                                + ", Image: " + personPhotoUrl);
+                        personPhotoUrl = personPhotoUrl.substring(0,personPhotoUrl.length() - 2)+ PROFILE_PIC_SIZE;
                     }
                 }else{
 
@@ -247,6 +256,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         values.put("user_id", user_id.replaceAll("\"",""));
         values.put("contact_id",contact_id.replaceAll("\"",""));
         dbobject.insertdata(values, "userlogin");
+        Log.d("result tested", "data inserted successfully");
     }
 
     @Override
@@ -543,9 +553,12 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                     JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                     if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                                         dg.dismiss();
+                                        Log.d("result tested","true");
                                         saveDataToDatabase();
                                         if (cscore != null) {
+                                            Log.d("result tested", "cscore is not null");
                                             if (cscore.length() > 0) {//if credit score is already present
+                                                Log.d("result tested", "cscore is having length > 0");
                                                 goToIntent(currentact);
                                             }
                                         } else {
@@ -680,7 +693,11 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
         MainActivity.signinstate = true;
         Intent intent;
         // saveDataToDatabase();
+
+        Log.d("result tested", "goToIntent 1");
+
         if (ListView_Click.buttonApply) {
+            Log.d("result tested", "goToIntent 2");
             ListView_Click.buttonApply = false;
             if (((GlobalData) currentact.getApplicationContext()).getLoanType() != null) {
                 String emtyp = ((GlobalData) currentact.getApplicationContext()).getLoanType();
