@@ -401,36 +401,50 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                             if(tag!=null)
                                 Log.d("tag is K",tag);
                             Log.d("!ListView_Click.buttonApply", String.valueOf(!ListView_Click.buttonApply));
-                            if(((GlobalData) currentact.getApplication()).getcredback()!=null)
+                            if(((GlobalData) currentact.getApplication()).getcredback()!=null)//set
                                 Log.d("getcredback is K",((GlobalData) currentact.getApplication()).getcredback());
-                            if(!ListView_Click.buttonApply) {
-                            if (tag.equals("facebook")||tag.equals("google")&&((GlobalData) currentact.getApplication()).getcredback() == null&&ListView_Click.listvc==null) {
-                                RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
-                                Log.d("facebook signout", "");
+
+                            if(ListView_Click.listvc!=null)
+                            Log.d("ListView_Click.listvc ",ListView_Click.listvc);
+
+                            if(!ListView_Click.buttonApply) {//not frm apply page
+                            if ((tag.equals("facebook")||tag.equals("google")) && ((GlobalData) currentact.getApplication()).getcredback() == null && ListView_Click.listvc==null) {
+                                Log.d("facebook signout k", "1");
                                 signinPrepage obj = new signinPrepage();
                                 obj.logoutfb(currentact);
                                 Intent  intent = new Intent(currentact, MyProfileActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 currentact.startActivity(intent);
                             }
+                            else {
+
+                                Log.d("from apply o credit butn", "2");
+                                Intent intent2 = new Intent(currentact, CibilScore.class);
+                               // if(ListView_Click.listvc!=null)
+                                    //intent2.putExtra("apply", "apply");
+                                //intent2.putExtra("apply", "googlep");
+                                currentact.startActivity(intent2);
+                                ListView_Click.listvc=null;
+                            }
                             }else {
                                 Log.d("cscore is KK", "3");
-                                if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
+                                /*if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
 
                                     //Log.d("from mainact", ((GlobalData) currentact.getApplication()).getcredflag());
                                     goToIntent(currentact);
 
 
-                                } else {
+                                }*/
 
-                                    Log.d("from apply o credit butn", "");
-                                    Intent intent2 = new Intent(currentact, CibilScore.class);
-                                    if(ListView_Click.listvc!=null)
-                                        intent2.putExtra("apply", "apply");
-                                    //intent2.putExtra("apply", "googlep");
-                                    currentact.startActivity(intent2);
-                                    ListView_Click.listvc=null;
-                                }
+
+                                Intent intent2 = new Intent(currentact, CibilScore.class);
+                                if(ListView_Click.listvc!=null)
+                                intent2.putExtra("apply", "apply");
+                                //intent2.putExtra("apply", "googlep");
+                                currentact.startActivity(intent2);
+                                ListView_Click.listvc=null;
+
+
                             }
                         }
 
@@ -564,7 +578,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                         } else {
                                             //first time login through fb
                                             if(!ListView_Click.buttonApply) {
-                                            if (tag.equals("facebook") && ((GlobalData) currentact.getApplication()).getcredback() == null && ListView_Click.listvc == null) {
+                                            if ((tag.equals("facebook")||tag.equals("google")) && ((GlobalData) currentact.getApplication()).getcredback() == null && ListView_Click.listvc == null) {
                                                 RegisterPageActivity.showErroralert(currentact, jsonObject.get("error_message").toString(), "error");
                                                 Log.d("facebook signout", "");
                                                 signinPrepage obj = new signinPrepage();
@@ -572,24 +586,40 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                                 Intent intent = new Intent(currentact, MyProfileActivity.class);
                                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 currentact.startActivity(intent);
-                                            } }else {
+                                            }
+                                            else {
+
+                                                Log.d("from apply o credit butn", "");
+                                                Intent intent2 = new Intent(currentact, CibilScore.class);
+                                               // if (ListView_Click.listvc != null)
+                                                   // intent2.putExtra("apply", "apply");
+                                                //intent2.putExtra("apply", "googlep");
+                                                currentact.startActivity(intent2);
+                                                ListView_Click.listvc = null;
+                                            }
+
+
+                                            }else {
                                                 Log.d("cscore is KK", "3");
-                                                if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
+                                               /* if (((GlobalData) currentact.getApplication()).getcredflag() != null) {
 
                                                     //Log.d("from mainact", ((GlobalData) currentact.getApplication()).getcredflag());
                                                     goToIntent(currentact);
 
 
-                                                } else {
+                                                }*/
 
-                                                    Log.d("from apply o credit butn", "");
-                                                    Intent intent2 = new Intent(currentact, CibilScore.class);
-                                                    if (ListView_Click.listvc != null)
-                                                        intent2.putExtra("apply", "apply");
-                                                    //intent2.putExtra("apply", "googlep");
-                                                    currentact.startActivity(intent2);
-                                                    ListView_Click.listvc = null;
-                                                }
+
+                                                Intent intent2 = new Intent(currentact, CibilScore.class);
+                                                if(ListView_Click.listvc!=null)
+                                                    intent2.putExtra("apply", "apply");
+                                                //intent2.putExtra("apply", "googlep");
+                                                currentact.startActivity(intent2);
+                                                ListView_Click.listvc=null;
+
+
+
+
                                             }
                                         /*kkIntent intent2 = new Intent(currentact, CibilScore.class);
                                         intent2.putExtra("apply", "googlep");

@@ -114,7 +114,7 @@
             android:layout_height="150dp"
             android:id="@+id/exce"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/circle_green"
+            android:src="@drawable/excel"
             android:visibility="invisible"
            />
 
