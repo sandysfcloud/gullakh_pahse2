@@ -100,6 +100,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         if(bankid!=null)
         Log.d("bank name in cibil score page",bankid);
 
+        Log.d("its cibil score page","1");
 
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("select * from userlogin");
@@ -118,7 +119,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                 if (cr1.moveToFirst()) {
                     sessionid = cr1.getString(1);
                     getContactDetails();//get all data from server and upadate in local db except phone,conact id,email and userid
-                    Log.e("sessionid-cartypes", sessionid);
+                    Log.e("sessionid-cartypes check here", sessionid);
                     cr1.close();
                 }
 
@@ -657,7 +658,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                         date = date.replace("\"", "");
                     }
                     cscore = cscore.replace("\"", "");
-                    if (apply != null) {
+                    if (apply != null) {//go to post if from pre question
 
                         if (apply.equals("apply")) {
 
@@ -675,7 +676,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                             obj.goToIntent(CibilScore.this);//
 
                         }
-                    } else
+                    } else//set alert if from mainactivity page
                         setalert();//from mainactivity
 
 

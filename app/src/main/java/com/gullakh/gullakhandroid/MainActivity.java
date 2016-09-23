@@ -265,8 +265,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             llsignout.setVisibility(View.GONE);
         }
 
-
-        ListView_Click.buttonApply = false;//true only when goes from bank detail page
+         ListView_Click.listvc=null;
+         ListView_Click.buttonApply = false;//true only when goes from bank detail page
         ((GlobalData) getApplication()).setcredback(null);//true only when cs button is clicked
         //coin=(ImageView)findViewById(R.id.imageViewCoin);
        // Typeface myfontthin = Typeface.createFromAsset(getAssets(), "fonts/RalewayThin.ttf");

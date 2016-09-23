@@ -323,7 +323,7 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener,
                 else
                     setDataToHashMap("builder_name", "");
 
-                if (Text2.getSelectedItem().toString() != null)
+                if (Text2.getSelectedItem() != null)
                     setDataToHashMap("project_name", Text2.getSelectedItem().toString());
                 else
                     setDataToHashMap("project_name", "");
