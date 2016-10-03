@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -132,6 +133,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
 
         spinner = (Spinner) findViewById(R.id.spinner);
 
+
+
         List<String> categories = new ArrayList<String>();
         categories.add("Select");
         categories.add("< 1yr");
@@ -141,6 +144,73 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         categories.add(" 5yrs");
         categories.add("> 5yrs");
 
+
+        String loantyp=((GlobalData) getApplication()).getLoanType();
+        String getemptype=((GlobalData) getApplication()).getemptype();
+
+        String lexp=null;
+        if(loantyp!=null) {
+            if (getemptype.equals("Salaried")) {
+                if (loantyp.equals("Personal Loan")) {
+                    lexp = "2y";
+                    categories.remove(1);
+
+                }
+                else if (loantyp.equals("Car Loan")) {
+                    lexp = "< 1yr";
+
+
+                }
+                else if (loantyp.equals("Home Loan")) {
+                    lexp = "1y";
+
+                    categories.remove(1);
+
+
+                }
+
+                else {
+                    lexp = "1y";
+                    categories.remove(1);
+                }
+
+            }
+            else
+            {
+                if (loantyp.equals("Personal Loan")) {
+                    categories.remove(1);
+                    categories.remove(2);
+                    categories.remove(3);
+                    categories.remove(4);
+                    categories.remove(5);
+                    lexp = "5y";
+                }
+                else if (loantyp.equals("Car Loan")) {
+                    categories.remove(1);
+                    lexp = "2y";
+                }
+                else if (loantyp.equals("Home Loan")) {
+                    categories.remove(1);
+                    categories.remove(2);
+                    lexp = "3y";
+                }
+
+
+                else {
+                    categories.remove(1);
+                    categories.remove(2);
+                    lexp = "3y";
+                }
+
+            }
+        }
+
+
+
+
+
+
+
         /*MyArrayAdapter ma3 = new MyArrayAdapter(this, categories);
         spinner.setAdapter(ma3);*/
 
@@ -148,7 +218,66 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         dataAdapter1.setDropDownViewResource(R.layout.simple_spinnertextview);
         spinner.setAdapter(dataAdapter1);
 
+
+
+
+
+
+
+        AutoCompleteTextView acFrom = (AutoCompleteTextView) findViewById(R.id.salEmpname );
+        acFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> p, View v, int pos, long id) {
+                //TODO: set focus on next view
+                EditText acTo = (EditText) findViewById(R.id.saljoindateofempyr);
+                acTo.setFocusableInTouchMode(true);
+                acTo.requestFocus();
+            }
+        });
+
+
+
+
     }
+
+
+   /* public String limtexp()
+    {
+        String loantyp=((GlobalData) getApplication()).getLoanType();
+        String getemptype=((GlobalData) getApplication()).getemptype();
+
+        String lexp=null;
+       if(loantyp!=null) {
+           if (getemptype.equals("Salaried")) {
+               if (loantyp.equals("Personal Loan"))
+                   lexp="2y";
+               else if (loantyp.equals("Car Loan"))
+                   lexp= "6m";
+               else if (loantyp.equals("Home Loan"))
+                   lexp= "1y";
+
+               else
+                   lexp= "1y";
+
+           }
+           else
+           {
+               if (loantyp.equals("Personal Loan"))
+                   lexp= "5y";
+               else if (loantyp.equals("Car Loan"))
+                   lexp= "2y";
+               else if (loantyp.equals("Home Loan"))
+                   lexp= "3y";
+
+               else
+                   lexp= "3y";
+
+           }
+       }
+
+        return lexp;
+
+    }*/
 
     private void getDataFromHashMap() {
         if(cl_car_global_data.dataWithAns.get("name_of_current_emp")!=null&&
@@ -217,6 +346,8 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.next:
 
+
+
                 if(flag==1)
                 {
                     nextfun();
@@ -264,6 +395,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
 
     public void nextfun()
     {
+
 
         if(Emp.getText().toString()!=null) {
 

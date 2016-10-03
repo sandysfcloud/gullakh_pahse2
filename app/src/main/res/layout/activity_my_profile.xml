@@ -29,7 +29,13 @@
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/user"
                     android:layout_marginTop="50dp" />
+
+
+
+
             </RelativeLayout>
+
+
 
             <LinearLayout
                 android:orientation="horizontal"

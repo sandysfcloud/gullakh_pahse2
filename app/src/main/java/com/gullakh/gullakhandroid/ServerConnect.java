@@ -19,19 +19,38 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.SingleClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  * Created by njfernandis on 06/02/16.
@@ -53,6 +72,10 @@ public class ServerConnect extends Activity implements AsyncResponse
     String jsonObjectfinal;
     public String globalindetity;
     public AsyncResponse delegate = null;
+    URL url;
+    HttpsURLConnection urlConnection;
+    URLConnection urlConnection2;
+    InputStream in;
     //initialization function which gets session id
         public void init(Activity d) {
         activity=d;
@@ -254,6 +277,39 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                     Log.e("args data is", String.valueOf(identifier));
                     HttpResponse response = null;
 
+                    //*******************************************************SSl cirtificate
+
+
+
+                    HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+
+                    DefaultHttpClient client = new DefaultHttpClient();
+
+                    SchemeRegistry registry = new SchemeRegistry();
+                    SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();
+                    socketFactory.setHostnameVerifier((X509HostnameVerifier) hostnameVerifier);
+                    registry.register(new Scheme("https", socketFactory, 443));
+                    SingleClientConnManager mgr = new SingleClientConnManager(client.getParams(), registry);
+                    DefaultHttpClient httpClient = new DefaultHttpClient(mgr, client.getParams());
+
+// Set verifier
+                    HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
+
+// Example send http request
+
+
+
+
+
+
+
+                    //****************************************************
+
+
+
+
+
+
                     if(identifier.equals("sessn")) {
                         globalindetity="sessn";
                         //get token use it to get session id (post request)
@@ -276,7 +332,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                             nameValuePairs.add(new BasicNameValuePair("username", "connectuser"));
                             nameValuePairs.add(new BasicNameValuePair("accessKey", accessKey));
 
-                            DefaultHttpClient httpClient = new DefaultHttpClient();
+                            //DefaultHttpClient httpClient = new DefaultHttpClient();
                             HttpPost httpPost = new HttpPost(GlobalData.SERVER_GET_URL);
 
                             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -292,7 +348,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                         //start get request for token
                         try {
                             Log.e("else!!!!!", identifier);
-                            HttpClient client = null;
+                           // HttpClient client = null;
                             HttpPost post = null;
 
 
@@ -319,9 +375,11 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                                 }
                                // Log.e("checkapi!!!!!4", sessionidnew);
                                     client = new DefaultHttpClient();
-                                    post = new HttpPost(GlobalData.SERVER_GET_URL + "?operation=describe&sessionName=" + sessionidnew + "&elementType=Accounts");
+                                Log.d("url check api K", String.valueOf(in));
+                                   // post = new HttpPost(GlobalData.SERVER_GET_URL + "?operation=describe&sessionName=" + sessionidnew + "&elementType=Accounts");
+                                post = new HttpPost(GlobalData.SERVER_GET_URL+ "?operation=describe&sessionName=" + sessionidnew + "&elementType=Accounts");
 
-
+                                Log.d("url check api K 2", "22");
 
                             }
 

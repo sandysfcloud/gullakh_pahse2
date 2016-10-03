@@ -54,9 +54,12 @@
                 android:id="@+id/salEmpname"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/saljoindateofempyr"
+
+
                 android:singleLine="true"
+                android:completionThreshold="1"
+                android:imeOptions="actionNext"
+
                 android:hint="Ex- Infosys"
 
                 />

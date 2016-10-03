@@ -29,10 +29,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class hl_need6 extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     Button next, back;
@@ -90,8 +92,7 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener,
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 3)
-                    getbuilder(Text1.getText().toString());
+
 
             }
 
@@ -103,8 +104,9 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener,
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-//                if (s.length() == 2)
-//                    getemplistnew(Emp.getText().toString());
+                if (s.length()==3)
+                getbuilder(Text1.getText().toString());
+                Log.d("entered text is",Text1.getText().toString());
             }
         });
 
@@ -208,26 +210,59 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener,
 
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Builder[] enums = gson.fromJson(jsonObject.get("result"), Builder[].class);
-
-                int size = enums.length;
-                Log.e("builderlist frm server ", String.valueOf(size));
-                ArrayList<String> liste = new ArrayList<String>();
-                builderid = new HashMap<>();
-                for (int i = 0; i < size; i++) {
-                    liste.add(enums[i].getbuildername());
-                    builderid.put(enums[i].getbuildername(), enums[i].getbuildersid());
+                JSONObject  result=null;
+                try {
+                      result = new JSONObject(str_result);
+                    Log.d("JSON k", String.valueOf(result));
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                final ShowSuggtn fAdapter = new ShowSuggtn(hl_need6.this, android.R.layout.simple_dropdown_item_1line, liste);
-                Text1.setAdapter(fAdapter);
-                fAdapter.notifyDataSetChanged();
 
 
-                Log.e("Check builderid", String.valueOf(builderid));
+                if(!result.isNull("result")) {
+                  JSONObject obj = null;
+                  try {
+                      obj = new JSONObject(jsonObject.get("result").toString());
 
-                Log.e("emplist frm server ", String.valueOf(liste));
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
+                  Log.d("jsonObject.get builder ", String.valueOf(obj));
 
 
+                  //Builder enums = gson.fromJson(jsonObject.get("result"), Builder.class);
+                  //Builder enums = gson.fromJson(jsonObject.get("result"), Builder.class);
+                  builderid = new HashMap<>();
+                  ArrayList<String> liste = new ArrayList<String>();
+                  Iterator<String> iter = obj.keys();
+                  while (iter.hasNext()) {
+                      String key = iter.next();
+                      try {
+                          Object value = obj.get(key);
+                          Log.d("jsonObject.get string data ", String.valueOf(value));
+                          Log.d("jsonObject.get string key data ", key);
+                          liste.add(String.valueOf(value));
+                          builderid.put(String.valueOf(value), key);
+
+                      } catch (JSONException e) {
+
+                          Log.e("JSONException is", String.valueOf(e));
+
+                          // Something went wrong!
+                      }
+                  }
+
+
+                  AutoCompleteAdapter adapter = new AutoCompleteAdapter(hl_need6.this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, liste);
+                  Text1.setAdapter(adapter);
+                  adapter.notifyDataSetChanged();
+
+
+                  Log.e("Check builderid", String.valueOf(builderid));
+
+                  Log.e("builderlist frm server ", String.valueOf(liste));
+
+              }
             }
         }, hl_need6.this, "2");
         DataHandler dbobject = new DataHandler(hl_need6.this);
@@ -423,6 +458,29 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener,
 
     }
 }
+
+
+ /*int size = enums.length;
+                Log.e("builderlist frm server ", String.valueOf(size));
+                ArrayList<String> liste = new ArrayList<String>();
+                builderid = new HashMap<>();
+                for (int i = 0; i < size; i++) {
+                    liste.add(enums[i].getbuildername());
+                    builderid.put(enums[i].getbuildername(), enums[i].getbuildersid());
+                }
+                //ShowSuggtn fAdapter = new ShowSuggtn(hl_need6.this, android.R.layout.simple_dropdown_item_1line, liste);
+                //Text1.setAdapter(fAdapter);
+
+                AutoCompleteAdapter adapter = new AutoCompleteAdapter(hl_need6.this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, liste);
+                Text1.setAdapter(adapter);
+                adapter.notifyDataSetChanged();*/
+
+
+
+
+
+
+
 /*setDataToHashMap("joint_acc",jointMembers);
                                 if (cl_car_global_data.dataWithAns.get("proposed_ownership").equals("Joint")) {
                                     cl_car_global_data.numOfApp = getApplicants();

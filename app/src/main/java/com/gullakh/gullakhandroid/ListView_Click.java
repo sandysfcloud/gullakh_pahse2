@@ -96,12 +96,12 @@ Log.d("bankname in listvieclick",bankname);
     String feedata = "";
     for (int i = 0; i < sepfee.length; i++) {
         if(i == 0)
-            feedata="•"+feedata;
+            feedata="•"+feedata.trim();
 
         if(i==sepfee.length-1)
-            feedata = feedata + sepfee[i] + "\n"+"\n";
+            feedata = feedata.trim() + sepfee[i].trim() + "\n"+"\n";
         else
-        feedata = feedata + sepfee[i] + "\n"+"\n"+"\u2022";
+        feedata = feedata.trim() + sepfee[i].trim() + "\n"+"\n"+"\u2022";
 
         Log.d("feedata check",feedata);
         Log.d("fee info", +i + " " + sepfee[0]);
@@ -110,26 +110,26 @@ Log.d("bankname in listvieclick",bankname);
     String othrdata = "";
     for (int i = 0; i < sepother.length; i++) {
         if(i == 0)
-            othrdata="•"+othrdata;
+            othrdata="•"+othrdata.trim();
 
         if(i==sepother.length-1)
-        othrdata = othrdata + sepother[i] + "\n"+"\n";
+        othrdata = othrdata.trim() + sepother[i].trim() + "\n"+"\n";
         else
-            othrdata = othrdata + sepother[i] + "\n"+"\n"+"\u2022";
-        Log.d("sepother info", +i + " " + sepother[i]);
+            othrdata = othrdata.trim() + sepother[i].trim() + "\n"+"\n"+"\u2022";
+        Log.d("sepother info", +i + " " + sepother[i].trim());
     }
 
     String cardocu = "";
     for (int i = 0; i < sdocum.length; i++) {
         if(i == 0)
-            cardocu="•"+cardocu;
+            cardocu="•"+cardocu.trim();
 
         if(i==sdocum.length-1)
-        cardocu = cardocu + sdocum[i] + "\n"+"\n";
+        cardocu = cardocu.trim() + sdocum[i].trim() + "\n"+"\n";
         else
-            cardocu = cardocu + sdocum[i] + "\n"+"\n"+"\u2022";
+            cardocu = cardocu.trim() + sdocum[i].trim() + "\n"+"\n"+"\u2022";
 
-        Log.d("documen info", +i + " " + sdocum[i]);
+        Log.d("documen info", +i + " " + sdocum[i].trim());
     }
     Log.d("final cardocu info",cardocu);
 
@@ -163,6 +163,8 @@ Log.d("bankname in listvieclick",bankname);
 
                 one_time_fee_temp = String.valueOf(format.format(new BigDecimal(one_time_fee)));
                 one_time_fee_temp = one_time_fee_temp.replaceAll("\\.00", "");
+                one_time_fee_temp = one_time_fee_temp.replaceAll("Rs.", "");
+                one_time_fee_temp = one_time_fee_temp.replaceAll("\u20B9", "");
             } else {
                 one_time_fee_temp = one_time_fee;
             }

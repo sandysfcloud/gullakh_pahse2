@@ -51,11 +51,11 @@ public class ShowSuggtn extends ArrayAdapter<String> implements Filterable {
                     Log.d("Constraints", constraint.toString());
                 FilterResults oReturn = new FilterResults();
 
-                /*  if (orig == null){
-                    for (int i = 0; i < items.size(); i++) {
-                        orig.add(items.get(i));
+                 if (orig == null){
+                    for (int i = 0; i < _items.size(); i++) {
+                        orig.add(_items.get(i));
                     }
-                  }*/
+                  }
                 String temp;
                 int counters = 0;
                 if (constraint != null){
@@ -76,11 +76,12 @@ public class ShowSuggtn extends ArrayAdapter<String> implements Filterable {
                         }
                     }
                     Log.d("REsult size:", String.valueOf(_items.size()));
-                   /* if(!counters)
+                  // if(!counters)
+                    if(counters==0)
                     {
                         _items.clear();
                         _items = orig;
-                    }*/
+                    }
                     oReturn.values = _items;
                     oReturn.count = _items.size();
                 }

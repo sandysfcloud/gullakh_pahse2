@@ -169,7 +169,11 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                     try {
                         mSeekArc.setProgress(Integer.valueOf(data));
 
+
+                        if(data.equals("1"))
                         mSeekArcProgress.setText(data + " Year");
+                        else
+                            mSeekArcProgress.setText(data + " Years");
                     } catch (Exception e) {
 
                     }
@@ -195,6 +199,7 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                                           boolean fromUser) {
                 //if (progress != 0)
                 //progress = ((progress + 1)*1000)/1000;
+
                 progress = progress + 1;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));

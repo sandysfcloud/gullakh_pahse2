@@ -36,6 +36,7 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
     TextView mSeekArcProgress, onetext;
     String data,loan_type;
     Dialog dg;
+    String gloan_type,gtenure,loantyp,carloantp,Baltrans,emptype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +68,28 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
         lp.width = AbsListView.LayoutParams.MATCH_PARENT;
         v2.setLayoutParams(lp);
 
+
+
+
+        if (savedInstanceState != null) {
+
+            gloan_type = savedInstanceState.getString("loantyp");
+            emptype = savedInstanceState.getString("emptype");
+
+
+        }
+        else {
+
+            gloan_type=((GlobalData) getApplication()).getLoanType();
+            emptype = ((GlobalData) getApplication()).getemptype();
+        }
+
 //**********
 
         tenure = (EditText) findViewById(R.id.tenure);
-        tenure.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "30")});
+
+
+
         tenure.setSelection(tenure.getText().length());
         onetext = (TextView) findViewById(R.id.onetext);
         tenure.addTextChangedListener(new NumberTextWatcher(tenure));
@@ -80,6 +99,23 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
+
+
+        if(gloan_type.equals("Home Loan")) {
+            if(emptype.equals("Salaried")) {
+                mSeekArc.mMax=5;
+
+                tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "30")});
+            }
+            else {
+                mSeekArc.mMax=3;
+                tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "20")});
+            }
+        }
+        else {
+            mSeekArc.mMax=2;
+            tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "15")});
+        }
 
 
 
@@ -124,9 +160,14 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
                     data = data.replaceAll("\\s+", "");
                     Log.d("loan KK2", data);
                     try {
+
+
                         mSeekArc.setProgress(Integer.valueOf(data));
 
+                        if(data.equals("1"))
                         mSeekArcProgress.setText(data + " Year");
+                        else
+                            mSeekArcProgress.setText(data + " Years");
                     } catch (Exception e) {
 
                     }
@@ -152,7 +193,10 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
                                           boolean fromUser) {
                 //if (progress != 0)
                 //progress = ((progress + 1)*1000)/1000;
-                progress = progress + 1;
+               // if (progress == 0)
+                    progress = progress + 5;
+                //else
+                //progress = progress + 1;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -189,6 +233,18 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
             loan_type=data;
         }
 
+
+
+
+    }
+
+
+    protected void onSaveInstanceState(Bundle icicle) {
+        super.onSaveInstanceState(icicle);
+
+        icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
+
+        icicle.putString("emptype",  ((GlobalData) getApplication()).getemptype());
 
 
 

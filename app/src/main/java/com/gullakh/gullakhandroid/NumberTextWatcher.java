@@ -2,6 +2,7 @@ package com.gullakh.gullakhandroid;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 
 import java.text.DecimalFormat;
@@ -52,6 +53,8 @@ public class NumberTextWatcher implements TextWatcher {
                 et.setSelection(sel);
             } else {
                 // place cursor at the end?
+                Log.d(" NTW", String.valueOf(et.getText().length() - 1));
+                if(et.getText().length() - 1 >= 0)
                 et.setSelection(et.getText().length() - 1);
             }
         } catch (NumberFormatException nfe) {

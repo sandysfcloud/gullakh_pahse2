@@ -238,8 +238,6 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
     }
 
 
-
-
     public void onShakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);

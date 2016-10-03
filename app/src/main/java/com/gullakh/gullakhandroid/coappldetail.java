@@ -225,6 +225,11 @@ public class coappldetail extends AppCompatActivity implements View.OnClickListe
                         } else
                             RegisterPageActivity.showErroralert(this, "Add co applicants data!", "failed");
                     }
+                    else {
+                        Log.d("proposed_ownership is ", cl_car_global_data.dataWithAns.get("proposed_ownership"));
+                        finish();
+                    }
+
                 }
 
                 break;

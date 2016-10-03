@@ -182,6 +182,8 @@ if(isNumeric(tempValues.getprocessing_fee()))
 {
 	profee = String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
 	profee = profee.replaceAll("\\.00", "");
+	profee = profee.replaceAll("Rs.", "");
+    profee = profee.replaceAll("\u20B9", "");
 
 }
 			else {

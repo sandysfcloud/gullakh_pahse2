@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,8 +37,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
     TextView mSeekArcProgress,onetext;
     String data;
     String valuewithcomma;
-    String loan_type,loan_amt,loantyp,carloantp;
+    String loan_type,loan_amt,loantyp,carloantp,emptyp;
     private ContentValues contentValues;
+    String progressval;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,21 +101,26 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             loan_amt = savedInstanceState.getString("loan_amt");
             loantyp = savedInstanceState.getString("loantyp");
             carloantp = savedInstanceState.getString("carloantyp");
-
+            emptyp = savedInstanceState.getString("emptyp");
 
         }
         else {
             loan_amt = ((GlobalData) getApplication()).getloanamt();
             loantyp=((GlobalData) getApplication()).getLoanType();
+            emptyp =((GlobalData) getApplication()).getemptype();
             carloantp=((GlobalData) getApplication()).getCartypeloan();
         }
 
         if (loan_amt != null) {
 
+            limitloan(0);
+
+
+
             String loanamt = loan_amt;
             int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
-          //  mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
-            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 10000)));
+            //  mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / Integer.parseInt(progressval.replace(",","").trim()))));
 
 
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
@@ -124,7 +131,11 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             mSeekArcProgress.setText(strtemp);
             amt.setText(String.valueOf(loanamtint));
             amt.setSelection(amt.getText().length());
+
+
         }
+        else
+            limitloan(1);
 
         amt.addTextChangedListener(new TextWatcher() {
 
@@ -156,8 +167,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                     loan = loan.replaceAll("\\s+","");
                     Log.d("loan KK2", loan);
                     try {
+
                        // mSeekArc.setProgress(Integer.valueOf(loan) / 50000);
-                        mSeekArc.setProgress(Integer.valueOf(loan) / 10000);
+                        mSeekArc.setProgress(Integer.valueOf(loan) /  Integer.parseInt(progressval.replace(",","").trim()));
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
 
@@ -184,7 +196,33 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                                                                               boolean fromUser) {
 
                                                    // progress = (progress + 1) * 50000;
-                                                    progress = (progress + 1) * 10000;
+                                                    int progressval=0;
+
+                                                    //if(progress==0) {
+                                                        if(loantyp.equals("Personal Loan"))
+                                                        progress = (progress + 1) * 50000;
+
+                                                        else if(loantyp.equals("Car Loan"))
+                                                        progress = (progress + 1) * 75000;
+
+                                                        else {
+                                                            if(emptyp.equals("Salaried"))
+                                                            progress = (progress + 1) * 100000;
+                                                            else
+                                                             progress = (progress + 1) * 500000;
+                                                        }
+
+                                                        Log.d("progress value is K IF", String.valueOf(progress));
+
+                                                  /*  }
+                                                    else {
+
+
+                                                        progress = (progress + 1) * 10000;
+                                                        Log.d("progress value is K ELSE", String.valueOf(progress));
+                                                    }*/
+
+
                                                     Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                                                     String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
 
@@ -192,8 +230,14 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
 
                                                     mSeekArcProgress.setText(strtemp);
-                                                    if (fromUser)
+
+                                                    Log.d("strtemp  editext", strtemp);
+                                                    Log.d("progress  val", String.valueOf(progress));
+                                                    if (fromUser) {
+                                                        Log.d("value to set in editext", strtemp);
                                                         amt.setText(String.valueOf(progress));
+                                                        //amt.setText(strtemp);
+                                                    }
 
 
                                                 }
@@ -225,6 +269,71 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
             loan_type=data;
         }
 
+
+
+
+    }//*******************end of oncreate
+
+
+
+
+
+    public void limitloan(int val)//max limit of seekbar and min n max of edittext
+    {
+
+
+
+
+            if(loantyp.equals("Personal Loan")||loantyp.equals("Car Loan")) {
+
+
+
+               if(loantyp.equals("Personal Loan")) {
+                   mSeekArc.mMax = 29;
+                   progressval="50,000";
+
+                   if(val==1) {//first time
+                       mSeekArcProgress.setText("50,000");
+                       amt.setText("50,000");
+                   }
+                  // amt.setFilters(new InputFilter[]{new InputFilterMinMax("50000", String.valueOf(Integer.MAX_VALUE))});
+               }
+                else if(loantyp.equals("Car Loan")) {
+                   progressval="75,000";
+                   mSeekArc.mMax = 19;
+                   if(val==1) {//first time
+                       mSeekArcProgress.setText("75,000");
+                       amt.setText("75,000");
+                   }
+                 //  amt.setFilters(new InputFilter[]{new InputFilterMinMax("75000", String.valueOf(Integer.MAX_VALUE))});
+               }
+            }
+            else {
+                mSeekArc.mMax = 99;
+                if(emptyp.equals("Salaried")) {
+                    progressval="1,00,000";
+                    if(val==1) {//first time
+                        mSeekArcProgress.setText("1,00,000");
+                        amt.setText("1,00,000");
+                    }
+                 //   amt.setFilters(new InputFilter[]{new InputFilterMinMax("100000", String.valueOf(Integer.MAX_VALUE))});
+                }
+               else {
+                    progressval="5,00,000";
+                    if(val==1) {//first time
+                        mSeekArcProgress.setText("5,00,000");
+                        amt.setText("5,00,000");
+                    }
+                  //  amt.setFilters(new InputFilter[]{new InputFilterMinMax("500000", String.valueOf(Integer.MAX_VALUE))});
+                }
+
+            }
+
+
+
+
+
+
     }
 
 
@@ -233,7 +342,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
         icicle.putString("loan_amt", ((GlobalData) getApplication()).getloanamt());
         icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
         icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
-
+        icicle.putString("emptyp",((GlobalData) getApplication()).getemptype());
     }
 
 
@@ -318,12 +427,15 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 //                overridePendingTransition(R.transition.left, R.transition.right);
 //                break;
             case R.id.next:
+
+                Log.d("compare loan amount", String.valueOf(Integer.parseInt(amt.getText().toString().replace(",","").trim())>=Integer.parseInt(progressval.replace(",","").trim())));
                 if(amt.getText().toString().matches("")) {
 
                     RegisterPageActivity.showErroralert(Loan_amt_questn.this, "Please enter loan amount!", "failed");
                 }
-                else
-                {
+                else if(Integer.parseInt(amt.getText().toString().replace(",","").trim())>=Integer.parseInt(progressval.replace(",","").trim()))
+                    {
+
                     Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
                     Log.d("loan amount in la questn",((GlobalData) getApplication()).getloanamt());
@@ -350,6 +462,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 //                    overridePendingTransition(R.transition.left, R.transition.right);
 
                 }
+                    else
+                        RegisterPageActivity.showErroralert(Loan_amt_questn.this, "Oh Snap! Loan amount should be more than or equal to "+progressval, "failed");
+
                 break;
             case R.id.back:
                 overridePendingTransition(R.transition.left, R.transition.right);

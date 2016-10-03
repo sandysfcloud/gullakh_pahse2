@@ -248,6 +248,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 globaltenure = ((GlobalData) getApplication()).getTenure();
                 globalloan_type = ((GlobalData) getApplication()).getLoanType();
+
                 globalsal = ((GlobalData) getApplication()).getnetsalary().toString();
 
             }
@@ -1021,8 +1022,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             loant=loant.replace("Rs.","");
 
             loant=loant.replace(",", "");
-            loant=loant.replace(" ","");
-            loan_amt = Integer.parseInt(loant.trim());
+            loant=loant.replace(" ","").trim();
+            loan_amt = Integer.parseInt(loant);
         }
 
 

@@ -38,6 +38,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
     Double netsal,avg_incen;
     int fbonus=0;
     CustomScrollView myScroll;
+    String progressval;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,9 +138,9 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
             }
 
 
-
+            limitloan(0);
            // mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 50000)));
-           mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / 1000)));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(netsalary) / Integer.parseInt(progressval.replace(",", "").trim()))));
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             String strtemp = String.valueOf(format.format(new BigDecimal(netsalary)));
             strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -151,7 +152,10 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
             incent.setSelection(incent.getText().length());
 
+
         }
+        else
+            limitloan(1);
 
         onetext = (TextView) findViewById(R.id.onetext);
      //   onetext.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
@@ -190,7 +194,7 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                     Log.d("loan KK2", sald);
                     try {
                        // mSeekArc.setProgress(Integer.valueOf(sald) / 50000);
-                        mSeekArc.setProgress(Integer.valueOf(sald) / 1000);
+                        mSeekArc.setProgress(Integer.valueOf(sald) / Integer.parseInt(progressval.replace(",", "").trim()));
                         mSeekArcProgress.setText(strtemp);
                     }catch(Exception e){
 
@@ -215,9 +219,21 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                 myScroll.setEnableScrolling(false);
 
-                //  progress = (progress + 4) * 5000;
-                //progress = (progress + 1) * 50000;
-                progress = (progress + 1) * 1000;
+
+                if(gloan_type.equals("Personal Loan"))
+                    progress = (progress + 1) * 17500;
+
+                else if(gloan_type.equals("Car Loan"))
+                    progress = (progress + 1) * 10000;
+                else
+                    progress = (progress + 1) * 15000;
+
+                Log.d("progress value is K Salary page", String.valueOf(progress));
+
+
+
+
+                //progress = (progress + 1) * 1000;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
                 String strtemp = String.valueOf(format.format(new BigDecimal(String.valueOf(progress))));
                 strtemp = strtemp.substring(0, strtemp.length() - 3);
@@ -239,7 +255,10 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
                 // review.setVisibility(View.INVISIBLE);
             }
         }
-    }
+
+
+
+    }//*****************end of oncreate
 
 
 
@@ -255,6 +274,72 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
 
 
+
+    public void limitloan(int val)//max limit of seekbar and min n max of edittext
+    {
+
+
+            if(gloan_type.equals("Personal Loan")) {
+                mSeekArc.mMax = 11;
+                progressval = "17,500";
+                if(val==1) {//first time
+
+                    mSeekArcProgress.setText("17,500");
+                    sal.setText("17,500");
+                }
+                // amt.setFilters(new InputFilter[]{new InputFilterMinMax("50000", String.valueOf(Integer.MAX_VALUE))});
+            }
+            else if(gloan_type.equals("Car Loan")) {
+
+                mSeekArc.mMax = 19;
+                progressval = "10,000";
+                if(val==1) {//first time
+
+                    mSeekArcProgress.setText("10,000");
+                    sal.setText("10,000");
+                }
+                //  amt.setFilters(new InputFilter[]{new InputFilterMinMax("75000", String.valueOf(Integer.MAX_VALUE))});
+            }
+
+        else {
+            mSeekArc.mMax = 13;
+                progressval = "15,000";
+                if(val==1) {//first time
+
+                    mSeekArcProgress.setText("15,000");
+                    sal.setText("15,000");
+                }
+                //   amt.setFilters(new InputFilter[]{new InputFilterMinMax("100000", String.valueOf(Integer.MAX_VALUE))});
+                            Log.d("max value taken", String.valueOf(mSeekArc.mMax));
+
+
+
+        }
+
+
+
+
+
+
+    }
+
+   /* public void limitloan()//max limit of seekbar and min n max of edittext
+    {
+
+
+        if(gloan_type.equals("Personal Loan")||gloan_type.equals("Car Loan")) {
+            mSeekArc.mMax = 200;
+            if(gloan_type.equals("Personal Loan"))
+                sal.setFilters(new InputFilter[]{ new InputFilterMinMax("17500", String.valueOf( Integer.MAX_VALUE))});
+            else if(gloan_type.equals("Car Loan"))
+                sal.setFilters(new InputFilter[]{ new InputFilterMinMax("10000", String.valueOf( Integer.MAX_VALUE))});
+        }
+        else
+            sal.setFilters(new InputFilter[]{ new InputFilterMinMax("15000", String.valueOf( Integer.MAX_VALUE))});
+
+
+
+    }*/
 
 
 

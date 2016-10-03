@@ -256,7 +256,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
 
 
 
-                if(Dob.getText().toString()!=null) {
+                if(!Dob.getText().toString().matches("")) {
                     Log.d("dob is fun", Dob.getText().toString());
                     Log.d("age is fun", String.valueOf(((GlobalData) getApplication()).getage()));
 
@@ -279,7 +279,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
                 if (coapp) {
                     //if co-applicant is present
                     if (firstName.getText().toString().length() > 0) {
-                        if (age > 18) {
+                        if (age > 21) {
                         cl_car_global_data.dataWithAnscoapp = new HashMap<String, String>();
 
                         if (working) {

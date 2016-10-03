@@ -146,7 +146,7 @@
                         <com.gullakh.gullakhandroid.font.RobotoEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Average Monthly Incentives"
+                            android:hint="Average Monthly Incentives(6-months)"
                             android:inputType="number"
                             android:id="@+id/incent"
                             android:textColorHint="#000"

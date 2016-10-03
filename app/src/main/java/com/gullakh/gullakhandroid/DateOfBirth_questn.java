@@ -59,7 +59,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     JSONServerGet requestgetserver;
     private ContentValues contentValues;
     String gloan_type,carloantp,Baltrans,emptypg;
-    int age=0;
+    int age=0,agelimtmin=0,agelimtmax=0;
     ArrayList<String> liste;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,7 +246,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     {
 
                 empflag=1;
-                Log.d("employer question DOB","0");
+                Log.d("employer question DOB", "0");
                 LinearLayout ldateofb = (LinearLayout) findViewById(R.id.ldateofb);
                 LinearLayout lempl = (LinearLayout) findViewById(R.id.lempl);
 
@@ -260,24 +260,24 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                 Emp = (AutoCompleteTextView) findViewById(R.id.salEmpname);
                 Emp.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() == 3)
-                    getemplistnew(Emp.getText().toString());
-            }
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (s.length() == 3)
+                            getemplistnew(Emp.getText().toString());
+                    }
 
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start,
+                                                  int count, int after) {
+                    }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start,
+                                              int before, int count) {
 //                if (s.length() == 2)
 //                    getemplistnew(Emp.getText().toString());
-            }
-        });
+                    }
+                });
 
 
 
@@ -583,7 +583,26 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         }
     }
 
+public void agelimit()
+{
+    if(emptypg.equals("Salaried")) {
+        agelimtmin = 21;
+        agelimtmax = 60;
+    }
+    else {
+        agelimtmax = 65;
+        if(gloan_type.equals("Personal Loan"))
+            agelimtmin = 28;
+        if(gloan_type.equals("Car Loan"))
+            agelimtmin = 21;
+        if(gloan_type.equals("Home Loan")||gloan_type.equals("Loan Against Property"))
+            agelimtmin = 23;
 
+
+    }
+    Log.d("age limit is", String.valueOf(agelimtmin));
+
+}
 
 
     public void save(String flag)
@@ -639,7 +658,11 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                     Log.d("age is acc to dob", String.valueOf(age));
                 }
 
-                if (age > 18) {
+
+                agelimit();
+                Log.d("agelimt values ", String.valueOf(agelimtmin)+" "+String.valueOf(agelimtmax));
+                if (age >= agelimtmin && age <= agelimtmax)
+                {
 
 
                     String loantype=  gloan_type;
@@ -652,7 +675,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
                     ((GlobalData) getApplication()).setage(age);
 
-                    Log.d("dob age is >18", String.valueOf(age));
+                    Log.d("dob age is >21", String.valueOf(age));
 
                     if(flag.equals("next")) {
                         if (loantype.equalsIgnoreCase("Car Loan") || loantype.equalsIgnoreCase("Loan Against Property")) {
@@ -701,9 +724,10 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
                     }
 
 
-                } else {
-                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "You are too young to get loan!", "failed");
-                }
+                } else
+                    RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Oh Snap! Your age should be between "+agelimtmin+" to "+agelimtmax+" to apply for "+gloan_type+"!", "failed");
+
+
             }
             else
                 RegisterPageActivity.showErroralert(DateOfBirth_questn.this, "Please select your gender!", "failed");

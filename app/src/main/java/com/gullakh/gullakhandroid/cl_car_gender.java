@@ -515,11 +515,17 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             case R.id.date:
                 Calendar now = Calendar.getInstance();
                 now.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+               /* com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
                         cl_car_gender.this,
                         2016,
                         05,
                         00
+                );*/
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                        cl_car_gender.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
                 );
                 Calendar calendar = Calendar.getInstance();
 
