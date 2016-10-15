@@ -239,7 +239,7 @@ public class hl_coappldetails extends AppCompatActivity implements View.OnClickL
         setDataToHashMap("lastname", lastName.getText().toString());
         setDataToHashMap("relation", titled);
         setDataToHashMap("gender", dataGender);
-        setDataToHashMap("co_ap_dob", Dob.getText().toString());
+        setDataToHashMap("co_applicant_dob", Dob.getText().toString());
         setDataToHashMap("working", String.valueOf(working));
 
         Log.d("setdata hmap", String.valueOf(cl_car_global_data.dataWithAnscoapp));

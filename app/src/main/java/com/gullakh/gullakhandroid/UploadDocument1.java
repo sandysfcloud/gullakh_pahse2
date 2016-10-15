@@ -2,12 +2,16 @@ package com.gullakh.gullakhandroid;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +19,20 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class UploadDocument1 extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView upload,team;
-
+    JSONServerGet requestgetserver;
+    String sessionid;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +65,70 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
         name.setText("Dear "+intent.getStringExtra("name")+",");
         applno.setText("Your application # is "+intent.getStringExtra("applno")+".");
     }
+
+
+    public void senddocudata(String data)
+    {
+
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+
+                Log.e("emplist frm server ", String.valueOf(jsonObject));
+
+
+
+            }
+        }, this, "2");
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        requestgetserver.execute("sessn", "doccollection", data,cl_car_gender.borrowercaseid);
+
+
+
+
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            overridePendingTransition(R.transition.left, R.transition.right);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public void onClick(View v)
     {
         switch (v.getId()) {
             case R.id.ImageUpload:
+                senddocudata("Customer");
                 Intent intent = new Intent(this, UploadDocument2.class);
                 intent.putExtra("data", "newappl");
                 startActivity(intent);
                 overridePendingTransition(R.transition.left, R.transition.right);
                 break;
             case R.id.ImageGullakh:
+                senddocudata("Bank");
                 showdialog();
                 break;
             case R.id.close:

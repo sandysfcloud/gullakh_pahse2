@@ -82,6 +82,11 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
         incent = (EditText) findViewById(R.id.incent);
         incent.addTextChangedListener(new NumberTextWatcher(incent));
+        incent.setError("(6 months)");
+
+       /* TextView errorm = (TextView) findViewById(R.id.errorm);
+        errorm.setOnClickListener(this);
+        errorm.setError("6 months");*/
 
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
@@ -116,6 +121,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
         if(gloan_type.equalsIgnoreCase("Home Loan")||gloan_type.equalsIgnoreCase("Loan Against Property")) {
             Log.d("its hl o lap","1");
             fbonus=1;
+            if(gloan_type.equalsIgnoreCase("Home Loan"))
+            sal.setError("If there are co-applicant's please include their salary to get higher borrowing power.");
             mbonus = (MaterialTextField) findViewById(R.id.mbonus);
             mbonus.setVisibility(View.VISIBLE);
             bonus = (EditText) findViewById(R.id.bonus);
@@ -429,12 +436,14 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                 Double netsal;
                 if(incent.getText().toString()!=null&& !(incent.getText().toString().equals(""))) {
-
+                    Double vbonus=0.0;
                     if(fbonus==1) {
-                        Double vbonus=Double.parseDouble(bonus.getText().toString().replaceAll(",", ""));
+                        if(!bonus.getText().toString().matches("")) {
+                             vbonus = Double.parseDouble(bonus.getText().toString().replaceAll(",", ""));
 
-                        if(vbonus!=0)
-                            vbonus=vbonus/24;
+                            if (vbonus != 0)
+                                vbonus = vbonus / 24;
+                        }
 
                         Log.d("its home or lap loan", String.valueOf(fbonus));
 
@@ -457,6 +466,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
                     Double dincent = Double.parseDouble(incent.getText().toString().replaceAll(",", "")) ;
                     ((GlobalData) getApplication()).setavgince(dincent);
+
+                    ((GlobalData) getApplication()).setbonus(vbonus);
                 }
 
                 else
@@ -467,6 +478,8 @@ public class Salaryed_NetSalary extends AppCompatActivity implements View.OnClic
 
 
                 Log.d("check net sal KK", String.valueOf(netsal));
+
+                Log.d("check salr KK", String.valueOf(salr));
                 ((GlobalData) getApplication()).setnetsalary(salr);
 
                 ((GlobalData) getApplication()).setTotalsal(String.valueOf(netsal));

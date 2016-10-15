@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -295,6 +296,7 @@ private boolean isReadStorageAllowed() {
             intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES);
 
 
+
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.putExtra("remove", "yes");
 
@@ -304,6 +306,14 @@ private boolean isReadStorageAllowed() {
             startActivityForResult(Intent.createChooser(intent, "Choose File to Upload.."), code);
 
             flag = 1;
+
+
+
+
+
+
+
+
         }
         else
         {
@@ -641,6 +651,17 @@ private boolean isReadStorageAllowed() {
             String FileExtension = getExt(temp1);
 
 
+            //**********getting size
+
+            File file = new File(temp1);
+            int file_size = Integer.parseInt(String.valueOf(file.length() / 1024));
+
+            Log.d("size of file K", String.valueOf(file_size));
+
+
+            //***********************
+
+
 
 
            try {
@@ -654,63 +675,61 @@ private boolean isReadStorageAllowed() {
 
 
 
+if(file_size<=200) {
 
+    if (requestCode == 1) {
 
-            if (requestCode == 1) {
+        pathfromuser1.setText(temp1);
 
-                pathfromuser1.setText(temp1);
+        savetoserver(temp1, FileExtension, "ID Proof & DOB Proof", requestCode);
 
-                savetoserver(temp1, FileExtension, "ID Proof & DOB Proof", requestCode);
+    } else if (requestCode == 2) {
 
-            } else if (requestCode == 2) {
+        pathfromuser2.setText(temp1);
+        savetoserver(temp1, FileExtension, "Address Proof", requestCode);
 
-                pathfromuser2.setText(temp1);
-                savetoserver(temp1, FileExtension,"Address Proof",requestCode);
+    } else if (requestCode == 3) {
 
-            } else if (requestCode == 3) {
+        pathfromuser3.setText(temp1);
+        savetoserver(temp1, FileExtension, "Signature Proof", requestCode);
+    } else if (requestCode == 4) {
 
-                pathfromuser3.setText(temp1);
-                savetoserver(temp1, FileExtension, "Signature Proof",requestCode);
-            } else if (requestCode == 4) {
+        pathfromuser4.setText(temp1);
 
-                pathfromuser4.setText(temp1);
+        savetoserver(temp1, FileExtension, "Payslip1", requestCode);
+    } else if (requestCode == 5) {
 
-                savetoserver(temp1, FileExtension, "Payslip1",requestCode);
-            }
+        pathfromuser5.setText(temp1);
 
+        // savetoserver(temp1, FileExtension, "Bank Statement/Passbook of Salary account",requestCode);
+        savetoserver(temp1, FileExtension, "Bank Statement", requestCode);
+    } else if (requestCode == 6) {
 
+        pathfromuser6.setText(temp1);
 
-            else if (requestCode == 5) {
-
-                pathfromuser5.setText(temp1);
-
-               // savetoserver(temp1, FileExtension, "Bank Statement/Passbook of Salary account",requestCode);
-                savetoserver(temp1, FileExtension, "Bank Statement",requestCode);
-            } else if (requestCode == 6) {
-
-                pathfromuser6.setText(temp1);
-
-               // savetoserver(temp1, FileExtension, "FORM-16/ ITR",requestCode);
-                savetoserver(temp1, FileExtension, "FORM-16ITR",requestCode);
-            } /*else if (requestCode == 7) {
+        // savetoserver(temp1, FileExtension, "FORM-16/ ITR",requestCode);
+        savetoserver(temp1, FileExtension, "FORM-16ITR", requestCode);
+    } /*else if (requestCode == 7) {
 
                 pathfromuser7.setText(temp1);
 
                 savetoserver(temp1, FileExtension, "Passport Size Photograph",requestCode);
-            }*/
+            }*/ else if (requestCode == 7) {
 
-            else if (requestCode == 7) {
+        pathfromuserps2.setText(temp1);
 
-                pathfromuserps2.setText(temp1);
+        savetoserver(temp1, FileExtension, "Payslip2", requestCode);
+    } else if (requestCode == 8) {
 
-                savetoserver(temp1, FileExtension, "Payslip2",requestCode);
-            }
-            else if (requestCode == 8) {
+        pathfromuserps3.setText(temp1);
 
-                pathfromuserps3.setText(temp1);
+        savetoserver(temp1, FileExtension, "Payslip3", requestCode);
+    }
+}
+            else
+    RegisterPageActivity.showErroralert(this, "The file size exceeds the limit 200KB and cannot be saved!", "error");
 
-                savetoserver(temp1, FileExtension, "Payslip3",requestCode);
-            }
+
 
             //*kk
 

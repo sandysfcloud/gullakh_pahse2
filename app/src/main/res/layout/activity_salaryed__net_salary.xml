@@ -74,6 +74,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
 
@@ -94,6 +95,7 @@
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#ffffff"
             android:id="@+id/esal"
+
             android:hint="Net Monthly Salary"
             app:mtf_image="@drawable/loan_amt"
             android:layout_marginBottom="10dp">
@@ -121,21 +123,31 @@
 
                    >
 
+                    <LinearLayout
+                        android:orientation="horizontal"
 
-                    <com.gullakh.gullakhandroid.font.RobotoTextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18dp"
-                        android:id="@+id/TextViewOption4"
-                        android:layout_marginLeft="38dp"
-                        android:textColor="#3f3f3f"
-                        app:typeface="robotoLight"
-                        android:visibility="gone" />
 
+                        >
+
+                        <!--<com.gullakh.gullakhandroid.font.RobotoTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18dp"
+                            android:id="@+id/errorm"
+
+                            style="@android:style/Widget.EditText"
+                            android:background="@color/white_transparent"
+
+                            android:textColor="#3f3f3f"
+                            app:typeface="robotoLight"
+                            />-->
                     <com.gullakh.gullakhandroid.MaterialTextField
                         android:layout_width="350dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_height="wrap_content"
+
 
 
                         app:mtf_cardCollapsedHeight="4dp"
@@ -146,8 +158,9 @@
                         <com.gullakh.gullakhandroid.font.RobotoEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Average Monthly Incentives(6-months)"
+                            android:hint="Average Monthly Incentives"
                             android:inputType="number"
+                            android:layout_weight="1"
                             android:id="@+id/incent"
                             android:textColorHint="#000"
                             android:textColor="#000"
@@ -155,6 +168,10 @@
                             app:typeface="robotoLight"/>
 
                     </com.gullakh.gullakhandroid.MaterialTextField>
+
+
+
+                    </LinearLayout>
 
                     <com.gullakh.gullakhandroid.MaterialTextField
                         android:layout_width="350dp"

@@ -29,7 +29,7 @@ public class GlobalData extends MultiDexApplication {
     private Double pat;
     private Double pat2;
     private Double depreciation;
-    private Double depreciation2;
+    private Double depreciation2,bonus;
 // =====================================================================================================================
 //-------------------------production URL------------------------------------------------------------------------------
    /* static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_uat/";
@@ -332,6 +332,14 @@ public class GlobalData extends MultiDexApplication {
     }
     public int getlpposcatg() {
         return lpposcatg;
+    }
+
+
+    public void setbonus(Double someVariable) {
+        this.bonus = someVariable;
+    }
+    public Double getbonus() {
+        return bonus;
     }
     //***************HomeLoan***********************//
 

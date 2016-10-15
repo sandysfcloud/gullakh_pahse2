@@ -709,19 +709,22 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
 
         try {
             if (globalindetity=="checkapi"){
+                Log.d("processFinishString is called","1");
 
-                if (jsonObject.get("success").toString().equals("true")) {
+                if (jsonObject.get("success").toString().equals("true")) {//if the session is already present
                     flag="true";
 
                 }else{
 
-                        //Log.d("flag in if condtn", flag);
-                        init(activity);
+                        Log.d("flag in if condtn", "fl");
+                        init(activity);//get the token server call
 
                 }
             }
 
-            if (globalindetity=="init"){
+            if (globalindetity=="init"){//get the token server response
+
+                Log.d("globalindetity is init K", "");
 
                 if (jsonObject.get("success").toString().equals("true")) {
 
@@ -737,7 +740,7 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
                 }
             }
 
-            if (globalindetity=="sessn") {
+            if (globalindetity=="sessn") {//get the session value
 
                 if (jsonObject.get("success").toString().equals("true")) {
 

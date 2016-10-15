@@ -118,7 +118,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 
 
             String loanamt = loan_amt;
-            int loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
+            int loanamtint=0;
+            if(!((GlobalData) getApplication()).getloanamt().matches(""))
+                loanamtint = (int) Double.parseDouble(((GlobalData) getApplication()).getloanamt());
             //  mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / 50000)));
             mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(loanamt) / Integer.parseInt(progressval.replace(",","").trim()))));
 
@@ -309,8 +311,9 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                }
             }
             else {
-                mSeekArc.mMax = 99;
+
                 if(emptyp.equals("Salaried")) {
+                    mSeekArc.mMax = 99;
                     progressval="1,00,000";
                     if(val==1) {//first time
                         mSeekArcProgress.setText("1,00,000");
@@ -319,6 +322,7 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
                  //   amt.setFilters(new InputFilter[]{new InputFilterMinMax("100000", String.valueOf(Integer.MAX_VALUE))});
                 }
                else {
+                    mSeekArc.mMax = 19;
                     progressval="5,00,000";
                     if(val==1) {//first time
                         mSeekArcProgress.setText("5,00,000");
@@ -428,15 +432,17 @@ public class Loan_amt_questn extends AppCompatActivity implements View.OnClickLi
 //                break;
             case R.id.next:
 
-                Log.d("compare loan amount", String.valueOf(Integer.parseInt(amt.getText().toString().replace(",","").trim())>=Integer.parseInt(progressval.replace(",","").trim())));
-                if(amt.getText().toString().matches("")) {
+               if(amt.getText().toString().matches("")) {
 
                     RegisterPageActivity.showErroralert(Loan_amt_questn.this, "Please enter loan amount!", "failed");
                 }
                 else if(Integer.parseInt(amt.getText().toString().replace(",","").trim())>=Integer.parseInt(progressval.replace(",","").trim()))
                     {
 
-                    Log.d("intent next loanamt", "check");
+                        Log.d("compare loan amount", String.valueOf(Integer.parseInt(amt.getText().toString().replace(",","").trim())>=Integer.parseInt(progressval.replace(",","").trim())));
+
+
+                        Log.d("intent next loanamt", "check");
                     ((GlobalData) getApplication()).setloanamt(amt.getText().toString().replaceAll(",", ""));
                     Log.d("loan amount in la questn",((GlobalData) getApplication()).getloanamt());
 

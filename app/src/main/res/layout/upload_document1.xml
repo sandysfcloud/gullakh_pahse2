@@ -81,7 +81,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Let Gullakh/Bank Collect Documents"
+        android:text="Let Bank Collect Documents"
         android:id="@+id/textViewupload3"
         android:layout_gravity="center_horizontal"
         android:gravity="center"

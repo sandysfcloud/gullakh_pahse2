@@ -33,7 +33,7 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 	String tenure;
 
 		int listpos;
-
+		String propreclo;
 	public ArrayList<ListModel> data;
 	public ArrayList<ListModel> original;
 
@@ -190,7 +190,7 @@ if(isNumeric(tempValues.getprocessing_fee()))
 	profee=tempValues.getprocessing_fee();
     }
 
-			String propreclo;
+
 			if(tempValues.getpre_closure_fee()!=null) {
 				if (isNumeric(tempValues.getpre_closure_fee())) {
 					propreclo = String.valueOf(format.format(new BigDecimal(tempValues.getpre_closure_fee())));
@@ -215,7 +215,14 @@ if(isNumeric(tempValues.getprocessing_fee()))
 
 			holder.day.setText(""+emi);
 			//holder.description.setText("EMI for "+((GlobalData) cont.getApplicationContext()).gettenure()+ " Years");
+
+			String loantyp2 = ((GlobalData) cont.getApplicationContext()).getLoanType();
+
+			if (loantyp2.equals("Home Loan") || loantyp2.equals("Loan Against Property"))
 			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%"+" floating");
+			else
+				holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%"+" fixed");
+
 			holder.t4.setText(""+profee);
 			holder.tprea.setText(""+propreclo);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
@@ -273,6 +280,7 @@ if(isNumeric(tempValues.getprocessing_fee()))
 					intent.putExtra("fee", data.get(pos).getfee_charges());
 					intent.putExtra("other", data.get(pos).getother_details());
 					intent.putExtra("docum", data.get(pos).getcardocu());
+					intent.putExtra("preclos",propreclo);
 					Log.d("adapter docum ", data.get(pos).getcardocu());
 					cont.startActivity(intent);
 					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);

@@ -178,8 +178,8 @@ public class hl_coappldetailsProff extends AppCompatActivity implements View.OnC
                                // setDataToHashMap("date", Doj.getText().toString());
                                // setDataToHashMap("category", String.valueOf(spinner2.getSelectedItem()));
 
-                                setDataToHashMap("start_date_of_current_business_prof", Doj.getText().toString());
-                                setDataToHashMap("firm_type_prof", String.valueOf(spinner2.getSelectedItem()));
+                                setDataToHashMap("start_date_of_current_business", Doj.getText().toString());
+                                setDataToHashMap("firm_type", String.valueOf(spinner2.getSelectedItem()));
 
                                 Log.d("check profession here", String.valueOf(cl_car_global_data.dataWithAnscoapp));
                                 ((GlobalData) getApplication()).setCoappprofpos(spinner1.getSelectedItemPosition());

@@ -23,6 +23,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -890,11 +891,14 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(4, -1),
                 R.string.drawer_title_image_gallery,
                 DrawerItem.DRAWER_ITEM_TAG_IMAGE_GALLERY));*/
-        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(5, -1),
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(6, -1),
                 R.string.drawer_title_my_application,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
-        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(6, -1),
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(7, -1),
                 R.string.drawer_title_shape_image_views,
+                DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(8, -1),
+                R.string.drawer_title_terms_of_use,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
 
 
@@ -990,6 +994,18 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
                 overridePendingTransition(R.transition.left, R.transition.right);
 
             }
+
+                if (position == 5) {
+                    Log.d("privacy p is clicked", "mainact");
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gullakh.com/privacy-policy"));
+                    startActivity(browserIntent);
+                }
+                if (position == 6) {
+                    Log.d("terms n con is clicked", "mainact");
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gullakh.com/term-of-service"));
+                    startActivity(browserIntent);
+
+                }
 
 
         }

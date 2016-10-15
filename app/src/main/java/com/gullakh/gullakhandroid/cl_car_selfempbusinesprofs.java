@@ -122,8 +122,8 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
     }
     private void getDataFromHashMap()
     {
-        if(cl_car_global_data.dataWithAns.get("profession")!=null && cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof")!=null &&
-                cl_car_global_data.dataWithAns.get("firm_type_prof")!=null)
+        if(cl_car_global_data.dataWithAns.get("profession")!=null && cl_car_global_data.dataWithAns.get("start_date_of_current_business")!=null &&
+                cl_car_global_data.dataWithAns.get("firm_type")!=null)
         {
            // Doj.setText(cl_car_global_data.dataWithAns.get("start_date_of_current_business_prof"));
             if(cl_car_global_data.dataWithAns.get("profession").equals("CA")) {
@@ -139,15 +139,15 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
             }else if(cl_car_global_data.dataWithAns.get("profession").equals("Others")) {
                 spinner1.setSelection(7);
             }
-            if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Proprietorship")) {
+            if(cl_car_global_data.dataWithAns.get("firm_type").equals("Proprietorship")) {
                 spinner2.setSelection(1);
-            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Partnership")) {
+            }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("Partnership")) {
                 spinner2.setSelection(2);
-            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("LLP")) {
+            }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("LLP")) {
                 spinner2.setSelection(3);
-            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Pvt. Ltd. Company")) {
+            }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("Pvt. Ltd. Company")) {
                 spinner2.setSelection(4);
-            }else if(cl_car_global_data.dataWithAns.get("firm_type_prof").equals("Public Ltd. Company")) {
+            }else if(cl_car_global_data.dataWithAns.get("firm_type").equals("Public Ltd. Company")) {
                 spinner2.setSelection(5);
             }
         }
@@ -165,8 +165,16 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
                         if (!spinner2.getSelectedItem().toString().matches("Select"))
                         {
                             setDataToHashMap("profession",spinner1.getSelectedItem().toString());
-                            setDataToHashMap("start_date_of_current_business_prof",spinner3.getSelectedItem().toString());
-                            setDataToHashMap("firm_type_prof",spinner2.getSelectedItem().toString());
+                           /* setDataToHashMap("start_date_of_current_business_prof",spinner3.getSelectedItem().toString());
+                            setDataToHashMap("firm_type_prof",spinner2.getSelectedItem().toString());*/
+
+                            setDataToHashMap("start_date_of_current_business",spinner3.getSelectedItem().toString());
+                            setDataToHashMap("firm_type",spinner2.getSelectedItem().toString());
+
+                            Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
+                            Log.d("HashMap2", cl_car_global_data.dataWithAns.get("start_date_of_current_business"));
+                            Log.d("HashMap3", cl_car_global_data.dataWithAns.get("firm_type"));
+
                             if(((GlobalData) getApplication()).getLoanType().equals("Home Loan"))
                             {
                                 goToDatabase("Home Loan");
@@ -219,8 +227,8 @@ public class cl_car_selfempbusinesprofs extends AppCompatActivity  implements Vi
     }
     public void setDataToHashMap(String Key,String data)
     {
-        cl_car_global_data.dataWithAns.put(Key,data);
-        Log.d("HashMap", cl_car_global_data.dataWithAns.get("profession"));
+        cl_car_global_data.dataWithAns.put(Key, data);
+
     }
     private void goToDatabase(String loanType)
     {

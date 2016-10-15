@@ -180,7 +180,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         title = (TextView) v.findViewById(R.id.title);
         ImageView review = (ImageView) v.findViewById(R.id.edit);
-        review.setVisibility(View.INVISIBLE);
+        review.setVisibility(View.GONE);
         ImageView close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
 
@@ -1371,12 +1371,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     lenderInfo.put("plemi", CustomListViewValuesArr2.get(i).getemi_value());
                     lenderInfo.put("plpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
                     lenderInfo.put("plprosesingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
+                    Log.d("check lender info","if (i == 0) {");
+
                 } else if (i == 1) {
                     lenderInfo.put("secondarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
                     lenderInfo.put("slroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
                     lenderInfo.put("slemi", CustomListViewValuesArr2.get(i).getemi_value());
                     lenderInfo.put("slpreclosurefee", CustomListViewValuesArr2.get(i).getpre_closure_fee());
                     lenderInfo.put("slprocessingfee", CustomListViewValuesArr2.get(i).getprocessing_fee());
+                    Log.d("check lender info", "if (i == 1) {");
                 }
             }
             ((GlobalData) this.getApplication()).setLenders(lenderInfo);
@@ -1385,6 +1388,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         } else if (CustomListViewValuesArr2.size() == 1) {
             for (int i = 0; i < 2; i++) {
                 if (i == 0) {
+                    Log.d("check lender info","size() == 1) {");
                     lenderInfo.put("primarylender", CustomListViewValuesArr2.get(i).getaccount_lender());
                     lenderInfo.put("plroi", CustomListViewValuesArr2.get(i).getfloating_interest_rate());
                     lenderInfo.put("plemi", CustomListViewValuesArr2.get(i).getemi_value());
@@ -1399,7 +1403,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 ((GlobalData) this.getApplication()).setLenders(lenderInfo);
             }
         }
-
+        Log.d("check lender info",lenderInfo.toString());
         for (Map.Entry<String, String> entry : lenderInfo.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
@@ -1436,7 +1440,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         });
 
         //getSupportActionBar().setTitle("Result");
-        title.setText("Your Loan Offers");
+        title.setText("Loan Offers-"+globalloan_type);
     }
 
 

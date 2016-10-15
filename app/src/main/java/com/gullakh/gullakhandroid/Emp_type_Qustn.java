@@ -216,6 +216,48 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
     public void onNothingSelected(AdapterView<?> parent) {
     }
     public void goToIntent(){
+
+        if(!((GlobalData) getApplication()).getemptype().matches(""))
+        {
+            if(!((GlobalData) getApplication()).getemptype().equals("Salaried")) {
+
+                if (cl_car_global_data.dataWithAns.containsKey("name_of_current_emp"))
+                    cl_car_global_data.dataWithAns.put("name_of_current_emp", null);
+                if (cl_car_global_data.dataWithAns.containsKey("year_you_joined_current_comp"))
+                    cl_car_global_data.dataWithAns.put("year_you_joined_current_comp", null);
+                if (cl_car_global_data.dataWithAns.containsKey("total_exp"))
+                    cl_car_global_data.dataWithAns.put("total_exp", null);
+
+                if (cl_car_global_data.dataWithAns.containsKey("sal_pay_option"))
+                    cl_car_global_data.dataWithAns.put("sal_pay_option", null);
+                if (cl_car_global_data.dataWithAns.containsKey("sal_dep_to"))
+                    cl_car_global_data.dataWithAns.put("sal_dep_to", null);
+
+                ((GlobalData) getApplication()).setTotalsal(null);
+                ((GlobalData) getApplication()).setnetsalary(null);
+            }
+
+            if(!((GlobalData) getApplication()).getemptype().equals("Self Employed Business")) {
+
+                if (cl_car_global_data.dataWithAns.containsKey("ind_type"))
+                    cl_car_global_data.dataWithAns.put("ind_type", null);
+                if (cl_car_global_data.dataWithAns.containsKey("start_date_of_cur_business"))
+                    cl_car_global_data.dataWithAns.put("start_date_of_cur_business", null);
+                if (cl_car_global_data.dataWithAns.containsKey("firm_type"))
+                    cl_car_global_data.dataWithAns.put("firm_type", null);
+            }
+
+            if(!((GlobalData) getApplication()).getemptype().equals("Self Employed Professional")) {
+
+                if (cl_car_global_data.dataWithAns.containsKey("profession"))
+                    cl_car_global_data.dataWithAns.put("profession", null);
+                if (cl_car_global_data.dataWithAns.containsKey("start_date_of_current_business"))
+                    cl_car_global_data.dataWithAns.put("start_date_of_current_business", null);
+                if (cl_car_global_data.dataWithAns.containsKey("firm_type"))
+                    cl_car_global_data.dataWithAns.put("firm_type", null);
+            }
+
+        }
         Intent intent;
         String loantype =((GlobalData) getApplication()).getLoanType();
         if(loantype.equalsIgnoreCase("Car Loan")){

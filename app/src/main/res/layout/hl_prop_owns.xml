@@ -91,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="Self"
                     android:id="@+id/cself"
+                    android:visibility="gone"
                     android:checked="false"
                     android:textSize="16dp"
                     android:gravity="center_vertical" />

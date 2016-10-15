@@ -28,7 +28,7 @@
             android:layout_weight="4"
             android:textColor="#ffffff"
             app:typeface="robotoLight"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
         <ImageView
         android:id="@+id/close"

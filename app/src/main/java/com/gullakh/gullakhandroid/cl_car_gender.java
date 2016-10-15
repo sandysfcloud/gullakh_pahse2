@@ -129,6 +129,14 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         Intent intent2 = getIntent();
         coappldata = intent2.getStringExtra("coappl");
 
+
+        if(!((GlobalData) getApplication()).getemptype().matches("")) {
+            if (!((GlobalData) getApplication()).getemptype().equals("Salaried")) {
+                if (cl_car_global_data.dataWithAns.containsKey("net_mon_salary"))
+                    cl_car_global_data.dataWithAns.put("net_mon_salary", null);
+            }
+        }
+
         if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Home Loan") ||
                 ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
 
@@ -186,7 +194,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         spinner.setAdapter(dataAdapter1);
 
 
-
         getContactDetails();
         city = (Spinner) findViewById(R.id.city);
         city.setPrompt("Select City");
@@ -196,9 +203,8 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
         state.setPrompt("Select State");
 
 
-
-        scity=cl_car_global_data.dataWithAns.get("currently_living_in");
-        sstate=((GlobalData) getApplication()).getStatename();
+        scity = cl_car_global_data.dataWithAns.get("currently_living_in");
+        sstate = ((GlobalData) getApplication()).getStatename();
 
 
         getstatenam();
@@ -254,6 +260,13 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
 
 
+
+
+
+
+
+
+
        /* MyArrayAdapter ma2 = new MyArrayAdapter(this, categories);
         spinner.setAdapter(ma2);*/
     }
@@ -291,12 +304,10 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 liststate = new String[size];
 
                 for (int i = 0; i < size; i++) {
-                    if(i == 0)
-                    {
+                    if (i == 0) {
                         Log.d("index s 0", "0");
-                        liststate[i]="Select";
-                    }
-                    else
+                        liststate[i] = "Select";
+                    } else
                         liststate[i] = enums[i].getStatename();
 
                     cityindex.put(liststate[i], i);
@@ -310,17 +321,16 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     if (sstate.length() > 0) {
                         Log.d("state index", String.valueOf(cityindex));
 
-                        sstate=Character.toUpperCase(sstate.charAt(0)) + sstate.substring(1);
+                        sstate = Character.toUpperCase(sstate.charAt(0)) + sstate.substring(1);
                         Log.d("state value", String.valueOf(sstate));
                         //state = state.replace(" ", "");
 
-                        if(cityindex.get(sstate)!=null) {
+                        if (cityindex.get(sstate) != null) {
                             Log.d("state index", String.valueOf(cityindex.get(sstate)));
                             state.setSelection((Integer) cityindex.get(sstate));
                         }
                     }
                 }
-
 
 
                 // if(((GlobalData) getApplication()).getcitypos()!=-1)
@@ -344,7 +354,6 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
         requestgetserver.execute("sessn", "statenamcibil", sessionid);
     }
-
 
 
     public void getcitynam(String Statenam) {
@@ -375,7 +384,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
 
                 listcity = new String[size];
-                if(size>0) {
+                if (size > 0) {
                     listcity[0] = "Select";
                     for (int i = 0; i < size; i++) {
                         listcity[i] = enums[i].getcity_name().trim();
@@ -397,7 +406,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                         Log.d("city value frm profile", String.valueOf(scity));
 
                         Log.d("city index", String.valueOf(cityindex.get(scity)));
-                        if(cityindex.get(scity)!=null) {
+                        if (cityindex.get(scity) != null) {
                             if (!cityindex.isEmpty())
                                 city.setSelection((Integer) cityindex.get(scity));
                         }
@@ -446,7 +455,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
         switch (v.getId()) {
             case R.id.Submit:
-                if (add1.getText().toString().equals("") || add2.getText().toString().equals("") || pin.getText().toString().equals("") || city.getSelectedItem()==null || state.getSelectedItem()==null) {
+                if (add1.getText().toString().equals("") || add2.getText().toString().equals("") || pin.getText().toString().equals("") || city.getSelectedItem() == null || state.getSelectedItem() == null) {
                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Enter all address fields!", "failed");
                 } else {
                     if (pin.getText().toString().length() == 6) {
@@ -458,24 +467,23 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                                     ((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Loan Against Property")) {
 
                                 if (coappldata != null) {
-                                    Log.d("coappldata != null","1");
+                                    Log.d("coappldata != null", "1");
 
-                                    if(cl_car_global_data.dataWithAnscoapp!=null) {
-                                        if ( cl_car_global_data.dataWithAnscoapp.get("firstname")!=null) {
+                                    if (cl_car_global_data.dataWithAnscoapp != null) {
+                                        if (cl_car_global_data.dataWithAnscoapp.get("firstname") != null) {
                                             Log.d("coappldata != null", "2");
                                             submitfunction();
                                         }
-                                    }
-                                    else
+                                    } else
                                         RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants data!", "failed");
                                 } else if (!coapllflag) {
-                                    Log.d("!coapllflag","2");
+                                    Log.d("!coapllflag", "2");
                                     submitfunction();
                                 } else {
                                     RegisterPageActivity.showErroralert(cl_car_gender.this, "Add co applicants field!", "failed");
                                 }
                             } else {
-                                Log.d("submitfunction called","1");
+                                Log.d("submitfunction called", "1");
                                 submitfunction();
                             }
                         }
@@ -545,7 +553,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
     private void submitfunction() {
 
-        String tim=spinner.getSelectedItem().toString();
+        String tim = spinner.getSelectedItem().toString();
         String[] separated = tim.split("-");
         Log.d("borrw1", separated[0]);
         Log.d("borrw2", separated[1]);
@@ -563,29 +571,51 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
             readFormat = new SimpleDateFormat("dd-MM-yy hh:mm:ss pa");
             seldate=datefield.getText().toString()+" "+separated[1].replaceAll("[^0-9]", "")+":00:"+"00"+" "+"pm";
         }*/
+        DateFormat readFormat;
+        String seldate;
 
-        Log.d("datefield value", String.valueOf(datefield));
-        DateFormat readFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
-        String seldate=datefield.getText().toString()+" "+separated[1].replaceAll("[^0-9]", "")+":00:"+"00"+" "+separated[1].replaceAll("[0-9]", "");
+
+
+
+
+
+        if (!datefield.getText().toString().matches("")) {
+            Log.d("datefield value", String.valueOf(datefield));
+            readFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+            seldate = datefield.getText().toString() + " " + separated[1].replaceAll("[^0-9]", "") + ":00:" + "00" + " " + separated[1].replaceAll("[0-9]", "");
+        } else {
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            Date tomorrow = calendar.getTime();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String tomorrowAsString = dateFormat.format(tomorrow);
+            Log.d("date is null so take tomm",tomorrowAsString);
+
+
+            readFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+            seldate = tomorrowAsString + " " + separated[1].replaceAll("[^0-9]", "") + ":00:" + "00" + " " + separated[1].replaceAll("[0-9]", "");
+        }
+
 
         Log.d("before selected date", seldate);
-        DateFormat writeFormat = new SimpleDateFormat( "dd-MMM-yy HH");
+        DateFormat writeFormat = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
         Date date = null;
         try {
             date = readFormat.parse(seldate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String selects=null;
+        String selects = null;
         if (date != null) {
             selects = writeFormat.format(date);
 
         }
-Log.d("after selected date", selects);
+        Log.d("after selected date", selects);
 //***********
 
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy HH");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
         String currents = sdf.format(new Date());
 
         Date currentd = null;
@@ -602,10 +632,9 @@ Log.d("after selected date", selects);
         Calendar c = Calendar.getInstance();
         int currmonth = c.get(Calendar.MONTH);
         int curryear = c.get(Calendar.YEAR);
-        Log.d("check date", currmonth + " " + curryear);
-       // if (yearv < curryear) {
-        if (selectd.compareTo(currentd)<0)
-        {
+        // Log.d("check date", currmonth + " " + curryear);
+        // if (yearv < curryear) {
+        if (selectd.compareTo(currentd) < 0) {
             RegisterPageActivity.showErroralert(cl_car_gender.this, "Please select future date and time!", "failed");
         } else if (yearv == curryear) {
             if (month < currmonth) {
@@ -621,7 +650,7 @@ Log.d("after selected date", selects);
                     goToDatabase("mysearch", "Car Loan");
                 }
 
-                goToServer(add1.getText().toString(), add2.getText().toString(), city.getSelectedItem().toString(), state.getSelectedItem().toString(), pin.getText().toString());
+                goToServer(add1.getText().toString(), add2.getText().toString(),/* city.getSelectedItem().toString()*/scity, /*state.getSelectedItem().toString()*/sstate, pin.getText().toString());
                 savetoserver();
             }
         } else if (yearv >= curryear) {
@@ -635,7 +664,7 @@ Log.d("after selected date", selects);
                 goToDatabase("mysearch", "Car Loan");
             }
 
-            goToServer(add1.getText().toString(), add2.getText().toString(), city.getSelectedItem().toString(), state.getSelectedItem().toString(), pin.getText().toString());
+            goToServer(add1.getText().toString(), add2.getText().toString(), /*city.getSelectedItem().toString()*/scity,/* state.getSelectedItem().toString()*/sstate, pin.getText().toString());
             savetoserver();
         }
     }
@@ -711,16 +740,18 @@ Log.d("after selected date", selects);
                     ContactBR[] Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR[].class);
                     Log.d("requestgetserver3 jsonobj", "1");
                     borrowercontactid = Borrower_contact[0].getId();
+                    if (borrowercontactid != null)
+                        Log.d("borrowercontactid createcase", borrowercontactid);
                     Gson gson1 = new Gson();
                     String json = gson1.toJson(((GlobalData) getApplication()).getLenders());
                     json = json.replaceAll("\\{|\\}", "");
                     Log.d("lender", json);
                     String[] tempLoanId = loanTypeId.split("x");
 
-                    requestgetserver5.execute("token", "createcase", sessionid, borrowercontactid, "Created", json, loanTypeId, datefield.getText().toString(), spinner.getSelectedItem().toString(), state.getSelectedItem().toString(), String.valueOf(((GlobalData) getApplication()).getloanamt()));
+                    requestgetserver5.execute("token", "createcase", sessionid, borrowercontactid, "Created", json, loanTypeId, datefield.getText().toString(), spinner.getSelectedItem().toString(), /*state.getSelectedItem().toString()*/sstate, String.valueOf(((GlobalData) getApplication()).getloanamt()));
                 } else {
                     requestgetserver4.execute("token", "createcontact", sessionid, borrowercityid, useremail, usermobile, cl_car_global_data.dataWithAns.get("dob"), add1.getText().toString() + " " + add2.getText().toString()
-                            , city.getSelectedItem().toString(), pin.getText().toString(), state.getSelectedItem().toString());
+                            ,/* city.getSelectedItem().toString()*/scity, pin.getText().toString(), /*state.getSelectedItem().toString()*/sstate);
                 }
             }
         }, cl_car_gender.this, "wait3");
@@ -762,7 +793,7 @@ Log.d("after selected date", selects);
                 LoanReq Borrower_case = gson.fromJson(jsonObject.get("result"), LoanReq.class);
                 borrowercaseid = Borrower_case.getId();
                 borrowercaseno = Borrower_case.getCase_number();
-
+                Log.d("Borrower borrowercaseid id KK", borrowercaseid);
                 gotoUpdateCredential();
 
                 if (((GlobalData) getApplication()).getLoanType().equalsIgnoreCase("Car Loan")) {
@@ -889,7 +920,7 @@ Log.d("after selected date", selects);
                 LoanParaMaster[] LoanP = gson.fromJson(jsonObject.get("result"), LoanParaMaster[].class);
                 Map<String, String> arrayLoanParameter = new HashMap<>();
                 for (int i = 0; i < LoanP.length; i++) {
-                    arrayLoanParameter.put(LoanP[i].getWebreference(), LoanP[i].getid());
+                    arrayLoanParameter.put(LoanP[i].getWebreference(), LoanP[i].getid());//from server get all webservicesvalue n id
                     Log.d("webref", LoanP[i].getWebreference() + " value :" + LoanP[i].getid());
                 }
 
@@ -897,7 +928,7 @@ Log.d("after selected date", selects);
                 for (Map.Entry<String, String> entry : cl_car_global_data.dataWithAns.entrySet()) {
                     JSONObject LoanData = new JSONObject();
                     try {
-                        Log.d("parametevalue", arrayLoanParameter.get(entry.getKey()) + entry.getValue());
+                        Log.d("parametevalue", arrayLoanParameter.get(entry.getKey()) + entry.getValue());//matching server n android data
                         LoanData.put("parametername", arrayLoanParameter.get(entry.getKey()));
                         LoanData.put("parameter_value", entry.getValue());
                         LoanData.put("loanrequestcase", borrowercaseid);
@@ -984,7 +1015,7 @@ Log.d("after selected date", selects);
 
             }
         }, cl_car_gender.this, "wait6");
-        requestgetserver22.execute("token", "updateContactDetailsNew", ((GlobalData) getApplication()).getDob().toString(), ((GlobalData) getApplication()).getgender().toString(), add1.getText().toString(), add2.getText().toString(), city.getSelectedItem().toString(), state.getSelectedItem().toString(), pin.getText().toString(), userid, "", "");
+        requestgetserver22.execute("token", "updateContactDetailsNew", ((GlobalData) getApplication()).getDob().toString(), ((GlobalData) getApplication()).getgender().toString(), add1.getText().toString(), add2.getText().toString(),/* city.getSelectedItem().toString()*/scity, /*state.getSelectedItem().toString()*/sstate, pin.getText().toString(), userid, "", "");
 
     }
 
@@ -1044,8 +1075,8 @@ Log.d("after selected date", selects);
             ContentValues contentValues1 = new ContentValues();
             contentValues1.put("contact_id", borrowercontactid);
             contentValues1.put("street", add1.getText().toString());
-            contentValues1.put("city", city.getSelectedItem().toString());
-            contentValues1.put("state", state.getSelectedItem().toString());
+            contentValues1.put("city", /*city.getSelectedItem().toString()*/scity);
+            contentValues1.put("state", /*state.getSelectedItem().toString()*/sstate);
             contentValues1.put("zip", pin.getText().toString());
             contentValues1.put("gender", ((GlobalData) getApplication()).getgender());
             contentValues1.put("dob", ((GlobalData) getApplication()).getDob());
@@ -1091,10 +1122,10 @@ Log.d("after selected date", selects);
                 if (details.length > 0) {
                     add1.setText(details[0].getMailingstreet());
                     add2.setText(details[0].getOtherstreet());
-                   // city.setsel(details[0].getMailingcity());
-                   // state.setText(details[0].getMailingstate());
-                    sstate=details[0].getMailingstate();
-                    scity=details[0].getMailingcity();
+                    // city.setsel(details[0].getMailingcity());
+                    // state.setText(details[0].getMailingstate());
+                    sstate = details[0].getMailingstate();
+                    scity = details[0].getMailingcity();
                     pin.setText(details[0].getMailingzip());
                     name = details[0].getFirstname();
                     borrowercontactid = details[0].getId();

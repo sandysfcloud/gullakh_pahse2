@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -86,6 +87,24 @@ public class hl_need6 extends AppCompatActivity implements View.OnClickListener,
         Text2 = (Spinner) findViewById(R.id.editText2);
         Text3 = (EditText) findViewById(R.id.editText3);
         Text1.setOnClickListener(this);
+
+       // TextView bnt = (TextView) findViewById(R.id.textView50);
+        Text1.setOnClickListener(this);
+        Text1.setError("Optional");
+        AutoCompleteAdapter adapter = new AutoCompleteAdapter(hl_need6.this, android.R.layout.simple_dropdown_item_1line, android.R.id.text1, new ArrayList<String>());
+        Text2.setAdapter(adapter);
+        //TextView bnt11 = (TextView) findViewById(R.id.textView51);
+        /*TextView errorText = (TextView)Text2.getSelectedView();
+        errorText.setError("");
+        errorText.setTextColor(Color.RED);//just to highlight that this is an error
+        errorText.setText("Optional");*/
+        TextView tvInvisibleError = (TextView) v.findViewById(R.id.tvInvisibleError);
+        tvInvisibleError.setOnClickListener(this);
+        tvInvisibleError.setError("Optional");
+
+        /*TextView bnt2 = (TextView) findViewById(R.id.textView52);
+        bnt2.setOnClickListener(this);
+        bnt2.setError("Optional");*/
 
 
         Text1.addTextChangedListener(new TextWatcher() {

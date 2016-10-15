@@ -188,6 +188,22 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
 
 
                         }
+
+
+                        else if(args[1].equals("doccollection")){
+                            Log.d("main result", "doccollection");
+                            Log.d("sessn", args[0]);
+                            String[] separated = args[3].split("x");;
+                            Log.d("separated[1] ", separated[0]+" "+separated[1]);
+                            nameValuePairs = new ArrayList<NameValuePair>();
+                            nameValuePairs.add(new BasicNameValuePair("operation", "query"));
+                            nameValuePairs.add(new BasicNameValuePair("elementType", "doccollection"));
+                            nameValuePairs.add(new BasicNameValuePair("sessionName", args[0]));
+                            nameValuePairs.add(new BasicNameValuePair("owner", args[2]));
+                            nameValuePairs.add(new BasicNameValuePair("recordid", separated[1]));
+
+                            Log.d("namevaluepair", String.valueOf(nameValuePairs));
+                        }
                         else if(args[1].equals("projectlist")){
                             Log.d("main result", "projectlist");
                             Log.d("sessn", args[2]);
@@ -275,8 +291,15 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                 nameValuePairs.add(new BasicNameValuePair("gender", ((GlobalData) act.getApplication()).getgender()));
                                 nameValuePairs.add(new BasicNameValuePair("salaryamount", String.valueOf(((GlobalData) act.getApplication()).getnetsalary())));
                                 nameValuePairs.add(new BasicNameValuePair("employername", String.valueOf(((GlobalData) act.getApplication()).getemployer())));
+
+                                if(((GlobalData) act.getApplication()).getemptype().equals("Salaried")) {
+                                    nameValuePairs.add(new BasicNameValuePair("avg_monthly_incentives", String.valueOf(((GlobalData) act.getApplication()).getavgince())));
+                                    nameValuePairs.add(new BasicNameValuePair("annual_bonus", String.valueOf(((GlobalData) act.getApplication()).getbonus())));
+                                }
                                 //****Home Loan
-                                nameValuePairs.add(new BasicNameValuePair("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans()));
+                                //nameValuePairs.add(new BasicNameValuePair("balanecetransfer", ((GlobalData) act.getApplication()).getBaltrans()));
+
+                                nameValuePairs.add(new BasicNameValuePair("hl_bal_tranf", ((GlobalData) act.getApplication()).getBaltrans()));
                                 nameValuePairs.add(new BasicNameValuePair("loanneededfor", ((GlobalData) act.getApplication()).gethneed()));
                                 nameValuePairs.add(new BasicNameValuePair("property_city", ((GlobalData) act.getApplication()).getCity()));
                                 nameValuePairs.add(new BasicNameValuePair("age", ((GlobalData) act.getApplication()).getage()+""  ));
@@ -300,9 +323,9 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                                             Log.d("typeofpropertycat1", ((GlobalData) act.getApplication()).getprop_allotmentby());
                                             Log.d("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat1());
                                             Log.d("typeofpropertycat3", ((GlobalData) act.getApplication()).getpropcat2());
-                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat1", ((GlobalData) act.getApplication()).getprop_allotmentby()));
-                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat2", ((GlobalData) act.getApplication()).getpropcat1()));
-                                            nameValuePairs.add(new BasicNameValuePair("typeofpropertycat3", ((GlobalData) act.getApplication()).getpropcat2()));
+                                            nameValuePairs.add(new BasicNameValuePair("category_lap", ((GlobalData) act.getApplication()).getprop_allotmentby()));
+                                            nameValuePairs.add(new BasicNameValuePair("property_type_lap", ((GlobalData) act.getApplication()).getpropcat1()));
+                                            nameValuePairs.add(new BasicNameValuePair("occupied_property", ((GlobalData) act.getApplication()).getpropcat2()));
 
                                         }
 
@@ -490,6 +513,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             Log.e("LoanParameterMasterexec-query", "select * from Employermaster;");
                            // client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Employermaster where employer_name LIKE '"+args[3]+"%';")).toString());
+                            Log.d("url get in gullakh",GlobalData.SERVER_GET_URL+"?operation=query&sessionName="+args[2]+"&query="+URLEncoder.encode("select * from Employermaster where employer_name LIKE '"+args[3]+"%';"));
                         }
 
 
@@ -757,6 +781,7 @@ import static com.gullakh.gullakhandroid.ServerConnect.md5;
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
                             nameValuePairs.add(new BasicNameValuePair("element", args[3]));
                             Log.d("argsument update", args[2] + "and" + args[3]);
+                            Log.d("all  co-appl in last page", args[2] + "and" + args[3]);
                             client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL).toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));

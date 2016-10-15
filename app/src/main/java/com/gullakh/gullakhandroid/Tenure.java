@@ -311,35 +311,42 @@ public class Tenure extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.next:
-                ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
-
-               Log.d("tenure is in Tenure", ((GlobalData) getApplication()).getTenure());
-               // Log.d("tenure global",((GlobalData) getApplication()).getTenure());
 
 
+                if(!tenure.getText().toString().matches("")) {
+                    ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
 
-                Intent intent = null;
-                if (gloan_type.equalsIgnoreCase("Car Loan")||gloan_type.equalsIgnoreCase("Personal Loan")||gloan_type.equalsIgnoreCase("Home Loan")) {
-                    if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
-                        intent = new Intent(Tenure.this, Car_Loan_PAT.class);
+                    Log.d("tenure is in Tenure", ((GlobalData) getApplication()).getTenure());
+                    // Log.d("tenure global",((GlobalData) getApplication()).getTenure());
 
-                    } else {
-                        intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
 
-                    }
+                    Intent intent = null;
+                    if (gloan_type.equalsIgnoreCase("Car Loan") || gloan_type.equalsIgnoreCase("Personal Loan") || gloan_type.equalsIgnoreCase("Home Loan")) {
+                        if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
+                            intent = new Intent(Tenure.this, Car_Loan_PAT.class);
 
-                } else if (gloan_type.equalsIgnoreCase("Loan Against Property")) {
-                    Log.d("its loan againt prop","1");
+                        } else {
+                            intent = new Intent(Tenure.this, Salaryed_NetSalary.class);
+
+                        }
+
+                    } else if (gloan_type.equalsIgnoreCase("Loan Against Property")) {
+                        Log.d("its loan againt prop", "1");
                    /* if (((GlobalData) getApplication()).getBaltrans().equalsIgnoreCase("Yes")) {
                         intent = new Intent(Tenure.this, lp_ownsh.class);
 
                     } else {*/
                         intent = new Intent(Tenure.this, lp_ownsh.class);
 
-                    //}
+                        //}
+                    }
+                    startActivity(intent);
+                    overridePendingTransition(R.transition.left, R.transition.right);
                 }
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+
+                else
+                RegisterPageActivity.showErroralert(this, "Please enter your tenure value!", "failed");
+
 
                 break;
 

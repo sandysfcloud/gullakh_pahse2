@@ -61,7 +61,7 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Total EMI's That I Pay");
+        titl.setText("Total EMIs that I pay currently");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();

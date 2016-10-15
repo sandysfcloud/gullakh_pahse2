@@ -123,14 +123,15 @@ if(((GlobalData) getApplication()).getSalryPayMode()!=null) {
     private void getInfo() {
         DataHandler dbobject = new DataHandler(this);
         Cursor cr = dbobject.displayData("SELECT * FROM mysearch WHERE loantype='Car Loan';");
-        cr.moveToFirst();
+        if(cr.moveToFirst()) {
 //        Log.d("Data from DataBase", cr.getString(0) + cr.getString(1) + cr.getString(2) + cr.getString(3) + cr.getString(4));
-        try {
-            JSONObject reader = new JSONObject(cr.getString(3));
-            String b = reader.getString("sal_pay_option");
-            setDeopsiteSalary(b);
-        } catch (JSONException e) {
-            e.printStackTrace();
+            try {
+                JSONObject reader = new JSONObject(cr.getString(3));
+                String b = reader.getString("sal_pay_option");
+                setDeopsiteSalary(b);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

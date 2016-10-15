@@ -34,7 +34,8 @@
     <string name="drawer_title_splash_screens">Splash Screens</string>
     <string name="drawer_title_progress_bars">Progress Bars</string>
     <!-- <string name="drawer_title_buttons">Buttons</string> -->
-    <string name="drawer_title_shape_image_views">Policy And Licences</string>
+    <string name="drawer_title_shape_image_views">Privacy Policy</string>
+    <string name="drawer_title_terms_of_use">Terms of Use</string>
     <string name="drawer_title_my_application">My Application</string>
     <string name="drawer_title_text_views">Text Views</string>
     <string name="drawer_title_search_bars">Search Bars</string>
@@ -138,6 +139,8 @@
         <item>@drawable/carloan_icon</item>
         <item>@drawable/policy</item>
         <item>@drawable/my_application</item>
+        <item>@drawable/privacy</item>
+        <item>@drawable/terms_use</item>
 
     </array>
     <string-array name="accordion_sections">

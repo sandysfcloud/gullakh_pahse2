@@ -37,6 +37,8 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
     String data,loan_type;
     Dialog dg;
     String gloan_type,gtenure,loantyp,carloantp,Baltrans,emptype;
+
+    int max,min;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,21 +102,26 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
         mSeekArc = (SeekArc) findViewById(R.id.seekArc);
         mSeekArcProgress = (TextView) findViewById(R.id.seekArcProgress);
 
-
+        Log.d("its TN loan type",gloan_type);
         if(gloan_type.equals("Home Loan")) {
             if(emptype.equals("Salaried")) {
+                Log.d("its home l K","Salaried");
                 mSeekArc.mMax=5;
-
-                tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "30")});
+                min=5;max=30;
+                //tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "30")});
             }
             else {
+                Log.d("its home l K","!Salaried");
                 mSeekArc.mMax=3;
-                tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "20")});
+                min=5;max=20;
+               // tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "20")});
             }
         }
         else {
+            Log.d("its LAP K","!");
             mSeekArc.mMax=2;
-            tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "15")});
+            min=5;max=15;
+           // tenure.setFilters(new InputFilter[]{new InputFilterMinMax("5", "15")});
         }
 
 
@@ -123,12 +130,23 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
             String emi = String.valueOf(((GlobalData) getApplication()).getTenure());
             tenure.setText(emi);
             tenure.setSelection(tenure.getText().length());
-            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getTenure()))));
+            mSeekArc.setProgress(Integer.parseInt(String.valueOf(Integer.valueOf(((GlobalData) getApplication()).getTenure())))/5);
             Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
             String strtemp = String.valueOf(format.format(new BigDecimal(emi.toString())));
             strtemp = strtemp.substring(0, strtemp.length() - 3);
             //  mSeekArcProgress.setText(strtemp+"");
-            mSeekArcProgress.setText(((GlobalData) getApplication()).getTenure() + " Year");
+            if(((GlobalData) getApplication()).getTenure().equals("1"))
+                mSeekArcProgress.setText(((GlobalData) getApplication()).getTenure() + " Year");
+            else
+            mSeekArcProgress.setText(((GlobalData) getApplication()).getTenure() + " Years");
+        }
+        else
+        {
+            mSeekArcProgress.setText("5"+ " Year's");
+            tenure.setText("5");
+            tenure.setSelection(tenure.getText().length());
+
+
         }
 
         tenure.addTextChangedListener(new TextWatcher() {
@@ -162,7 +180,7 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
                     try {
 
 
-                        mSeekArc.setProgress(Integer.valueOf(data));
+                        mSeekArc.setProgress(Integer.valueOf(data)/5);
 
                         if(data.equals("1"))
                         mSeekArcProgress.setText(data + " Year");
@@ -194,7 +212,7 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
                 //if (progress != 0)
                 //progress = ((progress + 1)*1000)/1000;
                // if (progress == 0)
-                    progress = progress + 5;
+                    progress = (progress+1) * 5;
                 //else
                 //progress = progress + 1;
                 Format format = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
@@ -307,31 +325,41 @@ public class TenureNew extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.next:
-                ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
-                Log.d("tenure is in Tenurenew", tenure.getText().toString());
-                Log.d("tenure global",((GlobalData) getApplication()).getTenure());
 
-                String emptype = ((GlobalData) getApplication()).getemptype();
-                String loantype =((GlobalData) getApplication()).getLoanType();
-                Intent intent = null;
-                if (loantype.equalsIgnoreCase("Car Loan")||loantype.equalsIgnoreCase("Personal Loan")||loantype.equalsIgnoreCase("Home Loan")) {
-                    if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
-                        intent = new Intent(this, Car_Loan_PAT.class);
+                if(!tenure.getText().toString().matches("")) {
+                    if(Integer.parseInt(tenure.getText().toString().replace(",","").trim())>=min&&Integer.parseInt(tenure.getText().toString().replace(",","").trim())<=max) {
+                        ((GlobalData) getApplication()).setTenure(tenure.getText().toString());
+                        Log.d("tenure is in Tenurenew", tenure.getText().toString());
+                        Log.d("tenure global", ((GlobalData) getApplication()).getTenure());
 
-                    } else {
-                        intent = new Intent(this, Salaryed_NetSalary.class);
+                        String emptype = ((GlobalData) getApplication()).getemptype();
+                        String loantype = ((GlobalData) getApplication()).getLoanType();
+                        Intent intent = null;
+                        if (loantype.equalsIgnoreCase("Car Loan") || loantype.equalsIgnoreCase("Personal Loan") || loantype.equalsIgnoreCase("Home Loan")) {
+                            if (emptype.equals("Self Employed Business") || emptype.equals("Self Employed Professional")) {
+                                intent = new Intent(this, Car_Loan_PAT.class);
 
+                            } else {
+                                intent = new Intent(this, Salaryed_NetSalary.class);
+
+                            }
+
+                        } else if (loantype.equalsIgnoreCase("Loan Against Property")) {
+                            Log.d("its loan againt prop", "1");
+
+                            intent = new Intent(this, lp_ownsh.class);
+
+
+                        }
+                        startActivity(intent);
+                        overridePendingTransition(R.transition.left, R.transition.right);
                     }
-
-                } else if (loantype.equalsIgnoreCase("Loan Against Property")) {
-                    Log.d("its loan againt prop","1");
-
-                    intent = new Intent(this, lp_ownsh.class);
-
+                    else
+                        RegisterPageActivity.showErroralert(this, "Tenure should be between "+min+" to"+max+" years!", "failed");
 
                 }
-                startActivity(intent);
-                overridePendingTransition(R.transition.left, R.transition.right);
+                else
+                    RegisterPageActivity.showErroralert(this, "Please enter your tenure value!", "failed");
 
                 break;
 

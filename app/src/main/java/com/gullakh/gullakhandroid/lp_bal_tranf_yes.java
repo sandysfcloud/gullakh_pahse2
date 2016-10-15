@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +70,28 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         Text3.addTextChangedListener(new NumberTextWatcher(Text3));
         Text4.addTextChangedListener(new NumberTextWatcher(Text4));
         Text2.setOnClickListener(this);
-        getbanknam();
+       // getbanknam();
+
+        Text1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 3)
+                    getbanknam(Text1.getText().toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+//                if (s.length() == 2)
+//                    getemplistnew(Emp.getText().toString());
+            }
+        });
 
 
 
@@ -119,7 +142,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
     }
 
 
-    public void getbanknam()
+    public void getbanknam(String emp)
     {
         Log.d("getbanknam called ","1");
 
@@ -145,7 +168,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                 for(int i=0;i<size;i++) {
                     liste.add(enums[i].getbank_name());
                 }
-
+                Log.e("bank list frm server ", String.valueOf(liste));
                 final ShowSuggtn fAdapter = new ShowSuggtn(lp_bal_tranf_yes.this, android.R.layout.simple_dropdown_item_1line, liste);
                 Text1.setAdapter(fAdapter);
             }
@@ -158,7 +181,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("token", "otherbank", sessionid);
+        requestgetserver.execute("token", "otherbank", sessionid,emp);
     }
 
     @Override

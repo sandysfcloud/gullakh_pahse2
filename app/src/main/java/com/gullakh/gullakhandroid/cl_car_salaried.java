@@ -319,7 +319,7 @@ public class cl_car_salaried extends AppCompatActivity implements View.OnClickLi
                 }
                 final ShowSuggtn fAdapter = new ShowSuggtn(cl_car_salaried.this, android.R.layout.simple_dropdown_item_1line, liste);
                 Emp.setAdapter(fAdapter);
-
+                fAdapter.notifyDataSetChanged();
 
                 Log.e("emplist frm server ", String.valueOf(liste));
 

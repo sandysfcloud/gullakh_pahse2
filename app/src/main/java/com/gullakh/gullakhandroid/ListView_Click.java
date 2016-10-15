@@ -47,7 +47,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
     private String[] preclosure1;
     public  static String lenderid=null;
 
-    public  static String listvc=null;
+    public  static String listvc=null,preclos;
 
     public  static String bankname;
 
@@ -67,6 +67,7 @@ public class ListView_Click extends ActionBarActivity implements View.OnClickLis
         fees = intent.getStringExtra("fee");
         other = intent.getStringExtra("other");
         docum = intent.getStringExtra("docum");
+        preclos = intent.getStringExtra("preclos");
         lenderid = intent.getStringExtra("lenderid");
 
 
@@ -362,16 +363,28 @@ Log.d("bankname in listvieclick",bankname);
 
                 if (lenderid.equalsIgnoreCase(((GlobalData) getApplication()).getLenders().get("primarylender"))){
                     //same lender
+
                 }else{
                     //different lender
                     ((GlobalData) getApplication()).getLenders().put("primarylender", lenderid);
                     ((GlobalData) getApplication()).getLenders().put("plroi",roi );
-                    ((GlobalData) getApplication()).getLenders().put("plemi",emi );
+                    ((GlobalData) getApplication()).getLenders().put("plemi", emi);
+                    Log.d("check preclosure1 of primary", sepfee[0]);
                     preclosure1=sepfee[0].split(" ");
-                    ((GlobalData) getApplication()).getLenders().put("plpreclosurefee", preclosure1[preclosure1.length-1]);
+                    Log.d("check preclosure1 of primary2",preclos);
+                    ((GlobalData) getApplication()).getLenders().put("plpreclosurefee", preclos);
+                    //  ((GlobalData) getApplication()).getLenders().put("plpreclosurefee", preclosure1[preclosure1.length - 1]);
+                    //Log.d("check preclosure1 of primary3", preclosure1[preclosure1.length - 1]);
                     ((GlobalData) getApplication()).getLenders().put("plprosesingfee",one_time_fee );
+
+                    ((GlobalData) getApplication()).getLenders().put("secondarylender","" );
+                    ((GlobalData) getApplication()).getLenders().put("slroi","" );
+                    ((GlobalData) getApplication()).getLenders().put("slemi","" );
+                    ((GlobalData) getApplication()).getLenders().put("slpreclosurefee","" );
+                    ((GlobalData) getApplication()).getLenders().put("slprocessingfee","" );
+
                 }
-                Log.d("finally lender data","check");
+                Log.d("finally lender data",lenderid);
                 HashMap<String,String> temp=((GlobalData) getApplication()).getLenders();
                 for (Map.Entry<String, String> entry : temp.entrySet()) {
                     System.out.println(entry.getKey()+" : "+entry.getValue());
