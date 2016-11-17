@@ -7,7 +7,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp" >
 
-   <com.gullakh.gullakhandroid.font.FontelloTextView
+   <com.gullakh.gullakhandroidapp.font.FontelloTextView
         style="@style/TextViewAppearance.Title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
 
         android:textSize="16sp" />
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:id="@+id/textTitle"
         style="@style/TextViewAppearance.Title1"
         android:layout_width="match_parent"

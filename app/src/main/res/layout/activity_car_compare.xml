@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bgque"
 
-    tools:context="com.gullakh.gullakhandroid.CarCompare"
+    tools:context="com.gullakh.gullakhandroidapp.CarCompare"
     >
 
     <LinearLayout
@@ -118,7 +118,7 @@
 
             android:orientation="horizontal">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -139,7 +139,7 @@
 
                 android:background="#80616161"/>
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -177,7 +177,7 @@
             android:orientation="horizontal">
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -190,7 +190,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -203,7 +203,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -241,7 +241,7 @@
             android:orientation="horizontal">
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -254,7 +254,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -267,7 +267,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -304,7 +304,7 @@
             android:orientation="horizontal">
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -317,7 +317,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -330,7 +330,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -368,7 +368,7 @@
             android:orientation="horizontal">
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -381,7 +381,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -394,7 +394,7 @@
                 android:textSize="18sp"
                 app:typeface="robotoLight"
                 />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_weight="1"
                 android:layout_width="match_parent"

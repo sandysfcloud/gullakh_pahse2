@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.cl_car_yearofmft"
+    tools:context="com.gullakh.gullakhandroidapp.cl_car_yearofmft"
     android:background="@drawable/bgque">
 
 
@@ -20,7 +20,7 @@
         android:layout_gravity="center_horizontal|bottom"
         android:gravity="center"
         >
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Done"
@@ -51,7 +51,7 @@
 
 
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -71,7 +71,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -94,7 +94,7 @@
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -107,14 +107,14 @@
             android:textSize="22dp"
             android:visibility="gone" />
 
-        <com.gullakh.gullakhandroid.MaterialTextField
+        <com.gullakh.gullakhandroidapp.MaterialTextField
             android:layout_width="300dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/tenureimg">
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                 android:focusableInTouchMode="false"
                 android:textSize="15sp" />
 
-        </com.gullakh.gullakhandroid.MaterialTextField>
+        </com.gullakh.gullakhandroidapp.MaterialTextField>
 
     </LinearLayout>
 

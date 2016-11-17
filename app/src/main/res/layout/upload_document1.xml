@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.UploadDocument1"
+    tools:context="com.gullakh.gullakhandroidapp.UploadDocument1"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         app:typeface="robotoLight"
         android:layout_width="fill_parent"
         android:layout_height="30dp"
@@ -23,7 +23,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginTop="20dp" />
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         app:typeface="robotoLight"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:layout_marginBottom="20dp"
         android:textColor="#000000" />
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         app:typeface="robotoLight"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/uploaddoc" />
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         app:typeface="robotoLight"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         app:typeface="robotoLight"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

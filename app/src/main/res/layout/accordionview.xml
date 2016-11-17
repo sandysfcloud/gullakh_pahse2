@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:accordion="http://schemas.android.com/apk/res-auto/com.gullakh.gullakhandroid"
+    xmlns:accordion="http://schemas.android.com/apk/res-auto/com.gullakh.gullakhandroidapp"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:color/white"
@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <com.gullakh.gullakhandroid.AccordionView
+        <com.gullakh.gullakhandroidapp.AccordionView
             android:id="@+id/accordion_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Item 4" />
-        </com.gullakh.gullakhandroid.AccordionView>
+        </com.gullakh.gullakhandroidapp.AccordionView>
     </ScrollView>
 
 </LinearLayout>

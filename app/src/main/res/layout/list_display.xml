@@ -20,7 +20,7 @@
         android:layout_gravity="right"
         android:orientation="horizontal"
         android:background="#ffffff">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tloan_amt"
@@ -29,7 +29,7 @@
             android:textSize="15sp"
             android:text="Loan Amount: "
             app:typeface="robotoLight"/>
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/loan_amt"
@@ -55,7 +55,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/editnew"/>
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -75,7 +75,7 @@
 
         android:layout_marginTop="-15dp"
         android:orientation="horizontal">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tenure"
@@ -85,7 +85,7 @@
             android:layout_marginLeft="5dp"
             android:text="Tenure: "
             app:typeface="robotoLight"/>
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tenr_amt"
@@ -125,7 +125,7 @@
             android:layout_marginTop="8dp"
 
             android:src="@drawable/filter"/>
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#616161"
@@ -191,7 +191,7 @@
 
         android:layout_weight="1.2"
         >
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#616161"

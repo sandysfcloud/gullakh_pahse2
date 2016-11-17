@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:gravity="center_horizontal">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -28,7 +28,7 @@
             android:background="#2cababab"
             android:paddingLeft="10dp" />
 
-        <com.gullakh.gullakhandroid.font.RobotoAutoText
+        <com.gullakh.gullakhandroidapp.font.RobotoAutoText
             app:typeface="robotoLight"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -36,11 +36,11 @@
             android:ems="10"
             android:id="@+id/editText1"
             android:background="@drawable/edittextsimple"
-            android:hint="Ex-State Bank of India"
+            android:hint="Ex-SBI"
             android:gravity="center_vertical"
             android:paddingLeft="10dp" />
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -54,7 +54,7 @@
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp" />
 
-        <com.gullakh.gullakhandroid.font.RobotoEditText
+        <com.gullakh.gullakhandroidapp.font.RobotoEditText
             app:typeface="robotoLight"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -67,7 +67,7 @@
             android:focusableInTouchMode="false"
             android:singleLine="true" />
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -80,7 +80,7 @@
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp" />
 
-        <com.gullakh.gullakhandroid.font.RobotoEditText
+        <com.gullakh.gullakhandroidapp.font.RobotoEditText
             app:typeface="robotoLight"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -92,7 +92,7 @@
             android:gravity="center_vertical"
             android:drawableLeft="@drawable/loan_amt"/>
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -107,7 +107,7 @@
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp" />
 
-        <com.gullakh.gullakhandroid.font.RobotoEditText
+        <com.gullakh.gullakhandroidapp.font.RobotoEditText
             app:typeface="robotoLight"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -130,7 +130,7 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -150,7 +150,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"

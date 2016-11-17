@@ -24,7 +24,7 @@
             android:weightSum="2"
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:id="@+id/applyf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:background="@drawable/rectbutton_red"
             android:text="Apply Filter"
             app:typeface="robotoLight"/>
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 android:id="@+id/reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:text="Reset Filter"
                 app:typeface="robotoLight"/>
             </LinearLayout>
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
         android:text="Select Banks"
 
@@ -71,7 +71,7 @@
         android:padding="5dip"
         app:typeface="robotoLight"/>
 
-    <com.gullakh.gullakhandroid.font.RobotoButton
+    <com.gullakh.gullakhandroidapp.font.RobotoButton
 
         android:layout_height="wrap_content"
 
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
             android:text="Loan Amount:"
             android:id="@+id/textView2"
@@ -115,7 +115,7 @@
             app:typeface="robotoLight"/>-->
 
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Other"
@@ -138,7 +138,7 @@
 
             android:layout_marginBottom="-12dp"
             android:weightSum="5">
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="fill_parent"
                 android:text="1 Lakh"
                 android:textSize="14sp"
@@ -148,7 +148,7 @@
                 android:textColor="#90ffffff"
                 android:padding="5dip"
                 app:typeface="robotoLight"/>
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
                 android:layout_width="fill_parent"
                 android:text="1 Crore"
@@ -170,7 +170,7 @@
 
             />
 
-        <com.gullakh.gullakhandroid.MaterialTextField
+        <com.gullakh.gullakhandroidapp.MaterialTextField
             android:layout_width="300dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -192,7 +192,7 @@
                 android:textSize="15sp"
                 app:typeface="robotoLight"/>
 
-        </com.gullakh.gullakhandroid.MaterialTextField>
+        </com.gullakh.gullakhandroidapp.MaterialTextField>
     <!--  <com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
             android:text="Tenure"
             android:id="@+id/textView3"
@@ -231,7 +231,7 @@
             app:typeface="robotoLight"/>
 
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
 
             android:id="@+id/tenr"
@@ -267,7 +267,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
         android:text="Interest Rate Type"
         android:id="@+id/textView4"
@@ -278,7 +278,7 @@
         android:textColor="#90ffffff"
         android:padding="5dip"
         app:typeface="robotoLight"/>
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
 
         android:id="@+id/min"
@@ -290,7 +290,7 @@
         android:textColor="#90ffffff"
         android:padding="5dip"
         app:typeface="robotoLight"/>
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
 
         android:id="@+id/max"
@@ -318,7 +318,7 @@
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:weightSum="9">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
 
 
             android:id="@+id/tmax"
@@ -330,7 +330,7 @@
             android:textColor="#90ffffff"
             android:padding="5dip"
             app:typeface="robotoLight"/>
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/tmin"
                 android:layout_width="fill_parent"
                 android:text="14"

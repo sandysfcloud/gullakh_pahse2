@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gullakh.gullakhandroid.signinPrepage"
+    tools:context="com.gullakh.gullakhandroidapp.signinPrepage"
     android:orientation="vertical"
     android:background="@drawable/bgque"
     android:gravity="center">
@@ -103,7 +103,7 @@
     <fragment
 
         android:id="@+id/fragment"
-        android:name="com.gullakh.gullakhandroid.GooglePlusLogin"
+        android:name="com.gullakh.gullakhandroidapp.GooglePlusLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

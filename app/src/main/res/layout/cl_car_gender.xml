@@ -28,7 +28,7 @@
                 android:id="@+id/title"
                 android:orientation="vertical"
                 android:visibility="gone">
-                <com.gullakh.gullakhandroid.font.RobotoTextView
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
                     app:typeface="robotoLight"
                     android:layout_width="fill_parent"
                     android:layout_height="65dp"
@@ -65,7 +65,7 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                 android:textSize="20dp"
                 android:layout_margin="20dp"
                 android:visibility="gone" />
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/addr1"
@@ -89,7 +89,7 @@
                 android:singleLine="true"
                 app:typeface="robotoLight"/>
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/addr2"
@@ -101,7 +101,7 @@
                 android:singleLine="true"
                 android:visibility="visible"
                 app:typeface="robotoLight"/>
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:id="@+id/pin"
@@ -166,7 +166,7 @@
                 android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 app:typeface="robotoLight"/>-->
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -189,7 +189,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp">
 
-                <com.gullakh.gullakhandroid.font.RobotoEditText
+                <com.gullakh.gullakhandroidapp.font.RobotoEditText
                     android:focusableInTouchMode="false"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
@@ -232,7 +232,7 @@
         android:gravity="center"
         android:background="#b8546e7a">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -252,7 +252,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"

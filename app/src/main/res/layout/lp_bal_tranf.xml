@@ -18,7 +18,7 @@
         android:id="@+id/ll4"
         android:layout_weight="1">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="65dp"
@@ -69,7 +69,7 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -89,7 +89,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"

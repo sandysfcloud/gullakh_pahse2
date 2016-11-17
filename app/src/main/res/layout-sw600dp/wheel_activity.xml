@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.gullakh.gullakhandroid.WheelView
+    <com.gullakh.gullakhandroidapp.WheelView
         android:id="@+id/wheelview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gullakh.gullakhandroid.MaterialRippleLayout
+<com.gullakh.gullakhandroidapp.MaterialRippleLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
 
 
@@ -26,4 +26,4 @@
              />
     </LinearLayout>
 
-</com.gullakh.gullakhandroid.MaterialRippleLayout>
+</com.gullakh.gullakhandroidapp.MaterialRippleLayout>

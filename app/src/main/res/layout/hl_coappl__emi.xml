@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:gravity="center">
-        <com.gullakh.gullakhandroid.MaterialTextField
+        <com.gullakh.gullakhandroidapp.MaterialTextField
             android:layout_width="fill_parent"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:imeOptions="actionDone"
                 android:singleLine="true"
                 android:hint="Ex-10,000" />
-        </com.gullakh.gullakhandroid.MaterialTextField>
+        </com.gullakh.gullakhandroidapp.MaterialTextField>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -48,7 +48,7 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -68,7 +68,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"

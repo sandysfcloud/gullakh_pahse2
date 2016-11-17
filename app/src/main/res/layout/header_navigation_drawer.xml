@@ -38,7 +38,7 @@
             android:layout_marginTop="10dp" />
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/email"
                 style="@style/TextViewAppearance.Body1"
                 android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
 
 
         </LinearLayout>
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:id="@+id/logout"
             android:visibility="invisible"
 

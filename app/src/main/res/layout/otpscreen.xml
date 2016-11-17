@@ -52,7 +52,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center" />
 
-    <com.gullakh.gullakhandroid.font.RobotoEditText
+    <com.gullakh.gullakhandroidapp.font.RobotoEditText
         android:layout_width="200dp"
         android:layout_height="45dp"
         android:inputType="phone"

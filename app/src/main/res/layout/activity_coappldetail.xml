@@ -4,7 +4,7 @@
     android:background="@drawable/bgque"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.coappldetail">
+    tools:context="com.gullakh.gullakhandroidapp.coappldetail">
 
     <LinearLayout
     android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:src="@drawable/coappimg"/>
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 android:text="Father"
                 />
 
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -85,7 +85,7 @@
                 android:src="@drawable/coappimg"/>
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 android:text="Mother"
                 />
 
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -128,7 +128,7 @@
                 android:src="@drawable/coappimg"/>
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                 android:text="Brother"
                 />
 
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -171,7 +171,7 @@
                 android:src="@drawable/coappimg"/>
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                 android:text="Spouse"
                 />
 
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -198,7 +198,7 @@
                 />
         </LinearLayout>
     </LinearLayout>
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="match_parent"

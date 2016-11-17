@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.UploadDocument2"
+    tools:context="com.gullakh.gullakhandroidapp.UploadDocument2"
     android:orientation="vertical"
     android:background="@drawable/bgque"
     android:gravity="center_horizontal">
@@ -25,7 +25,7 @@
             android:layout_marginBottom="5dp">
 
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -40,7 +40,7 @@
                 android:background="@drawable/edittextsimple"
                 android:hint="ID Proof &amp; DOB Proof"
                 android:layout_weight="1" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -66,7 +66,7 @@
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
 
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -93,7 +93,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -108,7 +108,7 @@
                 android:hint="Address Proof"
                 android:layout_weight="1"
                 android:visibility="visible" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -133,7 +133,7 @@
                 android:visibility="gone"
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -160,7 +160,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -175,7 +175,7 @@
                 android:hint="Signature Proof"
                 android:layout_weight="1"
                 android:visibility="visible" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -200,7 +200,7 @@
                 android:visibility="gone"
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -227,7 +227,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -243,7 +243,7 @@
                 android:layout_weight="1"
                 android:visibility="visible" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -268,7 +268,7 @@
                 android:visibility="gone"
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -298,7 +298,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -314,7 +314,7 @@
                 android:layout_weight="1"
                 android:visibility="visible" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -339,7 +339,7 @@
                 android:visibility="gone"
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -367,7 +367,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -383,7 +383,7 @@
                 android:layout_weight="1"
                 android:visibility="visible" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -408,7 +408,7 @@
                 android:visibility="gone"
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -437,7 +437,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -452,7 +452,7 @@
                 android:hint="Bank Statement/Passbook of Salary Account"
                 android:layout_weight="1"
                 android:visibility="visible" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -477,7 +477,7 @@
                 android:visibility="gone"
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -504,7 +504,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="250dp"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -519,7 +519,7 @@
                 android:hint="FORM-16/ ITR"
                 android:layout_weight="1"
                 android:visibility="visible" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -544,7 +544,7 @@
                 android:visibility="gone"
                 android:src="@drawable/delete"
                 android:layout_marginLeft="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoButton
+            <com.gullakh.gullakhandroidapp.font.RobotoButton
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -642,7 +642,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="match_parent"
             android:layout_height="50dp"

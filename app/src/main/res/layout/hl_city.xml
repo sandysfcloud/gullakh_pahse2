@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1">
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="City in which property is located?"
@@ -73,7 +73,7 @@
             android:weightSum="2"
             android:gravity="center"
             android:layout_marginBottom="10dp">
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -83,7 +83,7 @@
                 android:text="Bengaluru"
                 app:typeface="robotoLight"
                 android:layout_weight="1" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -133,7 +133,7 @@
             android:gravity="center"
             android:layout_weight="1"
             android:layout_marginBottom="10dp">
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -143,7 +143,7 @@
                 android:text="Delhi"
                 app:typeface="robotoLight"
                 android:layout_weight="1" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -156,7 +156,7 @@
         </LinearLayout>
 
 
-        <com.gullakh.gullakhandroid.MaterialTextField
+        <com.gullakh.gullakhandroidapp.MaterialTextField
             android:layout_width="300dp"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/home"
             android:layout_weight="1">
-            <com.gullakh.gullakhandroid.font.RobotoAutoText
+            <com.gullakh.gullakhandroidapp.font.RobotoAutoText
                 app:typeface="robotoLight"
                 android:imeActionLabel="Done"
                 android:singleLine="true"
@@ -177,7 +177,7 @@
                 android:id="@+id/locatn"
                 android:textColor="#3f3f3f"
                 android:textSize="15sp" />
-        </com.gullakh.gullakhandroid.MaterialTextField>
+        </com.gullakh.gullakhandroidapp.MaterialTextField>
 
     </LinearLayout>
 
@@ -191,7 +191,7 @@
         android:background="#b8546e7a"
         android:visibility="gone"
         android:layout_weight="1">
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Done"
@@ -217,7 +217,7 @@
         android:background="#b8546e7a"
         android:layout_weight="1">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -237,7 +237,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"

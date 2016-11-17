@@ -26,7 +26,7 @@
             android:id="@+id/lpers"
          >
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
@@ -39,14 +39,14 @@
             android:gravity="center"
             android:textColor="#707070"
             android:textSize="22dp" />
-        <com.gullakh.gullakhandroid.MaterialTextField
+        <com.gullakh.gullakhandroidapp.MaterialTextField
             android:layout_width="300dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             app:mtf_cardCollapsedHeight="4dp"
             app:mtf_cardColor="#fff"
             app:mtf_image="@drawable/companyname">
-            <com.gullakh.gullakhandroid.font.RobotoAutoText
+            <com.gullakh.gullakhandroidapp.font.RobotoAutoText
                 app:typeface="robotoLight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -64,9 +64,9 @@
 
                 />
 
-    </com.gullakh.gullakhandroid.MaterialTextField>
+    </com.gullakh.gullakhandroidapp.MaterialTextField>
             </LinearLayout>
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <com.gullakh.gullakhandroid.MaterialTextField
+            <com.gullakh.gullakhandroidapp.MaterialTextField
                 android:layout_width="300dp"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 app:mtf_cardCollapsedHeight="4dp"
                 app:mtf_cardColor="#fff"
                 app:mtf_image="@drawable/companyname">
-                <com.gullakh.gullakhandroid.font.RobotoEditText
+                <com.gullakh.gullakhandroidapp.font.RobotoEditText
                     app:typeface="robotoLight"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -110,10 +110,10 @@
                     android:singleLine="true"
                     android:hint="Ex- 01-01-2010"
                     />
-            </com.gullakh.gullakhandroid.MaterialTextField>
+            </com.gullakh.gullakhandroidapp.MaterialTextField>
         </LinearLayout>
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -156,7 +156,7 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -176,7 +176,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"

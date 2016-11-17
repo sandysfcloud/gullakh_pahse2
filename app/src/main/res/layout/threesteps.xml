@@ -13,7 +13,7 @@
         android:gravity="center"
         android:background="#ed1c24">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
@@ -41,7 +41,7 @@
                 android:id="@+id/imageView1"
                 android:src="@drawable/step1" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -90,7 +90,7 @@
             android:layout_height="85dp"
             android:id="@+id/imageView3"
             android:src="@drawable/step3" />
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -103,7 +103,7 @@
                 android:gravity="center"
                 android:layout_marginLeft="30dp" />
     </LinearLayout>
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:layout_width="fill_parent"
             android:layout_height="40dp"

@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal|top"
         android:layout_margin="20dp"
         android:textSize="24dp" />
-<com.gullakh.gullakhandroid.AnimatedExpandableListView
+<com.gullakh.gullakhandroidapp.AnimatedExpandableListView
     android:id="@+id/exlist_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />

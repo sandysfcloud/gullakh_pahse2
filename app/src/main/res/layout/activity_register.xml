@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"
             android:id="@+id/signupheading"
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     android:background="@drawable/edittextsimple"
                     android:layout_marginLeft="10dp" />
 
-                <com.gullakh.gullakhandroid.font.RobotoEditText
+                <com.gullakh.gullakhandroidapp.font.RobotoEditText
                     android:layout_width="200dp"
                     android:layout_height="50dp"
 
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp" >
 
-                <com.gullakh.gullakhandroid.font.RobotoEditText
+                <com.gullakh.gullakhandroidapp.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
 
@@ -124,7 +124,7 @@
                     android:nextFocusRight="@+id/LastName"
                     android:paddingLeft="10dp" />
 
-                <com.gullakh.gullakhandroid.font.RobotoEditText
+                <com.gullakh.gullakhandroidapp.font.RobotoEditText
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
 
@@ -142,7 +142,7 @@
                     android:paddingLeft="10dp" />
             </LinearLayout>
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:inputType="textEmailAddress"
@@ -157,7 +157,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
 
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:inputType="phone"
@@ -172,7 +172,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
-            <com.gullakh.gullakhandroid.font.RobotoEditText
+            <com.gullakh.gullakhandroidapp.font.RobotoEditText
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:inputType="textPassword"
@@ -210,7 +210,7 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"

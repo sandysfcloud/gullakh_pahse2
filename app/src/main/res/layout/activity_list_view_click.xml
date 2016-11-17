@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:background="@drawable/bgque"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.ListView_Click">
+    tools:context="com.gullakh.gullakhandroidapp.ListView_Click">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +32,7 @@
 
 
             />
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:id="@+id/bankname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             android:paddingBottom="8dp"
             android:orientation="vertical" >
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/mt1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                 app:typeface="robotoLight"
                 />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/tmr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:paddingBottom="8dp"
             android:orientation="vertical" >
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/tf1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                 app:typeface="robotoLight"
                 />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/tf2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
             android:paddingBottom="8dp"
             android:orientation="vertical" >
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/t3"
                 android:singleLine="true"
                 android:ellipsize="marquee"
@@ -163,7 +163,7 @@
                 app:typeface="robotoLight"
                 />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/t4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -222,7 +222,7 @@
                             android:id="@+id/popup"
                             android:layout_weight="1">
 
-                                <com.gullakh.gullakhandroid.font.RobotoTextView
+                                <com.gullakh.gullakhandroidapp.font.RobotoTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/tfee"
@@ -315,7 +315,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/card_background_white"
                         android:orientation="vertical">
-                        <com.gullakh.gullakhandroid.font.RobotoTextView
+                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/tdocum"
@@ -344,7 +344,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/card_background_white"
                             android:orientation="vertical">
-                            <com.gullakh.gullakhandroid.font.RobotoTextView
+                            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/tothr"

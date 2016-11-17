@@ -11,7 +11,7 @@
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -46,7 +46,7 @@
 
         android:layout_marginBottom="20dp">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -63,7 +63,7 @@
 
 
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -95,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -166,7 +166,7 @@
             />
     </RelativeLayout>
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -178,7 +178,7 @@
         android:visibility="visible"
         app:typeface="robotoLight"/>
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -190,7 +190,7 @@
         android:visibility="gone"
         app:typeface="robotoLight"/>
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -203,7 +203,7 @@
         app:typeface="robotoLight"/>
 
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -216,7 +216,7 @@
         android:textColor="#393939"
         app:typeface="robotoLight"/>
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -232,7 +232,7 @@
 
 
 
-    <com.gullakh.gullakhandroid.font.RobotoButton
+    <com.gullakh.gullakhandroidapp.font.RobotoButton
         android:id="@+id/downl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
         android:background="@drawable/rectbutton_red"
         android:text="View Credit Summary"
         app:typeface="robotoLight"/>
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"

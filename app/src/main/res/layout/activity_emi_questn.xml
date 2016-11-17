@@ -1,11 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:seekarc="http://schemas.android.com/apk/res/com.gullakh.gullakhandroid"
+    xmlns:seekarc="http://schemas.android.com/apk/res/com.gullakh.gullakhandroidapp"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bgque"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gullakh.gullakhandroid.Questionier1">
+    tools:context="com.gullakh.gullakhandroidapp.Questionier1">
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,7 +22,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp">
 
-            <com.gullakh.gullakhandroid.SeekArc
+            <com.gullakh.gullakhandroidapp.SeekArc
                 android:id="@+id/seekArc"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -39,7 +39,7 @@
                 seekarc:thumb="@drawable/custom_seek_arc_control_selector"
                 seekarc:touchInside="true" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/seekArcProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 android:textSize="30sp"
                 app:typeface="robotoLight"/>
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 android:id="@+id/onetext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
            >
-            <com.gullakh.gullakhandroid.MaterialTextField
+            <com.gullakh.gullakhandroidapp.MaterialTextField
                 android:layout_width="300dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                 app:mtf_image="@drawable/loan_amt"
                 >
 
-                <com.gullakh.gullakhandroid.font.RobotoEditText
+                <com.gullakh.gullakhandroidapp.font.RobotoEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Total EMI's"
@@ -90,7 +90,7 @@
                     android:text="0"
                     app:typeface="robotoLight"/>
 
-            </com.gullakh.gullakhandroid.MaterialTextField>
+            </com.gullakh.gullakhandroidapp.MaterialTextField>
 
 
 
@@ -105,7 +105,7 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a"
         android:visibility="gone">
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Done"
@@ -130,7 +130,7 @@
         android:background="#b8546e7a"
         android:layout_gravity="center_horizontal">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -150,7 +150,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"

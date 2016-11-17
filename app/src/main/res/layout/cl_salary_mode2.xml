@@ -52,7 +52,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:gravity="center"
                 android:textSize="18dp" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp">
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                 android:gravity="center"
                 android:textSize="18dp" />
 
-            <com.gullakh.gullakhandroid.font.RobotoTextView
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
                 app:typeface="robotoLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,29 +133,56 @@
                 android:textSize="18dp" />
         </LinearLayout>
 
-        <com.gullakh.gullakhandroid.MaterialTextField
-            android:layout_width="300dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            app:mtf_cardCollapsedHeight="4dp"
-            android:focusable="false"
-            app:mtf_cardColor="#fff"
-            app:mtf_image="@drawable/piggymoney">
+        <!--<com.gullakh.gullakhandroid.MaterialTextField
+               android:layout_width="300dp"
+               android:layout_gravity="center_horizontal"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="4dp"
+               android:layout_marginRight="4dp"
+               app:mtf_cardCollapsedHeight="4dp"
+               android:focusable="false"
+               app:mtf_cardColor="#fff"
+               app:mtf_image="@drawable/piggymoney">
 
-            <com.gullakh.gullakhandroid.font.RobotoAutoText
-                app:typeface="robotoLight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Others"
-                android:inputType="text"
-                android:id="@+id/bank"
-                android:textColor="#000"
-                android:textSize="15sp"
-                android:imeOptions="actionDone"
-                android:singleLine="true"/>
-        </com.gullakh.gullakhandroid.MaterialTextField>
+              <com.gullakh.gullakhandroid.font.RobotoAutoText
+                   app:typeface="robotoLight"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:hint="Others"
+                   android:inputType="text"
+                   android:id="@+id/bank"
+                   android:textColor="#000"
+                   android:textSize="15sp"
+                   android:imeOptions="actionDone"
+                   android:singleLine="true"/>
+
+
+            </com.gullakh.gullakhandroid.MaterialTextField>-->
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+            app:typeface="robotoLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Others"
+            android:layout_gravity="left"
+            android:textSize="18dp" />
+
+         <Spinner
+         android:layout_width="300dp"
+         android:layout_height="wrap_content"
+         android:id="@+id/bank"
+         android:scrollbars = "vertical"
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+
+         android:layout_gravity="center_horizontal"
+         android:dropDownSelector="#c2c2c2"
+         android:dropDownWidth="match_parent"
+         android:spinnerMode="dialog"
+         android:background="@drawable/edittextsimple"
+         android:layout_marginTop="5dp" />
 
     </LinearLayout>
     <LinearLayout
@@ -166,7 +193,7 @@
         android:layout_width="fill_parent"
         android:background="#b8546e7a">
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -186,7 +213,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             app:typeface="robotoLight"
             android:layout_width="100dp"
             android:layout_height="50dp"

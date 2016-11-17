@@ -12,7 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_weight="1">
-        [24/03/16 7:32:49 pm] Chetan Nandre: <com.gullakh.gullakhandroid.font.RobotoTextView
+        [24/03/16 7:32:49 pm] Chetan Nandre: <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Employment Type"
@@ -32,7 +32,7 @@
             android:minWidth="0dp"
             android:id="@+id/img"
             android:background="@drawable/salaried" />
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,7 +52,7 @@
             android:id="@+id/img2"
             android:background="@drawable/selfempbus"
             />
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
             android:id="@+id/prof"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/selfempprof" />
-        <com.gullakh.gullakhandroid.font.RobotoTextView
+        <com.gullakh.gullakhandroidapp.font.RobotoTextView
             android:layout_width="381dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -103,7 +103,7 @@
         android:background="#b8546e7a"
         android:visibility="gone"
         >
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Done"
@@ -127,7 +127,7 @@
         android:layout_width="match_parent"
         android:background="#b8546e7a" >
 
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Previous"
@@ -147,7 +147,7 @@
             android:background="#ed1c24"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
-        <com.gullakh.gullakhandroid.font.RobotoButton
+        <com.gullakh.gullakhandroidapp.font.RobotoButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Next"

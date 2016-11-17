@@ -30,7 +30,7 @@ android:weightSum="4"
 
         />
 
-    <com.gullakh.gullakhandroid.font.RobotoTextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_weight="2"
         android:id="@+id/textTitle"
         style="@style/TextViewAppearance.Title1"

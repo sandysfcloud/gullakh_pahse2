@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gullakh.gullakhandroid" >
+    package="com.gullakh.gullakhandroidapp" >
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
-        android:name="com.gullakh.gullakhandroid.permission.C2D_MESSAGE"
+        android:name="com.gullakh.gullakhandroidapp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.gullakh.gullakhandroid.permission.C2D_MESSAGE" />
@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
 
     <application
-        android:name=".GlobalData"
+        android:name="com.gullakh.gullakhandroidapp.GlobalData"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -40,19 +40,19 @@
             android:value="@string/fb_login_protocol_scheme" />
 
         <receiver
-            android:name=".GcmBroadcastReceiver"
+            android:name="com.gullakh.gullakhandroidapp.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="com.gullakh.gullakhandroid" />
+                <category android:name="com.gullakh.gullakhandroidapp" />
             </intent-filter>
         </receiver>
 
-        <service android:name=".GcmIntentService" />
+        <service android:name="com.gullakh.gullakhandroidapp.GcmIntentService" />
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".SplashScreensActivity"
+            android:name="com.gullakh.gullakhandroidapp.SplashScreensActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -68,69 +68,69 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.gullakh.gullakhandroidapp.MainActivity"
             android:label=" Home"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterPageActivity"
+            android:name="com.gullakh.gullakhandroidapp.RegisterPageActivity"
             android:label="Sign Up"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GoogleCardsMediaActivity"
+            android:name="com.gullakh.gullakhandroidapp.GoogleCardsMediaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".StickyListHeadersActivity"
+            android:name="com.gullakh.gullakhandroidapp.StickyListHeadersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MyProfileActivity"
+            android:name="com.gullakh.gullakhandroidapp.MyProfileActivity"
             android:label="My Profile "
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".WheelViewActivity"
+            android:name="com.gullakh.gullakhandroidapp.WheelViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ListView_Click"
+            android:name="com.gullakh.gullakhandroidapp.ListView_Click"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Car_type_questn"
+            android:name="com.gullakh.gullakhandroidapp.Car_type_questn"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ExpandableListViewActivity"
+            android:name="com.gullakh.gullakhandroidapp.ExpandableListViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PersonalLoanMenuActivity"
+            android:name="com.gullakh.gullakhandroidapp.PersonalLoanMenuActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Your_Info_Questn"
             android:label="@string/title_activity_questionier2" />
         <activity
-            android:name=".Loan_amt_questn"
+            android:name="com.gullakh.gullakhandroidapp.Loan_amt_questn"
             android:label="@string/title_activity_cartypes__questn"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Emp_type_Qustn"
+            android:name="com.gullakh.gullakhandroidapp.Emp_type_Qustn"
             android:label=""
             android:screenOrientation="portrait" />
         <activity
             android:windowSoftInputMode="stateVisible|adjustResize"
-            android:name=".Salaryed_NetSalary"
+            android:name="com.gullakh.gullakhandroidapp.Salaryed_NetSalary"
             android:label="@string/title_activity_salaryed__net_salary"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EMI_questn"
+            android:name="com.gullakh.gullakhandroidapp.EMI_questn"
             android:label="@string/title_activity_emi_questn"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DateOfBirth_questn"
+            android:name="com.gullakh.gullakhandroidapp.DateOfBirth_questn"
             android:label="@string/title_activity_date_of_birth_questn"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Filter"
+            android:name="com.gullakh.gullakhandroidapp.Filter"
             android:label="@string/title_activity_filter"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".signin"
+            android:name="com.gullakh.gullakhandroidapp.signin"
             android:exported="true"
             android:label="@string/title_activity_signin"
             android:screenOrientation="portrait" >
@@ -144,65 +144,65 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".cl_car_gender"
+            android:name="com.gullakh.gullakhandroidapp.cl_car_gender"
             android:label="Gender"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_car_make"
+            android:name="com.gullakh.gullakhandroidapp.cl_car_make"
             android:label="Select Cars"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_car_residence"
+            android:name="com.gullakh.gullakhandroidapp.cl_car_residence"
             android:label=""
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_salary_mode2"
+            android:name="com.gullakh.gullakhandroidapp.cl_salary_mode2"
             android:label="Salaried Bank"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_car_residence_type"
+            android:name="com.gullakh.gullakhandroidapp.cl_car_residence_type"
             android:label="Select Residence"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_car_salaried"
+            android:name="com.gullakh.gullakhandroidapp.cl_car_salaried"
             android:label="Salaried"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_car_selfempbusiness"
+            android:name="com.gullakh.gullakhandroidapp.cl_car_selfempbusiness"
             android:label="Self Employed-Business"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_car_selfempbusinesprofs"
+            android:name="com.gullakh.gullakhandroidapp.cl_car_selfempbusinesprofs"
             android:label="Self Employed Professional"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Car_Loan_PAT"
+            android:name="com.gullakh.gullakhandroidapp.Car_Loan_PAT"
             android:label="@string/title_activity_car__loan__pat"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CarLoan_Depreciation"
+            android:name="com.gullakh.gullakhandroidapp.CarLoan_Depreciation"
             android:label="@string/title_activity_car_loan__depreciation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".cl_salary_mode1"
+            android:name="com.gullakh.gullakhandroidapp.cl_salary_mode1"
             android:label="Salary Deposited to"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SearchAdapter"
+            android:name="com.gullakh.gullakhandroidapp.SearchAdapter"
             android:label="@string/title_activity_search_page"
             android:screenOrientation="portrait" />
-        <activity android:name=".cl_car_yearofmft"
+        <activity android:name="com.gullakh.gullakhandroidapp.cl_car_yearofmft"
             android:screenOrientation="portrait" />
-        <activity android:name=".signinPrepage"
+        <activity android:name="com.gullakh.gullakhandroidapp.signinPrepage"
             android:screenOrientation="portrait" />
-        <activity android:name=".UploadDocument1"
+        <activity android:name="com.gullakh.gullakhandroidapp.UploadDocument1"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UploadDocument2"
+            android:name="com.gullakh.gullakhandroidapp.UploadDocument2"
             android:label="Upload Documents"
             android:screenOrientation="portrait"
             >
@@ -217,42 +217,42 @@
         </intent-filter>
     </activity>
         <activity
-            android:name=".Myapplication"
+            android:name="com.gullakh.gullakhandroidapp.Myapplication"
             android:label="@string/title_activity_myapplication"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_city"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_city"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_salaried2"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_salaried2"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_coappldetails"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_coappldetails"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need1"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need1"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need2"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need2"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need3"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need3"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need4"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need4"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need5"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need5"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need6"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need6"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need8"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need8"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_need7"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_need7"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_empType"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_empType"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_coappldetailsSal"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_coappldetailsSal"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_coappldetailsbuss"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_coappldetailsbuss"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_coappldetailsProff"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_coappldetailsProff"
             android:screenOrientation="portrait" />
-        <activity android:name=".pl_need"
+        <activity android:name="com.gullakh.gullakhandroidapp.pl_need"
             android:screenOrientation="portrait" />
 
         <!--
@@ -265,37 +265,37 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         -->
-        <activity android:name=".lp_ownsh"
+        <activity android:name="com.gullakh.gullakhandroidapp.lp_ownsh"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".coappldetail"
+            android:name="com.gullakh.gullakhandroidapp.coappldetail"
             android:label="@string/title_activity_coappldetail"
             android:screenOrientation="portrait" />
         <!-- <activity android:name=".lp_ownsh" /> -->
-        <activity android:name=".lp_bal_tranf"
+        <activity android:name="com.gullakh.gullakhandroidapp.lp_bal_tranf"
             android:screenOrientation="portrait" />
-        <activity android:name=".lp_bal_tranf_yes"
+        <activity android:name="com.gullakh.gullakhandroidapp.lp_bal_tranf_yes"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CarCompare"
+            android:name="com.gullakh.gullakhandroidapp.CarCompare"
             android:label="@string/title_activity_car_compare"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_coappl_EMI"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_coappl_EMI"
             android:screenOrientation="portrait" />
-        <activity android:name=".ForgetPassword"
+        <activity android:name="com.gullakh.gullakhandroidapp.ForgetPassword"
             android:screenOrientation="portrait" />
-        <activity android:name=".Tenure"
+        <activity android:name="com.gullakh.gullakhandroidapp.Tenure"
             android:screenOrientation="portrait" />
-        <activity android:name=".hl_prop_owns"
+        <activity android:name="com.gullakh.gullakhandroidapp.hl_prop_owns"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TenureNew"
+            android:name="com.gullakh.gullakhandroidapp.TenureNew"
             android:label="@string/title_activity_tenure_new"
             android:screenOrientation="portrait" />
-        <activity android:name=".GooglePlusLogin"
+        <activity android:name="com.gullakh.gullakhandroidapp.GooglePlusLogin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CibilScore"
+            android:name="com.gullakh.gullakhandroidapp.CibilScore"
             android:label="@string/title_activity_cibil_score"
             android:screenOrientation="portrait" >
         </activity>
