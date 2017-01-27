@@ -128,7 +128,11 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 
 			holder.t4 = (TextView) convertView
 					.findViewById(R.id.t4);
+			holder.st = (TextView) convertView
+					.findViewById(R.id.st);
 
+			holder.fixedyear = (TextView) convertView
+					.findViewById(R.id.fixedyear);
 
 			holder.tprea = (TextView) convertView
 					.findViewById(R.id.tprea);
@@ -180,10 +184,14 @@ Log.d("setting image", tempValues.getcarimgurl());
 
 if(isNumeric(tempValues.getprocessing_fee()))
 {
+
+	Log.d("isNumeric in adapter", String.valueOf(tempValues.getprocessing_fee()));
+
+
 	profee = String.valueOf(format.format(new BigDecimal(tempValues.getprocessing_fee())));
 	profee = profee.replaceAll("\\.00", "");
-	profee = profee.replaceAll("Rs.", "");
-    profee = profee.replaceAll("\u20B9", "");
+	//profee = profee.replaceAll("Rs.", "");
+   // profee = profee.replaceAll("\u20B9", "");
 
 }
 			else {
@@ -218,15 +226,53 @@ if(isNumeric(tempValues.getprocessing_fee()))
 
 			String loantyp2 = ((GlobalData) cont.getApplicationContext()).getLoanType();
 
-			if (loantyp2.equals("Home Loan") || loantyp2.equals("Loan Against Property"))
-			holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%"+" floating");
+			if (loantyp2.equals("Home Loan") || loantyp2.equals("Loan Against Property")) {
+				holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate()) + "% " + tempValues.getfloat_fixed());
+			}
 			else
 				holder.t2.setText(String.valueOf(tempValues.getfloating_interest_rate())+"%"+" fixed");
 
-			holder.t4.setText(""+profee);
+			if (loantyp2.equals("Home Loan")) {
+				holder.fixedyear.setVisibility(View.VISIBLE);
+				holder.fixedyear.setText("Monthly for " + tempValues.getfixedyear() + " year(s)");
+			}
+
+			int loan_amt;
+
+			Log.d("profee value is in adapter", profee);
+
+			if(profee.equals("NA")&&!tempValues.getprocessing_fee_float().equals("NA")) {
+
+				Log.d("pf is NA and pffloat is not NA","1");
+
+				Double pf_float=Double.parseDouble(tempValues.getprocessing_fee_float());
+				if (((GlobalData) cont.getApplicationContext()).getloanamt() != null) {
+
+					Log.d("tempValues.getproce_fee_perc()", tempValues.getproce_fee_perc());
+
+
+					loan_amt = Integer.parseInt(((GlobalData) cont.getApplicationContext()).getloanamt());
+					Double pf_val=((loan_amt * (pf_float/100))+(Double.parseDouble(tempValues.getproce_fee_perc())/100)*(loan_amt * (pf_float/100)));
+					int pf_int = pf_val.intValue();
+					Log.d("pf float value is pf_int", String.valueOf(pf_int));
+					String profee_float = String.valueOf(format.format(new BigDecimal(pf_int)));
+					profee_float = profee_float.replaceAll("\\.00", "");
+					//profee_float = profee_float.replaceAll("Rs.", "");
+					//profee_float = profee_float.replaceAll("\u20B9", "");
+
+					Log.d("pf float value is profee_float", String.valueOf(profee_float));
+
+					holder.t4.setText(profee_float);
+					holder.st.setVisibility(View.VISIBLE);
+				}
+			}
+			else
+			holder.t4.setText("" + profee);
+
 			holder.tprea.setText(""+propreclo);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
-
+			holder.bp.setOnClickListener((GoogleCardsMediaActivity) cont);
+			holder.bp.setError("subject to max. loan amount as per bank’s product guidelines-Refer to details tab");
 
 			/*holder.comp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
@@ -280,7 +326,7 @@ if(isNumeric(tempValues.getprocessing_fee()))
 					intent.putExtra("fee", data.get(pos).getfee_charges());
 					intent.putExtra("other", data.get(pos).getother_details());
 					intent.putExtra("docum", data.get(pos).getcardocu());
-					intent.putExtra("preclos",propreclo);
+					intent.putExtra("preclos", propreclo);
 					Log.d("adapter docum ", data.get(pos).getcardocu());
 					cont.startActivity(intent);
 					((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
@@ -318,11 +364,11 @@ if(isNumeric(tempValues.getprocessing_fee()))
 		}
 	private static class ViewHolder {
 		public ImageView image;
-		public TextView promo,name,t1,t2,t3,t4;
+		public TextView promo,name,t1,t2,t3,t4,st;
 		public TextView bp,tprea;
 		public TextView price;
 		public TextView description;
-		public TextView day;
+		public TextView day,fixedyear;
 		public Button apply;
 		public CheckBox comp;
 

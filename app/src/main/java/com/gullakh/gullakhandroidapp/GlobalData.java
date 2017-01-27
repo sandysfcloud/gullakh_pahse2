@@ -32,14 +32,16 @@ public class GlobalData extends MultiDexApplication {
     private Double depreciation2,bonus;
 // =====================================================================================================================
 //-------------------------production URL------------------------------------------------------------------------------
-   /* static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_uat/";
-    static final String GULLAKH_WEB ="http://52.39.95.142/gullakh_web/";*/
+    static final String GULLAKH_PORTAL ="https://www.gullakh.com/gullakh_portal_uat/";
+    static final String GULLAKH_WEB ="https://www.gullakh.com/gullakh_web/";
 
-    static final String GULLAKH_PORTAL ="https://www.gullakh.com/crm/";
+  /* static final String GULLAKH_PORTAL ="https://www.gullakh.com/crm/";
     static final String GULLAKH_WEB ="https://www.gullakh.com/";
 
-      /* static final String GULLAKH_PORTAL ="http://52.39.95.142/gullakh_portal_dev/";
-    static final String GULLAKH_WEB ="http://52.39.95.142/gullakh_web_dev/";*/
+       static final String GULLAKH_PORTAL ="https://www.gullakh.com/gullakh_portal_dev/";
+    static final String GULLAKH_WEB ="https://www.gullakh.com/gullakh_web_dev/";*/
+
+
 //======================================================================================================================
     //------------------------developer URL-----------------------------------------------------------------------------
 //    static final String GULLAKH_PORTAL ="http://54.200.200.39/gullakh_portal_dev/";
@@ -50,6 +52,8 @@ public class GlobalData extends MultiDexApplication {
     static final String SERVER_GET_URL =GULLAKH_PORTAL+"webservice_new.php";
     static final String CIBIL =GULLAKH_WEB+"equifax/equifax";
     static final String Webservice=GULLAKH_WEB+"index.php/user/Webservices/";
+
+    static final String CIBIL_NEW =GULLAKH_WEB+"assets/xmlfiles/";
 
     private String cartypeloan;
     private HashMap<String, String> lenders;

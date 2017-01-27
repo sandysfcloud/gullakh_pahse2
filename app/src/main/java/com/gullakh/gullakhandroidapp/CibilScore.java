@@ -37,13 +37,30 @@ import com.google.gson.JsonParser;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class CibilScore extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
     private String[] Loantypsp = new String[]{"New Car Loan", "Used Car Loan", "Personal Loan", "Home Loan", "Loan Against Property"};
@@ -60,7 +77,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
     String apply,bankid;
     Dialog dgthis;
     String[] listcity, liststate;
-    String spcity, spstate, serveremail, s_gender,err_msg;
+    String spcity, spstate, serveremail, s_gender,err_msg=null;
 
     private String firstname, lastname;
 
@@ -249,7 +266,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
                                 Log.d("from mainact", "show alert");
                                 if (((GlobalData) getApplication()).getcredback() != null) {//frm creditscore buttn click
                                     Log.d("from mainact", "from cs button click");
-                                    setalert();//if cibil score is present and frm mainactivity
+
+                                        setalert();//if cibil score is present and frm mainactivity
+
                                 }
                                 else
                                 {
@@ -278,6 +297,11 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
                 }
+                else
+                    page();
+
+
+
                 dgthis.dismiss();
             }
         }, CibilScore.this, "wait");
@@ -676,7 +700,9 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                         }
                     } else//set alert if from mainactivity page
-                        setalert();//from mainactivity
+
+                            setalert();//from mainactivity
+
 
 
                 } else {
@@ -708,8 +734,25 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
 
     public void setalert() {
+
+
+
+
+        //********************************************************************
+
         Log.d("set alert called", "");
-        AlertDialog.Builder builder = new AlertDialog.Builder(CibilScore.this);
+        finish();
+
+
+
+        Intent intent = new Intent(CibilScore.this, CibilScore_New.class);
+        intent.putExtra("userid",userid);
+        startActivity(intent);
+
+
+
+
+        /*AlertDialog.Builder builder = new AlertDialog.Builder(CibilScore.this);
 
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.cibilscorepopup, null);
@@ -765,6 +808,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         Log.d("cscore score is", cscore);
 
 
+
+
         if (Integer.parseInt(cscore)  > 0 && Integer.parseInt(cscore)<=399) {
             Log.d("its vpoor", "");
             vpoor.setVisibility(View.VISIBLE);
@@ -816,7 +861,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         ContentValues values = new ContentValues();
         values.put("score", cscore);
         values.put("firstname", nam);
-        dbobject1.updateDatatouserlogin("userlogin", values, userid);
+        dbobject1.updateDatatouserlogin("userlogin", values, userid);*/
 
 
     }
@@ -985,6 +1030,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                 break;
             case R.id.dob:
+                Log.d("dob is clicked","1");
                 Calendar now = Calendar.getInstance();
                 now.set(now.get(Calendar.YEAR) - 18, now.get(Calendar.MONTH) + 1, now.get(Calendar.DAY_OF_MONTH));
                 com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
@@ -1169,7 +1215,8 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
 
                         }
                     } else
-                        setalert();//from mainactivity
+
+                            setalert();//from mainactivity
 
 
                 } else {

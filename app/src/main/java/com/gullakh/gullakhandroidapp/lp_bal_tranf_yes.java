@@ -38,7 +38,8 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
     AutoCompleteTextView Text1;
     private JSONServerGet requestgetserver;
     String sessionid,existloan,existbeg,outbal,topup;
-
+    String balt,loantyp;
+    TextView beg_ln;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +71,10 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         Text3.addTextChangedListener(new NumberTextWatcher(Text3));
         Text4.addTextChangedListener(new NumberTextWatcher(Text4));
         Text2.setOnClickListener(this);
+        beg_ln = (TextView) findViewById(R.id.textView1);
        // getbanknam();
+
+
 
         Text1.addTextChangedListener(new TextWatcher() {
 
@@ -87,7 +91,8 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-            if (s.length() == 3)
+            //if (s.length() == 3)
+                if (s.length() == 2)
                 getbanknam(Text1.getText().toString());
             }
         });
@@ -101,7 +106,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
             existbeg = savedInstanceState.getString("begin_of_existing_home_loan");
             outbal = savedInstanceState.getString("present_outstanding_bal_of_homeloan_you_wish_to_transfer");
             topup = savedInstanceState.getString("top_up_amount");
-
+            loantyp = savedInstanceState.getString("loantyp");
             Log.d("savedInstanceState lp_bal_tranf_yes", topup);
 
         }
@@ -111,6 +116,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
             existbeg =cl_car_global_data.dataWithAns.get("begin_of_existing_home_loan");
             outbal = cl_car_global_data.dataWithAns.get("present_outstanding_bal_of_homeloan_you_wish_to_transfer");
             topup = cl_car_global_data.dataWithAns.get("top_up_amount");
+            loantyp=((GlobalData) getApplication()).getLoanType();
         }
 
         if (existloan!= null) {
@@ -126,6 +132,10 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
 
 
 
+        if(loantyp.equals("Home Loan")) {
+
+            beg_ln.setText("When did you begin your home existing loan?");
+        }
 
     }
 
@@ -138,6 +148,7 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
         icicle.putString("begin_of_existing_home_loan", cl_car_global_data.dataWithAns.get("begin_of_existing_home_loan"));
         icicle.putString("present_outstanding_bal_of_homeloan_you_wish_to_transfer", cl_car_global_data.dataWithAns.get("present_outstanding_bal_of_homeloan_you_wish_to_transfer"));
         icicle.putString("top_up_amount",cl_car_global_data.dataWithAns.get("top_up_amount"));
+        icicle.putString("loantyp", ((GlobalData) getApplication()).getLoanType());
     }
 
 
@@ -263,13 +274,17 @@ public class lp_bal_tranf_yes extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+
+
+
     public void setDataToHashMap(String key, String data) {
         Log.d(key, data);
         cl_car_global_data.dataWithAns.put(key, data);
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        date = dayOfMonth+"-"+DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;
+       // date = dayOfMonth+"-"+DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;
+        date = DateWithMMYY.formatMonth((++monthOfYear))+"-"+year;
         Text2.setText(date);
     }
     public String getDate() {

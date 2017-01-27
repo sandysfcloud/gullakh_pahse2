@@ -231,6 +231,20 @@
                     android:textSize="16sp"
                     app:typeface="robotoLight"
                     />
+
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:id="@+id/st"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="incl. 15% Service Tax"
+                    android:textColor="#616161"
+                    android:textSize="12sp"
+                    app:typeface="robotoLight"
+                    />
              <!--   -->
             </LinearLayout>
 
@@ -281,7 +295,18 @@
                     android:textSize="16sp"
                     app:typeface="robotoLight"
                     />
-
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:id="@+id/fixedyear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@android:color/transparent"
+                    android:maxLines="1"
+                    android:text="Monthly for 10 years"
+                    android:textColor="#616161"
+                    android:textSize="12sp"
+                    app:typeface="robotoLight"
+                    />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -517,13 +542,14 @@
         </LinearLayout>-->
     </RelativeLayout>
     <com.gullakh.gullakhandroidapp.font.RobotoTextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bp"
         android:layout_marginLeft="12dp"
         android:textSize="14sp"
-
-        android:layout_marginTop="8dp"
+        style="@android:style/Widget.EditText"
+        android:background="#00ffffff"
+        android:layout_marginTop="5dp"
         android:textColor="#177bbd"
         android:text="Your Borrowing Power is "
         app:typeface="robotoLight"/>
@@ -534,7 +560,7 @@
         android:background="@drawable/google_cards_background_bottom"
         android:gravity="right"
         android:orientation="vertical"
-        android:padding="8dp" >
+        android:padding="5dp" >
 
     </LinearLayout>
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.gullakh.gullakhandroidapp;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,7 +55,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.plus.Plus;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -239,6 +242,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         credit = (Button) findViewById(R.id.credit);
         credit.setOnClickListener(this);
 
+       /* ImageView share = (ImageView) findViewById(R.id.share);
+        share.setOnClickListener(this);*/
+
         DataHandler dbobject = new DataHandler(this);
         dbobject.addTable();
         Cursor checkSignInState = dbobject.displayData("select * from userlogin");
@@ -410,6 +416,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 View headerView = null;
                 // headerView = prepareHeaderView(R.layout.header_navigation_drawer,"",emailfromul);
                 headerView = prepareHeaderView(R.layout.header_navigation_drawer, "", fname + " " + lastnam);
+
+               /* ImageView prof_img = (ImageView) headerView.findViewById(R.id.image);
+                prof_img.setOnClickListener(this);*/
                 mDrawerList.addHeaderView(headerView);
                 //mDrawerList.setAdapter(new DrawerAdapter(this, mDrawerItems, true));
                 mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -460,7 +469,7 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
                 dgthis.dismiss();
             }
         }, MainActivity.this, "wait");
-        requestgetserver2.execute("token","getcontact",sessionid,emailfromul);
+        requestgetserver2.execute("token", "getcontact", sessionid, emailfromul);
     }
 
 
@@ -621,7 +630,9 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
             case R.id.imageViewInfo:
                 showdialog();
                 break;
-
+          /*  case R.id.share:
+                share();
+                break;*/
 
             case R.id.credit:
                 Log.d("get cibil button in page", "1");
@@ -651,11 +662,68 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
 
                 }
 
+
+
+
                 break;
+           /* case R.id.image:
 
 
+            Log.d("profile drawer item","2");
+            DataHandler dbobject2 = new DataHandler(MainActivity.this);
+            dbobject2.addTable();
+
+
+            Cursor cr2= dbobject2.displayData("select * from userlogin");
+            if(cr2!=null) {
+                if (cr2.moveToFirst()) {
+                    Log.d("already logined", "");
+                    Intent intent4 = new Intent(MainActivity.this, MyProfileActivity.class);
+                    startActivity(intent4);
+
+                }else{
+                    Log.d("not logined", "");
+                    Intent intent4 = new Intent(MainActivity.this, signinPrepage.class);
+                    startActivity(intent4);
+
+                }
+            }else{
+                Intent intent5 = new Intent(MainActivity.this, signinPrepage.class);
+                startActivity(intent5);
+
+            }
+            overridePendingTransition(R.transition.left, R.transition.right);
+
+                break;*/
 
         }
+
+    }
+
+    private void share() {
+
+
+        Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+       /* try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
+        }*/
+
+        String userEntry = "http://play.google.com/store/apps/details?id=" + this.getPackageName();
+        Intent textShareIntent = new Intent(Intent.ACTION_SEND);
+        textShareIntent.putExtra(Intent.EXTRA_TEXT, userEntry);
+        textShareIntent.setType("text/plain");
+        startActivity(textShareIntent);
+
+
 
     }
 
@@ -893,12 +961,22 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(6, -1),
                 R.string.drawer_title_my_application,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
+
         mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(7, -1),
+                R.string.Share_This_App,
+                DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
+
+
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(8, -1),
                 R.string.drawer_title_shape_image_views,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
-        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(8, -1),
+        mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(9, -1),
                 R.string.drawer_title_terms_of_use,
                 DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));
+
+     /*   mDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(10, -1),
+                R.string.drawer_title_logout,
+                DrawerItem.DRAWER_ITEM_TAG_SHAPE_IMAGE_VIEWS));*/
 
 
 
@@ -993,23 +1071,83 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
                 overridePendingTransition(R.transition.left, R.transition.right);
 
             }
-
                 if (position == 5) {
+                    Log.d("share is clicked", "mainact");
+                    share();
+                }
+
+                if (position == 6) {
                     Log.d("privacy p is clicked", "mainact");
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gullakh.com/privacy-policy"));
                     startActivity(browserIntent);
                 }
-                if (position == 6) {
+                if (position == 7) {
                     Log.d("terms n con is clicked", "mainact");
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gullakh.com/term-of-service"));
                     startActivity(browserIntent);
 
                 }
+                /*if (position == 8) {
+                    Log.d("terms n con is clicked", "logout");
 
+                    //********************Logout
+
+
+
+                    MainActivity.signinstate = false;
+                    DataHandler dbobjectnew = new DataHandler(MainActivity.this);
+                    dbobjectnew.query("DELETE FROM userlogin");
+//                GooglePlusLogin obj=new GooglePlusLogin();
+//                obj.signOutFromGplus();
+//                mGoogleApiClient = ((GlobalData)getApplication()).getGoogleObject();
+
+
+                    signinPrepage obj = new signinPrepage();
+                    obj.logoutfb(MainActivity.this);
+
+
+                    signOutFromGplus();
+
+                    Intent int3 = new Intent(getApplicationContext(), MainActivity.class);
+                    int3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(int3);
+                   /*GooglePlusLogin fragmentList = (GooglePlusLogin) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                    fragmentList.signOutFromGplus();
+
+
+
+                    //Check if connected
+                    if(App.getGoogleApiHelper().isConnected())
+                    {
+                        //Get google api client
+                        GoogleApiClient client = App.getGoogleApiHelper().getGoogleApiClient();
+
+
+                        if (client.isConnected()) {
+                            Log.d("signOutFromGplus", "Clicked 2 ");
+                            Plus.AccountApi.clearDefaultAccount(client);
+                            client.disconnect();
+//            mGoogleApiClient.connect();
+                            Log.d("signOutFromGplus", "Clicked 3 ");
+                        }
+                    }*/
+
+
+
+
+
+
+
+                    //*****************************************
+
+               // }
 
         }
         }
     }
+
+
+
 
     private void selectItem(int position, int drawerTag) {
         Fragment fragment = getFragmentByDrawerTag(drawerTag);

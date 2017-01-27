@@ -6,15 +6,15 @@ package com.gullakh.gullakhandroidapp;
 public class RuleMaster {
 
     public String bankid;
-    public Double foir;
-    public Double roi;
-    public String tenure;
-    public String pf;
+
+    public String tenure,roifloat;
+    public String pf,pffloat;
     public String feedetails;
     public String otherdetail;
     public String document;
     public String pre_closure_fee;
-
+    public Double foir;
+    public String roi,fixedyear;
 
 
     public String getaccount_lender(){
@@ -32,13 +32,23 @@ public class RuleMaster {
     public void setfoir(Double token){
         foir=token;
     }
-    public Double getfloating_interest_rate(){
+    public String getfloating_interest_rate(){
         return roi;
     }
 
-    public void setfloating_interest_rate(Double token){
+    public void setfloating_interest_rate(String token){
         roi=token;
     }
+
+
+    public String getfloating_interest_rate_float(){
+        return roifloat;
+    }
+
+    public void setfloating_interest_rate_float(String token){
+        roifloat=token;
+    }
+
 
 
     public String gettenure(){
@@ -56,6 +66,18 @@ public class RuleMaster {
     public void setprocessing_fee(String token){
         pf=token;
     }
+
+
+
+    public String getprocessing_fee_float(){
+        return pffloat;
+    }
+
+    public void setprocessing_fee_float(String token){
+        pffloat=token;
+    }
+
+
 
     public String getfee_charges_details(){
         return feedetails;
@@ -89,6 +111,14 @@ public class RuleMaster {
     }
     public String getpre_closure_fee(){
         return pre_closure_fee;
+    }
+
+
+    public void setfixedyear(String token){
+        fixedyear=token;
+    }
+    public String getfixedyear(){
+        return fixedyear;
     }
 
 }

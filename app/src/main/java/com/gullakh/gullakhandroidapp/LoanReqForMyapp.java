@@ -22,7 +22,7 @@ public class LoanReqForMyapp
     public String d6,d7,d8;
     public String createdtime;
     public String plemi="";
-    public String plroi="";
+    public String plroi="",doc_collect_by;
 
     public String getPlemi() {
         return plemi;
@@ -105,4 +105,9 @@ public class LoanReqForMyapp
     public String getLoanrequestcaseid() {
         return loanrequestcaseid;
     }
+
+    public String getdoc_collect_by() {
+        return doc_collect_by;
+    }
+
 }

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class cl_car_gender extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
@@ -577,29 +579,27 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 
 
 
-
+        readFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a", Locale.US);
 
         if (!datefield.getText().toString().matches("")) {
-            Log.d("datefield value", String.valueOf(datefield));
-            readFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+            Log.d("datefield value", String.valueOf(datefield.getText().toString()));
+
             seldate = datefield.getText().toString() + " " + separated[1].replaceAll("[^0-9]", "") + ":00:" + "00" + " " + separated[1].replaceAll("[0-9]", "");
         } else {
 
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             Date tomorrow = calendar.getTime();
-            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
             String tomorrowAsString = dateFormat.format(tomorrow);
             Log.d("date is null so take tomm",tomorrowAsString);
 
-
-            readFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
             seldate = tomorrowAsString + " " + separated[1].replaceAll("[^0-9]", "") + ":00:" + "00" + " " + separated[1].replaceAll("[0-9]", "");
         }
 
 
         Log.d("before selected date", seldate);
-        DateFormat writeFormat = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
+        DateFormat writeFormat = new SimpleDateFormat("dd-MMM-yy HH:mm:ss", Locale.US);
         Date date = null;
         try {
             date = readFormat.parse(seldate);
@@ -615,7 +615,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
 //***********
 
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yy HH:mm:ss", Locale.US);
         String currents = sdf.format(new Date());
 
         Date currentd = null;
@@ -767,8 +767,9 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 gsonBuilder.setDateFormat("M/d/yy hh:mm a");
                 Gson gson = gsonBuilder.create();
                 JsonParser parser = new JsonParser();
+                Log.d("requestgetserver4 jsonobj", str_result);
                 JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
-                Log.d("requestgetserver4 jsonobj", String.valueOf(jsonObject));
+                Log.d("requestgetserver4 jsonobj2", String.valueOf(jsonObject));
                 ContactBR Borrower_contact = gson.fromJson(jsonObject.get("result"), ContactBR.class);
                 borrowercontactid = Borrower_contact.getId();
                 Log.d("Borrower contact id", borrowercontactid);
@@ -793,6 +794,11 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 LoanReq Borrower_case = gson.fromJson(jsonObject.get("result"), LoanReq.class);
                 borrowercaseid = Borrower_case.getId();
                 borrowercaseno = Borrower_case.getCase_number();
+
+                SharedPreferences.Editor editor = getSharedPreferences("borrowercaseid", MODE_PRIVATE).edit();
+                editor.putString("borrowercaseid", borrowercaseid);
+                editor.commit();
+
                 Log.d("Borrower borrowercaseid id KK", borrowercaseid);
                 gotoUpdateCredential();
 

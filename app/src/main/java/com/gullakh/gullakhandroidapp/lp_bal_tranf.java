@@ -136,7 +136,8 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
 
             case R.id.radioButton1:
                 ((GlobalData) getApplication()).setBaltrans("Yes");
-                setDataToHashMap("hl_bal_tranf", "Yes");
+              //  setDataToHashMap("hl_bal_tranf", "Yes");
+                setDataToHashMap("balanecetransfer", "Yes");
                 buttonYes=true;
                 intent = new Intent(lp_bal_tranf.this, lp_bal_tranf_yes.class);
                 startActivity(intent);
@@ -144,7 +145,8 @@ public class lp_bal_tranf extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.radioButton2:
                 ((GlobalData) getApplication()).setBaltrans("No");
-                setDataToHashMap("hl_bal_tranf", "No");
+               // setDataToHashMap("hl_bal_tranf", "No");
+                setDataToHashMap("balanecetransfer", "No");
                 buttonYes=false;
                 intent = new Intent(lp_bal_tranf.this, Loan_amt_questn.class);
                 startActivity(intent);

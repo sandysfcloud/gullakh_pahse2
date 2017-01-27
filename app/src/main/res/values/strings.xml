@@ -35,6 +35,9 @@
     <string name="drawer_title_progress_bars">Progress Bars</string>
     <!-- <string name="drawer_title_buttons">Buttons</string> -->
     <string name="drawer_title_shape_image_views">Privacy Policy</string>
+    <string name="Share_This_App">Share This App</string>
+
+    <string name="drawer_title_logout">Log Out</string>
     <string name="drawer_title_terms_of_use">Terms of Use</string>
     <string name="drawer_title_my_application">My Application</string>
     <string name="drawer_title_text_views">Text Views</string>
@@ -139,8 +142,10 @@
         <item>@drawable/carloan_icon</item>
         <item>@drawable/policy</item>
         <item>@drawable/my_application</item>
+        <item>@drawable/share</item>
         <item>@drawable/privacy</item>
         <item>@drawable/terms_use</item>
+        <item>@drawable/logout</item>
 
     </array>
     <string-array name="accordion_sections">
@@ -225,6 +230,7 @@
     <string name="fb_login_protocol_scheme">1799021007038264</string>
     <string name="title_activity_cibil_score">CibilScore</string>
     <string name="changemobno"> Or <u>change mobile number</u></string>
+    <string name="title_activity_cibil__pay__history">Payment History</string>
 
 
 </resources>

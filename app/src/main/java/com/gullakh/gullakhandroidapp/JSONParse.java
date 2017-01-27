@@ -35,7 +35,8 @@ public class JSONParse  extends AsyncTask<String, Void, JSONObject> {
         // DIALOG_DOWNLOAD_PROGRESS is defined as 0 at start of class
          //dialogalert=showAlert();
         Log.e("AsyncTask", "onPreExecute");
-        dialogalert=RegisterPageActivity.showAlertinit(activity);
+      //  dialogalert=RegisterPageActivity.showAlertinit(activity);
+        dialogalert=RegisterPageActivity.showWaitdialog(activity);
 
     }
     @Override
@@ -70,6 +71,9 @@ public class JSONParse  extends AsyncTask<String, Void, JSONObject> {
             else
             urlnew=urlnew+"/update_password";
         Log.e("urlnew used in jsonparse",urlnew);
+        if(arraydata!=null)
+        Log.e("arraydata in jparse", String.valueOf(arraydata));
+
          json = jParser.getJSONFromUrl(urlnew,arraydata);
         Log.e("AsyncTask", "doinback1");
         try {

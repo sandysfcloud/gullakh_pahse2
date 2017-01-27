@@ -44,7 +44,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     public static final int RC_SIGN_IN = 0;
     public static final String TAG = "SignInPage";
     public static final int PROFILE_PIC_SIZE = 400;
-    public GoogleApiClient mGoogleApiClient;
+    public  GoogleApiClient  mGoogleApiClient;
     public boolean mIntentInProgress;
     public boolean mSignInClicked;
     public ConnectionResult mConnectionResult;
@@ -304,7 +304,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
     /**
      * Sign-out from google
      * */
-    public void signOutFromGplus() {
+    public  void signOutFromGplus() {
         Log.d("signOutFromGplus", "Clicked 1 ");
         if (mGoogleApiClient.isConnected()) {
             Log.d("signOutFromGplus", "Clicked 2 ");
@@ -567,8 +567,21 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
                                     JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
                                     if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
                                         dg.dismiss();
-                                        Log.d("result tested","true");
-                                        saveDataToDatabase();
+                                        Log.d("result tested","true OTP Varification");
+
+
+                                        if (jsonObject.get("result").toString().replaceAll("\"","").equals("true")) {
+                                            Log.d("clicked 1", "result");
+                                            if (jsonObject.get("contact_id").toString().equals("") || jsonObject.get("contact_id").toString() != null)
+                                                contact_id = jsonObject.get("contact_id").toString();
+                                            if (jsonObject.get("user_id").toString().equals("") || jsonObject.get("user_id").toString() != null)
+                                                user_id = jsonObject.get("user_id").toString();
+                                            if (jsonObject.get("phone").toString().equals("") || jsonObject.get("phone").toString() != null)
+                                                usermobno = jsonObject.get("phone").toString().replaceAll("\"", "");
+                                        }
+
+
+                                            saveDataToDatabase();
                                         if (cscore != null) {
                                             Log.d("result tested", "cscore is not null");
                                             if (cscore.length() > 0) {//if credit score is already present

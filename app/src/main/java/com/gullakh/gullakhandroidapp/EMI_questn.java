@@ -56,12 +56,13 @@ public class EMI_questn extends AppCompatActivity  implements View.OnClickListen
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_actionbar_eachactivity, null);
         TextView  titl = (TextView) v.findViewById(R.id.title);
+        titl.setSelected(true);
         review = (ImageView) v.findViewById(R.id.edit);
         review.setOnClickListener(this);
         ImageView  close = (ImageView) v.findViewById(R.id.close);
         close.setOnClickListener(this);
         //titl.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
-        titl.setText("Total EMIs that I pay currently");
+        titl.setText("Total EMIs that I pay (excluding current home loan EMI proposed for BT)");
         actionBar.setCustomView(v);
 
         View v2 = getSupportActionBar().getCustomView();

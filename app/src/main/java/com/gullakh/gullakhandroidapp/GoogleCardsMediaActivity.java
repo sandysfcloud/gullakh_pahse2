@@ -43,6 +43,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -126,7 +128,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     TextView loan_amt, tenr_amt, title;
     ArrayAdapter<String> adapter;
     //private static final String[] COUNTRIES = new String[]{"Best Rate", "Processing Fee", "Preclosure fee"};
-    private static final String[] COUNTRIES = new String[]{"Best Rate"};
+    private static final String[] COUNTRIES = new String[]{"Best Rate","BP"};
     Map<String, String> Arry_bankimg = null;
     String listidmaster, globaltenure, globalloan_type, globalsal;
     private LoanDetails loandetailsobj1;
@@ -135,6 +137,9 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     Format format;
     ArrayList<String> high_cibil = new ArrayList<String>();
     DecimalFormat df,dfnd;
+    Boolean f_fixed=true,f_float=false;
+    String dataval,procegn_fee_perc;
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,6 +223,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             TextView tloan_amt = (TextView) findViewById(R.id.tloan_amt);
             TextView tfilter = (TextView) findViewById(R.id.tfilter);
 
+
+
             /*loan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
             tloan_amt.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
             tfilter.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/OpenSans-Light.ttf"));
@@ -272,7 +279,12 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             s1.setPrompt("Sort By");
 
-
+            if(globalloan_type.equals("Home Loan") || globalloan_type.equals("Loan Against Property"))
+            {
+                Log.d("its home or LAP -", globalloan_type);
+                f_fixed=false;
+                f_float=true;
+            }
             //******get data from search
             //  setsearchdb();
 
@@ -283,9 +295,10 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                 AdapterView<?> parent, View view, int position, long id) {
                             sortbyposition = position;
                             Log.d("test position", String.valueOf(position));
-                            // if(position!=0)
 
+                            if(position!=0)
                             calculate();
+
                             setadapter(CustomListViewValuesArr);
                         }
 
@@ -384,6 +397,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                                         sched.setLoan_type(loanDeatils[i].getLoantype());
                                         sched.setPlemi(loanDeatils[i].getPlemi());
                                         sched.setPlroi(loanDeatils[i].getPlroi());
+                                        sched.setdoc_collect_by(loanDeatils[i].getdoc_collect_by());
                                         searchlistviewArry.add(sched);
 
                                     }
@@ -662,6 +676,58 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     public void loan_amtcalcutn(final String param) {
 
+//phase -2
+
+
+        requestgetserver2 = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                try {
+
+                    Log.e("processFinishString in image", String.valueOf(0));
+
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                    Gson gson = gsonBuilder.create();
+
+                    JSONObject jsonObject = new JSONObject(str_result);
+
+                    Log.e("Check result in servicecharge", String.valueOf(jsonObject));
+                    Log.e("Check result in servicecharge", String.valueOf(jsonObject.get("result")));
+
+                    JSONObject jsonObject2 = new JSONObject(String.valueOf(jsonObject.get("result")));
+
+                    procegn_fee_perc=jsonObject2.getString("percentage");
+                    Log.e("Check result in servicecharge percentage", procegn_fee_perc);
+
+
+                } catch (Throwable t) {
+                    Log.e("My App", "Could not parse malformed JSON: ");
+                }
+
+
+            }
+        }, GoogleCardsMediaActivity.this, "2");
+//*******
+
+
+
+
+        requestgetserver2.execute("sessn", "servicecharge", sessionid);
+
+
+
+
+
+
+
+
 
         requestgetserver3 = new JSONServerGet(new AsyncResponse() {
             @Override
@@ -802,11 +868,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
 
                     } else {
-                        dispalert();
+                        dispalert("");
                     }
                     //******************kk
                 } else {
-                    dispalert();
+                    dispalert("");
                 }
 
             }
@@ -980,7 +1046,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
     }
 
-    public void dispalert() {
+    public void dispalert(String data) {
+         dataval=data;
         AlertDialog.Builder builder = new AlertDialog.Builder(GoogleCardsMediaActivity.this);
         builder.setMessage("Sorry, there were no Loan Offers matching your criteria!!!")
 
@@ -988,9 +1055,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+
+                        if (dataval.equals("no banks")) {
+                            dialog.dismiss();
+                        } else {
+
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
 
 
                     }
@@ -1015,6 +1088,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     }
     public void calculate() {
 
+        Log.d("calculate", "is called");
         int loan_amt;
         if(((GlobalData) getApplication()).getloanamt()!=null)
             loan_amt = Integer.parseInt(((GlobalData) getApplication()).getloanamt());
@@ -1026,10 +1100,6 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
             loan_amt = Integer.parseInt(loant);
         }
 
-
-
-
-
         double final_bp, emi_valu, emi_value, bp;
         CustomListViewValuesArr.clear();
         if (!disbank.equals(null))
@@ -1039,100 +1109,128 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
-                if (seektenure != 0) {
-                    //if the seekbar is changed
-
-                    int seekmonth = seektenure * 12;
-                    ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
-                    Log.d("seektenure value", String.valueOf(seektenure));
-                    //this emi is used for display purpose only not calclation
-                    emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -loan_amt, 0, false);
-                    // emi_valu = FinanceLib.pmt((75 / 100) / 12, seekmonth, -loan_amt, 0, false);
-                    Log.d("emi_valu", String.valueOf(emi_valu));
-                    Log.d("floating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-                    Log.d("seektenure", String.valueOf(seekmonth));
-                    Log.d("-loan_amt", String.valueOf(-loan_amt));
-                    emi_value = Math.ceil(emi_valu);
-                    //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
-
-                } else {
-                    Log.d("getfloating_interest_rate", String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-                    Log.d("Max_tenure", String.valueOf(Max_tenure));
-                    Log.d("loan_amt", String.valueOf(-loan_amt));
-
-                    emi_valu = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure*12, -loan_amt, 0, false);
-
-                    Log.d("checking emisandeep", String.valueOf(emi_valu) + " " + Max_tenure*12);
+                String roical=null;
+                if (f_float)
+                    roical= cobj_RM[i].getfloating_interest_rate_float();
+                else
+                    roical= cobj_RM[i].getfloating_interest_rate();
 
 
-                }
-                double bpd;
-                if (seektenure != 0) {
-                    Log.d("tenure value is changed", String.valueOf(seektenure));
-                    tenr_amt.setText(String.valueOf(seektenure)+ " Year(s)");
-                    int seekmonth = seektenure * 12;
-                    bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, seekmonth, -100000, 0, false);
-                } else {
-                    bpd = FinanceLib.pmt((cobj_RM[i].getfloating_interest_rate() / 100) / 12, Max_tenure*12, -100000, 0, false);
-                }
-                bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
-                final_bp = Math.ceil(bp);
-                Log.d("net_salry in cal", String.valueOf(net_salry));
-                Log.d("bpd value in cal", String.valueOf(bpd));
-                Log.d("emi value in cal", String.valueOf(emi));
-                Log.d("Max_tenure in cal", String.valueOf(Max_tenure));
 
-                Log.d("finalValue bp", String.valueOf(final_bp));
-                Log.d("loan_amt", String.valueOf(loan_amt));
+                if (!roical.equals("NA")) {
+                    if (seektenure != 0) {
+                        //if the seekbar is changed
 
-                emi_valu = Math.ceil(emi_valu);
+                        int seekmonth = seektenure * 12;
+                        ((GlobalData) this.getApplicationContext()).settenure(String.valueOf(seektenure));
+                        Log.d("seektenure value", String.valueOf(seektenure));
+                        //this emi is used for display purpose only not calclation
+                        emi_valu = FinanceLib.pmt((Double.parseDouble(roical) / 100) / 12, seekmonth, -loan_amt, 0, false);
+                        // emi_valu = FinanceLib.pmt((75 / 100) / 12, seekmonth, -loan_amt, 0, false);
+                        Log.d("emi_valu", String.valueOf(emi_valu));
+                        Log.d("floating_interest_rate", String.valueOf(roical));
+                        Log.d("seektenure", String.valueOf(seekmonth));
+                        Log.d("-loan_amt", String.valueOf(-loan_amt));
+                        emi_value = Math.ceil(emi_valu);
+                        //bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (emi_value)) * 100000;
 
-                maxbp = final_bp;
+                    } else {
+                        Log.d("getfloating_interest_rate", String.valueOf(roical));
+                        Log.d("Max_tenure", String.valueOf(Max_tenure));
+                        Log.d("loan_amt", String.valueOf(-loan_amt));
 
-                if (final_bp >= maxbp) {
+                        emi_valu = FinanceLib.pmt((Double.parseDouble(roical) / 100) / 12, Max_tenure * 12, -loan_amt, 0, false);
+
+                        Log.d("checking emisandeep", String.valueOf(emi_valu) + " " + Max_tenure * 12);
+
+
+                    }
+                    double bpd;
+
+                    if (seektenure != 0) {
+                        Log.d("tenure value is changed", String.valueOf(seektenure));
+                        tenr_amt.setText(String.valueOf(seektenure) + " Year(s)");
+                        int seekmonth = seektenure * 12;
+
+                        bpd = FinanceLib.pmt((Double.parseDouble(roical) / 100) / 12, seekmonth, -100000, 0, false);
+                    } else {
+                        bpd = FinanceLib.pmt((Double.parseDouble(roical) / 100) / 12, Max_tenure * 12, -100000, 0, false);
+                    }
+                    bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
+                    final_bp = Math.ceil(bp);
+                    Log.d("net_salry in cal", String.valueOf(net_salry));
+                    Log.d("bpd value in cal", String.valueOf(bpd));
+                    Log.d("emi value in cal", String.valueOf(emi));
+                    Log.d("Max_tenure in cal", String.valueOf(Max_tenure));
+
+                    Log.d("cobj_RM[i].getaccount_lender value",cobj_RM[i].getaccount_lender());
+                    Log.d("finalValue bp", String.valueOf(final_bp));
+                    Log.d("loan_amt", String.valueOf(loan_amt));
+
+                    emi_valu = Math.ceil(emi_valu);
+
                     maxbp = final_bp;
-                    //maxbp = maxbp/1000 * 1000;
-                    Log.d("maxbp value", String.valueOf(maxbp));
-                }
+
+                    if (final_bp >= maxbp) {
+                        maxbp = final_bp;
+                        //maxbp = maxbp/1000 * 1000;
+                        Log.d("maxbp value", String.valueOf(maxbp));
+                    }
 
 
+                    if (loan_amt <= final_bp) {
 
 
-
-                if (loan_amt <= final_bp) {
-
-
-                    //****************getting 2 best rate bank
+                        //****************getting 2 best rate bank
 
 
-                    //********
-                    Log.d("bankname in googleact", String.valueOf(Arry_banknam));
-                    Log.d("bankname in googleact", String.valueOf(Arry_banknam.get(cobj_RM[i].getaccount_lender())));
+                        //********
+                        Log.d("bankname in googleact", String.valueOf(Arry_banknam));
+                        Log.d("bankname in googleact", String.valueOf(Arry_banknam.get(cobj_RM[i].getaccount_lender())));
 
-                    Log.d("procee fee in googleact", String.valueOf(cobj_RM[i].getprocessing_fee()));
-                    double vfoir = Math.ceil(cobj_RM[i].getfloating_interest_rate());
+                        Log.d("procee fee in googleact", String.valueOf(cobj_RM[i].getprocessing_fee()));
+                      //  double vfoir = Math.ceil(Double.parseDouble(cobj_RM[i].getfloating_interest_rate()));
 
-                    ListModel sched = new ListModel();
-                    sched = new ListModel();
-                    sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
-                    sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-                    sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
-                    sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
-                    sched.setemi_value(String.valueOf(emi_valu));
-                    sched.setbp(String.valueOf(final_bp));
-                    sched.setfee_charges(cobj_RM[i].getfee_charges_details());
-                    //  Log.d("check fee here", cobj_RM[i].getfee_charges_details());
-                    sched.setother_details(cobj_RM[i].getother_details());
-                    sched.setcardocu(cobj_RM[i].getdocu_details());
+                        Log.d("cobj_RM[i].getfloating_interest_rate() is", cobj_RM[i].getfloating_interest_rate());
 
-                    sched.setpre_closure_fee(cobj_RM[i].getpre_closure_fee());
 
-                    if (Arry_bankimg.get(cobj_RM[i].getaccount_lender()) != null)
-                        sched.setcarimgurl(Arry_bankimg.get(cobj_RM[i].getaccount_lender()));
+                        ListModel sched = new ListModel();
+                        sched = new ListModel();
+                        sched.setaccount_lender(cobj_RM[i].getaccount_lender());//data is present in listmodel class variables,values are put inside listmodel class variables, accessed in CustHotel class put in list here
+                        sched.setproce_fee_perc(procegn_fee_perc);
+                        sched.setbanknam(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                        sched.setfixedyear(cobj_RM[i].getfixedyear());
+                        if (f_float) {//float is clicked or 1st time in home or LAP
+                            sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate_float()));
+                            sched.setfloat_fixed("float");
 
-                    //   Log.d("activity docum ", cobj_RM[i].getdocu_details());
 
-                    //user not eligible to this bank remove this bank from cibil score.
+                        } else {
+
+                            sched.setfloating_interest_rate(String.valueOf(cobj_RM[i].getfloating_interest_rate()));
+                            sched.setfloat_fixed("fixed");
+                        }
+
+                       // if(cobj_RM[i].getprocessing_fee().equals("NA"))
+                            sched.setprocessing_fee_float(cobj_RM[i].getprocessing_fee_float());
+                       // else
+                        sched.setprocessing_fee(cobj_RM[i].getprocessing_fee());
+
+                        sched.setemi_value(String.valueOf(emi_valu));
+                        sched.setbp(String.valueOf(final_bp));
+                        sched.setfee_charges(cobj_RM[i].getfee_charges_details());
+                        //  Log.d("check fee here", cobj_RM[i].getfee_charges_details());
+                        sched.setother_details(cobj_RM[i].getother_details());
+                        sched.setcardocu(cobj_RM[i].getdocu_details());
+
+                        sched.setpre_closure_fee(cobj_RM[i].getpre_closure_fee());
+
+                        if (Arry_bankimg.get(cobj_RM[i].getaccount_lender()) != null)
+                            sched.setcarimgurl(Arry_bankimg.get(cobj_RM[i].getaccount_lender()));
+
+                        //   Log.d("activity docum ", cobj_RM[i].getdocu_details());
+
+                        //user not eligible to this bank remove this bank from cibil score.
 
 
 
@@ -1162,21 +1260,27 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     }*/
 
 
-                        if(Arry_banknam.get(cobj_RM[i].getaccount_lender())==null)
-                        {
-                            Log.d("cibil remove","1");
+                        if (Arry_banknam.get(cobj_RM[i].getaccount_lender()) == null) {
+                            Log.d("cibil remove", "1");
+                        } else {
+                            CustomListViewValuesArr.add(sched);
+                            disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
+                            Log.d("disbank", String.valueOf(disbank));
                         }
-                    else {
-                        CustomListViewValuesArr.add(sched);
-                        disbank.add(Arry_banknam.get(cobj_RM[i].getaccount_lender()));
-                        Log.d("disbank", String.valueOf(disbank));
+                        //Log.d("activity docum ", cobj_RM[i].getaccount_lender());
+
+
                     }
-                    //Log.d("activity docum ", cobj_RM[i].getaccount_lender());
+
                 }
-
-
             }
 
+            Log.d("there is not banks - disbank", String.valueOf(disbank));
+           /* if(disbank.isEmpty())
+            {
+                Log.d("there is not banks under the criteria","1");
+                dispalert("no banks");
+            }*/
 
         }
         // double Emi = FinanceLib.pmt(0.00740260861, 180, -984698, 0, false);
@@ -1191,11 +1295,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
                 } else if (sortbyposition == 1) {
                     combank = 2;
+                    return (Float.valueOf(obj1.getbp()) > Float.valueOf(obj2.getbp())) ? -1 : (Float.valueOf(obj1.getbp()) < Float.valueOf(obj2.getbp())) ? 1 : 0;
+                }
+                /* else if (sortbyposition == 1) {
+                    combank = 2;
                     return (Float.valueOf(obj1.getprocessing_fee()) < Float.valueOf(obj2.getprocessing_fee())) ? -1 : (Float.valueOf(obj1.getprocessing_fee()) > Float.valueOf(obj2.getprocessing_fee())) ? 1 : 0;
                 } else if (sortbyposition == 2) {
                     combank = 3;
-                    return (Float.valueOf(obj1.getpre_closure_fee()) < Float.valueOf(obj2.getpre_closure_fee())) ? -1 : (Float.valueOf(obj1.getpre_closure_fee()) > Float.valueOf(obj2.getpre_closure_fee())) ? 1 : 0;
-                } else
+                    return (Float.valueOf(obj1.getpre_closure_fee()) < Float.valueOf(obj2.getpre_closure_fee())) ? -1 : (Float.valueOf(obj1.getpre_closure_fee()) > Float.valueOf(obj2.getpre_closure_fee())) ? 1 : 0;*/
+                else
                     return (Float.valueOf(obj1.getfloating_interest_rate()) < Float.valueOf(obj2.getfloating_interest_rate())) ? -1 : (Float.valueOf(obj1.getfloating_interest_rate()) > Float.valueOf(obj2.getfloating_interest_rate())) ? 1 : 0;
             }
         });
@@ -1403,7 +1511,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 ((GlobalData) this.getApplication()).setLenders(lenderInfo);
             }
         }
-        Log.d("check lender info",lenderInfo.toString());
+        Log.d("check lender info", lenderInfo.toString());
         for (Map.Entry<String, String> entry : lenderInfo.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
@@ -1440,7 +1548,7 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
         });
 
         //getSupportActionBar().setTitle("Result");
-        title.setText("Loan Offers-"+globalloan_type);
+        title.setText("Loan Offers-" + globalloan_type);
     }
 
 
@@ -1488,7 +1596,30 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
     public void updateloanamt(int Current) {
         prevloan = Current;
     }
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
 
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.fixed:
+                if (checked)
+                {
+                     f_fixed=true;
+                    f_float=false;
+                }
+                    // Pirates are the best
+                    break;
+            case R.id.floating:
+                if (checked)
+                {
+                     f_float=true;
+                    f_fixed=false;
+                }
+                    // Ninjas rule
+                    break;
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -1518,6 +1649,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 final RangeSeekBar seekBar1 = (RangeSeekBar) dialog.findViewById(R.id.loanamt);
                 editloan = (EditText) dialog.findViewById(R.id.loanamountid);
+
+                LinearLayout rg = (LinearLayout) dialog.findViewById(R.id.radiog);
+                RadioButton fixed = (RadioButton) dialog.findViewById(R.id.fixed);
+                RadioButton floating = (RadioButton) dialog.findViewById(R.id.floating);
+
+                if(f_fixed)
+                    fixed.setChecked(true);
+                else
+                    floating.setChecked(true);
 
 
                 final RangeSeekBar tenure = (RangeSeekBar) dialog.findViewById(R.id.tenure);
@@ -1743,22 +1883,51 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                 String loantyp2 = ((GlobalData) getApplication()).getLoanType();
 
-                if (loantyp2.equals("Home Loan") || loantyp2.equals("Loan Against Property"))
+
+                int flag=0;
+
+                if(Max_tenure!=Integer.parseInt(((GlobalData) getApplication()).getTenure())) {
+                    Log.d("Max_tenure is changed", String.valueOf(Max_tenure));
+                    flag = 1;
+                }
+                Log.d("flag is", String.valueOf(flag));
+               // Max_tenure = Integer.parseInt(((GlobalData) getApplication()).getTenure());
+
+                if (loantyp2.equals("Home Loan") || loantyp2.equals("Loan Against Property")) {
+                    Log.d("Home Loan tenure is changed", String.valueOf(Max_tenure));
+                    rg.setVisibility(View.VISIBLE);
+                    if(flag==1)
+                        tenure.setRangeValues(1, Max_tenure);
+                    else
                     tenure.setRangeValues(1, 30);
-                else if(loantyp2.equals("Personal Loan"))
-                    tenure.setRangeValues(1, 5);
-                else
+                }
+                else if(loantyp2.equals("Personal Loan")) {
+                    Log.d("Personal Loan tenure is changed", String.valueOf(Max_tenure));
+                    if (flag == 1)
+                        tenure.setRangeValues(1, Max_tenure);
+                    else
+                        tenure.setRangeValues(1, 5);
+                }
+                else {
+                    Log.d("car Loan tenure is changed", String.valueOf(Max_tenure));
+                    if(flag==1)
+                        tenure.setRangeValues(1, Max_tenure);
+                    else
                     tenure.setRangeValues(1, 7);
+                }
 
 
                 if (seektenure == 0) {
+                    Log.d("if seektenure is", "0");
                     //when filter is clicked at 1st take calculated tenure value -(caltenure())
-                    tenure.setSelectedMaxValue(Max_tenure / 12);
-                    tenur.setText(String.valueOf(Max_tenure / 12) + " Years");
-
-                    Log.d("Max_tenure", String.valueOf(Max_tenure / 12));
+                   /* tenure.setSelectedMaxValue(Max_tenure / 12);
+                    tenur.setText(String.valueOf(Max_tenure / 12) + " Years");*/
+                    tenure.setSelectedMaxValue(Max_tenure);
+                    tenur.setText(String.valueOf(Max_tenure) + " Years");
+                    Log.d("Max_tenure", String.valueOf(Max_tenure));
 
                 } else {
+                    Log.d("else in seektenure ", "1");
                     //otherwise take the value from seekbar
                     tenur.setText(Integer.toString(seektenure) + " Years");
                     tenure.setSelectedMaxValue(seektenure);
@@ -1766,10 +1935,11 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     Log.d("seektenure", String.valueOf(seektenure));
                 }
 
-if(((GlobalData) getApplication()).getTenure()!=null) {
+/*if(((GlobalData) getApplication()).getTenure()!=null) {
+    Log.d("((GlobalData) getApplication()).getTenure()!=null", "1");
     tenure.setSelectedMaxValue(Integer.parseInt(((GlobalData) getApplication()).getTenure()));
     tenur.setText(((GlobalData) getApplication()).getTenure() + " Years");
-}
+}*/
 
                 tenure.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
 
@@ -1802,6 +1972,7 @@ if(((GlobalData) getApplication()).getTenure()!=null) {
                 break;
 
             case R.id.applyf:
+
 
 
                 newCustomListViewValuesArr.clear();

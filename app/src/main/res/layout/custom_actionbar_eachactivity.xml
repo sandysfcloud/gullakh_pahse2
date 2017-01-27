@@ -15,7 +15,7 @@
         android:layout_height="20dp"
         android:layout_weight="1"
         android:layout_gravity="left"
-        android:layout_marginLeft="-10dp"
+
         android:src="@drawable/editiconnew" />
 
         <com.gullakh.gullakhandroidapp.font.RobotoTextView
@@ -23,9 +23,17 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:id="@+id/title"
+            android:singleLine="true"
+
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit ="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:layout_weight="4"
+
             android:textColor="#ffffff"
             app:typeface="robotoLight"
             android:textSize="16dp" />
@@ -37,7 +45,7 @@
         android:layout_gravity="right"
         android:layout_weight="1"
         android:gravity="right"
-            android:layout_marginRight="-10dp"
+
         android:src="@drawable/close" />
     </LinearLayout>
 </LinearLayout>

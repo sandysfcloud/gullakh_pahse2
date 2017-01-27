@@ -134,7 +134,18 @@
                     android:background="@drawable/rectbutton_red"
                     android:text="My Credit Report"
                     app:typeface="robotoLight"/>
+
+               <!-- <ImageView
+                    android:id="@+id/share"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+
+                    android:src="@drawable/share"
+                    />-->
+
             </LinearLayout>
+
 
             <!--<TextView
                 android:layout_width="wrap_content"

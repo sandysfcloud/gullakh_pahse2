@@ -71,7 +71,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 	static  TextView temp,tcar,tloan,temi,tsal;
 	static int flag=0;
 	public Button register;
-	public EditText firstName,middlename,lastName,Password;
+	public EditText firstName,middlename,lastName,Password,cPassword;
 	public Spinner spinner;
 	public String userid,tempUid=null;
 	public String contactid,loantyp;
@@ -106,12 +106,12 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		Password=(EditText)findViewById(R.id.password);
 
 		register = (Button) findViewById(R.id.Registerbutton);
-		 baseContext = getBaseContext();
-		 emailadress=(EditText) findViewById(R.id.otp);
-		 mobilenumber=(EditText) findViewById(R.id.mobilenumber);
+		baseContext = getBaseContext();
+		emailadress=(EditText) findViewById(R.id.otp);
+		mobilenumber=(EditText) findViewById(R.id.mobilenumber);
 		// password=(EditText) findViewById(R.id.password);
 		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
-
+		cPassword=(EditText)findViewById(R.id.cpassword);
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view,
 									   int position, long id) {
@@ -148,6 +148,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 							if (Password.getText().toString().equals("") || Password.getText().toString().length()<7){
 								RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please enter valid password of minimum 8 characters.", "error");
 							}else {
+								if (!Password.getText().toString().equals(cPassword.getText().toString())){
+									RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Password doesn't match.", "error");
+								}else {
 								if (checkBox.isChecked()) {
 									useremail = emailadress.getText().toString();
 									usermobno = mobilenumber.getText().toString();
@@ -179,6 +182,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 								} else {
 									RegisterPageActivity.showErroralert(RegisterPageActivity.this, "Please select Terms & conditions", "error");
 								}
+							}
 							}
 						}
 
@@ -278,7 +282,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					//Resend CODE here ...!!!!
 					final AlertDialog dialog = builder.create();
 
-						dialog.show();
+					dialog.show();
 
 //					builder.show();
 					myButton.setOnClickListener(new View.OnClickListener() {
@@ -341,16 +345,16 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 
-								String[] arraydata = new String[5];
-								arraydata[0] = "password";
-								arraydata[1] = useremail;
-								arraydata[2] = usermobno;
-								arraydata[3] = RegisterAppToServer.regid;
-								arraydata[4] = inputpassword.getText().toString();
-								urlchange = "setpassword";
-								JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
-								asyncTask.delegate = RegisterPageActivity.this;
-								asyncTask.execute();
+							String[] arraydata = new String[5];
+							arraydata[0] = "password";
+							arraydata[1] = useremail;
+							arraydata[2] = usermobno;
+							arraydata[3] = RegisterAppToServer.regid;
+							arraydata[4] = inputpassword.getText().toString();
+							urlchange = "setpassword";
+							JSONParse asyncTask = new JSONParse(RegisterPageActivity.this, arraydata);
+							asyncTask.delegate = RegisterPageActivity.this;
+							asyncTask.execute();
 
 						}
 					});
@@ -413,9 +417,9 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					}
 
 				}
-				}else{
+			}else{
 
-					RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
+				RegisterPageActivity.showErroralert(RegisterPageActivity.this,str_result.get("error_message").toString(),"error");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -436,6 +440,10 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		values.put("firstname", firstName.getText().toString());
 		values.put("lastname", lastName.getText().toString());
 		values.put("contact_id", contactid);
+
+
+		if(userid!=null)
+			Log.d("user_id value in registerpageactivity",userid);
 
 		Log.d("mobileandemailinRP",useremail+" "+usermobno);
 
@@ -465,7 +473,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		coin.setAnimation(mAnimation);
 		piggibg.startAnimation(pulse);
 
- //********
+		//********
 
 
 		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -489,7 +497,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 
-      //*******new loading
+		//*******new loading
 		/*LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
 
 		View dialogView = inflater.inflate(R.layout.dialogloading, null);
@@ -593,8 +601,8 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			public void onClick(View v) {
 				Log.d("close clicked", String.valueOf(1));
 				dialog.dismiss();
-				}
-			});
+			}
+		});
 
 
 
@@ -637,7 +645,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			}
 		}
 		else
-		carloan_que_salary_new.add("Loan Amount: ");
+			carloan_que_salary_new.add("Loan Amount: ");
 
 		carloan_que_salary_new.add("Tenure: ");
 
@@ -651,14 +659,14 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			}*/
 		}
 
-        if(emptyp!=null) {
+		if(emptyp!=null) {
 			if (emptyp.equals("Self Employed Business") || emptyp.equals("Self Employed Professional")) {
 				flag = 1;
 				carloan_que_salary_new.add("PAT for Last FY: ");
 				carloan_que_salary_new.add("Dep. for Last FY: ");
 				//carloan_que_salary_new.add("PAT for Prev. to Last FY: ");
 				//carloan_que_salary_new.add("Dep. for Prev. to Last FY: ");
-			 }else
+			}else
 				carloan_que_salary_new.add("Salary/Incentives: ");
 		}
 
@@ -691,7 +699,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		ArrayList<String>carloan_que_salary_new_ans=new ArrayList<String>();
 		if(((GlobalData) act.getApplication()).getcarres()!=null)
-		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getcarres().toString());
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getemptype());
 
 		if(loantyp!=null&& loantyp.equals("Car Loan")) {
@@ -727,7 +735,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			}
 		}
 		else
-		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
+			carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getloanamt());
 
 		carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getTenure());
 
@@ -758,7 +766,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getdepreciation2().toString());
 			}
 
-        else {
+			else {
 
 				if (((GlobalData) act.getApplication()).getnetsalary() != null) {
 					Log.d("net sal not null", String.valueOf(((GlobalData) act.getApplication()).getnetsalary()+"/"+((GlobalData) act.getApplication()).getavgince()));
@@ -795,7 +803,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 			if(loantyp.equals("Home Loan"))
 			{
 				if(((GlobalData) act.getApplication()).getCity()!=null)
-				carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCity());
+					carloan_que_salary_new_ans.add(((GlobalData) act.getApplication()).getCity());
 			}
 
 		}
@@ -806,7 +814,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new));
-        Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new_ans));
+		Log.d("carloan_que_salary_new", String.valueOf(carloan_que_salary_new_ans));
 
 
 		TextView tv;
@@ -816,7 +824,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 			View view = inflater.inflate(R.layout.linearreviewquestions, null);
-			 tv=(TextView) view.findViewById(R.id.headertype);
+			tv=(TextView) view.findViewById(R.id.headertype);
 			//LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.linerlytclick);
 			LinearLayout linearLayoutclick=(LinearLayout) view.findViewById(R.id.vlinemp);
 
@@ -1297,7 +1305,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 			TextView tvans=(TextView) view.findViewById(R.id.selectedanswer);
 			tv.setText(carloan_que_salary_new.get(i - 1));
-			 //textdata=carloan_que_salary_new.get(i - 1);
+			//textdata=carloan_que_salary_new.get(i - 1);
 			tv.setTypeface(Typeface.createFromAsset(CurrentAct.getAssets(), "fonts/OpenSans-Light.ttf"));
 			tvans.setTypeface(Typeface.createFromAsset(CurrentAct.getAssets(), "fonts/OpenSans-Light.ttf"));
 			tvans.setText(carloan_que_salary_new_ans.get(i - 1));
@@ -1536,17 +1544,17 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 
 	public static String insertcomma(Editable view)
-{
-	double doubleValue = 0;
-	String s = null;
-	try {
-		// The comma in the format specifier does the trick
-		s = String.format("%,d", Long.parseLong(view.toString()));
-	} catch (NumberFormatException e) {
-	}
+	{
+		double doubleValue = 0;
+		String s = null;
+		try {
+			// The comma in the format specifier does the trick
+			s = String.format("%,d", Long.parseLong(view.toString()));
+		} catch (NumberFormatException e) {
+		}
 
-	return s;
-}
+		return s;
+	}
 
 
 	public static Dialog showErroralert(Activity act, String msg, String flgsucfail ){

@@ -34,6 +34,7 @@
             android:layout_height="50dp"
             android:inputType="textCapSentences"
             android:ems="10"
+            android:imeOptions="actionNext"
             android:id="@+id/editText1"
             android:background="@drawable/edittextsimple"
             android:hint="Ex-SBI"
@@ -64,8 +65,9 @@
             android:background="@drawable/edittextsimple"
             android:hint="Ex-May-2000"
             android:paddingLeft="10dp"
-            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
             android:singleLine="true" />
+
 
         <com.gullakh.gullakhandroidapp.font.RobotoTextView
             app:typeface="robotoLight"

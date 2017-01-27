@@ -35,6 +35,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -139,6 +140,21 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         }
 
 
+
+        DataHandler dbobject = new DataHandler(this);
+        Cursor cr = dbobject.displayData("select * from userlogin");
+        if (cr != null) {
+            if (cr.moveToFirst()) {
+                if(cr.getString(7)!=null)
+                dobg =cr.getString(7);
+
+                if(cr.getString(8)!=null)
+                    genderg =cr.getString(8);
+                Log.d("cr.getString(7)n8 in userlogin",cr.getString(7)+" gender "+genderg);
+            }
+            }
+
+
         if(ageg!=0)//if age data is present then
         {
             age=ageg;
@@ -147,20 +163,25 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
 
 
 
-        if(dobg!=null)
-            Dob.setText(dobg);
+        if(dobg!=null) {
+
+            Log.d("dobg value",dobg+"value");
+            Log.d("dobg formatDate value",formatDate(dobg));
+
+            Dob.setText(formatDate(dobg));
+        }
 
 
         if(genderg!=null)
         {
             String gender=genderg;
-            if(gender.equals("male"))
+            if(gender.equalsIgnoreCase("male"))
             {
                 gen1.setImageResource(R.drawable.buttonselecteffect);
                 gen2.setImageResource(R.drawable.userfemale);
                 dataGender="male";
             }
-            else if(gender.equals("female"))
+            else if(gender.equalsIgnoreCase("female"))
             {
                 gen1.setImageResource(R.drawable.usermale);
                 gen2.setImageResource(R.drawable.buttonselecteffect);
@@ -225,7 +246,17 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
     }//end of oncreate
 
 
+    private String formatDate(String dateString) {
+        try {
 
+            SimpleDateFormat sd =new SimpleDateFormat("yyyy-MM-dd");
+            Date d = sd.parse(dateString);
+            sd = new SimpleDateFormat("dd-MM-yyyy");
+            return sd.format(d);
+        } catch (ParseException e) {
+        }
+        return "";
+    }
 
 
     protected void onSaveInstanceState(Bundle icicle) {
@@ -645,11 +676,11 @@ public void agelimit()
                     Log.d("age is fun", String.valueOf(((GlobalData) getApplication()).getage()));
 
 
-                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                    String newDate = format.format(Date.parse(Dob.getText().toString()));
+                   /* SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                    String newDate = format.format(Date.parse(Dob.getText().toString()));*/
 
 
-                    String CurrentString =newDate;
+                    String CurrentString =Dob.getText().toString();
                     String[] separated = CurrentString.split("-");
                     Log.d("dob split",  separated[0]+" "+ separated[1]+ " "+ separated[2]);
 

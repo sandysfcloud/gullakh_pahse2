@@ -97,7 +97,7 @@ public class UploadDocument1 extends AppCompatActivity implements View.OnClickLi
             Log.e("sessionid-cartypes", sessionid);
         }
 
-        requestgetserver.execute("sessn", "doccollection", data,cl_car_gender.borrowercaseid);
+        requestgetserver.execute("sessn", "doccollection",sessionid, data,cl_car_gender.borrowercaseid);
 
 
 

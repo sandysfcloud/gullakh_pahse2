@@ -33,7 +33,7 @@
             android:id="@+id/image"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/user"
+            android:src="@drawable/user2"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp" />
 

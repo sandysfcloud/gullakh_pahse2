@@ -1,8 +1,11 @@
 package com.gullakh.gullakhandroidapp;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -23,14 +33,14 @@ public class MyApplicatnAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     Context cont;
-
+    JSONServerGet requestgetserver;
     ArrayList<String> rmonth_fee;
     ArrayList<String>  rfixed_fee;
     ArrayList<String> ronetime_fee;
     int [] imageId;
     String tenure;
-
-    int listpos;
+    String sessionid;
+    int listpos,flag=0;
 
     public ArrayList<ListModel> data;
     public ArrayList<ListModel> original;
@@ -110,6 +120,8 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     .findViewById(R.id.apply);
             holder.viewbutton= (Button) convertView
                     .findViewById(R.id.view);
+            holder.letg= (Button) convertView
+                    .findViewById(R.id.letg);
             holder.apply.setTag(position);
 
             convertView.setTag(holder);
@@ -164,8 +176,14 @@ public class MyApplicatnAdapter extends BaseAdapter {
 
         if(tempValues.getstatus().equalsIgnoreCase("Created"))
         {
+            Log.d("if cond","Created");
+            Log.d("tempValues.setapp_flag value", String.valueOf(tempValues.getapp_flag()));
             holder.viewbutton.setVisibility(View.GONE);
             holder.apply.setVisibility(View.VISIBLE);
+            if(tempValues.getdoc_collect_by().equals("Bank")||tempValues.getapp_flag()==1)
+                holder.letg.setVisibility(View.GONE);
+            else
+            holder.letg.setVisibility(View.VISIBLE);
             holder.apply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -189,33 +207,55 @@ public class MyApplicatnAdapter extends BaseAdapter {
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
             });
+
+
+            holder.letg.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    int pos= (int) v.getTag();
+                                                    senddocudata(data.get(pos).getLoancaseid());
+
+                                                    data.get(pos).setapp_flag(1);
+                                                    Log.d("tempValues.setapp_flag value", String.valueOf(data.get(pos).getapp_flag()));
+                                                    holder.letg.setVisibility(View.GONE);
+                                                }
+            });
+
+
         }
         else
         {
+            Log.d("else cond","Submited");
             holder.apply.setVisibility(View.GONE);
             holder.viewbutton.setVisibility(View.VISIBLE);
             holder.viewbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
-                    int pos= (int) v.getTag();
+                public void onClick(View v) {
+                    int pos = (int) v.getTag();
                     Intent intent = new Intent(cont, Myapplication.class);
 
-                    intent.putExtra("data1",   data.get(pos).getLoan_type());//loanParameters.getLoantype()
-                    intent.putExtra("data2",  data.get(pos).getLoan_amount());
-                    intent.putExtra("data3",  data.get(pos).getBank_name());
+                    intent.putExtra("data1", data.get(pos).getLoan_type());//loanParameters.getLoantype()
+                    intent.putExtra("data2", data.get(pos).getLoan_amount());
+                    intent.putExtra("data3", data.get(pos).getBank_name());
                     intent.putExtra("data4", data.get(pos).getPlemi());
                     intent.putExtra("data5", data.get(pos).getPlroi());
                     intent.putExtra("progress", data.get(pos).getCompletedpercentage());
-                    intent.putExtra("status",  data.get(pos).getstatus());
+                    intent.putExtra("status", data.get(pos).getstatus());
                     cont.startActivity(intent);
                     ((GoogleCardsMediaActivity) cont).overridePendingTransition(R.transition.left, R.transition.right);
                 }
             });
+
+
+
+
+
+
         }
         }
         holder.apply.setTag(position);
         holder.viewbutton.setTag(position);
+        holder.letg.setTag(position);
         return convertView;
     }
 
@@ -226,10 +266,51 @@ public class MyApplicatnAdapter extends BaseAdapter {
         public TextView price;
         public TextView applno;
         public TextView date,status;
-        public Button apply,viewbutton;
+        public Button apply,viewbutton,letg;
 
     }
+    public void senddocudata(String id)
+    {
 
+        requestgetserver = new JSONServerGet(new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject output) {
+
+            }
+
+            public void processFinishString(String str_result, Dialog dg) {
+
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+                Gson gson = gsonBuilder.create();
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(str_result).getAsJsonObject();
+
+                Log.e("emplist frm server ", String.valueOf(jsonObject));
+
+
+
+            }
+        }, (GoogleCardsMediaActivity) cont, "2");
+        DataHandler dbobject = new DataHandler(cont);
+        Cursor cr = dbobject.displayData("select * from session");
+        if (cr.moveToFirst()) {
+            sessionid = cr.getString(1);
+            Log.e("sessionid-cartypes", sessionid);
+        }
+
+        id="x"+id;
+
+        Log.e("record value", id);
+
+        requestgetserver.execute("sessn", "doccollection",sessionid,"Bank",id );
+
+
+
+
+    }
     public  void filter(ArrayList<CharSequence> selectedColours ) {
 
 
@@ -253,3 +334,12 @@ public class MyApplicatnAdapter extends BaseAdapter {
 
 }
 
+/*
+  String id="";
+        SharedPreferences prefs = cont.getSharedPreferences("borrowercaseid", cont.MODE_PRIVATE);
+        String restoredText = prefs.getString("borrowercaseid", null);
+        if (restoredText != null) {
+            id = prefs.getString("borrowercaseid", "No name defined");//"No name defined" is the default value.
+            Log.e("restoredText", id);
+        }
+ */
