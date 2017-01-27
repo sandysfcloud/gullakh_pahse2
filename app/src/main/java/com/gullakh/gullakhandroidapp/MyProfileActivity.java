@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.json.JSONObject;
 
@@ -46,27 +48,36 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
-public class MyProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyProfileActivity extends AppCompatActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
 
     private Button signout;
     private ImageButton edit;
     private Button Done;
-    private EditText ph, email, add1, add2, add5, name;
-    Spinner add3, add4;
+    private EditText ph, email, add1, add2, add5, name,birthdate;
+    Spinner add3, add4,gender_s;
     private JSONServerGet requestgetserver1, requestgetserver2, requestgetserver3, requestgetserver4;
     private String userid;
     private String contactid;
     private String sessionid, spstate;
-    private String firstname, lastname, city, state;
+    private String firstname, lastname, city, state,Dob,gender,gender_value;
     private GoogleApiClient mGoogleApiClient;
     private ImageView ProfilePic;
     Bitmap bmp;
     RoundImage roundedImage, roundedImage1;
     public static boolean myprofileFlag;
     JSONServerGet requestgetserver;
-    String[] listcity, liststate;
+    String[] listcity, liststate,categories;
+    int day=0;
+    int month=0;
+    int yearv=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +160,32 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         add4.setBackgroundResource(R.color.white_transparent);
 
 
+        gender_s = (Spinner) findViewById(R.id.gender);
+        gender_s.setPrompt("Select Gender");
+        gender_s.setBackgroundResource(R.color.white_transparent);
+
+
+        //**********
+
+        // Spinner click listener
+      //  gender_s.setOnItemSelectedListener(this);
+
+        // Spinner Drop down elements
+
+        categories = new String[]{"Male","Female"};
+
+        MyArrayAdapter ma = new MyArrayAdapter(MyProfileActivity.this, categories);
+        gender_s.setAdapter(ma);
+
+
+
+        //***********
+
+
         add5 = (EditText) findViewById(R.id.editText5);
+        birthdate = (EditText) findViewById(R.id.birthdate);
+        birthdate.setOnClickListener(this);
+
         name.setEnabled(false);
         add1.setEnabled(false);
         add2.setEnabled(false);
@@ -158,6 +194,10 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         add5.setEnabled(false);
         ph.setEnabled(false);
         email.setEnabled(false);
+
+        gender_s.setEnabled(false);
+        birthdate.setEnabled(false);
+
         edit = (ImageButton) findViewById(R.id.imageButtonEdit);
         Done = (Button) findViewById(R.id.done);
         signout = (Button) findViewById(R.id.signout);
@@ -176,6 +216,9 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 add3.setBackgroundResource(R.drawable.edittextsimple);
                 add4.setBackgroundResource(R.drawable.edittextsimple);
                 add5.setBackgroundResource(R.drawable.edittextsimple);
+
+                gender_s.setBackgroundResource(R.drawable.edittextsimple);
+                birthdate.setBackgroundResource(R.drawable.edittextsimple);
                 //ph.setEnabled(true);
                 name.setEnabled(true);
                 add1.setEnabled(true);
@@ -183,6 +226,9 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 add3.setEnabled(true);
                 add4.setEnabled(true);
                 add5.setEnabled(true);
+
+                gender_s.setEnabled(true);
+                birthdate.setEnabled(true);
             }
         });
         Done.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +246,10 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 add3.setBackgroundResource(R.color.white_transparent);
                 add4.setBackgroundResource(R.color.white_transparent);
                 add5.setBackgroundResource(R.color.white_transparent);
+
+                gender_s.setBackgroundResource(R.color.white_transparent);
+                birthdate.setBackgroundResource(R.color.white_transparent);
+
                 // ph.setEnabled(false);
                 name.setEnabled(false);
                 add1.setEnabled(false);
@@ -207,6 +257,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 add3.setEnabled(false);
                 add4.setEnabled(false);
                 add5.setEnabled(false);
+
+                gender_s.setEnabled(false);
+                birthdate.setEnabled(false);
+
+
                 String[] temp = name.getText().toString().split(" ");
                 //kk  firstname=temp[0];
                 //lastname=temp[temp.length-1];
@@ -247,10 +302,11 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 if (state != null)
                     Log.d("state is", state);
 
-
+                if (gender_value != null)
+                    Log.d("gender_value is", gender_value);
                 // goToServer(firstname,lastname,add1.getText().toString(), add2.getText().toString(), add3.getText().toString(), add4.getText().toString(), add5.getText().toString());
 
-                goToServer(firstname, lastname, add1.getText().toString(), add2.getText().toString(), city, state, add5.getText().toString());
+                goToServer(firstname, lastname, add1.getText().toString(), add2.getText().toString(), city, state, add5.getText().toString(), birthdate.getText().toString(),gender_value);
             }
 
         });
@@ -363,7 +419,23 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+        gender_s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+                gender_value = categories[arg2];
+
+                // getStateName(spcity);
+                Log.d("onItemSelected is called", gender_value);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -542,6 +614,27 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
         requestgetserver.execute("token", "relatedcity", sessionid, Statenam);
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+        //  String date = dayOfMonth+"-"+(++monthOfYear)+"-"+year;
+        day=dayOfMonth;
+        month=monthOfYear;
+        month=month+1;
+        yearv=year;
+        Log.d("day is "+day+"month is "+month+"year is "+yearv,"0");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, monthOfYear, dayOfMonth);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String formatdate = format.format(calendar.getTime());
+        Log.d("date is KK", formatdate);
+        //Dob.setText(date);
+        birthdate.setText(formatdate);
+
+
+    }
+
 
     private class MyArrayAdapter extends BaseAdapter {
 
@@ -611,7 +704,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    private void goToServer(String firstname, String lastname, final String add1, final String add2, final String add3, final String add4, final String add5) {
+    private void goToServer(String firstname, String lastname, final String add1, final String add2, final String add3, final String add4, final String add5,final String gender, final String bdy) {
         requestgetserver1 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -630,7 +723,7 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
 
             }
         }, MyProfileActivity.this, "wait");
-        requestgetserver1.execute("token", "contactaddress", sessionid, contactid, add1, add2, add3, add4, add5, "", "", firstname, lastname);
+        requestgetserver1.execute("token", "contactaddress", sessionid, contactid, add1, add2, add3, add4, add5, "", "", firstname, lastname,gender,bdy);
 
     }
 
@@ -651,6 +744,27 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
+
+            case R.id.birthdate:
+                Calendar now = Calendar.getInstance();
+                now.set(now.get(Calendar.YEAR)-18, now.get(Calendar.MONTH)+1 , now.get(Calendar.DAY_OF_MONTH));
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                        MyProfileActivity.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                //now.add(Calendar.YEAR, -16);
+                //dpd.setMinDate(now);
+                dpd.setAccentColor(R.color.mdtp_background_color);
+                //dpd.vibrate(vibrateDate.isChecked());
+                dpd.showYearPickerFirst(true);
+                dpd.setAccentColor(Color.parseColor("#FFE2041E"));
+                //dpd.setTitle("DatePicker Title");
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+                break;
+
+
             case R.id.profilepic:
                 Intent i1 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i1.setType("image/*");
@@ -683,6 +797,18 @@ public class MyProfileActivity extends AppCompatActivity implements View.OnClick
                     add2.setText(details[0].getOtherstreet());
                     city = details[0].getMailingcity();
                     state = details[0].getMailingstate();
+
+
+                    Dob = details[0].getDob();
+                    gender=details[0].getgen();
+
+                    birthdate.setText(Dob);
+
+                    if(gender.equalsIgnoreCase("Male"))
+                    gender_s.setSelection(0);
+                    else
+                        gender_s.setSelection(1);
+
                     //*c  add3.setText(details[0].getMailingcity());
                     // add4.setText(details[0].getMailingstate());
                     Log.d("state is", state);
