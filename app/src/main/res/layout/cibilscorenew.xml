@@ -1,0 +1,1009 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgque"
+    android:orientation="vertical">
+
+
+    <TabHost
+        android:id="@+id/tabhost"
+        android:layout_width="fill_parent"
+
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+
+            >
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#80ffffff"
+                android:padding="5dp">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/tab1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:orientation="vertical">
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:fillViewport="true">
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#b8546e7a"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_weight="1"
+
+                                            android:orientation="vertical">
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+
+
+                                            android:text="My Credit Report"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#fff"
+                                            android:textSize="18sp"
+                                            app:typeface="robotoMedium" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoButton
+                                            android:id="@+id/downl"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:minHeight="0dp"
+                                            android:minWidth="0dp"
+                                            android:paddingTop="8dp"
+                                            android:paddingBottom="8dp"
+                                            android:paddingLeft="8dp"
+                                            android:paddingRight="8dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_marginTop="7dp"
+
+                                            android:textSize="12sp"
+                                            android:textColor="#ffffff"
+
+                                            android:background="@drawable/rectbutton_red"
+                                            android:text="Download Report"
+                                            app:typeface="robotoMedium"/>
+                                            </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+
+                                            android:orientation="vertical">
+
+                                            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center"
+                                                android:text="Reported By Equifax"
+                                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                                android:textColor="#fff"
+                                                android:textSize="18dp"
+                                                app:typeface="robotoMedium" />
+
+                                            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                                android:id="@+id/currnt_date"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginBottom="10dp"
+                                                android:layout_marginTop="10dp"
+                                                android:gravity="center"
+                                                android:text="on Oct 14, 2016"
+                                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                                android:textColor="#fff"
+                                                android:textSize="18dp"
+                                                app:typeface="robotoMedium" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+
+
+                                    android:background="#393939" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    >
+
+                                    <ImageView
+                                        android:id="@+id/cibil_score"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:id="@+id/scoreval"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+
+                                        android:layout_centerVertical="true"
+
+                                        android:paddingTop="40dp"
+                                        android:text="on Oct 14, 2016"
+
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+
+
+                                        android:textSize="35dp"
+
+                                        app:typeface="robotoMedium" />
+                                </RelativeLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-15dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <!--    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="match_parent"
+                                           android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                           android:text="The loans approved are for"
+
+
+                                           android:textSize="16dp"
+                                           android:textColor="#393939"
+                                           app:typeface="robotoMedium"/>
+                                       <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                           android:layout_width="wrap_content"
+                                           android:layout_height="match_parent"
+                                           android:textAppearance="?android:attr/textAppearanceMedium"
+                                           android:layout_marginTop="10dp"
+                                           android:text="individuals with a score greater than 750"
+                                           android:gravity="center"
+                                           android:textSize="16dp"
+                                           android:textColor="#393939"
+                                           app:typeface="robotoMedium"/>-->
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginBottom="8dp"
+
+                                        android:gravity="center"
+                                        android:text="My Credit Report Summary"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                        android:textColor="#393939"
+                                        android:textSize="18dp"
+                                        app:typeface="robotoMedium" />
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_marginTop="8dp"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
+
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle"
+                                            android:gravity="center"
+                                            android:text="Total Number Of Accounts"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+
+                                            android:background="#00ffffff" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+
+                                            android:background="@drawable/rectangle"
+                                            android:gravity="center"
+                                            android:text="Total Number Of Open Accounts"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+
+                                            android:background="#00ffffff" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle"
+                                            android:gravity="center"
+                                            android:text="Total Balance Amount (Rs.)"
+
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_marginTop="2dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
+
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:id="@+id/acc_no"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle_plain"
+                                            android:gravity="center"
+                                            android:text="17"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="#00ffffff" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:id="@+id/open_accnt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle_plain"
+                                            android:gravity="center"
+                                            android:text="8"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:id="@+id/tot_bal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle_plain"
+                                            android:gravity="center"
+                                            android:text="31,61,149"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_marginTop="2dp"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
+
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle"
+                                            android:gravity="center"
+                                            android:text="Oldest Account"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+
+                                            android:background="#00ffffff" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+
+                                            android:background="@drawable/rectangle"
+                                            android:gravity="center"
+                                            android:text="Recent Account"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+
+                                            android:background="#00ffffff" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle"
+                                            android:gravity="center"
+                                            android:text="Enquiries In Last 90 Days"
+
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_marginTop="2dp"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:weightSum="3">
+
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:id="@+id/old_accnt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle_plain"
+                                            android:gravity="center"
+                                            android:text="Credit Card on 27-10-2004"
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+
+                                            android:background="#00ffffff" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:id="@+id/rec_accnt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle_plain"
+                                            android:gravity="center"
+                                            android:text="Housing Loan on 05-02-2016"
+
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+
+                                            android:background="#00ffffff" />
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:id="@+id/tot_enq"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="65dp"
+                                            android:layout_weight="1"
+                                            android:background="@drawable/rectangle_plain"
+                                            android:gravity="center"
+                                            android:text="0"
+
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#393939"
+                                            android:textSize="16dp"
+                                            app:typeface="robotoMedium" />
+
+                                    </LinearLayout>
+
+
+                                    <!--  <View
+                                          android:layout_width="match_parent"
+                                          android:layout_height="1dp"
+
+                                          android:background="#393939"
+                                          />-->
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </ScrollView>
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:orientation="vertical">
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:fillViewport="true">
+
+                            <LinearLayout
+                                android:id="@+id/tab2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+
+                                android:orientation="vertical">
+
+                                <LinearLayout
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#b8546e7a"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+
+                                        android:orientation="horizontal"
+
+                                        android:weightSum="2">
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_weight="1"
+                                            android:text="My Accounts"
+
+
+                                            android:textAppearance="?android:attr/textAppearanceMedium"
+                                            android:textColor="#fff"
+                                            android:textSize="18dp"
+                                            app:typeface="robotoMedium" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+
+                                            android:orientation="vertical">
+
+                                            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center"
+                                                android:text="Reported by Equifax"
+                                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                                android:textColor="#fff"
+                                                android:textSize="18dp"
+                                                app:typeface="robotoLight" />
+
+                                            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginBottom="10dp"
+                                                android:layout_marginTop="10dp"
+                                                android:gravity="center"
+                                                android:text="on Oct 14, 2016"
+                                                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                                                android:textColor="#fff"
+                                                android:textSize="18dp"
+                                                app:typeface="robotoLight" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+
+                                    android:background="#393939" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#40546e7a"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_weight="1"
+                                        android:text="All Accounts"
+
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="18dp"
+                                        app:typeface="robotoLight" />
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+
+                                        android:background="#393939" />
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:text="Balances(Rs.)"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="18dp"
+                                        app:typeface="robotoLight" />
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+
+                                    android:background="#393939" />
+
+                                <LinearLayout
+                                    android:id="@+id/lin_data"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"></LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+
+                                    android:background="#393939" />
+
+                                <!-- <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Factors Impacting Your Credit Score"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
+                                    android:textColor="#393939"
+                                    android:textSize="18dp"
+                                    app:typeface="robotoLight" />
+
+
+                               <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_gravity="left"
+                                    android:gravity="left"
+                                    android:orientation="vertical">
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:text="1. Payment History....(Read More)"
+                                        android:layout_marginTop="5dp"
+
+                                        android:layout_weight="1"
+                                        android:textSize="16dp"
+                                        android:textColor="#393939"
+                                        app:typeface="robotoLight"/>
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:text="2. High utilisation of credit limit....(Read More)"
+                                        android:layout_marginTop="5dp"
+
+                                        android:layout_weight="1"
+                                        android:textSize="16dp"
+                                        android:textColor="#393939"
+                                        app:typeface="robotoLight"/>
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:text="3. Higher percentage of credit cards or personal loans....(Read More)"
+                                        android:layout_marginTop="5dp"
+
+                                        android:layout_weight="1"
+                                        android:textSize="16dp"
+                                        android:textColor="#393939"
+                                        app:typeface="robotoLight"/>
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:text="4. Many new accounts opened recently....(Read More)"
+                                        android:layout_marginTop="5dp"
+
+                                        android:layout_weight="1"
+                                        android:textSize="16dp"
+                                        android:textColor="#393939"
+                                        app:typeface="robotoLight"/>
+
+
+                                </LinearLayout>-->
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="16dp"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:id="@+id/hl"
+                                        android:clickable="true"
+                                        android:background="@drawable/rectangle"
+                                        android:gravity="center"
+                                        android:text="Home Loans"
+
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+
+                                        android:background="#00ffffff" />
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:id="@+id/pl"
+                                        android:clickable="true"
+                                        android:background="@drawable/rectangle"
+                                        android:gravity="center"
+                                        android:text="Personal Loans"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+
+                                        android:background="#00ffffff" />
+                                    <!-- <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                         android:layout_width="match_parent"
+                                         android:layout_height="65dp"
+                                         android:textAppearance="?android:attr/textAppearanceMedium"
+                                         android:text="Car Loans"
+                                         android:gravity="center"
+                                         android:background="@drawable/rectangle"
+
+                                         android:layout_weight="1"
+                                         android:textSize="16dp"
+                                         android:textColor="#393939"
+                                         app:typeface="robotoMedium"/>-->
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="2dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle_plain"
+                                        android:gravity="center"
+
+                                        android:text="9.10%"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="#00ffffff" />
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle_plain"
+                                        android:gravity="center"
+
+                                        android:text="11.49%"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+
+                                    <!--<com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:background="@drawable/rectangle_plain"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:text="9.90%"
+                                        android:gravity="center"
+
+                                        android:layout_weight="1"
+                                        android:textSize="16dp"
+                                        android:textColor="#393939"
+                                        app:typeface="robotoMedium"/>-->
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle"
+                                        android:gravity="center"
+                                        android:text="Car Loans"
+                                        android:id="@+id/cl"
+                                        android:clickable="true"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="#00ffffff" />
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle"
+                                        android:gravity="center"
+                                        android:id="@+id/ll"
+                                        android:clickable="true"
+                                        android:text="LAP"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+
+                                        android:background="#00ffffff" />
+
+                                    <!--  <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                          android:layout_width="match_parent"
+                                          android:layout_height="65dp"
+                                          android:textAppearance="?android:attr/textAppearanceMedium"
+                                          android:text="Enquiries In Last 90 Days"
+                                          android:gravity="center"
+                                          android:background="@drawable/rectangle"
+                                          android:visibility="invisible"
+                                          android:layout_weight="1"
+                                          android:textSize="16dp"
+                                          android:textColor="#393939"
+                                          app:typeface="robotoMedium"/>-->
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="65dp"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle_plain"
+                                        android:gravity="center"
+                                        android:text="9.90%"
+
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+
+                                        android:background="#00ffffff" />
+
+                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle_plain"
+
+                                        android:gravity="center"
+                                        android:text="10.00%"
+                                        android:textAppearance="?android:attr/textAppearanceMedium"
+                                        android:textColor="#393939"
+                                        android:textSize="16dp"
+                                        app:typeface="robotoMedium" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+
+                                        android:background="#00ffffff" />
+                                    <!--  <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                          android:layout_width="match_parent"
+                                          android:layout_height="65dp"
+                                          android:textAppearance="?android:attr/textAppearanceMedium"
+                                          android:text="0"
+                                          android:visibility="invisible"
+                                          android:gravity="center"
+                                          android:background="@drawable/rectangle_plain"
+
+                                          android:layout_weight="1"
+                                          android:textSize="16dp"
+                                          android:textColor="#393939"
+                                          app:typeface="robotoMedium"/>-->
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:id="@+id/lin_list"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"></LinearLayout>
+
+
+                                <com.gullakh.gullakhandroidapp.font.RobotoButton
+                                    android:id="@+id/acc_det"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+
+                                    android:layout_marginRight="8dp"
+                                    android:layout_marginTop="6dp"
+
+                                    android:background="@drawable/rectbutton_org"
+                                    android:minHeight="0dp"
+                                    android:minWidth="0dp"
+                                    android:padding="8dp"
+                                    android:text="Account Detail"
+                                    android:textColor="#ffffff"
+                                    android:textSize="12dp"
+                                    app:typeface="robotoLight" />
+
+                            </LinearLayout>
+                        </ScrollView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<LinearLayout
+                    android:id="@+id/tab3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="This is tab 3" />
+                </LinearLayout>-->
+            </FrameLayout>
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-4dp"
+                android:layout_weight="0"
+                android:background="@color/main_color_500" />
+
+
+        </LinearLayout>
+
+
+    </TabHost>
+
+
+</RelativeLayout>

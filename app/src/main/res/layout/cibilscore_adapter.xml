@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical"
+    android:background="#90ffffff"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     >
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#b8546e7a"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+
+            android:weightSum="2"
+
+            android:layout_height="wrap_content">
+
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Account Type"
+                android:id="@+id/acc_type"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="#fff"
+                app:typeface="robotoMedium"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+
+                android:layout_height="wrap_content">
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Reported by Equifax"
+                    android:gravity="center"
+
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    app:typeface="robotoLight"/>
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rep_date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginTop="10dp"
+                    android:text="rep date"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    app:typeface="robotoLight"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="375dp" >
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="375dp"
+
+            android:contentDescription="cd_main_image"
+            android:scaleType="centerCrop" />
+
+        <!-- <ImageView
+
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+            android:src="@mipmap/personal_backg2"
+
+
+             />-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="375dp"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:orientation="horizontal">
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:id="@+id/open"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="8dp"
+
+
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="8dp"
+                    android:textSize="12dp"
+                    android:textColor="#ffffff"
+
+                    android:text="Open"
+                    app:typeface="robotoLight"/>
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="8dp"
+
+                    android:id="@+id/close"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="8dp"
+                    android:textSize="12dp"
+                    android:textColor="#ffffff"
+
+                    android:text="Close"
+                    app:typeface="robotoLight"/>
+
+
+                <!-- <CheckBox
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="6dp"
+                     android:text="Compare"
+                     android:layout_marginRight="10dp"
+                     android:textColor="#616161"
+                     android:id="@+id/cself"
+                     android:checked="false"
+                     android:textSize="14dp"
+                    />-->
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="8dp"
+                    android:id="@+id/thr"
+                    android:visibility="invisible"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="8dp"
+                    android:textSize="12dp"
+                    android:textColor="#ffffff"
+
+                    android:text="WO/SF/SETTLED"
+                    app:typeface="robotoLight"/>
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:id="@+id/line"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+
+                android:background="#80616161"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Bank Name"
+                android:textColor="#393939"
+                android:textSize="14sp"
+                app:typeface="robotoLight"
+                />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#80616161"/>
+
+
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                android:id="@+id/accno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="A/c No."
+                android:textColor="#393939"
+                android:textSize="14sp"
+                app:typeface="robotoLight"
+                />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#80616161"/>
+
+
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Amount Overdue(Past Due Amount)"
+                android:textColor="#393939"
+                android:textSize="14sp"
+                app:typeface="robotoLight"
+                />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#80616161"/>
+
+
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                android:id="@+id/due"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:maxLines="2"
+                android:text="Amount"
+                android:textColor="#393939"
+                android:textSize="14sp"
+                app:typeface="robotoLight"
+                />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+
+                android:background="#80616161"/>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+
+                android:layout_marginRight="10dp"
+                android:padding="2dp"
+                android:background="#40546e7a"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Current Balance"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+
+                    android:background="#80616161"
+                    />
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Date Opened"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#80616161"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/curr_bal"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="₹ 1,46,575"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+
+                    android:background="#80616161"
+                    />
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date_opnd"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="27-Oct-2014"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#80616161"
+                />
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="2"
+                android:padding="2dp"
+                android:background="#40546e7a"
+                android:layout_height="wrap_content">
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Sanction Amount"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+
+                    android:background="#80616161"
+                    />
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Date Reported"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#80616161"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sanc_amt"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="₹ 2,00,000"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+
+                    android:background="#80616161"
+                    />
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="14-Jun-2016"
+                    android:id="@+id/date_rep"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#80616161"
+                />
+
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="2"
+                android:padding="2dp"
+                android:background="#40546e7a"
+                android:layout_height="wrap_content">
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ownership Type"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+
+                    android:background="#80616161"
+                    />
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Last Payment Date"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#80616161"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Individual"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/own_typ"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+
+                    android:background="#80616161"
+                    />
+                <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lat_pd"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="14-Jun-2016"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="#393939"
+                    app:typeface="robotoLight"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#80616161"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+ <com.gullakh.gullakhandroidapp.font.RobotoButton
+        android:id="@+id/history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="8dp"
+
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:padding="8dp"
+        android:textSize="12dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/rectbutton_org"
+        android:text="Payment History"
+        app:typeface="robotoLight"/>
+    <!--  <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="0"
+       android:background="@drawable/google_cards_background_bottom"
+       android:gravity="right"
+       android:orientation="vertical"
+       android:padding="8dp" >
+
+   </LinearLayout>-->
+</LinearLayout>

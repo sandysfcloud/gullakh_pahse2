@@ -1,0 +1,732 @@
+<?xml version='1.0' encoding='UTF-8'?><Envelope nonsense="http://schemas.xmlsoap.org/soap/envelope/"><Body><InquiryResponse nonsense="http://services.equifax.com/eport/ws/schemas/1.0">
+<InquiryResponseHeader>
+<CustomerCode>SERW</CustomerCode>
+<ClientID>007FP04192</ClientID>
+<CustRefField/>
+<ReportOrderNO>234046329</ReportOrderNO>
+<ProductCode>IDCR</ProductCode>
+<SuccessCode>1</SuccessCode>
+<Date>17-12-2016</Date>
+<Time>16:03:01</Time>
+<HitCode>10</HitCode>
+</InquiryResponseHeader>
+<InquiryRequestInfo>
+<InquiryPurpose>00</InquiryPurpose>
+<FirstName>Sandeep</FirstName>
+<AddrLine1>Sri Nidhi House, Kadekar Kola</AddrLine1>
+<State>KA</State>
+<Postal>576103</Postal>
+<InquiryAddresses>
+<InquiryAddress seq="1">
+<AddressLine>Sri Nidhi House, Kadekar Kola</AddressLine>
+<State>KA</State>
+<Postal>576103</Postal>
+</InquiryAddress>
+</InquiryAddresses>
+<InquiryPhones>
+<InquiryPhone seq="1">
+<Number>9880172137</Number>
+<PhoneType>M</PhoneType>
+</InquiryPhone>
+<InquiryPhone seq="1">
+<Number>9880172137</Number>
+<PhoneType>H</PhoneType>
+</InquiryPhone>
+</InquiryPhones>
+<DOB>1984-05-09</DOB>
+<PANId>BWQPS1127P</PANId>
+<HomePhone seq="1">
+<PhoneNumber>9880172137</PhoneNumber>
+</HomePhone>
+<MobilePhone>9880172137</MobilePhone>
+</InquiryRequestInfo>
+<ReportData>
+<IDAndContactInfo>
+<PersonalInfo>
+<Name>
+<FirstName>SANDEEP</FirstName>
+<LastName>P</LastName>
+</Name>
+<DateOfBirth>1984-05-09</DateOfBirth>
+<Gender>Male</Gender>
+<Age>
+<Age>32</Age>
+</Age>
+<Occupation/>
+</PersonalInfo>
+<IdentityInfo>
+<PANId seq="1" ReportedDate="2016-05-31">
+<IdNumber>BWQPS1127P</IdNumber>
+</PANId>
+<DriverLicence seq="1" ReportedDate="2015-07-31">
+<IdNumber>869S19528067</IdNumber>
+</DriverLicence>
+</IdentityInfo>
+<AddressInfo seq="1" ReportedDate="2016-05-31">
+<Address>NO 150 4TH CROSS VIRPAKSHA LAY OUT 2ND PHASE ELECTRONIC CITY,13 KARNATAKA</Address>
+<State>KA</State>
+<Postal>560100</Postal>
+<Type>Owns,Primary</Type>
+</AddressInfo>
+<AddressInfo seq="2" ReportedDate="2016-05-31">
+<Address>NO 84 2ND FLOOR,REHEJA COMPLEX,WILSON GARDEN,13 KARNATAKA</Address>
+<State>KA</State>
+<Postal>560027</Postal>
+<Type>Owns</Type>
+</AddressInfo>
+<AddressInfo seq="3" ReportedDate="2015-07-31">
+<Address>RIVERDALE SOFTWARE SOLUTIONS P LTD,325 2ND FLR,RUDRAPPA COMPL,ABOVE SBI 8TH MAIN 1ST CROSS BANGALORE</Address>
+<State>KA</State>
+<Postal>560079</Postal>
+<Type>Office</Type>
+</AddressInfo>
+<AddressInfo seq="4" ReportedDate="2015-07-31">
+<Address>NO 48/1 2ND FLOOR,3RD CROSS 1ST MAIN NAGA S V G NAGAR,MODDALAPALYA VIJAY BANGALORE</Address>
+<State>KA</State>
+<Postal>560072</Postal>
+<Type>Primary</Type>
+</AddressInfo>
+<AddressInfo seq="5" ReportedDate="2015-07-31">
+<Address>86 17TH MALLESHWARAM BANGALORE</Address>
+<State>KA</State>
+<Postal>560073</Postal>
+<Type>Primary</Type>
+</AddressInfo>
+<PhoneInfo typeCode="H" seq="1" ReportedDate="2016-05-31">
+<Number>08030578611</Number>
+</PhoneInfo>
+<PhoneInfo typeCode="M" seq="1" ReportedDate="2015-07-31">
+<Number>9880172137</Number>
+</PhoneInfo>
+<PhoneInfo typeCode="H" seq="2" ReportedDate="2016-04-30">
+<Number>8030578611</Number>
+</PhoneInfo>
+<PhoneInfo typeCode="M" seq="2" ReportedDate="2016-05-31">
+<Number>9844094769</Number>
+</PhoneInfo>
+<EmailAddressInfo seq="1" ReportedDate="2013-01-31">
+<EmailAddress>SANDUKADEKAR@YAHOO.COM</EmailAddress>
+</EmailAddressInfo>
+</IDAndContactInfo>
+<Score>
+<Name>M001</Name>
+<Value>553</Value>
+</Score>
+<AccountSummary>
+<NoOfAccounts>2</NoOfAccounts>
+<NoOfActiveAccounts>1</NoOfActiveAccounts>
+<NoOfWriteOffs>1</NoOfWriteOffs>
+<TotalPastDue>0.00</TotalPastDue>
+<MostSevereStatusWithIn24Months>Loss</MostSevereStatusWithIn24Months>
+<SingleHighestCredit>36410.00</SingleHighestCredit>
+<SingleHighestSanctionAmount>0.00</SingleHighestSanctionAmount>
+<TotalHighCredit>36410.00</TotalHighCredit>
+<AverageOpenBalance>20247.00</AverageOpenBalance>
+<SingleHighestBalance>62104.00</SingleHighestBalance>
+<NoOfPastDueAccounts>0</NoOfPastDueAccounts>
+<NoOfZeroBalanceAccounts>0</NoOfZeroBalanceAccounts>
+<RecentAccount>Credit Card on 12-01-2013</RecentAccount>
+<OldestAccount>Consumer Loan on 06-09-2010</OldestAccount>
+<TotalBalanceAmount>20247.00</TotalBalanceAmount>
+<TotalSanctionAmount>0.00</TotalSanctionAmount>
+<TotalCreditLimit>38000.00</TotalCreditLimit>
+<TotalMonthlyPaymentAmount>0.00</TotalMonthlyPaymentAmount>
+</AccountSummary>
+<RecentActivities>
+<AccountsDeliquent>1</AccountsDeliquent>
+<AccountsOpened>0</AccountsOpened>
+<TotalInquiries>0</TotalInquiries>
+<AccountsUpdated>2</AccountsUpdated>
+</RecentActivities>
+<OtherKeyInd>
+<AgeOfOldestTrade>75</AgeOfOldestTrade>
+<NumberOfOpenTrades>1</NumberOfOpenTrades>
+<AllLinesEVERWritten>50.00</AllLinesEVERWritten>
+<AllLinesEVERWrittenIn9Months>0</AllLinesEVERWrittenIn9Months>
+<AllLinesEVERWrittenIn6Months>1</AllLinesEVERWrittenIn6Months>
+</OtherKeyInd>
+<EnquirySummary>
+<Purpose>ALL</Purpose>
+<Total>0</Total>
+<Past30Days>0</Past30Days>
+<Past12Months>0</Past12Months>
+<Past24Months>0</Past24Months>
+<Recent/>
+</EnquirySummary>
+<AccountDetails>
+<Account seq="1" ReportedDate="2016-11-30">
+<AccountNumber> 4166441500698426</AccountNumber>
+<Institution>Kotak Mahindra Bank Ltd.</Institution>
+<AccountType>Credit Card</AccountType>
+<OwnershipType>Individual</OwnershipType>
+<Balance>20247</Balance>
+<PastDueAmount>0</PastDueAmount>
+<LastPayment>1050</LastPayment>
+<Open>Yes</Open>
+<HighCredit>36410</HighCredit>
+<LastPaymentDate>2016-11-27</LastPaymentDate>
+<DateReported>2016-11-30</DateReported>
+<DateOpened>2013-01-12</DateOpened>
+<Reason/>
+<InterestRate/>
+<RepaymentTenure/>
+<DisputeCode/>
+<TermFrequency>Monthly</TermFrequency>
+<CreditLimit>38000</CreditLimit>
+<CollateralValue/>
+<CollateralType/>
+<AccountStatus>Current Account</AccountStatus>
+<AssetClassification/>
+<SuitFiledStatus/>
+<History48Months>
+<Month key="11-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="10-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="09-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="08-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="07-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="06-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="05-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="04-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="03-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="02-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="01-16">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="12-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="11-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="10-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="09-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="08-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="07-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="06-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="05-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="04-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="03-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="02-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="01-15">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="12-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="11-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="10-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="09-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="08-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="07-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="06-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="05-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="04-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="03-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="02-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="01-14">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="12-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="11-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="10-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="09-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="08-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="07-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="06-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="05-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="04-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="03-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="02-13">
+<PaymentStatus>000</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="01-13">
+<PaymentStatus>NEW</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+</History48Months>
+</Account>
+<Account seq="2" ReportedDate="2016-10-31">
+<AccountNumber> 300128</AccountNumber>
+<Institution>Capital First limited</Institution>
+<AccountType>Consumer Loan</AccountType>
+<OwnershipType>Individual</OwnershipType>
+<Balance>62104</Balance>
+<PastDueAmount>48504</PastDueAmount>
+<WriteOffAmount>62104</WriteOffAmount>
+<Open>No</Open>
+<SanctionAmount>48497</SanctionAmount>
+<DateReported>2016-10-31</DateReported>
+<DateOpened>2010-09-06</DateOpened>
+<Reason/>
+<InterestRate/>
+<RepaymentTenure>8</RepaymentTenure>
+<DisputeCode/>
+<InstallmentAmount>6063</InstallmentAmount>
+<TermFrequency>Monthly</TermFrequency>
+<CollateralValue/>
+<CollateralType/>
+<AccountStatus>Charge Off/Written Off</AccountStatus>
+<AssetClassification/>
+<SuitFiledStatus/>
+<History48Months>
+<Month key="10-16">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="09-16">
+<PaymentStatus>181+</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="08-16">
+<PaymentStatus>181+</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="07-16">
+<PaymentStatus>181+</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="06-16">
+<PaymentStatus>181+</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="05-16">
+<PaymentStatus>181+</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>*</AssetClassificationStatus>
+</Month>
+<Month key="04-16">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="03-16">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="02-16">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="01-16">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="12-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="11-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="10-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="09-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="08-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="07-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="06-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="05-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="04-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="03-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="02-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="01-15">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="12-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="11-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="10-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="09-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="08-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="07-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="06-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="05-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="04-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="03-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="02-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="01-14">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="12-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="11-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="10-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="09-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>LOSS</AssetClassificationStatus>
+</Month>
+<Month key="08-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="07-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="06-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="05-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="04-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="03-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="02-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="01-13">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="12-12">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+<Month key="11-12">
+<PaymentStatus>WOF</PaymentStatus>
+<SuitFiledStatus>*</SuitFiledStatus>
+<AssetClassificationStatus>DBT</AssetClassificationStatus>
+</Month>
+</History48Months>
+</Account>
+</AccountDetails>
+<Disclaimer>
+			This report is to be used subject to and in compliance with the
+			Membership agreement entered into between the Member/Specified User
+			and Equifax Credit Information Services Private Limited ("ECIS"), in
+			the case of Members/Specified Users of ECIS. In other cases, the use
+			of this report is governed by the terms and conditions of ECIS,
+			contained in the Application form submitted by the customer/user.
+
+			The information contained in this report is derived from various
+			Members/sources which are not controlled by ECIS. ECIS provides this
+			report on a best effort basis and does not guarantee the timeliness,
+			correctness or completeness of the information contained
+			therein,except as explicitly stated in the Membership agreement/terms
+			and conditions of ECIS, as the case may be.
+		</Disclaimer>
+<ScoringElements>
+<ScoringElement type="REJ" seq="1">
+<Code>EXCL_CD_4</Code>
+<Description>Charge-Offs trades within 24 Months</Description>
+</ScoringElement>
+<ScoringElement type="REJ" seq="2">
+<Code>EXCL_CD_9</Code>
+<Description>Settled Trades within 24 Months</Description>
+</ScoringElement>
+<ScoringElement type="RES" seq="3">
+<Code>1b</Code>
+<Description>Delinquent balance is mid-range</Description>
+</ScoringElement>
+<ScoringElement type="RES" seq="4">
+<Code>10b</Code>
+<Description>No. of delinquent  tradelines are mid-range</Description>
+</ScoringElement>
+<ScoringElement type="RES" seq="5">
+<Code>14b</Code>
+<Description>No. of delinquent  tradelines in the last year are mid-range</Description>
+</ScoringElement>
+<ScoringElement type="RES" seq="6">
+<Code>12b</Code>
+<Description>Most Recent personal finance tradeline is mid-aged</Description>
+</ScoringElement>
+<ScoringElement type="RES" seq="7">
+<Code>5a</Code>
+<Description>No. of home loan tradelines are low</Description>
+</ScoringElement>
+</ScoringElements>
+</ReportData>
+</InquiryResponse></Body></Envelope>
