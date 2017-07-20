@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bgque"
+    tools:context="com.gullakh.gullakhandroidapp.CreditS_Download">
+
+
+
+    <com.gullakh.gullakhandroidapp.font.RobotoButton
+        android:id="@+id/downl1"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+
+        android:minWidth="0dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/rectbutton_org"
+        android:text="Download Report1"
+        app:typeface="robotoMedium"/>
+
+    <com.gullakh.gullakhandroidapp.font.RobotoButton
+        android:id="@+id/downl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+
+        android:background="@drawable/rectbutton_org"
+        android:text="Download Report2"
+        app:typeface="robotoMedium"/>
+    <com.gullakh.gullakhandroidapp.font.RobotoButton
+        android:id="@+id/downl3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+
+        android:background="@drawable/rectbutton_org"
+        android:text="Download Report3"
+        app:typeface="robotoMedium"/>
+    <com.gullakh.gullakhandroidapp.font.RobotoButton
+        android:id="@+id/downl4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:visibility="gone"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+
+        android:background="@drawable/rectbutton_org"
+        android:text="Download Report4"
+        app:typeface="robotoMedium"/>
+
+</LinearLayout>

@@ -279,7 +279,8 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
             s1.setPrompt("Sort By");
 
-            if(globalloan_type.equals("Home Loan") || globalloan_type.equals("Loan Against Property"))
+           // if(globalloan_type.equals("Home Loan") || globalloan_type.equals("Loan Against Property"))
+            if(globalloan_type.equals("Home Loan"))
             {
                 Log.d("its home or LAP -", globalloan_type);
                 f_fixed=false;
@@ -752,6 +753,14 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
 
                     //****cibilscore
 
+                    int maxLogSize = 2000;
+                    for(int i = 0; i <= str_result.length() / maxLogSize; i++) {
+                        int start = i * maxLogSize;
+                        int end = (i+1) * maxLogSize;
+                        end = end > str_result.length() ? str_result.length() : end;
+                        Log.v("CHECK111", str_result.substring(start, end));
+                    }
+
 
 
 
@@ -1110,12 +1119,15 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                 Log.d("cobj_RM.length", String.valueOf(cobj_RM.length));
 
                 String roical=null;
-                if (f_float)
-                    roical= cobj_RM[i].getfloating_interest_rate_float();
+                if (f_float) {
+                    Log.d("its HL  i is :", String.valueOf(i));
+                    roical = cobj_RM[i].getfloating_interest_rate_float();
+                }
                 else
                     roical= cobj_RM[i].getfloating_interest_rate();
 
 
+                Log.d("roical VALUE CC", roical);
 
                 if (!roical.equals("NA")) {
                     if (seektenure != 0) {
@@ -1156,7 +1168,17 @@ public class GoogleCardsMediaActivity extends ActionBarActivity implements
                     } else {
                         bpd = FinanceLib.pmt((Double.parseDouble(roical) / 100) / 12, Max_tenure * 12, -100000, 0, false);
                     }
-                    bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
+                    double foir_cal;
+
+                    try {
+                        foir_cal = new Double(cobj_RM[i].getfoir());
+                    } catch (NumberFormatException e) {
+                        foir_cal= 0; // your default value
+                    }
+
+                  //  bp = ((net_salry * (cobj_RM[i].getfoir() / 100) - emi) / (bpd)) * 100000;
+                    bp = ((net_salry * (foir_cal / 100) - emi) / (bpd)) * 100000;
+
                     final_bp = Math.ceil(bp);
                     Log.d("net_salry in cal", String.valueOf(net_salry));
                     Log.d("bpd value in cal", String.valueOf(bpd));

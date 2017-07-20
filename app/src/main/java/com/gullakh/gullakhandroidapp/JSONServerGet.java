@@ -63,10 +63,13 @@ import static com.gullakh.gullakhandroidapp.ServerConnect.md5;
         protected void onPreExecute() {
             super.onPreExecute();
             if (seq == "1") {
-                dialogalert = RegisterPageActivity.showAlert(act);
+                dialogalert = RegisterPageActivity.showAlert(act,"1");
             } else if (seq == "wait"){
                 dialogalert = RegisterPageActivity.showWaitdialog(act);
         }
+            else if (seq == "welcome"){
+                dialogalert = RegisterPageActivity.show_welcomedialog(act);
+            }
         }
 
 
@@ -389,7 +392,7 @@ import static com.gullakh.gullakhandroidapp.ServerConnect.md5;
 
                                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                                 response = httpClient.execute(httpPost);
-                                Log.e("Response:session id ", String.valueOf(response));
+                                Log.e("Response:session id value ", String.valueOf(response));
 
                             } else {
 
@@ -417,7 +420,7 @@ import static com.gullakh.gullakhandroidapp.ServerConnect.md5;
                        // DefaultHttpClient httpClient = new DefaultHttpClient();
                         HttpPost httpPost;
                         if(args[1].equals("cibil")){
-                            Log.d("its get cibil score","");
+                            Log.d("its get cibil score value","");
                             httpPost = new HttpPost(GlobalData.CIBIL);
                         }
                         else {
@@ -489,12 +492,44 @@ import static com.gullakh.gullakhandroidapp.ServerConnect.md5;
 
 
                         else if (args[1].equals("cibil_new")) {
-                            //get all employer list
-                            Log.e("cibil_new!!!!!", args[1]);
 
-                            // httpClient = new DefaultHttpClient();
-                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.CIBIL_NEW +  args[2] + ".xml").toString());
+                            Log.e("cibil_new!!!!!", args[2]);
+                            if(args[2].equals("empty"))
+                                post = new HttpPost(android.text.Html.fromHtml(GlobalData.CIBIL_NEW +  args[3] + ".xml").toString());
+                            else {
+                                String thePath = args[2].replaceAll(" ", "%20");
+                                Log.e("cibil_new!!!!!222", thePath);
+                                post = new HttpPost(android.text.Html.fromHtml(thePath).toString());
+                            }
+
+
                         }
+
+
+
+
+                        else if (args[1].equals("credit_downld")) {
+                            //get all employer list
+                            Log.e("credit_downld!!!!!", args[2]);
+                            Log.e("credit_downld id!!!!!", args[3]);
+                            // httpClient = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL +"?operation=query&sessionName="+args[2]+"&query="+ URLEncoder.encode("select * from Contacts where id="+args[3]+" limit 1;")).toString());
+                            Log.e("credit_downld query!!!!!", "select * from Contacts where id='"+args[3]+"' limit 1;");
+
+                        }
+
+                        else if (args[1].equals("credit_downld2")) {
+                            //get all employer list
+                            Log.e("credit_downld!!!!!", args[2]);
+                            Log.e("credit_downld id!!!!!", args[3]);
+                            // httpClient = new DefaultHttpClient();
+                            post = new HttpPost(android.text.Html.fromHtml(GlobalData.SERVER_GET_URL +"?operation=query&sessionName="+args[2]+"&query="+ URLEncoder.encode("select * from CreditReport where contact="+args[3]+" order by reportnumber DESC;")).toString());
+                            Log.e("credit_downld query!!!!!", "select * from Contacts where id='"+args[3]+"' limit 1;");
+
+                        }
+
+
+
 
                         else if (args[1].equals("cartype")) {
                             //get all employer list
@@ -687,7 +722,7 @@ import static com.gullakh.gullakhandroidapp.ServerConnect.md5;
 
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("user_id", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("contact_id",args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("contact_id", args[3]));
                           //  client = new DefaultHttpClient();
                             post = new HttpPost(android.text.Html.fromHtml(GlobalData.Webservice+"update_contact_id").toString());
                             post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -695,12 +730,12 @@ import static com.gullakh.gullakhandroidapp.ServerConnect.md5;
                         }else if(args[1].equals("contactaddress")){
                             Log.d("sess and contact", args[2] + " " + args[3]);
                             Log.d("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8] + "\",\"gender\":\"" + args[9]
-                                    + "\",\"dob\":\"" + args[10] + "\",\"firstname\":\"" + args[11] + "\",\"lastname\":\"" + args[12] + "gender:" + args[13] +  "bday:" + args[14] + "}]");
+                                    + "\",\"dob\":\"" + args[10] + "\",\"firstname\":\"" + args[11] + "\",\"lastname\":\"" + args[12] + "gender:" + args[13] + "bday:" + args[14] + "}]");
                             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                             nameValuePairs.add(new BasicNameValuePair("operation", "query"));
                             nameValuePairs.add(new BasicNameValuePair("elementType", "updatecontactdetail"));
                             nameValuePairs.add(new BasicNameValuePair("sessionName", args[2]));
-                            nameValuePairs.add(new BasicNameValuePair("contact",args[3]));
+                            nameValuePairs.add(new BasicNameValuePair("contact", args[3]));
                             nameValuePairs.add(new BasicNameValuePair("element", "[{\"mailingstreet\":\"" + args[4] + "\",\"otherstreet\":\"" + args[5] + "\",\"mailingcity\":\"" + args[6] + "\",\"mailingstate\":\"" + args[7] + "\",\"mailingzip\":\"" + args[8] + "\",\"gender\":\"" + args[9] + "\",\"dob\":\"" + args[10] + "\",\"firstname\":\"" + args[11] + "\",\"lastname\":\"" + args[12] + "\",\"dob\":\""+ args[13] + "\",\"gender\":\""+ args[14] + "\"}]"));
                             Log.d("nameValuePairs contactaddressn", String.valueOf(nameValuePairs));
                           //  client = new DefaultHttpClient();

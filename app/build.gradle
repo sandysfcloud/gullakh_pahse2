@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'gullakh'
             keyPassword 'reset123'
-            storeFile file('/Users/njfernandis/Desktop/gullakh-files/keystore-path-gullakh/keystore.jks')
+            storeFile file('/home/admin1/Desktop/kavya/keystore-path-gullakh/keystore.jks')
             storePassword 'reset123'
         }
     }

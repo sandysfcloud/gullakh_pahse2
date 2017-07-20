@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,6 +88,7 @@ public class CibilScore_Adapter  extends BaseAdapter {
     public int getCount() {
         // TODO Auto-generated method stub
         Log.d("getCount()", String.valueOf(data.size()));
+      //  Toast.makeText(cont, "No Accounts Under Selected Criteria!!!", Toast.LENGTH_LONG).show();
         return data.size();
 
 
@@ -187,7 +190,9 @@ public class CibilScore_Adapter  extends BaseAdapter {
 
             holder.acc_type.setText(tempValues.getcibil_acctyp());
 
-            holder.rep_date.setText(formattedDate);
+           // holder.rep_date.setText(formattedDate);
+
+            holder.rep_date.setText(tempValues.getrep_date());
 
             Log.d("value from model", tempValues.getcibil_acctyp());
             Log.d("formattedDate value is test", formattedDate);
@@ -203,23 +208,35 @@ public class CibilScore_Adapter  extends BaseAdapter {
             if(tempValues.getcibil_open().equals("Yes")) {
                 /*holder.open.setVisibility(View.VISIBLE);
                 holder.close.setVisibility(View.GONE);
-                holder.othr.setVisibility(View.GONE);*/
+                holder.othr.setVisibility(View.GONE);
 
                 holder.open.setBackgroundResource(R.drawable.rectbutton_red);;
                 holder.close.setBackgroundColor(Color.parseColor("#D3D3D3"));
-                holder.othr.setBackgroundColor(Color.parseColor("#D3D3D3"));
+                holder.othr.setBackgroundColor(Color.parseColor("#D3D3D3"));*/
+                holder.close.setVisibility(View.GONE);
+                holder.othr.setVisibility(View.GONE);
+                holder.open.setVisibility(View.VISIBLE);
+                holder.open.setBackgroundColor(Color.parseColor("#b8546e7a"));
 
             }
 
             else if(tempValues.getcibil_open().equals("No")) {
                 /*holder.close.setVisibility(View.VISIBLE);
                 holder.open.setVisibility(View.GONE);
-                holder.othr.setVisibility(View.GONE);*/
+                holder.othr.setVisibility(View.GONE);
 
 
                 holder.open.setBackgroundColor(Color.parseColor("#D3D3D3"));
                 holder.close.setBackgroundResource(R.drawable.rectbutton_red);
-                holder.othr.setBackgroundColor(Color.parseColor("#D3D3D3"));
+                holder.othr.setBackgroundColor(Color.parseColor("#D3D3D3"));*/
+
+
+
+
+                holder.close.setVisibility(View.VISIBLE);
+                holder.othr.setVisibility(View.GONE);
+                holder.open.setVisibility(View.GONE);
+                holder.close.setBackgroundColor(Color.parseColor("#b8546e7a"));
             }
 
             /*else {
@@ -272,7 +289,6 @@ public class CibilScore_Adapter  extends BaseAdapter {
 
 
             holder.own_typ.setText(tempValues.getcibil_own_typ());
-
 
 
             holder.history = (Button) convertView
@@ -338,7 +354,7 @@ public class CibilScore_Adapter  extends BaseAdapter {
 
     }
 
-    public void filter(ArrayList<CharSequence> selectedColours) {
+    /*public void filter(ArrayList<CharSequence> selectedColours) {
 
 
         data.clear();
@@ -352,6 +368,25 @@ public class CibilScore_Adapter  extends BaseAdapter {
         }
 
         notifyDataSetChanged();
+    }*/
+
+
+
+    public void filter() {
+
+
+      /*  data.clear();
+
+
+        for (ListModel wp : original) {
+            if (selectedColours.contains(wp.getbanknam())) {
+                data.add(wp);
+               /* Log.d("selected Bank - Sandeep", wp.getbanknam());
+            }
+        }*/
+
+        notifyDataSetChanged();
     }
+
 
 }

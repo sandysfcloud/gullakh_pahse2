@@ -175,6 +175,7 @@ public class GooglePlusLogin extends android.support.v4.app.Fragment implements 
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi
                         .getCurrentPerson(mGoogleApiClient);
+                Log.d("currentPerson details", String.valueOf(currentPerson));
                 personName = currentPerson.getDisplayName();
                 googleuserid=currentPerson.getId();
                 String personPhotoUrl = currentPerson.getImage().getUrl();

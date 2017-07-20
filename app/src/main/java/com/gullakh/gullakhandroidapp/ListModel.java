@@ -51,7 +51,7 @@ public class ListModel implements Serializable{
     private String loan_amount;
     private String setCompletedpercentage;
     public String bank_name;
-    public String loan_type,float_fixed,proce_fee_perc;
+    public String loan_type,float_fixed,proce_fee_perc,rep_date;
     public boolean checkeddata;
     public String pre_closure_fee,fixedyear;
     ArrayList<String> hist_key=new ArrayList<String>();
@@ -556,6 +556,18 @@ int app_flag=0;
     public String getcibil_sanc() {
         return cibil_sanc;
     }
+
+
+    public void setrep_date(String bank_name) {
+        this.rep_date = bank_name;
+    }
+
+    public String getrep_date() {
+        return rep_date;
+    }
+
+
+
 
 
     public void setcibil_date_rep(String bank_name) {

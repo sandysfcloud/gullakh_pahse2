@@ -264,7 +264,7 @@ public class DateOfBirth_questn extends AppCompatActivity implements View.OnClic
         icicle.putString("dob", String.valueOf(((GlobalData) getApplication()).getDob()));
         icicle.putString("gender",((GlobalData) getApplication()).getgender());
         icicle.putString("age", String.valueOf(((GlobalData) getApplication()).getage()));
-        icicle.putString("emptyp",((GlobalData) getApplication()).getemptype());
+        icicle.putString("emptyp", ((GlobalData) getApplication()).getemptype());
 
         icicle.putString("loantyp",  ((GlobalData) getApplication()).getLoanType());
         icicle.putString("carloantyp",  ((GlobalData) getApplication()).getCartypeloan());
@@ -674,14 +674,26 @@ public void agelimit()
                 if(Dob.getText().toString()!=null) {
                     Log.d("dob is fun", Dob.getText().toString());
                     Log.d("age is fun", String.valueOf(((GlobalData) getApplication()).getage()));
+                    String CurrentString=null;
+                    try {
+
+                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                        String newDate = format.format(Date.parse(Dob.getText().toString()));
 
 
-                   /* SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                    String newDate = format.format(Date.parse(Dob.getText().toString()));*/
+                        // String CurrentString =Dob.getText().toString();
+                         CurrentString = newDate;
 
+                    } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    String[] separated=null;
 
-                    String CurrentString =Dob.getText().toString();
-                    String[] separated = CurrentString.split("-");
+                    if(CurrentString!=null)
+                     separated = CurrentString.split("-");
+                    else
+                        separated =Dob.getText().toString().split("-");
+
                     Log.d("dob split",  separated[0]+" "+ separated[1]+ " "+ separated[2]);
 
                     age = getAge(Integer.parseInt(separated[2]),Integer.parseInt(separated[1]), Integer.parseInt(separated[0]));

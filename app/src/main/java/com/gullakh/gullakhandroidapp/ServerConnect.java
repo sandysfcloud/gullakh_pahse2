@@ -245,7 +245,9 @@ public ArrayList<String> getEmployerList(Activity d)throws ExecutionException, I
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                dialogalert=RegisterPageActivity.showAlertinit(activity);
+                Log.d("ServerConnect onPreExecute","1");
+              //  dialogalert=RegisterPageActivity.showAlertinit(activity);
+                dialogalert=RegisterPageActivity.show_welcomedialog(activity);
                 //test
             }
 

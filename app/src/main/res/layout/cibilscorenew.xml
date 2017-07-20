@@ -106,7 +106,7 @@
                                             android:textColor="#ffffff"
 
                                             android:background="@drawable/rectbutton_red"
-                                            android:text="Download Report"
+                                            android:text="View Report"
                                             app:typeface="robotoMedium"/>
                                             </LinearLayout>
 
@@ -129,7 +129,7 @@
                                                 app:typeface="robotoMedium" />
 
                                             <com.gullakh.gullakhandroidapp.font.RobotoTextView
-                                                android:id="@+id/currnt_date"
+                                                android:id="@+id/rep_date"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
                                                 android:layout_marginBottom="10dp"
@@ -557,6 +557,7 @@
                                                 android:layout_height="match_parent"
                                                 android:layout_marginBottom="10dp"
                                                 android:layout_marginTop="10dp"
+                                                android:id="@+id/acc_rep_date"
                                                 android:gravity="center"
                                                 android:text="on Oct 14, 2016"
                                                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -710,14 +711,26 @@
                                     android:orientation="horizontal"
                                     android:weightSum="2">
 
-
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle"
+                                        android:orientation="horizontal"
+                                        >
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                          android:layout_gravity="center_vertical"
+                                            android:layout_marginLeft="8dp"
+                                            android:src="@drawable/homeloan"/>
                                     <com.gullakh.gullakhandroidapp.font.RobotoTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="65dp"
                                         android:layout_weight="1"
                                         android:id="@+id/hl"
                                         android:clickable="true"
-                                        android:background="@drawable/rectangle"
+
                                         android:gravity="center"
                                         android:text="Home Loans"
 
@@ -726,25 +739,44 @@
                                         android:textSize="16dp"
                                         app:typeface="robotoMedium" />
 
+
+                                        </LinearLayout>
+
                                     <View
                                         android:layout_width="2dp"
                                         android:layout_height="match_parent"
 
                                         android:background="#00ffffff" />
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle"
+                                        android:orientation="horizontal"
+                                        >
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginLeft="8dp"
+                                            android:src="@drawable/personalloannew"/>
+
                                     <com.gullakh.gullakhandroidapp.font.RobotoTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="65dp"
-                                        android:layout_weight="1"
+
                                         android:id="@+id/pl"
                                         android:clickable="true"
-                                        android:background="@drawable/rectangle"
+
                                         android:gravity="center"
+
                                         android:text="Personal Loans"
                                         android:textAppearance="?android:attr/textAppearanceMedium"
                                         android:textColor="#393939"
                                         android:textSize="16dp"
                                         app:typeface="robotoMedium" />
+                                        </LinearLayout>
 
                                     <View
                                         android:layout_width="2dp"
@@ -829,38 +861,70 @@
                                     android:orientation="horizontal"
                                     android:weightSum="2">
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rectangle"
+                                        android:orientation="horizontal"
+                                        >
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginLeft="8dp"
+                                            android:src="@drawable/carloan"/>
+
 
                                     <com.gullakh.gullakhandroidapp.font.RobotoTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="65dp"
-                                        android:layout_weight="1"
-                                        android:background="@drawable/rectangle"
+
+
                                         android:gravity="center"
                                         android:text="Car Loans"
+
                                         android:id="@+id/cl"
                                         android:clickable="true"
                                         android:textAppearance="?android:attr/textAppearanceMedium"
                                         android:textColor="#393939"
                                         android:textSize="16dp"
                                         app:typeface="robotoMedium" />
+                                        </LinearLayout>
                                     <View
                                         android:layout_width="2dp"
                                         android:layout_height="match_parent"
                                         android:background="#00ffffff" />
-
-                                    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                    <LinearLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="65dp"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:background="@drawable/rectangle"
+                                        android:orientation="horizontal"
+                                        >
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginLeft="8dp"
+                                            android:src="@drawable/busineeloan"/>
+
+
+                                        <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+
+
                                         android:gravity="center"
                                         android:id="@+id/ll"
                                         android:clickable="true"
                                         android:text="LAP"
+
                                         android:textAppearance="?android:attr/textAppearanceMedium"
                                         android:textColor="#393939"
                                         android:textSize="16dp"
                                         app:typeface="robotoMedium" />
+                                        </LinearLayout>
 
                                     <View
                                         android:layout_width="2dp"
@@ -967,7 +1031,7 @@
                                     android:minHeight="0dp"
                                     android:minWidth="0dp"
                                     android:padding="8dp"
-                                    android:text="Account Detail"
+                                    android:text="Account Details"
                                     android:textColor="#ffffff"
                                     android:textSize="12dp"
                                     app:typeface="robotoLight" />

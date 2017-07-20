@@ -134,7 +134,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
         Intent intent;
         switch (v.getId()) {
             case R.id.done:
-                finish();
+                //**new kk finish();
+                goToIntent();
                 break;
             case R.id.edit:
                 dg=RegisterPageActivity.showAlertreview(Emp_type_Qustn.this, 2);
@@ -170,7 +171,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 if (data != null) {
                     if (data.equals("review")) {
-                        finish();
+                        //**new kk finish();
+                        goToIntent();
                     }
                 }
                 else {
@@ -186,7 +188,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 if (data != null) {
                     if (data.equals("review")) {
-                        finish();
+                        //**new kk finish();
+                        goToIntent();
                     }
                 }else{
                     goToIntent();
@@ -201,7 +204,8 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
 
                 if (data != null) {
                     if (data.equals("review")) {
-                        finish();
+                        //**new kk finish();
+                        goToIntent();
                     }
                 }else{
                     goToIntent();
@@ -258,21 +262,56 @@ public class Emp_type_Qustn extends AppCompatActivity implements View.OnClickLis
             }
 
         }
-        Intent intent;
+        Intent intent=null;
         String loantype =((GlobalData) getApplication()).getLoanType();
         if(loantype.equalsIgnoreCase("Car Loan")){
+            if (data != null) {//latest
+                if (data.equals("review")) {
+                    //**new kk finish();
+                    if(((GlobalData) getApplication()).getemptype().equals("Salaried"))
+                    intent = new Intent(Emp_type_Qustn.this, Salaryed_NetSalary.class);
+                    else
+                        intent = new Intent(Emp_type_Qustn.this, Car_Loan_PAT.class);
+
+                }
+            }
+            else
             intent = new Intent(Emp_type_Qustn.this, Car_type_questn.class);
 
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }else if(loantype.equalsIgnoreCase("Loan Against Property") || (loantype.equalsIgnoreCase("Home Loan"))){
+
+            if (data != null) {
+                if (data.equals("review")) {//latest
+                    //**new kk finish();
+                    if(((GlobalData) getApplication()).getemptype().equals("Salaried"))
+                        intent = new Intent(Emp_type_Qustn.this, Salaryed_NetSalary.class);
+                    else
+                        intent = new Intent(Emp_type_Qustn.this, Car_Loan_PAT.class);
+
+                }
+            }
+            else
             intent = new Intent(Emp_type_Qustn.this, lp_bal_tranf.class);
 
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }
         else{
+            if (data != null) {
+                if (data.equals("review")) {//latest
+                    //**new kk finish();
+                    if(((GlobalData) getApplication()).getemptype().equals("Salaried"))
+                        intent = new Intent(Emp_type_Qustn.this, Salaryed_NetSalary.class);
+                    else
+                        intent = new Intent(Emp_type_Qustn.this, Car_Loan_PAT.class);
+
+                }
+            }
+            else
             intent = new Intent(Emp_type_Qustn.this, Loan_amt_questn.class);
+
             startActivity(intent);
             overridePendingTransition(R.transition.left, R.transition.right);
         }

@@ -4,26 +4,32 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_gravity="center_horizontal"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
-    <TextView
+    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Please wait"
+        android:id="@+id/text1"
         android:layout_marginTop="40dp"
         android:textSize="20dp"
         android:gravity="center"
+        android:visibility="gone"
         android:layout_gravity="center_horizontal"
         android:textColor="#fff"
+        app:typeface="robotoMedium"
         />
-    <TextView
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:gravity="center"
+        android:id="@+id/text2"
         android:layout_gravity="center_horizontal"
         android:text="We are working to get best offers..."
-
+        android:visibility="gone"
         android:textColor="#fff"
+        app:typeface="robotoMedium"
         />
 
     <!--<com.github.glomadrian.loadingballs.BallView

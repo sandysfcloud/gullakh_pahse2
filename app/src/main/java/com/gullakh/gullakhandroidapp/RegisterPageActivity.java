@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputType;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -112,6 +114,24 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		// password=(EditText) findViewById(R.id.password);
 		final CheckBox checkBox= (CheckBox) findViewById(R.id.checkBox);
 		cPassword=(EditText)findViewById(R.id.cpassword);
+
+
+
+		TextView tc =(TextView)findViewById(R.id.tc);
+		tc.setClickable(true);
+		tc.setMovementMethod(LinkMovementMethod.getInstance());
+		String text = "<a href='https://www.gullakh.com/term-of-service'> T&amp;C </a>";
+		tc.setText(Html.fromHtml(text));
+
+		TextView pp =(TextView)findViewById(R.id.pp);
+		pp.setClickable(true);
+		pp.setMovementMethod(LinkMovementMethod.getInstance());
+		String text2 = "<a href='https://www.gullakh.com/privacy-policy'> Privacy Policy.</a>";
+		pp.setText(Html.fromHtml(text2));
+
+
+
+
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			public void onItemSelected(AdapterView<?> parent, View view,
 									   int position, long id) {
@@ -486,7 +506,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		return dialog;
 	}
 
-	public static Dialog showAlert(Activity act)
+	public static Dialog showAlert(Activity act,String data)
 	{
 		CurrentAct=act;
 		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
@@ -507,7 +527,13 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		ImageView piggibg = (ImageView) dialog.findViewById(R.id.pigbg);
 		ImageView coin = (ImageView) dialog.findViewById(R.id.coin);
 		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
+		TextView text1 = (TextView) dialog.findViewById(R.id.text1);
+		TextView text2 = (TextView) dialog.findViewById(R.id.text2);
 
+		if(data.equals("1")) {
+			text1.setVisibility(View.VISIBLE);
+			text2.setVisibility(View.VISIBLE);
+		}
 
 
 		mAnimation = new TranslateAnimation(0,0,0,220);
@@ -570,6 +596,61 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 		dialog.getWindow().setAttributes(lp);
 		return dialog;
 	}
+	public static Dialog show_welcomedialog(Activity act)
+	{
+		CurrentAct=act;
+		Dialog dialog = new Dialog(act, R.style.PauseDialog2);
+
+// 						Setting the title and layout for the dialog
+		dialog.setTitle("");
+		dialog.setContentView(R.layout.welcomedialog);
+
+//*******new loading
+		/*LayoutInflater inflater = dialog.getWindow().getLayoutInflater();
+
+		View dialogView = inflater.inflate(R.layout.dialogloadingwait, null);
+		ImageView piggibg = (ImageView) dialogView.findViewById(R.id.pigbg);
+		//piggi = (ImageView) findViewById(R.id.pig);
+		ImageView coin = (ImageView) dialogView.findViewById(R.id.coin);
+		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);*/
+
+
+		ImageView piggibg = (ImageView) dialog.findViewById(R.id.pigbg);
+		ImageView coin = (ImageView) dialog.findViewById(R.id.coin);
+		Animation pulse = AnimationUtils.loadAnimation(act, R.anim.pulse);
+
+		//mAnimation = new TranslateAnimation(0,0,0,75);
+		mAnimation = new TranslateAnimation(0,0,0,220);
+		mAnimation.setDuration(500);
+		mAnimation.setRepeatCount(-1);
+		coin.setAnimation(mAnimation);
+		piggibg.startAnimation(pulse);
+
+
+		//********
+
+		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+		lp.copyFrom(dialog.getWindow().getAttributes());
+		lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+		lp.dimAmount=0.9f;
+		dialog.show();
+		dialog.getWindow().setAttributes(lp);
+		return dialog;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public static Dialog showAlertreview(Activity act,Integer questionno)
 	{
@@ -1446,7 +1527,7 @@ public class RegisterPageActivity extends AppCompatActivity  implements AsyncRes
 
 		for(int i=1;i<=cl_car_global_data.totalno_coapp;i++){
 
-			Log.d("total no of co app", String.valueOf(cl_car_global_data.totalno_coapp));
+			Log.d("total no of co", String.valueOf(cl_car_global_data.totalno_coapp));
 
 			View view = inflater.inflate(R.layout.linearreviewquestions, null);
 			tv=(TextView) view.findViewById(R.id.headertype);

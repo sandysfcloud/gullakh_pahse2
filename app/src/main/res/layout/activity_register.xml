@@ -204,16 +204,57 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
 
             <CheckBox
-                android:layout_width="250dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="I agree to the Terms and Conditions"
+                android:text="I agree to the "
                 android:id="@+id/checkBox"
-                android:layout_gravity="center_horizontal"
+
                 android:textSize="13dp"
                 android:textColor="#747373">
             </CheckBox>
+
+            <com.gullakh.gullakhandroidapp.font.RobotoTextView
+                app:typeface="robotoLight"
+                android:id="@+id/tc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/transparent_button_selector"
+                android:text="T&amp;C "
+                android:textColor="#747373"
+                android:textSize="13dp"
+               />
+
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+        app:typeface="robotoLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transparent_button_selector"
+        android:text="and "
+        android:textColor="#747373"
+        android:textSize="13dp"
+        />
+
+    <com.gullakh.gullakhandroidapp.font.RobotoTextView
+        app:typeface="robotoLight"
+        android:id="@+id/pp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transparent_button_selector"
+        android:text=" Privacy Policy."
+        android:textColor="#747373"
+        android:textSize="13dp"
+        />
+</LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

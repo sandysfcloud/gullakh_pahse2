@@ -726,7 +726,7 @@ public class CibilScore extends AppCompatActivity implements View.OnClickListene
         // requestgetserver.execute("sessn", "cibil", sessionid,s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp,nam);
 //CHANGE BACK LATER
 
-
+        Log.d("user id cibilscore",userid);
         requestgetserver.execute("sessn", "cibil", sessionid, s_Dob, s_state, s_zip, s_panid, s_addr, userid, contactid, ph, loantyp, nam, ListView_Click.lenderid);
 
 

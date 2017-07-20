@@ -437,6 +437,9 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
 
 
     public void getContactDetails(){
+
+        Log.d("getContactDetails function is called","1");
+
         requestgetserver2 = new JSONServerGet(new AsyncResponse() {
             @Override
             public void processFinish(JSONObject output) {
@@ -468,7 +471,7 @@ if(cl_car_global_data.dataWithAnscoapp!=null)
 
                 dgthis.dismiss();
             }
-        }, MainActivity.this, "wait");
+        }, MainActivity.this, "welcome");
         requestgetserver2.execute("token", "getcontact", sessionid, emailfromul);
     }
 

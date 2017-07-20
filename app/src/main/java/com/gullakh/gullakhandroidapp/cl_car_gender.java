@@ -650,7 +650,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                     goToDatabase("mysearch", "Car Loan");
                 }
 
-                goToServer(add1.getText().toString(), add2.getText().toString(),/* city.getSelectedItem().toString()*/scity, /*state.getSelectedItem().toString()*/sstate, pin.getText().toString());
+               // goToServer(add1.getText().toString(), add2.getText().toString(),/* city.getSelectedItem().toString()*/scity, /*state.getSelectedItem().toString()*/sstate, pin.getText().toString());
                 savetoserver();
             }
         } else if (yearv >= curryear) {
@@ -664,7 +664,7 @@ public class cl_car_gender extends AppCompatActivity implements View.OnClickList
                 goToDatabase("mysearch", "Car Loan");
             }
 
-            goToServer(add1.getText().toString(), add2.getText().toString(), /*city.getSelectedItem().toString()*/scity,/* state.getSelectedItem().toString()*/sstate, pin.getText().toString());
+            //goToServer(add1.getText().toString(), add2.getText().toString(), /*city.getSelectedItem().toString()*/scity,/* state.getSelectedItem().toString()*/sstate, pin.getText().toString());
             savetoserver();
         }
     }

@@ -231,6 +231,7 @@
     <string name="title_activity_cibil_score">CibilScore</string>
     <string name="changemobno"> Or <u>change mobile number</u></string>
     <string name="title_activity_cibil__pay__history">Payment History</string>
+    <string name="title_activity_credit_s__download">CreditS_Download</string>
 
 
 </resources>

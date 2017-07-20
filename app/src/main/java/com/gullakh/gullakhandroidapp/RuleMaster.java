@@ -13,8 +13,8 @@ public class RuleMaster {
     public String otherdetail;
     public String document;
     public String pre_closure_fee;
-    public Double foir;
-    public String roi,fixedyear;
+    //public Double foir;
+    public String roi,foir,fixedyear;
 
 
     public String getaccount_lender(){
@@ -25,11 +25,11 @@ public class RuleMaster {
         bankid=token;
     }
 
-    public Double getfoir(){
+    public String getfoir(){
         return foir;
     }
 
-    public void setfoir(Double token){
+    public void setfoir(String token){
         foir=token;
     }
     public String getfloating_interest_rate(){

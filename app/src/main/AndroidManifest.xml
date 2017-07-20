@@ -34,8 +34,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/fb_login_protocol_scheme" />
-        <application
-            android:name=".App"></application>
+
+        <application android:name=".App" />
+
         <receiver
             android:name=".GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
@@ -334,8 +335,12 @@
         </activity>
         <activity
             android:name=".Cibil_Pay_History"
-            android:theme="@style/PauseDialognew"
-            android:label="@string/title_activity_cibil__pay__history" >
+            android:label="@string/title_activity_cibil__pay__history"
+            android:theme="@style/PauseDialognew" >
+        </activity>
+        <activity
+            android:name=".CreditS_Download"
+            android:label="@string/title_activity_credit_s__download" >
         </activity>
     </application>
 

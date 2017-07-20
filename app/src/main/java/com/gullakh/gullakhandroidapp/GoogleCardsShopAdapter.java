@@ -1,7 +1,9 @@
 package com.gullakh.gullakhandroidapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +44,9 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 		static ArrayList<String> compbank=new ArrayList<String>();
 		static ArrayList<String> compbankimg=new ArrayList<String>();
 	ListModel tempValues = null;
-	//public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
+		int lastposition=0;
+		AlertDialog alert;
+		//public GoogleCardsShopAdapter(GoogleCardsMediaActivity context, ArrayList<String> prgmNameList, int[] prgmImages,ArrayList<String> month_fee,ArrayList<String>  fixed_fee,ArrayList<String> onetime_fee,String tenur) {
 		//super(context, 0, items);
 	public GoogleCardsShopAdapter(Activity context,ArrayList<ListModel> d,int[] prgmImages)
 	{
@@ -95,6 +99,9 @@ public class GoogleCardsShopAdapter extends BaseAdapter
 			holder = new ViewHolder();
 			holder.image = (ImageView) convertView
 					.findViewById(R.id.bankimg);
+
+			holder.alert = (ImageView) convertView
+					.findViewById(R.id.alert);
 
 
 			holder.name = (TextView) convertView
@@ -272,7 +279,30 @@ if(isNumeric(tempValues.getprocessing_fee()))
 			holder.tprea.setText(""+propreclo);
 			holder.bp.setText(String.valueOf("Your Borrowing Power is " + bp));
 			holder.bp.setOnClickListener((GoogleCardsMediaActivity) cont);
-			holder.bp.setError("subject to max. loan amount as per bank’s product guidelines-Refer to details tab");
+		//	holder.bp.setError("subject to max. loan amount as per bank’s product guidelines-Refer to details tab");
+
+			//holder.bp.setError(null);
+
+
+			holder.alert.setOnClickListener((GoogleCardsMediaActivity) cont);
+			AlertDialog.Builder builder = new AlertDialog.Builder((GoogleCardsMediaActivity) cont);
+			builder.setMessage("subject to max. loan amount as per bank’s product guidelines-Refer to details tab.")
+					.setCancelable(false)
+					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							alert.dismiss();
+						}
+					});
+			alert = builder.create();
+
+			holder.alert.setOnClickListener(new OnClickListener() {
+
+				public void onClick(View v) {
+
+					alert.show();
+				}
+			});
+
 
 			/*holder.comp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
@@ -363,7 +393,7 @@ if(isNumeric(tempValues.getprocessing_fee()))
 			return true;
 		}
 	private static class ViewHolder {
-		public ImageView image;
+		public ImageView image,alert;
 		public TextView promo,name,t1,t2,t3,t4,st;
 		public TextView bp,tprea;
 		public TextView price;
@@ -373,6 +403,8 @@ if(isNumeric(tempValues.getprocessing_fee()))
 		public CheckBox comp;
 
 	}
+
+
 
 	public  void filter(ArrayList<CharSequence> selectedColours ) {
 

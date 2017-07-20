@@ -37,7 +37,8 @@ public class RegisterAppToServer extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialogalert = RegisterPageActivity.showWaitdialog(act);
+       // dialogalert = RegisterPageActivity.showWaitdialog(act);
+        dialogalert=RegisterPageActivity.show_welcomedialog(act);
     }
     @Override
     protected String doInBackground(Void... arg0) {

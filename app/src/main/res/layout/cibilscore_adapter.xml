@@ -551,6 +551,7 @@
                     android:text="Individual"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
+                    android:gravity="center_vertical"
                     android:id="@+id/own_typ"
                     android:layout_weight="1"
                     android:textSize="14sp"
@@ -594,7 +595,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
 
-        android:layout_marginTop="6dp"
+
         android:layout_marginRight="8dp"
 
         android:minHeight="0dp"
